@@ -1,0 +1,112 @@
+
+.TH "GCLOUD_COMPUTE_DISKS_RESIZE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute disks resize \- resize a disk or disks
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute disks resize\fR \fIDISK_NAME\fR [\fIDISK_NAME\fR\ ...] \fB\-\-size\fR=\fISIZE\fR [\fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute disks resize\fR resizes a Google Compute Engine disk(s).
+
+Only increasing disk size is supported. Disks can be resized regardless of
+whether they are attached.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIDISK_NAME\fR [\fIDISK_NAME\fR ...]
+The names of the disks to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-size\fR=\fISIZE\fR
+Indicates the new size of the disks. The value must be a whole number followed
+by a size unit of \f5\fIKB\fR\fR for kilobyte, \f5\fIMB\fR\fR for megabyte,
+\f5\fIGB\fR\fR for gigabyte, or \f5\fITB\fR\fR for terabyte. For example,
+\f5\fI10GB\fR\fR will produce 10 gigabyte disks. Disk size must be a multiple of
+10 GB.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the disks to operate on. If not specified, you may be prompted to
+select a zone.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To resize a disk called example\-disk\-1 to new size 6TB, run:
+
+.RS 2m
+$ gcloud compute disks resize example\-disk\-1 \-\-size=6TB
+.RE
+
+To resize two disks called example\-disk\-2 and example\-disk\-3 to new size
+6TB, run:
+
+.RS 2m
+$ gcloud compute disks resize example\-disk\-2 example\-disk\-3 \e
+   \-\-size=6TB
+.RE
+
+This assumes that original size of each of these disks is 6TB or less.

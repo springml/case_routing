@@ -1,0 +1,78 @@
+
+.TH "GCLOUD_COMPUTE_IMAGES_REMOVE\-LABELS" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute images remove\-labels \- remove labels from Google Compute Engine images
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute images remove\-labels\fR \fIIMAGE_NAME\fR (\fB\-\-all\fR\ |\ \fB\-\-labels\fR=\fIKEY\fR,[\fIKEY\fR,...]) [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute images remove\-labels\fR removes labels from a Google Compute
+Engine image. For example, running:
+
+.RS 2m
+$ gcloud compute images remove\-labels example\-image \-\-labels=k0,k1
+.RE
+
+will remove existing labels with key \f5\fIk0\fR\fR and \f5\fIk1\fR\fR from
+\'example\-image'.
+
+Labels can be used to identify the image and to filter them as in
+
+.RS 2m
+$ gcloud compute images list \-\-filter='labels.k1:value2'
+.RE
+
+To list existing labels
+
+.RS 2m
+$ gcloud compute images describe example\-image \e
+    \-\-format='default(labels)'
+.RE
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIIMAGE_NAME\fR
+The name of the disk image to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+Exactly one of these must be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-all\fR
+Remove all labels from the resource.
+
+.TP 2m
+\fB\-\-labels\fR=\fIKEY\fR,[\fIKEY\fR,...]
+A comma\-separated list of label keys to remove from the resource.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

@@ -1,0 +1,141 @@
+
+.TH "GCLOUD_COMPUTE_URL\-MAPS_ADD\-PATH\-MATCHER" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute url\-maps add\-path\-matcher \- add a path matcher to a URL map
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute url\-maps add\-path\-matcher\fR \fIURL_MAP_NAME\fR \fB\-\-path\-matcher\-name\fR=\fIPATH_MATCHER_NAME\fR (\fB\-\-default\-backend\-bucket\fR=\fIDEFAULT_BACKEND_BUCKET\fR\ |\ \fB\-\-default\-service\fR=\fIDEFAULT_SERVICE\fR) [\fB\-\-backend\-bucket\-path\-rules\fR=\fIPATH\fR=\fIBUCKET\fR,[\fIPATH\fR=\fIBUCKET\fR,...]] [\fB\-\-backend\-service\-path\-rules\fR=\fIPATH\fR=\fISERVICE\fR,[\fIPATH\fR=\fISERVICE\fR,...]] [\fB\-\-delete\-orphaned\-path\-matcher\fR] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-path\-rules\fR=\fIPATH\fR=\fISERVICE\fR,[\fIPATH\fR=\fISERVICE\fR,...]] [\fB\-\-existing\-host\fR=\fIEXISTING_HOST\fR\ |\ \fB\-\-new\-hosts\fR=\fINEW_HOST\fR,[\fINEW_HOST\fR,...]] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute url\-maps add\-path\-matcher\fR is used to add a path matcher
+to a URL map. A path matcher maps HTTP request paths to backend services or
+backend buckets. Each path matcher must be referenced by at least one host rule.
+This command can create a new host rule through the \f5\-\-new\-hosts\fR flag or
+it can reconfigure an existing host rule to point to the newly added path
+matcher using \f5\-\-existing\-host\fR. In the latter case, if a path matcher is
+orphaned as a result of the operation, this command will fail unless
+\f5\-\-delete\-orphaned\-path\-matcher\fR is provided.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIURL_MAP_NAME\fR
+The name of the URL map to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-path\-matcher\-name\fR=\fIPATH_MATCHER_NAME\fR
+The name to assign to the path matcher.
+
+.RE
+.sp
+Exactly one of these must be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-default\-backend\-bucket\fR=\fIDEFAULT_BACKEND_BUCKET\fR
+A backend bucket that will be used for requests that the path matcher cannot
+match. Exactly one of \-\-default\-service or \-\-default\-backend\-bucket is
+required.
+
+.TP 2m
+\fB\-\-default\-service\fR=\fIDEFAULT_SERVICE\fR
+A backend service that will be used for requests that the path matcher cannot
+match. Exactly one of \-\-default\-service or \-\-default\-backend\-bucket is
+required.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-backend\-bucket\-path\-rules\fR=\fIPATH\fR=\fIBUCKET\fR,[\fIPATH\fR=\fIBUCKET\fR,...]
+Rules for mapping request paths to backend buckets.
+
+.TP 2m
+\fB\-\-backend\-service\-path\-rules\fR=\fIPATH\fR=\fISERVICE\fR,[\fIPATH\fR=\fISERVICE\fR,...]
+Rules for mapping request paths to services.
+
+.TP 2m
+\fB\-\-delete\-orphaned\-path\-matcher\fR
+If provided and a path matcher is orphaned as a result of this command, the
+command removes the orphaned path matcher instead of failing.
+
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+An optional, textual description for the path matcher.
+
+.TP 2m
+\fB\-\-path\-rules\fR=\fIPATH\fR=\fISERVICE\fR,[\fIPATH\fR=\fISERVICE\fR,...]
+Rules for mapping request paths to services.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-existing\-host\fR=\fIEXISTING_HOST\fR
+An existing host rule to tie the new path matcher to. Although host rules can
+contain more than one host, only a single host is needed to uniquely identify
+the host rule.
+
+.TP 2m
+\fB\-\-new\-hosts\fR=\fINEW_HOST\fR,[\fINEW_HOST\fR,...]
+If specified, a new host rule with the given hosts is created and the path
+matcher is tied to the new host rule.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To create a rule for mapping the path \f5/search/*\fR to the hypothetical
+\f5search\-service\fR, \f5/static/*\fR to the \f5static\-bucket\fR backend
+bucket and \f5/images/*\fR to the \f5images\-service\fR under the hosts
+\f5example.com\fR and \f5*.example.com\fR, run:
+
+.RS 2m
+$ gcloud compute url\-maps add\-path\-matcher MY\-URL\-MAP \e
+    \-\-path\-matcher\-name MY\-MATCHER \e
+    \-\-default\-service MY\-DEFAULT\-SERVICE \e
+    \-\-backend\-service\-path\-rules \e
+    '/search/*=search_service,/images/*=images\-service' \e
+    \-\-backend\-bucket\-path\-rules '/static/*=static\-bucket' \e
+    \-\-new\-hosts example.com '*.example.com'
+.RE
+
+Note that a default service or default backend bucket must be provided to handle
+paths for which there is no mapping.

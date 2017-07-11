@@ -1,0 +1,112 @@
+
+.TH "GCLOUD_COMPUTE_DISKS_REMOVE\-LABELS" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute disks remove\-labels \- remove labels from Google Compute Engine persistent disks
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute disks remove\-labels\fR \fIDISK_NAME\fR (\fB\-\-all\fR\ |\ \fB\-\-labels\fR=\fIKEY\fR,[\fIKEY\fR,...]) [\fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute disks remove\-labels\fR removes labels from a Google Compute
+Engine persistent disk. For example, running:
+
+.RS 2m
+$ gcloud compute disks remove\-labels example\-disk \-\-labels=k0,k1
+.RE
+
+will remove existing labels with key \f5\fIk0\fR\fR and \f5\fIk1\fR\fR from
+\'example\-disk'.
+
+Labels can be used to identify the disk and to filter them as in
+
+.RS 2m
+$ gcloud compute disks list \-\-filter='labels.k1:value2'
+.RE
+
+To list existing labels
+
+.RS 2m
+$ gcloud compute disks describe example\-disk \e
+    \-\-format='default(labels)'
+.RE
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIDISK_NAME\fR
+The name of the disk to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+Exactly one of these must be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-all\fR
+Remove all labels from the resource.
+
+.TP 2m
+\fB\-\-labels\fR=\fIKEY\fR,[\fIKEY\fR,...]
+A comma\-separated list of label keys to remove from the resource.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the disk to operate on. If not specified, you may be prompted to
+select a zone.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

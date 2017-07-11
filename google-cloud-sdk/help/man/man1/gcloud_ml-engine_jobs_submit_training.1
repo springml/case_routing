@@ -1,0 +1,247 @@
+
+.TH "GCLOUD_ML\-ENGINE_JOBS_SUBMIT_TRAINING" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud ml\-engine jobs submit training \- submits a Cloud Machine Learning training job
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud ml\-engine jobs submit training\fR \fIJOB\fR \fB\-\-module\-name\fR=\fIMODULE_NAME\fR [\fB\-\-config\fR=\fICONFIG\fR] [\fB\-\-job\-dir\fR=\fIJOB_DIR\fR] [\fB\-\-package\-path\fR=\fIPACKAGE_PATH\fR] [\fB\-\-packages\fR=[\fIPACKAGE\fR,...]] [\fB\-\-region\fR=\fIREGION\fR] [\fB\-\-runtime\-version\fR=\fIRUNTIME_VERSION\fR] [\fB\-\-scale\-tier\fR=\fISCALE_TIER\fR] [\fB\-\-staging\-bucket\fR=\fISTAGING_BUCKET\fR] [\fB\-\-async\fR\ |\ \fB\-\-stream\-logs\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR] [\-\-\ \fIUSER_ARGS\fR\ ...]
+
+
+
+.SH "DESCRIPTION"
+
+Submits a Cloud Machine Learning training job.
+
+This creates temporary files and executes Python code staged by a user on Google
+Cloud Storage. Model code can either be specified with a path, e.g.:
+
+.RS 2m
+$ gcloud ml\-engine jobs submit training my_job \e
+        \-\-module\-name trainer.task \e
+        \-\-staging\-bucket gs://my\-bucket \e
+        \-\-package\-path /my/code/path/trainer \e
+        \-\-packages additional\-dep1.tar.gz,dep2.whl
+.RE
+
+Or by specifying an already built package:
+
+.RS 2m
+$ gcloud ml\-engine jobs submit training my_job \e
+        \-\-module\-name trainer.task \e
+        \-\-staging\-bucket gs://my\-bucket \e
+        \-\-packages trainer\-0.0.1.tar.gz,additional\-dep1.tar.gz,dep2.whl
+.RE
+
+If \-\-package\-path /my/code/path/trainer is specified and there is a setup.py
+file at /my/code/path/setup.py then that file will be invoked with \f5sdist\fR
+and the generated tar files will be uploaded to Cloud Storage. Otherwise a
+temporary setup.py file will be generated for the build.
+
+By default, this command runs asynchronously; it exits once the job is
+successfully submitted.
+
+To follow the progress of your job, pass the \f5\-\-stream\-logs\fR flag (note
+that even with the \f5\-\-stream\-logs\fR flag, the job will continue to run
+after this command exits and must be cancelled with \f5gcloud ml\-engine jobs
+cancel JOB_ID\fR).
+
+For more information, see:
+https://cloud.google.com/ml/docs/concepts/training\-overview
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIJOB\fR
+Name of the job.
+
+.TP 2m
+[\-\- \fIUSER_ARGS\fR ...]
+Additional user arguments to be forwarded to user code
+
+The '\-\-' argument must be specified between gcloud specific args on the left
+and USER_ARGS on the right.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-module\-name\fR=\fIMODULE_NAME\fR
+Name of the module to run
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-config\fR=\fICONFIG\fR
+Path to the job configuration file. The file should be a YAML document (JSON
+also accepted) containing a Job resource as defined in the API (all fields are
+optional): https://cloud.google.com/ml/reference/rest/v1/projects.jobs
+
+If an option is specified both in the configuration file \fBand\fR via command
+line arguments, the command line arguments override the configuration file.
+
+.TP 2m
+\fB\-\-job\-dir\fR=\fIJOB_DIR\fR
+A Google Cloud Storage path in which to store training outputs and other data
+needed for training.
+
+This path will be passed to your TensorFlow program as \f5\-\-job_dir\fR
+command\-line arg. The benefit of specifying this field is that Cloud ML Engine
+will validate the path for use in training.
+
+If packages must be uploaded and \f5\-\-staging\-bucket\fR is not provided, this
+path will be used instead.
+
+.TP 2m
+\fB\-\-package\-path\fR=\fIPACKAGE_PATH\fR
+Path to a Python package to build. This should point to a directory containing
+the Python source for the job. It will be built using setuptools (which must be
+installed) using its \fBparent\fR directory as context. If the parent directory
+contains a \f5setup.py\fR file, the build will use that; otherwise, it will use
+a simple built\-in one.
+
+.TP 2m
+\fB\-\-packages\fR=[\fIPACKAGE\fR,...]
+Path to Python archives used for training. These can be local paths (absolute or
+relative), in which case they will be uploaded to the Cloud Storage bucket given
+by \f5\-\-staging\-bucket\fR, or Cloud Storage URLs
+(\f5gs://bucket\-name/path/to/package.tar.gz\fR).
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the machine learning training job to submit. If not specified, you
+will be prompted to select a region.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/region\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/region REGION
+.RE
+
+A list of regions can be fetched by running:
+
+.RS 2m
+$ gcloud compute regions list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/region
+.RE
+
+Alternatively, the region can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_REGION\fR\fR.
+
+.TP 2m
+\fB\-\-runtime\-version\fR=\fIRUNTIME_VERSION\fR
+The Google Cloud ML Engine runtime version for this job. Defaults to the latest
+stable version. See
+https://cloud.google.com/ml/docs/concepts/runtime\-version\-list for a list of
+accepted versions.
+
+.TP 2m
+\fB\-\-scale\-tier\fR=\fISCALE_TIER\fR
+Specifies the machine types, the number of replicas for workers and parameter
+servers. \fISCALE_TIER\fR must be one of:
+
+.RS 2m
+.TP 2m
+\fBBASIC\fR
+A single worker instance. This tier is suitable for learning how to use Cloud ML
+Engine, and for experimenting with new models using small datasets.
+.TP 2m
+\fBBASIC_GPU\fR
+A single worker instance with a GPU.
+.TP 2m
+\fBCUSTOM\fR
+The CUSTOM tier is not a set tier, but rather enables you to use your own
+cluster specification. When you use this tier, set values to configure your
+processing cluster according to these guidelines (using the \-\-config flag):
+
+.RS 2m
+.IP "\(bu" 2m
+You \fImust\fR set \f5TrainingInput.masterType\fR to specify the type of machine
+to use for your master node. This is the only required setting.
+.IP "\(bu" 2m
+You \fImay\fR set \f5TrainingInput.workerCount\fR to specify the number of
+workers to use. If you specify one or more workers, you \fImust\fR also set
+\f5TrainingInput.workerType\fR to specify the type of machine to use for your
+worker nodes.
+.IP "\(bu" 2m
+You \fImay\fR set \f5TrainingInput.parameterServerCount\fR to specify the number
+of parameter servers to use. If you specify one or more parameter servers, you
+\fImust\fR also set \f5TrainingInput.parameterServerType\fR to specify the type
+of machine to use for your parameter servers. Note that all of your workers must
+use the same machine type, which can be different from your parameter server
+type and master type. Your parameter servers must likewise use the same machine
+type, which can be different from your worker type and master type.
+.RE
+.sp
+.TP 2m
+\fBPREMIUM_1\fR
+A large number of workers with many parameter servers.
+.TP 2m
+\fBSTANDARD_1\fR
+Many workers and a few parameter servers.
+
+.RE
+.sp
+.TP 2m
+\fB\-\-staging\-bucket\fR=\fISTAGING_BUCKET\fR
+Bucket in which to stage training archives.
+
+Required only if a file upload is necessary (that is, other flags include local
+paths) and no other flags implicitly specify an upload path.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+(DEPRECATED) Display information about the operation in progress without waiting
+for the operation to complete. Enabled by default and can be omitted; use
+\f5\-\-stream\-logs\fR to run synchronously.
+
+.TP 2m
+\fB\-\-stream\-logs\fR
+Block until job completion and stream the logs while the job runs.
+
+Note that even if command execution is halted, the job will still run until
+cancelled with
+
+.RS 2m
+$ gcloud ml\-engine jobs cancel JOB_ID
+.RE
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

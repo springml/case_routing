@@ -1,0 +1,128 @@
+
+.TH "GCLOUD_DATAPROC_JOBS_SUBMIT_PIG" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud dataproc jobs submit pig \- submit a Pig job to a cluster
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud dataproc jobs submit pig\fR \fB\-\-cluster\fR=\fICLUSTER\fR (\fB\-\-execute\fR=\fIQUERY\fR,\ \fB\-e\fR\ \fIQUERY\fR\ |\ \fB\-\-file\fR=\fIFILE\fR,\ \fB\-f\fR\ \fIFILE\fR) [\fB\-\-async\fR] [\fB\-\-bucket\fR=\fIBUCKET\fR] [\fB\-\-continue\-on\-failure\fR] [\fB\-\-driver\-log\-levels\fR=[\fIPACKAGE\fR=\fILEVEL\fR,...]] [\fB\-\-jars\fR=[\fIJAR\fR,...]] [\fB\-\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]] [\fB\-\-params\fR=[\fIPARAM\fR=\fIVALUE\fR,...]] [\fB\-\-properties\fR=[\fIPROPERTY\fR=\fIVALUE\fR,...]] [\fB\-\-region\fR=\fIREGION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Submit a Pig job to a cluster.
+
+
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-cluster\fR=\fICLUSTER\fR
+The Dataproc cluster to submit the job to.
+
+.RE
+.sp
+Exactly one of these must be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-execute\fR=\fIQUERY\fR, \fB\-e\fR \fIQUERY\fR
+A Pig query to execute as part of the job.
+
+.TP 2m
+\fB\-\-file\fR=\fIFILE\fR, \fB\-f\fR \fIFILE\fR
+HCFS URI of file containing Pig script to execute as the job.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Does not wait for the job to run.
+
+.TP 2m
+\fB\-\-bucket\fR=\fIBUCKET\fR
+The Cloud Storage bucket to stage files in. Defaults to the cluster's configured
+bucket.
+
+.TP 2m
+\fB\-\-continue\-on\-failure\fR
+Whether to continue if a single query fails.
+
+.TP 2m
+\fB\-\-driver\-log\-levels\fR=[\fIPACKAGE\fR=\fILEVEL\fR,...]
+A list of package to log4j log level pairs to configure driver logging. For
+example: root=FATAL,com.example=INFO
+
+.TP 2m
+\fB\-\-jars\fR=[\fIJAR\fR,...]
+Comma separated list of jar files to be provided to Pig and MR. May contain
+UDFs.
+
+.TP 2m
+\fB\-\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]
+A list of label KEY=VALUE pairs to add.
+
+.TP 2m
+\fB\-\-params\fR=[\fIPARAM\fR=\fIVALUE\fR,...]
+A list of key value pairs to set variables in the Pig queries.
+
+.TP 2m
+\fB\-\-properties\fR=[\fIPROPERTY\fR=\fIVALUE\fR,...]
+A list of key value pairs to configure Pig.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+Specifies the Cloud Dataproc region to use. Each Cloud Dataproc region
+constitutes an independent resource namespace constrained to deploying instances
+into Google Compute Engine zones inside the region. The default value of
+"global" is a special multi\-region namespace which is capable of deploying
+instances into all Google Compute Engine zones globally, and is disjoint from
+other Cloud Dataproc regions. Overrides the default \fBdataproc/region\fR
+property value for this command invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To submit a Pig job with a local script, run:
+
+.RS 2m
+$ gcloud dataproc jobs submit pig \-\-cluster my_cluster \e
+    \-\-file my_queries.pig
+.RE
+
+To submit a Pig job with inline queries, run:
+
+.RS 2m
+$ gcloud dataproc jobs submit pig \-\-cluster my_cluster \e
+    \-e "LNS = LOAD 'gs://my_bucket/my_file.txt' AS (line)" \e
+    \-e \e
+    "WORDS = FOREACH LNS GENERATE FLATTEN(TOKENIZE(line)) AS word" \e
+    \-e "GROUPS = GROUP WORDS BY word" \e
+    \-e "WORD_COUNTS = FOREACH GROUPS GENERATE group, COUNT(WORDS)" \e
+    \-e "DUMP WORD_COUNTS"
+.RE

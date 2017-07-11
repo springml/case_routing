@@ -1,0 +1,103 @@
+
+.TH "GCLOUD_DOCKER" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud docker \- provides the docker CLI access to the Google Container Registry
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud docker\fR [\fB\-\-authorize\-only\fR,\ \fB\-a\fR] [\fB\-\-docker\-host\fR=\fIDOCKER_HOST\fR] [\fB\-\-server\fR=\fISERVER\fR,[\fISERVER\fR,...],\ \fB\-s\fR\ \fISERVER\fR,[\fISERVER\fR,...];\ default="gcr.io,us.gcr.io,eu.gcr.io,asia.gcr.io,l.gcr.io,launcher.gcr.io,appengine.gcr.io,us\-mirror.gcr.io,eu\-mirror.gcr.io,asia\-mirror.gcr.io,mirror.gcr.io"] [\fIGCLOUD_WIDE_FLAG\ ...\fR] [\-\-\ \fIDOCKER_ARGS\fR\ ...]
+
+
+
+.SH "DESCRIPTION"
+
+The gcloud docker command group wraps docker commands, so that gcloud can inject
+the appropriate fresh authentication token into requests that interact with the
+docker registry.
+
+All docker\-specific flags are passed through to the underlying docker command.
+A full reference of docker's command line options available after \-\- can be
+found here: https://docs.docker.com/engine/reference/commandline/cli/.
+
+You may also run \f5gcloud docker \-\- \-\-help\fR to view the docker CLI's help
+directly.
+
+More information on Google Container Registry can be found here:
+https://cloud.google.com/container\-registry/ and detailed documentation can be
+found here: https://cloud.google.com/container\-registry/docs/
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+[\-\- \fIDOCKER_ARGS\fR ...]
+Arguments to pass to docker.
+
+The '\-\-' argument must be specified between gcloud specific args on the left
+and DOCKER_ARGS on the right.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-authorize\-only\fR, \fB\-a\fR
+Configure docker authorization only, do not launch the docker command\-line.
+
+.TP 2m
+\fB\-\-docker\-host\fR=\fIDOCKER_HOST\fR
+The URL to connect to Docker Daemon. Format: tcp://host:port or
+unix:///path/to/socket.
+
+.TP 2m
+\fB\-\-server\fR=\fISERVER\fR,[\fISERVER\fR,...], \fB\-s\fR \fISERVER\fR,[\fISERVER\fR,...]; default="gcr.io,us.gcr.io,eu.gcr.io,asia.gcr.io,l.gcr.io,launcher.gcr.io,appengine.gcr.io,us\-mirror.gcr.io,eu\-mirror.gcr.io,asia\-mirror.gcr.io,mirror.gcr.io"
+The address of the Google Cloud Registry.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+Pull the image 'gcr.io/google\-containers/pause:1.0' from the docker registry:
+
+.RS 2m
+$ gcloud docker \-\- pull gcr.io/google\-containers/pause:1.0
+.RE
+
+Push the image 'gcr.io/example\-org/example\-image:latest' to our private docker
+registry.
+
+.RS 2m
+$ gcloud docker \-\- push gcr.io/example\-org/example\-image:latest
+.RE
+
+Configure authentication, then simply use docker:
+
+.RS 2m
+$ gcloud docker \-\-authorize\-only
+.RE
+
+.RS 2m
+$ docker push gcr.io/example\-org/example\-image:latest
+.RE

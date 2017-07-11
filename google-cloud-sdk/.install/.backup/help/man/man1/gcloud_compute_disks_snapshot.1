@@ -1,0 +1,117 @@
+
+.TH "GCLOUD_COMPUTE_DISKS_SNAPSHOT" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute disks snapshot \- create snapshots of Google Compute Engine persistent disks
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute disks snapshot\fR \fIDISK_NAME\fR [\fIDISK_NAME\fR\ ...] [\fB\-\-async\fR] [\fB\-\-csek\-key\-file\fR=\fIFILE\fR] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-guest\-flush\fR] [\fB\-\-snapshot\-names\fR=\fISNAPSHOT_NAME\fR,[\fISNAPSHOT_NAME\fR,...]] [\fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Create snapshots of Google Compute Engine persistent disks.
+
+\fBgcloud compute disks snapshot\fR creates snapshots of persistent disks.
+Snapshots are useful for backing up data or copying a persistent disk. Once
+created, snapshots may be managed (listed, deleted, etc.) via \f5\fIgcloud
+compute snapshots\fR\fR.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIDISK_NAME\fR [\fIDISK_NAME\fR ...]
+The names of the disks to operate on.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Display information about the operation in progress, without waiting for the
+operation to complete.
+
+.TP 2m
+\fB\-\-csek\-key\-file\fR=\fIFILE\fR
+Path to a Customer\-Supplied Encryption Key (CSEK) key file, mapping Google
+Compute Engine resources to user managed keys to be used when creating,
+mounting, or snapshotting disks. See
+https://cloud.google.com/compute/docs/disks/customer\-supplied\-encryption for
+more details.
+
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+An optional, textual description for the snapshots being created.
+
+.TP 2m
+\fB\-\-guest\-flush\fR
+Create an application consistent snapshot by informing the OS to prepare for the
+snapshot process. Currently only supported on Windows instances using the Volume
+Shadow Copy Service (VSS).
+
+.TP 2m
+\fB\-\-snapshot\-names\fR=\fISNAPSHOT_NAME\fR,[\fISNAPSHOT_NAME\fR,...]
+Names to assign to the snapshots. Without this option, the name of each snapshot
+will be a random, 16\-character hexadecimal number that starts with a letter.
+The values of this option run parallel to the disks specified. For example,
+
+.RS 2m
+$ gcloud compute disks snapshot my\-disk\-1 my\-disk\-2 my\-disk\-3 \e
+    \-\-snapshot\-names snapshot\-1,snapshot\-2,snapshot\-3
+.RE
+
+will result in \f5\fImy\-disk\-1\fR\fR being snapshotted as
+\f5\fIsnapshot\-1\fR\fR, \f5\fImy\-disk\-2\fR\fR as \f5\fIsnapshot\-2\fR\fR, and
+so on.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the disks to operate on. If not specified, you may be prompted to
+select a zone.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

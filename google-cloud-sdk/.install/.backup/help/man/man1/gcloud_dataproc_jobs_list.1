@@ -1,0 +1,121 @@
+
+.TH "GCLOUD_DATAPROC_JOBS_LIST" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud dataproc jobs list \- list jobs in a project
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud dataproc jobs list\fR [\fB\-\-cluster\fR=\fICLUSTER\fR] [\fB\-\-region\fR=\fIREGION\fR] [\fB\-\-state\-filter\fR=\fISTATE_FILTER\fR] [\fB\-\-filter\fR=\fIEXPRESSION\fR] [\fB\-\-limit\fR=\fILIMIT\fR] [\fB\-\-page\-size\fR=\fIPAGE_SIZE\fR;\ default="100"] [\fB\-\-sort\-by\fR=[\fIFIELD\fR,...]] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+List jobs in a project. An optional filter can be used to constrain the jobs
+returned. Filters are case\-sensitive and have the following syntax:
+
+.RS 2m
+[field = value] AND [field [= value]] ...
+.RE
+
+where \f5field\fR is \f5status.state\fR or \f5labels.[KEY]\fR, and \f5[KEY]\fR
+is a label key. \f5value\fR can be \f5*\fR to match all values.
+\f5status.state\fR can be either \f5ACTIVE\fR or \f5INACTIVE\fR. Only the
+logical \f5AND\fR operator is supported; space\-separated items are treated as
+having an implicit \f5AND\fR operator.
+
+
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-cluster\fR=\fICLUSTER\fR
+Restrict to the jobs of this Dataproc cluster.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+Specifies the Cloud Dataproc region to use. Each Cloud Dataproc region
+constitutes an independent resource namespace constrained to deploying instances
+into Google Compute Engine zones inside the region. The default value of
+"global" is a special multi\-region namespace which is capable of deploying
+instances into all Google Compute Engine zones globally, and is disjoint from
+other Cloud Dataproc regions. Overrides the default \fBdataproc/region\fR
+property value for this command invocation.
+
+.TP 2m
+\fB\-\-state\-filter\fR=\fISTATE_FILTER\fR
+Filter by job state. \fISTATE_FILTER\fR must be one of: \fBactive\fR,
+\fBinactive\fR.
+
+
+.RE
+.sp
+
+.SH "LIST COMMAND FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-filter\fR=\fIEXPRESSION\fR
+Apply a Boolean filter \fIEXPRESSION\fR to each resource item to be listed. If
+the expression evaluates True then that item is listed. For more details and
+examples of filter expressions run $ gcloud topic filters. This flag interacts
+with other flags that are applied in this order: \fB\-\-flatten\fR,
+\fB\-\-sort\-by\fR, \fB\-\-filter\fR, \fB\-\-limit\fR.
+
+.TP 2m
+\fB\-\-limit\fR=\fILIMIT\fR
+The maximum number of resources to list. The default is \fBunlimited\fR. This
+flag interacts with other flags that are applied in this order:
+\fB\-\-flatten\fR, \fB\-\-sort\-by\fR, \fB\-\-filter\fR, \fB\-\-limit\fR.
+
+.TP 2m
+\fB\-\-page\-size\fR=\fIPAGE_SIZE\fR; default="100"
+Some services group resource list output into pages. This flag specifies the
+maximum number of resources per page. The default is determined by the service
+if it supports paging, otherwise it is \fBunlimited\fR (no paging). Paging may
+be applied before or after \fB\-\-filter\fR and \fB\-\-limit\fR depending on the
+service.
+
+.TP 2m
+\fB\-\-sort\-by\fR=[\fIFIELD\fR,...]
+A comma\-separated list of resource field key names to sort by. The default
+order is ascending. Prefix a field with ``~'' for descending order on that
+field. This flag interacts with other flags that are applied in this order:
+\fB\-\-flatten\fR, \fB\-\-sort\-by\fR, \fB\-\-filter\fR, \fB\-\-limit\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To see the list of all jobs, run:
+
+.RS 2m
+$ gcloud dataproc jobs list
+.RE
+
+To see a list of all active jobs in cluster \f5my_cluster\fR with a label of
+\f5env=staging\fR, run:
+
+.RS 2m
+$ gcloud dataproc jobs list \e
+    \-\-filter='status.state = ACTIVE AND placement.clusterName =
+ my_cluster AND labels.env = staging'
+.RE

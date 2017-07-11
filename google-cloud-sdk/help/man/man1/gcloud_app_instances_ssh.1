@@ -1,0 +1,107 @@
+
+.TH "GCLOUD_APP_INSTANCES_SSH" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud app instances ssh \- SSH into the VM of an App Engine Flexible instance
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud app instances ssh\fR \fIINSTANCE\fR \fB\-\-service\fR=\fISERVICE\fR \fB\-\-version\fR=\fIVERSION\fR [\fB\-\-container\fR=\fICONTAINER\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR] [\-\-\ \fICOMMAND\fR\ ...]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud app instances ssh\fR lets you remotely log in to your running App
+Engine Flexible instances.
+
+\fBgcloud app instances ssh\fR resolves the instance's IP address and
+pre\-populates the VM with a public key managed by gcloud. If the gcloud managed
+key pair does not exist, it is generated the first time an SSH command is run,
+which may prompt you for a passphrase for the private key encryption.
+
+All SSH commands require the OpenSSH client suite to be installed on Linux and
+Mac OS X. On Windows, the Cloud SDK comes with a bundled PuTTY suite instead, so
+it has no external dependencies.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIINSTANCE\fR
+The instance ID.
+
+.TP 2m
+[\-\- \fICOMMAND\fR ...]
+Remote command to execute on the VM.
+
+The '\-\-' argument must be specified between gcloud specific args on the left
+and COMMAND on the right.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-service\fR=\fISERVICE\fR
+The service ID.
+
+.TP 2m
+\fB\-\-version\fR=\fIVERSION\fR
+The version ID.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-container\fR=\fICONTAINER\fR
+Name of the container within the VM to connect to.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To SSH into an App Engine Flexible instance, run:
+
+.RS 2m
+$ gcloud app instances ssh \-\-service s1 \-\-version v1 i1
+.RE
+
+To SSH into the app container within an instance, run:
+
+.RS 2m
+$ gcloud app instances ssh \-\-service s1 \-\-version v1 i1 \e
+  \-\-container=gaeapp
+.RE
+
+To SSH into the app container and run a remote command, run:
+
+.RS 2m
+$ gcloud app instances ssh \-\-service s1 \-\-version v1 i1 \e
+  \-\-container=gaeapp \-\- echo hello
+.RE

@@ -1,0 +1,76 @@
+
+.TH "GCLOUD_ML\-ENGINE_LOCAL_PREDICT" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud ml\-engine local predict \- run prediction locally
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud ml\-engine local predict\fR \fB\-\-model\-dir\fR=\fIMODEL_DIR\fR (\fB\-\-json\-instances\fR=\fIJSON_INSTANCES\fR\ |\ \fB\-\-text\-instances\fR=\fITEXT_INSTANCES\fR) [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud ml\-engine local predict\fR performs prediction locally with the given
+instances. It requires the TensorFlow SDK be installed locally.
+
+
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-model\-dir\fR=\fIMODEL_DIR\fR
+Path to the model.
+
+.RE
+.sp
+Exactly one of these must be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-json\-instances\fR=\fIJSON_INSTANCES\fR
+Path to a local file from which instances are read. Instances are in JSON
+format; newline delimited.
+
+An example of the JSON instances file:
+
+.RS 2m
+{"images": [0.0, ..., 0.1], "key": 3}
+{"images": [0.0, ..., 0.1], "key": 2}
+...
+.RE
+
+This flag accepts "\-" for stdin.
+
+.TP 2m
+\fB\-\-text\-instances\fR=\fITEXT_INSTANCES\fR
+Path to a local file from which instances are read. Instances are in UTF\-8
+encoded text format; newline delimited.
+
+An example of the text instances file:
+
+.RS 2m
+107,4.9,2.5,4.5,1.7
+100,5.7,2.8,4.1,1.3
+...
+.RE
+
+This flag accepts "\-" for stdin.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

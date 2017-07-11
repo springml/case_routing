@@ -1,0 +1,88 @@
+
+.TH "GCLOUD_CONTAINER_CLUSTERS_RESIZE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud container clusters resize \- resizes an existing cluster for running containers
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud container clusters resize\fR \fINAME\fR \fB\-\-size\fR=\fISIZE\fR [\fB\-\-async\fR] [\fB\-\-node\-pool\fR=\fINODE_POOL\fR] [\fB\-\-zone\fR=\fIZONE\fR,\ \fB\-z\fR\ \fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Resize an existing cluster to a provided size.
+
+If you have multiple node pools, you must specify which node pool to resize by
+using the \-\-node\-pool flag. You are not required to use the flag if you have
+a single node pool.
+
+When increasing the size of a container cluster, the new instances are created
+with the same configuration as the existing instances. Existing pods are not
+moved onto the new instances, but new pods (such as those created by resizing a
+replication controller) will be scheduled onto the new instances.
+
+When decreasing a cluster, the pods that are scheduled on the instances being
+removed will be killed. If your pods are being managed by a replication
+controller, the controller will attempt to reschedule them onto the remaining
+instances. If your pods are not managed by a replication controller, they will
+not be restarted. Note that when resizing down, instances running pods and
+instances without pods are not differentiated. Resize will pick instances to
+remove at random.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of this cluster.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-size\fR=\fISIZE\fR
+Target number of nodes in the cluster.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Don't wait for the operation to complete.
+
+.TP 2m
+\fB\-\-node\-pool\fR=\fINODE_POOL\fR
+The node pool to resize.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR, \fB\-z\fR \fIZONE\fR
+The compute zone (e.g. us\-central1\-a) for the cluster. Overrides the default
+\fBcompute/zone\fR property value for this command invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

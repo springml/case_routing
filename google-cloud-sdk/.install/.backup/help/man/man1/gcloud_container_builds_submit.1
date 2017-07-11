@@ -1,0 +1,116 @@
+
+.TH "GCLOUD_CONTAINER_BUILDS_SUBMIT" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud container builds submit \- submit a build using the Google Container Builder service
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud container builds submit\fR [\fISOURCE\fR] (\fB\-\-config\fR=\fICONFIG\fR\ |\ \fB\-\-tag\fR=\fITAG\fR,\ \fB\-t\fR\ \fITAG\fR) [\fB\-\-async\fR] [\fB\-\-gcs\-log\-dir\fR=\fIGCS_LOG_DIR\fR] [\fB\-\-gcs\-source\-staging\-dir\fR=\fIGCS_SOURCE_STAGING_DIR\fR] [\fB\-\-no\-source\fR] [\fB\-\-substitutions\fR=[\fIKEY\fR=\fIVALUE\fR,...]] [\fB\-\-timeout\fR=\fITIMEOUT\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Submit a build using the Google Container Builder service.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+[\fISOURCE\fR]
+The source directory on local disk or tarball in Google Cloud Storage or disk to
+use for this build.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+Exactly one of these must be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-config\fR=\fICONFIG\fR
+The .yaml or .json file to use for build configuration.
+
+.TP 2m
+\fB\-\-tag\fR=\fITAG\fR, \fB\-t\fR \fITAG\fR
+The tag to use with a "docker build" image creation. The Container Builder
+service will run a remote "docker build \-t $TAG .", where $TAG is the tag
+provided by this flag. The tag must be in the gcr.io/* or *.gcr.io/* namespaces.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Display information about the operation in progress, without waiting for the
+operation to complete.
+
+.TP 2m
+\fB\-\-gcs\-log\-dir\fR=\fIGCS_LOG_DIR\fR
+Directory in Google Cloud Storage to hold build logs. If the bucket does not
+exist, it will be created. If not set, \f5gs://<project id>_cloudbuild/logs\fR
+is used.
+
+.TP 2m
+\fB\-\-gcs\-source\-staging\-dir\fR=\fIGCS_SOURCE_STAGING_DIR\fR
+Directory in Google Cloud Storage to stage a copy of the source used for the
+build. If the bucket does not exist, it will be created. If not set,
+\f5gs://<project id>_cloudbuild/source\fR is used.
+
+.TP 2m
+\fB\-\-no\-source\fR
+Specify that no source should be uploaded with this build.
+
+.TP 2m
+\fB\-\-substitutions\fR=[\fIKEY\fR=\fIVALUE\fR,...]
+Parameters to be substituted in the build specification.
+
+For example (using some nonsensical substitution keys; all keys must begin with
+an underscore):
+
+.RS 2m
+$ gcloud container builds submit . \e
+    \-\-config config.yaml \e
+    \-\-substitutions _FAVORITE_COLOR=blue,_NUM_CANDIES=10
+.RE
+
+This will result in a build where every occurrence of \f5${_FAVORITE_COLOR}\fR
+in certain fields is replaced by "blue", and similarly for \f5${_NUM_CANDIES}\fR
+and "10".
+
+For more details, see:
+https://cloud.google.com/container\-builder/docs/api/build\-requests#substitutions
+
+.TP 2m
+\fB\-\-timeout\fR=\fITIMEOUT\fR
+Maximum time a build can last before it is failed as "TIMEOUT", written as a
+duration (eg "2h15m5s" is two hours, fifteen minutes, and five seconds). If no
+unit is specified, seconds is assumed (eg "10" is 10 seconds). Overrides the
+default \fBcontainer/build_timeout\fR property value for this command
+invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

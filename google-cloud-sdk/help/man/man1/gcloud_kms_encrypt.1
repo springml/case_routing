@@ -1,0 +1,99 @@
+
+.TH "GCLOUD_KMS_ENCRYPT" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud kms encrypt \- encrypt a plaintext file using a key
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud kms encrypt\fR \fB\-\-ciphertext\-file\fR=\fICIPHERTEXT_FILE\fR \fB\-\-plaintext\-file\fR=\fIPLAINTEXT_FILE\fR [\fB\-\-additional\-authenticated\-data\-file\fR=\fIADDITIONAL_AUTHENTICATED_DATA_FILE\fR] [\fB\-\-key\fR=\fIKEY\fR] [\fB\-\-keyring\fR=\fIKEYRING\fR] [\fB\-\-location\fR=\fILOCATION\fR] [\fB\-\-version\fR=\fIVERSION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Encrypts the given plaintext file using the given CryptoKey and writes the
+result to the named ciphertext file. The plaintext file must not be larger than
+64KiB.
+
+If an additional authenticated data file is provided, its contents must also be
+provided during decryption. The file must not be larger than 64KiB.
+
+The flag \f5\-\-version\fR indicates the version of the key to use for
+encryption. By default, the primary version is used.
+
+If \f5\-\-plaintext\-file\fR or \f5\-\-additional\-authenticated\-data\-file\fR
+is set to '\-', that file is read from stdin. Similarly, if
+\f5\-\-ciphertext\-file\fR is set to '\-', the ciphertext is written to stdout.
+
+
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-ciphertext\-file\fR=\fICIPHERTEXT_FILE\fR
+Path to the ciphertext file to output.
+
+.TP 2m
+\fB\-\-plaintext\-file\fR=\fIPLAINTEXT_FILE\fR
+Path to the plaintext file to encrypt.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-additional\-authenticated\-data\-file\fR=\fIADDITIONAL_AUTHENTICATED_DATA_FILE\fR
+Path to the optional file containing the additional authenticated data.
+
+.TP 2m
+\fB\-\-key\fR=\fIKEY\fR
+The key to use for encryption.
+
+.TP 2m
+\fB\-\-keyring\fR=\fIKEYRING\fR
+The containing keyring.
+
+.TP 2m
+\fB\-\-location\fR=\fILOCATION\fR
+The location of the requested resource.
+
+.TP 2m
+\fB\-\-version\fR=\fIVERSION\fR
+The version to use for encryption.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+The following command will read the file 'path/to/plaintext', encrypt it using
+the CryptoKey \f5frodo\fR with the KeyRing \f5fellowship\fR and Location
+\f5global\fR, and write the ciphertext to 'path/to/ciphertext'.
+
+.RS 2m
+$ gcloud kms encrypt frodo \e
+    \-\-keyring fellowship \e
+    \-\-location global \e
+    \-\-plaintext\-file path/to/input/plaintext \e
+    \-\-ciphertext\-file path/to/output/ciphertext
+.RE

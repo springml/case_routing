@@ -1,0 +1,98 @@
+
+.TH "GCLOUD_COMPUTE_CONFIG\-SSH" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute config\-ssh \- populate SSH config files with Host entries from each instance
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute config\-ssh\fR [\fB\-\-dry\-run\fR] [\fB\-\-force\-key\-file\-overwrite\fR] [\fB\-\-remove\fR] [\fB\-\-ssh\-config\-file\fR=\fISSH_CONFIG_FILE\fR] [\fB\-\-ssh\-key\-file\fR=\fISSH_KEY_FILE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute config\-ssh\fR makes SSHing to virtual machine instances
+easier by adding an alias for each instance to the user SSH configuration
+(\f5~/.ssh/config\fR) file.
+
+In most cases, it is sufficient to run:
+
+.RS 2m
+$ gcloud compute config\-ssh
+.RE
+
+Each instance will be given an alias of the form \f5NAME.ZONE.PROJECT\fR. For
+example, if \f5example\-instance\fR resides in \f5us\-central1\-a\fR, you can
+SSH to it by running:
+
+.RS 2m
+$ ssh example\-instance.us\-central1\-a.MY\-PROJECT
+.RE
+
+On some platforms, the host alias can be tab\-completed, making the long alias
+less daunting to type.
+
+The aliases created interface with SSH\-based programs like \fBscp(1)\fR, so it
+is possible to use the aliases elsewhere:
+
+.RS 2m
+$ scp ~/MY\-FILE example\-instance.us\-central1\-a.MY\-PROJECT:~
+.RE
+
+Whenever instances are added, removed, or their external IP addresses are
+changed, this command should be re\-executed to update the configuration.
+
+This command ensures that the user's public SSH key is present in the project's
+metadata. If the user does not have a public SSH key, one is generated using
+\fBssh\-keygen(1)\fR (if the \f5\-\-quiet\fR flag is given, the generated key
+will have an empty passphrase).
+
+
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-dry\-run\fR
+If provided, the proposed changes to the SSH config file are printed to standard
+output and no actual changes are made.
+
+.TP 2m
+\fB\-\-force\-key\-file\-overwrite\fR
+If enabled gcloud will regenerate and overwrite the files associated with a
+broken SSH key without asking for confirmation in both interactive and
+non\-interactive environment.
+
+If disabled gcloud will not attempt to regenerate the files associated with a
+broken SSH key and fail in both interactive and non\-interactive environment.
+
+.TP 2m
+\fB\-\-remove\fR
+If provided, any changes made to the SSH config file by this tool are reverted.
+
+.TP 2m
+\fB\-\-ssh\-config\-file\fR=\fISSH_CONFIG_FILE\fR
+Specifies an alternative per\-user SSH configuration file. By default, this is
+\f5\fI~/.ssh/config\fR\fR.
+
+.TP 2m
+\fB\-\-ssh\-key\-file\fR=\fISSH_KEY_FILE\fR
+The path to the SSH key file. By default, this is
+\f5\fI~/.ssh/google_compute_engine\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

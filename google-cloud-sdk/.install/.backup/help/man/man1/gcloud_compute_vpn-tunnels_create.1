@@ -1,0 +1,133 @@
+
+.TH "GCLOUD_COMPUTE_VPN\-TUNNELS_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute vpn\-tunnels create \- create a VPN tunnel
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute vpn\-tunnels create\fR \fINAME\fR \fB\-\-peer\-address\fR=\fIPEER_ADDRESS\fR \fB\-\-shared\-secret\fR=\fISHARED_SECRET\fR \fB\-\-target\-vpn\-gateway\fR=\fITARGET_VPN_GATEWAY\fR [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-ike\-version\fR=\fIIKE_VERSION\fR] [\fB\-\-local\-traffic\-selector\fR=\fICIDR\fR,[\fICIDR\fR,...]] [\fB\-\-region\fR=\fIREGION\fR] [\fB\-\-remote\-traffic\-selector\fR=\fICIDR\fR,[\fICIDR\fR,...]] [\fB\-\-router\fR=\fIROUTER\fR] [\fB\-\-target\-vpn\-gateway\-region\fR=\fITARGET_VPN_GATEWAY_REGION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute vpn\-tunnels create\fR is used to create a VPN tunnel between
+a VPN Gateway in Google Cloud Platform and an external gateway that is
+identified by \-\-peer\-address.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the VPN Tunnel to create.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-peer\-address\fR=\fIPEER_ADDRESS\fR
+A valid IP\-v4 address representing the remote tunnel endpoint
+
+.TP 2m
+\fB\-\-shared\-secret\fR=\fISHARED_SECRET\fR
+A shared secret consisting of printable characters. Valid arguments match the
+regular expression [ \-~]+
+
+.TP 2m
+\fB\-\-target\-vpn\-gateway\fR=\fITARGET_VPN_GATEWAY\fR
+A reference to a target vpn gateway
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+An optional, textual description for the target VPN tunnel.
+
+.TP 2m
+\fB\-\-ike\-version\fR=\fIIKE_VERSION\fR
+Internet Key Exchange protocol version number. Default is 2. \fIIKE_VERSION\fR
+must be one of: \fB1\fR, \fB2\fR.
+
+.TP 2m
+\fB\-\-local\-traffic\-selector\fR=\fICIDR\fR,[\fICIDR\fR,...]
+Traffic selector is an agreement between IKE peers to permit traffic through a
+tunnel if the traffic matches a specified pair of local and remote addresses.
+
+local_traffic_selector allows to configure the local addresses that are
+permitted. The value should be a comma separated list of CIDR formatted strings.
+Example: 192.168.0.0/16,10.0.0.0/24.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the VPN Tunnel to create. If not specified, you will be prompted
+to select a region.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/region\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/region REGION
+.RE
+
+A list of regions can be fetched by running:
+
+.RS 2m
+$ gcloud compute regions list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/region
+.RE
+
+Alternatively, the region can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_REGION\fR\fR.
+
+.TP 2m
+\fB\-\-remote\-traffic\-selector\fR=\fICIDR\fR,[\fICIDR\fR,...]
+Traffic selector is an agreement between IKE peers to permit traffic through a
+tunnel if the traffic matches a specified pair of local and remote addresses.
+
+remote_traffic_selector allows to configure the remote addresses that are
+permitted. The value should be a comma separated list of CIDR formatted strings.
+Example: 192.168.0.0/16,10.0.0.0/24.
+
+.TP 2m
+\fB\-\-router\fR=\fIROUTER\fR
+The Router to use for dynamic routing.
+
+.TP 2m
+\fB\-\-target\-vpn\-gateway\-region\fR=\fITARGET_VPN_GATEWAY_REGION\fR
+The region of the Target VPN Gateway to operate on. Should be the same as
+region, if not specified, it will be automatically set. Overrides the default
+\fBcompute/region\fR property value for this command invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

@@ -1,0 +1,109 @@
+
+.TH "GCLOUD_APP_INSTANCES_SCP" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud app instances scp \- SCP from or to the VM of an App Engine Flexible instance
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud app instances scp\fR [\fIINSTANCE\fR:]\fISRC\fR [[\fIINSTANCE\fR:]\fISRC\fR\ ...] [\fIINSTANCE\fR:]\fIDEST\fR \fB\-\-service\fR=\fISERVICE\fR \fB\-\-version\fR=\fIVERSION\fR [\fB\-\-compress\fR] [\fB\-\-recurse\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud app instances scp\fR lets you remotely copy files to or from an App
+Engine Flexible instance.
+
+\fBgcloud app instances scp\fR resolves the instance's IP address and
+pre\-populates the VM with a public key managed by gcloud. If the gcloud managed
+key pair does not exist, it is generated the first time an SSH command is run,
+which may prompt you for a passphrase for the private key encryption.
+
+All SSH commands require the OpenSSH client suite to be installed on Linux and
+Mac OS X. On Windows, the Cloud SDK comes with a bundled PuTTY suite instead, so
+it has no external dependencies.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+[\fIINSTANCE\fR:]\fISRC\fR [[\fIINSTANCE\fR:]\fISRC\fR ...]
+Specifies the files to copy.
+
+.TP 2m
+[\fIINSTANCE\fR:]\fIDEST\fR
+Specifies a destination for the source files.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-service\fR=\fISERVICE\fR
+The service ID.
+
+.TP 2m
+\fB\-\-version\fR=\fIVERSION\fR
+The version ID.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-compress\fR
+Enable compression.
+
+.TP 2m
+\fB\-\-recurse\fR
+Upload directories recursively.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To copy one file from a remote instance to the local machine, run:
+
+.RS 2m
+$ gcloud app instances scp \-\-service s1 \-\-version v1 \e
+  i1:remote_file local_file
+.RE
+
+To copy several local files to a remote instance, run:
+
+.RS 2m
+$ gcloud app instances scp \-\-service s1 \-\-version v1 local_1 \e
+  local_1 i1:remote_dir
+.RE
+
+To use recursive copy, run:
+
+.RS 2m
+$ gcloud app instances scp \-\-service s1 \-\-version v1 \e
+  \-\-recurse local_dir i1:remote_dir
+.RE

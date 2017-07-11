@@ -1,0 +1,228 @@
+
+.TH "GCLOUD_SQL_INSTANCES_PATCH" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud sql instances patch \- updates the settings of a Cloud SQL instance
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud sql instances patch\fR \fIINSTANCE\fR [\fB\-\-activation\-policy\fR=\fIACTIVATION_POLICY\fR] [\fB\-\-assign\-ip\fR] [\fB\-\-async\fR] [\fB\-\-cpu\fR=\fICPU\fR] [\fB\-\-diff\fR] [\fB\-\-enable\-bin\-log\fR] [\fB\-\-enable\-database\-replication\fR] [\fB\-\-follow\-gae\-app\fR=\fIFOLLOW_GAE_APP\fR] [\fB\-\-gce\-zone\fR=\fIGCE_ZONE\fR] [\fB\-\-maintenance\-release\-channel\fR=\fIMAINTENANCE_RELEASE_CHANNEL\fR] [\fB\-\-maintenance\-window\-any\fR] [\fB\-\-maintenance\-window\-day\fR=\fIMAINTENANCE_WINDOW_DAY\fR] [\fB\-\-maintenance\-window\-hour\fR=\fIMAINTENANCE_WINDOW_HOUR\fR] [\fB\-\-memory\fR=\fIMEMORY\fR] [\fB\-\-pricing\-plan\fR=\fIPRICING_PLAN\fR,\ \fB\-p\fR\ \fIPRICING_PLAN\fR] [\fB\-\-replication\fR=\fIREPLICATION\fR] [\fB\-\-require\-ssl\fR] [\fB\-\-storage\-auto\-increase\fR] [\fB\-\-storage\-size\fR=\fISTORAGE_SIZE\fR] [\fB\-\-tier\fR=\fITIER\fR,\ \fB\-t\fR\ \fITIER\fR] [\fB\-\-authorized\-gae\-apps\fR=\fIAPP\fR,[\fIAPP\fR,...]\ |\ \fB\-\-clear\-gae\-apps\fR] [\fB\-\-authorized\-networks\fR=\fINETWORK\fR,[\fINETWORK\fR,...]\ |\ \fB\-\-clear\-authorized\-networks\fR] [\fB\-\-backup\-start\-time\fR=\fIBACKUP_START_TIME\fR\ |\ \fB\-\-no\-backup\fR] [\fB\-\-clear\-database\-flags\fR\ |\ \fB\-\-database\-flags\fR=\fIFLAG\fR=\fIVALUE\fR,[\fIFLAG\fR=\fIVALUE\fR,...]] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Updates the settings of a Cloud SQL instance.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIINSTANCE\fR
+Cloud SQL instance ID.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-activation\-policy\fR=\fIACTIVATION_POLICY\fR
+The activation policy for this instance. This specifies when the instance should
+be activated and is applicable only when the instance state is RUNNABLE.
+\fIACTIVATION_POLICY\fR must be one of: \fBALWAYS\fR, \fBNEVER\fR,
+\fBON_DEMAND\fR.
+
+.TP 2m
+\fB\-\-assign\-ip\fR
+The instance must be assigned an IP address.
+
+.TP 2m
+\fB\-\-async\fR
+Do not wait for the operation to complete.
+
+.TP 2m
+\fB\-\-cpu\fR=\fICPU\fR
+A whole number value indicating how many cores are desired in the machine. Both
+\-\-cpu and \-\-memory must be specified if a custom machine type is desired,
+and the \-\-tier flag must be omitted.
+
+.TP 2m
+\fB\-\-diff\fR
+Show what changed as a result of the update.
+
+.TP 2m
+\fB\-\-enable\-bin\-log\fR
+Enable binary log. If backup configuration is disabled, binary log should be
+disabled as well.
+
+.TP 2m
+\fB\-\-enable\-database\-replication\fR
+Enable database replication. Applicable only for read replica instance(s).
+WARNING: Instance will be restarted.
+
+.TP 2m
+\fB\-\-follow\-gae\-app\fR=\fIFOLLOW_GAE_APP\fR
+First Generation instances only. The App Engine app this instance should follow.
+It must be in the same region as the instance. WARNING: Instance may be
+restarted.
+
+.TP 2m
+\fB\-\-gce\-zone\fR=\fIGCE_ZONE\fR
+The preferred Compute Engine zone (e.g. us\-central1\-a, us\-central1\-b, etc.).
+WARNING: Instance may be restarted.
+
+.TP 2m
+\fB\-\-maintenance\-release\-channel\fR=\fIMAINTENANCE_RELEASE_CHANNEL\fR
+Which channel's updates to apply during the maintenance window.
+\fIMAINTENANCE_RELEASE_CHANNEL\fR must be one of:
+
+.RS 2m
+.TP 2m
+\fBpreview\fR
+Preview updates release prior to production updates. You may wish to use the
+preview channel for dev/test applications so that you can preview their
+compatibility with your application prior to the production release.
+.TP 2m
+\fBproduction\fR
+Production updates are stable and recommended for applications in production.
+
+.RE
+.sp
+.TP 2m
+\fB\-\-maintenance\-window\-any\fR
+Removes the user\-specified maintenance window.
+
+.TP 2m
+\fB\-\-maintenance\-window\-day\fR=\fIMAINTENANCE_WINDOW_DAY\fR
+Day of week for maintenance window, in UTC time zone.
+\fIMAINTENANCE_WINDOW_DAY\fR must be one of: \fBSUN\fR, \fBMON\fR, \fBTUE\fR,
+\fBWED\fR, \fBTHU\fR, \fBFRI\fR, \fBSAT\fR.
+
+.TP 2m
+\fB\-\-maintenance\-window\-hour\fR=\fIMAINTENANCE_WINDOW_HOUR\fR
+Hour of day for maintenance window, in UTC time zone.
+
+.TP 2m
+\fB\-\-memory\fR=\fIMEMORY\fR
+A whole number value indicating how much memory is desired in the machine. A
+size unit should be provided (eg. 3072MiB or 9GiB) \- if no units are specified,
+GiB is assumed. Both \-\-cpu and \-\-memory must be specified if a custom
+machine type is desired, and the \-\-tier flag must be omitted.
+
+.TP 2m
+\fB\-\-pricing\-plan\fR=\fIPRICING_PLAN\fR, \fB\-p\fR \fIPRICING_PLAN\fR
+First Generation instances only. The pricing plan for this instance.
+\fIPRICING_PLAN\fR must be one of: \fBPER_USE\fR, \fBPACKAGE\fR.
+
+.TP 2m
+\fB\-\-replication\fR=\fIREPLICATION\fR
+The type of replication this instance uses. \fIREPLICATION\fR must be one of:
+\fBSYNCHRONOUS\fR, \fBASYNCHRONOUS\fR.
+
+.TP 2m
+\fB\-\-require\-ssl\fR
+mysqld should default to 'REQUIRE X509' for users connecting over IP.
+
+.TP 2m
+\fB\-\-storage\-auto\-increase\fR
+Storage size can be increased, but it cannot be decreased; storage increases are
+permanent for the life of the instance. With this setting enabled, a spike in
+storage requirements can result in permanently increased storage costs for your
+instance. However, if an instance runs out of available space, it can result in
+the instance going offline, dropping existing connections.
+
+.TP 2m
+\fB\-\-storage\-size\fR=\fISTORAGE_SIZE\fR
+Amount of storage allocated to the instance. Must be an integer number of GB
+between 10GB and 10230GB inclusive.
+
+.TP 2m
+\fB\-\-tier\fR=\fITIER\fR, \fB\-t\fR \fITIER\fR
+The tier for this instance. For Second Generation instances, TIER is the
+instance's machine type (e.g., db\-n1\-standard\-1). For PostgreSQL instances,
+only shared\-core machine types (e.g., db\-f1\-micro) apply. A complete list of
+tiers is available here: https://cloud.google.com/sql/pricing. WARNING: Instance
+will be restarted.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-authorized\-gae\-apps\fR=\fIAPP\fR,[\fIAPP\fR,...]
+First Generation instances only. List of IDs for App Engine applications running
+in the Standard environment that can access this instance.
+
+.TP 2m
+\fB\-\-clear\-gae\-apps\fR
+Specified to clear the list of App Engine apps that can access this instance.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-authorized\-networks\fR=\fINETWORK\fR,[\fINETWORK\fR,...]
+The list of external networks that are allowed to connect to the instance.
+Specified in CIDR notation, also known as 'slash' notation (e.g.
+192.168.100.0/24).
+
+.TP 2m
+\fB\-\-clear\-authorized\-networks\fR
+Clear the list of external networks that are allowed to connect to the instance.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-backup\-start\-time\fR=\fIBACKUP_START_TIME\fR
+The start time of daily backups, specified in the 24 hour format \- HH:MM, in
+the UTC timezone.
+
+.TP 2m
+\fB\-\-no\-backup\fR
+Specified if daily backup should be disabled.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-clear\-database\-flags\fR
+Clear the database flags set on the instance. WARNING: Instance will be
+restarted.
+
+.TP 2m
+\fB\-\-database\-flags\fR=\fIFLAG\fR=\fIVALUE\fR,[\fIFLAG\fR=\fIVALUE\fR,...]
+A comma\-separated list of database flags to set on the instance. Use an equals
+sign to separate flag name and value. Flags without values, like
+skip_grant_tables, can be written out without a value after, e.g.,
+\f5skip_grant_tables=\fR. Use on/off for booleans. View the Instance Resource
+API for allowed flags. (e.g., \f5\-\-database\-flags
+max_allowed_packet=55555,skip_grant_tables=,log_output=1\fR)
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

@@ -1,0 +1,89 @@
+
+.TH "GCLOUD_DEPLOYMENT\-MANAGER_DEPLOYMENTS_CANCEL\-PREVIEW" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud deployment\-manager deployments cancel\-preview \- cancel a pending or running deployment preview
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud deployment\-manager deployments cancel\-preview\fR \fIDEPLOYMENT_NAME\fR [\fB\-\-async\fR] [\fB\-\-fingerprint\fR=\fIFINGERPRINT\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+This command will cancel a currently running or pending preview operation on a
+deployment.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIDEPLOYMENT_NAME\fR
+Deployment name.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Return immediately and print information about the Operation in progress rather
+than waiting for the Operation to complete. (default=False)
+
+.TP 2m
+\fB\-\-fingerprint\fR=\fIFINGERPRINT\fR
+The fingerprint to use in requests to modify a deployment. If not specified, a
+get deployment request will be made to fetch the latest fingerprint. A
+fingerprint is a randomly generated value that is part of the update, stop, and
+cancel\-preview request to perform optimistic locking. It is initially generated
+by Deployment Manager and changes after every request to modify data. The latest
+fingerprint is printed when deployment data is modified.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To cancel a running operation on a deployment, run:
+
+.RS 2m
+$ gcloud deployment\-manager deployments cancel\-preview my\-deployment
+.RE
+
+To issue a cancel preview command without waiting for the operation to complete,
+run:
+
+.RS 2m
+$ gcloud deployment\-manager deployments cancel\-preview \e
+    my\-deployment \-\-async
+.RE
+
+To cancel a preview command providing a fingerprint:
+
+.RS 2m
+$ gcloud deployment\-manager deployments cancel\-preview \e
+    my\-deployment \-\-fingerprint deployment\-fingerprint
+.RE
+
+When a deployment preview is cancelled, the deployment itself is not deleted.

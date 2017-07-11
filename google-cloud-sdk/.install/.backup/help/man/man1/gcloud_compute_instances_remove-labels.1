@@ -1,0 +1,115 @@
+
+.TH "GCLOUD_COMPUTE_INSTANCES_REMOVE\-LABELS" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute instances remove\-labels \- remove labels from Google Compute Engine virtual machine instances
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute instances remove\-labels\fR \fIINSTANCE_NAME\fR (\fB\-\-all\fR\ |\ \fB\-\-labels\fR=\fIKEY\fR,[\fIKEY\fR,...]) [\fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute instances remove\-labels\fR removes labels from a Google
+Compute Engine virtual machine instance. For example, running:
+
+.RS 2m
+$ gcloud compute instances remove\-labels example\-instance \e
+    \-\-labels=k0,k1
+.RE
+
+will remove existing labels with key \f5\fIk0\fR\fR and \f5\fIk1\fR\fR from
+\'example\-instance'.
+
+Labels can be used to identify the instance and to filter them as in
+
+.RS 2m
+$ gcloud compute instances list \-\-filter='labels.k1:value2'
+.RE
+
+To list existing labels
+
+.RS 2m
+$ gcloud compute instances describe example\-instance \e
+    \-\-format='default(labels)'
+.RE
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIINSTANCE_NAME\fR
+The name of the instance to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+Exactly one of these must be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-all\fR
+Remove all labels from the resource.
+
+.TP 2m
+\fB\-\-labels\fR=\fIKEY\fR,[\fIKEY\fR,...]
+A comma\-separated list of label keys to remove from the resource.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the instance to operate on. If not specified, you may be prompted to
+select a zone. \f5gcloud\fR will attempt to identify the zone by searching for
+resources in your project. If the zone cannot be determined, you will then be
+prompted with all Google Cloud Platform zones.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

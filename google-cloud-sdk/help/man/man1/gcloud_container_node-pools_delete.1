@@ -1,0 +1,80 @@
+
+.TH "GCLOUD_CONTAINER_NODE\-POOLS_DELETE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud container node\-pools delete \- delete an existing node pool in a running cluster
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud container node\-pools delete\fR \fINAME\fR [\fB\-\-async\fR] [\fB\-\-cluster\fR=\fICLUSTER\fR] [\fB\-\-wait\fR] [\fB\-\-zone\fR=\fIZONE\fR,\ \fB\-z\fR\ \fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud container node\-pools delete\fR deletes a node pool from a Google
+Container Engine cluster. This command does not gracefully drain the nodes prior
+to deleting them. Use "kubectl drain NODE_NAME" to drain each node to have
+containers running on these nodes terminate gracefully.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the node pool to delete.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Don't wait for the operation to complete.
+
+.TP 2m
+\fB\-\-cluster\fR=\fICLUSTER\fR
+The cluster from which to delete the node pool. Overrides the default
+\fBcontainer/cluster\fR property value for this command invocation.
+
+.TP 2m
+\fB\-\-wait\fR
+DEPRECATED, use \-\-no\-async. Poll the operation for completion after issuing a
+create request.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR, \fB\-z\fR \fIZONE\fR
+The compute zone (e.g. us\-central1\-a) for the cluster. Overrides the default
+\fBcompute/zone\fR property value for this command invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To delete the "node\-pool\-1" node pool from the cluster "sample\-cluster", run:
+
+.RS 2m
+$ gcloud container node\-pools delete node\-pool\-1 \e
+    \-\-cluster=sample\-cluster
+.RE

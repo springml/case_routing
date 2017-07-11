@@ -1,0 +1,69 @@
+
+.TH "GCLOUD_APP_VERSIONS_MIGRATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud app versions migrate \- migrate traffic from one version to another for a set of services
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud app versions migrate\fR \fIVERSION\fR [\fB\-\-service\fR=\fISERVICE\fR,\ \fB\-s\fR\ \fISERVICE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Migrate traffic from one version to another for a set of services.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIVERSION\fR
+The version to migrate to.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-service\fR=\fISERVICE\fR, \fB\-s\fR \fISERVICE\fR
+If specified, only migrate versions from the given service.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+This only works for automatically scaled Standard versions. To migrate from one
+version to another for all services where there is a version v2 and shut down
+the previous version, run:
+
+.RS 2m
+$ gcloud app versions migrate v2
+.RE
+
+To migrate from one version to another for a specific service, run:
+
+.RS 2m
+$ gcloud app versions migrate v2 \-\-service="s1"
+.RE

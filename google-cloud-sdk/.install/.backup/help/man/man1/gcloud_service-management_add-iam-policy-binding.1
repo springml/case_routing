@@ -1,0 +1,73 @@
+
+.TH "GCLOUD_SERVICE\-MANAGEMENT_ADD\-IAM\-POLICY\-BINDING" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud service\-management add\-iam\-policy\-binding \- add IAM policy binding for a service
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud service\-management add\-iam\-policy\-binding\fR \fISERVICE\fR \fB\-\-member\fR=\fIMEMBER\fR \fB\-\-role\fR=\fIROLE\fR [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Adds IAM policy binding to a service's access policy.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fISERVICE\fR
+The name of the service to which the member is to be added.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-member\fR=\fIMEMBER\fR
+The member to add to the binding. Should be of the form \f5user:user_email\fR
+(e.g. \f5user:test\-user@gmail.com.\fR)
+
+.TP 2m
+\fB\-\-role\fR=\fIROLE\fR
+Define the role of the member.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+The following command will add an IAM policy binding for the role of
+\'roles/servicemanagement.serviceConsumer' for the user 'test\-user@gmail.com'
+on a service with identifier 'my\-service'
+
+.RS 2m
+$ gcloud service\-management add\-iam\-policy\-binding my\-service \e
+    \-\-member='user:test\-user@gmail.com' \e
+    \-\-role='roles/servicemanagement.serviceConsumer'
+.RE
+
+See https://cloud.google.com/iam/docs/managing\-policies for details of policy
+role and member types.

@@ -1,0 +1,106 @@
+
+.TH "GCLOUD_COMPUTE_ADDRESSES_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute addresses create \- reserve IP addresses
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute addresses create\fR [\fINAME\fR\ ...] [\fB\-\-addresses\fR=\fIADDRESS\fR,[\fIADDRESS\fR,...]] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-global\fR\ |\ \fB\-\-region\fR=\fIREGION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute addresses create\fR is used to reserve one or more IP
+addresses. Once an IP address is reserved, it will be associated with the
+project until it is released using 'gcloud compute addresses delete'. Ephemeral
+IP addresses that are in use by resources in the project can be reserved using
+the \f5\-\-addresses\fR flag.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+[\fINAME\fR ...]
+The names of the addresses to create.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-addresses\fR=\fIADDRESS\fR,[\fIADDRESS\fR,...]
+Ephemeral IP addresses to promote to reserved status. Only addresses that are
+being used by resources in the project can be promoted. When providing this
+flag, a parallel list of names for the addresses can be provided. For example,
+
+.RS 2m
+$ gcloud compute addresses create ADDRESS\-1 ADDRESS\-2             \e
+  \-\-addresses 162.222.181.197,162.222.181.198             \e
+  \-\-region us\-central1
+.RE
+
+will result in 162.222.181.197 being reserved as 'ADDRESS\-1' and
+162.222.181.198 as 'ADDRESS\-2'. If no names are given, server\-generated names
+will be assigned to the IP addresses.
+
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+An optional textual description for the addresses.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-global\fR
+If provided, it is assumed the addresses are global.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the addresses to create. Overrides the default
+\fBcompute/region\fR property value for this command invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To reserve three IP addresses in the \f5us\-central1\fR region, run:
+
+.RS 2m
+$ gcloud compute addresses create ADDRESS\-1 ADDRESS\-2 ADDRESS\-3 \e
+    \-\-region us\-central1
+.RE
+
+To reserve ephemeral IP addresses 162.222.181.198 and 23.251.146.189 which are
+being used by virtual machine instances in the \f5us\-central1\fR region, run:
+
+.RS 2m
+$ gcloud compute addresses create \e
+    \-\-addresses 162.222.181.198,23.251.146.189 \-\-region us\-central1
+.RE
+
+In the above invocation, the two addresses will be assigned random names.

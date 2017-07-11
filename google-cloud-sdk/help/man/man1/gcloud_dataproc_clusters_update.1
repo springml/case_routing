@@ -1,0 +1,117 @@
+
+.TH "GCLOUD_DATAPROC_CLUSTERS_UPDATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud dataproc clusters update \- update labels and/or the number of worker nodes in a cluster
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud dataproc clusters update\fR \fINAME\fR [\fB\-\-async\fR] [\fB\-\-num\-preemptible\-workers\fR=\fINUM_PREEMPTIBLE_WORKERS\fR] [\fB\-\-num\-workers\fR=\fINUM_WORKERS\fR] [\fB\-\-region\fR=\fIREGION\fR] [\fB\-\-remove\-labels\fR=[\fIKEY\fR,...]] [\fB\-\-update\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Update the number of worker nodes and/or the labels in a cluster.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the cluster to update.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Display information about the operation in progress, without waiting for the
+operation to complete.
+
+.TP 2m
+\fB\-\-num\-preemptible\-workers\fR=\fINUM_PREEMPTIBLE_WORKERS\fR
+The new number of preemptible worker nodes in the cluster.
+
+.TP 2m
+\fB\-\-num\-workers\fR=\fINUM_WORKERS\fR
+The new number of worker nodes in the cluster.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+Specifies the Cloud Dataproc region to use. Each Cloud Dataproc region
+constitutes an independent resource namespace constrained to deploying instances
+into Google Compute Engine zones inside the region. The default value of
+"global" is a special multi\-region namespace which is capable of deploying
+instances into all Google Compute Engine zones globally, and is disjoint from
+other Cloud Dataproc regions. Overrides the default \fBdataproc/region\fR
+property value for this command invocation.
+
+.TP 2m
+\fB\-\-remove\-labels\fR=[\fIKEY\fR,...]
+A list of label keys to remove. If a label does not exist it is silently
+ignored.
+
+.TP 2m
+\fB\-\-update\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]
+A list of label KEY=VALUE pairs to update. If a label exists its value is
+modified, otherwise a new label is created.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To resize a cluster, run:
+
+.RS 2m
+$ gcloud dataproc clusters update my_cluster \-\-num\-workers 5
+.RE
+
+To change the number preemptible workers in a cluster, run:
+
+.RS 2m
+$ gcloud dataproc clusters update my_cluster \e
+    \-\-num\-preemptible\-workers 5
+.RE
+
+To add the label 'customer=acme' to a cluster, run:
+
+.RS 2m
+$ gcloud dataproc clusters update my_cluster \e
+    \-\-update\-labels=customer=acme
+.RE
+
+To update the label 'customer=ackme' to 'customer=acme', run:
+
+.RS 2m
+$ gcloud dataproc clusters update my_cluster \e
+    \-\-update\-labels=customer=acme
+.RE
+
+To remove the label whose key is 'customer', run:
+
+.RS 2m
+$ gcloud dataproc clusters update my_cluster \-\-remove\-labels=customer
+.RE

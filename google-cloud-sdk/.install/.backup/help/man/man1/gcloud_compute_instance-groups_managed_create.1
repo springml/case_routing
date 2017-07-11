@@ -1,0 +1,122 @@
+
+.TH "GCLOUD_COMPUTE_INSTANCE\-GROUPS_MANAGED_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute instance\-groups managed create \- create a Compute Engine managed instance group
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute instance\-groups managed create\fR \fINAME\fR \fB\-\-size\fR=\fISIZE\fR \fB\-\-template\fR=\fITEMPLATE\fR [\fB\-\-base\-instance\-name\fR=\fIBASE_INSTANCE_NAME\fR] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-target\-pool\fR=[\fITARGET_POOL\fR,...]] [\fB\-\-region\fR=\fIREGION\fR\ |\ \fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute instance\-groups managed create\fR creates a Google Compute
+Engine managed instance group.
+
+For example, running:
+
+.RS 2m
+$ gcloud compute instance\-groups managed create \e
+example\-managed\-instance\-group \-\-zone us\-central1\-a \e
+\-\-template example\-instance\-template \-\-size 1
+.RE
+
+will create one managed instance group called
+\'example\-managed\-instance\-group' in the \f5\fIus\-central1\-a\fR\fR zone.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the managed instance group to create.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-size\fR=\fISIZE\fR
+The initial number of instances you want in this group.
+
+.TP 2m
+\fB\-\-template\fR=\fITEMPLATE\fR
+Specifies the instance template to use when creating new instances.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-base\-instance\-name\fR=\fIBASE_INSTANCE_NAME\fR
+The base name to use for the Compute Engine instances that will be created with
+the managed instance group. If not provided base instance name will be the
+prefix of instance group name.
+
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+An optional description for this group.
+
+.TP 2m
+\fB\-\-target\-pool\fR=[\fITARGET_POOL\fR,...]
+Specifies any target pools you want the instances of this managed instance group
+to be part of.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the managed instance group to create. If not specified, you will
+be prompted to select a region.
+
+A list of regions can be fetched by running:
+
+.RS 2m
+$ gcloud compute regions list
+.RE
+
+Overrides the default \fBcompute/region\fR property value for this command
+invocation.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the managed instance group to create. If not specified, you may be
+prompted to select a zone.
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+Overrides the default \fBcompute/zone\fR property value for this command
+invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

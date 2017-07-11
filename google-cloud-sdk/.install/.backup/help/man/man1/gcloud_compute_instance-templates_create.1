@@ -1,0 +1,500 @@
+
+.TH "GCLOUD_COMPUTE_INSTANCE\-TEMPLATES_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute instance\-templates create \- create a Compute Engine virtual machine instance template
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute instance\-templates create\fR \fINAME\fR [\fB\-\-accelerator\fR=[\fItype\fR=\fITYPE\fR,[\fIcount\fR=\fICOUNT\fR],...]] [\fB\-\-no\-boot\-disk\-auto\-delete\fR] [\fB\-\-boot\-disk\-device\-name\fR=\fIBOOT_DISK_DEVICE_NAME\fR] [\fB\-\-boot\-disk\-size\fR=\fIBOOT_DISK_SIZE\fR] [\fB\-\-boot\-disk\-type\fR=\fIBOOT_DISK_TYPE\fR] [\fB\-\-can\-ip\-forward\fR] [\fB\-\-custom\-cpu\fR=\fICUSTOM_CPU\fR] [\fB\-\-custom\-memory\fR=\fICUSTOM_MEMORY\fR] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-disk\fR=[\fIauto\-delete\fR=\fIAUTO\-DELETE\fR],[\fIboot\fR=\fIBOOT\fR],[\fIdevice\-name\fR=\fIDEVICE\-NAME\fR],[\fImode\fR=\fIMODE\fR],[\fIname\fR=\fINAME\fR]] [\fB\-\-image\-project\fR=\fIIMAGE_PROJECT\fR] [\fB\-\-local\-ssd\fR=[\fIdevice\-name\fR=\fIDEVICE\-NAME\fR],[\fIinterface\fR=\fIINTERFACE\fR]] [\fB\-\-machine\-type\fR=\fIMACHINE_TYPE\fR] [\fB\-\-maintenance\-policy\fR=\fIMAINTENANCE_POLICY\fR] [\fB\-\-metadata\fR=\fIKEY\fR=\fIVALUE\fR,[\fIKEY\fR=\fIVALUE\fR,...]] [\fB\-\-metadata\-from\-file\fR=\fIKEY\fR=\fILOCAL_FILE_PATH\fR,[\fIKEY\fR=\fILOCAL_FILE_PATH\fR,...]] [\fB\-\-network\fR=\fINETWORK\fR] [\fB\-\-preemptible\fR] [\fB\-\-region\fR=\fIREGION\fR] [\fB\-\-no\-restart\-on\-failure\fR] [\fB\-\-subnet\fR=\fISUBNET\fR] [\fB\-\-tags\fR=\fITAG\fR,[\fITAG\fR,...]] [\fB\-\-address\fR=\fIADDRESS\fR\ |\ \fB\-\-no\-address\fR] [\fB\-\-image\fR=\fIIMAGE\fR\ |\ \fB\-\-image\-family\fR=\fIIMAGE_FAMILY\fR] [\fB\-\-no\-scopes\fR\ |\ \fB\-\-scopes\fR=[\fISCOPE\fR,...]] [\fB\-\-no\-service\-account\fR\ |\ \fB\-\-service\-account\fR=\fISERVICE_ACCOUNT\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute instance\-templates create\fR facilitates the creation of
+Google Compute Engine virtual machine instance templates. For example, running:
+
+.RS 2m
+$ gcloud compute instance\-templates create INSTANCE\-TEMPLATE
+.RE
+
+will create one instance templates called 'INSTANCE\-TEMPLATE'.
+
+Instance templates are global resources, and can be used to create instances in
+any zone.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the instance template to create.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-accelerator\fR=[\fItype\fR=\fITYPE\fR,[\fIcount\fR=\fICOUNT\fR],...]
+Attaches accelerators (e.g. GPUs) to the instances.
+
+.RS 2m
+.TP 2m
+\fBtype\fR
+The specific type (e.g. nvidia\-tesla\-k80 for nVidia Tesla K80) of accelerator
+to attach to the instances. Use 'gcloud compute accelerator\-types list' to
+learn about all available accelerator types.
+
+.TP 2m
+\fBcount\fR
+The number of pieces of the accelerator to attach to the instances. The default
+value is 1.
+
+.RE
+.sp
+.TP 2m
+\fB\-\-boot\-disk\-auto\-delete\fR
+Automatically delete boot disks when their instances are deleted. Enabled by
+default, use \fB\-\-no\-boot\-disk\-auto\-delete\fR to disable.
+
+.TP 2m
+\fB\-\-boot\-disk\-device\-name\fR=\fIBOOT_DISK_DEVICE_NAME\fR
+The name the guest operating system will see for the boot disk as. This option
+can only be specified if a new boot disk is being created (as opposed to
+mounting an existing persistent disk).
+
+.TP 2m
+\fB\-\-boot\-disk\-size\fR=\fIBOOT_DISK_SIZE\fR
+The size of the boot disk. This option can only be specified if a new boot disk
+is being created (as opposed to mounting an existing persistent disk). The value
+must be a whole number followed by a size unit of \f5\fIKB\fR\fR for kilobyte,
+\f5\fIMB\fR\fR for megabyte, \f5\fIGB\fR\fR for gigabyte, or \f5\fITB\fR\fR for
+terabyte. For example, \f5\fI10GB\fR\fR will produce a 10 gigabyte disk. The
+minimum size a boot disk can have is 10 GB. Disk size must be a multiple of 1
+GB.
+
+.TP 2m
+\fB\-\-boot\-disk\-type\fR=\fIBOOT_DISK_TYPE\fR
+The type of the boot disk. This option can only be specified if a new boot disk
+is being created (as opposed to mounting an existing persistent disk). To get a
+list of available disk types, run \f5$ gcloud compute disk\-types list\fR.
+
+.TP 2m
+\fB\-\-can\-ip\-forward\fR
+If provided, allows the instances to send and receive packets with non\-matching
+destination or source IP addresses.
+
+.TP 2m
+\fB\-\-custom\-cpu\fR=\fICUSTOM_CPU\fR
+A whole number value indicating how many cores are desired in the custom machine
+type. Both \-\-custom\-cpu and \-\-custom\-memory must be specified if a custom
+machine type is desired, and the \-\-machine\-type flag must be omitted.
+
+.TP 2m
+\fB\-\-custom\-memory\fR=\fICUSTOM_MEMORY\fR
+A whole number value indicating how much memory is desired in the custom machine
+type. A size unit should be provided (eg. 3072MB or 9GB) \- if no units are
+specified, GB is assumed. Both \-\-custom\-cpu and \-\-custom\-memory must be
+specified if a custom machine type is desired, and the \-\-machine\-type flag
+must be omitted.
+
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+Specifies a textual description for the instance template.
+
+.TP 2m
+\fB\-\-disk\fR=[\fIauto\-delete\fR=\fIAUTO\-DELETE\fR],[\fIboot\fR=\fIBOOT\fR],[\fIdevice\-name\fR=\fIDEVICE\-NAME\fR],[\fImode\fR=\fIMODE\fR],[\fIname\fR=\fINAME\fR]
+Attaches persistent disks to the instances. The disks specified must already
+exist.
+
+.RS 2m
+.TP 2m
+\fBname\fR
+The disk to attach to the instances. When creating more than one instance and
+using this property, the only valid mode for attaching the disk is read\-only
+(see \fBmode\fR below).
+
+.TP 2m
+\fBmode\fR
+Specifies the mode of the disk. Supported options are \f5\fIro\fR\fR for
+read\-only and \f5\fIrw\fR\fR for read\-write. If omitted, \f5\fIrw\fR\fR is
+used as a default. It is an error for mode to be \f5\fIrw\fR\fR when creating
+more than one instance because read\-write disks can only be attached to a
+single instance.
+
+.TP 2m
+\fBboot\fR
+If \f5\fIyes\fR\fR, indicates that this is a boot disk. The virtual machines
+will use the first partition of the disk for their root file systems. The
+default value for this is \f5\fIno\fR\fR.
+
+.TP 2m
+\fBdevice\-name\fR
+An optional name that indicates the disk name the guest operating system will
+see. If omitted, a device name of the form \f5\fIpersistent\-disk\-N\fR\fR will
+be used.
+
+.TP 2m
+\fBauto\-delete\fR
+If \f5\fIyes\fR\fR, this persistent disk will be automatically deleted when the
+instance is deleted. However, if the disk is later detached from the instance,
+this option won't apply. The default value for this is \f5\fIno\fR\fR.
+
+.RE
+.sp
+.TP 2m
+\fB\-\-image\-project\fR=\fIIMAGE_PROJECT\fR
+The project against which all image and image family references will be
+resolved. It is best practice to define image\-project.
+.RS 2m
+.IP "\(em" 2m
+If specifying one of our public images, image\-project must be provided.
+.IP "\(em" 2m
+If there are several of the same image\-family value in multiple projects,
+image\-project must be specified to clarify the image to be used.
+.IP "\(em" 2m
+If not specified and either image or image\-family is provided, the current
+default project is used.
+.RE
+.RE
+.sp
+
+.RS 2m
+.TP 2m
+\fB\-\-local\-ssd\fR=[\fIdevice\-name\fR=\fIDEVICE\-NAME\fR],[\fIinterface\fR=\fIINTERFACE\fR]
+Attaches a local SSD to the instances.
+
+This flag is currently in BETA and may change without notice.
+
+.RS 2m
+.TP 2m
+\fBdevice\-name\fR
+Optional. A name that indicates the disk name the guest operating system will
+see. If omitted, a device name of the form \f5\fIlocal\-ssd\-N\fR\fR will be
+used.
+
+.TP 2m
+\fBinterface\fR
+Optional. The kind of disk interface exposed to the VM for this SSD. Valid
+values are \f5\fISCSI\fR\fR and \f5\fINVME\fR\fR. SCSI is the default and is
+supported by more guest operating systems. NVME may provide higher performance.
+
+.RE
+.sp
+.TP 2m
+\fB\-\-machine\-type\fR=\fIMACHINE_TYPE\fR
+Specifies the machine type used for the instances. To get a list of available
+machine types, run 'gcloud compute machine\-types list'. If unspecified, the
+default type is n1\-standard\-1.
+
+.TP 2m
+\fB\-\-maintenance\-policy\fR=\fIMAINTENANCE_POLICY\fR
+Specifies the behavior of the instances when their host machines undergo
+maintenance. The default is MIGRATE. \fIMAINTENANCE_POLICY\fR must be one of:
+
+.RS 2m
+.TP 2m
+\fBMIGRATE\fR
+The instances should be migrated to a new host. This will temporarily impact the
+performance of instances during a migration event.
+.TP 2m
+\fBTERMINATE\fR
+The instances should be terminated.
+
+.RE
+.sp
+.TP 2m
+\fB\-\-metadata\fR=\fIKEY\fR=\fIVALUE\fR,[\fIKEY\fR=\fIVALUE\fR,...]
+Metadata to be made available to the guest operating system running on the
+instances. Each metadata entry is a key/value pair separated by an equals sign.
+Metadata keys must be unique and less than 128 bytes in length. Values must be
+less than or equal to 32,768 bytes in length. Multiple arguments can be passed
+to this flag, e.g., \f5\fI\-\-metadata
+key\-1=value\-1,key\-2=value\-2,key\-3=value\-3\fR\fR.
+
+In images that have Compute Engine tools installed on them, such as the official
+images (https://cloud.google.com/compute/docs/images), the following metadata
+keys have special meanings:
+
+.RS 2m
+.TP 2m
+\fBstartup\-script\fR
+Specifies a script that will be executed by the instances once they start
+running. For convenience, \f5\fI\-\-metadata\-from\-file\fR\fR can be used to
+pull the value from a file.
+
+.TP 2m
+\fBstartup\-script\-url\fR
+Same as \f5\fIstartup\-script\fR\fR except that the script contents are pulled
+from a publicly\-accessible location on the web.
+
+.RE
+.sp
+.TP 2m
+\fB\-\-metadata\-from\-file\fR=\fIKEY\fR=\fILOCAL_FILE_PATH\fR,[\fIKEY\fR=\fILOCAL_FILE_PATH\fR,...]
+Same as \f5\fI\-\-metadata\fR\fR except that the value for the entry will be
+read from a local file. This is useful for values that are too large such as
+\f5\fIstartup\-script\fR\fR contents.
+
+.TP 2m
+\fB\-\-network\fR=\fINETWORK\fR
+Specifies the network that the instances will be part of. If \-\-subnet is also
+specified subnet must be a subnetwork of network specified by \-\-network. If
+neither is specified, this defaults to the "default" network.
+
+.TP 2m
+\fB\-\-preemptible\fR
+If provided, instances will be preemptible and time\-limited. Instances may be
+preempted to free up resources for standard VM instances, and will only be able
+to run for a limited amount of time. Preemptible instances can not be restarted
+and will not migrate.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the subnetwork to attach. If not specified, you will be prompted
+to select a region.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/region\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/region REGION
+.RE
+
+A list of regions can be fetched by running:
+
+.RS 2m
+$ gcloud compute regions list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/region
+.RE
+
+Alternatively, the region can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_REGION\fR\fR.
+
+.TP 2m
+\fB\-\-restart\-on\-failure\fR
+The instances will be restarted if they are terminated by Compute Engine. This
+does not affect terminations performed by the user. Enabled by default, use
+\fB\-\-no\-restart\-on\-failure\fR to disable.
+
+.TP 2m
+\fB\-\-subnet\fR=\fISUBNET\fR
+Specifies the subnet that the instances will be part of. If \-\-network is also
+specified subnet must be a subnetwork of network specified by \-\-network.
+
+.TP 2m
+\fB\-\-tags\fR=\fITAG\fR,[\fITAG\fR,...]
+Specifies a list of tags to apply to the instances for identifying the instances
+to which network firewall rules will apply. See \fBgcloud compute
+firewall\-rules create\fR(1) for more details.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-address\fR=\fIADDRESS\fR
+Assigns the given external IP address to the instance that is created. This
+option can only be used when creating a single instance.
+
+.TP 2m
+\fB\-\-no\-address\fR
+If provided, the instances will not be assigned external IP addresses.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-image\fR=\fIIMAGE\fR
+Specifies the boot image for the instances. For each instance, a new boot disk
+will be created from the given image. Each boot disk will have the same name as
+the instance. To view a list of public images and projects, run \f5$ gcloud
+compute images list\fR. It is best practice to use \f5\-\-image\fR when a
+specific version of an image is needed.
+
+When using this option, \f5\fI\-\-boot\-disk\-device\-name\fR\fR and
+\f5\fI\-\-boot\-disk\-size\fR\fR can be used to override the boot disk's device
+name and size, respectively.
+
+.TP 2m
+\fB\-\-image\-family\fR=\fIIMAGE_FAMILY\fR
+The family of the image that the boot disk will be initialized with. When a
+family is specified instead of an image, the latest non\-deprecated image
+associated with that family is used. It is best practice to use
+\f5\-\-image\-family\fR when the latest version of an image is needed.
+
+By default, \f5\fIdebian\-8\fR\fR is assumed for this flag.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-no\-scopes\fR
+Create instance without scopes
+
+.TP 2m
+\fB\-\-scopes\fR=[\fISCOPE\fR,...]
+If not provided, the instance will be assigned the default scopes, described
+below.
+
+SCOPE can be either the full URI of the scope or an alias. Available aliases
+are:
+
+.RS 2m
+default
+  Scopes assigned to instances by default:
+  \- https://www.googleapis.com/auth/cloud.useraccounts.readonly
+  \- https://www.googleapis.com/auth/devstorage.read_only
+  \- https://www.googleapis.com/auth/logging.write
+  \- https://www.googleapis.com/auth/monitoring.write
+  \- https://www.googleapis.com/auth/pubsub
+  \- https://www.googleapis.com/auth/service.management.readonly
+  \- https://www.googleapis.com/auth/servicecontrol
+  \- https://www.googleapis.com/auth/trace.append
+.RE
+
+.RS 2m
+bigquery
+  \- https://www.googleapis.com/auth/bigquery
+.RE
+
+.RS 2m
+cloud\-platform
+  \- https://www.googleapis.com/auth/cloud\-platform
+.RE
+
+.RS 2m
+compute\-ro
+  \- https://www.googleapis.com/auth/compute.readonly
+.RE
+
+.RS 2m
+compute\-rw
+  \- https://www.googleapis.com/auth/compute
+.RE
+
+.RS 2m
+datastore
+  \- https://www.googleapis.com/auth/datastore
+.RE
+
+.RS 2m
+logging\-write
+  \- https://www.googleapis.com/auth/logging.write
+.RE
+
+.RS 2m
+monitoring
+  \- https://www.googleapis.com/auth/monitoring
+.RE
+
+.RS 2m
+monitoring\-write
+  \- https://www.googleapis.com/auth/monitoring.write
+.RE
+
+.RS 2m
+service\-control
+  \- https://www.googleapis.com/auth/servicecontrol
+.RE
+
+.RS 2m
+service\-management
+  \- https://www.googleapis.com/auth/service.management.readonly
+.RE
+
+.RS 2m
+sql
+  \- https://www.googleapis.com/auth/sqlservice
+.RE
+
+.RS 2m
+sql\-admin
+  \- https://www.googleapis.com/auth/sqlservice.admin
+.RE
+
+.RS 2m
+storage\-full
+  \- https://www.googleapis.com/auth/devstorage.full_control
+.RE
+
+.RS 2m
+storage\-ro
+  \- https://www.googleapis.com/auth/devstorage.read_only
+.RE
+
+.RS 2m
+storage\-rw
+  \- https://www.googleapis.com/auth/devstorage.read_write
+.RE
+
+.RS 2m
+taskqueue
+  \- https://www.googleapis.com/auth/taskqueue
+.RE
+
+.RS 2m
+useraccounts\-ro
+  \- https://www.googleapis.com/auth/cloud.useraccounts.readonly
+.RE
+
+.RS 2m
+useraccounts\-rw
+  \- https://www.googleapis.com/auth/cloud.useraccounts
+.RE
+
+.RS 2m
+userinfo\-email
+  \- https://www.googleapis.com/auth/userinfo.email
+.RE
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-no\-service\-account\fR
+Create instance without service account
+
+.TP 2m
+\fB\-\-service\-account\fR=\fISERVICE_ACCOUNT\fR
+A service account is an identity attached to the instance. Its access tokens can
+be accessed through the instance metadata server and are used to authenticate
+applications on the instance. The account can be either an email address or an
+alias corresponding to a service account. You can explicitly specify the Compute
+Engine default service account using the 'default' alias.
+
+If not provided, the instance will get project's default service account.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

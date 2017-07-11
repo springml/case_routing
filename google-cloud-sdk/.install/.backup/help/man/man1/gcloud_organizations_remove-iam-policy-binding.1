@@ -1,0 +1,74 @@
+
+.TH "GCLOUD_ORGANIZATIONS_REMOVE\-IAM\-POLICY\-BINDING" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud organizations remove\-iam\-policy\-binding \- remove IAM policy binding for a organization
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud organizations remove\-iam\-policy\-binding\fR \fIORGANIZATION_ID\fR \fB\-\-member\fR=\fIMEMBER\fR \fB\-\-role\fR=\fIROLE\fR [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Removes a policy binding to the IAM policy of an organization, given an
+organization ID and the binding.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIORGANIZATION_ID\fR
+ID for the organization whose IAM binding you want to remove.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-member\fR=\fIMEMBER\fR
+The member to add to the binding. Should be of the form \f5user:user_email\fR
+(e.g. \f5user:test\-user@gmail.com.\fR)
+
+.TP 2m
+\fB\-\-role\fR=\fIROLE\fR
+The role to remove the member from.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+The following command will remove a IAM policy binding for the role of
+\'roles/editor' for the user 'test\-user@gmail.com' on organization with
+identifier 'example\-organization\-id\-1'
+
+.RS 2m
+$ gcloud organizations remove\-iam\-policy\-binding \e
+    example\-organization\-id\-1 \-\-member='user:test\-user@gmail.com' \e
+    \-\-role='roles/editor'
+.RE
+
+See https://cloud.google.com/iam/docs/managing\-policies for details of policy
+role and member types.

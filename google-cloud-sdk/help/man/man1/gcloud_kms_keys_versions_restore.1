@@ -1,0 +1,75 @@
+
+.TH "GCLOUD_KMS_KEYS_VERSIONS_RESTORE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud kms keys versions restore \- restore a version scheduled for destruction
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud kms keys versions restore\fR \fIVERSION\fR [\fB\-\-key\fR=\fIKEY\fR] [\fB\-\-keyring\fR=\fIKEYRING\fR] [\fB\-\-location\fR=\fILOCATION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Restores the given version that was scheduled to be destroyed.
+
+This moves the version from Scheduled for destruction to Disabled. Only versions
+which are Scheduled for destruction can be Restored.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIVERSION\fR
+Name of the version to restore.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-key\fR=\fIKEY\fR
+The containing key.
+
+.TP 2m
+\fB\-\-keyring\fR=\fIKEYRING\fR
+The containing keyring.
+
+.TP 2m
+\fB\-\-location\fR=\fILOCATION\fR
+The location of the requested resource.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+The following command restores version 9 of key \f5frodo\fR within keyring
+\f5fellowship\fR and location \f5us\-east1\fR which was previously scheduled for
+destruction:
+
+.RS 2m
+$ gcloud kms keys versions restore 9 \-\-location us\-east1 \e
+    \-\-keyring fellowship \-\-key frodo
+.RE

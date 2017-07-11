@@ -1,0 +1,149 @@
+
+.TH "GCLOUD_COMPUTE_IMAGES_DEPRECATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute images deprecate \- manage deprecation status of Google Compute Engine images
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute images deprecate\fR \fIIMAGE_NAME\fR \fB\-\-state\fR=\fISTATE\fR [\fB\-\-replacement\fR=\fIREPLACEMENT\fR] [\fB\-\-delete\-in\fR=\fIDELETE_IN\fR\ |\ \fB\-\-delete\-on\fR=\fIDELETE_ON\fR] [\fB\-\-obsolete\-in\fR=\fIOBSOLETE_IN\fR\ |\ \fB\-\-obsolete\-on\fR=\fIOBSOLETE_ON\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute images deprecate\fR is used to deprecate images.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIIMAGE_NAME\fR
+The name of the disk image to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-state\fR=\fISTATE\fR
+The deprecation state to set on the image. \fISTATE\fR must be one of:
+
+.RS 2m
+.TP 2m
+\fBACTIVE\fR
+The image is currently supported.
+.TP 2m
+\fBDELETED\fR
+New uses result in an error. Setting this state will not automatically delete
+the image. You must still make a request to delete the image to remove it from
+the image list.
+.TP 2m
+\fBDEPRECATED\fR
+Operations which create a new \fBDEPRECATED\fR resource return successfully, but
+with a warning indicating that the image is deprecated and recommending its
+replacement.
+.TP 2m
+\fBOBSOLETE\fR
+New uses result in an error.
+
+
+.RE
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-replacement\fR=\fIREPLACEMENT\fR
+Specifies a Compute Engine image as a replacement for the image being phased
+out. Users of the deprecated image will be advised to switch to this
+replacement. For example, \fB\-\-replacement example\-image\fR or
+\fB\-\-replacement projects/google/global/images/example\-image\fR.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-delete\-in\fR=\fIDELETE_IN\fR
+Specifies the amount of time until the image will be marked as DELETED. Note:
+The image will not actually be deleted \- this field is only for informational
+purposes (see below). For instance, specifying \f5\fI30d\fR\fR will mark as
+DELETED in 30 days from the current system time. Valid units for this flag are
+``s'' for seconds, ``m'' for minutes, ``h'' for hours and ``d'' for days. If no
+unit is specified, seconds is assumed.
+
+Note that the image will not be deleted automatically. The image will only be
+marked as deleted. An explicit request to delete the image must be made in order
+to remove it from the image list. This flag is mutually exclusive with
+\fB\-\-delete\-on\fR.
+
+.TP 2m
+\fB\-\-delete\-on\fR=\fIDELETE_ON\fR
+Similar to \fB\-\-delete\-in\fR, but specifies an absolute time when the image
+will be marked as DELETED. Note: The image will not actually be deleted \- this
+field is for informational purposes (see the description of \-\-delete\-in for
+more details). The date and time specified must be valid RFC 3339 full\-date or
+date\-time. For times in UTC, this looks like
+\f5\fIYYYY\-MM\-DDTHH:MM:SSZ\fR\fR. For example: 2020\-01\-02T00:00:00Z for
+midnight on January 2, 2020 in UTC. This flag is mutually exclusive with
+\fB\-\-delete\-in\fR.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-obsolete\-in\fR=\fIOBSOLETE_IN\fR
+Specifies time (in the same format as \fB\-\-delete\-in\fR) until the image will
+be marked OBSOLETE. State will not be changed \- it is only for informational
+purposes. This flag is mutually exclusive with \fB\-\-obsolete\-on\fR.
+
+.TP 2m
+\fB\-\-obsolete\-on\fR=\fIOBSOLETE_ON\fR
+Specifies time (in the same format as \fB\-\-delete\-on\fR) when this image will
+be marked as OBSOLETE. State will not be changed \- it has only informational
+purpose. This flag is mutually exclusive with \fB\-\-obsolete\-in\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To deprecate an image called 'IMAGE' immediately, mark it as obsolete in one
+day, and mark it as deleted in two days, use:
+
+.RS 2m
+$ gcloud compute images deprecate IMAGE \-\-state DEPRECATED \e
+    \-\-obsolete\-in 1d \-\-delete\-in 2d
+.RE
+
+To un\-deprecate an image called 'IMAGE', use:
+
+.RS 2m
+$ gcloud compute images deprecate IMAGE \-\-state ACTIVE
+.RE

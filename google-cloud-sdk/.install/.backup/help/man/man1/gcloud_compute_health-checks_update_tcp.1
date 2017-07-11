@@ -1,0 +1,125 @@
+
+.TH "GCLOUD_COMPUTE_HEALTH\-CHECKS_UPDATE_TCP" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute health\-checks update tcp \- update a TCP health check
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute health\-checks update tcp\fR \fINAME\fR [\fB\-\-check\-interval\fR=\fICHECK_INTERVAL\fR] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-healthy\-threshold\fR=\fIHEALTHY_THRESHOLD\fR] [\fB\-\-port\fR=\fIPORT\fR] [\fB\-\-port\-name\fR=\fIPORT_NAME\fR] [\fB\-\-proxy\-header\fR=\fIPROXY_HEADER\fR] [\fB\-\-request\fR=\fIREQUEST\fR] [\fB\-\-response\fR=\fIRESPONSE\fR] [\fB\-\-timeout\fR=\fITIMEOUT\fR] [\fB\-\-unhealthy\-threshold\fR=\fIUNHEALTHY_THRESHOLD\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute health\-checks update tcp\fR is used to update an existing TCP
+health check. Only arguments passed in will be updated on the health check.
+Other attributes will remain unaffected.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the TCP health check to update.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-check\-interval\fR=\fICHECK_INTERVAL\fR
+How often to perform a health check for an instance. For example, specifying
+\f5\fI10s\fR\fR will run the check every 10 seconds. Valid units for this flag
+are ``s'' for seconds and ``m'' for minutes.
+
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+A textual description for the TCP health check. Pass in an empty string to
+unset.
+
+.TP 2m
+\fB\-\-healthy\-threshold\fR=\fIHEALTHY_THRESHOLD\fR
+The number of consecutive successful health checks before an unhealthy instance
+is marked as healthy.
+
+.TP 2m
+\fB\-\-port\fR=\fIPORT\fR
+The TCP port number that this health check monitors.
+
+.TP 2m
+\fB\-\-port\-name\fR=\fIPORT_NAME\fR
+The port name that this health check monitors. By default, this is empty.
+Setting this to an empty string will clear any existing port\-name value.
+
+.TP 2m
+\fB\-\-proxy\-header\fR=\fIPROXY_HEADER\fR
+The type of proxy protocol header to be sent to the backend. \fIPROXY_HEADER\fR
+must be one of:
+
+.RS 2m
+.TP 2m
+\fBNONE\fR
+No proxy header is added.
+.TP 2m
+\fBPROXY_V1\fR
+Adds the header "PROXY UNKNOWN\er\en".
+
+.RE
+.sp
+.TP 2m
+\fB\-\-request\fR=\fIREQUEST\fR
+An optional string of up to 1024 characters to send once the health check TCP
+connection has been established. The health checker then looks for a reply of
+the string provided in the \f5\-\-response\fR field.
+
+If \f5\-\-response\fR is not configured, the health checker does not wait for a
+response and regards the probe as successful if the TCP or SSL handshake was
+successful.
+
+Setting this to an empty string will clear any existing request value.
+
+.TP 2m
+\fB\-\-response\fR=\fIRESPONSE\fR
+An optional string of up to 1024 characters that the health checker expects to
+receive from the instance. If the response is not received exactly, the health
+check probe fails. If \f5\-\-response\fR is configured, but not
+\f5\-\-request\fR, the health checker will wait for a response anyway. Unless
+your system automatically sends out a message in response to a successful
+handshake, only configure \f5\-\-response\fR to match an explicit
+\f5\-\-request\fR. Setting this to an empty string will clear any existing
+response value.
+
+.TP 2m
+\fB\-\-timeout\fR=\fITIMEOUT\fR
+If Google Compute Engine doesn't receive a healthy response from the instance by
+the time specified by the value of this flag, the health check request is
+considered a failure. For example, specifying \f5\fI10s\fR\fR will cause the
+check to wait for 10 seconds before considering the request a failure. Valid
+units for this flag are ``s'' for seconds and ``m'' for minutes.
+
+.TP 2m
+\fB\-\-unhealthy\-threshold\fR=\fIUNHEALTHY_THRESHOLD\fR
+The number of consecutive health check failures before a healthy instance is
+marked as unhealthy.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

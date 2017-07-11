@@ -1,0 +1,71 @@
+
+.TH "GCLOUD_COMPUTE_BACKEND\-SERVICES_EDIT" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute backend\-services edit \- modify backend services
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute backend\-services edit\fR \fIBACKEND_SERVICE_NAME\fR [\fB\-\-global\fR\ |\ \fB\-\-region\fR=\fIREGION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute backend\-services edit\fR can be used to modify a backend
+service. The backend service resource is fetched from the server and presented
+in a text editor. After the file is saved and closed, this command will update
+the resource. Only fields that can be modified are displayed in the editor.
+
+Backends are named by their associated instances groups, and one of the
+\f5\fI\-\-group\fR\fR or \f5\fI\-\-instance\-group\fR\fR flags is required to
+identify the backend that you are modifying. You cannot "change" the instance
+group associated with a backend, but you can accomplish something similar with
+\f5\fIbackend\-services remove\-backend\fR\fR and \f5\fIbackend\-services
+add\-backend\fR\fR.
+
+The editor used to modify the resource is chosen by inspecting the
+\f5\fIEDITOR\fR\fR environment variable.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIBACKEND_SERVICE_NAME\fR
+The name of the backend service to operate on.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-global\fR
+If provided, it is assumed the backend service is global.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the backend service to operate on. Overrides the default
+\fBcompute/region\fR property value for this command invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

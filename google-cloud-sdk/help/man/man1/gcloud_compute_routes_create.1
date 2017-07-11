@@ -1,0 +1,180 @@
+
+.TH "GCLOUD_COMPUTE_ROUTES_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute routes create \- create a new route
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute routes create\fR \fINAME\fR \fB\-\-destination\-range\fR=\fIDESTINATION_RANGE\fR (\fB\-\-next\-hop\-address\fR=\fINEXT_HOP_ADDRESS\fR\ |\ \fB\-\-next\-hop\-gateway\fR=\fINEXT_HOP_GATEWAY\fR\ |\ \fB\-\-next\-hop\-instance\fR=\fINEXT_HOP_INSTANCE\fR\ |\ \fB\-\-next\-hop\-vpn\-tunnel\fR=\fINEXT_HOP_VPN_TUNNEL\fR) [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-network\fR=\fINETWORK\fR;\ default="default"] [\fB\-\-next\-hop\-instance\-zone\fR=\fINEXT_HOP_INSTANCE_ZONE\fR] [\fB\-\-next\-hop\-vpn\-tunnel\-region\fR=\fINEXT_HOP_VPN_TUNNEL_REGION\fR] [\fB\-\-priority\fR=\fIPRIORITY\fR;\ default="1000"] [\fB\-\-tags\fR=\fITAG\fR,[\fITAG\fR,...]] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute routes create\fR is used to create routes. A route is a rule
+that specifies how certain packets should be handled by the virtual network.
+Routes are associated with virtual machine instances by tag, and the set of
+routes for a particular VM is called its routing table. For each packet leaving
+a virtual machine, the system searches that machine's routing table for a single
+best matching route.
+
+Routes match packets by destination IP address, preferring smaller or more
+specific ranges over larger ones (see \f5\fI\-\-destination\-range\fR\fR). If
+there is a tie, the system selects the route with the smallest priority value.
+If there is still a tie, it uses the layer three and four packet headers to
+select just one of the remaining matching routes. The packet is then forwarded
+as specified by \f5\fI\-\-next\-hop\-address\fR\fR,
+\f5\fI\-\-next\-hop\-instance\fR\fR, \f5\fI\-\-next\-hop\-vpn\-tunnel\fR\fR, or
+\f5\fI\-\-next\-hop\-gateway\fR\fR of the winning route. Packets that do not
+match any route in the sending virtual machine routing table will be dropped.
+
+Exactly one of \f5\fI\-\-next\-hop\-address\fR\fR,
+\f5\fI\-\-next\-hop\-gateway\fR\fR, \f5\fI\-\-next\-hop\-vpn\-tunnel\fR\fR, or
+\f5\fI\-\-next\-hop\-instance\fR\fR must be provided with this command.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the route to create.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-destination\-range\fR=\fIDESTINATION_RANGE\fR
+The destination range of outgoing packets that the route will apply to. To match
+all traffic, use ``0.0.0.0/0''.
+
+.RE
+.sp
+Exactly one of these must be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-next\-hop\-address\fR=\fINEXT_HOP_ADDRESS\fR
+Specifies the IP address of an instance that should handle matching packets. The
+instance must have IP forwarding enabled (i.e., include
+\f5\fI\-\-can\-ip\-forward\fR\fR when creating the instance using \f5gcloud
+compute instances create\fR)
+
+.TP 2m
+\fB\-\-next\-hop\-gateway\fR=\fINEXT_HOP_GATEWAY\fR
+Specifies the gateway that should handle matching packets. Currently, the only
+acceptable value is \f5default\-internet\-gateway\fR which is a gateway operated
+by Google Compute Engine.
+
+.TP 2m
+\fB\-\-next\-hop\-instance\fR=\fINEXT_HOP_INSTANCE\fR
+Specifies the name of an instance that should handle traffic matching this
+route. When this flag is specified, the zone of the instance must be specified
+using \f5\fI\-\-next\-hop\-instance\-zone\fR\fR.
+
+.TP 2m
+\fB\-\-next\-hop\-vpn\-tunnel\fR=\fINEXT_HOP_VPN_TUNNEL\fR
+The target VPN tunnel that will receive forwarded traffic.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+An optional, textual description for the route.
+
+.TP 2m
+\fB\-\-network\fR=\fINETWORK\fR; default="default"
+Specifies the network to which the route will be applied.
+
+.TP 2m
+\fB\-\-next\-hop\-instance\-zone\fR=\fINEXT_HOP_INSTANCE_ZONE\fR
+The zone of the next hop instance. If not specified, you may be prompted to
+select a zone. \f5gcloud\fR will attempt to identify the zone by searching for
+resources in your project. If the zone cannot be determined, you will then be
+prompted with all Google Cloud Platform zones.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+.TP 2m
+\fB\-\-next\-hop\-vpn\-tunnel\-region\fR=\fINEXT_HOP_VPN_TUNNEL_REGION\fR
+The region of the next hop vpn tunnel. If not specified, you will be prompted to
+select a region.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/region\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/region REGION
+.RE
+
+A list of regions can be fetched by running:
+
+.RS 2m
+$ gcloud compute regions list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/region
+.RE
+
+Alternatively, the region can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_REGION\fR\fR.
+
+.TP 2m
+\fB\-\-priority\fR=\fIPRIORITY\fR; default="1000"
+Specifies the priority of this route relative to other routes with the same
+specificity. The lower the value, the higher the priority.
+
+.TP 2m
+\fB\-\-tags\fR=\fITAG\fR,[\fITAG\fR,...]
+Identifies the set of instances that this route will apply to. If no tags are
+provided, the route will apply to all instances in the network.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

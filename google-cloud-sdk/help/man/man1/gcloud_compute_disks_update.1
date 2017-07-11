@@ -1,0 +1,106 @@
+
+.TH "GCLOUD_COMPUTE_DISKS_UPDATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute disks update \- update a Google Compute Engine persistent disk
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute disks update\fR \fIDISK_NAME\fR [\fB\-\-remove\-labels\fR=[\fIKEY\fR,...]] [\fB\-\-update\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]] [\fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute disks update\fR updates a Google Compute Engine persistent
+disk. For example:
+
+.RS 2m
+$ gcloud compute disks update example\-disk \-\-zone us\-central1\-a \e
+  \-\-update\-labels=k0=value1,k1=value2 \-\-remove\-labels=k3
+.RE
+
+will add/update labels \f5\fIk0\fR\fR and \f5\fIk1\fR\fR and remove labels with
+key \f5\fIk3\fR\fR.
+
+Labels can be used to identify the disk and to filter them as in
+
+.RS 2m
+$ gcloud compute disks list \-\-filter='labels.k1:value2'
+.RE
+
+To list existing labels
+
+.RS 2m
+$ gcloud compute disks describe example\-disk \e
+    \-\-format='default(labels)'
+.RE
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIDISK_NAME\fR
+The name of the disk to update.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-remove\-labels\fR=[\fIKEY\fR,...]
+A list of label keys to remove. If a label does not exist it is silently
+ignored.
+
+.TP 2m
+\fB\-\-update\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]
+A list of label KEY=VALUE pairs to update. If a label exists its value is
+modified, otherwise a new label is created.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the disk to update. If not specified, you may be prompted to select
+a zone.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

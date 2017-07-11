@@ -1,0 +1,93 @@
+
+.TH "GCLOUD_KMS_DECRYPT" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud kms decrypt \- decrypt a ciphertext file using a key
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud kms decrypt\fR \fB\-\-ciphertext\-file\fR=\fICIPHERTEXT_FILE\fR \fB\-\-plaintext\-file\fR=\fIPLAINTEXT_FILE\fR [\fB\-\-additional\-authenticated\-data\-file\fR=\fIADDITIONAL_AUTHENTICATED_DATA_FILE\fR] [\fB\-\-key\fR=\fIKEY\fR] [\fB\-\-keyring\fR=\fIKEYRING\fR] [\fB\-\-location\fR=\fILOCATION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Decrypts the given ciphertext file using the given CryptoKey and writes the
+result to the named plaintext file.
+
+If an additional authenticated data file is provided, its contents must match
+the additional authenticated data provided during encryption. The file must not
+be larger than 64KiB.
+
+If \f5\-\-ciphertext\-file\fR or \f5\-\-additional\-authenticated\-data\-file\fR
+is set to '\-', that file is read from stdin. Similarly, if
+\f5\-\-plaintext\-file\fR is set to '\-', the decrypted plaintext is written to
+stdout.
+
+
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-ciphertext\-file\fR=\fICIPHERTEXT_FILE\fR
+Path to the ciphertext file to decrypt.
+
+.TP 2m
+\fB\-\-plaintext\-file\fR=\fIPLAINTEXT_FILE\fR
+Path to the plaintext file to output.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-additional\-authenticated\-data\-file\fR=\fIADDITIONAL_AUTHENTICATED_DATA_FILE\fR
+Path to the optional file containing the additional authenticated data.
+
+.TP 2m
+\fB\-\-key\fR=\fIKEY\fR
+The key to use for decryption.
+
+.TP 2m
+\fB\-\-keyring\fR=\fIKEYRING\fR
+The containing keyring.
+
+.TP 2m
+\fB\-\-location\fR=\fILOCATION\fR
+The location of the requested resource.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+The following command will read the file 'path/to/ciphertext', decrypt it using
+the CryptoKey \f5frodo\fR with the KeyRing \f5fellowship\fR and Location
+\f5global\fR, and write the plaintext to 'path/to/plaintext'.
+
+.RS 2m
+$ gcloud kms decrypt frodo \e
+    \-\-keyring fellowship \e
+    \-\-location global \e
+    \-\-ciphertext\-file path/to/input/ciphertext \e
+    \-\-plaintext\-file path/to/output/plaintext
+.RE

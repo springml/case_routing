@@ -1,0 +1,73 @@
+
+.TH "GCLOUD_PROJECTS_ADD\-IAM\-POLICY\-BINDING" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud projects add\-iam\-policy\-binding \- add IAM policy binding for a project
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud projects add\-iam\-policy\-binding\fR \fIPROJECT_ID\fR \fB\-\-member\fR=\fIMEMBER\fR \fB\-\-role\fR=\fIROLE\fR [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Adds a policy binding to the IAM policy of a project, given a project ID and the
+binding.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIPROJECT_ID\fR
+ID for the project you want to add IAM policy binding to.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-member\fR=\fIMEMBER\fR
+The member to add to the binding. Should be of the form \f5user:user_email\fR
+(e.g. \f5user:test\-user@gmail.com.\fR)
+
+.TP 2m
+\fB\-\-role\fR=\fIROLE\fR
+Define the role of the member.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+The following command will add an IAM policy binding for the role of
+\'roles/editor' for the user 'test\-user@gmail.com' on a project with identifier
+\'example\-project\-id\-1'
+
+.RS 2m
+$ gcloud projects add\-iam\-policy\-binding example\-project\-id\-1 \e
+    \-\-member='user:test\-user@gmail.com' \-\-role='roles/editor'
+.RE
+
+See https://cloud.google.com/iam/docs/managing\-policies for details of policy
+role and member types.

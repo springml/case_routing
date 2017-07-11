@@ -1,0 +1,188 @@
+
+.TH "GCLOUD_COMPUTE_SSH" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute ssh \- SSH into a virtual machine instance
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute ssh\fR [\fIUSER\fR@]\fIINSTANCE\fR [\fB\-\-command\fR=\fICOMMAND\fR] [\fB\-\-container\fR=\fICONTAINER\fR] [\fB\-\-dry\-run\fR] [\fB\-\-force\-key\-file\-overwrite\fR] [\fB\-\-plain\fR] [\fB\-\-ssh\-flag\fR=\fISSH_FLAG\fR] [\fB\-\-ssh\-key\-file\fR=\fISSH_KEY_FILE\fR] [\fB\-\-strict\-host\-key\-checking\fR=\fISTRICT_HOST_KEY_CHECKING\fR] [\fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR] [\-\-\ \fISSH_ARGS\fR\ ...]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute ssh\fR is a thin wrapper around the \fBssh(1)\fR command that
+takes care of authentication and the translation of the instance name into an IP
+address.
+
+This command ensures that the user's public SSH key is present in the project's
+metadata. If the user does not have a public SSH key, one is generated using
+\fBssh\-keygen(1)\fR (if the \f5\-\-quiet\fR flag is given, the generated key
+will have an empty passphrase).
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+[\fIUSER\fR@]\fIINSTANCE\fR
+Specifies the instance to SSH into.
+
+\f5\fIUSER\fR\fR specifies the username with which to SSH. If omitted, $USER
+from the environment is selected.
+
+\f5\fIINSTANCE\fR\fR specifies the name of the virtual machine instance to SSH
+into.
+
+.TP 2m
+[\-\- \fISSH_ARGS\fR ...]
+Flags and positionals passed to the underlying ssh implementation.
+
+
+.RE
+.sp
+The '\-\-' argument must be specified between gcloud specific args on the left
+and SSH_ARGS on the right. Example:
+
+.RS 2m
+$ gcloud compute ssh example\-instance \-\-zone us\-central1\-a \-\- \-vvv \e
+\-L 80:%INSTANCE%:80
+.RE
+
+
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-command\fR=\fICOMMAND\fR
+A command to run on the virtual machine.
+
+Runs the command on the target instance and then exits.
+
+.TP 2m
+\fB\-\-container\fR=\fICONTAINER\fR
+The name or ID of a container inside of the virtual machine instance to connect
+to. This only applies to virtual machines that are using a Google
+Container\-Optimized virtual machine image. For more information, see
+https://cloud.google.com/compute/docs/containers
+
+.TP 2m
+\fB\-\-dry\-run\fR
+If provided, prints the command that would be run to standard out instead of
+executing it.
+
+.TP 2m
+\fB\-\-force\-key\-file\-overwrite\fR
+If enabled gcloud will regenerate and overwrite the files associated with a
+broken SSH key without asking for confirmation in both interactive and
+non\-interactive environment.
+
+If disabled gcloud will not attempt to regenerate the files associated with a
+broken SSH key and fail in both interactive and non\-interactive environment.
+
+.TP 2m
+\fB\-\-plain\fR
+Suppresses the automatic addition of \fBssh(1)\fR/\fBscp(1)\fR flags. This flag
+is useful if you want to take care of authentication yourself or use specific
+ssh/scp features.
+
+.TP 2m
+\fB\-\-ssh\-flag\fR=\fISSH_FLAG\fR
+Additional flags to be passed to \fBssh(1)\fR. It is recommended that flags be
+passed using an assignment operator and quotes. This flag will replace
+occurences of \f5\fI%USER%\fR\fR and \f5\fI%INSTANCE%\fR\fR with their
+dereferenced values. Example:
+
+.RS 2m
+$ gcloud compute ssh example\-instance \-\-zone us\-central1\-a \e
+    \-\-ssh\-flag="\-vvv" \-\-ssh\-flag="\-L 80:%INSTANCE%:80"
+.RE
+
+is equivalent to passing the flags \f5\fI\-\-vvv\fR\fR and \f5\fI\-L
+80:162.222.181.197:80\fR\fR to \fBssh(1)\fR if the external IP address of
+\'example\-instance' is 162.222.181.197.
+
+.TP 2m
+\fB\-\-ssh\-key\-file\fR=\fISSH_KEY_FILE\fR
+The path to the SSH key file. By default, this is
+\f5\fI~/.ssh/google_compute_engine\fR\fR.
+
+.TP 2m
+\fB\-\-strict\-host\-key\-checking\fR=\fISTRICT_HOST_KEY_CHECKING\fR
+Override the default behavior of StrictHostKeyChecking. By default,
+StrictHostKeyChecking is set to 'no' the first time you connect to an instance
+and will be set to 'yes' for all subsequent connections. Use this flag to
+specify a value for the connection. \fISTRICT_HOST_KEY_CHECKING\fR must be one
+of: \fByes\fR, \fBno\fR, \fBask\fR.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the instance to connect to. If not specified, you may be prompted to
+select a zone.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To SSH into 'example\-instance' in zone \f5\fIus\-central1\-a\fR\fR, run:
+
+.RS 2m
+$ gcloud compute ssh example\-instance \-\-zone us\-central1\-a
+.RE
+
+You can also run a command on the virtual machine. For example, to get a
+snapshot of the guest's process tree, run:
+
+.RS 2m
+$ gcloud compute ssh example\-instance \-\-zone us\-central1\-a \e
+    \-\-command "ps \-ejH"
+.RE
+
+If you are using the Google container virtual machine image, you can SSH into
+one of your containers with:
+
+.RS 2m
+$ gcloud compute ssh example\-instance \-\-zone us\-central1\-a \e
+    \-\-container CONTAINER
+.RE

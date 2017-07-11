@@ -1,0 +1,103 @@
+
+.TH "GCLOUD_COMPUTE_DISKS_MOVE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute disks move \- move a disk between zones
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute disks move\fR \fIDISK_NAME\fR \fB\-\-destination\-zone\fR=\fIDESTINATION_ZONE\fR [\fB\-\-async\fR] [\fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute disks move\fR facilitates moving a Google Compute Engine disk
+volume from one zone to another. You cannot move a disk if it is attached to a
+running or stopped instance; use the gcloud compute instances move command
+instead.
+
+For example, running:
+
+.RS 2m
+$ gcloud compute disks move example\-disk\-1 \-\-zone us\-central1\-b \e
+   \-\-destination\-zone us\-central1\-f
+.RE
+
+will move the disk called example\-disk\-1, currently running in
+us\-central1\-b, to us\-central1\-f.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIDISK_NAME\fR
+The name of the disk to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-destination\-zone\fR=\fIDESTINATION_ZONE\fR
+The zone to move the disk to.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Display information about the operation in progress, without waiting for the
+operation to complete.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the disk to operate on. If not specified, you may be prompted to
+select a zone.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

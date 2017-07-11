@@ -1,0 +1,133 @@
+
+.TH "GCLOUD_COMPUTE_BACKEND\-SERVICES_REMOVE\-BACKEND" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute backend\-services remove\-backend \- remove a backend from a backend service
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute backend\-services remove\-backend\fR \fIBACKEND_SERVICE_NAME\fR \fB\-\-instance\-group\fR=\fIINSTANCE_GROUP\fR [\fB\-\-global\fR\ |\ \fB\-\-region\fR=\fIREGION\fR] [\fB\-\-instance\-group\-region\fR=\fIINSTANCE_GROUP_REGION\fR\ |\ \fB\-\-instance\-group\-zone\fR=\fIINSTANCE_GROUP_ZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute backend\-services remove\-backend\fR is used to remove a
+backend from a backend service.
+
+Before removing a backend, it is a good idea to "drain" the backend first. A
+backend can be drained by setting its capacity scaler to zero through 'gcloud
+compute backend\-services edit'.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIBACKEND_SERVICE_NAME\fR
+The name of the backend service to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-instance\-group\fR=\fIINSTANCE_GROUP\fR
+The name of the instance group to remove from the backend service.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-global\fR
+If provided, it is assumed the backend service is global.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the backend service to operate on. Overrides the default
+\fBcompute/region\fR property value for this command invocation.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-instance\-group\-region\fR=\fIINSTANCE_GROUP_REGION\fR
+The region of the instance group to remove from the backend service. If not
+specified, you will be prompted to select a region.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/region\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/region REGION
+.RE
+
+A list of regions can be fetched by running:
+
+.RS 2m
+$ gcloud compute regions list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/region
+.RE
+
+Alternatively, the region can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_REGION\fR\fR.
+
+.TP 2m
+\fB\-\-instance\-group\-zone\fR=\fIINSTANCE_GROUP_ZONE\fR
+The zone of the instance group to remove from the backend service. If not
+specified, you may be prompted to select a zone.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

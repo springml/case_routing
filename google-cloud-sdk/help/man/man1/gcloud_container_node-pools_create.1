@@ -1,0 +1,205 @@
+
+.TH "GCLOUD_CONTAINER_NODE\-POOLS_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud container node\-pools create \- create a node pool in a running cluster
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud container node\-pools create\fR \fINAME\fR [\fB\-\-cluster\fR=\fICLUSTER\fR] [\fB\-\-disk\-size\fR=\fIDISK_SIZE\fR] [\fB\-\-no\-enable\-cloud\-endpoints\fR] [\fB\-\-image\-type\fR=\fIIMAGE_TYPE\fR] [\fB\-\-machine\-type\fR=\fIMACHINE_TYPE\fR,\ \fB\-m\fR\ \fIMACHINE_TYPE\fR] [\fB\-\-node\-labels\fR=[\fINODE_LABEL\fR,...]] [\fB\-\-num\-nodes\fR=\fINUM_NODES\fR;\ default="3"] [\fB\-\-scopes\fR=\fISCOPE\fR,[\fISCOPE\fR,...]] [\fB\-\-tags\fR=\fITAG\fR,[\fITAG\fR,...]] [\fB\-\-zone\fR=\fIZONE\fR,\ \fB\-z\fR\ \fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud container node\-pools create\fR facilitates the creation of a node
+pool in a Google Container Engine cluster. A variety of options exists to
+customize the node configuration and the number of nodes created.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the node pool to create.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-cluster\fR=\fICLUSTER\fR
+The cluster to add the node pool to. Overrides the default
+\fBcontainer/cluster\fR property value for this command invocation.
+
+.TP 2m
+\fB\-\-disk\-size\fR=\fIDISK_SIZE\fR
+Size in GB for node VM boot disks. Defaults to 100GB.
+
+.TP 2m
+\fB\-\-enable\-cloud\-endpoints\fR
+Automatically enable Google Cloud Endpoints to take advantage of API management
+features. Enabled by default, use \fB\-\-no\-enable\-cloud\-endpoints\fR to
+disable.
+
+.TP 2m
+\fB\-\-image\-type\fR=\fIIMAGE_TYPE\fR
+The image type to use for the node pool. Defaults to server\-specified.
+
+Image Type specifies the base OS that the nodes in the node pool will run on. If
+an image type is specified, that will be assigned to the node pool and all
+future upgrades will use the specified image type. If it is not specified the
+server will pick the default image type.
+
+The default image type and the list of valid image types are available using the
+following command.
+
+.RS 2m
+$ gcloud container get\-server\-config
+.RE
+
+.TP 2m
+\fB\-\-machine\-type\fR=\fIMACHINE_TYPE\fR, \fB\-m\fR \fIMACHINE_TYPE\fR
+The type of machine to use for nodes. Defaults to n1\-standard\-1
+
+.TP 2m
+\fB\-\-node\-labels\fR=[\fINODE_LABEL\fR,...]
+Applies the given kubernetes labels on all nodes in the new node\-pool. Example:
+
+.RS 2m
+$ gcloud container node\-pools create node\-pool\-1 \e
+    \-\-cluster=example\-cluster \e
+    \-\-node\-labels=label1=value1,label2=value2
+.RE
+
+New nodes, including ones created by resize or recreate, will have these labels
+on the kubernetes API node object and can be used in nodeSelectors. See
+http://kubernetes.io/docs/user\-guide/node\-selection/ for examples.
+
+.TP 2m
+\fB\-\-num\-nodes\fR=\fINUM_NODES\fR; default="3"
+The number of nodes in the node pool in each of the cluster's zones.
+
+.TP 2m
+\fB\-\-scopes\fR=\fISCOPE\fR,[\fISCOPE\fR,...]
+Specifies scopes for the node instances. The project's default service account
+is used. Examples:
+
+.RS 2m
+$ gcloud container node\-pools create node\-pool\-1 \e
+    \-\-cluster=example\-cluster \e
+    \-\-scopes https://www.googleapis.com/auth/devstorage.read_only
+.RE
+
+.RS 2m
+$ gcloud container node\-pools create node\-pool\-1 \e
+    \-\-cluster=example\-cluster \e
+    \-\-scopes bigquery,storage\-rw,compute\-ro
+.RE
+
+Multiple SCOPEs can specified, separated by commas. The scopes necessary for the
+cluster to function properly (compute\-rw, storage\-ro), are always added, even
+if not explicitly specified.
+
+SCOPE can be either the full URI of the scope or an alias. Available aliases
+are:
+
+
+.TS
+tab(,);
+lB lB
+l l.
+Alias,URI
+bigquery,https://www.googleapis.com/auth/bigquery
+cloud\-platform,https://www.googleapis.com/auth/cloud\-platform
+cloud\-source\-repos,https://www.googleapis.com/auth/source.full_control
+cloud\-source\-repos\-ro,https://www.googleapis.com/auth/source.read_only
+compute\-ro,https://www.googleapis.com/auth/compute.readonly
+compute\-rw,https://www.googleapis.com/auth/compute
+datastore,https://www.googleapis.com/auth/datastore
+default,https://www.googleapis.com/auth/cloud.useraccounts.readonly
+,https://www.googleapis.com/auth/devstorage.read_only
+,https://www.googleapis.com/auth/logging.write
+,https://www.googleapis.com/auth/monitoring.write
+,https://www.googleapis.com/auth/pubsub
+,https://www.googleapis.com/auth/service.management.readonly
+,https://www.googleapis.com/auth/servicecontrol
+,https://www.googleapis.com/auth/trace.append
+logging\-write,https://www.googleapis.com/auth/logging.write
+monitoring,https://www.googleapis.com/auth/monitoring
+monitoring\-write,https://www.googleapis.com/auth/monitoring.write
+service\-control,https://www.googleapis.com/auth/servicecontrol
+service\-management,https://www.googleapis.com/auth/service.management.readonly
+sql,https://www.googleapis.com/auth/sqlservice
+sql\-admin,https://www.googleapis.com/auth/sqlservice.admin
+storage\-full,https://www.googleapis.com/auth/devstorage.full_control
+storage\-ro,https://www.googleapis.com/auth/devstorage.read_only
+storage\-rw,https://www.googleapis.com/auth/devstorage.read_write
+taskqueue,https://www.googleapis.com/auth/taskqueue
+useraccounts\-ro,https://www.googleapis.com/auth/cloud.useraccounts.readonly
+useraccounts\-rw,https://www.googleapis.com/auth/cloud.useraccounts
+userinfo\-email,https://www.googleapis.com/auth/userinfo.email
+.TE
+
+.TP 2m
+\fB\-\-tags\fR=\fITAG\fR,[\fITAG\fR,...]
+Applies the given Compute Engine tags (comma separated) on all nodes in the new
+node\-pool. Example:
+
+.RS 2m
+$ gcloud container node\-pools create node\-pool\-1 \e
+    \-\-cluster=example\-cluster \-\-tags=tag1,tag2
+.RE
+
+New nodes, including ones created by resize or recreate, will have these tags on
+the Compute Engine API instance object and can be used in firewall rules. See
+https://cloud.google.com/sdk/gcloud/reference/compute/firewall\-rules/create for
+examples.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR, \fB\-z\fR \fIZONE\fR
+The compute zone (e.g. us\-central1\-a) for the cluster. Overrides the default
+\fBcompute/zone\fR property value for this command invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To create a new node pool "node\-pool\-1" with the default options in the
+cluster "sample\-cluster", run:
+
+.RS 2m
+$ gcloud container node\-pools create node\-pool\-1 \e
+    \-\-cluster=example\-cluster
+.RE
+
+The new node pool will show up in the cluster after all the nodes have been
+provisioned.
+
+To create a node pool with 5 nodes, run:
+
+.RS 2m
+$ gcloud container node\-pools create node\-pool\-1 \e
+    \-\-cluster=example\-cluster \-\-num\-nodes=5
+.RE

@@ -1,0 +1,87 @@
+
+.TH "GCLOUD_TOPIC_ESCAPING" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud topic escaping \- list/dictionary\-type argument escaping supplementary help
+
+
+
+.SH "DESCRIPTION"
+
+List/dictionary\-type argument escaping supplementary help.
+
+\fBgcloud\fR supports list\-type and dictionary\-type flags that take one
+argument which is a list of one or more comma\-separated items:
+
+.RS 2m
+\-\-list\-flag=value1,value2,value3
+.RE
+
+.RS 2m
+\-\-dict\-flag=key1=value1,key2=value2
+.RE
+
+In the case of a dict\-type flag, each item is a key\-value pair separated by
+\'='. If more than one '=' is present, the first is used.
+
+In order to include commas in your arguments, specify an alternate delimiter
+using the following syntax:
+
+.RS 2m
+^DELIM^flag value, with comma
+.RE
+
+where \fIDELIM\fR is a sequence of one or more characters that may not appear in
+any value in the list.
+
+NOTE: In cmd.exe and PowerShell on Windows, \f5^\fR is a special character and
+you must escape it by repeating it. In the following examples, every time you
+see \f5^\fR, replace it with \f5^^^^\fR.
+
+
+
+.SH "EXAMPLES"
+
+In these examples, a list\-type or dictionary\-type flag is given, along with a
+shell comment explaining how it is parsed. The parsed flags are shown here using
+Python\-style list or dict formats (in other languages, what Python calls
+"dicts" are often called "associative arrays," "maps," or "hashes").
+
+Basic example:
+
+.RS 2m
+\-\-list\-flag=^:^a,b:c,d # => ['a,b', 'c,d']
+.RE
+
+Multi\-character delimiters are allowed:
+
+.RS 2m
+\-\-list\-flag=^\-\-^a\-,b\-\-c # => ['a\-,b', 'c']
+.RE
+
+Just one '^' has no special meaning:
+
+.RS 2m
+\-\-list\-flag=^a,b,c # => ['^a', 'b', 'c']
+.RE
+
+This is an alternative way of starting with '^':
+
+.RS 2m
+\-\-list\-flag=^,^^a,b,c # => ['^a', 'b', 'c']
+.RE
+
+A '^' anywhere but the start has no special meaning:
+
+.RS 2m
+\-\-list\-flag=a^:^,b,c # => ['a^:^', 'b', 'c']
+.RE
+
+Dictionary\-type arguments work exactly the same as list\-type arguments:
+
+.RS 2m
+\-\-dict\-flag=^:^a=b,c:d=f,g # => {'a': 'b,c', 'd': 'f,g'}
+.RE

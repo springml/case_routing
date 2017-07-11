@@ -1,0 +1,297 @@
+# Copyright 2016 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# This file lists apis used by gcloud (CloudSDK).
+# It is configuration for regen_apis.py script, which needs to be rerun
+# everytime some input discovery doc is added/updated or apitools generation
+# code has been changed.
+
+# To add new api simply add an entry with its api name and version
+# pointing to its discovery doc file which should be checked into root_dir.
+
+# api version can have the follwing fields:
+# api_name:
+#   api_version:
+#     discovery_doc: <relative path wrt root_dir>
+#     unelidable_request_methods: <list of request method id>
+#     default: <true|false in case there more that one api version>
+#     version: <actual private version of this api,
+#               defaults to public api_version>
+#     resources:
+#       resource_collection_name: <parsing_template>
+
+root_dir: googlecloudsdk/third_party/apis
+
+apis:
+  apikeys:
+    v1:
+      discovery_doc: apikeys_v1.json
+  appengine:
+    v1alpha:
+      discovery_doc: appengine_v1alpha.json
+      default: false
+    v1beta:
+      discovery_doc: appengine_v1beta.json
+      default: false
+    v1:
+      discovery_doc: appengine_v1.json
+      default: true
+      resources:
+        projects: projects/{projectId}
+  bigquery:
+    v2:
+      discovery_doc: bigquery_v2.json
+  bigtableadmin:
+    v2:
+      discovery_doc: bigtableadmin_v2.json
+      resources:
+        projects: projects/{projectId}
+  bigtableclusteradmin:
+    v1:
+      discovery_doc: bigtableclusteradmin_v1.json
+      resources:
+        operations: operations/{+operationId}
+        projects: projects/{projectId}
+        projects.zones: projects/{projectId}/zones/{zoneId}
+        projects.zones.clusters: projects/{projectId}/zones/{zoneId}/clusters/{clusterId}
+  bio:
+    v1:
+      discovery_doc: bio_v1.json
+      default: true
+  cloudbilling:
+    v1:
+      discovery_doc: cloudbilling_v1.json
+      unelidable_request_methods:
+      - cloudbilling.projects.updateBillingInfo
+      resources:
+        projects: projects/{projectsId}
+  cloudbuild:
+    v1:
+      discovery_doc: cloudbuild_v1.json
+      # The following stanza is a workaround for b/24867445. It prevents elision
+      # of the CreateBuildRequest (project_id + build) into just a Build object.
+      unelidable_request_methods:
+      - cloudbuild.projects.builds.create
+  clouddebugger:
+    v2:
+      discovery_doc: clouddebugger_v2.json
+  clouderrorreporting:
+    v1beta1:
+      discovery_doc: clouderrorreporting_v1beta1.json
+      resources:
+        projects: projects/{projectId}
+  cloudfunctions:
+    v1beta2:
+      discovery_doc: cloudfunctions_v1beta2.json
+      resources:
+        providers.event_types: providers/{triggerProvider}/eventTypes/{triggerEvent}
+        # For now, we only accept global buckets, but should give them to the
+        # EventTrigger API in the format that it expects (with the underscore).
+        projects.buckets: projects/_/buckets/{bucketId}
+  cloudiot:
+    v1beta1:
+      discovery_doc: cloudiot_v1beta1.json
+      resources:
+        projects.locations: "projects/{projectsId}/locations/{locationsId}"
+        projects.locations.registries.devices.configVersions: "projects/{projectsId}/locations/{locationsId}/registries/{registriesId}/devices/{devicesId}/configVersions"
+  cloudkms:
+    v1beta1:
+      discovery_doc: cloudkms_v1beta1.json
+    v1:
+      discovery_doc: cloudkms_v1.json
+      default: true
+  cloudresourcemanager:
+    v1beta1:
+      discovery_doc: cloudresourcemanager_v1beta1.json
+    v1:
+      discovery_doc: cloudresourcemanager_v1.json
+      default: true
+      # Explicitly specifying the Liens service because it does not expose a
+      # Get method.
+      resources:
+        liens: liens/{liensId}
+    v2alpha1:
+      discovery_doc: cloudresourcemanager_v2alpha1.json
+    v2beta1:
+      discovery_doc: cloudresourcemanager_v2beta1.json
+  cloudresourcesearch:
+    v1:
+      discovery_doc: cloudresourcesearch_v1.json
+  cloudtasks:
+    v2beta2:
+      discovery_doc: cloudtasks_v2beta2.json
+  clouduseraccounts:
+    alpha:
+      discovery_doc: clouduseraccounts_alpha.json
+    beta:
+      discovery_doc: clouduseraccounts_beta.json
+      default: true
+  compute:
+    alpha:
+      discovery_doc: compute_alpha.json
+      resources:
+        nextHopGateways: projects/{project}/global/gateways/{nextHopGateway}
+    beta:
+      discovery_doc: compute_beta.json
+      unelidable_request_methods:
+      - compute.disks.resize
+      resources:
+        nextHopGateways: projects/{project}/global/gateways/{nextHopGateway}
+    v1:
+      discovery_doc: compute_v1.json
+      default: true
+      resources:
+        nextHopGateways: projects/{project}/global/gateways/{nextHopGateway}
+  container:
+    v1:
+      discovery_doc: container_v1.json
+      default: true
+    v1alpha1:
+      discovery_doc: container_v1alpha1.json
+  containeranalysis:
+    v1alpha1:
+      discovery_doc: containeranalysis_v1alpha1.json
+  dataflow:
+    v1b3:
+      discovery_doc: dataflow_v1b3.json
+  datapol:
+    v1alpha1:
+      discovery_doc: datapol_v1alpha1.json
+      resources:
+         data.taxonomy: "data/{data}/taxonomyStores/{taxonomyStoresId}/dataTaxonomies/{dataTaxonomiesId}"
+         data.tag: "data/{data}/taxonomyStores/{taxonomyStoresId}/dataTaxonomies/{dataTaxonomiesId}/annotationTag"
+  dataproc:
+    v1:
+      discovery_doc: dataproc_v1.json
+      resources:
+         projects.regions: "projects/{projectId}/regions/{regionId}"
+         projects.regions.operations_list: "projects/{projectId}/regions/{regionId}/operations"
+      default: true
+    v1beta2:
+      discovery_doc: dataproc_v1beta2.json
+      resources:
+         projects.regions: "projects/{projectId}/regions/{regionId}"
+         projects.regions.operations_list: "projects/{projectId}/regions/{regionId}/operations"
+  deploymentmanager:
+    alpha:
+      discovery_doc: deploymentmanager_alpha.json
+    v2:
+      discovery_doc: deploymentmanager_v2.json
+      default: true
+    v2beta:
+      discovery_doc: deploymentmanager_v2beta.json
+  discovery:
+    v1:
+      discovery_doc: discovery_v1.json
+      resources:
+        apis.versions: '{api}/{version}'
+  dns:
+    v1:
+      discovery_doc: dns_v1.json
+      default: true
+    v1beta1:
+      discovery_doc: dns_v1beta1.json
+    v1beta2:
+      discovery_doc: dns_v1beta2.json
+    v2beta1:
+      discovery_doc: dns_v2beta1.json
+  genomics:
+    v1:
+      discovery_doc: genomics_v1.json
+      default: true
+    v1alpha2:
+      discovery_doc: genomics_v1alpha2.json
+  oslogin:
+    v1alpha:
+      discovery_doc: oslogin_v1alpha.json
+      default: true
+  iam:
+    v1:
+      discovery_doc: iam_v1.json
+  language:
+    v1beta2:
+      discovery_doc: language_v1beta2.json
+    v1:
+      discovery_doc: language_v1.json
+      default: true
+  logging:
+    v1beta3:
+      discovery_doc: logging_v1beta3.json
+    v2:
+      discovery_doc: logging_v2.json
+      default: true
+  ml:
+    v1:
+      discovery_doc: ml_v1.json
+  pubsub:
+    v1:
+      discovery_doc: pubsub_v1.json
+  replicapoolupdater:
+    v1beta1:
+      discovery_doc: replicapoolupdater_v1beta1.json
+  runtimeconfig:
+    v1beta1:
+      discovery_doc: runtimeconfig_v1beta1.json
+  servicemanagement:
+    v1:
+      discovery_doc: servicemanagement_v1.json
+  serviceuser:
+    v1:
+      discovery_doc: serviceuser_v1.json
+  source:
+    v1:
+      discovery_doc: source_v1.json
+  sourcerepo:
+    v1:
+      discovery_doc: sourcerepo_v1.json
+  spanner:
+    v1:
+      discovery_doc: spanner_v1.json
+  speech:
+    v1:
+      discovery_doc: speech_v1.json
+  sqladmin:
+    v1beta3:
+      discovery_doc: sqladmin_v1beta3.json
+      default: true
+    v1beta4:
+      discovery_doc: sqladmin_v1beta4.json
+  storage:
+    v1:
+      discovery_doc: storage_v1.json
+  testing:
+    v1:
+      discovery_doc: testing_v1.json
+      # Methods in generated apis that should not have their requests elided.
+      # Currently if a request body has fields with the same names as all of the
+      # url parameters for a given method, then no request object is created for
+      # these methods. In some cases this is undesired because the value in the
+      # url and the value in the request body should be different and the
+      # request message is still needed.
+      unelidable_request_methods:
+      - testing.projects.testMatrices.create
+  toolresults:
+    v1beta3:
+      discovery_doc: toolresults_v1beta3.json
+  videointelligence:
+    v1beta1:
+      discovery_doc: videointelligence_v1beta1.json
+    v1:
+      discovery_doc: videointelligence_v1.json
+      default: true
+  vision:
+    v1:
+      discovery_doc: vision_v1.json
+

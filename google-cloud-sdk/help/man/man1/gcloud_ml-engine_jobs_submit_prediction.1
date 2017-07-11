@@ -1,0 +1,138 @@
+
+.TH "GCLOUD_ML\-ENGINE_JOBS_SUBMIT_PREDICTION" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud ml\-engine jobs submit prediction \- start a Cloud ML Engine batch prediction job
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud ml\-engine jobs submit prediction\fR \fIJOB\fR \fB\-\-data\-format\fR=\fIDATA_FORMAT\fR \fB\-\-input\-paths\fR=\fIINPUT_PATH\fR,[\fIINPUT_PATH\fR,...] \fB\-\-output\-path\fR=\fIOUTPUT_PATH\fR \fB\-\-region\fR=\fIREGION\fR (\fB\-\-model\fR=\fIMODEL\fR\ |\ \fB\-\-model\-dir\fR=\fIMODEL_DIR\fR) [\fB\-\-max\-worker\-count\fR=\fIMAX_WORKER_COUNT\fR] [\fB\-\-runtime\-version\fR=\fIRUNTIME_VERSION\fR] [\fB\-\-version\fR=\fIVERSION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Start a Cloud ML Engine batch prediction job.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIJOB\fR
+Name of the batch prediction job.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-data\-format\fR=\fIDATA_FORMAT\fR
+Data format of the input files. \fIDATA_FORMAT\fR must be one of:
+
+.RS 2m
+.TP 2m
+\fBTEXT\fR
+Text files with instances separated by the new\-line character.
+.TP 2m
+\fBTF_RECORD\fR
+TFRecord files; see
+https://www.tensorflow.org/versions/r0.12/how_tos/reading_data/index.html#file\-formats
+.TP 2m
+\fBTF_RECORD_GZIP\fR
+GZIP\-compressed TFRecord files.
+
+.RE
+.sp
+.TP 2m
+\fB\-\-input\-paths\fR=\fIINPUT_PATH\fR,[\fIINPUT_PATH\fR,...]
+Google Cloud Storage paths to the instances to run prediction on.
+
+Wildcards (\f5*\fR) accepted at the \fBend\fR of a path. More than one path can
+be specified if multiple file patterns are needed. For example,
+
+.RS 2m
+gs://my\-bucket/instances*,gs://my\-bucket/other\-instances1
+.RE
+
+will match any objects whose names start with \f5instances\fR in
+\f5my\-bucket\fR as well as the \f5other\-instances1\fR bucket, while
+
+.RS 2m
+gs://my\-bucket/instance\-dir/*
+.RE
+
+will match any objects in the \f5instance\-dir\fR "directory" (since directories
+aren't a first\-class Cloud Storage concept) of \f5my\-bucket\fR.
+
+.TP 2m
+\fB\-\-output\-path\fR=\fIOUTPUT_PATH\fR
+Google Cloud Storage path to which to save the output. Example:
+gs://my\-bucket/output.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The Google Compute Engine region to run the job in.
+
+.RE
+.sp
+Exactly one of these must be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-model\fR=\fIMODEL\fR
+Name of the model to use for prediction.
+
+.TP 2m
+\fB\-\-model\-dir\fR=\fIMODEL_DIR\fR
+Google Cloud Storage location where the model files are located.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-max\-worker\-count\fR=\fIMAX_WORKER_COUNT\fR
+The maximum number of workers to be used for parallel processing. Defaults to 10
+if not specified.
+
+.TP 2m
+\fB\-\-runtime\-version\fR=\fIRUNTIME_VERSION\fR
+The Google Cloud ML Engine runtime version for this job. Defaults to the latest
+stable version. See
+https://cloud.google.com/ml/docs/concepts/runtime\-version\-list for a list of
+accepted versions.
+
+.TP 2m
+\fB\-\-version\fR=\fIVERSION\fR
+Model version to be used.
+
+This flag may only be given if \-\-model is specified. If unspecified, the
+default version of the model will be used. To list versions for a model, run
+
+.RS 2m
+$ gcloud ml\-engine versions list
+.RE
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

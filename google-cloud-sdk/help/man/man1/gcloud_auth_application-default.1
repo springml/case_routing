@@ -1,0 +1,82 @@
+
+.TH "GCLOUD_AUTH_APPLICATION\-DEFAULT" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud auth application\-default \- manage your active Application Default Credentials
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud auth application\-default\fR \fICOMMAND\fR [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Application Default Credentials (ADC) provide a method to get credentials used
+in calling Google APIs. The gcloud auth application\-default command group
+allows you to manage active credentials on your machine that are used for local
+application development.
+
+These credentials are only used by Google client libraries in your own
+application.
+
+More information on ADC and how they work can be found here:
+https://developers.google.com/identity/protocols/application\-default\-credentials
+
+
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "COMMANDS"
+
+\f5\fICOMMAND\fR\fR is one of the following:
+
+.RS 2m
+.TP 2m
+\fBlogin\fR
+Acquire new user credentials to use for Application Default Credentials.
+
+.TP 2m
+\fBprint\-access\-token\fR
+Print an access token for the your current Application Default Credentials.
+
+.TP 2m
+\fBrevoke\fR
+Revoke previously generated Application Default Credentials.
+
+
+.RE
+.sp
+
+.SH "EXAMPLES"
+
+To create a service account and have your application use it for API access,
+run:
+
+.RS 2m
+$ gcloud iam service\-accounts create my\-account
+$ gcloud iam service\-accounts keys create key.json
+  \-\-iam\-account=my\-account@my\-project.iam.gserviceaccount.com
+$ export GOOGLE_APPLICATION_CREDENTIALS=key.json
+$ ./my_application.sh
+.RE
+
+To temporarily use your own user credentials, run:
+
+.RS 2m
+$ gcloud auth application\-default login
+.RE
+
+This will take you through a web flow to acquire new user credentials.

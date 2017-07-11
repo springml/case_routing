@@ -1,0 +1,96 @@
+
+.TH "GCLOUD_COMPUTE_URL\-MAPS_INVALIDATE\-CDN\-CACHE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute url\-maps invalidate\-cdn\-cache \- invalidate specified objects for a URL map in Cloud CDN caches
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute url\-maps invalidate\-cdn\-cache\fR \fIURLMAP\fR \fB\-\-path\fR=\fIPATH\fR [\fB\-\-async\fR] [\fB\-\-host\fR=\fIHOST\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute url\-maps invalidate\-cdn\-cache\fR requests that Cloud CDN
+stop using cached content for resources at a particular URL path or set of URL
+paths.
+
+\fBgcloud compute url\-maps invalidate\-cdn\-cache\fR may succeed even if no
+content is cached for some or all URLs with the given path.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIURLMAP\fR
+The name of the URL map to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-path\fR=\fIPATH\fR
+A path specifying which objects to invalidate. PATH must start with ``/'' and
+the only place a ``*'' is allowed is at the end following a ``/''. It will be
+matched against URL paths, which do not include scheme, host, or any text after
+the first ``?'' or ``#'' (and those characters are not allowed here). For
+example, for the URL \f5\fIhttps://example.com/whatever/x.html?a=b\fR\fR, the
+path is \f5\fI/whatever/x.html\fR\fR.
+
+If PATH ends with ``*'', the preceding string is a prefix, and all URLs whose
+paths begin with it will be invalidated. If PATH doesn't end with ``*'', then
+only URLs with exactly that path will be invalidated.
+
+Examples:
+.RS 2m
+.IP "\(em" 2m
+``'', ``*'', anything that doesn't start with ``/'': error
+.IP "\(em" 2m
+``/'': just the root URL
+.IP "\(em" 2m
+``/*'': everything
+.IP "\(em" 2m
+``/x/y'': ``/x/y'' only (and not ``/x/y/'')
+.IP "\(em" 2m
+``/x/y/'': ``/x/y/'' only (and not ``/x/y'')
+.IP "\(em" 2m
+``/x/y/*'': ``/x/y/'' and everything under it
+.RE
+.RE
+.sp
+
+
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Do not wait for the operation to complete.
+
+.TP 2m
+\fB\-\-host\fR=\fIHOST\fR
+If set, this invalidation will apply only to requests to the specified host.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

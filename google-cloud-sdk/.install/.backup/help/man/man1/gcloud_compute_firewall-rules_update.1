@@ -1,0 +1,145 @@
+
+.TH "GCLOUD_COMPUTE_FIREWALL\-RULES_UPDATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute firewall\-rules update \- update a firewall rule
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute firewall\-rules update\fR \fINAME\fR [\fB\-\-allow\fR=[\fIPROTOCOL\fR[:\fIPORT\fR[\-\fIPORT\fR]],...]] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-source\-ranges\fR=[\fICIDR_RANGE\fR,...]] [\fB\-\-source\-tags\fR=[\fITAG\fR,...]] [\fB\-\-target\-tags\fR=[\fITAG\fR,...]] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute firewall\-rules update\fR is used to update firewall rules
+that allow incoming traffic to a network. The firewall rule will only be updated
+for arguments that are specifically passed. Other attributes will remain
+unaffected.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the firewall rule to update.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-allow\fR=[\fIPROTOCOL\fR[:\fIPORT\fR[\-\fIPORT\fR]],...]
+A list of protocols and ports whose traffic will be allowed.
+
+The protocols allowed over this connection. This can be the (case\-sensitive)
+string values \f5tcp\fR, \f5udp\fR, \f5icmp\fR, \f5esp\fR, \f5ah\fR, \f5sctp\fR,
+or any IP protocol number. An IP\-based protocol must be specified for each
+rule. The rule applies only to specified protocol.
+
+For port\-based protocols \- \f5tcp\fR, \f5udp\fR, and \f5sctp\fR \- a list of
+destination ports or port ranges to which the rule applies may optionally be
+specified. If no port or port range is specified, the rule applies to all
+destination ports. TCP and UDP rules must include a port or port range.
+
+The ICMP protocol is supported, but there is no support for configuring ICMP
+packet filtering by ICMP code.
+
+For example, to create a rule that allows TCP traffic through port 80 and ICMP
+traffic:
+
+.RS 2m
+$ gcloud compute firewall\-rules update MY\-RULE \-\-allow tcp:80,icmp
+.RE
+
+To create a rule that allows TCP traffic from port 20000 to 25000:
+
+.RS 2m
+$ gcloud compute firewall\-rules update MY\-RULE \e
+    \-\-allow tcp:20000\-25000
+.RE
+
+Setting this will override the current values.
+
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+A textual description for the firewall rule. Set to an empty string to clear
+existing.
+
+.TP 2m
+\fB\-\-source\-ranges\fR=[\fICIDR_RANGE\fR,...]
+A list of IP address blocks that are allowed to make inbound connections that
+match the firewall rule to the instances on the network. The IP address blocks
+must be specified in CIDR format:
+http://en.wikipedia.org/wiki/Classless_Inter\-Domain_Routing.
+
+If neither \-\-source\-ranges nor \-\-source\-tags are specified,
+\-\-source\-ranges defaults to \f50.0.0.0/0\fR, which means that the rule
+applies to all incoming connections from inside or outside the network. If both
+\-\-source\-ranges and \-\-source\-tags are specified, the rule matches if
+either the range of the source matches \-\-source\-ranges or the tag of the
+source matches \-\-source\-tags.
+
+Setting this will override the existing source ranges for the firewall. The
+following will clear the existing source ranges:
+
+.RS 2m
+$ gcloud compute firewall\-rules update MY\-RULE \-\-source\-ranges
+.RE
+
+.TP 2m
+\fB\-\-source\-tags\fR=[\fITAG\fR,...]
+A list of instance tags indicating the set of instances on the network to which
+the rule applies if all other fields match. If neither \-\-source\-ranges nor
+\-\-source\-tags are specified, \-\-source\-ranges defaults to \f50.0.0.0/0\fR,
+which means that the rule applies to all incoming connections from inside or
+outside the network.
+
+If both \-\-source\-ranges and \-\-source\-tags are specified, an inbound
+connection is allowed if either the range of the source matches
+\-\-source\-ranges or the tag of the source matches \-\-source\-tags.
+
+Tags can be assigned to instances during instance creation.
+
+Setting this will override the existing source tags for the firewall. The
+following will clear the existing source tags:
+
+.RS 2m
+$ gcloud compute firewall\-rules update MY\-RULE \-\-source\-tags
+.RE
+
+.TP 2m
+\fB\-\-target\-tags\fR=[\fITAG\fR,...]
+A list of instance tags indicating which instances the rule is applied to. If
+the field is set, the rule applies to only instances with a matching tag. If
+omitted, the rule applies to all instances in the network.
+
+Tags can be assigned to instances during instance creation.
+
+Setting this will override the existing target tags for the firewall. The
+following will clear the existing target tags:
+
+.RS 2m
+$ gcloud compute firewall\-rules update MY\-RULE \-\-target\-tags
+.RE
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

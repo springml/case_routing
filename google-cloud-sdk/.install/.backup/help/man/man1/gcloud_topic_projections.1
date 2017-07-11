@@ -1,0 +1,1417 @@
+
+.TH "GCLOUD_TOPIC_PROJECTIONS" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud topic projections \- resource projections supplementary help
+
+
+
+.SH "DESCRIPTION"
+
+Most \fBgcloud\fR commands return a list of resources on success. By default
+they are pretty\-printed on the standard output. The
+\fB\-\-format=\fR\fINAME\fR[\fIATTRIBUTES\fR]\fB(\fR\fIPROJECTION\fR\fB)\fR and
+\fB\-\-filter=\fR\fIEXPRESSION\fR flags along with projections can be used to
+format and change the default output to a more meaningful result.
+
+To change the default output format of a command, use the \-\-format flag. For
+details run $ gcloud topic formats.
+
+To select resources to be listed, use the \-\-filter flag. For details run $
+gcloud topic filters.
+
+To reach resource items through a unique path of names from the root, use
+resource\-keys. For details run $ gcloud topic resource\-keys.
+
+To list a subset of resource keys in a resource, use projections. Resource
+projections are described in detail below.
+
+
+
+.SH "Projections"
+
+A projection is a list of keys that selects resource data values. Projections
+are used in \fB\-\-format\fR flag expressions. For example, the \fBtable\fR
+format requires a projection that describes the table columns:
+
+.RS 2m
+table(name, network.ip.internal, network.ip.external, uri())
+.RE
+
+
+.SH "Transforms"
+
+A \fBtransform\fR formats resource data values. Each projection key may have
+zero or more transform calls:
+
+.RS 2m
+_key_._transform_([arg...])...
+.RE
+
+This example applies the \fBfoo\fR() and then the \fBbar\fR() transform to the
+\fBstatus.time\fR resource value:
+
+.RS 2m
+(name, status.time.foo().bar())
+.RE
+
+
+The builtin transform functions are:
+
+
+.RS 2m
+.TP 2m
+\fBalways\fR()
+Marks a transform sequence to always be applied.
+
+In some cases transforms are disabled. Prepending always() to a transform
+sequence causes the sequence to always be evaluated.
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5some_field.always().foo().bar()\fR
+Always applies foo() and then bar().
+
+
+.RE
+.sp
+.TP 2m
+\fBbasename\fR(undefined="")
+Returns the last path component.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource or basename is empty.
+.RE
+.sp
+
+
+.TP 2m
+\fBcollection\fR(undefined="")
+Returns the current resource collection.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+This value is returned if r or the collection is empty.
+.RE
+.sp
+
+
+.TP 2m
+\fBcolor\fR(red, yellow, green, blue)
+Colorizes the resource string value.
+
+The \fBred\fR, \fByellow\fR, \fBgreen\fR and \fBblue\fR args are RE patterns,
+matched against the resource in order. The first pattern that matches colorizes
+the matched substring with that color, and the other patterns are skipped.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5red\fR\fR
+The substring pattern for the color red.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5yellow\fR\fR
+The substring pattern for the color yellow.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5green\fR\fR
+The substring pattern for the color green.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5blue\fR\fR
+The substring pattern for the color blue.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5color(red=STOP,yellow=CAUTION,green=GO)\fR
+For the resource string "CAUTION means GO FASTER" displays the substring
+"CAUTION" in yellow.
+
+
+.RE
+.sp
+.TP 2m
+\fBcount\fR()
+Counts the number of each item in the list.
+
+A string resource is treated as a list of characters.
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5"b/a/b/c".split("/").count()\fR
+Returns {a: 1, b: 2, c: 1}.
+
+
+.RE
+.sp
+.TP 2m
+\fBdate\fR(format="%Y\-%m\-%dT%H:%M:%S", unit=1, undefined="", tz, tz_default)
+Formats the resource as a strftime() format.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5format\fR\fR
+The strftime(3) format.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5unit\fR\fR
+If the resource is a Timestamp then divide by \fIunit\fR to yield seconds.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource is not a valid time.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5tz\fR\fR
+Return the time relative to the tz timezone if specified, the explicit timezone
+in the resource if it has one, otherwise the local timezone. For example,
+...date(tz=EST5EDT, tz_default=UTC).
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5tz_default\fR\fR
+The default timezone if the resource does not have a timezone suffix.
+.RE
+.sp
+
+
+.TP 2m
+\fBdecode\fR(encoding, undefined="")
+Returns the decoded value of the resource that was encoded by encoding.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5encoding\fR\fR
+The encoding name. \fBbase64\fR and \fButf\-8\fR are supported.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the decoding fails.
+.RE
+.sp
+
+
+.TP 2m
+\fBduration\fR(start="", end="", parts=3, precision=3, calendar=true, unit=1, undefined="")
+Formats the resource as an ISO 8601 duration string.
+
+The ISO 8601 Duration (https://en.wikipedia.org/wiki/ISO_8601#Durations) format
+is: "[\-]P[nY][nM][nD][T[nH][nM][n[.m]S]]". The 0 duration is "P0". Otherwise at
+least one part will always be displayed. Negative durations are prefixed by
+"\-". "T" disambiguates months "P2M" to the left of "T" and minutes "PT5M" to
+the right.
+
+If the resource is a datetime then the duration of \f5resource \-
+current_time\fR is returned.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5start\fR\fR
+The name of a start time attribute in the resource. The duration of the \f5end
+\- start\fR time attributes in resource is returned. If \f5end\fR is not
+specified then the current time is used.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5end\fR\fR
+The name of an end time attribute in the resource. Defaults to the current time
+if omitted. Ignored if \f5start\fR is not specified.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5parts\fR\fR
+Format at most this many duration parts starting with largest non\-zero part.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5precision\fR\fR
+Format the last duration part with precision digits after the decimal point.
+Trailing "0" and "." are always stripped.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5calendar\fR\fR
+Allow time units larger than hours in formated durations if true. Durations
+specifying hours or smaller units are exact across daylight savings time
+boundaries. On by default. Use calendar=false to disable. For example, if
+\f5calendar=true\fR then at the daylight savings boundary 2016\-03\-13T01:00:00
++ P1D => 2016\-03\-14T01:00:00 but 2016\-03\-13T01:00:00 + PT24H =>
+2016\-03\-14T03:00:00. Similarly, a +P1Y duration will be inexact but "calendar
+correct", yielding the same month and day number next year, even in leap years.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5unit\fR\fR
+Divide the resource numeric value by \fIunit\fR to yield seconds.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource is not a valid timestamp.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5duration(start=createTime,end=updateTime)\fR
+The duration from resource creation to the most recent update.
+.TP 2m
+\f5updateTime.duration()\fR
+The duration since the most recent resource update.
+
+
+.RE
+.sp
+.TP 2m
+\fBencode\fR(encoding, undefined="")
+Returns the encoded value of the resource using encoding.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5encoding\fR\fR
+The encoding name. \fBbase64\fR and \fButf\-8\fR are supported.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the encoding fails.
+.RE
+.sp
+
+
+.TP 2m
+\fBenum\fR(enums, inverse=false, undefined="")
+Returns the enums dictionary description for the resource.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5enums\fR\fR
+The name of a message enum dictionary.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5inverse\fR\fR
+Do inverse lookup if true.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if there is no matching enum description.
+.RE
+.sp
+
+
+.TP 2m
+\fBerror\fR(message)
+Raises an Error exception that does not generate a stack trace.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5message\fR\fR
+An error message. If not specified then the resource is formatted as the error
+message.
+.RE
+.sp
+
+
+.TP 2m
+\fBextract\fR(keys)
+Extract an ordered list of values from the resource for the specified keys.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5keys\fR\fR
+The list of keys in the resource whose associated values will be included in the
+result.
+.RE
+.sp
+
+
+.TP 2m
+\fBfatal\fR(message)
+Raises an InternalError exception that generates a stack trace.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5message\fR\fR
+An error message. If not specified then the resource is formatted as the error
+message.
+.RE
+.sp
+
+
+.TP 2m
+\fBfirstof\fR(keys)
+Returns the first non\-empty attribute value for key in keys.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5keys\fR\fR
+Keys to check for resource attribute values,
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5x.firstof(bar_foo, barFoo, BarFoo, BAR_FOO)\fR
+Checks x.bar_foo, x.barFoo, x.BarFoo, and x.BAR_FOO in order for the first
+non\-empty value.
+
+
+.RE
+.sp
+.TP 2m
+\fBfloat\fR(precision=6, spec, undefined="")
+Returns the string representation of a floating point number.
+
+One of these formats is used (1) ". \fIprecision\fR \fIspec\fR" if \fIspec\fR is
+specified (2) ". \fIprecision\fR" unless 1e\-04 <= abs(number) < 1e+09 (3) ".1f"
+otherwise.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5precision\fR\fR
+The maximum number of digits before and after the decimal point.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5spec\fR\fR
+The printf(3) floating point format "e", "f" or "g" spec character.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource is not a float.
+.RE
+.sp
+
+
+.TP 2m
+\fBformat\fR(fmt, args)
+Formats resource key values.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5fmt\fR\fR
+The format string with {0} ... {nargs\-1} references to the resource attribute
+name arg values.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5args\fR\fR
+The resource attribute key expression to format. The printer projection symbols
+and aliases may be used in key expressions. If no args are specified then the
+resource is used as the arg list if it is a list, otherwise the resource is used
+as the only arg.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5\-\-format='value(format("{0:f.1}/{1:f.1}", q.CPU.default, q.CPU.limit))'\fR
+Formats q.CPU.default and q.CPU.limit as floating point numbers.
+
+
+.RE
+.sp
+.TP 2m
+\fBgroup\fR(keys)
+Formats a [...] grouped list.
+
+Each group is enclosed in [...]. The first item separator is ':', subsequent
+separators are ','. [item1] [item1] ... [item1: item2] ... [item1: item2]
+[item1: item2, item3] ... [item1: item2, item3]
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5keys\fR\fR
+Optional attribute keys to select from the list. Otherwise the string value of
+each list item is selected.
+.RE
+.sp
+
+
+.TP 2m
+\fBif\fR(expr)
+Disables the projection key if the flag name filter expr is false.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5expr\fR\fR
+A command flag filter name expression. See \f5gcloud topic filters\fR for
+details on filter expressions. The expression variables are flag names without
+the leading \fB\-\-\fR prefix and dashes replaced by underscores.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5table(name, value.if(NOT short_format))\fR
+Lists a value column if the \fB\-\-short\-format\fR command line flag is not
+specified.
+
+
+.RE
+.sp
+.TP 2m
+\fBiso\fR(undefined="T")
+Formats the resource to numeric ISO time format.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource does not have an isoformat() attribute.
+.RE
+.sp
+
+
+.TP 2m
+\fBjoin\fR(sep="/", undefined="")
+Joins the elements of the resource list by the value of sep.
+
+A string resource is treated as a list of characters.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5sep\fR\fR
+The separator value to use when joining.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the result after joining is empty.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5"a/b/c/d".split("/").join("!")\fR
+Returns "a!b!c!d".
+
+
+.RE
+.sp
+.TP 2m
+\fBlen\fR()
+Returns the length of the resource if it is non\-empty, 0 otherwise.
+
+.TP 2m
+\fBlist\fR(show="", undefined="", separator=",")
+Formats a dict or list into a compact comma separated list.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5show\fR\fR
+If show=\fBkeys\fR then list dict keys; if show=\fBvalues\fR then list dict
+values; otherwise list dict key=value pairs.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Return this if the resource is empty.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5separator\fR\fR
+The list item separator string.
+.RE
+.sp
+
+
+.TP 2m
+\fBmap\fR(depth=1)
+Applies the next transform in the sequence to each resource list item.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5depth\fR\fR
+The list nesting depth.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5list_field.map().foo().list()\fR
+Applies foo() to each item in list_field and then list() to the resulting value
+to return a compact comma\-separated list.
+.TP 2m
+\f5list_field.map().foo().map().bar()\fR
+Applies foo() to each item in list_field and then bar() to each item in the
+resulting list.
+.TP 2m
+\f5abc.xyz.map(2).foo()\fR
+Applies foo() to each item in xyz[] for all items in abc[].
+
+
+.RE
+.sp
+.TP 2m
+\fBnotnull\fR()
+Remove null values from the resource list.
+
+.TP 2m
+\fBresolution\fR(undefined="", transpose=false)
+Formats a human readable XY resolution.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if a recognizable resolution was not found.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5transpose\fR\fR
+Returns the y/x resolution if true.
+.RE
+.sp
+
+
+.TP 2m
+\fBscope\fR(args)
+Gets the /args/ suffix from a URI.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5args\fR\fR
+Optional URI segment names. If not specified then 'regions', 'zones' is assumed.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5"https://abc/foo/projects/bar/xyz".scope("projects")\fR
+Returns "bar/xyz".
+.TP 2m
+\f5"https://xyz/foo/regions/abc".scope()\fR
+Returns "abc".
+
+
+.RE
+.sp
+.TP 2m
+\fBsegment\fR(index=\-1, undefined="")
+Returns the index\-th URI path segment.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5index\fR\fR
+The path segment index to return counting from 0.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource or segment index is empty.
+.RE
+.sp
+
+
+.TP 2m
+\fBsize\fR(zero="0", precision=1, units_in, units_out, min=0)
+Formats a human readable size in bytes.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5zero\fR\fR
+Returns this if size==0. Ignored if None.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5precision\fR\fR
+The number of digits displayed after the decimal point.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5units_in\fR\fR
+A unit suffix (only the first character is checked) or unit size. The size is
+multiplied by this. The default is 1.0.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5units_out\fR\fR
+A unit suffix (only the first character is checked) or unit size. The size is
+divided by this. The default is 1.0.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5min\fR\fR
+Sizes < \fImin\fR will be listed as "< \fImin\fR".
+.RE
+.sp
+
+
+.TP 2m
+\fBslice\fR(op=":", undefined="")
+Returns a list slice specified by op.
+
+The op parameter consists of up to three colon\-delimeted integers: start, end,
+and step. The parameter supports half\-open ranges: start and end values can be
+omitted, representing the first and last positions of the resource respectively.
+
+The step value represents the increment between items in the resource included
+in the slice. A step of 2 results in a slice that contains every other item in
+the resource.
+
+Negative values for start and end indicate that the positons should start from
+the last position of the resource. A negative value for step indicates that the
+slice should contain items in reverse order.
+
+If op contains no colons, the slice consists of the single item at the specified
+position in the resource.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5op\fR\fR
+The slice operation.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the slice cannot be created, or the resulting slice is
+empty.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5[1,2,3].slice(1:)\fR
+Returns [2,3].
+.TP 2m
+\f5[1,2,3].slice(:2)\fR
+Returns [1,2].
+.TP 2m
+\f5[1,2,3].slice(\-1:)\fR
+Returns [3].
+.TP 2m
+\f5[1,2,3].slice(: :\-1)\fR
+Returns [3,2,1].
+.TP 2m
+\f5[1,2,3].slice(1)\fR
+Returns [2].
+
+
+.RE
+.sp
+.TP 2m
+\fBsort\fR(attr="")
+Sorts the elements of the resource list by a given attribute (or itself).
+
+A string resource is treated as a list of characters.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5attr\fR\fR
+The optional field of an object or dict by which to sort.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5"b/a/d/c".split("/").sort()\fR
+Returns "[a, b, c, d]".
+
+
+.RE
+.sp
+.TP 2m
+\fBsplit\fR(sep="/", undefined="")
+Splits a string by the value of sep.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5sep\fR\fR
+The separator value to use when splitting.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the result after splitting is empty.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5"a/b/c/d".split()\fR
+Returns ["a", "b", "c", "d"].
+
+
+.RE
+.sp
+.TP 2m
+\fBsub\fR(pattern, replacement, count=0, ignorecase=true)
+Replaces a pattern matched in a string with the given replacement.
+
+Return the string obtained by replacing the leftmost non\-overlapping
+occurrences of pattern in the string by replacement. If the pattern isn't found,
+then the original string is returned unchanged.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5pattern\fR\fR
+The regular expression pattern to match in r that we want to replace with
+something.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5replacement\fR\fR
+The value to substitute into whatever pattern is matched.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5count\fR\fR
+The max number of pattern occurrences to be replaced. Must be non\-negative. If
+omitted or zero, all occurrences will be replaces.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5ignorecase\fR\fR
+Whether to perform case\-insensitive matching.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5table(field.sub(" there", ""))\fR
+If the field string is "hey there" it will be displayed as "hey".
+
+
+.RE
+.sp
+.TP 2m
+\fBsynthesize\fR(args)
+Synthesizes a new resource from the schema arguments.
+
+A list of tuple arguments controls the resource synthesis. Each tuple is a
+schema that defines the synthesis of one resource list item. Each schema item
+defines the synthesis of one synthesized_resource attribute from an
+original_resource attribute.
+
+There are three kinds of schema items:
+
+.RS 2m
+.TP 2m
+\fBname:literal\fR
+The value for the name attribute in the synthesized resource is the literal
+value.
+.TP 2m
+\fBname=key\fR
+The value for the name attribute in the synthesized_resource is the value of key
+in the original_resource.
+.TP 2m
+\fBkey\fR
+All the attributes of the value of key in the original_resource are added to the
+attributes in the synthesized_resource.
+.RE
+.sp
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5args\fR\fR
+The list of schema tuples.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+This returns a list of two resource items
+\f5synthesize((name:up, upInfo), (name:down, downInfo))\fR
+.TP 2m
+If upInfo and downInfo serialize to
+\f5{"foo": 1, "bar": "yes"}\fR
+.TP 2m
+and
+\f5{"foo": 0, "bar": "no"}\fR
+.TP 2m
+then the synthesized resource list is
+\f5[{"name": "up", "foo": 1, "bar": "yes"}, {"name": "down", "foo": 0, "bar":
+"no"}]\fR
+.TP 2m
+This could then be displayed by a nested table using
+\f5synthesize(...):format="table(name, foo, bar)"\fR
+
+
+.RE
+.sp
+.TP 2m
+\fBuri\fR(undefined=".")
+Gets the resource URI.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this if a the URI for r cannot be determined.
+.RE
+.sp
+
+
+.TP 2m
+\fByesno\fR(yes, no="No")
+Returns no if the resource is empty, yes or the resource itself otherwise.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5yes\fR\fR
+If the resource is not empty then returns \fIyes\fR or the resource itself if
+\fIyes\fR is not defined.
+.RE
+.sp
+.RS 2m
+.TP 2m
+\fB\f5no\fR\fR
+Returns this value if the resource is empty.
+.RE
+.sp
+
+
+.RE
+.sp
+The cloudbuild transform functions are:
+
+
+.RS 2m
+.TP 2m
+\fBbuild_images\fR(undefined="")
+Returns the formatted build results images.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource cannot be formatted.
+.RE
+.sp
+
+
+.TP 2m
+\fBbuild_source\fR(undefined="")
+Returns the formatted build source.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource cannot be formatted.
+.RE
+.sp
+
+
+.RE
+.sp
+The compute transform functions are:
+
+
+.RS 2m
+.TP 2m
+\fBfirewall_rule\fR(undefined="")
+Returns a compact string describing a firewall rule.
+
+The compact string is a comma\-separated list of PROTOCOL:PORT_RANGE items. If a
+particular protocol has no port ranges then only the protocol is listed.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource cannot be formatted.
+.RE
+.sp
+
+
+.TP 2m
+\fBimage_alias\fR(undefined="")
+Returns a comma\-separated list of alias names for an image.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource cannot be formatted.
+.RE
+.sp
+
+
+.TP 2m
+\fBlocation\fR(undefined="")
+Return the region or zone name.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource cannot be formatted.
+.RE
+.sp
+
+
+.TP 2m
+\fBlocation_scope\fR(undefined="")
+Return the location scope name, either region or zone.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource cannot be formatted.
+.RE
+.sp
+
+
+.TP 2m
+\fBmachine_type\fR()
+Return the formatted name for a machine type.
+
+.TP 2m
+\fBnext_maintenance\fR(undefined="")
+Returns the timestamps of the next scheduled maintenance.
+
+All timestamps are assumed to be ISO strings in the same timezone.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource cannot be formatted.
+.RE
+.sp
+
+
+.TP 2m
+\fBoperation_http_status\fR(undefined="")
+Returns the HTTP response code of an operation.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if there is no response code.
+.RE
+.sp
+
+
+.TP 2m
+\fBproject\fR(undefined="")
+Returns a project name from a selfLink.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource cannot be formatted.
+.RE
+.sp
+
+
+.TP 2m
+\fBquota\fR(undefined="")
+Formats a quota as usage/limit.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource cannot be formatted.
+.RE
+.sp
+
+
+.TP 2m
+\fBstatus\fR(undefined="")
+Returns the machine status with deprecation information if applicable.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource cannot be formatted.
+.RE
+.sp
+
+
+.TP 2m
+\fBzone\fR(undefined="")
+Returns a zone name from a selfLink.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource cannot be formatted.
+.RE
+.sp
+
+
+.RE
+.sp
+The container transform functions are:
+
+
+.RS 2m
+.TP 2m
+\fBmaster_version\fR(undefined="")
+Returns the formatted master version.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource cannot be formatted.
+.RE
+.sp
+
+
+.RE
+.sp
+The debug transform functions are:
+
+
+.RS 2m
+.TP 2m
+\fBfull_status\fR(undefined="UNKNOWN_ERROR")
+Returns a full description of the status of a logpoint or snapshot.
+
+Status will be one of ACTIVE, COMPLETED, or a verbose error description. If the
+status is an error, there will be additional information available in the status
+field of the object.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource is not a valid status.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5\-\-format="table(id, location, full_status())"\fR
+Displays the full status in the third table problem.
+
+
+.RE
+.sp
+.TP 2m
+\fBshort_status\fR(undefined="UNKNOWN_ERROR")
+Returns a short description of the status of a logpoint or snapshot.
+
+Status will be one of ACTIVE, COMPLETED, or a short error description. If the
+status is an error, there will be additional information available in the status
+field of the object.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource is not a valid status.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5\-\-format="table(id, location, short_status())"\fR
+Displays the short status in the third table problem.
+
+
+.RE
+.RE
+.sp
+The functions transform functions are:
+
+
+.RS 2m
+.TP 2m
+\fBtrigger\fR(undefined="")
+Returns textual information about functions trigger.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource cannot be formatted.
+.RE
+.sp
+
+
+.RE
+.sp
+The runtime_config transform functions are:
+
+
+.RS 2m
+.TP 2m
+\fBwaiter_status\fR(undefined="")
+Returns a short description of the status of a waiter or waiter operation.
+
+Status will be one of WAITING, SUCCESS, FAILURE, or TIMEOUT.
+
+The arguments are:
+
+.RS 2m
+.TP 2m
+\fB\f5undefined\fR\fR
+Returns this value if the resource status cannot be determined.
+.RE
+.sp
+
+For example:
+
+.RS 2m
+.TP 2m
+\f5\-\-format="table(name, status())"\fR
+Displays the status in table column two.
+
+
+
+.RE
+.RE
+.sp
+
+.SH "Key Attributes"
+
+Key attributes control formatted output. Each projection key may have zero or
+more attributes:
+
+.RS 2m
+_key_:_attribute_=_value_...
+.RE
+
+where =\fIvalue\fR is omitted for Boolean attributes and no\-\fIattribute\fR
+sets the attribute to false. Attribute values may appear in any order, but must
+be specified after any transform calls. The attributes are:
+
+.RS 2m
+.TP 2m
+\fBalias\fR=\fIALIAS\-NAME\fR
+Sets \fIALIAS\-NAME\fR as an alias for the projection key.
+
+.TP 2m
+\fBalign\fR=\fIALIGNMENT\fR
+Specifies the output column data alignment. Used by the \fBtable\fR format. The
+alignment values are:
+
+.RS 2m
+.TP 2m
+\fBleft\fR
+Left (default).
+
+.TP 2m
+\fBcenter\fR
+Center.
+
+.TP 2m
+\fBright\fR
+Right.
+
+.RE
+.sp
+.TP 2m
+\fBlabel\fR=\fILABEL\fR
+A string value used to label output. Use :label="" or :label='' for no label.
+The \fBtable\fR format uses \fILABEL\fR values as column headings. Also sets
+\fILABEL\fR as an alias for the projection key. The default label is the
+disambiguated right hand parts of the column key name in ANGRY_SNAKE_CASE.
+
+.TP 2m
+[no\-]\fBreverse\fR
+Sets the key sort order to descending. \fBno\-reverse\fR resets to the default
+ascending order.
+
+.TP 2m
+\fBsort\fR=\fISORT\-ORDER\fR
+An integer counting from 1. Keys with lower sort\-order are sorted first. Keys
+with same sort order are sorted left to right.
+
+.TP 2m
+\fBwrap\fR
+Enables the column text to be wrapped if the table would otherwise be too wide
+for the display.
+
+
+.RE
+.sp
+
+.SH "EXAMPLES"
+
+List a table of instance \fBzone\fR (sorted in descending order) and \fBname\fR
+(sorted by \fBname\fR and centered with column heading \fBINSTANCE\fR) and
+\fBcreationTimestamp\fR (listed using the \fBstrftime\fR(3) year\-month\-day
+format with column heading \fBSTART\fR):
+
+.RS 2m
+$ gcloud compute instances list \e
+    \-\-format='table(name:sort=2:align=center:label=INSTANCE,
+ zone:sort=1:reverse,
+ creationTimestamp.date("%Y\-%m\-%d"):label=START)'
+.RE
+
+List only the \fBname\fR, \fBstatus\fR and \fBzone\fR instance resource keys in
+YAML format:
+
+.RS 2m
+$ gcloud compute instances list \-\-format='yaml(name, status, zone)'
+.RE
+
+List only the \fBconfig.account\fR key value(s) in the \fBinfo\fR resource:
+
+.RS 2m
+$ gcloud info \-\-format='value(config.account)'
+.RE

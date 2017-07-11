@@ -1,0 +1,117 @@
+
+.TH "GCLOUD_COMPUTE_TARGET\-POOLS_SET\-BACKUP" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute target\-pools set\-backup \- set a backup pool for a target pool
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute target\-pools set\-backup\fR \fINAME\fR [\fB\-\-failover\-ratio\fR=\fIFAILOVER_RATIO\fR] [\fB\-\-region\fR=\fIREGION\fR] [\fB\-\-backup\-pool\fR=\fIBACKUP_POOL\fR\ |\ \fB\-\-no\-backup\-pool\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute target\-pools set\-backup\fR is used to set a backup target
+pool for a primary target pool, which defines the fallback behavior of the
+primary pool. If the ratio of the healthy instances in the primary pool is at or
+below the specified \f5\fI\-\-failover\-ratio value\fR\fR, then traffic arriving
+at the load\-balanced IP address will be directed to the backup pool.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the target pool for which to set the backup pool.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-failover\-ratio\fR=\fIFAILOVER_RATIO\fR
+The new failover ratio value for the target pool. This must be a float in the
+range of [0, 1].
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the target pool to set a backup pool for. If not specified, you
+will be prompted to select a region.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/region\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/region REGION
+.RE
+
+A list of regions can be fetched by running:
+
+.RS 2m
+$ gcloud compute regions list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/region
+.RE
+
+Alternatively, the region can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_REGION\fR\fR.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-backup\-pool\fR=\fIBACKUP_POOL\fR
+Name of the target pool that will serve as backup.
+
+.TP 2m
+\fB\-\-no\-backup\-pool\fR
+Unsets the backup pool. This disables failover.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To cause \f5TARGET\-POOL\fR (in region \f5us\-central1\fR) to fail over to
+\f5BACKUP\-POOL\fR when more than half of the \f5TARGET\-POOL\fR instances are
+unhealthy, run:
+
+.RS 2m
+$ gcloud compute target\-pools set\-backup TARGET\-POOL \e
+    \-\-backup\-pool BACKUP\-POOL \-\-failover\-ratio 0.5 \e
+    \-\-region us\-central1
+.RE
+
+To remove \f5BACKUP\-POOL\fR as a backup to \f5TARGET\-POOL\fR, run:
+
+.RS 2m
+$ gcloud compute target\-pools set\-backup TARGET\-POOL \e
+    \-\-backup\-pool '' \-\-region us\-central1
+.RE

@@ -1,0 +1,108 @@
+
+.TH "GCLOUD_KMS_KEYS_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud kms keys create \- create a new key
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud kms keys create\fR \fIKEY\fR \fB\-\-purpose\fR=\fIPURPOSE\fR [\fB\-\-keyring\fR=\fIKEYRING\fR] [\fB\-\-location\fR=\fILOCATION\fR] [\fB\-\-next\-rotation\-time\fR=\fINEXT_ROTATION_TIME\fR] [\fB\-\-rotation\-period\fR=\fIROTATION_PERIOD\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Creates a new key within the given keyring.
+
+The optional flags \f5\-\-rotation\-period\fR and \f5\-\-next\-rotation\-time\fR
+define a rotation schedule for the key. A schedule can also be defined by the
+\f5create\-rotation\-schedule\fR command.
+
+The flag \f5\-\-next\-rotation\-time\fR must be in ISO or RFC3339 format, and
+\f5\-\-rotation\-period\fR must be in the form INTEGER[UNIT], where units can be
+one of seconds (s), minutes (m), hours (h) or days (d).
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIKEY\fR
+Name of the key to create.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-purpose\fR=\fIPURPOSE\fR
+The "purpose" of the key. \fIPURPOSE\fR must be (currently only one value is
+supported): \fBencryption\fR.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-keyring\fR=\fIKEYRING\fR
+The containing keyring.
+
+.TP 2m
+\fB\-\-location\fR=\fILOCATION\fR
+The location of the requested resource.
+
+.TP 2m
+\fB\-\-next\-rotation\-time\fR=\fINEXT_ROTATION_TIME\fR
+Next automatic rotation time of the key.
+
+.TP 2m
+\fB\-\-rotation\-period\fR=\fIROTATION_PERIOD\fR
+Automatic rotation period of the key.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+The following command creates a key named \f5frodo\fR within the keyring
+\f5fellowship\fR and location \f5us\-east1\fR:
+
+.RS 2m
+$ gcloud kms keys create frodo \e
+    \-\-location us\-east1 \e
+    \-\-keyring fellowship \e
+    \-\-purpose encryption
+.RE
+
+The following command creates a key named \f5strider\fR within the keyring
+\f5rangers\fR and location \f5global\fR with a specified rotation schedule:
+
+.RS 2m
+$ gcloud kms keys create strider \e
+    \-\-location global \-\-keyring rangers \e
+    \-\-purpose encryption \e
+    \-\-rotation\-period 30d \e
+    \-\-next\-rotation\-time 2017\-10\-12T12:34:56.1234Z
+.RE

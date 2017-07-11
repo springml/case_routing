@@ -1,0 +1,73 @@
+
+.TH "GCLOUD_COMPUTE_SNAPSHOTS_ADD\-LABELS" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute snapshots add\-labels \- add labels to Google Compute Engine snapshots
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute snapshots add\-labels\fR \fISNAPSHOT_NAME\fR \fB\-\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute snapshots add\-labels\fR adds labels to a Google Compute
+Engine snapshot. For example, running:
+
+.RS 2m
+$ gcloud compute snapshots add\-labels example\-snapshot \e
+    \-\-labels=k0=v0,k1=v1
+.RE
+
+will add key\-value pairs \f5\fIk0\fR\fR=\f5\fIv0\fR\fR and
+\f5\fIk1\fR\fR=\f5\fIv1\fR\fR to 'example\-snapshot'.
+
+Labels can be used to identify the snapshot and to filter them as in
+
+.RS 2m
+$ gcloud compute snapshots list \-\-filter='labels.k1:value2'
+.RE
+
+To list existing labels
+
+.RS 2m
+$ gcloud compute snapshots describe example\-snapshot \e
+    \-\-format='default(labels)'
+.RE
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fISNAPSHOT_NAME\fR
+The name of the snapshot to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]
+A list of labels to add.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

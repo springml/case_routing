@@ -1,0 +1,259 @@
+
+.TH "GCLOUD_CONTAINER_CLUSTERS_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud container clusters create \- create a cluster for running containers
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud container clusters create\fR \fINAME\fR [\fB\-\-additional\-zones\fR=\fIZONE\fR,[\fIZONE\fR,...]] [\fB\-\-async\fR] [\fB\-\-cluster\-ipv4\-cidr\fR=\fICLUSTER_IPV4_CIDR\fR] [\fB\-\-cluster\-version\fR=\fICLUSTER_VERSION\fR] [\fB\-\-disable\-addons\fR=[\fIDISABLE_ADDONS\fR,...]] [\fB\-\-disk\-size\fR=\fIDISK_SIZE\fR] [\fB\-\-no\-enable\-cloud\-endpoints\fR] [\fB\-\-no\-enable\-cloud\-logging\fR] [\fB\-\-no\-enable\-cloud\-monitoring\fR] [\fB\-\-image\-type\fR=\fIIMAGE_TYPE\fR] [\fB\-\-machine\-type\fR=\fIMACHINE_TYPE\fR,\ \fB\-m\fR\ \fIMACHINE_TYPE\fR] [\fB\-\-max\-nodes\-per\-pool\fR=\fIMAX_NODES_PER_POOL\fR] [\fB\-\-network\fR=\fINETWORK\fR] [\fB\-\-node\-labels\fR=[\fINODE_LABEL\fR,...]] [\fB\-\-num\-nodes\fR=\fINUM_NODES\fR;\ default="3"] [\fB\-\-password\fR=\fIPASSWORD\fR] [\fB\-\-scopes\fR=\fISCOPE\fR,[\fISCOPE\fR,...]] [\fB\-\-subnetwork\fR=\fISUBNETWORK\fR] [\fB\-\-tags\fR=\fITAG\fR,[\fITAG\fR,...]] [\fB\-\-username\fR=\fIUSERNAME\fR,\ \fB\-u\fR\ \fIUSERNAME\fR;\ default="admin"] [\fB\-\-zone\fR=\fIZONE\fR,\ \fB\-z\fR\ \fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Create a cluster for running containers.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of this cluster.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-additional\-zones\fR=\fIZONE\fR,[\fIZONE\fR,...]
+The set of additional zones in which the specified node footprint should be
+replicated. All zones must be in the same region as the cluster's primary zone.
+If additional\-zones is not specified, all nodes will be in the cluster's
+primary zone.
+
+Note that \f5NUM_NODES\fR nodes will be created in each zone, such that if you
+specify \f5\-\-num\-nodes=4\fR and choose one additional zone, 8 nodes will be
+created.
+
+Multiple locations can be specified, separated by commas. For example:
+
+.RS 2m
+$ gcloud container clusters create example\-cluster \e
+    \-\-zone us\-central1\-a \e
+    \-\-additional\-zones us\-central1\-b,us\-central1\-c
+.RE
+
+.TP 2m
+\fB\-\-async\fR
+Don't wait for the operation to complete.
+
+.TP 2m
+\fB\-\-cluster\-ipv4\-cidr\fR=\fICLUSTER_IPV4_CIDR\fR
+The IP address range for the pods in this cluster in CIDR notation (e.g.
+10.0.0.0/14). Prior to Kubernetes version 1.7.0 this must be a subset of
+10.0.0.0/8; however, starting with version 1.7.0 can be any RFC 1918 IP range.
+
+.TP 2m
+\fB\-\-cluster\-version\fR=\fICLUSTER_VERSION\fR
+The Kubernetes version to use for the master and nodes. Defaults to
+server\-specified.
+
+The default Kubernetes version is available using the following command.
+
+.RS 2m
+$ gcloud container get\-server\-config
+.RE
+
+.TP 2m
+\fB\-\-disable\-addons\fR=[\fIDISABLE_ADDONS\fR,...]
+List of cluster addons to disable. Options are HttpLoadBalancing,
+HorizontalPodAutoscaling. \fIDISABLE_ADDONS\fR must be one of:
+\fBHttpLoadBalancing\fR, \fBHorizontalPodAutoscaling\fR.
+
+.TP 2m
+\fB\-\-disk\-size\fR=\fIDISK_SIZE\fR
+Size in GB for node VM boot disks. Defaults to 100GB.
+
+.TP 2m
+\fB\-\-enable\-cloud\-endpoints\fR
+Automatically enable Google Cloud Endpoints to take advantage of API management
+features. Enabled by default, use \fB\-\-no\-enable\-cloud\-endpoints\fR to
+disable.
+
+.TP 2m
+\fB\-\-enable\-cloud\-logging\fR
+Automatically send logs from the cluster to the Google Cloud Logging API.
+Enabled by default, use \fB\-\-no\-enable\-cloud\-logging\fR to disable.
+
+.TP 2m
+\fB\-\-enable\-cloud\-monitoring\fR
+Automatically send metrics from pods in the cluster to the Google Cloud
+Monitoring API. VM metrics will be collected by Google Compute Engine regardless
+of this setting. Enabled by default, use \fB\-\-no\-enable\-cloud\-monitoring\fR
+to disable.
+
+.TP 2m
+\fB\-\-image\-type\fR=\fIIMAGE_TYPE\fR
+The image type to use for the cluster. Defaults to server\-specified.
+
+Image Type specifies the base OS that the nodes in the cluster will run on. If
+an image type is specified, that will be assigned to the cluster and all future
+upgrades will use the specified image type. If it is not specified the server
+will pick the default image type.
+
+The default image type and the list of valid image types are available using the
+following command.
+
+.RS 2m
+$ gcloud container get\-server\-config
+.RE
+
+.TP 2m
+\fB\-\-machine\-type\fR=\fIMACHINE_TYPE\fR, \fB\-m\fR \fIMACHINE_TYPE\fR
+The type of machine to use for nodes. Defaults to n1\-standard\-1.
+
+.TP 2m
+\fB\-\-max\-nodes\-per\-pool\fR=\fIMAX_NODES_PER_POOL\fR
+The maximum number of nodes to allocate per default initial node pool. Container
+Engine will automatically create enough nodes pools such that each node pool
+contains less than \-\-max\-nodes\-per\-pool nodes. Defaults to 1000 nodes, but
+can be set as low as 100 nodes per pool on initial create.
+
+.TP 2m
+\fB\-\-network\fR=\fINETWORK\fR
+The Compute Engine Network that the cluster will connect to. Google Container
+Engine will use this network when creating routes and firewalls for the
+clusters. Defaults to the 'default' network.
+
+.TP 2m
+\fB\-\-node\-labels\fR=[\fINODE_LABEL\fR,...]
+Applies the given kubernetes labels on all nodes in the new node\-pool. Example:
+
+.RS 2m
+$ gcloud container clusters create example\-cluster \e
+    \-\-node\-labels=label\-a=value1,label\-2=value2
+.RE
+
+New nodes, including ones created by resize or recreate, will have these labels
+on the kubernetes API node object and can be used in nodeSelectors. See
+http://kubernetes.io/docs/user\-guide/node\-selection/ for examples.
+
+.TP 2m
+\fB\-\-num\-nodes\fR=\fINUM_NODES\fR; default="3"
+The number of nodes to be created in each of the cluster's zones.
+
+.TP 2m
+\fB\-\-password\fR=\fIPASSWORD\fR
+The password to use for cluster auth. Defaults to a server\-specified
+randomly\-generated string.
+
+.TP 2m
+\fB\-\-scopes\fR=\fISCOPE\fR,[\fISCOPE\fR,...]
+Specifies scopes for the node instances. The project's default service account
+is used. Examples:
+
+.RS 2m
+$ gcloud container clusters create example\-cluster \e
+    \-\-scopes https://www.googleapis.com/auth/devstorage.read_only
+.RE
+
+.RS 2m
+$ gcloud container clusters create example\-cluster \e
+    \-\-scopes bigquery,storage\-rw,compute\-ro
+.RE
+
+Multiple SCOPEs can specified, separated by commas. The scopes necessary for the
+cluster to function properly (compute\-rw, storage\-ro), are always added, even
+if not explicitly specified.
+
+SCOPE can be either the full URI of the scope or an alias. Available aliases
+are:
+
+
+.TS
+tab(,);
+lB lB
+l l.
+Alias,URI
+bigquery,https://www.googleapis.com/auth/bigquery
+cloud\-platform,https://www.googleapis.com/auth/cloud\-platform
+cloud\-source\-repos,https://www.googleapis.com/auth/source.full_control
+cloud\-source\-repos\-ro,https://www.googleapis.com/auth/source.read_only
+compute\-ro,https://www.googleapis.com/auth/compute.readonly
+compute\-rw,https://www.googleapis.com/auth/compute
+datastore,https://www.googleapis.com/auth/datastore
+default,https://www.googleapis.com/auth/cloud.useraccounts.readonly
+,https://www.googleapis.com/auth/devstorage.read_only
+,https://www.googleapis.com/auth/logging.write
+,https://www.googleapis.com/auth/monitoring.write
+,https://www.googleapis.com/auth/pubsub
+,https://www.googleapis.com/auth/service.management.readonly
+,https://www.googleapis.com/auth/servicecontrol
+,https://www.googleapis.com/auth/trace.append
+logging\-write,https://www.googleapis.com/auth/logging.write
+monitoring,https://www.googleapis.com/auth/monitoring
+monitoring\-write,https://www.googleapis.com/auth/monitoring.write
+service\-control,https://www.googleapis.com/auth/servicecontrol
+service\-management,https://www.googleapis.com/auth/service.management.readonly
+sql,https://www.googleapis.com/auth/sqlservice
+sql\-admin,https://www.googleapis.com/auth/sqlservice.admin
+storage\-full,https://www.googleapis.com/auth/devstorage.full_control
+storage\-ro,https://www.googleapis.com/auth/devstorage.read_only
+storage\-rw,https://www.googleapis.com/auth/devstorage.read_write
+taskqueue,https://www.googleapis.com/auth/taskqueue
+useraccounts\-ro,https://www.googleapis.com/auth/cloud.useraccounts.readonly
+useraccounts\-rw,https://www.googleapis.com/auth/cloud.useraccounts
+userinfo\-email,https://www.googleapis.com/auth/userinfo.email
+.TE
+
+.TP 2m
+\fB\-\-subnetwork\fR=\fISUBNETWORK\fR
+The name of the Google Compute Engine subnetwork
+(https://cloud.google.com/compute/docs/subnetworks) to which the cluster is
+connected. If specified, the cluster's network must be a "custom subnet"
+network.
+
+.TP 2m
+\fB\-\-tags\fR=\fITAG\fR,[\fITAG\fR,...]
+Applies the given Compute Engine tags (comma separated) on all nodes in the new
+node\-pool. Example:
+
+.RS 2m
+$ gcloud container clusters create example\-cluster \-\-tags=tag1,tag2
+.RE
+
+New nodes, including ones created by resize or recreate, will have these tags on
+the Compute Engine API instance object and can be used in firewall rules. See
+https://cloud.google.com/sdk/gcloud/reference/compute/firewall\-rules/create for
+examples.
+
+.TP 2m
+\fB\-\-username\fR=\fIUSERNAME\fR, \fB\-u\fR \fIUSERNAME\fR; default="admin"
+The user name to use for cluster auth.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR, \fB\-z\fR \fIZONE\fR
+The compute zone (e.g. us\-central1\-a) for the cluster. Overrides the default
+\fBcompute/zone\fR property value for this command invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

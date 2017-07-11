@@ -1,0 +1,97 @@
+
+.TH "GCLOUD_COMPUTE_INSTANCE\-GROUPS_MANAGED_SET\-TARGET\-POOLS" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute instance\-groups managed set\-target\-pools \- set target pools of managed instance group
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute instance\-groups managed set\-target\-pools\fR \fINAME\fR \fB\-\-target\-pools\fR=[\fITARGET_POOL\fR,...] [\fB\-\-region\fR=\fIREGION\fR\ |\ \fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute instance\-groups managed set\-target\-pools\fR sets the target
+pools for an existing managed instance group. Instances that are part of the
+managed instance group will be added to the target pool automatically.
+
+Setting a new target pool won't apply to existing instances in the group unless
+they are recreated using the recreate\-instances command. But any new instances
+created in the managed instance group will be added to all of the provided
+target pools for load balancing purposes.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the managed instance group to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-target\-pools\fR=[\fITARGET_POOL\fR,...]
+Compute Engine Target Pools to add the instances to. Target Pools must be
+specified by name or by URL. Example: \-\-target\-pool
+target\-pool\-1,target\-pool\-2.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the managed instance group to operate on. If not specified, you
+will be prompted to select a region.
+
+A list of regions can be fetched by running:
+
+.RS 2m
+$ gcloud compute regions list
+.RE
+
+Overrides the default \fBcompute/region\fR property value for this command
+invocation.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the managed instance group to operate on. If not specified, you may
+be prompted to select a zone.
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+Overrides the default \fBcompute/zone\fR property value for this command
+invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

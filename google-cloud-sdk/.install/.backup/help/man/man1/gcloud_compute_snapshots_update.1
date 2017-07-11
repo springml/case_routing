@@ -1,0 +1,79 @@
+
+.TH "GCLOUD_COMPUTE_SNAPSHOTS_UPDATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute snapshots update \- update a Google Compute Engine snapshot
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute snapshots update\fR \fISNAPSHOT_NAME\fR [\fB\-\-remove\-labels\fR=[\fIKEY\fR,...]] [\fB\-\-update\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute snapshots update\fR updates labels for a Google Compute
+snapshot. For example:
+
+.RS 2m
+$ gcloud compute snapshots update example\-snapshot \e
+  \-\-update\-labels=k0=value1,k1=value2 \-\-remove\-labels=k3
+.RE
+
+will add/update labels \f5\fIk0\fR\fR and \f5\fIk1\fR\fR and remove labels with
+key \f5\fIk3\fR\fR.
+
+Labels can be used to identify the snapshot and to filter them as in
+
+.RS 2m
+$ gcloud compute snapshots list \-\-filter='labels.k1:value2'
+.RE
+
+To list existing labels
+
+.RS 2m
+$ gcloud compute snapshots describe example\-snapshot \e
+    \-\-format='default(labels)'
+.RE
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fISNAPSHOT_NAME\fR
+The name of the snapshot to update.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-remove\-labels\fR=[\fIKEY\fR,...]
+A list of label keys to remove. If a label does not exist it is silently
+ignored.
+
+.TP 2m
+\fB\-\-update\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]
+A list of label KEY=VALUE pairs to update. If a label exists its value is
+modified, otherwise a new label is created.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

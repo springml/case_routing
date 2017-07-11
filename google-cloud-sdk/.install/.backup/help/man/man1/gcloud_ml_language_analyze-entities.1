@@ -1,0 +1,86 @@
+
+.TH "GCLOUD_ML_LANGUAGE_ANALYZE\-ENTITIES" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud ml language analyze\-entities \- use Google Cloud Natural Language API to identify entities in text
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud ml language analyze\-entities\fR (\fB\-\-content\fR=\fICONTENT\fR\ |\ \fB\-\-content\-file\fR=\fICONTENT_FILE\fR) [\fB\-\-content\-type\fR=\fICONTENT_TYPE\fR;\ default="PLAIN_TEXT"] [\fB\-\-encoding\-type\fR=\fIENCODING_TYPE\fR;\ default="UTF8"] [\fB\-\-language\fR=\fILANGUAGE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Entity Analysis inspects the given text for common names or known entities
+(proper nouns such as public figures, landmarks, etc.), and returns information
+about those entities.
+
+This command requires a service account from a project that has enabled the
+Natural Language API. To learn about using service accounts with the Natural
+Language API, please go to
+https://cloud.google.com/natural\-language/docs/getting\-started. Step 2 under
+the "Make an entity analysis request" section will give directions for using
+service accounts in gcloud.
+
+Currently English, Spanish, and Japanese are supported.
+
+
+
+.SH "REQUIRED FLAGS"
+
+Exactly one of these must be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-content\fR=\fICONTENT\fR
+Specify input text on the command line. Useful for experiments, or for extremely
+short text.
+
+.TP 2m
+\fB\-\-content\-file\fR=\fICONTENT_FILE\fR
+Specify a local file or Google Cloud Storage (format \f5gs://bucket/object\fR)
+file path containing the text to be analyzed. More useful for longer text or
+data output from another system.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-content\-type\fR=\fICONTENT_TYPE\fR; default="PLAIN_TEXT"
+Specify the format of the input text. \fICONTENT_TYPE\fR must be one of:
+\fBPLAIN_TEXT\fR, \fBHTML\fR.
+
+.TP 2m
+\fB\-\-encoding\-type\fR=\fIENCODING_TYPE\fR; default="UTF8"
+The encoding type used by the API to calculate offsets. If NONE, those offsets
+are not calculated. This is an optional flag only used for the entity mentions
+in results, and does not affect how the input is read or analyzed.
+\fIENCODING_TYPE\fR must be one of: \fBNONE\fR, \fBUTF8\fR, \fBUTF16\fR,
+\fBUTF32\fR.
+
+.TP 2m
+\fB\-\-language\fR=\fILANGUAGE\fR
+Specify the language of the input text. If omitted, the server will attempt to
+auto\-detect. Both ISO (such as \f5en\fR or \f5es\fR) and BCP\-47 (such as
+\f5en\-US\fR or \f5ja\-JP\fR) language codes are accepted.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

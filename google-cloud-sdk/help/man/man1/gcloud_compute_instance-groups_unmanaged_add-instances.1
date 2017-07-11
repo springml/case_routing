@@ -1,0 +1,93 @@
+
+.TH "GCLOUD_COMPUTE_INSTANCE\-GROUPS_UNMANAGED_ADD\-INSTANCES" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute instance\-groups unmanaged add\-instances \- adds instances to an unmanaged instance group by name
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute instance\-groups unmanaged add\-instances\fR \fINAME\fR \fB\-\-instances\fR=\fIINSTANCE\fR,[\fIINSTANCE\fR,...] [\fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute instance\-groups unmanaged add\-instances\fR adds existing
+instances to an unmanaged instance group by name. For example:
+
+.RS 2m
+$ gcloud compute instance\-groups unmanaged add\-instances \e
+    example\-instance\-group \-\-instances example\-instance\-1 \e
+    example\-instance\-2 \-\-zone us\-central1\-a
+.RE
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the instance group to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-instances\fR=\fIINSTANCE\fR,[\fIINSTANCE\fR,...]
+A list of names of instances to add to the instance group. These must exist
+beforehand and must live in the same zone as the instance group.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the instance group to operate on. If not specified, you may be
+prompted to select a zone.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

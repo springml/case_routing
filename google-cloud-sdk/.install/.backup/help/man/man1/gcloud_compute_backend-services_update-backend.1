@@ -1,0 +1,240 @@
+
+.TH "GCLOUD_COMPUTE_BACKEND\-SERVICES_UPDATE\-BACKEND" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute backend\-services update\-backend \- update an existing backend in a backend service
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute backend\-services update\-backend\fR \fIBACKEND_SERVICE_NAME\fR \fB\-\-instance\-group\fR=\fIINSTANCE_GROUP\fR [\fB\-\-balancing\-mode\fR=\fIBALANCING_MODE\fR] [\fB\-\-capacity\-scaler\fR=\fICAPACITY_SCALER\fR] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-max\-utilization\fR=\fIMAX_UTILIZATION\fR] [\fB\-\-global\fR\ |\ \fB\-\-region\fR=\fIREGION\fR] [\fB\-\-instance\-group\-region\fR=\fIINSTANCE_GROUP_REGION\fR\ |\ \fB\-\-instance\-group\-zone\fR=\fIINSTANCE_GROUP_ZONE\fR] [\fB\-\-max\-connections\fR=\fIMAX_CONNECTIONS\fR\ |\ \fB\-\-max\-connections\-per\-instance\fR=\fIMAX_CONNECTIONS_PER_INSTANCE\fR\ |\ \fB\-\-max\-rate\fR=\fIMAX_RATE\fR\ |\ \fB\-\-max\-rate\-per\-instance\fR=\fIMAX_RATE_PER_INSTANCE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute backend\-services update\-backend\fR updates a backend that is
+part of a backend service. This is useful for changing the way a backend
+behaves. Example changes that can be made include changing the load balancing
+policy and \f5draining\fR a backend by setting its capacity scaler to zero.
+
+Backends are named by their associated instances groups, and one of the
+\f5\-\-group\fR or \f5\-\-instance\-group\fR flags is required to identify the
+backend that you are modifying. You cannot "change" the instance group
+associated with a backend, but you can accomplish something similar with
+\f5backend\-services remove\-backend\fR and \f5backend\-services
+add\-backend\fR.
+
+\f5gcloud compute backend\-services edit\fR can also be used to update a backend
+if the use of a text editor is desired.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIBACKEND_SERVICE_NAME\fR
+The name of the backend service to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-instance\-group\fR=\fIINSTANCE_GROUP\fR
+The name of the instance group to update the backend service.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-balancing\-mode\fR=\fIBALANCING_MODE\fR
+Defines the strategy for balancing load.
+
+\fBRATE\fR and the max rate arguments are available only in backend services
+with HTTP based protocols.
+
+For backend services with TCP/SSL protocol either \fBUTILIZATION\fR or
+\fBCONNECTION\fR are available.
+
+\fIBALANCING_MODE\fR must be one of:
+
+.RS 2m
+.TP 2m
+\fBCONNECTION\fR
+Spreads load based on how many concurrent connections the group can handle.
+There are two ways to specify max connections: \fB\-\-max\-connections\fR which
+defines the max number of connections for the whole group or
+\fB\-\-max\-connections\-per\-instance\fR, which defines the max number of
+connections on a per\-instance basis.
+.TP 2m
+\fBRATE\fR
+Spreads load based on how many requests per second (RPS) the group can handle.
+There are two ways to specify max RPS: \fB\-\-max\-rate\fR which defines the max
+RPS for the whole group or \fB\-\-max\-rate\-per\-instance\fR, which defines the
+max RPS on a per\-instance basis.
+.TP 2m
+\fBUTILIZATION\fR
+Relies on the CPU utilization of the instances in the group when balancing load.
+Use \fB\-\-max\-utilization\fR to set a maximum target CPU utilization for each
+instance. Use \fB\-\-max\-rate\-per\-instance\fR or \fB\-\-max\-rate\fR to
+optionally limit based on RPS in addition to CPU. You can optionally also limit
+based on connections (for TCP/SSL) in addition to CPU by setting
+\fB\-\-max\-connections\fR or \fB\-\-max\-connections\-per\-instance\fR.
+
+
+.RE
+.sp
+.TP 2m
+\fB\-\-capacity\-scaler\fR=\fICAPACITY_SCALER\fR
+A setting that applies to all balancing modes. This value is multiplied by the
+balancing mode value to set the current max usage of the instance group.
+Acceptable values are \f50.0\fR (0%) through \f51.0\fR (100%). Setting this
+value to \f50.0\fR (0%) drains the backend service. Note that draining a backend
+service only prevents new connections to instances in the group. All existing
+connections are allowed to continue until they close by normal means.
+
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+An optional, textual description for the backend.
+
+.TP 2m
+\fB\-\-max\-utilization\fR=\fIMAX_UTILIZATION\fR
+The maximum average CPU utilization of the backend service. Acceptable values
+are \f50.0\fR (0%) through \f51.0\fR (100%). This flag can only be provided when
+the balancing mode is \fBUTILIZATION\fR.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-global\fR
+If provided, it is assumed the backend service is global.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the backend service to operate on. Overrides the default
+\fBcompute/region\fR property value for this command invocation.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-instance\-group\-region\fR=\fIINSTANCE_GROUP_REGION\fR
+The region of the instance group to update the backend service. If not
+specified, you will be prompted to select a region.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/region\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/region REGION
+.RE
+
+A list of regions can be fetched by running:
+
+.RS 2m
+$ gcloud compute regions list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/region
+.RE
+
+Alternatively, the region can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_REGION\fR\fR.
+
+.TP 2m
+\fB\-\-instance\-group\-zone\fR=\fIINSTANCE_GROUP_ZONE\fR
+The zone of the instance group to update the backend service. If not specified,
+you may be prompted to select a zone.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-max\-connections\fR=\fIMAX_CONNECTIONS\fR
+Maximum concurrent connections that the group can handle.
+
+.TP 2m
+\fB\-\-max\-connections\-per\-instance\fR=\fIMAX_CONNECTIONS_PER_INSTANCE\fR
+The maximum concurrent connections per\-instance.
+
+.TP 2m
+\fB\-\-max\-rate\fR=\fIMAX_RATE\fR
+Maximum number of requests per second that can be sent to the instance group.
+Must not be used with Autoscaled Managed Instance Groups. \f5\-\-max\-rate\fR
+and \f5\-\-max\-rate\-per\-instance\fR are mutually exclusive. However, one of
+them can be set even if \f5\-\-balancing\-mode\fR is set to \f5UTILIZATION\fR.
+If either \f5\-\-max\-rate\fR or \f5\-\-max\-rate\-per\-instance\fR is set and
+\f5\-\-balancing\-mode\fR is set to \f5RATE\fR, then only that value is
+considered when judging capacity. If either \f5\-\-max\-rate\fR or
+\f5\-\-max\-rate\-per\-instance\fR is set and \f5\-\-balancing\-mode\fR is set
+to \f5UTILIZATION\fR, then instances are judged to be at capacity when either
+the \f5UTILIZATION\fR or \f5RATE\fR value is reached.
+
+.TP 2m
+\fB\-\-max\-rate\-per\-instance\fR=\fIMAX_RATE_PER_INSTANCE\fR
+Maximum number of requests per second that can be sent to each instance in the
+instance group. \f5\-\-max\-rate\fR and \f5\-\-max\-rate\-per\-instance\fR are
+mutually exclusive. However, one of them can be set even if
+\f5\-\-balancing\-mode\fR is set to \f5UTILIZATION\fR. If either
+\f5\-\-max\-rate\fR or \f5\-\-max\-rate\-per\-instance\fR is set and
+\f5\-\-balancing\-mode\fR is set to \f5RATE\fR, then only that value is
+considered when judging capacity. If either \f5\-\-max\-rate\fR or
+\f5\-\-max\-rate\-per\-instance\fR is set and \f5\-\-balancing\-mode\fR is set
+to \f5UTILIZATION\fR, then instances are judged to be at capacity when either
+the \f5UTILIZATION\fR or \f5RATE\fR value is reached.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

@@ -1,0 +1,87 @@
+
+.TH "GCLOUD_DEBUG_SNAPSHOTS_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud debug snapshots create \- create debug snapshots
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud debug snapshots create\fR \fILOCATION\fR [\fB\-\-condition\fR=\fICONDITION\fR] [\fB\-\-expression\fR=\fIEXPRESSION\fR] [\fB\-\-target\fR=(\fIID\fR|\fIDESCRIPTION_REGEXP\fR)] [\fB\-\-wait\fR=\fIWAIT\fR;\ default="10"] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+This command creates a debug snapshot on a Cloud Debugger debug target.
+Snapshots allow you to capture stack traces and local variables from your
+running service without interfering with normal operations.
+
+When any instance of the target executes the snapshot location, the optional
+condition expression is evaluated. If the result is true (or if there is no
+condition), the instance captures the current thread state and reports it back
+to Cloud Debugger. Once any instance captures a snapshot, the snapshot is marked
+as completed, and it will not be captured again.
+
+You can most easily view snapshot results in the developer console. It is also
+possible to inspect snapshot results with the "snapshots describe" command.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fILOCATION\fR
+The location where the snapshot should be taken. Locations are of the form
+FILE:LINE, where FILE can be simply the file name, or the file name preceded by
+enough path components to differntiate it from other files with the same name.
+If the file name is not unique in the debug target, the behavior is unspecified.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-condition\fR=\fICONDITION\fR
+A condition to restrict when the snapshot is taken. When the snapshot location
+is executed, the condition will be evaluated, and the snapshot will be generated
+only if the condition is true.
+
+.TP 2m
+\fB\-\-expression\fR=\fIEXPRESSION\fR
+An expression to evaluate when the snapshot is taken. You may specify
+\-\-expression multiple times.
+
+.TP 2m
+\fB\-\-target\fR=(\fIID\fR|\fIDESCRIPTION_REGEXP\fR)
+The debug target. It may be a target ID or name obtained from 'debug targets
+list', or it may be a regular expression uniquely specifying a debuggee based on
+its description or name. For App Engine projects, if not specified, the default
+target is the most recent deployment of the default module and version.
+
+.TP 2m
+\fB\-\-wait\fR=\fIWAIT\fR; default="10"
+The number of seconds to wait to ensure that no error is returned from a
+debugger agent when creating the snapshot. When a snapshot is created, there
+will be a delay before the agents see and apply the snapshot. Until at least one
+agent has attempted to enable the snapshot, it cannot be determined if the
+snapshot is valid.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

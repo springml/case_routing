@@ -1,0 +1,124 @@
+
+.TH "GCLOUD_COMPUTE_INSTANCES_ATTACH\-DISK" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute instances attach\-disk \- attach a disk to an instance
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute instances attach\-disk\fR \fIINSTANCE_NAME\fR \fB\-\-disk\fR=\fIDISK\fR [\fB\-\-csek\-key\-file\fR=\fIFILE\fR] [\fB\-\-device\-name\fR=\fIDEVICE_NAME\fR] [\fB\-\-mode\fR=\fIMODE\fR;\ default="rw"] [\fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute instances attach\-disk\fR is used to attach a disk to an
+instance. For example,
+
+.RS 2m
+$ gcloud compute instances attach\-disk example\-instance \e
+    \-\-disk DISK \-\-zone us\-central1\-a
+.RE
+
+attaches the disk named 'DISK' to the instance named 'example\-instance' in zone
+\f5\fIus\-central1\-a\fR\fR.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIINSTANCE_NAME\fR
+The name of the instance to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-disk\fR=\fIDISK\fR
+The name of the disk to attach to the instance.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-csek\-key\-file\fR=\fIFILE\fR
+Path to a Customer\-Supplied Encryption Key (CSEK) key file, mapping Google
+Compute Engine resources to user managed keys to be used when creating,
+mounting, or snapshotting disks. See
+https://cloud.google.com/compute/docs/disks/customer\-supplied\-encryption for
+more details.
+
+.TP 2m
+\fB\-\-device\-name\fR=\fIDEVICE_NAME\fR
+An optional name that indicates the disk name the guest operating system will
+see. (Note: Device name does not correspond to mounted volume name)
+
+.TP 2m
+\fB\-\-mode\fR=\fIMODE\fR; default="rw"
+Specifies the mode of the disk. \fIMODE\fR must be one of:
+
+.RS 2m
+.TP 2m
+\fBro\fR
+Read\-only.
+.TP 2m
+\fBrw\fR
+Read\-write. It is an error to attach a disk in read\-write mode to more than
+one instance.
+
+.RE
+.sp
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the instance to operate on. If not specified, you may be prompted to
+select a zone. \f5gcloud\fR will attempt to identify the zone by searching for
+resources in your project. If the zone cannot be determined, you will then be
+prompted with all Google Cloud Platform zones.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

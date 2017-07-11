@@ -1,0 +1,147 @@
+
+.TH "GCLOUD_COMPUTE_COPY\-FILES" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute copy\-files \- copy files to and from Google Compute Engine virtual machines via scp
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute copy\-files\fR [[\fIUSER\fR@]\fIINSTANCE\fR:]\fISRC\fR [[[\fIUSER\fR@]\fIINSTANCE\fR:]\fISRC\fR\ ...] [[\fIUSER\fR@]\fIINSTANCE\fR:]\fIDEST\fR [\fB\-\-dry\-run\fR] [\fB\-\-force\-key\-file\-overwrite\fR] [\fB\-\-plain\fR] [\fB\-\-ssh\-key\-file\fR=\fISSH_KEY_FILE\fR] [\fB\-\-strict\-host\-key\-checking\fR=\fISTRICT_HOST_KEY_CHECKING\fR] [\fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fB(DEPRECATED)\fR \f5gcloud compute copy\-files\fR is deprecated. Please use
+\f5gcloud compute scp\fR instead. Note that \f5gcloud compute scp\fR does not
+have recursive copy on by default. To turn on recursion, use the
+\f5\-\-recurse\fR flag.
+
+\fBgcloud compute copy\-files\fR copies files between a virtual machine instance
+and your local machine using the scp command.
+
+To denote a remote file, prefix the file name with the virtual machine instance
+name (e.g., \fIexample\-instance\fR:~/\fIFILE\fR). To denote a local file, do
+not add a prefix to the file name (e.g., ~/\fIFILE\fR). For example, to copy a
+remote directory to your local host, run:
+
+.RS 2m
+$ gcloud compute copy\-files example\-instance:~/REMOTE\-DIR \e
+    ~/LOCAL\-DIR \-\-zone us\-central1\-a
+.RE
+
+In the above example, \f5~/REMOTE\-DIR\fR from \f5example\-instance\fR is copied
+into the ~/\fILOCAL\-DIR\fR directory.
+
+Conversely, files from your local computer can be copied to a virtual machine:
+
+.RS 2m
+$ gcloud compute copy\-files ~/LOCAL\-FILE\-1 ~/LOCAL\-FILE\-2 \e
+    example\-instance:~/REMOTE\-DIR \-\-zone us\-central1\-a
+.RE
+
+If a file contains a colon (``:''), you must specify it by either using an
+absolute path or a path that begins with ``./''.
+
+Under the covers, \fBscp(1)\fR or pscp (on Windows) is used to facilitate the
+transfer.
+
+When the destination is local, all sources must be the same virtual machine
+instance. When the destination is remote, all sources must be local.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+[[\fIUSER\fR@]\fIINSTANCE\fR:]\fISRC\fR [[[\fIUSER\fR@]\fIINSTANCE\fR:]\fISRC\fR ...]
+Specifies the files to copy.
+
+.TP 2m
+[[\fIUSER\fR@]\fIINSTANCE\fR:]\fIDEST\fR
+Specifies a destination for the source files.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-dry\-run\fR
+If provided, prints the command that would be run to standard out instead of
+executing it.
+
+.TP 2m
+\fB\-\-force\-key\-file\-overwrite\fR
+If enabled gcloud will regenerate and overwrite the files associated with a
+broken SSH key without asking for confirmation in both interactive and
+non\-interactive environment.
+
+If disabled gcloud will not attempt to regenerate the files associated with a
+broken SSH key and fail in both interactive and non\-interactive environment.
+
+.TP 2m
+\fB\-\-plain\fR
+Suppresses the automatic addition of \fBssh(1)\fR/\fBscp(1)\fR flags. This flag
+is useful if you want to take care of authentication yourself or use specific
+ssh/scp features.
+
+.TP 2m
+\fB\-\-ssh\-key\-file\fR=\fISSH_KEY_FILE\fR
+The path to the SSH key file. By default, this is
+\f5\fI~/.ssh/google_compute_engine\fR\fR.
+
+.TP 2m
+\fB\-\-strict\-host\-key\-checking\fR=\fISTRICT_HOST_KEY_CHECKING\fR
+Override the default behavior of StrictHostKeyChecking. By default,
+StrictHostKeyChecking is set to 'no' the first time you connect to an instance
+and will be set to 'yes' for all subsequent connections. Use this flag to
+specify a value for the connection. \fISTRICT_HOST_KEY_CHECKING\fR must be one
+of: \fByes\fR, \fBno\fR, \fBask\fR.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the instance to copy files to/from.
+
+If not specified, you may be prompted to select a zone.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

@@ -1,0 +1,187 @@
+
+.TH "GCLOUD_TOPIC_DATETIMES" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud topic datetimes \- date/time input format supplementary help
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud\fR command line flags and filter expressions that expect date/time
+string values support common input formats. These formats fall into two main
+categories: absolute date/times and relative durations.
+
+
+.SH "Absolute date/time formats"
+
+Absolute date/time input formats minimally support ISO 8601
+(https://en.wikipedia.org/wiki/ISO_8601) and RFC 822
+(https://www.ietf.org/rfc/rfc0822.txt) date/times. When omitted the date/time
+value defaults are:
+
+.RS 2m
+.IP "\(bu" 2m
+year, month, day \- current value
+.IP "\(bu" 2m
+hour, minute, second, fractional second \- 0
+.RE
+.sp
+
+The supported absolute date/time input formats are listed here.
+
+ISO 8601 / RFC 3339 zulu:
+
+.RS 2m
+2003\-09\-25T10:49:41.519Z
+2003\-09\-25T10:49:41Z
+.RE
+
+ISO 8601 numeric timezone offset:
+
+.RS 2m
+2003\-09\-25T10:49:41.5\-0000
+2003\-09\-25T10:49:41.5\-03:00
+2003\-09\-25T10:49:41.5+0300
+.RE
+
+ISO with omitted parts:
+
+.RS 2m
+2003\-09\-25T10:49:41
+2003\-09\-25T10:49
+2003\-09\-25T10
+2003\-09\-25
+.RE
+
+RFC 822:
+
+.RS 2m
+Thu, 25 Sep 2003 10:49:41 \-0300
+.RE
+
+UNIX date command, explicit timezone:
+
+.RS 2m
+Thu Sep 25 10:36:28 EDT 2003
+2003 10:36:28 EDT 25 Sep Thu
+.RE
+
+local timezone:
+
+.RS 2m
+Thu Sep 25 10:36:28 2003
+.RE
+
+omitted parts (date parts default to the current date, time parts default to 0):
+
+.RS 2m
+Thu Sep 25 10:36:28
+Thu Sep 10:36:28
+Thu 10:36:28
+Thu 10:36
+10:36
+.RE
+
+omitted parts with different order:
+
+.RS 2m
+Thu Sep 25 2003
+Sep 25 2003
+Sep 2003
+Sep
+2003
+.RE
+
+ISO no separators:
+
+.RS 2m
+20030925T104941.5\-0300
+20030925T104941\-0300
+20030925T104941
+20030925T1049
+20030925T10
+20030925
+.RE
+
+no T separator:
+
+.RS 2m
+20030925104941
+200309251049
+.RE
+
+other date orderings:
+
+.RS 2m
+2003\-09\-25
+2003\-Sep\-25
+25\-Sep\-2003
+Sep\-25\-2003
+09\-25\-2003
+.RE
+
+other date separators:
+
+.RS 2m
+2003.Sep.25
+2003/09/25
+2003 Sep 25
+2003 09 25
+.RE
+
+
+.SH "Relative duration date/time formats"
+
+Relative durations are based on ISO 8601 durations
+(https://en.wikipedia.org/wiki/ISO_8601#Durations). Relative durations are
+case\-insensitive and must be prefixed with +P or \-P. They denote offsets from
+the current time.
+
+A fully qualified duration string contains year, month, day, hour, minute,
+second, and fractional second parts. Each part is a number followed by a single
+character suffix:
+
+.RS 2m
+.IP "\(bu" 2m
+P \- period (the duration designator)
+.IP "\(bu" 2m
+Y \- year
+.IP "\(bu" 2m
+M \- minute if after T or H, month otherwise
+.IP "\(bu" 2m
+D \- day
+.IP "\(bu" 2m
+T \- separates date parts from time parts
+.IP "\(bu" 2m
+H \- hour
+.IP "\(bu" 2m
+M \- minute if after T or H, month otherwise
+.IP "\(bu" 2m
+S \- second (for fractional seconds, use decimal value for seconds)
+.RE
+.sp
+
+At least one part must be specified. Omitted parts default to 0.
+
+.RS 2m
+\-P1Y2M3DT4H5M6.7S
++p1y2m3dT4h5m6.7s
+.RE
+
+A relative duration may be used in any context that expects a date/time string.
+
+For example:
+
+.RS 2m
+.IP "\(bu" 2m
+1 month ago: \-p1m
+.IP "\(bu" 2m
+30 minutes from now: +pt30m
+.IP "\(bu" 2m
+2 hours and 30 minutes ago: \-p2h30m
+.RE
+.sp

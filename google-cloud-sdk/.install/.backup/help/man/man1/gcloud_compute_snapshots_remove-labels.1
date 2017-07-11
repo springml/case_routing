@@ -1,0 +1,79 @@
+
+.TH "GCLOUD_COMPUTE_SNAPSHOTS_REMOVE\-LABELS" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute snapshots remove\-labels \- remove labels from Google Compute Engine snapshots
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute snapshots remove\-labels\fR \fISNAPSHOT_NAME\fR (\fB\-\-all\fR\ |\ \fB\-\-labels\fR=\fIKEY\fR,[\fIKEY\fR,...]) [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute snapshots remove\-labels\fR removes labels from a Google
+Compute Engine snapshot. For example, running:
+
+.RS 2m
+$ gcloud compute snapshots remove\-labels example\-snapshot \e
+    \-\-labels=k0,k1
+.RE
+
+will remove existing labels with key \f5\fIk0\fR\fR and \f5\fIk1\fR\fR from
+\'example\-snapshot'.
+
+Labels can be used to identify the snapshot and to filter them as in
+
+.RS 2m
+$ gcloud compute snapshots list \-\-filter='labels.k1:value2'
+.RE
+
+To list existing labels
+
+.RS 2m
+$ gcloud compute snapshots describe example\-snapshot \e
+    \-\-format='default(labels)'
+.RE
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fISNAPSHOT_NAME\fR
+The name of the snapshot to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+Exactly one of these must be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-all\fR
+Remove all labels from the resource.
+
+.TP 2m
+\fB\-\-labels\fR=\fIKEY\fR,[\fIKEY\fR,...]
+A comma\-separated list of label keys to remove from the resource.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

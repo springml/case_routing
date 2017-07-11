@@ -1,0 +1,115 @@
+
+.TH "GCLOUD_SERVICE\-MANAGEMENT_LIST" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud service\-management list \- list services for a project
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud service\-management list\fR [\fB\-\-available\fR\ |\ \fB\-\-enabled\fR\ |\ \fB\-\-produced\fR] [\fB\-\-filter\fR=\fIEXPRESSION\fR] [\fB\-\-limit\fR=\fILIMIT\fR] [\fB\-\-page\-size\fR=\fIPAGE_SIZE\fR] [\fB\-\-sort\-by\fR=[\fIFIELD\fR,...]] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+This command lists the services that are produced, enabled, or available to be
+enabled by a project. You can choose the mode in which the command will list
+services by using exactly one of the \f5\-\-produced\fR, \f5\-\-enabled\fR, or
+\f5\-\-available\fR flags. \f5\-\-enabled\fR is the default.
+
+
+
+.SH "FLAGS"
+
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-available\fR
+Return the services available to the project to enable. This list will include
+any services that the project has already enabled. Or use one of \-\-enabled or
+\-\-produced.
+
+.TP 2m
+\fB\-\-enabled\fR
+(DEFAULT) Return the services which the project has enabled. Or use one of
+\-\-produced or \-\-available.
+
+.TP 2m
+\fB\-\-produced\fR
+Return the services that the project has produced. Or use one of \-\-enabled or
+\-\-available.
+
+
+.RE
+.sp
+
+.SH "LIST COMMAND FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-filter\fR=\fIEXPRESSION\fR
+Apply a Boolean filter \fIEXPRESSION\fR to each resource item to be listed. If
+the expression evaluates True then that item is listed. For more details and
+examples of filter expressions run $ gcloud topic filters. This flag interacts
+with other flags that are applied in this order: \fB\-\-flatten\fR,
+\fB\-\-sort\-by\fR, \fB\-\-filter\fR, \fB\-\-limit\fR.
+
+.TP 2m
+\fB\-\-limit\fR=\fILIMIT\fR
+The maximum number of resources to list. The default is \fBunlimited\fR. This
+flag interacts with other flags that are applied in this order:
+\fB\-\-flatten\fR, \fB\-\-sort\-by\fR, \fB\-\-filter\fR, \fB\-\-limit\fR.
+
+.TP 2m
+\fB\-\-page\-size\fR=\fIPAGE_SIZE\fR
+Some services group resource list output into pages. This flag specifies the
+maximum number of resources per page. The default is determined by the service
+if it supports paging, otherwise it is \fBunlimited\fR (no paging). Paging may
+be applied before or after \fB\-\-filter\fR and \fB\-\-limit\fR depending on the
+service.
+
+.TP 2m
+\fB\-\-sort\-by\fR=[\fIFIELD\fR,...]
+A comma\-separated list of resource field key names to sort by. The default
+order is ascending. Prefix a field with ``~'' for descending order on that
+field. This flag interacts with other flags that are applied in this order:
+\fB\-\-flatten\fR, \fB\-\-sort\-by\fR, \fB\-\-filter\fR, \fB\-\-limit\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To list the services the current project produces, run:
+
+.RS 2m
+$ gcloud service\-management list \-\-produced
+.RE
+
+To list the services the current project has enabled for consumption, run:
+
+.RS 2m
+$ gcloud service\-management list \-\-enabled
+.RE
+
+To list the services the current project can enable for consumption, run:
+
+.RS 2m
+$ gcloud service\-management list \-\-available
+.RE

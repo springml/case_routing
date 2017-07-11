@@ -1,0 +1,99 @@
+
+.TH "GCLOUD_DEPLOYMENT\-MANAGER_DEPLOYMENTS_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud deployment\-manager deployments create \- create a deployment
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud deployment\-manager deployments create\fR \fIDEPLOYMENT_NAME\fR \fB\-\-config\fR=\fICONFIG\fR [\fB\-\-async\fR] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-preview\fR] [\fB\-\-properties\fR=[\fIPROPERTIES\fR,...]] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+This command inserts (creates) a new deployment based on a provided config file.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIDEPLOYMENT_NAME\fR
+Deployment name.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-config\fR=\fICONFIG\fR
+Filename of config that specifies resources to deploy. More information is
+available at https://cloud.google.com/deployment\-manager/docs/configuration/.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Return immediately and print information about the Operation in progress rather
+than waiting for the Operation to complete. (default=False)
+
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+Optional description of the deployment to insert.
+
+.TP 2m
+\fB\-\-preview\fR
+Preview the requested create without actually instantiating the underlying
+resources. (default=False)
+
+.TP 2m
+\fB\-\-properties\fR=[\fIPROPERTIES\fR,...]
+A comma separated, key:value, map to be used when deploying a template file
+directly.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To create a new deployment, run:
+
+.RS 2m
+$ gcloud deployment\-manager deployments create my\-deployment \e
+    \-\-config config.yaml \-\-description "My deployment"
+.RE
+
+To preview a deployment without actually creating resources, run:
+
+.RS 2m
+$ gcloud deployment\-manager deployments create my\-new\-deployment \e
+    \-\-config config.yaml \-\-preview
+.RE
+
+To instantiate a deployment that has been previewed, issue an update command for
+that deployment without specifying a config file.

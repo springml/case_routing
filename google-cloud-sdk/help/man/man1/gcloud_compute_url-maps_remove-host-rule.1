@@ -1,0 +1,78 @@
+
+.TH "GCLOUD_COMPUTE_URL\-MAPS_REMOVE\-HOST\-RULE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute url\-maps remove\-host\-rule \- remove a host rule from a URL map
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute url\-maps remove\-host\-rule\fR \fIURL_MAP_NAME\fR \fB\-\-host\fR=\fIHOST\fR [\fB\-\-delete\-orphaned\-path\-matcher\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute url\-maps remove\-host\-rule\fR is used to remove a host rule
+from a URL map. When a host rule is removed, its path matcher is only removed if
+it is not referenced by any other host rules and
+\f5\-\-delete\-orphaned\-path\-matcher\fR is provided.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIURL_MAP_NAME\fR
+The name of the URL map to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-host\fR=\fIHOST\fR
+One of the hosts in the host rule to remove.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-delete\-orphaned\-path\-matcher\fR
+If provided and a path matcher is orphaned as a result of this command, the
+command removes the orphaned path matcher instead of failing.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To remove a host rule that contains the host \f5example.com\fR from the URL map
+named \f5MY\-URL\-MAP\fR, you can use this command:
+
+.RS 2m
+$ gcloud compute url\-maps remove\-host\-rule MY\-URL\-MAP \e
+    \-\-host example.com
+.RE

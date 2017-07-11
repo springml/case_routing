@@ -1,0 +1,134 @@
+
+.TH "GCLOUD_DATAPROC_JOBS_SUBMIT" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud dataproc jobs submit \- submit Google Cloud Dataproc jobs to execute on a cluster
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud dataproc jobs submit\fR \fICOMMAND\fR [\fB\-\-async\fR] [\fB\-\-bucket\fR=\fIBUCKET\fR] [\fB\-\-region\fR=\fIREGION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Submit Google Cloud Dataproc jobs to execute on a cluster.
+
+
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Does not wait for the job to run.
+
+.TP 2m
+\fB\-\-bucket\fR=\fIBUCKET\fR
+The Cloud Storage bucket to stage files in. Defaults to the cluster's configured
+bucket.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+Specifies the Cloud Dataproc region to use. Each Cloud Dataproc region
+constitutes an independent resource namespace constrained to deploying instances
+into Google Compute Engine zones inside the region. The default value of
+"global" is a special multi\-region namespace which is capable of deploying
+instances into all Google Compute Engine zones globally, and is disjoint from
+other Cloud Dataproc regions. Overrides the default \fBdataproc/region\fR
+property value for this command invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "COMMANDS"
+
+\f5\fICOMMAND\fR\fR is one of the following:
+
+.RS 2m
+.TP 2m
+\fBhadoop\fR
+Submit a Hadoop job to a cluster.
+
+.TP 2m
+\fBhive\fR
+Submit a Hive job to a cluster.
+
+.TP 2m
+\fBpig\fR
+Submit a Pig job to a cluster.
+
+.TP 2m
+\fBpyspark\fR
+Submit a PySpark job to a cluster.
+
+.TP 2m
+\fBspark\fR
+Submit a Spark job to a cluster.
+
+.TP 2m
+\fBspark\-sql\fR
+Submit a Spark SQL job to a cluster.
+
+
+.RE
+.sp
+
+.SH "EXAMPLES"
+
+To submit a Hadoop MapReduce job, run:
+
+.RS 2m
+$ gcloud dataproc jobs submit hadoop \-\-cluster my_cluster \e
+    \-\-jar my_jar.jar arg1 arg2
+.RE
+
+To submit a Spark Scala or Java job, run:
+
+.RS 2m
+$ gcloud dataproc jobs submit spark \-\-cluster my_cluster \e
+    \-\-jar my_jar.jar arg1 arg2
+.RE
+
+To submit a PySpark job, run:
+
+.RS 2m
+$ gcloud dataproc jobs submit pyspark \-\-cluster my_cluster \e
+    my_script.py arg1 arg2
+.RE
+
+To submit a Spark SQL job, run:
+
+.RS 2m
+$ gcloud dataproc jobs submit spark\-sql \-\-cluster my_cluster \e
+    \-\-file my_queries.q
+.RE
+
+To submit a Pig job, run:
+
+.RS 2m
+$ gcloud dataproc jobs submit pig \-\-cluster my_cluster \e
+    \-\-file my_script.pig
+.RE
+
+To submit a Hive job, run:
+
+.RS 2m
+$ gcloud dataproc jobs submit hive \-\-cluster my_cluster \e
+    \-\-file my_queries.q
+.RE

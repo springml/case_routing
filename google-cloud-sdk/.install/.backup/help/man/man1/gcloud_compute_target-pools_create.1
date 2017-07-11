@@ -1,0 +1,148 @@
+
+.TH "GCLOUD_COMPUTE_TARGET\-POOLS_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute target\-pools create \- define a load\-balanced pool of virtual machine instances
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute target\-pools create\fR \fINAME\fR [\fB\-\-backup\-pool\fR=\fIBACKUP_POOL\fR] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-failover\-ratio\fR=\fIFAILOVER_RATIO\fR] [\fB\-\-health\-check\fR=\fIHEALTH_CHECK\fR] [\fB\-\-http\-health\-check\fR=\fIHTTP_HEALTH_CHECK\fR] [\fB\-\-region\fR=\fIREGION\fR] [\fB\-\-session\-affinity\fR=\fISESSION_AFFINITY\fR;\ default="NONE"] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute target\-pools create\fR is used to create a target pool. A
+target pool resource defines a group of instances that can receive incoming
+traffic from forwarding rules. When a forwarding rule directs traffic to a
+target pool, Google Compute Engine picks an instance from the target pool based
+on a hash of the source and destination IP addresses and ports. For more
+information on load balancing, see
+https://cloud.google.com/compute/docs/load\-balancing\-and\-autoscaling/
+
+To add instances to a target pool, use 'gcloud compute target\-pools
+add\-instances'.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the target pool.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-backup\-pool\fR=\fIBACKUP_POOL\fR
+Together with \f5\fI\-\-failover\-ratio\fR\fR, this flag defines the fallback
+behavior of the target pool (primary pool) to be created by this command. If the
+ratio of the healthy instances in the primary pool is at or below the specified
+\f5\fI\-\-failover\-ratio value\fR\fR, then traffic arriving at the
+load\-balanced IP address will be directed to the backup pool. If this flag is
+provided, then \f5\fI\-\-failover\-ratio\fR\fR is required.
+
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+An optional description of this target pool.
+
+.TP 2m
+\fB\-\-failover\-ratio\fR=\fIFAILOVER_RATIO\fR
+Together with \f5\fI\-\-backup\-pool\fR\fR, defines the fallback behavior of the
+target pool (primary pool) to be created by this command. If the ratio of the
+healthy instances in the primary pool is at or below this number, traffic
+arriving at the load\-balanced IP address will be directed to the backup pool.
+For example, if 0.4 is chosen as the failover ratio, then traffic will fail over
+to the backup pool if more than 40% of the instances become unhealthy. If not
+set, the traffic will be directed the instances in this pool in the
+\f5\fIforce\fR\fR mode, where traffic will be spread to the healthy instances
+with the best effort, or to all instances when no instance is healthy. If this
+flag is provided, then \f5\fI\-\-backup\-pool\fR\fR is required.
+
+.TP 2m
+\fB\-\-health\-check\fR=\fIHEALTH_CHECK\fR
+DEPRECATED, use \-\-http\-health\-check. Specifies an HTTP health check resource
+to use to determine the health of instances in this pool. If no health check is
+specified, traffic will be sent to all instances in this target pool as if the
+instances were healthy, but the health status of this pool will appear as
+unhealthy as a warning that this target pool does not have a health check.
+
+.TP 2m
+\fB\-\-http\-health\-check\fR=\fIHTTP_HEALTH_CHECK\fR
+Specifies an HTTP health check resource to use to determine the health of
+instances in this pool. If no health check is specified, traffic will be sent to
+all instances in this target pool as if the instances were healthy, but the
+health status of this pool will appear as unhealthy as a warning that this
+target pool does not have a health check.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the target pool to create. If not specified, you will be prompted
+to select a region.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/region\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/region REGION
+.RE
+
+A list of regions can be fetched by running:
+
+.RS 2m
+$ gcloud compute regions list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/region
+.RE
+
+Alternatively, the region can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_REGION\fR\fR.
+
+.TP 2m
+\fB\-\-session\-affinity\fR=\fISESSION_AFFINITY\fR; default="NONE"
+The type of session affinity to use for this backend service.
+\fISESSION_AFFINITY\fR must be one of:
+
+.RS 2m
+.TP 2m
+\fBCLIENT_IP\fR
+Route requests to instances based on the hash of the client's IP address.
+.TP 2m
+\fBCLIENT_IP_PROTO\fR
+Connections from the same client IP with the same IP protocol willgo to the same
+VM in the pool while that VM remains healthy. This option cannot be used for
+HTTP(s) load balancing.
+.TP 2m
+\fBGENERATED_COOKIE\fR
+Route requests to instances based on the contents of the "GCLB" cookie set by
+the load balancer.
+.TP 2m
+\fBNONE\fR
+Session affinity is disabled.
+
+
+.RE
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

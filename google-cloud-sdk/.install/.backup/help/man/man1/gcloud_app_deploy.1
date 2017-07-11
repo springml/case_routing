@@ -1,0 +1,107 @@
+
+.TH "GCLOUD_APP_DEPLOY" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud app deploy \- deploy the local code and/or configuration of your app to App Engine
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud app deploy\fR [\fIDEPLOYABLES\fR\ ...] [\fB\-\-bucket\fR=\fIBUCKET\fR] [\fB\-\-image\-url\fR=\fIIMAGE_URL\fR] [\fB\-\-no\-promote\fR] [\fB\-\-no\-stop\-previous\-version\fR] [\fB\-\-version\fR=\fIVERSION\fR,\ \fB\-v\fR\ \fIVERSION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+This command is used to deploy both code and configuration to the App Engine
+server. As an input it takes one or more \f5\fIDEPLOYABLES\fR\fR that should be
+uploaded. A \f5\fIDEPLOYABLE\fR\fR can be a service's .yaml file or a
+configuration's .yaml file.
+
+This command supports App Engine flexible task queue files. The format of task
+queue files can be found at:
+https://cloud.google.com/appengine/docs/python/config/queueref
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+[\fIDEPLOYABLES\fR ...]
+The yaml files for the services or configurations you want to deploy. If not
+given, defaults to \f5app.yaml\fR in the current directory. If that is not
+found, attempts to automatically generate necessary configuration files (such as
+app.yaml) in the current directory.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-bucket\fR=\fIBUCKET\fR
+The Google Cloud Storage bucket used to stage files associated with the
+deployment. If this argument is not specified, the application's default code
+bucket is used.
+
+.TP 2m
+\fB\-\-image\-url\fR=\fIIMAGE_URL\fR
+Deploy with a specific Docker image. Docker url must be from one of the valid
+gcr hostnames.
+
+.TP 2m
+\fB\-\-promote\fR
+Promote the deployed version to receive all traffic.
+
+True by default. To change the default behavior for your current environment,
+run:
+
+.RS 2m
+$ gcloud config set app/promote_by_default false
+.RE
+
+.TP 2m
+\fB\-\-stop\-previous\-version\fR
+Stop the previously running version when deploying a new version that receives
+all traffic. Overrides the default \fBapp/stop_previous_version\fR property
+value for this command invocation. Use \fB\-\-no\-stop\-previous\-version\fR to
+disable.
+
+.TP 2m
+\fB\-\-version\fR=\fIVERSION\fR, \fB\-v\fR \fIVERSION\fR
+The version of the app that will be created or replaced by this deployment. If
+you do not specify a version, one will be generated for you.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To deploy a single service, run:
+
+.RS 2m
+$ gcloud app deploy ~/my_app/app.yaml
+.RE
+
+To deploy multiple services, run:
+
+.RS 2m
+$ gcloud app deploy ~/my_app/app.yaml ~/my_app/another_service.yaml
+.RE

@@ -1,0 +1,98 @@
+
+.TH "GCLOUD_COMPUTE_INSTANCES_SET\-SCHEDULING" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute instances set\-scheduling \- set scheduling options for Google Compute Engine virtual machines
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute instances set\-scheduling\fR \fIINSTANCE_NAME\fR [\fB\-\-maintenance\-policy\fR=\fIMAINTENANCE_POLICY\fR] [\fB\-\-restart\-on\-failure\fR] [\fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fB$gcloud compute instances set\-scheduling\fR is used to configure scheduling
+options for Google Compute Engine virtual machines.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIINSTANCE_NAME\fR
+The name of the instance to operate on.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-maintenance\-policy\fR=\fIMAINTENANCE_POLICY\fR
+Specifies the behavior of the instances when their host machines undergo
+maintenance. The default is MIGRATE. \fIMAINTENANCE_POLICY\fR must be one of:
+
+.RS 2m
+.TP 2m
+\fBMIGRATE\fR
+The instances should be migrated to a new host. This will temporarily impact the
+performance of instances during a migration event.
+.TP 2m
+\fBTERMINATE\fR
+The instances should be terminated.
+
+.RE
+.sp
+.TP 2m
+\fB\-\-restart\-on\-failure\fR
+The instances will be restarted if they are terminated by Compute Engine. This
+does not affect terminations performed by the user.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the instance to operate on. If not specified, you may be prompted to
+select a zone. \f5gcloud\fR will attempt to identify the zone by searching for
+resources in your project. If the zone cannot be determined, you will then be
+prompted with all Google Cloud Platform zones.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

@@ -1,0 +1,195 @@
+
+.TH "GCLOUD_TOPIC_FILTERS" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud topic filters \- resource filters supplementary help
+
+
+
+.SH "DESCRIPTION"
+
+Most \fBgcloud\fR commands return a list of resources on success. By default
+they are pretty\-printed on the standard output. The
+\fB\-\-format=\fR\fINAME\fR[\fIATTRIBUTES\fR]\fB(\fR\fIPROJECTION\fR\fB)\fR and
+\fB\-\-filter=\fR\fIEXPRESSION\fR flags along with projections can be used to
+format and change the default output to a more meaningful result.
+
+To change the default output format of a command, use the \-\-format flag. For
+details run $ gcloud topic formats.
+
+To select resources to be listed, use the \-\-filter flag. Resource filters are
+described in detail below.
+
+To reach resource items through a unique path of names from the root, use
+resource\-keys. For details run $ gcloud topic resource\-keys.
+
+To list a subset of resource keys in a resource, use projections. For details
+run $ gcloud topic projections.
+
+
+
+.SH "Filter Expressions"
+
+A filter expression is a Boolean function that selects the resources to print
+from a list of resources. Expressions are composed of terms connected by logic
+operators.
+
+.RS 2m
+.TP 2m
+\fBLogicOperator\fR
+Expressions containing both \fBAND\fR and \fBOR\fR must be parenthesized to
+disambiguate precedence.
+
+.RS 2m
+.TP 2m
+\fBNOT\fR \fIterm\-1\fR
+True if \fIterm\-1\fR is False, otherwise False.
+
+.TP 2m
+\fIterm\-1\fR \fBAND\fR \fIterm\-2\fR
+True if both \fIterm\-1\fR and \fIterm\-2\fR are true.
+
+.TP 2m
+\fIterm\-1\fR \fBOR\fR \fIterm\-2\fR
+True if at least one of \fIterm\-1\fR or \fIterm\-2\fR is true.
+
+.TP 2m
+\fIterm\-1\fR \fIterm\-2\fR
+True if both \fIterm\-1\fR and \fIterm\-2\fR are true. Implicit conjunction has
+lower precedence than \fBOR\fR.
+
+.RE
+.sp
+.TP 2m
+\fBTerms\fR
+A term is a \fIkey\fR \fIoperator\fR \fIvalue\fR tuple, where \fIkey\fR is a
+dotted name that evaluates to the value of a resource attribute, and \fIvalue\fR
+may be:
+
+.RS 2m
+.TP 2m
+\fBnumber\fR
+integer or floating point numeric constant
+.TP 2m
+\fBunquoted literal\fR
+character sequence terminated by space, ( or )
+.TP 2m
+\fBquoted literal\fR
+\fI"..."\fR or \fI'...'\fR Most filter expressions need to be quoted in shell
+commands. If you use \fI'...'\fR shell quotes then use \fI"..."\fR filter string
+literal quotes and vice versa.
+
+.RE
+.sp
+.TP 2m
+\fBOperator Terms\fR
+.RS 2m
+.TP 2m
+\fIkey\fR \fB=\fR \fIvalue\fR
+True if \fIkey\fR is equal to \fIvalue\fR.
+
+.TP 2m
+\fIkey\fR \fB=(\fR \fIvalue\fR ... \fB)\fR
+True if \fIkey\fR is equal to any \fIvalue\fR in the (space, tab, newline,
+\fB,\fR) separated list.
+
+.TP 2m
+\fIkey\fR \fB!=\fR \fIvalue\fR
+True if \fIkey\fR is not \fIvalue\fR. Equivalent to \-\fIkey\fR=\fIvalue\fR and
+NOT \fIkey\fR=\fIvalue\fR.
+
+.TP 2m
+\fIkey\fR \fB<\fR \fIvalue\fR
+True if \fIkey\fR is less than \fIvalue\fR. If both \fIkey\fR and \fIvalue\fR
+are numeric then numeric comparison is used, otherwise lexicographic string
+comparison is used.
+
+.TP 2m
+\fIkey\fR \fB<=\fR \fIvalue\fR
+True if \fIkey\fR is less than or equal to \fIvalue\fR. If both \fIkey\fR and
+\fIvalue\fR are numeric then numeric comparison is used, otherwise lexicographic
+string comparison is used.
+
+.TP 2m
+\fIkey\fR \fB>=\fR \fIvalue\fR
+True if \fIkey\fR is greater than or equal to \fIvalue\fR. If both \fIkey\fR and
+\fIvalue\fR are numeric then numeric comparison is used, otherwise lexicographic
+string comparison is used.
+
+.TP 2m
+\fIkey\fR \fB>\fR \fIvalue\fR
+True if \fIkey\fR is greater than \fIvalue\fR. If both \fIkey\fR and \fIvalue\fR
+are numeric then numeric comparison is used, otherwise lexicographic string
+comparison is used.
+
+.TP 2m
+\fIkey\fR \fB:\fR \fIsimple\-pattern\fR
+True if \fIkey\fR matches \fIsimple\-pattern\fR. The match is anchored (all
+characters must match), case insensitive, and allows one \f5*\fR operator that
+matches any sequence of 0 or more characters. The pattern \f5abc\fR matches
+\f5abc\fR, the pattern \f5abc*\fR matches \f5abc\fR and \f5abcxyz\fR, the
+pattern \f5*xyz\fR matches \f5xyz\fR and \f5abcxyz\fR, and the pattern \f5*\fR
+matches any non\-empty string. Use \fIkey\fR\f5:*\fR to test if \fIkey\fR is
+defined and \f5\-\fR\fIkey\fR\f5:*\fR to test if \fIkey\fR is undefined.
+
+.TP 2m
+\fIkey\fR \fB:(\fR \fIsimple\-pattern\fR ... \fB)\fR
+True if \fIkey\fR matches any \fIsimple\-pattern\fR in the (space, tab, newline,
+comma) separated list.
+
+.TP 2m
+\fIkey\fR \fB~\fR \fIvalue\fR
+True if \fIkey\fR matches the RE (regular expression) pattern \fIvalue\fR.
+
+.TP 2m
+\fIkey\fR \fB!\fR~ \fIvalue\fR
+True if \fIkey\fR does not match the RE (regular expression) pattern
+\fIvalue\fR.
+
+
+.RE
+.RE
+.sp
+
+.SH "EXAMPLES"
+
+List all instances resources:
+
+.RS 2m
+$ gcloud compute instances list
+.RE
+
+List instances resources that have machineType \fBf1\-micro\fR:
+
+.RS 2m
+$ gcloud compute instances list \-\-filter='machineType:f1\-micro'
+.RE
+
+List resources with zone prefix \fBus\fR and not MachineType \fBf1\-micro\fR:
+
+.RS 2m
+$ gcloud compute instances list \e
+    \-\-filter='zone ~ ^us AND \-machineType:f1\-micro'
+.RE
+
+List in JSON format those projects where the labels match specific values (e.g.
+label.env is 'test' and label.version is alpha):
+
+.RS 2m
+$ gcloud projects list \-\-format="json" \e
+    \-\-filter="labels.env=test AND labels.version=alpha"
+.RE
+
+List projects that were created after a specific date:
+
+.RS 2m
+$ gcloud projects list \e
+    \-\-format="table(projectNumber,projectId,createTime)" \e
+    \-\-filter="createTime.date('%Y\-%m\-%d', Z)='2016\-05\-11'"
+.RE
+
+Note that in the last example, a projection on the key was used. The filter is
+applied on the createTime key after the date formatting is set.

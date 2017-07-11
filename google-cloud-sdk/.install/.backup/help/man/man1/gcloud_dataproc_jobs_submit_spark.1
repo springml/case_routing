@@ -1,0 +1,143 @@
+
+.TH "GCLOUD_DATAPROC_JOBS_SUBMIT_SPARK" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud dataproc jobs submit spark \- submit a Spark job to a cluster
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud dataproc jobs submit spark\fR \fB\-\-cluster\fR=\fICLUSTER\fR [\fB\-\-archives\fR=[\fIARCHIVE\fR,...]] [\fB\-\-async\fR] [\fB\-\-bucket\fR=\fIBUCKET\fR] [\fB\-\-driver\-log\-levels\fR=[\fIPACKAGE\fR=\fILEVEL\fR,...]] [\fB\-\-files\fR=[\fIFILE\fR,...]] [\fB\-\-jars\fR=[\fIJAR\fR,...]] [\fB\-\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]] [\fB\-\-properties\fR=[\fIPROPERTY\fR=\fIVALUE\fR,...]] [\fB\-\-region\fR=\fIREGION\fR] [\fB\-\-class\fR=\fIMAIN_CLASS\fR] [\fB\-\-jar\fR=\fIMAIN_JAR\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR] [\-\-\ \fIJOB_ARGS\fR\ ...]
+
+
+
+.SH "DESCRIPTION"
+
+Submit a Spark job to a cluster.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+[\-\- \fIJOB_ARGS\fR ...]
+The arguments to pass to the driver.
+
+The '\-\-' argument must be specified between gcloud specific args on the left
+and JOB_ARGS on the right.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-cluster\fR=\fICLUSTER\fR
+The Dataproc cluster to submit the job to.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-archives\fR=[\fIARCHIVE\fR,...]
+Comma separated list of archives to be provided to the job. must be one of the
+following file formats: .zip, .tar, .tar.gz, or .tgz.
+
+.TP 2m
+\fB\-\-async\fR
+Does not wait for the job to run.
+
+.TP 2m
+\fB\-\-bucket\fR=\fIBUCKET\fR
+The Cloud Storage bucket to stage files in. Defaults to the cluster's configured
+bucket.
+
+.TP 2m
+\fB\-\-driver\-log\-levels\fR=[\fIPACKAGE\fR=\fILEVEL\fR,...]
+A list of package to log4j log level pairs to configure driver logging. For
+example: root=FATAL,com.example=INFO
+
+.TP 2m
+\fB\-\-files\fR=[\fIFILE\fR,...]
+Comma separated list of files to be provided to the job.
+
+.TP 2m
+\fB\-\-jars\fR=[\fIJAR\fR,...]
+Comma separated list of jar files to be provided to the executor and driver
+classpaths.
+
+.TP 2m
+\fB\-\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]
+A list of label KEY=VALUE pairs to add.
+
+.TP 2m
+\fB\-\-properties\fR=[\fIPROPERTY\fR=\fIVALUE\fR,...]
+A list of key value pairs to configure Spark.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+Specifies the Cloud Dataproc region to use. Each Cloud Dataproc region
+constitutes an independent resource namespace constrained to deploying instances
+into Google Compute Engine zones inside the region. The default value of
+"global" is a special multi\-region namespace which is capable of deploying
+instances into all Google Compute Engine zones globally, and is disjoint from
+other Cloud Dataproc regions. Overrides the default \fBdataproc/region\fR
+property value for this command invocation.
+
+.TP 2m
+\fB\-\-class\fR=\fIMAIN_CLASS\fR
+The class containing the main method of the driver. Must be in a provided jar or
+jar that is already on the classpath
+
+.TP 2m
+\fB\-\-jar\fR=\fIMAIN_JAR\fR
+The HCFS URI of jar file containing the driver jar.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To submit a Spark job that runs the main class of a jar, run:
+
+.RS 2m
+$ gcloud dataproc jobs submit spark \-\-cluster my_cluster \e
+    \-\-jar my_jar.jar arg1 arg2
+.RE
+
+To submit a Spark job that runs a specific class of a jar, run:
+
+.RS 2m
+$ gcloud dataproc jobs submit spark \-\-cluster my_cluster \e
+    \-\-class org.my.main.Class \-\-jars my_jar1.jar,my_jar2.jar arg1 \e
+    arg2
+.RE
+
+To submit a Spark job that runs a jar that is already on the cluster, run:
+
+.RS 2m
+$ gcloud dataproc jobs submit spark \-\-cluster my_cluster \e
+    \-\-class org.apache.spark.examples.SparkPi \e
+    \-\-jars file:///usr/lib/spark/lib/spark\-examples.jar 1000
+.RE

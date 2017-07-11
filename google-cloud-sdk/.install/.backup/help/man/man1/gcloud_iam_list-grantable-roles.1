@@ -1,0 +1,92 @@
+
+.TH "GCLOUD_IAM_LIST\-GRANTABLE\-ROLES" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud iam list\-grantable\-roles \- list IAM grantable roles for a resource
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud iam list\-grantable\-roles\fR \fIRESOURCE\fR [\fB\-\-filter\fR=\fIEXPRESSION\fR] [\fB\-\-page\-size\fR=\fIPAGE_SIZE\fR;\ default="100"] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+This command displays the list of grantable roles for a resource. The resource
+can be referenced either via the full resource name or via a URI. User can then
+add IAM policy bindings to grant the roles.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIRESOURCE\fR
+The full resource name to get the list of roles for.
+
+
+.RE
+.sp
+
+.SH "LIST COMMAND FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-filter\fR=\fIEXPRESSION\fR
+Apply a Boolean filter \fIEXPRESSION\fR to each resource item to be listed. If
+the expression evaluates True then that item is listed. For more details and
+examples of filter expressions run $ gcloud topic filters. This flag interacts
+with other flags that are applied in this order: \fB\-\-flatten\fR,
+\fB\-\-sort\-by\fR, \fB\-\-filter\fR, \fB\-\-limit\fR.
+
+.TP 2m
+\fB\-\-page\-size\fR=\fIPAGE_SIZE\fR; default="100"
+Some services group resource list output into pages. This flag specifies the
+maximum number of resources per page. The default is determined by the service
+if it supports paging, otherwise it is \fBunlimited\fR (no paging). Paging may
+be applied before or after \fB\-\-filter\fR and \fB\-\-limit\fR depending on the
+service.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+List grantable roles for a project:
+
+.RS 2m
+$ gcloud iam list\-grantable\-roles \e
+    //cloudresourcemanager.googleapis.com/projects/PROJECT_ID
+.RE
+
+List grantable roles for a resource identified via full resource name:
+
+.RS 2m
+$ gcloud iam list\-grantable\-roles \e
+    //compute.googleapis.com/projects/example\-project/zones/\e
+us\-central1\-f/instances/example\-instance
+.RE
+
+List grantable roles for a resource identified via URI:
+
+.RS 2m
+$ gcloud iam list\-grantable\-roles \e
+    https://www.googleapis.com/compute/v1/projects/example\-project/\e
+zones/us\-central1\-f/instances/example\-instance
+.RE

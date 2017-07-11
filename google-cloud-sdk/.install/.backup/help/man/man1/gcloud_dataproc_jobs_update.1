@@ -1,0 +1,89 @@
+
+.TH "GCLOUD_DATAPROC_JOBS_UPDATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud dataproc jobs update \- update the labels for a job
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud dataproc jobs update\fR \fIJOB_ID\fR [\fB\-\-region\fR=\fIREGION\fR] [\fB\-\-remove\-labels\fR=[\fIKEY\fR,...]] [\fB\-\-update\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Update the labels for a job.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIJOB_ID\fR
+The ID of the job to describe.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+Specifies the Cloud Dataproc region to use. Each Cloud Dataproc region
+constitutes an independent resource namespace constrained to deploying instances
+into Google Compute Engine zones inside the region. The default value of
+"global" is a special multi\-region namespace which is capable of deploying
+instances into all Google Compute Engine zones globally, and is disjoint from
+other Cloud Dataproc regions. Overrides the default \fBdataproc/region\fR
+property value for this command invocation.
+
+.TP 2m
+\fB\-\-remove\-labels\fR=[\fIKEY\fR,...]
+A list of label keys to remove. If a label does not exist it is silently
+ignored.
+
+.TP 2m
+\fB\-\-update\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]
+A list of label KEY=VALUE pairs to update. If a label exists its value is
+modified, otherwise a new label is created.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To add the label 'customer=acme' to a job , run:
+
+.RS 2m
+$ gcloud dataproc jobs update job_id \-\-update\-labels=customer=acme
+.RE
+
+To update the label 'customer=ackme' to 'customer=acme', run:
+
+.RS 2m
+$ gcloud dataproc jobs update job_id \-\-update\-labels=customer=acme
+.RE
+
+To remove the label whose key is 'customer', run:
+
+.RS 2m
+$ gcloud dataproc jobs update job_id \-\-remove\-labels=customer
+.RE

@@ -1,0 +1,147 @@
+
+.TH "GCLOUD_COMPUTE_INSTANCE\-GROUPS_MANAGED_SET\-AUTOSCALING" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute instance\-groups managed set\-autoscaling \- set autoscaling parameters of a managed instance group
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute instance\-groups managed set\-autoscaling\fR \fINAME\fR \fB\-\-max\-num\-replicas\fR=\fIMAX_NUM_REPLICAS\fR [\fB\-\-cool\-down\-period\fR=\fICOOL_DOWN_PERIOD\fR] [\fB\-\-custom\-metric\-utilization\fR=[\fImetric\fR=\fIMETRIC\fR],[\fIutilization\-target\fR=\fIUTILIZATION\-TARGET\fR],[\fIutilization\-target\-type\fR=\fIUTILIZATION\-TARGET\-TYPE\fR]] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-min\-num\-replicas\fR=\fIMIN_NUM_REPLICAS\fR] [\fB\-\-scale\-based\-on\-cpu\fR] [\fB\-\-scale\-based\-on\-load\-balancing\fR] [\fB\-\-target\-cpu\-utilization\fR=\fITARGET_CPU_UTILIZATION\fR] [\fB\-\-target\-load\-balancing\-utilization\fR=\fITARGET_LOAD_BALANCING_UTILIZATION\fR] [\fB\-\-region\fR=\fIREGION\fR\ |\ \fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute instance\-groups managed set\-autoscaling\fR sets autoscaling
+parameters of specified managed instance group.
+
+Autoscalers can use one or more policies listed below. Information on using
+multiple policies can be found here:
+https://cloud.google.com/compute/docs/autoscaler/multiple\-policies
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the managed instance group to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-max\-num\-replicas\fR=\fIMAX_NUM_REPLICAS\fR
+Maximum number of replicas Autoscaler will set.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-cool\-down\-period\fR=\fICOOL_DOWN_PERIOD\fR
+The time period that the autoscaler should wait before it starts collecting
+information from a new instance. This prevents the autoscaler from collecting
+information when the instance is initializing, during which the collected usage
+would not be reliable. The default is 60 seconds.
+
+.TP 2m
+\fB\-\-custom\-metric\-utilization\fR=[\fImetric\fR=\fIMETRIC\fR],[\fIutilization\-target\fR=\fIUTILIZATION\-TARGET\fR],[\fIutilization\-target\-type\fR=\fIUTILIZATION\-TARGET\-TYPE\fR]
+Adds a target metric value for the to the Autoscaler.
+
+.RS 2m
+.TP 2m
+\fBmetric\fR
+Protocol\-free URL of a Google Cloud Monitoring metric.
+
+.TP 2m
+\fButilization\-target\fR
+Value of the metric Autoscaler will aim to maintain (greater than 0.0).
+
+.TP 2m
+\fButilization\-target\-type\fR
+How target is expressed. Valid values: DELTA_PER_MINUTE, DELTA_PER_SECOND,
+GAUGE.
+.RE
+.sp
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+Notes about Autoscaler.
+
+.TP 2m
+\fB\-\-min\-num\-replicas\fR=\fIMIN_NUM_REPLICAS\fR
+Minimum number of replicas Autoscaler will set.
+
+.TP 2m
+\fB\-\-scale\-based\-on\-cpu\fR
+Autoscaler will be based on CPU utilization.
+
+.TP 2m
+\fB\-\-scale\-based\-on\-load\-balancing\fR
+Use autoscaling based on load balancing utilization.
+
+.TP 2m
+\fB\-\-target\-cpu\-utilization\fR=\fITARGET_CPU_UTILIZATION\fR
+Autoscaler will aim to maintain CPU utilization at target level (0.0 to 1.0).
+
+.TP 2m
+\fB\-\-target\-load\-balancing\-utilization\fR=\fITARGET_LOAD_BALANCING_UTILIZATION\fR
+Autoscaler will aim to maintain the load balancing utilization level (greater
+than 0.0).
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the managed instance group to operate on. If not specified, you
+will be prompted to select a region.
+
+A list of regions can be fetched by running:
+
+.RS 2m
+$ gcloud compute regions list
+.RE
+
+Overrides the default \fBcompute/region\fR property value for this command
+invocation.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the managed instance group to operate on. If not specified, you may
+be prompted to select a zone.
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+Overrides the default \fBcompute/zone\fR property value for this command
+invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

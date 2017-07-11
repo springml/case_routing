@@ -1,0 +1,94 @@
+
+.TH "GCLOUD_DNS_RECORD\-SETS_TRANSACTION_ADD" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud dns record\-sets transaction add \- append a record\-set addition to the transaction
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud dns record\-sets transaction add\fR \fIDATA\fR [\fIDATA\fR\ ...] \fB\-\-name\fR=\fINAME\fR \fB\-\-ttl\fR=\fITTL\fR \fB\-\-type\fR=\fITYPE\fR \fB\-\-zone\fR=\fIZONE\fR, \fB\-z\fR \fIZONE\fR [\fB\-\-transaction\-file\fR=\fITRANSACTION_FILE\fR;\ default="transaction.yaml"] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+This command appends a record\-set addition to the transaction.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIDATA\fR [\fIDATA\fR ...]
+DNS data (Address/CNAME/MX info, etc.) of the record\-set to add.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-name\fR=\fINAME\fR
+DNS name of the record\-set to add.
+
+.TP 2m
+\fB\-\-ttl\fR=\fITTL\fR
+TTL for the record\-set to add.
+
+.TP 2m
+\fB\-\-type\fR=\fITYPE\fR
+Type of the record\-set to add.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR, \fB\-z\fR \fIZONE\fR
+Name of the managed\-zone whose record\-sets you want to manage.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-transaction\-file\fR=\fITRANSACTION_FILE\fR; default="transaction.yaml"
+Path of the file which contains the transaction.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To add an A record, run:
+
+.RS 2m
+$ gcloud dns record\-sets transaction add \-\-zone MANAGED_ZONE \e
+    \-\-name my.domain. \-\-ttl 1234 \e
+    \-\-type A "1.2.3.4"
+.RE
+
+To add a TXT record with multiple data values, run:
+
+.RS 2m
+$ gcloud dns record\-sets transaction add \-\-zone MANAGED_ZONE \e
+    \-\-name my.domain. \-\-ttl 2345 \e
+    \-\-type TXT "Hello world" "Bye world"
+.RE

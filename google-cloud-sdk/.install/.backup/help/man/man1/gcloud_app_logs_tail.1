@@ -1,0 +1,83 @@
+
+.TH "GCLOUD_APP_LOGS_TAIL" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud app logs tail \- streams logs for App Engine apps
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud app logs tail\fR [\fB\-\-level\fR=\fILEVEL\fR;\ default="any"] [\fB\-\-logs\fR=\fIAPP_LOG\fR,[\fIAPP_LOG\fR,...];\ default="stderr,stdout,crash.log,nginx.request,request_log"] [\fB\-\-service\fR=\fISERVICE\fR,\ \fB\-s\fR\ \fISERVICE\fR] [\fB\-\-version\fR=\fIVERSION\fR,\ \fB\-v\fR\ \fIVERSION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Streams logs for App Engine apps.
+
+
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-level\fR=\fILEVEL\fR; default="any"
+Filter entries with severity equal to or higher than a given level. \fILEVEL\fR
+must be one of: \fBcritical\fR, \fBerror\fR, \fBwarning\fR, \fBinfo\fR,
+\fBdebug\fR, \fBany\fR.
+
+.TP 2m
+\fB\-\-logs\fR=\fIAPP_LOG\fR,[\fIAPP_LOG\fR,...]; default="stderr,stdout,crash.log,nginx.request,request_log"
+Filter entries from a particular set of logs. Must be a comma\-separated list of
+log names (request_log, stdout, stderr, etc).
+
+.TP 2m
+\fB\-\-service\fR=\fISERVICE\fR, \fB\-s\fR \fISERVICE\fR
+Limit to specific service.
+
+.TP 2m
+\fB\-\-version\fR=\fIVERSION\fR, \fB\-v\fR \fIVERSION\fR
+Limit to specific version.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To stream logs from a serving app, run:
+
+.RS 2m
+$ gcloud app logs tail
+.RE
+
+To show only logs with a specific service, version, and level, run:
+
+.RS 2m
+$ gcloud app logs tail \-\-service=s1 \-\-version=v1 \-\-level=warning
+.RE
+
+To show only the logs from the request log for Standard apps, run:
+
+.RS 2m
+$ gcloud app logs tail \-\-logs=request_log
+.RE
+
+To show only the logs from the request log for Flex apps, run:
+
+.RS 2m
+$ gcloud app logs tail \-\-logs=nginx.requests
+.RE

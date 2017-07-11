@@ -1,0 +1,88 @@
+
+.TH "GCLOUD_DEPLOYMENT\-MANAGER_DEPLOYMENTS_DELETE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud deployment\-manager deployments delete \- delete a deployment
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud deployment\-manager deployments delete\fR \fIDEPLOYMENT_NAME\fR [\fIDEPLOYMENT_NAME\fR\ ...] [\fB\-\-async\fR] [\fB\-\-delete\-policy\fR=\fIDELETE_POLICY\fR;\ default="DELETE"] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+This command deletes a deployment and deletes all associated resources.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIDEPLOYMENT_NAME\fR [\fIDEPLOYMENT_NAME\fR ...]
+Deployment name.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Return immediately and print information about the Operation in progress rather
+than waiting for the Operation to complete. (default=False)
+
+.TP 2m
+\fB\-\-delete\-policy\fR=\fIDELETE_POLICY\fR; default="DELETE"
+Delete policy for resources that will change as part of an update or delete.
+DELETE deletes the resource while ABANDON just removes the resource reference
+from the deployment. \fIDELETE_POLICY\fR must be one of: \fBABANDON\fR,
+\fBDELETE\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To delete a deployment, run:
+
+.RS 2m
+$ gcloud deployment\-manager deployments delete my\-deployment
+.RE
+
+To issue a delete command without waiting for the operation to complete, run:
+
+.RS 2m
+$ gcloud deployment\-manager deployments delete my\-deployment \-\-async
+.RE
+
+To delete several deployments, run:
+
+.RS 2m
+$ gcloud deployment\-manager deployments delete my\-deployment\-one \e
+    my\-deployment\-two my\-deployment\-three
+.RE
+
+To disable the confirmation prompt on delete, run:
+
+.RS 2m
+$ gcloud deployment\-manager deployments delete my\-deployment \-q
+.RE

@@ -1,0 +1,80 @@
+
+.TH "GCLOUD_APP_INSTANCES_ENABLE\-DEBUG" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud app instances enable\-debug \- enables debug mode for an instance
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud app instances enable\-debug\fR [\fIINSTANCE\fR] [\fB\-\-service\fR=\fISERVICE\fR,\ \fB\-s\fR\ \fISERVICE\fR] [\fB\-\-version\fR=\fIVERSION\fR,\ \fB\-v\fR\ \fIVERSION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+When in debug mode, SSH will be enabled on the VMs, and you can use \f5gcloud
+compute ssh\fR to login to them. They will be removed from the health checking
+pools, but they still receive requests.
+
+Note that any local changes to an instance will be **lost** if debug mode is
+disabled on the instance. New instance(s) may spawn depending on the app's
+scaling settings.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+[\fIINSTANCE\fR]
+The instance ID to enable debug mode on. If not specified, select instance
+interactively. Must uniquely specify (with other flags) exactly one instance
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-service\fR=\fISERVICE\fR, \fB\-s\fR \fISERVICE\fR
+If specified, only match instances belonging to the given service. This affects
+both interactive and non\-interactive selection.
+
+.TP 2m
+\fB\-\-version\fR=\fIVERSION\fR, \fB\-v\fR \fIVERSION\fR
+If specified, only match instances belonging to the given version. This affects
+both interactive and non\-interactive selection.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To enable debug mode for a particular instance, run:
+
+.RS 2m
+$ gcloud app instances enable\-debug \-\-service=s1 \-\-version=v1 i1
+.RE
+
+To enable debug mode for an instance chosen interactively, run:
+
+.RS 2m
+$ gcloud app instances enable\-debug
+.RE

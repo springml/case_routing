@@ -1,0 +1,220 @@
+
+.TH "GCLOUD_COMPUTE_BACKEND\-SERVICES_UPDATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute backend\-services update \- update a backend service
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute backend\-services update\fR \fIBACKEND_SERVICE_NAME\fR [\fB\-\-affinity\-cookie\-ttl\fR=\fIAFFINITY_COOKIE_TTL\fR] [\fB\-\-cache\-key\-include\-host\fR] [\fB\-\-cache\-key\-include\-protocol\fR] [\fB\-\-cache\-key\-include\-query\-string\fR] [\fB\-\-connection\-draining\-timeout\fR=\fICONNECTION_DRAINING_TIMEOUT\fR] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-enable\-cdn\fR] [\fB\-\-health\-checks\fR=\fIHEALTH_CHECK\fR,[\fIHEALTH_CHECK\fR,...]] [\fB\-\-http\-health\-checks\fR=\fIHTTP_HEALTH_CHECK\fR,[\fIHTTP_HEALTH_CHECK\fR,...]] [\fB\-\-https\-health\-checks\fR=\fIHTTPS_HEALTH_CHECK\fR,[\fIHTTPS_HEALTH_CHECK\fR,...]] [\fB\-\-iap\fR=\fIdisabled\fR|\fIenabled\fR,[\fIoauth2\-client\-id\fR=\fIOAUTH2\-CLIENT\-ID\fR,\fIoauth2\-client\-secret\fR=\fIOAUTH2\-CLIENT\-SECRET\fR]] [\fB\-\-port\fR=\fIPORT\fR] [\fB\-\-port\-name\fR=\fIPORT_NAME\fR] [\fB\-\-protocol\fR=\fIPROTOCOL\fR] [\fB\-\-session\-affinity\fR=\fISESSION_AFFINITY\fR] [\fB\-\-timeout\fR=\fITIMEOUT\fR] [\fB\-\-cache\-key\-query\-string\-blacklist\fR=[\fIQUERY_STRING\fR,...]\ |\ \fB\-\-cache\-key\-query\-string\-whitelist\fR=\fIQUERY_STRING\fR,[\fIQUERY_STRING\fR,...]] [\fB\-\-global\fR\ |\ \fB\-\-region\fR=\fIREGION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute backend\-services update\fR is used to update backend
+services.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIBACKEND_SERVICE_NAME\fR
+The name of the backend service to update.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-affinity\-cookie\-ttl\fR=\fIAFFINITY_COOKIE_TTL\fR
+If session\-affinity is set to "generated_cookie", this flag sets the TTL, in
+seconds, of the resulting cookie. A setting of 0 indicates that the cookie
+should be transient.
+
+.TP 2m
+\fB\-\-cache\-key\-include\-host\fR
+Enable including host in cache key. If enabled, requests to different hosts will
+be cached separately. Can only be applied for global resources.
+
+.TP 2m
+\fB\-\-cache\-key\-include\-protocol\fR
+Enable including protocol in cache key. If enabled, http and https requests will
+be cached separately. Can only be applied for global resources.
+
+.TP 2m
+\fB\-\-cache\-key\-include\-query\-string\fR
+Enable including query string in cache key. If enabled, the query string
+parameters will be included according to
+\-\-cache\-key\-query\-string\-whitelist and
+\-\-cache\-key\-query\-string\-blacklist. If disabled, the entire query string
+will be excluded. Use "\-\-cache\-key\-query\-string\-blacklist=" (sets the
+blacklist to the empty list) to include the entire query string. Can only be
+applied for global resources.
+
+.TP 2m
+\fB\-\-connection\-draining\-timeout\fR=\fICONNECTION_DRAINING_TIMEOUT\fR
+Connection draining timeout to be used during removal of VMs from instance
+groups. This guarantees that for the specified time all existing connections to
+a VM will remain untouched, but no new connections will be accepted. Set timeout
+to zero to disable connection draining. Enable feature by specifying a timeout
+of up to one hour. If the flag is omitted API default value (0s) will be used.
+Valid units for this flag are \f5s\fR for seconds, \f5m\fR for minutes, and
+\f5h\fR for hours.
+
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+An optional, textual description for the backend service.
+
+.TP 2m
+\fB\-\-enable\-cdn\fR
+Enable Cloud CDN for the backend service. Cloud CDN can cache HTTP responses
+from a backend service at the edge of the network, close to users. Cloud CDN is
+disabled by default.
+
+.TP 2m
+\fB\-\-health\-checks\fR=\fIHEALTH_CHECK\fR,[\fIHEALTH_CHECK\fR,...]
+Specifies a list of health check objects for checking the health of the backend
+service. Health checks need not be for the same protocol as that of the backend
+service.
+
+.TP 2m
+\fB\-\-http\-health\-checks\fR=\fIHTTP_HEALTH_CHECK\fR,[\fIHTTP_HEALTH_CHECK\fR,...]
+Specifies a list of HTTP health check objects for checking the health of the
+backend service.
+
+.TP 2m
+\fB\-\-https\-health\-checks\fR=\fIHTTPS_HEALTH_CHECK\fR,[\fIHTTPS_HEALTH_CHECK\fR,...]
+Specifies a list of HTTPS health check objects for checking the health of the
+backend service.
+
+.TP 2m
+\fB\-\-iap\fR=\fIdisabled\fR|\fIenabled\fR,[\fIoauth2\-client\-id\fR=\fIOAUTH2\-CLIENT\-ID\fR,\fIoauth2\-client\-secret\fR=\fIOAUTH2\-CLIENT\-SECRET\fR]
+Change the Identity Aware Proxy (IAP) service configuration for the backend
+service. You can set IAP to 'enabled' or 'disabled', or modify the OAuth2 client
+configuration (oauth2\-client\-id and oauth2\-client\-secret) used by IAP. If
+any fields are unspecified, their values will not be modified. For instance, if
+IAP is enabled, '\-\-iap=disabled' will disable IAP, and a subsequent
+\'\-\-iap=enabled' will then enable it with the same OAuth2 client configuration
+as the first time it was enabled. See https://cloud.google.com/iap/ for more
+information about this feature.
+
+.TP 2m
+\fB\-\-port\fR=\fIPORT\fR
+The TCP port to use when connecting to the backend. \-\-port is being deprecated
+in favor of \-\-port\-name.
+
+.TP 2m
+\fB\-\-port\-name\fR=\fIPORT_NAME\fR
+The name of a service that has been added to an instance group in this backend.
+Instance group services map a name to a port number which is used by the load
+balancing service. Only one \f5\fIport\-name\fR\fR may be added to a backend
+service, and that name must exist as a service on all instance groups that are a
+part of this backend service. The port number associated with the name may
+differ between instances. If you do not specify this flag, your instance groups
+must have a service named \f5\fIhttp\fR\fR configured. See also \f5gcloud
+compute instance\-groups set\-named\-ports \-\-help\fR.
+
+.TP 2m
+\fB\-\-protocol\fR=\fIPROTOCOL\fR
+The protocol for incoming requests. \fIPROTOCOL\fR must be one of: \fBHTTP\fR,
+\fBHTTPS\fR, \fBSSL\fR, \fBTCP\fR, \fBUDP\fR.
+
+.TP 2m
+\fB\-\-session\-affinity\fR=\fISESSION_AFFINITY\fR
+The type of session affinity to use for this backend service.
+\fISESSION_AFFINITY\fR must be one of:
+
+.RS 2m
+.TP 2m
+\fBCLIENT_IP\fR
+Route requests to instances based on the hash of the client's IP address.
+.TP 2m
+\fBCLIENT_IP_PORT_PROTO\fR
+Connections from the same client IP with the same IP protocol and port will go
+to the same VM in the backend while that VM remains healthy. This option cannot
+be used for HTTP(S) load balancing.
+.TP 2m
+\fBCLIENT_IP_PROTO\fR
+Connections from the same client IP with the same IP protocol willgo to the same
+VM in the pool while that VM remains healthy. This option cannot be used for
+HTTP(s) load balancing.
+.TP 2m
+\fBGENERATED_COOKIE\fR
+Route requests to instances based on the contents of the "GCLB" cookie set by
+the load balancer.
+.TP 2m
+\fBNONE\fR
+Session affinity is disabled.
+
+.RE
+.sp
+.TP 2m
+\fB\-\-timeout\fR=\fITIMEOUT\fR
+The amount of time to wait for a backend to return a full response for the
+request and for the load balancer to proxy the response to the client before
+considering the request failed.
+
+For example, specifying \f510s\fR gives instances 10 seconds to respond to
+requests. The load balancer will retry GET requests once if the backend closes
+the connection or times out before sending response headers to the proxy. If the
+backend produces any response headers, the load balancer does not retry. If the
+backend does not reply at all, the load balancer returns a \f5502 Bad Gateway\fR
+error to the client. Valid units for this flag are \f5s\fR for seconds, \f5m\fR
+for minutes, and \f5h\fR for hours.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-cache\-key\-query\-string\-blacklist\fR=[\fIQUERY_STRING\fR,...]
+Specifies a comma separated list of query string parameters to exclude in cache
+keys. All other parameters will be included. Either specify
+\-\-cache\-key\-query\-string\-whitelist or
+\-\-cache\-key\-query\-string\-blacklist, not both. '&' and '=' will be percent
+encoded and not treated as delimiters. Can only be applied for global resources.
+
+.TP 2m
+\fB\-\-cache\-key\-query\-string\-whitelist\fR=\fIQUERY_STRING\fR,[\fIQUERY_STRING\fR,...]
+Specifies a comma separated list of query string parameters to include in cache
+keys. All other parameters will be excluded. Either specify
+\-\-cache\-key\-query\-string\-whitelist or
+\-\-cache\-key\-query\-string\-blacklist, not both. '&' and '=' will be percent
+encoded and not treated as delimiters. Can only be applied for global resources.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-global\fR
+If provided, it is assumed the backend service is global.
+
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the backend service to update. Overrides the default
+\fBcompute/region\fR property value for this command invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

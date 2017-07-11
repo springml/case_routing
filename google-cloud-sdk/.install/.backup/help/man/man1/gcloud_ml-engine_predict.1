@@ -1,0 +1,100 @@
+
+.TH "GCLOUD_ML\-ENGINE_PREDICT" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud ml\-engine predict \- run Cloud ML Engine online prediction
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud ml\-engine predict\fR \fB\-\-model\fR=\fIMODEL\fR (\fB\-\-json\-instances\fR=\fIJSON_INSTANCES\fR\ |\ \fB\-\-text\-instances\fR=\fITEXT_INSTANCES\fR) [\fB\-\-version\fR=\fIVERSION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\f5gcloud ml\-engine predict\fR sends a prediction request to Cloud ML Engine
+for the given instances. This command will only accept up to 100 instances at a
+time. If you are predicting on more instances, you should use batch prediction
+via
+
+.RS 2m
+$ gcloud ml\-engine jobs submit prediction.
+.RE
+
+
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-model\fR=\fIMODEL\fR
+Name of the model.
+
+.RE
+.sp
+Exactly one of these must be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-json\-instances\fR=\fIJSON_INSTANCES\fR
+Path to a local file from which instances are read. Instances are in JSON
+format; newline delimited.
+
+An example of the JSON instances file:
+
+.RS 2m
+{"images": [0.0, ..., 0.1], "key": 3}
+{"images": [0.0, ..., 0.1], "key": 2}
+...
+.RE
+
+This flag accepts "\-" for stdin.
+
+.TP 2m
+\fB\-\-text\-instances\fR=\fITEXT_INSTANCES\fR
+Path to a local file from which instances are read. Instances are in UTF\-8
+encoded text format; newline delimited.
+
+An example of the text instances file:
+
+.RS 2m
+107,4.9,2.5,4.5,1.7
+100,5.7,2.8,4.1,1.3
+...
+.RE
+
+This flag accepts "\-" for stdin.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-version\fR=\fIVERSION\fR
+Model version to be used.
+
+If unspecified, the default version of the model will be used. To list model
+versions run
+
+.RS 2m
+$ gcloud ml\-engine versions list
+.RE
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

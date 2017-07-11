@@ -1,0 +1,97 @@
+
+.TH "GCLOUD_APP_SERVICES_SET\-TRAFFIC" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud app services set\-traffic \- set traffic splitting settings
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud app services set\-traffic\fR [\fISERVICES\fR\ ...] \fB\-\-splits\fR=\fISPLITS\fR,[\fISPLITS\fR,...] [\fB\-\-migrate\fR] [\fB\-\-split\-by\fR=\fISPLIT_BY\fR;\ default="ip"] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+This command sets the traffic split of versions across a service or a project.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+[\fISERVICES\fR ...]
+The services to modify.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-splits\fR=\fISPLITS\fR,[\fISPLITS\fR,...]
+Key\-value pairs describing what proportion of traffic should go to each
+version. The split values are added together and used as weights. The exact
+values do not matter, only their relation to each other. For example, v1=2,v2=2
+is equivalent to v1=.5,v2=.5
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-migrate\fR
+The migrate flag determines whether or not to use traffic migration during the
+operation. Traffic migration will attempt to automatically migrate traffic from
+the previous version to the new version, giving the autoscaler time to respond.
+See the documentation here:
+https://cloud.google.com/appengine/docs/python/console/trafficmigration for more
+information.
+
+.TP 2m
+\fB\-\-split\-by\fR=\fISPLIT_BY\fR; default="ip"
+Whether to split traffic based on cookies or IP addresses. \fISPLIT_BY\fR must
+be one of: \fBcookie\fR, \fBip\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To send all traffic to 'v2' of service 's1', run:
+
+.RS 2m
+$ gcloud app services set\-traffic s1 \-\-splits v2=1
+.RE
+
+To split traffic evenly between 'v1' and 'v2' of service 's1', run:
+
+.RS 2m
+$ gcloud app services set\-traffic s1 \-\-splits v2=.5,v1=.5
+.RE
+
+To split traffic across all services:
+
+.RS 2m
+$ gcloud app services set\-traffic \-\-splits v2=.5,v1=.5
+.RE

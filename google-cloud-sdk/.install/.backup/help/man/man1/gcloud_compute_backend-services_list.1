@@ -1,0 +1,141 @@
+
+.TH "GCLOUD_COMPUTE_BACKEND\-SERVICES_LIST" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute backend\-services list \- list Google Compute Engine backend services
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute backend\-services list\fR [\fINAME\fR\ ...] [\fB\-\-regexp\fR=\fIREGEXP\fR,\ \fB\-r\fR\ \fIREGEXP\fR] [\fB\-\-global\fR\ |\ \fB\-\-regions\fR=[\fIREGION\fR,...]] [\fB\-\-filter\fR=\fIEXPRESSION\fR] [\fB\-\-limit\fR=\fILIMIT\fR] [\fB\-\-page\-size\fR=\fIPAGE_SIZE\fR] [\fB\-\-sort\-by\fR=[\fIFIELD\fR,...]] [\fB\-\-uri\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute backend\-services list\fR displays all Google Compute Engine
+backend services in a project.
+
+By default, global backend services and backend services from all regions are
+listed. The results can be narrowed down by providing the \f5\fI\-\-global\fR\fR
+or \f5\fI\-\-regions\fR\fR flag.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+[\fINAME\fR ...]
+If provided, show details for the specified names and/or URIs of resources.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-regexp\fR=\fIREGEXP\fR, \fB\-r\fR \fIREGEXP\fR
+A regular expression to filter the names of the results on. Any names that do
+not match the entire regular expression will be filtered out.
+
+.RE
+.sp
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-global\fR
+If provided, only global resources are shown.
+
+.TP 2m
+\fB\-\-regions\fR=[\fIREGION\fR,...]
+If provided, only regional resources are shown. If arguments are provided, only
+resources from the given regions are shown.
+
+
+.RE
+.sp
+
+.SH "LIST COMMAND FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-filter\fR=\fIEXPRESSION\fR
+Apply a Boolean filter \fIEXPRESSION\fR to each resource item to be listed. If
+the expression evaluates True then that item is listed. For more details and
+examples of filter expressions run $ gcloud topic filters. This flag interacts
+with other flags that are applied in this order: \fB\-\-flatten\fR,
+\fB\-\-sort\-by\fR, \fB\-\-filter\fR, \fB\-\-limit\fR.
+
+.TP 2m
+\fB\-\-limit\fR=\fILIMIT\fR
+The maximum number of resources to list. The default is \fBunlimited\fR. This
+flag interacts with other flags that are applied in this order:
+\fB\-\-flatten\fR, \fB\-\-sort\-by\fR, \fB\-\-filter\fR, \fB\-\-limit\fR.
+
+.TP 2m
+\fB\-\-page\-size\fR=\fIPAGE_SIZE\fR
+Some services group resource list output into pages. This flag specifies the
+maximum number of resources per page. The default is determined by the service
+if it supports paging, otherwise it is \fBunlimited\fR (no paging). Paging may
+be applied before or after \fB\-\-filter\fR and \fB\-\-limit\fR depending on the
+service.
+
+.TP 2m
+\fB\-\-sort\-by\fR=[\fIFIELD\fR,...]
+A comma\-separated list of resource field key names to sort by. The default
+order is ascending. Prefix a field with ``~'' for descending order on that
+field. This flag interacts with other flags that are applied in this order:
+\fB\-\-flatten\fR, \fB\-\-sort\-by\fR, \fB\-\-filter\fR, \fB\-\-limit\fR.
+
+.TP 2m
+\fB\-\-uri\fR
+Print a list of resource URIs instead of the default output.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To list all backend services in a project in table form, run:
+
+.RS 2m
+$ gcloud compute backend\-services list
+.RE
+
+To list the URIs of all backend services in a project, run:
+
+.RS 2m
+$ gcloud compute backend\-services list \-\-uri
+.RE
+
+To list all global backend services in a project, run:
+
+.RS 2m
+$ gcloud compute backend\-services list \-\-global
+.RE
+
+To list all backend services in the \f5\fIus\-central1\fR\fR and
+\f5\fIeurope\-west1\fR\fR regions, run:
+
+.RS 2m
+$ gcloud compute backend\-services list \e
+    \-\-regions us\-central1,europe\-west1
+.RE

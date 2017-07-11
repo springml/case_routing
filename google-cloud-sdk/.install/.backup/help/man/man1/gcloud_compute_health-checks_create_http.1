@@ -1,0 +1,116 @@
+
+.TH "GCLOUD_COMPUTE_HEALTH\-CHECKS_CREATE_HTTP" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute health\-checks create http \- create a HTTP health check to monitor load balanced instances
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute health\-checks create http\fR \fINAME\fR [\fB\-\-check\-interval\fR=\fICHECK_INTERVAL\fR;\ default="5s"] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-healthy\-threshold\fR=\fIHEALTHY_THRESHOLD\fR;\ default="2"] [\fB\-\-host\fR=\fIHOST\fR] [\fB\-\-port\fR=\fIPORT\fR;\ default="80"] [\fB\-\-port\-name\fR=\fIPORT_NAME\fR] [\fB\-\-proxy\-header\fR=\fIPROXY_HEADER\fR;\ default="NONE"] [\fB\-\-request\-path\fR=\fIREQUEST_PATH\fR;\ default="/"] [\fB\-\-timeout\fR=\fITIMEOUT\fR;\ default="5s"] [\fB\-\-unhealthy\-threshold\fR=\fIUNHEALTHY_THRESHOLD\fR;\ default="2"] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute health\-checks create http\fR is used to create a HTTP health
+check. HTTP health checks monitor instances in a load balancer controlled by a
+target pool. All arguments to the command are optional except for the name of
+the health check. For more information on load balancing, see
+https://cloud.google.com/compute/docs/load\-balancing\-and\-autoscaling/
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the HTTP health check to create.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-check\-interval\fR=\fICHECK_INTERVAL\fR; default="5s"
+How often to perform a health check for an instance. For example, specifying
+\f5\fI10s\fR\fR will run the check every 10 seconds. Valid units for this flag
+are ``s'' for seconds and ``m'' for minutes. The default value is
+\f5\fI5s\fR\fR.
+
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+An optional string description for the HTTP health check.
+
+.TP 2m
+\fB\-\-healthy\-threshold\fR=\fIHEALTHY_THRESHOLD\fR; default="2"
+The number of consecutive successful health checks before an unhealthy instance
+is marked as healthy. The default is 2.
+
+.TP 2m
+\fB\-\-host\fR=\fIHOST\fR
+The value of the host header used in this HTTP health check request. By default,
+this is empty and Google Compute Engine automatically sets the host header in
+health requests to the same external IP address as the forwarding rule
+associated with the target pool.
+
+.TP 2m
+\fB\-\-port\fR=\fIPORT\fR; default="80"
+The TCP port number that this health check monitors. The default value is 80.
+
+.TP 2m
+\fB\-\-port\-name\fR=\fIPORT_NAME\fR
+The port name that this health check monitors. By default, this is empty.
+
+.TP 2m
+\fB\-\-proxy\-header\fR=\fIPROXY_HEADER\fR; default="NONE"
+The type of proxy protocol header to be sent to the backend. \fIPROXY_HEADER\fR
+must be one of:
+
+.RS 2m
+.TP 2m
+\fBNONE\fR
+No proxy header is added.
+.TP 2m
+\fBPROXY_V1\fR
+Adds the header "PROXY UNKNOWN\er\en".
+
+.RE
+.sp
+.TP 2m
+\fB\-\-request\-path\fR=\fIREQUEST_PATH\fR; default="/"
+The request path that this health check monitors. For example,
+\f5\fI/healthcheck\fR\fR. The default value is ``/''.
+
+.TP 2m
+\fB\-\-timeout\fR=\fITIMEOUT\fR; default="5s"
+If Google Compute Engine doesn't receive a healthy response from the instance by
+the time specified by the value of this flag, the health check request is
+considered a failure. For example, specifying \f5\fI10s\fR\fR will cause the
+check to wait for 10 seconds before considering the request a failure. Valid
+units for this flag are ``s'' for seconds and ``m'' for minutes. The default
+value is \f5\fI5s\fR\fR.
+
+.TP 2m
+\fB\-\-unhealthy\-threshold\fR=\fIUNHEALTHY_THRESHOLD\fR; default="2"
+The number of consecutive health check failures before a healthy instance is
+marked as unhealthy. The default is 2.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

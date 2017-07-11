@@ -1,0 +1,89 @@
+
+.TH "GCLOUD_COMPUTE_URL\-MAPS_ADD\-HOST\-RULE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute url\-maps add\-host\-rule \- add a rule to a URL map to map hosts to a path matcher
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute url\-maps add\-host\-rule\fR \fIURL_MAP_NAME\fR \fB\-\-hosts\fR=\fIHOST\fR,[\fIHOST\fR,...] \fB\-\-path\-matcher\-name\fR=\fIPATH_MATCHER_NAME\fR [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute url\-maps add\-host\-rule\fR is used to add a mapping of hosts
+to a patch matcher in a URL map. The mapping will match the host component of
+HTTP requests to path matchers which in turn map the request to a backend
+service. Before adding a host rule, at least one path matcher must exist in the
+URL map to take care of the path component of the requests. \f5gcloud compute
+url\-maps add\-path\-matcher\fR or \f5gcloud compute url\-maps edit\fR can be
+used to add path matchers.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIURL_MAP_NAME\fR
+The name of the URL map to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-hosts\fR=\fIHOST\fR,[\fIHOST\fR,...]
+The set of hosts to match requests against. Each host must be a fully qualified
+domain name (FQDN) with the exception that the host can begin with a ``*'' or
+``*\-''. ``*'' acts as a glob and will match any string of atoms to the left
+where an atom is separated by dots (``.'') or dashes (``\-'').
+
+.TP 2m
+\fB\-\-path\-matcher\-name\fR=\fIPATH_MATCHER_NAME\fR
+The name of the patch matcher to use if a request matches this host rule. The
+patch matcher must already exist in the URL map (see \f5gcloud compute url\-maps
+add\-path\-matcher\fR).
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+An optional, textual description for the host rule.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To create a host rule mapping the \f5*\-foo.example.com\fR and \f5example.com\fR
+hosts to the \f5www\fR path matcher, run:
+
+.RS 2m
+$ gcloud compute url\-maps add\-host\-rule MY\-URL\-MAP \e
+    \-\-hosts '*\-foo.example.com,example.com' \-\-path\-matcher\-name www
+.RE

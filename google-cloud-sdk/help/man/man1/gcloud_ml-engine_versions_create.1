@@ -1,0 +1,113 @@
+
+.TH "GCLOUD_ML\-ENGINE_VERSIONS_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud ml\-engine versions create \- create a new Cloud ML Engine version
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud ml\-engine versions create\fR \fIVERSION\fR \fB\-\-model\fR=\fIMODEL\fR [\fB\-\-async\fR] [\fB\-\-config\fR=\fICONFIG\fR] [\fB\-\-origin\fR=\fIORIGIN\fR] [\fB\-\-runtime\-version\fR=\fIRUNTIME_VERSION\fR] [\fB\-\-staging\-bucket\fR=\fISTAGING_BUCKET\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Create a new Cloud ML Engine version.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIVERSION\fR
+Name of the model version.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-model\fR=\fIMODEL\fR
+Name of the model.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Display information about the operation in progress, without waiting for the
+operation to complete.
+
+.TP 2m
+\fB\-\-config\fR=\fICONFIG\fR
+Path to a YAML configuration file containing configuration parameters for the
+Version (https://cloud.google.com/ml/reference/rest/v1/projects.models.versions)
+to create.
+
+The file is in YAML format. Note that not all attributes of a Version are
+configurable; available attributes (with example values) are:
+
+.RS 2m
+description: A free\-form description of the version.
+deploymentUri: gs://path/to/source
+runtimeVersion: '1.0'
+manualScaling:
+  nodes: 10  # The number of nodes to allocate for this model.
+.RE
+
+The name of the version must always be specified via the required VERSION
+argument.
+
+If an option is specified both in the configuration file and via command line
+arguments, the command line arguments override the configuration file.
+
+.TP 2m
+\fB\-\-origin\fR=\fIORIGIN\fR
+Location of \f5model/\fR "directory" (as output by
+https://www.tensorflow.org/versions/r0.12/api_docs/python/state_ops.html#Saver).
+
+This overrides \f5deploymentUri\fR in the \f5\-\-config\fR file. If this flag is
+not passed, \f5deploymentUri\fR \fBmust\fR be specified in the file from
+\f5\-\-config\fR.
+
+Can be a Google Cloud Storage (\f5gs://\fR) path or local file path (no prefix).
+In the latter case the files will be uploaded to Google Cloud Storage and a
+\f5\-\-staging\-bucket\fR argument is required.
+
+.TP 2m
+\fB\-\-runtime\-version\fR=\fIRUNTIME_VERSION\fR
+The Google Cloud ML Engine runtime version for this job. Defaults to the latest
+stable version. See
+https://cloud.google.com/ml/docs/concepts/runtime\-version\-list for a list of
+accepted versions.
+
+.TP 2m
+\fB\-\-staging\-bucket\fR=\fISTAGING_BUCKET\fR
+Bucket in which to stage training archives.
+
+Required only if a file upload is necessary (that is, other flags include local
+paths) and no other flags implicitly specify an upload path.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

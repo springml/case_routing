@@ -1,0 +1,88 @@
+
+.TH "GCLOUD_KMS_KEYS_SET\-ROTATION\-SCHEDULE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud kms keys set\-rotation\-schedule \- update the rotation schedule for a key
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud kms keys set\-rotation\-schedule\fR \fIKEY\fR [\fB\-\-keyring\fR=\fIKEYRING\fR] [\fB\-\-location\fR=\fILOCATION\fR] [\fB\-\-next\-rotation\-time\fR=\fINEXT_ROTATION_TIME\fR] [\fB\-\-rotation\-period\fR=\fIROTATION_PERIOD\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Updates the rotation schedule for the given key. The schedule automatically
+creates a new primary version for the key according to the
+\f5\-\-next\-rotation\-time\fR and \f5\-\-rotation\-period\fR flags.
+
+The flag \f5\-\-next\-rotation\-time\fR must be in ISO or RFC3339 format, and
+\f5\-\-rotation\-period\fR must be in the form INTEGER[UNIT], where units can be
+one of seconds (s), minutes (m), hours (h) or days (d).
+
+Key rotations performed manually via \f5update\-primary\-version\fR and the
+version \f5create\fR do not affect the stored \f5\-\-next\-rotation\-time\fR.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIKEY\fR
+Name of the key to update the schedule of.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-keyring\fR=\fIKEYRING\fR
+The containing keyring.
+
+.TP 2m
+\fB\-\-location\fR=\fILOCATION\fR
+The location of the requested resource.
+
+.TP 2m
+\fB\-\-next\-rotation\-time\fR=\fINEXT_ROTATION_TIME\fR
+Next automatic rotation time of the key.
+
+.TP 2m
+\fB\-\-rotation\-period\fR=\fIROTATION_PERIOD\fR
+Automatic rotation period of the key.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+The following command sets a 30 day rotation period for the key named
+\f5frodo\fR within the keyring \f5fellowship\fR and location \f5global\fR
+starting at the specified time:
+
+.RS 2m
+$ gcloud kms keys set\-rotation\-schedule frodo \e
+    \-\-location global \e
+    \-\-keyring fellowship \e
+    \-\-rotation\-period 30d \e
+    \-\-next\-rotation\-time 2017\-10\-12T12:34:56.1234Z
+.RE

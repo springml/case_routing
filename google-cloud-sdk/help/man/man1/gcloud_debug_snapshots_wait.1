@@ -1,0 +1,126 @@
+
+.TH "GCLOUD_DEBUG_SNAPSHOTS_WAIT" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud debug snapshots wait \- wait for debug snapshots to complete
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud debug snapshots wait\fR [\fIID\fR\ ...] [\fB\-\-all\fR] [\fB\-\-all\-users\fR] [\fB\-\-location\fR=\fILOCATION\-REGEXP\fR] [\fB\-\-target\fR=(\fIID\fR|\fIDESCRIPTION_REGEXP\fR)] [\fB\-\-timeout\fR=\fITIMEOUT\fR;\ default="unlimited"] [\fB\-\-filter\fR=\fIEXPRESSION\fR] [\fB\-\-limit\fR=\fILIMIT\fR] [\fB\-\-page\-size\fR=\fIPAGE_SIZE\fR] [\fB\-\-sort\-by\fR=[\fIFIELD\fR,...]] [\fB\-\-uri\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+This command waits for one or more snapshots on a Cloud Debugger debug target to
+become completed. A snapshot is considered completed either if there was an
+error setting the snapshot or if the snapshot was hit on an instance of the
+debug target.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+[\fIID\fR ...]
+Zero or more snapshot resource identifiers. The command will wait for any of the
+specified snapshots to complete.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-all\fR
+If set, wait for all of the specified snapshots to complete, instead of waiting
+for any one of them to complete.
+
+.TP 2m
+\fB\-\-all\-users\fR
+If set, wait for matching snapshots from all users, rather than only the current
+user.
+
+.TP 2m
+\fB\-\-location\fR=\fILOCATION\-REGEXP\fR
+A regular expression to match against snapshot locations. The command will wait
+for any snapshots matching these criteria to complete. You may specify
+\-\-location multiple times.
+
+EXAMPLE:
+
+.RS 2m
+gcloud debug snapshots wait \e
+  \-\-location foo.py:[1\-3] \-\-location bar.py:3
+.RE
+
+.TP 2m
+\fB\-\-target\fR=(\fIID\fR|\fIDESCRIPTION_REGEXP\fR)
+The debug target. It may be a target ID or name obtained from 'debug targets
+list', or it may be a regular expression uniquely specifying a debuggee based on
+its description or name. For App Engine projects, if not specified, the default
+target is the most recent deployment of the default module and version.
+
+.TP 2m
+\fB\-\-timeout\fR=\fITIMEOUT\fR; default="unlimited"
+Maximum number of seconds to wait for a snapshot to complete. By default, wait
+indefinitely.
+
+
+.RE
+.sp
+
+.SH "LIST COMMAND FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-filter\fR=\fIEXPRESSION\fR
+Apply a Boolean filter \fIEXPRESSION\fR to each resource item to be listed. If
+the expression evaluates True then that item is listed. For more details and
+examples of filter expressions run $ gcloud topic filters. This flag interacts
+with other flags that are applied in this order: \fB\-\-flatten\fR,
+\fB\-\-sort\-by\fR, \fB\-\-filter\fR, \fB\-\-limit\fR.
+
+.TP 2m
+\fB\-\-limit\fR=\fILIMIT\fR
+The maximum number of resources to list. The default is \fBunlimited\fR. This
+flag interacts with other flags that are applied in this order:
+\fB\-\-flatten\fR, \fB\-\-sort\-by\fR, \fB\-\-filter\fR, \fB\-\-limit\fR.
+
+.TP 2m
+\fB\-\-page\-size\fR=\fIPAGE_SIZE\fR
+Some services group resource list output into pages. This flag specifies the
+maximum number of resources per page. The default is determined by the service
+if it supports paging, otherwise it is \fBunlimited\fR (no paging). Paging may
+be applied before or after \fB\-\-filter\fR and \fB\-\-limit\fR depending on the
+service.
+
+.TP 2m
+\fB\-\-sort\-by\fR=[\fIFIELD\fR,...]
+A comma\-separated list of resource field key names to sort by. The default
+order is ascending. Prefix a field with ``~'' for descending order on that
+field. This flag interacts with other flags that are applied in this order:
+\fB\-\-flatten\fR, \fB\-\-sort\-by\fR, \fB\-\-filter\fR, \fB\-\-limit\fR.
+
+.TP 2m
+\fB\-\-uri\fR
+Print a list of resource URIs instead of the default output.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

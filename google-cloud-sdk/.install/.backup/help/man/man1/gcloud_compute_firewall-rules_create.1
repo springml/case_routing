@@ -1,0 +1,135 @@
+
+.TH "GCLOUD_COMPUTE_FIREWALL\-RULES_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute firewall\-rules create \- create a Google Compute Engine firewall rule
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute firewall\-rules create\fR \fINAME\fR \fB\-\-allow\fR=\fIPROTOCOL\fR[:\fIPORT\fR[\-\fIPORT\fR]],[\fIPROTOCOL\fR[:\fIPORT\fR[\-\fIPORT\fR]],...] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-network\fR=\fINETWORK\fR;\ default="default"] [\fB\-\-source\-ranges\fR=\fICIDR_RANGE\fR,[\fICIDR_RANGE\fR,...]] [\fB\-\-source\-tags\fR=\fITAG\fR,[\fITAG\fR,...]] [\fB\-\-target\-tags\fR=\fITAG\fR,[\fITAG\fR,...]] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute firewall\-rules create\fR is used to create firewall rules to
+allow incoming traffic to a network.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the firewall rule to create.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-allow\fR=\fIPROTOCOL\fR[:\fIPORT\fR[\-\fIPORT\fR]],[\fIPROTOCOL\fR[:\fIPORT\fR[\-\fIPORT\fR]],...]
+A list of protocols and ports whose traffic will be allowed.
+
+The protocols allowed over this connection. This can be the (case\-sensitive)
+string values \f5tcp\fR, \f5udp\fR, \f5icmp\fR, \f5esp\fR, \f5ah\fR, \f5sctp\fR,
+or any IP protocol number. An IP\-based protocol must be specified for each
+rule. The rule applies only to specified protocol.
+
+For port\-based protocols \- \f5tcp\fR, \f5udp\fR, and \f5sctp\fR \- a list of
+destination ports or port ranges to which the rule applies may optionally be
+specified. If no port or port range is specified, the rule applies to all
+destination ports. TCP and UDP rules must include a port or port range.
+
+The ICMP protocol is supported, but there is no support for configuring ICMP
+packet filtering by ICMP code.
+
+For example, to create a rule that allows TCP traffic through port 80 and ICMP
+traffic:
+
+.RS 2m
+$ gcloud compute firewall\-rules create MY\-RULE \-\-allow tcp:80,icmp
+.RE
+
+To create a rule that allows TCP traffic from port 20000 to 25000:
+
+.RS 2m
+$ gcloud compute firewall\-rules create MY\-RULE \e
+    \-\-allow tcp:20000\-25000
+.RE
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+A textual description for the firewall rule.
+
+.TP 2m
+\fB\-\-network\fR=\fINETWORK\fR; default="default"
+The network to which this rule is attached. If omitted, the rule is attached to
+the \f5\fIdefault\fR\fR network.
+
+.TP 2m
+\fB\-\-source\-ranges\fR=\fICIDR_RANGE\fR,[\fICIDR_RANGE\fR,...]
+A list of IP address blocks that are allowed to make inbound connections that
+match the firewall rule to the instances on the network. The IP address blocks
+must be specified in CIDR format:
+http://en.wikipedia.org/wiki/Classless_Inter\-Domain_Routing.
+
+If neither \-\-source\-ranges nor \-\-source\-tags are specified,
+\-\-source\-ranges defaults to \f50.0.0.0/0\fR, which means that the rule
+applies to all incoming connections from inside or outside the network. If both
+\-\-source\-ranges and \-\-source\-tags are specified, the rule matches if
+either the range of the source matches \-\-source\-ranges or the tag of the
+source matches \-\-source\-tags.
+
+If neither \-\-source\-ranges nor \-\-source\-tags is provided, then this flag
+will default to 0.0.0.0/0, allowing all sources. Multiple IP address blocks can
+be specified if they are separated by commas.
+
+.TP 2m
+\fB\-\-source\-tags\fR=\fITAG\fR,[\fITAG\fR,...]
+A list of instance tags indicating the set of instances on the network to which
+the rule applies if all other fields match. If neither \-\-source\-ranges nor
+\-\-source\-tags are specified, \-\-source\-ranges defaults to \f50.0.0.0/0\fR,
+which means that the rule applies to all incoming connections from inside or
+outside the network.
+
+If both \-\-source\-ranges and \-\-source\-tags are specified, an inbound
+connection is allowed if either the range of the source matches
+\-\-source\-ranges or the tag of the source matches \-\-source\-tags.
+
+Tags can be assigned to instances during instance creation.
+
+.TP 2m
+\fB\-\-target\-tags\fR=\fITAG\fR,[\fITAG\fR,...]
+A list of instance tags indicating which instances the rule is applied to. If
+the field is set, the rule applies to only instances with a matching tag. If
+omitted, the rule applies to all instances in the network.
+
+Tags can be assigned to instances during instance creation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

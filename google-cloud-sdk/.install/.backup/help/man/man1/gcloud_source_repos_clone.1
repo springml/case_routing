@@ -1,0 +1,76 @@
+
+.TH "GCLOUD_SOURCE_REPOS_CLONE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud source repos clone \- clone project git repository in the current directory
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud source repos clone\fR \fIREPOSITORY_NAME\fR [\fIDIRECTORY_NAME\fR] [\fB\-\-dry\-run\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+This command clones git repository for the currently active Google Cloud
+Platform project into the specified folder in the current directory.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIREPOSITORY_NAME\fR
+Name of the repository. Note: Google Cloud Platform projects generally have (if
+created) a repository named "default"
+
+.TP 2m
+[\fIDIRECTORY_NAME\fR]
+Directory name for the cloned repo. Defaults to the repository name.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-dry\-run\fR
+If provided, prints the command that would be run to standard out instead of
+executing it.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To use the default Google Cloud repository for development, use the following
+commands. We recommend that you use your project name as TARGET_DIR to make it
+apparent which directory is used for which project. We also recommend to clone
+the repository named 'default' since it is automatically created for each
+project, and its contents can be browsed and edited in the Developers Console.
+
+.RS 2m
+$ gcloud init
+$ gcloud source repos clone default TARGET_DIR
+$ cd TARGET_DIR
+... create/edit files and create one or more commits ...
+$ git push origin master
+.RE

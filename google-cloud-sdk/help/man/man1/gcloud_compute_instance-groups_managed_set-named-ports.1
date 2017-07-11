@@ -1,0 +1,129 @@
+
+.TH "GCLOUD_COMPUTE_INSTANCE\-GROUPS_MANAGED_SET\-NAMED\-PORTS" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute instance\-groups managed set\-named\-ports \- sets the list of named ports for an instance group
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute instance\-groups managed set\-named\-ports\fR \fINAME\fR \fB\-\-named\-ports\fR=[\fINAME\fR:\fIPORT\fR,...] [\fB\-\-region\fR=\fIREGION\fR\ |\ \fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Named ports are key:value pairs metadata representing the service name and the
+port that it's running on. Named ports can be assigned to an instance group,
+which indicates that the service is available on all instances in the group.
+This information is used by the HTTP Load Balancing service.
+
+\fBgcloud compute instance\-groups managed set\-named\-ports\fR sets the list of
+named ports for all instances in an instance group.
+
+Note: Running this command will clear all existing named ports.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the instance group to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-named\-ports\fR=[\fINAME\fR:\fIPORT\fR,...]
+The comma\-separated list of key:value pairs representing the service name and
+the port that it is running on.
+
+To clear the list of named ports pass empty list as flag value. For example:
+
+.RS 2m
+$ gcloud compute instance\-groups managed set\-named\-ports \e
+    example\-instance\-group \-\-named\-ports ""
+.RE
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+At most one of these may be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the instance group to operate on. If not specified, you will be
+prompted to select a region.
+
+A list of regions can be fetched by running:
+
+.RS 2m
+$ gcloud compute regions list
+.RE
+
+Overrides the default \fBcompute/region\fR property value for this command
+invocation.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the instance group to operate on. If not specified, you may be
+prompted to select a zone.
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+Overrides the default \fBcompute/zone\fR property value for this command
+invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+For example, to apply the named ports to an entire instance group:
+
+.RS 2m
+$ gcloud compute instance\-groups managed set\-named\-ports \e
+    example\-instance\-group \-\-named\-ports example\-service:1111 \e
+    \-\-zone us\-central1\-a
+.RE
+
+The above example will assign a name 'example\-service' for port 1111 to the
+instance group called 'example\-instance\-group' in the
+\f5\fIus\-central1\-a\fR\fR zone. The command removes any named ports that are
+already set for this instance group.
+
+To clear named ports from instance group provide empty named ports list as
+parameter:
+
+.RS 2m
+$ gcloud compute instance\-groups managed set\-named\-ports \e
+    example\-instance\-group \-\-named\-ports "" \-\-zone us\-central1\-a
+.RE

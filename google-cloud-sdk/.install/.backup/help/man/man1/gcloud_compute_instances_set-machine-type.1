@@ -1,0 +1,113 @@
+
+.TH "GCLOUD_COMPUTE_INSTANCES_SET\-MACHINE\-TYPE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute instances set\-machine\-type \- set machine type for Google Compute Engine virtual machines
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute instances set\-machine\-type\fR \fIINSTANCE_NAME\fR [\fB\-\-custom\-cpu\fR=\fICUSTOM_CPU\fR] [\fB\-\-custom\-memory\fR=\fICUSTOM_MEMORY\fR] [\fB\-\-machine\-type\fR=\fIMACHINE_TYPE\fR] [\fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\f5\fIgcloud compute instances set\-machine\-type\fR\fR allows you to change the
+machine type of a virtual machine in the \fBTERMINATED\fR state (that is, a
+virtual machine instance that has been stopped).
+
+For example, if \f5\fIexample\-instance\fR\fR is a \f5\fIg1\-small\fR\fR virtual
+machine currently in the \fBTERMINATED\fR state, running:
+
+.RS 2m
+$ gcloud compute instances set\-machine\-type example\-instance \e
+    \-\-zone us\-central1\-b \-\-machine\-type n1\-standard\-4
+.RE
+
+will change the machine type to \f5\fIn1\-standard\-4\fR\fR, so that when you
+next start \f5\fIexample\-instance\fR\fR, it will be provisioned as an
+\f5\fIn1\-standard\-4\fR\fR instead of a \f5\fIg1\-small\fR\fR.
+
+See https://cloud.google.com/compute/docs/machine\-types for more information on
+machine types.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIINSTANCE_NAME\fR
+The name of the instance to operate on.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-custom\-cpu\fR=\fICUSTOM_CPU\fR
+A whole number value indicating how many cores are desired in the custom machine
+type. Both \-\-custom\-cpu and \-\-custom\-memory must be specified if a custom
+machine type is desired, and the \-\-machine\-type flag must be omitted.
+
+.TP 2m
+\fB\-\-custom\-memory\fR=\fICUSTOM_MEMORY\fR
+A whole number value indicating how much memory is desired in the custom machine
+type. A size unit should be provided (eg. 3072MB or 9GB) \- if no units are
+specified, GB is assumed. Both \-\-custom\-cpu and \-\-custom\-memory must be
+specified if a custom machine type is desired, and the \-\-machine\-type flag
+must be omitted.
+
+.TP 2m
+\fB\-\-machine\-type\fR=\fIMACHINE_TYPE\fR
+Specifies the machine type used for the instances. To get a list of available
+machine types, run 'gcloud compute machine\-types list'. Either this flag,
+\-\-custom\-cpu, or \-\-custom\-memory must be specified.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the instance to operate on. If not specified, you may be prompted to
+select a zone. \f5gcloud\fR will attempt to identify the zone by searching for
+resources in your project. If the zone cannot be determined, you will then be
+prompted with all Google Cloud Platform zones.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

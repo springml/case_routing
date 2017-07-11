@@ -1,0 +1,115 @@
+
+.TH "GCLOUD_DNS_RECORD\-SETS_TRANSACTION" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud dns record\-sets transaction \- make scriptable and transactional changes to your record\-sets
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud dns record\-sets transaction\fR \fICOMMAND\fR [\fB\-\-transaction\-file\fR=\fITRANSACTION_FILE\fR;\ default="transaction.yaml"] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Make scriptable and transactional changes to your record\-sets.
+
+
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-transaction\-file\fR=\fITRANSACTION_FILE\fR; default="transaction.yaml"
+Path of the file which contains the transaction.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "COMMANDS"
+
+\f5\fICOMMAND\fR\fR is one of the following:
+
+.RS 2m
+.TP 2m
+\fBabort\fR
+Abort transaction.
+
+.TP 2m
+\fBadd\fR
+Append a record\-set addition to the transaction.
+
+.TP 2m
+\fBdescribe\fR
+Describe the transaction.
+
+.TP 2m
+\fBexecute\fR
+Execute the transaction on Cloud DNS.
+
+.TP 2m
+\fBremove\fR
+Append a record\-set deletion to the transaction.
+
+.TP 2m
+\fBstart\fR
+Start a transaction.
+
+
+.RE
+.sp
+
+.SH "EXAMPLES"
+
+To start a transaction, run:
+
+.RS 2m
+$ gcloud dns record\-sets transaction start
+.RE
+
+To append a record\-set addition to the transaction, run:
+
+.RS 2m
+$ gcloud dns record\-sets transaction add \-\-name RECORD_SET_NAME \e
+    \-\-ttl TTL \-\-type TYPE DATA
+.RE
+
+To append a record\-set removal to the transaction, run:
+
+.RS 2m
+$ gcloud dns record\-sets transaction remove \-\-name RECORD_SET_NAME \e
+    \-\-ttl TTL \-\-type TYPE DATA
+.RE
+
+To look at the details of the transaction, run:
+
+.RS 2m
+$ gcloud dns record\-sets transaction describe
+.RE
+
+To delete the transaction, run:
+
+.RS 2m
+$ gcloud dns record\-sets transaction abort
+.RE
+
+To execute the transaction, run:
+
+.RS 2m
+$ gcloud dns record\-sets transaction execute
+.RE

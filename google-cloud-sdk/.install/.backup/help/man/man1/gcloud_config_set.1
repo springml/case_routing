@@ -1,0 +1,368 @@
+
+.TH "GCLOUD_CONFIG_SET" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud config set \- set a Cloud SDK property
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud config set\fR \fISECTION\fR/\fIPROPERTY\fR \fIVALUE\fR [\fB\-\-installation\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+By default, sets the property in your active configuration only. Use the
+\f5\-\-installation\fR flag to set the property across all configurations. See
+\f5gcloud topic configurations\fR for more information.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fISECTION\fR/\fIPROPERTY\fR
+The property to be set. Note that SECTION/ is optional while referring to
+properties in the core section.
+
+.TP 2m
+\fIVALUE\fR
+The value to be set.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-installation\fR
+Typically properties are updated only in the currently active configuration, but
+when \f5\-\-installation\fR is given the property is updated for the entire
+gcloud installation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "AVAILABLE PROPERTIES"
+
+.RS 2m
+.TP 2m
+\fIcore\fR
+
+.RS 2m
+.TP 2m
+\fBaccount\fR
+The account gcloud should use for authentication. You can run \f5gcloud auth
+list\fR to see the accounts you currently have available.
+
+
+.TP 2m
+\fBcustom_ca_certs_file\fR
+Absolute path to a custom CA cert file.
+
+
+.TP 2m
+\fBdefault_regional_backend_service\fR
+If True, backend services in \f5gcloud compute backend\-services\fR will be
+regional by default. The \f5\-\-global\fR flag will be required for global
+backend services.
+
+
+.TP 2m
+\fBdisable_color\fR
+If True, color will not be used when printing messages in the terminal.
+
+
+.TP 2m
+\fBdisable_prompts\fR
+If True, the default answer will be assumed for all user prompts. For any
+prompts that require user input, an error will be raised. This is the equivalent
+of using the global \f5\-\-quiet\fR flag.
+
+
+.TP 2m
+\fBdisable_usage_reporting\fR
+If True, anonymous statistics on SDK usage will not be collected. This is value
+is set based on your choices during installation, but can be changed at any
+time. For more information, see: https://cloud.google.com/sdk/usage\-statistics
+
+
+.TP 2m
+\fBlog_http\fR
+If True, log HTTP requests and responses to the logs. You may need to adjust
+your \f5verbosity\fR setting if you want to see in the terminal, otherwise it is
+available in the log files.
+
+
+.TP 2m
+\fBmax_log_days\fR
+Maximum number of days to retain log files before deleting. If set to 0, turns
+off log garbage collection and does not delete log files. If unset, defaults to
+30.
+
+
+.TP 2m
+\fBpass_credentials_to_gsutil\fR
+If True, pass the configured Cloud SDK authentication to gsutil.
+
+
+.TP 2m
+\fBproject\fR
+The project id of the Cloud Platform project to operate on by default. This can
+be overridden by using the global \f5\-\-project\fR flag.
+
+
+.TP 2m
+\fBshow_structured_logs\fR
+Controls when JSON structured log messages for the current verbosity and above
+will be written to standard error. The default is text format when disabled.
+Valid values are: \f5never\fR \- Log messages as text, \f5always\fR \- Always
+log messages as JSON, \f5log\fR \- Only log messages as JSON if stderr is a
+file, \f5terminal\fR \- Only log messages as JSON if stderr is a terminal. If
+unset default is \f5never\fR.
+
+
+.TP 2m
+\fBtrace_token\fR
+Token used to route traces of service requests for investigation of issues. This
+token will be provided by Google support.
+
+
+.TP 2m
+\fBuser_output_enabled\fR
+If False, messages to the user and command output on both standard output and
+standard error will be suppressed.
+
+
+.TP 2m
+\fBverbosity\fR
+The default logging verbosity for gcloud commands. This is the equivalent of
+using the global \f5\-\-verbosity\fR flag.
+
+
+.RE
+.sp
+.TP 2m
+\fIapp\fR
+
+.RS 2m
+.TP 2m
+\fBcloud_build_timeout\fR
+The timeout, in seconds, to wait for Docker builds to complete during
+deployments. All Docker builds now use the Container Builder API.
+
+
+.TP 2m
+\fBpromote_by_default\fR
+If True, when deploying a new version of a service, that version will be
+promoted to receive all traffic for the service. The flag can be overridden via
+the \f5\-\-promote\-by\-default\fR or \f5\-\-no\-promote\-by\-default\fR flags.
+
+
+.TP 2m
+\fBstop_previous_version\fR
+If True, when deploying a new version of a service, the previously deployed
+version is stopped. If False, older versions must be stopped manually.
+
+
+.RE
+.sp
+.TP 2m
+\fIauth\fR
+
+.RS 2m
+.TP 2m
+\fBdisable_credentials\fR
+If true, gcloud will not attempt to load any credentials or authenticate any
+requests. This is useful if you are behind a proxy that adds authentication to
+your requests.
+
+
+.RE
+.sp
+.TP 2m
+\fIcomponent_manager\fR
+
+.RS 2m
+.TP 2m
+\fBadditional_repositories\fR
+A comma separated list of additional repositories to check for components. This
+property is automatically managed by the \f5gcloud components repositories\fR
+commands.
+
+
+.TP 2m
+\fBdisable_update_check\fR
+If True, the Cloud SDK will not automatically check for updates.
+
+
+.RE
+.sp
+.TP 2m
+\fIcompute\fR
+
+.RS 2m
+.TP 2m
+\fBregion\fR
+The default region to use when working with regional Compute Engine resources.
+When a \f5\-\-region\fR flag is required but not provided, the command will fall
+back to this value, if set. To see valid choices, run \f5gcloud compute regions
+list\fR.
+
+
+.TP 2m
+\fBzone\fR
+The default zone to use when working with zonal Compute Engine resources. When a
+\f5\-\-zone\fR flag is required but not provided, the command will fall back to
+this value, if set. To see valid choices, run \f5gcloud compute zones list\fR.
+
+
+.RE
+.sp
+.TP 2m
+\fIcontainer\fR
+
+.RS 2m
+.TP 2m
+\fBbuild_timeout\fR
+The timeout, in seconds, to wait for container builds to complete.
+
+
+.TP 2m
+\fBcluster\fR
+The name of the cluster to use by default when working with Container Engine.
+
+
+.TP 2m
+\fBuse_application_default_credentials\fR
+Use application default credentials to authenticate to the cluster API server.
+
+
+.TP 2m
+\fBuse_client_certificate\fR
+Use the cluster's client certificate to authenticate to the cluster API server.
+
+
+.RE
+.sp
+.TP 2m
+\fIdataproc\fR
+
+.RS 2m
+.TP 2m
+\fBregion\fR
+Specifies the Cloud Dataproc region to use. Each Cloud Dataproc region
+constitutes an independent resource namespace constrained to deploying instances
+into Google Compute Engine zones inside the region. The default value of
+"global" is a special multi\-region namespace which is capable of deploying
+instances into all Google Compute Engine zones globally, and is disjoint from
+other Cloud Dataproc regions.
+
+
+.RE
+.sp
+.TP 2m
+\fIfunctions\fR
+
+.RS 2m
+.TP 2m
+\fBregion\fR
+The default region to use when working with Google Compute functions resources.
+When a \f5\-\-region\fR flag is required but not provided, the command will fall
+back to this value, if set. To see valid choices, run \f5gcloud functions
+regions list\fR.
+
+
+.RE
+.sp
+.TP 2m
+\fIml_engine\fR
+
+.RS 2m
+.TP 2m
+\fBpolling_interval\fR
+The interval (in seconds) at which to poll logs from your Cloud ML Engine jobs.
+Note that making it much faster than the default (60) will quickly use all of
+your quota.
+
+
+.RE
+.sp
+.TP 2m
+\fIproxy\fR
+
+.RS 2m
+.TP 2m
+\fBaddress\fR
+The hostname or IP address of your proxy server.
+
+
+.TP 2m
+\fBpassword\fR
+If your proxy requires authentication, the password to use when connecting.
+
+
+.TP 2m
+\fBport\fR
+The port to use when connected to your proxy server.
+
+
+.TP 2m
+\fBtype\fR
+The type of proxy you are using. Supported proxy types are: [http,
+http_no_tunnel, socks4, socks5].
+
+
+.TP 2m
+\fBusername\fR
+If your proxy requires authentication, the username to use when connecting.
+
+
+.RE
+.sp
+.TP 2m
+\fIspanner\fR
+
+.RS 2m
+.TP 2m
+\fBinstance\fR
+The default instance to use when working with Cloud Spanner resources. When an
+\f5instance\fR is required but not provided by a flag, the command will fall
+back to this value, if set.
+
+
+.RE
+.RE
+.sp
+
+.SH "EXAMPLES"
+
+To set the project property in the core section, run:
+
+.RS 2m
+$ gcloud config set project myProject
+.RE
+
+To set the zone property in the compute section, run:
+
+.RS 2m
+$ gcloud config set compute/zone zone3
+.RE

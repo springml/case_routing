@@ -1,0 +1,123 @@
+
+.TH "GCLOUD_ML\-ENGINE_LOCAL_TRAIN" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud ml\-engine local train \- run a Cloud ML Engine training job locally
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud ml\-engine local train\fR \fB\-\-module\-name\fR=\fIMODULE_NAME\fR [\fB\-\-distributed\fR] [\fB\-\-job\-dir\fR=\fIJOB_DIR\fR] [\fB\-\-package\-path\fR=\fIPACKAGE_PATH\fR] [\fB\-\-parameter\-server\-count\fR=\fIPARAMETER_SERVER_COUNT\fR] [\fB\-\-start\-port\fR=\fISTART_PORT\fR;\ default="27182"] [\fB\-\-worker\-count\fR=\fIWORKER_COUNT\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR] [\-\-\ \fIUSER_ARGS\fR\ ...]
+
+
+
+.SH "DESCRIPTION"
+
+This command runs the specified module in an environment similar to that of a
+live Cloud ML Engine Training Job.
+
+This is especially useful in the case of testing distributed models, as it
+allows you to validate that you are properly interacting with the Cloud ML
+Engine cluster configuration. If your model expects a specific number of
+parameter servers or workers (i.e. you expect to use the CUSTOM machine type),
+use the \-\-parameter\-server\-count and \-\-worker\-count flags to further
+specify the desired cluster configuration, just as you would in your cloud
+training job configuration:
+
+.RS 2m
+$ gcloud ml\-engine local train \-\-module\-name trainer.task \e
+        \-\-package\-path /path/to/my/code/trainer \e
+        \-\-distributed \e
+        \-\-parameter\-server\-count 4 \e
+        \-\-worker\-count 8
+.RE
+
+Unlike submitting a training job, the \-\-package\-path parameter can be
+omitted, and will use your current working directory.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+[\-\- \fIUSER_ARGS\fR ...]
+Additional user arguments to be forwarded to user code. Any relative paths will
+be relative to the \fBparent\fR directory of \f5\-\-package\-path\fR.
+
+
+.RE
+.sp
+The '\-\-' argument must be specified between gcloud specific args on the left
+and USER_ARGS on the right.
+
+
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-module\-name\fR=\fIMODULE_NAME\fR
+Name of the module to run
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-distributed\fR
+Runs the provided code in distributed mode by providing cluster configurations
+as environment variables to subprocesses
+
+.TP 2m
+\fB\-\-job\-dir\fR=\fIJOB_DIR\fR
+A local directory in which to store training outputs and other data needed for
+training.
+
+This path will be passed to your TensorFlow program as \f5\-\-job_dir\fR
+command\-line arg. The benefit of specifying this field is that Cloud ML Engine
+will validate the path for use in training.
+
+.TP 2m
+\fB\-\-package\-path\fR=\fIPACKAGE_PATH\fR
+Path to a Python package to build. This should point to a directory containing
+the Python source for the job. It will be built using setuptools (which must be
+installed) using its \fBparent\fR directory as context. If the parent directory
+contains a \f5setup.py\fR file, the build will use that; otherwise, it will use
+a simple built\-in one.
+
+.TP 2m
+\fB\-\-parameter\-server\-count\fR=\fIPARAMETER_SERVER_COUNT\fR
+Number of parameter servers with which to run. Ignored if \-\-distributed is not
+specified. Default: 2
+
+.TP 2m
+\fB\-\-start\-port\fR=\fISTART_PORT\fR; default="27182"
+Start of the range of ports reserved by the local cluster. This command will use
+a contiguous block of ports equal to parameter\-server\-count + worker\-count +
+1.
+
+If \-\-distributed is not specified, this flag is ignored.
+
+.TP 2m
+\fB\-\-worker\-count\fR=\fIWORKER_COUNT\fR
+Number of workers with which to run. Ignored if \-\-distributed is not
+specified. Default: 2
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

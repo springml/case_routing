@@ -1,0 +1,99 @@
+
+.TH "GCLOUD_COMPUTE_NETWORKS_SUBNETS_EXPAND\-IP\-RANGE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute networks subnets expand\-ip\-range \- expand the IP range of a Google Compute Engine subnetwork
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute networks subnets expand\-ip\-range\fR \fINAME\fR \fB\-\-prefix\-length\fR=\fIPREFIX_LENGTH\fR [\fB\-\-region\fR=\fIREGION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute networks subnets expand\-ip\-range\fR is used to expand the IP
+range of a subnetwork in a custom mode network.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the subnetwork to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-prefix\-length\fR=\fIPREFIX_LENGTH\fR
+The new prefix length of the subnet. It must be smaller than the original and in
+the private address space 10.0.0.0/8, 172.16.0.0/12 or 192.168.0.0/16 defined in
+RFC 1918.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-region\fR=\fIREGION\fR
+The region of the subnetwork to operate on. If not specified, you will be
+prompted to select a region.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/region\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/region REGION
+.RE
+
+A list of regions can be fetched by running:
+
+.RS 2m
+$ gcloud compute regions list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/region
+.RE
+
+Alternatively, the region can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_REGION\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+To expand the IP range of \f5\fISUBNET\fR\fR to /16, run:
+
+.RS 2m
+$ gcloud compute networks subnets expand\-ip\-range SUBNET \e
+    \-\-region us\-central1 \-\-prefix\-length 16
+.RE

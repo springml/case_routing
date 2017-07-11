@@ -1,0 +1,141 @@
+
+.TH "GCLOUD_COMPUTE_IMAGES_CREATE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute images create \- create Google Compute Engine images
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute images create\fR \fIIMAGE_NAME\fR (\fB\-\-source\-disk\fR=\fISOURCE_DISK\fR\ |\ \fB\-\-source\-uri\fR=\fISOURCE_URI\fR) [\fB\-\-csek\-key\-file\fR=\fIFILE\fR] [\fB\-\-description\fR=\fIDESCRIPTION\fR] [\fB\-\-family\fR=\fIFAMILY\fR] [\fB\-\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]] [\fB\-\-licenses\fR=[\fILICENSES\fR,...]] [\fB\-\-no\-require\-csek\-key\-create\fR] [\fB\-\-source\-disk\-zone\fR=\fISOURCE_DISK_ZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute images create\fR is used to create custom disk images. The
+resulting image can be provided during instance or disk creation so that the
+instance attached to the resulting disks has access to a known set of software
+or files from the image.
+
+Images can be created from gzipped compressed tarball containing raw disk data
+or from existing disks in any zone.
+
+Images are global resources, so they can be used across zones and projects.
+
+To learn more about creating image tarballs, visit
+https://cloud.google.com/compute/docs/creating\-custom\-image
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIIMAGE_NAME\fR
+The name of the disk image to create.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+Exactly one of these must be specified:
+
+.RS 2m
+.TP 2m
+\fB\-\-source\-disk\fR=\fISOURCE_DISK\fR
+A source disk to create the image from. The value for this option can be the
+name of a disk with the zone specified via \f5\fI\-\-source\-disk\-zone\fR\fR
+flag.
+
+.TP 2m
+\fB\-\-source\-uri\fR=\fISOURCE_URI\fR
+The full Google Cloud Storage URI where the disk image is stored. This file must
+be a gzip\-compressed tarball whose name ends in \f5\fI.tar.gz\fR\fR.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-csek\-key\-file\fR=\fIFILE\fR
+Path to a Customer\-Supplied Encryption Key (CSEK) key file, mapping Google
+Compute Engine images to user managed keys to be used when creating, mounting,
+or snapshotting disks. See
+https://cloud.google.com/compute/docs/disks/customer\-supplied\-encryption for
+more details.
+
+.TP 2m
+\fB\-\-description\fR=\fIDESCRIPTION\fR
+An optional, textual description for the image being created.
+
+.TP 2m
+\fB\-\-family\fR=\fIFAMILY\fR
+The family of the image. When creating an instance or disk, specifying a family
+will cause the latest non\-deprecated image in the family to be used.
+
+.TP 2m
+\fB\-\-labels\fR=[\fIKEY\fR=\fIVALUE\fR,...]
+A list of label KEY=VALUE pairs to add.
+
+.TP 2m
+\fB\-\-licenses\fR=[\fILICENSES\fR,...]
+Comma\-separated list of URIs to license resources.
+
+.TP 2m
+\fB\-\-require\-csek\-key\-create\fR
+Refuse to create images not protected by a user managed key in the key file when
+\-\-csek\-key\-file is given. This behavior is enabled by default to prevent
+incorrect gcloud invocations from accidentally creating images with no user
+managed key. Disabling the check allows creation of some images without a
+matching Customer\-Supplied Encryption Key in the supplied \-\-csek\-key\-file.
+See https://cloud.google.com/compute/docs/disks/customer\-supplied\-encryption
+for more details. Enabled by default, use
+\fB\-\-no\-require\-csek\-key\-create\fR to disable.
+
+.TP 2m
+\fB\-\-source\-disk\-zone\fR=\fISOURCE_DISK_ZONE\fR
+The zone of the source disk to operate on. If not specified, you may be prompted
+to select a zone.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

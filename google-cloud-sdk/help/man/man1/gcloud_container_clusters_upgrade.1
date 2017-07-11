@@ -1,0 +1,128 @@
+
+.TH "GCLOUD_CONTAINER_CLUSTERS_UPGRADE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud container clusters upgrade \- upgrade the Kubernetes version of an existing container cluster
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud container clusters upgrade\fR \fINAME\fR [\fB\-\-async\fR] [\fB\-\-cluster\-version\fR=\fICLUSTER_VERSION\fR] [\fB\-\-image\-type\fR=\fIIMAGE_TYPE\fR] [\fB\-\-master\fR] [\fB\-\-node\-pool\fR=\fINODE_POOL\fR] [\fB\-\-zone\fR=\fIZONE\fR,\ \fB\-z\fR\ \fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Upgrades the Kubernetes version of an existing container cluster.
+
+This command upgrades the Kubernetes version of the \fBnodes\fR of a cluster.
+The Kubernetes version of the cluster's \fBmaster\fR is periodically upgraded
+automatically as new releases are available.
+
+\fBBy running this command, all of the cluster's nodes will be deleted and\fR
+\fBrecreated one at a time.\fR While persistent Kubernetes resources, such as
+pods backed by replication controllers, will be rescheduled onto new nodes, a
+small cluster may experience a few minutes where there are insufficient nodes
+available to run all of the scheduled Kubernetes resources.
+
+\fBPlease ensure that any data you wish to keep is stored on a persistent\fR
+\fBdisk before upgrading the cluster.\fR Ephemeral Kubernetes resources\-\-in
+particular, pods without replication controllers\-\-will be lost, while
+persistent Kubernetes resources will get rescheduled.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fINAME\fR
+The name of the cluster to upgrade.
+
+
+.RE
+.sp
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Don't wait for the operation to complete.
+
+.TP 2m
+\fB\-\-cluster\-version\fR=\fICLUSTER_VERSION\fR
+The Kubernetes release version to which to upgrade the cluster's nodes.
+
+If provided, the \-\-cluster\-version must be no greater than the cluster
+master's minor version (x.\fBX\fR.x), and must be a latest patch version
+(x.x.\fBX\fR).
+
+You can find the list of allowed versions for upgrades by running:
+
+.RS 2m
+$ gcloud container get\-server\-config
+.RE
+
+.TP 2m
+\fB\-\-image\-type\fR=\fIIMAGE_TYPE\fR
+The image type to use for the cluster/node pool. Defaults to server\-specified.
+
+Image Type specifies the base OS that the nodes in the cluster/node pool will
+run on. If an image type is specified, that will be assigned to the cluster/node
+pool and all future upgrades will use the specified image type. If it is not
+specified the server will pick the default image type.
+
+The default image type and the list of valid image types are available using the
+following command.
+
+.RS 2m
+$ gcloud container get\-server\-config
+.RE
+
+.TP 2m
+\fB\-\-master\fR
+Upgrade the cluster's master to the latest version of Kubernetes supported on
+Container Engine. Nodes cannot be upgraded at the same time as the master.
+
+.TP 2m
+\fB\-\-node\-pool\fR=\fINODE_POOL\fR
+The node pool to upgrade.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR, \fB\-z\fR \fIZONE\fR
+The compute zone (e.g. us\-central1\-a) for the cluster. Overrides the default
+\fBcompute/zone\fR property value for this command invocation.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+Upgrade the nodes of <cluster> to the Kubernetes version of the cluster's
+master.
+
+.RS 2m
+$ gcloud container clusters upgrade <cluster>
+.RE
+
+Upgrade the nodes of <cluster> to Kubernetes version x.y.z.
+
+.RS 2m
+$ gcloud container clusters upgrade <cluster> \e
+    \-\-cluster\-version "x.y.z"
+.RE

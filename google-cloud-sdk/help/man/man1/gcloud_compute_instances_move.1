@@ -1,0 +1,105 @@
+
+.TH "GCLOUD_COMPUTE_INSTANCES_MOVE" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute instances move \- move an instance and its attached persistent disks between zones
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute instances move\fR \fIINSTANCE_NAME\fR \fB\-\-destination\-zone\fR=\fIDESTINATION_ZONE\fR [\fB\-\-async\fR] [\fB\-\-zone\fR=\fIZONE\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute instances move\fR facilitates moving a Google Compute Engine
+virtual machine from one zone to another. Moving a virtual machine may incur
+downtime if the guest OS must be shutdown in order to quiesce disk volumes prior
+to snapshotting.
+
+For example, running:
+
+.RS 2m
+$ gcloud compute instances move example\-instance\-1 \e
+   \-\-zone us\-central1\-b \-\-destination\-zone us\-central1\-f
+.RE
+
+will move the instance called example\-instance\-1 with its all attached
+persistent disks, currently running in us\-central1\-b, to us\-central1\-f.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIINSTANCE_NAME\fR
+The name of the instance to operate on.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-destination\-zone\fR=\fIDESTINATION_ZONE\fR
+The zone to move the instance to.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-async\fR
+Display information about the operation in progress, without waiting for the
+operation to complete.
+
+.TP 2m
+\fB\-\-zone\fR=\fIZONE\fR
+The zone of the instance to operate on. If not specified, you may be prompted to
+select a zone. \f5gcloud\fR will attempt to identify the zone by searching for
+resources in your project. If the zone cannot be determined, you will then be
+prompted with all Google Cloud Platform zones.
+
+To avoid prompting when this flag is omitted, you can set the
+\f5\fIcompute/zone\fR\fR property:
+
+.RS 2m
+$ gcloud config set compute/zone ZONE
+.RE
+
+A list of zones can be fetched by running:
+
+.RS 2m
+$ gcloud compute zones list
+.RE
+
+To unset the property, run:
+
+.RS 2m
+$ gcloud config unset compute/zone
+.RE
+
+Alternatively, the zone can be stored in the environment variable
+\f5\fICLOUDSDK_COMPUTE_ZONE\fR\fR.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

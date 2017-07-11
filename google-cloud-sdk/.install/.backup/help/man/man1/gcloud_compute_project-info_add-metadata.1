@@ -1,0 +1,85 @@
+
+.TH "GCLOUD_COMPUTE_PROJECT\-INFO_ADD\-METADATA" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud compute project\-info add\-metadata \- add or update project\-wide metadata
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud compute project\-info add\-metadata\fR [\fB\-\-metadata\fR=\fIKEY\fR=\fIVALUE\fR,[\fIKEY\fR=\fIVALUE\fR,...]] [\fB\-\-metadata\-from\-file\fR=\fIKEY\fR=\fILOCAL_FILE_PATH\fR,[\fIKEY\fR=\fILOCAL_FILE_PATH\fR,...]] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+\fBgcloud compute project\-info add\-metadata\fR can be used to add or update
+project\-wide metadata. Every instance has access to a metadata server that can
+be used to query metadata that has been set through this tool. Project\-wide
+metadata entries are visible to all instances. To set metadata for individual
+instances, use \f5gcloud compute instances add\-metadata\fR. For information on
+metadata, see https://cloud.google.com/compute/docs/metadata
+
+Only metadata keys that are provided are mutated. Existing metadata entries will
+remain unaffected.
+
+
+
+.SH "FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-metadata\fR=\fIKEY\fR=\fIVALUE\fR,[\fIKEY\fR=\fIVALUE\fR,...]
+Metadata to be made available to the guest operating system running on the
+instances. Each metadata entry is a key/value pair separated by an equals sign.
+Metadata keys must be unique and less than 128 bytes in length. Values must be
+less than or equal to 32,768 bytes in length. Multiple arguments can be passed
+to this flag, e.g., \f5\fI\-\-metadata
+key\-1=value\-1,key\-2=value\-2,key\-3=value\-3\fR\fR.
+
+In images that have Compute Engine tools installed on them, such as the official
+images (https://cloud.google.com/compute/docs/images), the following metadata
+keys have special meanings:
+
+.RS 2m
+.TP 2m
+\fBstartup\-script\fR
+Specifies a script that will be executed by the instances once they start
+running. For convenience, \f5\fI\-\-metadata\-from\-file\fR\fR can be used to
+pull the value from a file.
+
+.TP 2m
+\fBstartup\-script\-url\fR
+Same as \f5\fIstartup\-script\fR\fR except that the script contents are pulled
+from a publicly\-accessible location on the web.
+
+
+.RE
+.RE
+.sp
+At least one of [\-\-metadata] or [\-\-metadata\-from\-file] is required.
+
+.RS 2m
+.TP 2m
+\fB\-\-metadata\-from\-file\fR=\fIKEY\fR=\fILOCAL_FILE_PATH\fR,[\fIKEY\fR=\fILOCAL_FILE_PATH\fR,...]
+Same as \f5\fI\-\-metadata\fR\fR except that the value for the entry will be
+read from a local file. This is useful for values that are too large such as
+\f5\fIstartup\-script\fR\fR contents.
+
+
+.RE
+.sp
+At least one of [\-\-metadata] or [\-\-metadata\-from\-file] is required.
+
+
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.

@@ -1,0 +1,85 @@
+
+.TH "GCLOUD_KMS_KEYRINGS_ADD\-IAM\-POLICY\-BINDING" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud kms keyrings add\-iam\-policy\-binding \- add IAM policy binding to a keyring
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud kms keyrings add\-iam\-policy\-binding\fR \fIKEYRING\fR \fB\-\-member\fR=\fIMEMBER\fR \fB\-\-role\fR=\fIROLE\fR [\fB\-\-location\fR=\fILOCATION\fR] [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+Adds IAM policy binding to the given keyring.
+
+See https://cloud.google.com/iam/docs/managing\-policies for details of policy
+role and member types.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fIKEYRING\fR
+Name of the keyring whose IAM policy to modify.
+
+
+.RE
+.sp
+
+.SH "REQUIRED FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-member\fR=\fIMEMBER\fR
+The member to add to the binding. Should be of the form \f5user:user_email\fR
+(e.g. \f5user:test\-user@gmail.com.\fR)
+
+.TP 2m
+\fB\-\-role\fR=\fIROLE\fR
+Define the role of the member.
+
+
+.RE
+.sp
+
+.SH "OPTIONAL FLAGS"
+
+.RS 2m
+.TP 2m
+\fB\-\-location\fR=\fILOCATION\fR
+The location of the requested resource.
+
+
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+The following command will add an IAM policy binding for the role of
+\'roles/editor' for the user 'test\-user@gmail.com' on the keyring
+\f5fellowship\fR with location \f5global\fR:
+
+.RS 2m
+$ gcloud kms keyrings add\-iam\-policy\-binding fellowship \e
+    \-\-location global \e
+    \-\-member='user:test\-user@gmail.com' \e
+    \-\-role='roles/editor'
+.RE

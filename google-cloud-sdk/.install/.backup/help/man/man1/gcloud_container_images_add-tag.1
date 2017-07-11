@@ -1,0 +1,81 @@
+
+.TH "GCLOUD_CONTAINER_IMAGES_ADD\-TAG" 1
+
+
+
+.SH "NAME"
+.HP
+gcloud container images add\-tag \- adds tags to existing image
+
+
+
+.SH "SYNOPSIS"
+.HP
+\f5gcloud container images add\-tag\fR \fISRC_IMAGE\fR \fIDEST_IMAGE\fR [\fIGCLOUD_WIDE_FLAG\ ...\fR]
+
+
+
+.SH "DESCRIPTION"
+
+The container images add\-tag command adds the tag specified in the second tag
+parameter to the image referenced in the first tag parameter. Repositories must
+be hosted by the Google Container Registry.
+
+
+
+.SH "POSITIONAL ARGUMENTS"
+
+.RS 2m
+.TP 2m
+\fISRC_IMAGE\fR
+The fully qualified image reference to add a tag for.
+*.gcr.io/repository:tag\fB.gcr.io/repository@digest
+
+.TP 2m
+\fIDEST_IMAGE\fR
+The fully qualified image reference to be the new tag. *.gcr.io/repository:tag
+
+
+\fR
+.RE
+.sp
+
+.SH "GCLOUD WIDE FLAGS"
+
+These flags are available to all commands: \-\-account, \-\-configuration,
+\-\-flatten, \-\-format, \-\-help, \-\-log\-http, \-\-project, \-\-quiet,
+\-\-trace\-token, \-\-user\-output\-enabled, \-\-verbosity. Run \fB$ gcloud
+help\fR for details.
+
+
+
+.SH "EXAMPLES"
+
+Add a tag to another tag:
+
+.RS 2m
+$ gcloud container images add\-tag gcr.io/myproject/myimage:mytag1
+  gcr.io/myproject/myimage:mytag2
+.RE
+
+Add a tag to a digest
+
+.RS 2m
+$ gcloud container images add\-tag \e
+    gcr.io/myproject/myimage@sha256:digest
+  gcr.io/myproject/myimage:mytag2
+.RE
+
+Add a tag to latest
+
+.RS 2m
+$ gcloud container images add\-tag gcr.io/myproject/myimage
+  gcr.io/myproject/myimage:mytag2
+.RE
+
+Promote a tag to latest
+
+.RS 2m
+$ gcloud container images add\-tag gcr.io/myproject/myimage:mytag1
+  gcr.io/myproject/myimage:latest
+.RE
