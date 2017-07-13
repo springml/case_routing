@@ -1,4 +1,4 @@
-app.controller("AnalyticsController", function($scope, dataService, rawDataService) {
+app.controller("AnalyticsController", function($scope, $location, dataService, rawDataService, anchorSmoothScroll) {
 
     $scope.line = "line";
     $scope.bar = "bar";
@@ -44,6 +44,13 @@ app.controller("AnalyticsController", function($scope, dataService, rawDataServi
     $scope.showData = function(input) {
         console.log(input.path);
     }
+    $scope.gotoElement = function(eID){
+        // set the location.hash to the id of
+        // the element you wish to scroll to.
+        $location.hash('bottom');
+        // call $anchorScroll()
+        anchorSmoothScroll.scrollTo(eID);
+    };
 });
 
 function rawTransObj(arr, key){
