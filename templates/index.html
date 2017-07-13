@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 	<!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/simplex/bootstrap.min.css" />
+	<!-- JQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <!-- Angular -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js'></script>
     <!-- ChartJS -->
@@ -118,31 +121,33 @@
         <div class="space"></div>
         <div class="row">
             <legend>Values Table</legend>
-            <div class="col-md-10 col-md-offset-1" display: "table">
-                <table class="table table-striped table-hover" id="#valuestable" border="1" bordercolor="#DDDDDD">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Email Address</th>
-                            <th>Email Body</th>
-                            <th>Date Sent</th>
-                            <th>Category Predicted</th>
-                            <th>Category By User</th>
-                            <th>Category Servicer</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="row in rawData | limitTo:5">
-                            <td>{{row.id}}</td>
-                            <td>{{row.emailAddress}}</td>
-                            <td>{{row.email}}</td>
-                            <td>{{row.dateEmailSent}}</td>
-                            <td>{{row.categoryPredicted}}</td>
-                            <td>{{row.categoryByUser}}</td>
-                            <td>{{row.servicer}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-md-12">
+				<div class="tableScroll">
+					<table class="table table-striped table-hover" id="#valuestable" border="1" bordercolor="#DDDDDD">
+	                    <thead>
+	                        <tr>
+	                            <th>ID</th>
+	                            <th>Email Address</th>
+	                            <th>Email Body</th>
+	                            <th>Date Sent</th>
+	                            <th>Category Predicted</th>
+	                            <th>Category By User</th>
+	                            <th>Category Servicer</th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                        <tr ng-repeat="row in rawData | limitTo:5">
+	                            <td>{{row.id}}</td>
+	                            <td>{{row.emailAddress}}</td>
+	                            <td>{{row.email}}</td>
+	                            <td>{{row.dateEmailSent}}</td>
+	                            <td>{{row.categoryPredicted}}</td>
+	                            <td>{{row.categoryByUser}}</td>
+	                            <td>{{row.servicer}}</td>
+	                        </tr>
+	                    </tbody>
+	                </table>
+				</div>
             </div>
         </div>
 
@@ -155,15 +160,10 @@
                 <form class="form-horizontal">
                     <fieldset>
                         <div class="form-group">
-                            <label for="inputEmail" class="col-lg-2 control-label">Email Address</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" id="inputEmail" placeholder="Email" ng-model="emailSubject">
-                            </div>
-                            <label for="textArea" class="col-lg-2 control-label">Email Body</label>
-                            <div class="col-lg-10">
-                                <textarea class="form-control" rows="15" id="textArea" ng-model="emailBody" placeholder="Please input your email here"></textarea>
-
-								<button type="submit" class="btn btn-default btn-block" ng-click="submitEmail(emailSubject, emailBody)">Submit</button>
+                                <input type="text" class="form-control" id="subject" placeholder="Email Address" ng-model="subject">
+                                <textarea class="form-control" rows="15" id="content" ng-model="content" placeholder="Please input your email here"></textarea>
+								<button type="submit" class="btn btn-default btn-block" ng-click="submitEmail(subject, content)">Submit</button>
                             </div>
                         </div>
                     </fieldset>

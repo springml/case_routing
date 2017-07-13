@@ -1,4 +1,4 @@
-app.controller("AnalyticsController", function($scope, $location, dataService, rawDataService, anchorSmoothScroll) {
+app.controller("AnalyticsController", function($scope, $location, $http, dataService, rawDataService, anchorSmoothScroll) {
     $scope.chart;
     $scope.line = "line";
     $scope.bar = "bar";
@@ -51,17 +51,20 @@ app.controller("AnalyticsController", function($scope, $location, dataService, r
         anchorSmoothScroll.scrollTo(eID);
     };
 
-    $scope.submitEmail = function(emailSubject, emailBody){
-        var emailData = {
-            "emailSubject": emailSubject,
-            "emailBody": emailBody
-        }
-        console.log(emailData);
-        if(emailSubject && emailBody){
-            $http.post('/submit', emailData).success(function(res){
-                console.log(res);
-            });
-        }
+    $scope.submitEmail = function(subject, content){
+        var data = {
+            subject: subject,
+            content: content
+        };
+        console.log(data);
+        $http.post("/submit", data);
+        // var emailData = {
+        //     "subject": subject,
+        //     "content": content
+        // }
+        // if(subject && content){
+        //     $http.post('/submit', emailData);
+        // }
     }
 });
 
