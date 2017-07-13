@@ -1,5 +1,5 @@
 app.controller("AnalyticsController", function($scope, $location, dataService, rawDataService, anchorSmoothScroll) {
-
+    $scope.chart;
     $scope.line = "line";
     $scope.bar = "bar";
     $scope.radar = "radar";
@@ -12,7 +12,7 @@ app.controller("AnalyticsController", function($scope, $location, dataService, r
     // First Chart, Bar Cgart
     $scope.labelsCategory = asArr(rawTransObj(rawDataService, "categoryByUser"), "key");
     $scope.dataCategory = asArr(rawTransObj(rawDataService, "categoryByUser"), "value");
-    $scope.optionsCategory = dataOptions("Emails per Cateogry");
+    $scope.optionsCategory = dataOptions("Cases per Cateogry");
     $scope.colorCategory = [
         "#ECEFF1", "#CFD8DC", "#B0BEC5", "#90A4AE",
         "#78909C", "#607D8B", "#546E7A", "#455A64",
@@ -22,27 +22,26 @@ app.controller("AnalyticsController", function($scope, $location, dataService, r
     // Second Chart, Bar Chart
     $scope.labelsServicer = asArr(rawTransObj(rawDataService, "servicer"), "key");
     $scope.dataServicer = asArr(rawTransObj(rawDataService, "servicer"), "value");
-    $scope.optionsServicer = dataOptions("Emails per Asignee");
+    $scope.optionsServicer = dataOptions("Cases per Asignee");
 
     // Third Chart, Time Series
     $scope.labelsDate = asArr(rawTransObj(rawDataService, "dateEmailSent"), "key");
     $scope.dataDate = asArr(rawTransObj(rawDataService, "dateEmailSent"), "value");
-    $scope.optionsDate = dataOptions("# Emails vs Time");
+    $scope.optionsDate = dataOptions("# Cases vs Time");
 
     // Fourth Chart, Doughnut
     $scope.labelsDate = asArr(rawTransObj(rawDataService, "dateEmailSent"), "key");
     $scope.dataDate = asArr(rawTransObj(rawDataService, "dateEmailSent"), "value");
-    $scope.emailsRegion = circleOptions("Emails in Each Region");
+    $scope.emailsRegion = circleOptions("Cases in Each Region");
 
-    $scope.series = ["First", "Second"];
     $scope.datasetOverride = [{
         yAxisID: "y-axis-1"
     }, {
         yAxisID: "y-axis-2"
     }];
 
-    $scope.showData = function(input) {
-        console.log(input.path);
+    $scope.showData = function(event){
+        console.log(event);
     }
     $scope.gotoElement = function(eID){
         // set the location.hash to the id of
@@ -51,6 +50,19 @@ app.controller("AnalyticsController", function($scope, $location, dataService, r
         // call $anchorScroll()
         anchorSmoothScroll.scrollTo(eID);
     };
+
+    $scope.submitEmail = function(emailSubject, emailBody){
+        var emailData = {
+            "emailSubject": emailSubject,
+            "emailBody": emailBody
+        }
+        console.log(emailData);
+        if(emailSubject && emailBody){
+            $http.post('/submit', emailData).success(function(res){
+                console.log(res);
+            });
+        }
+    }
 });
 
 function rawTransObj(arr, key){
