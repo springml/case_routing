@@ -38,13 +38,14 @@ def index():
 @app.route('/request')
 def show_request():
 	return render_template('request.html')
-	
+
 @app.route('/submit', methods=['POST'])
 def run_pipeline():
-
 	#retreiving results from UI
-	sample_request_subject = request.form["subject"]
-	sample_request_content = request.form["content"]
+	sample_request_subject = request.get_json().get('subject', '')
+	sample_request_content = request.get_json().get('content', '')
+	# sample_request_subject = request.form["subject"]
+	# sample_request_content = request.form["content"]
 	sample_request_timestamp = datetime.datetime.now()
 
 	sample_request_subject, sample_request_content = clean_text(sample_request_subject, sample_request_content)
@@ -96,7 +97,6 @@ def run_pipeline():
 	data = [ticket_id, sample_request_subject, sample_request_content, category, sample_request_timestamp]
 	rows = [data]
 	erros = table.insert_data(rows)
-
 	return "Thank you for your submission"
 
 
