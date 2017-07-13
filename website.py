@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 import os
 import time
 import argparse, datetime, re
@@ -21,7 +21,9 @@ GROUP_NAMES = ['technical_group', 'legal_group', 'trading_group', 'communication
 DATA_PATH = '/Users/Edrich/programming/CaseRoutingDemo/'
 BAG_OF_WORDS_PATH = DATA_PATH + 'full_word_bags_dict.pk'
 
-
+@app.route('/static/<path:path>')
+def root():
+	return app.send_static_file('index.html')
 
 @app.route('/')
 def index():
