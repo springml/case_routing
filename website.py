@@ -17,9 +17,9 @@ import random
 # export GOOGLE_APPLICATION_CREDENTIALS=emailinsight-7f04f034fa9b.json
 # gcloud beta ml language analyze-entities --content="Michelangelo Caravaggio, Italian painter, is known for 'The Calling of Saint Matthew'."
 
-GROUP_NAMES = ['technical_group', 'legal_group', 'trading_group', 'communication_group', 'energy_group', 'sales_group']
+GROUP_NAMES = ['Legal', 'Information', 'Emergencies', 'TechSupport', 'Utilities', 'Sales']
 DATA_PATH = '/Users/Edrich/programming/CaseRoutingDemo/'
-BAG_OF_WORDS_PATH = DATA_PATH + 'full_word_bags_dict.pk'
+BAG_OF_WORDS_PATH = DATA_PATH + 'full_bags_3.pk'
 
 @app.route('/static/<path:path>')
 def root():
@@ -38,6 +38,7 @@ def index():
 @app.route('/request')
 def show_request():
 	return render_template('request.html')
+	
 @app.route('/submit', methods=['POST'])
 def run_pipeline():
 
@@ -48,7 +49,7 @@ def run_pipeline():
 
 	sample_request_subject, sample_request_content = clean_text(sample_request_subject, sample_request_content)
 	word_bags = unpack_word_bags(word_bags_path = BAG_OF_WORDS_PATH)
-	words_groups = get_bag_of_word_counts(sample_request_subject, sample_request_content, word_bags)
+	words_groups = get_bag_of_word_counts(sample_request_subject, sample_request_content, word_bags, GROUP_NAMES)
 	entity_count_person, entity_count_location, entity_count_organization, entity_count_event, entity_count_work_of_art, entity_count_consumer_good, sentiment_score = get_entity_counts_sentiment_score(sample_request_subject, sample_request_content)
 	subject_length, subject_word_count, content_length, content_word_count, is_am, is_weekday = get_basic_quantitative_features(sample_request_subject, sample_request_content, sample_request_timestamp)
 
@@ -182,16 +183,15 @@ def get_basic_quantitative_features(message_subject, message_content, message_ti
 	if (dt.weekday() < 6): is_weekday = 'yes'
 	return subject_length, subject_word_count, content_length, content_word_count, is_am, is_weekday
 
-def get_bag_of_word_counts(message_subject, message_content, word_bags):
-
+def get_bag_of_word_counts(message_subject, message_content, word_bags, departments):
 	text = message_subject + message_content
 	text = text.lower()
 	# loop through all emails and count group words in each raw text
 	words_groups = []
-	for group_id in range(len(GROUP_NAMES)):
+	for group_id in range(len(departments)):
 		work_group = []
-		top_words = word_bags[GROUP_NAMES[group_id]]
-		# work_group.append(len(set(top_words) & text.split()))
+		print('Working bag number:', departments[group_id])
+		top_words = word_bags[group_id]
 		work_group.append(len([w for w in text.split() if w in set(top_words)]))
 		words_groups.append(work_group)
 	return words_groups
