@@ -1,55 +1,167 @@
+{% raw %}
 <!DOCTYPE html>
-<html>
-	<head>
+<html ng-app="app">
 
-	</head>
-<body>
-<a href="/request">Input a request</a>
-<canvas id="CategoryChart"  width="600" height="100" ></canvas>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<script>
-	var ctx = document.getElementById('CategoryChart').getContext('2d');
-	var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'bar',
+<head>
+	<meta charset="utf-8">
+	<title>Case Routing Demo</title>
 
-    // The data for our dataset
-    data: {
-        labels: ["Technical", "Energy", "Legal", "Communication", "Sales"],
-        datasets: [{
-            backgroundColor: 'rgb(60, 172, 252)',
-            borderColor: 'rgb(0,0,0)',
-            data: [4, 10, 5, 2, 8],
-        }]
-    },
+	<!-- NormalizeJS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/simplex/bootstrap.min.css" />
+    <!-- Angular -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js'></script>
+    <!-- ChartJS -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js'></script>
+    <script src='http://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js'></script>
+    <!-- Local Files -->
+	<script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="controllers.js"></script>
+    <script type="text/javascript" src="services.js"></script>
+    <link rel="stylesheet" href="css/master.css">
+</head>
+<body ng-controller="AnalyticsController">
 
-    // Configuration options go here
-    options: {}
-});
-</script>
+	<!-- <a href="/request">Input a request</a> -->
+	<nav class="navbar navbar-default fixed-header">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Case Routing</a>
+            </div>
 
-<canvas id="TimelineChart"  width="600" height="100" ></canvas>
-<script>
-	var ctx = document.getElementById('TimelineChart').getContext('2d');
-	var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#analytics">Analytics</a></li>
+                    <li><a href="#valuestable">Values Table</a></li>
+                    <li><a href="#email-us">Email Us</a></li>
+                </ul>
+                <!-- <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#About">About</a></li>
+                </ul> -->
+            </div>
+        </div>
+    </nav>
 
-    // The data for our dataset
-    data: {
-        labels: ["0", "1", "2", "3", "4"],
-        datasets: [{
-            label: "Cases by Category",
-            backgroundColor: 'rgb(60, 172, 252)',
-            borderColor: 'rgb(0,0,0)',
-            data: [5, 10, 15, 17, 18],
-        }]
-    },
+	<!-- Four Charts (2 Bar charts and 1 Timeseries) -->
+	<a id="analytics"></a>
+	<div class="space"></div>
+    <div class="container-fluid" ng-controller="AnalyticsController" ng-click="showData($event)">
+        <div class="row">
+            <legend>Analytics</legend>
+            <div class="col-md-4">
+                <canvas id="base"
+					class="chart-base"
+					chart-color="colorCategory"
+					chart-type="bar"
+					chart-series="series"
+					chart-data="dataCategory"
+					chart-options="optionsCategory"
+					chart-labels="labelsCategory"
+					chart-dataset-override="datasetOverride">
+				</canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="base"
+					class="chart-base"
+					chart-type="bar"
+					chart-series="series"
+					chart-data="dataServicer"
+					chart-options="optionsServicer"
+					chart-labels="labelsServicer"
+					chart-dataset-override="datasetOverride">
+				</canvas>
+            </div>
+            <div class="col-md-4">
+                <canvas id="base"
+					class="chart-base"
+					chart-type="line"
+					chart-series="series"
+					chart-data="dataDate"
+					chart-options="optionsDate"
+					chart-labels="labelsDate"
+					chart-dataset-override="datasetOverride">
+				</canvas>
+            </div>
+            <div class="col-md-4 col-md-offset-4">
+				<!-- Below is chart-options, that somehow breaks the UI of the chart -->
+				<!-- chart-options="optionsDate" -->
+				<canvas id="base"
+					class="chart-base"
+					chart-type="pie"
+					chart-data="dataDate"
+					chart-labels="labelsDate"
+					chart-series="series"
+					chart-click="onClick"
+					chart-dataset-override="datasetOverride"
+					chart-options="emailsRegion">
+				</canvas>
+            </div>
+        </div>
 
-    // Configuration options go here
-    options: {}
-});
-</script>
+        <!-- Values Table -->
+		<a id="valuestable"></a>
+        <div class="space"></div>
+        <div class="row">
+            <legend>Values Table</legend>
+            <div class="col-md-10 col-md-offset-1">
+                <table class="table table-striped table-hover" id="#valuestable" border="1" bordercolor="#DDDDDD">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email Address</th>
+                            <th>Email Body</th>
+                            <th>Date Sent</th>
+                            <th>Category Predicted</th>
+                            <th>Category By User</th>
+                            <th>Category Servicer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in rawData | limitTo:5">
+                            <td>{{row.id}}</td>
+                            <td>{{row.emailAddress}}</td>
+                            <td>{{row.email}}</td>
+                            <td>{{row.dateEmailSent}}</td>
+                            <td>{{row.categoryPredicted}}</td>
+                            <td>{{row.categoryByUser}}</td>
+                            <td>{{row.servicer}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
+        <!-- Email Us Form -->
+		<a id="email-us"></a>
+		<div class="space"></div>
+        <div class="row">
+            <legend>Email Us</legend>
+            <div class="col-md-6">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label">Email Address</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                            </div>
+                            <label for="textArea" class="col-lg-2 control-label">Email Body</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="15" id="textArea" placeholder="Modified dashboard appears here"></textarea>
+                                <button type="submit" class="btn btn-default btn-block">Submit</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+{% endraw %}
