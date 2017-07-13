@@ -52,19 +52,10 @@ app.controller("AnalyticsController", function($scope, $location, $http, dataSer
     };
 
     $scope.submitEmail = function(subject, content){
-        var data = {
-            subject: subject,
-            content: content
-        };
-        console.log(data);
-        $http.post("/submit", data);
-        // var emailData = {
-        //     "subject": subject,
-        //     "content": content
-        // }
-        // if(subject && content){
-        //     $http.post('/submit', emailData);
-        // }
+        if(subject && content){
+            $http.post("/submit", {subject: subject, content: content});
+        }
+
     }
 });
 
