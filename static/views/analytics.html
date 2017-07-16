@@ -1,0 +1,89 @@
+<div class="row">
+    <legend>Analytics</legend>
+    <div class="col-md-4">
+        <canvas id="base"
+            class="chart-base"
+            chart="chart"
+            chart-color="colorCategory"
+            chart-type="bar"
+            chart-data="dataCategory"
+            chart-options="optionsCategory"
+            chart-labels="labelsCategory"
+            chart-dataset-override="datasetOverride"
+            ng-click="showData($event)">
+        </canvas>
+    </div>
+    <div class="col-md-4">
+        <canvas id="base"
+            class="chart-base"
+            chart="chart"
+            chart-type="bar"
+            chart-data="dataServicer"
+            chart-options="optionsServicer"
+            chart-labels="labelsServicer"
+            chart-dataset-override="datasetOverride"
+            ng-click="showData($event)">
+        </canvas>
+    </div>
+    <div class="col-md-4">
+        <canvas id="base"
+            class="chart-base"
+            chart="chart"
+            chart-type="line"
+            chart-data="dataDate"
+            chart-options="optionsDate"
+            chart-labels="labelsDate"
+            chart-dataset-override="datasetOverride"
+            ng-click="showData($event)">
+        </canvas>
+    </div>
+    <div class="col-md-4 col-md-offset-4">
+        <!-- Below is chart-options, that somehow breaks the UI of the chart -->
+        <!-- chart-options="optionsDate" -->
+        <canvas id="base"
+            class="chart-base"
+            chart="chart"
+            chart-type="pie"
+            chart-data="dataRegion"
+            chart-labels="labelsRegion"
+            chart-click="onClick"
+            chart-dataset-override="datasetOverride"
+            chart-options="emailsRegion"
+            ng-click="showData($event)">
+        </canvas>
+    </div>
+</div>
+
+<!-- Values Table -->
+<div class="space"></div>
+<div class="row">
+    <legend>Values Table</legend>
+    <div class="col-md-12">
+        <div class="tableScroll">
+            <table class="table table-striped table-hover" id="#valuestable" border="1" bordercolor="#DDDDDD">
+                <thead>
+                    <tr>
+                        <th>Case ID</th>
+                        <th>Subject</th>
+                        <th>Body</th>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Region</th>
+                        <th>Assignee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in rawData | limitTo:5">
+                        <td>{{row.caseID}}</td>
+                        <td>{{row.Subject}}</td>
+                        <td>{{row.Body}}</td>
+                        <td>{{row.Date}}</td>
+                        <td>{{row.Category}}</td>
+                        <td>{{row.Region}}</td>
+                        <td>{{row.Assignee}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
