@@ -1,0 +1,23 @@
+<div class="row">
+    <legend>Active Tickets</legend>
+    <div ng-repeat="row in rawData">
+        <div class="sub-row">
+            <div id="left-pane" class="panel panel-default col-md-7">
+                <div class="panel-heading">{{row.Subject}}</div>
+                <div class="panel-body">{{row.Body}}</div>
+                <a href="#" class="btn btn-default btn-block" ng-click="changeBool(row, row.caseID)" ng-if="notHidden == false">Click For More {{row.caseID}}</a>
+                <a href="#" class="btn btn-default btn-block" ng-click="changeBool(row, row.caseID)" ng-if="notHidden == true">Click for less {{rightPaneCaseID}}</a>
+            </div>
+            <div id="right-pane" class="panel panel-default col-md-5" ng-if="notHidden == true && rightPaneCaseID == row.caseID">
+                <div class="panel-heading">Ticket # {{row.caseID}}</div>
+                <div class="panel-body">
+                    <p>Date: {{row.Date}}</p>
+                    <p>Category: {{row.Category}}</p>
+                    <p>Assignee: {{row.Assignee}}</p>
+                    <p>Region: {{row.Region}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>

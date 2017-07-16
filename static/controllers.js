@@ -1,4 +1,5 @@
-app.controller("AnalyticsController", function($scope, $location, $http, dataService, rawDataService, anchorSmoothScroll) {
+app.controller("AnalyticsController", function($scope, $location, $http, rawDataService, anchorSmoothScroll) {
+    $scope.test = "I came from the controller";
     $scope.chart;
     $scope.line = "line";
     $scope.bar = "bar";
@@ -10,8 +11,8 @@ app.controller("AnalyticsController", function($scope, $location, $http, dataSer
     $scope.rawData = rawDataService;
 
     // First Chart, Bar Cgart
-    $scope.labelsCategory = asArr(rawTransObj(rawDataService, "categoryByUser"), "key");
-    $scope.dataCategory = asArr(rawTransObj(rawDataService, "categoryByUser"), "value");
+    $scope.labelsCategory = asArr(rawTransObj(rawDataService, "Category"), "key");
+    $scope.dataCategory = asArr(rawTransObj(rawDataService, "Category"), "value");
     $scope.optionsCategory = dataOptions("Cases per Cateogry");
     $scope.colorCategory = [
         "#ECEFF1", "#CFD8DC", "#B0BEC5", "#90A4AE",
@@ -20,18 +21,18 @@ app.controller("AnalyticsController", function($scope, $location, $http, dataSer
     ]
 
     // Second Chart, Bar Chart
-    $scope.labelsServicer = asArr(rawTransObj(rawDataService, "servicer"), "key");
-    $scope.dataServicer = asArr(rawTransObj(rawDataService, "servicer"), "value");
+    $scope.labelsServicer = asArr(rawTransObj(rawDataService, "Assignee"), "key");
+    $scope.dataServicer = asArr(rawTransObj(rawDataService, "Assignee"), "value");
     $scope.optionsServicer = dataOptions("Cases per Asignee");
 
     // Third Chart, Time Series
-    $scope.labelsDate = asArr(rawTransObj(rawDataService, "dateEmailSent"), "key");
-    $scope.dataDate = asArr(rawTransObj(rawDataService, "dateEmailSent"), "value");
+    $scope.labelsDate = asArr(rawTransObj(rawDataService, "Date"), "key");
+    $scope.dataDate = asArr(rawTransObj(rawDataService, "Date"), "value");
     $scope.optionsDate = dataOptions("# Cases vs Time");
 
     // Fourth Chart, Doughnut
-    $scope.labelsDate = asArr(rawTransObj(rawDataService, "dateEmailSent"), "key");
-    $scope.dataDate = asArr(rawTransObj(rawDataService, "dateEmailSent"), "value");
+    $scope.labelsRegion = asArr(rawTransObj(rawDataService, "Region"), "key");
+    $scope.dataRegion = asArr(rawTransObj(rawDataService, "Region"), "value");
     $scope.emailsRegion = circleOptions("Cases in Each Region");
 
     $scope.datasetOverride = [{
@@ -40,29 +41,49 @@ app.controller("AnalyticsController", function($scope, $location, $http, dataSer
         yAxisID: "y-axis-2"
     }];
 
-    $scope.showData = function(event){
+    $scope.showData = function(event) {
         console.log(event);
     }
-    $scope.gotoElement = function(eID){
+    $scope.gotoElement = function(eID) {
         // set the location.hash to the id of
         // the element you wish to scroll to.
         $location.hash('bottom');
         // call $anchorScroll()
         anchorSmoothScroll.scrollTo(eID);
     };
+});
 
-    $scope.submitEmail = function(subject, content){
-        if(subject && content){
-            $http.post("/submit", {subject: subject, content: content});
+app.controller("EmailUsController", function($scope, $location, $http, rawDataService, anchorSmoothScroll) {
+    $scope.submitEmail = function(subject, content) {
+        if (subject && content) {
+            $http.post("/submit", {
+                subject: subject,
+                content: content
+            });
         }
-
     }
 });
 
-function rawTransObj(arr, key){
+app.controller("TicketsController", function($scope, $location, $http, rawDataService, anchorSmoothScroll) {
+    $scope.rawData = rawDataService;
+    $scope.notHidden = false;
+    $scope.rightPaneCaseID;
+    $scope.changeBool = function(row, id) {
+        console.log(row);
+        console.log($scope.rightPaneCaseID)
+        $scope.rightPaneCaseID = id;
+        if ($scope.notHidden === false) {
+            $scope.notHidden = true
+        } else {
+            $scope.notHidden = false;
+        }
+    }
+});
+
+function rawTransObj(arr, key) {
     var transObj = {};
-    arr.forEach(function(row){
-        if(!transObj[row[key]]){
+    arr.forEach(function(row) {
+        if (!transObj[row[key]]) {
             transObj[row[key]] = 1;
         } else {
             transObj[row[key]] += 1;
@@ -71,19 +92,19 @@ function rawTransObj(arr, key){
     return transObj;
 }
 
-function asArr(obj, keyOrVal){
+function asArr(obj, keyOrVal) {
     var retArr = [];
-    for(var key in obj){
-        if(keyOrVal === "key"){
+    for (var key in obj) {
+        if (keyOrVal === "key") {
             retArr.push(key);
-        } else if (keyOrVal === "value"){
+        } else if (keyOrVal === "value") {
             retArr.push(obj[key]);
         }
     }
     return retArr;
 }
 
-function circleOptions(titleText){
+function circleOptions(titleText) {
     return {
         responsive: true,
         maintainAspectRatio: true,
@@ -95,7 +116,7 @@ function circleOptions(titleText){
     }
 }
 
-function dataOptions(titleText){
+function dataOptions(titleText) {
     return {
         legend: {
             display: false
