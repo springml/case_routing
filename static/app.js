@@ -1,8 +1,8 @@
 var app = angular.module("app", ['ngRoute', 'chart.js']);
 app.config(function($routeProvider, $locationProvider){
     $routeProvider.when('/', {
-        templateUrl: "./views/analytics.html",
-        controller: "AnalyticsController"
+        templateUrl: "./views/dashboard.html",
+        controller: "DashboardController"
     }).when('/tickets', {
         templateUrl: "./views/tickets.html",
         controller: "TicketsController"
