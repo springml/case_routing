@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngRoute', 'chart.js']);
+var app = angular.module("app", ['ngRoute', 'chart.js', 'ngAnimate']);
 app.config(function($routeProvider, $locationProvider){
     $routeProvider.when('/', {
         templateUrl: "./views/dashboard.html",

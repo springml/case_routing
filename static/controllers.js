@@ -13,10 +13,8 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     $scope.labelsCategory = asArr(rawTransObj(rawDataService, "Category"), "key");
     $scope.dataCategory = asArr(rawTransObj(rawDataService, "Category"), "value");
     $scope.optionsCategory = dataOptions("Cases per Cateogry");
-    $scope.colorCategory = [
-        "#ECEFF1", "#CFD8DC", "#B0BEC5", "#90A4AE",
-        "#78909C", "#607D8B", "#546E7A", "#455A64",
-        "#37474F", "#263238"
+    $scope.backgroundColor = [
+        "#000000", "#000000", "#000000", "#000000",
     ]
 
     // Second Chart, Bar Chart
@@ -58,6 +56,9 @@ app.controller("EmailUsController", function($scope, $location, $http, rawDataSe
             $http.post("/submit", {
                 subject: subject,
                 content: content
+            }).success(function(response){
+                this.subject = "";
+                this.content = "";
             });
         }
     }
@@ -153,7 +154,9 @@ function dataOptions(titleText) {
                     display: true,
                     position: "left",
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                        stepSize: 1
                     }
                 },
                 {
@@ -162,7 +165,9 @@ function dataOptions(titleText) {
                     display: false,
                     position: "right",
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                        stepSize: 1
                     }
                 }
             ]
