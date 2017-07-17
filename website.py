@@ -4,22 +4,26 @@ import os
 import time
 import argparse, datetime, re
 import cPickle as pickle
-from google.cloud import language
+from google.cloud import language, spanner, bigquery
 import json
 import googleapiclient.discovery
 import collections
 import predict
-from google.cloud import bigquery
+
 import random
-# gcloud auth activate-service-account  --key-file /Users/Edrich//programming/CaseRoutingDemo/emailinsight-7f04f034fa9b.json
+# export GOOGLE_APPLICATION_CREDENTIALS=emailinsight-3b9291f24d02.json
 # export API_KEY=AIzaSyAY9T1IVheKFOCI9vdTp6-J77Rzk2XUiW0
-# gcloud auth activate-service-account  --key-file emailinsight-7f04f034fa9b.json
-# export GOOGLE_APPLICATION_CREDENTIALS=emailinsight-7f04f034fa9b.json
+# gcloud auth activate-service-account  --key-file emailinsight-3b9291f24d02.json
 # gcloud beta ml language analyze-entities --content="Michelangelo Caravaggio, Italian painter, is known for 'The Calling of Saint Matthew'."
 
 GROUP_NAMES = ['Legal', 'Information', 'Emergencies', 'TechSupport', 'Utilities', 'Sales']
-DATA_PATH = '/Users/Edrich/programming/CaseRoutingDemo/'
+DATA_PATH = '/Users/hemanthkondapalli/CaseRouting/'
 BAG_OF_WORDS_PATH = DATA_PATH + 'full_bags_3.pk'
+
+spanner_client = spanner.Client()
+
+instance = spanner_client.instance("caseroutingdemo")
+database = instance.database("caserouting")
 
 @app.route('/static/<path:path>')
 def root():
@@ -30,22 +34,36 @@ def index():
 	'''
 	Home page
 	'''
+	results = {}
+	dimensions, measures  = run_query("SELECT Category, count(*) FROM cases Group By Category;")
+	results["categories"] = [dimensions, measures]
 
 
+	print results
+	return render_template('index.html', results=results)
 
-
-	return render_template('index.html')
 @app.route('/request')
 def show_request():
 	return render_template('request.html')
 
 @app.route('/submit', methods=['POST'])
 def run_pipeline():
+
+	print "we made it"
 	#retreiving results from UI
+	regions = ["West", "South", "Midwest", "Northeast"]
+	Case_Assignments = {"Legal": ["Charles Anderson", "Robert Heller", "Jane Jackson"],
+						"Information": ["Ann Gitlin", "Harrison Davis", "Raj Kumar"],
+						"Emergancies": ["Eduardo Sanchez", "Jack Lee", "Sarah Jefferson"],
+						"TechSupport": ["Kris Hauser", "Sheryl Thomas", "Yash Patel"],
+						"Utilities": ["Mike Camica", "Jose Lopez", "Greg Guniski"],
+						"Sales": ["Taylor Traver", "Sam Goldberg", "Jen Kuecks"],
+						"Region": ["West", "South", "Midwest", "Northeast"]
+	}
+
 	sample_request_subject = request.get_json().get('subject', '')
 	sample_request_content = request.get_json().get('content', '')
-	# sample_request_subject = request.form["subject"]
-	# sample_request_content = request.form["content"]
+
 	sample_request_timestamp = datetime.datetime.now()
 
 	sample_request_subject, sample_request_content = clean_text(sample_request_subject, sample_request_content)
@@ -85,19 +103,47 @@ def run_pipeline():
     	name=name,
     	body={'instances': [json_to_submit]}
 	).execute()
-
+	'''
 	bigquery_client = bigquery.Client()
 	dataset = bigquery_client.dataset('CaseRouting')
 	table = dataset.table('Tickets')
 	table.reload()
+	'''
 
-	ticket_id = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in xrange(6))
-	category = str(response['predictions'][0]['classes'])
+
+
+
 	sample_request_timestamp = sample_request_timestamp.strftime('%Y-%m-%d %H:%M:%S')
-	data = [ticket_id, sample_request_subject, sample_request_content, category, sample_request_timestamp]
-	rows = [data]
-	erros = table.insert_data(rows)
+	ticket_id = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in xrange(6))	
+	category = GROUP_NAMES[response['predictions'][0]['classes']]
+
+	assignee = random.choice(Case_Assignments[category])
+	region = random.choice(regions)
+	
+
+	with database.batch() as batch:
+		batch.insert(
+		table='cases',
+		columns=('CaseID', 'Subject', 'Body', 'Category', 'Assignee', 'Region', 'Timestamp'),
+		values=[
+			(ticket_id, sample_request_subject, sample_request_content, category, assignee, region, datetime.datetime.now())])
+
+
 	return "Thank you for your submission"
+
+def run_query(query):
+	data = database.execute_sql(query)
+	
+	dimensions = []
+	measures = []
+
+	for row in data:
+		dimensions.append(row[0])
+		measures.append(row[1])
+
+	return dimensions, measures
+
+
 
 
 def clean_text(message_subject, message_content):
@@ -105,6 +151,39 @@ def clean_text(message_subject, message_content):
 	message_content = re.sub('[^A-Za-z0-9.?!; ]+', ' ', message_content)
 
 	return message_subject, message_content
+
+def insert_data(instance_id, database_id):
+    """Inserts sample data into the given database.
+
+    The database and table must already exist and can be created using
+    `create_database`.
+    """
+    spanner_client = spanner.Client()
+    instance = spanner_client.instance(instance_id)
+    database = instance.database(database_id)
+
+    with database.batch() as batch:
+        batch.insert(
+            table='',
+            columns=('SingerId', 'FirstName', 'LastName',),
+            values=[
+                (1, u'Marc', u'Richards'),
+                (2, u'Catalina', u'Smith'),
+                (3, u'Alice', u'Trentor'),
+                (4, u'Lea', u'Martin'),
+                (5, u'David', u'Lomond')])
+
+        batch.insert(
+            table='Albums',
+            columns=('SingerId', 'AlbumId', 'AlbumTitle',),
+            values=[
+                (1, 1, u'Go, Go, Go'),
+                (1, 2, u'Total Junk'),
+                (2, 1, u'Green'),
+                (2, 2, u'Forever Hold Your Peace'),
+                (2, 3, u'Terrified')])
+
+    print('Inserted data.')
 
 def get_entity_counts_sentiment_score(message_subject, message_content):
 	"""Extract entities using google NLP API
@@ -190,7 +269,6 @@ def get_bag_of_word_counts(message_subject, message_content, word_bags, departme
 	words_groups = []
 	for group_id in range(len(departments)):
 		work_group = []
-		print('Working bag number:', departments[group_id])
 		top_words = word_bags[group_id]
 		work_group.append(len([w for w in text.split() if w in set(top_words)]))
 		words_groups.append(work_group)
