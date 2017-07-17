@@ -74,15 +74,24 @@ app.controller("TicketsController", function($scope, $location, $http, rawDataSe
         console.log("Row: " + JSON.stringify(row, null, 4));
         console.log("ID: " + id);
         $scope.rightPaneCaseID = id;
-
         // Right panel opens or close, depending on which button is clicked
         if ($scope.notHidden === false) {
             $scope.notHidden = true
         } else {
             $scope.notHidden = false;
         }
-
-        //
+    }
+    $scope.modifyCategory = function(modCat, id){
+        console.log(id);
+        console.log(modCat);
+        if(modCat && id){
+            // // (REMOVE COMMENT LINE 88-92) Talk to Hemanth on how to send this.
+            // // Sends
+            // $http.post("", {
+            //     Category: modCat,
+            //     CaseID: id
+            // });
+        }
     }
 });
 
