@@ -1,6 +1,7 @@
 <div class="row">
     <legend>Active Tickets</legend>
-    <div ng-repeat="row in rawData">
+    <input type="text" class="form-control" ng-model="selectid" placeholder="Search Ticket Number">
+    <div ng-repeat="row in rawData | filter:{caseID : selectid}">
         <div class="sub-row">
             <div id="left-pane" class="panel panel-default col-md-7">
                 <div class="panel-heading">{{row.Subject}}</div>
@@ -23,17 +24,15 @@
             <div id="right-pane" class="panel panel-default col-md-5" ng-if="notHidden == true && rightPaneCaseID == row.caseID">
                 <div class="panel-heading">Ticket # {{row.caseID}}</div>
                 <div class="panel-body">
-                    <p>Date: {{row.Date}}</p>
-                    <p>Assignee: {{row.Assignee}}</p>
-                    <p>Region: {{row.Region}}</p>
-                    <p>Category:
+                    <p><b>Date:</b> {{row.Date}}</p>
+                    <p><b>Assignee:</b> {{row.Assignee}}</p>
+                    <p><b>Region:</b> {{row.Region}}</p>
+                    <p><b>Category:</b>
                         <div class="form-group">
-                            <label for="select" class="col-lg-2 control-label">Selects</label>
-                            <div class="col-lg-10">
-                                <select class="form-control" id="select" ng-selected="row.Category">
-                                    <option ng-repeat="category in allCategories">{{category}}</option>
-                                </select>
-                            </div>
+                            <select class="form-control" id="select" ng-init="overwriteCategory = row.Category" ng-model="overwriteCategory">
+                                <option ng-repeat="category in allCategories" ng-value="category">{{category}}</option>
+                            </select>
+                            <button type="submit" class="btn btn-default" ng-click="modifyCategory(overwriteCategory, row.caseID)">Save</button>
                         </div>
                     </p>
                 </div>
