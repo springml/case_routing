@@ -66,20 +66,27 @@ app.controller("EmailUsController", function($scope, $location, $http, rawDataSe
 
 app.controller("TicketsController", function($scope, $location, $http, rawDataService, anchorSmoothScroll) {
     $scope.rawData = rawDataService;
+    $scope.allCategories = findAllCategories(rawDataService);
     $scope.notHidden = false;
+    $scope.leftPaneCaseID;
     $scope.rightPaneCaseID;
     $scope.changeBool = function(row, id) {
-        console.log(row);
-        console.log($scope.rightPaneCaseID)
+        console.log("Row: " + JSON.stringify(row, null, 4));
+        console.log("ID: " + id);
         $scope.rightPaneCaseID = id;
+
+        // Right panel opens or close, depending on which button is clicked
         if ($scope.notHidden === false) {
             $scope.notHidden = true
         } else {
             $scope.notHidden = false;
         }
+
+        //
     }
 });
 
+// User Defined Functions
 function rawTransObj(arr, key) {
     var transObj = {};
     arr.forEach(function(row) {
@@ -147,4 +154,14 @@ function dataOptions(titleText) {
             ]
         }
     }
+}
+
+function findAllCategories(arr){
+    var retArr = [];
+    arr.forEach(function(dataRow){
+        if(retArr.indexOf(dataRow.Category) === -1){
+            retArr.push(dataRow.Category);
+        }
+    });
+    return retArr;
 }
