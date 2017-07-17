@@ -1,5 +1,4 @@
-app.controller("AnalyticsController", function($scope, $location, $http, rawDataService, anchorSmoothScroll) {
-    $scope.test = "I came from the controller";
+app.controller("DashboardController", function($scope, $location, $http, rawDataService, anchorSmoothScroll) {
     $scope.chart;
     $scope.line = "line";
     $scope.bar = "bar";
@@ -152,13 +151,19 @@ function dataOptions(titleText) {
                     id: "y-axis-1",
                     type: "linear",
                     display: true,
-                    position: "left"
+                    position: "left",
+                    ticks: {
+                        beginAtZero: true
+                    }
                 },
                 {
                     id: "y-axis-2",
                     type: "linear",
                     display: false,
-                    position: "right"
+                    position: "right",
+                    ticks: {
+                        beginAtZero: true
+                    }
                 }
             ]
         }
