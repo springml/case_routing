@@ -61,7 +61,7 @@ def get_region_data():
 @app.route('/getCasesVSTime', methods=['POST'])
 def get_time_data():
 	data = {}
-	dimensions, measures  = run_query("SELECT FORMAT_TIMESTAMP('%F', Timestamp) as Date, count(*) FROM cases Group By Date HAVING Date is not null;")
+	dimensions, measures  = run_query("SELECT FORMAT_TIMESTAMP('%F', Timestamp) as Date, count(*) FROM cases Group By Date HAVING Date is not null Order By Date;")
 	data["time"] = [dimensions, measures]
 	return jsonify(data)
 

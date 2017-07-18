@@ -28,28 +28,42 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
         $scope.colorsCategory = [
             "#E1F5FE", "#B3E5FC", "#81D4FA",
             "#4FC3F7", "#29B6F6", "#03A9F4",
-            "#039BE5", "#0288D1", "#0277BD"];
+            "#039BE5", "#0288D1", "#0277BD"
+        ];
     });
-
     // Second Chart, Bar Chart
-    $scope.labelsAssignee = asArr(rawTransObj(rawDataService, "Assignee"), "key");
-    $scope.dataAssignee = asArr(rawTransObj(rawDataService, "Assignee"), "value");
-    $scope.optionsAssignee = dataOptions("Cases per Asignee");
-    $scope.colorsAssignee = [
-        "#E0F2F1", "#B2DFDB", "#80CBC4",
-        "#4DB6AC", "#26A69A", "#009688",
-        "#00897B", "#00796B", "#00695C"
-    ];
-
+    DataService.getCasesVSAssignee().then(function(res){
+        $scope.labelsAssignee = res[0];
+        $scope.dataAssignee = res[1];
+        $scope.optionsAssignee = dataOptions("Cases per Assignee");
+        $scope.colorsAssignee = [
+            "#E0F2F1", "#B2DFDB", "#80CBC4",
+            "#4DB6AC", "#26A69A", "#009688",
+            "#00897B", "#00796B", "#00695C"
+        ];
+    });
     // Third Chart, Time Series
-    $scope.labelsDate = asArr(rawTransObj(rawDataService, "Date"), "key");
-    $scope.dataDate = asArr(rawTransObj(rawDataService, "Date"), "value");
-    $scope.optionsDate = dataOptions("# Cases vs Time");
-
+    DataService.getCasesVSTime().then(function(res){
+        $scope.labelsDate = res[0];
+        $scope.dataDate = res[1];
+        $scope.optionsDate = dataOptions("Cases vs Time");
+        $scope.colorsAssignee = [
+            "#E0F2F1", "#B2DFDB", "#80CBC4",
+            "#4DB6AC", "#26A69A", "#009688",
+            "#00897B", "#00796B", "#00695C"
+        ];
+    });
     // Fourth Chart, Doughnut
-    $scope.labelsRegion = asArr(rawTransObj(rawDataService, "Region"), "key");
-    $scope.dataRegion = asArr(rawTransObj(rawDataService, "Region"), "value");
-    $scope.emailsRegion = circleOptions("Cases in Each Region");
+    DataService.getCasesVSRegion().then(function(res){
+        $scope.labelsRegion = res[0];
+        $scope.dataRegion = res[1];
+        $scope.emailsRegion = circleOptions("Cases per Region");
+        $scope.colorsRegion = [
+            "#C8E6C9", "#A5D6A7", "#81C784",
+            "#66BB6A", "#4CAF50", "#43A047",
+            "#388E3C", "#2E7D32", "#1B5E20"
+        ];
+    });
 
     $scope.datasetOverride = [{
         backgroundColour: ['#000000']
