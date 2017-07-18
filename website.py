@@ -34,20 +34,37 @@ def index():
 	'''
 	Home page
 	'''
-	results = {}
-	dimensions, measures  = run_query("SELECT Category, count(*) FROM cases Group By Category;")
-	results["categories"] = [dimensions, measures]
 
-
-	print results
-	return render_template('index.html', results=results)
+	return render_template('index.html')
 
 @app.route('/getCasesVSCategory', methods=['POST'])
-def run_get_raw_data():
+def get_cat_data():
 	data = {}
 	dimensions, measures  = run_query("SELECT Category, count(*) FROM cases Group By Category;")
 	data["categories"] = [dimensions, measures]
 	return jsonify(data)
+
+@app.route('/getCasesVSAssignee', methods=['POST'])
+def get_assignee_data():
+	data = {}
+	dimensions, measures  = run_query("SELECT Assignee, count(*) FROM cases Group By Assignee;")
+	data["assignees"] = [dimensions, measures]
+	return jsonify(data)
+
+@app.route('/getCasesVSRegion', methods=['POST'])
+def get_region_data():
+	data = {}
+	dimensions, measures  = run_query("SELECT Region, count(*) FROM cases Group By Region;")
+	data["regions"] = [dimensions, measures]
+	return jsonify(data)
+
+@app.route('/getCasesVSTime', methods=['POST'])
+def get_time_data():
+	data = {}
+	dimensions, measures  = run_query("SELECT FORMAT_TIMESTAMP('%F', Timestamp) as Date, count(*) FROM cases Group By Date HAVING Date is not null;")
+	data["time"] = [dimensions, measures]
+	return jsonify(data)
+
 
 @app.route('/request')
 def show_request():
