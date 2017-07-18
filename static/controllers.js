@@ -3,6 +3,12 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     $scope.labesCategory;
     $scope.dataCategory;
     $scope.optionsCategory;
+    $scope.colorsCategory;
+
+    $scope.labelsAssignee;
+    $scope.dataAssignee;
+    $scope.optionsAssignee;
+    $scope.colorsAssignee;
 
     $scope.chart;
     $scope.line = "line";
@@ -15,17 +21,25 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     $scope.rawData = rawDataService;
 
     // First Chart, Bar Chart
-    var vsCategory = DataService.getCasesVSCategory().then(function(res){
-        console.log(JSON.stringify(res, null, 4));
+    DataService.getCasesVSCategory().then(function(res){
         $scope.labelsCategory = res[0];
         $scope.dataCategory = res[1];
         $scope.optionsCategory = dataOptions("Cases per Cateogry");
+        $scope.colorsCategory = [
+            "#E1F5FE", "#B3E5FC", "#81D4FA",
+            "#4FC3F7", "#29B6F6", "#03A9F4",
+            "#039BE5", "#0288D1", "#0277BD"];
     });
 
     // Second Chart, Bar Chart
-    $scope.labelsServicer = asArr(rawTransObj(rawDataService, "Assignee"), "key");
-    $scope.dataServicer = asArr(rawTransObj(rawDataService, "Assignee"), "value");
-    $scope.optionsServicer = dataOptions("Cases per Asignee");
+    $scope.labelsAssignee = asArr(rawTransObj(rawDataService, "Assignee"), "key");
+    $scope.dataAssignee = asArr(rawTransObj(rawDataService, "Assignee"), "value");
+    $scope.optionsAssignee = dataOptions("Cases per Asignee");
+    $scope.colorsAssignee = [
+        "#E0F2F1", "#B2DFDB", "#80CBC4",
+        "#4DB6AC", "#26A69A", "#009688",
+        "#00897B", "#00796B", "#00695C"
+    ];
 
     // Third Chart, Time Series
     $scope.labelsDate = asArr(rawTransObj(rawDataService, "Date"), "key");
