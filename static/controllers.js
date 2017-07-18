@@ -1,4 +1,9 @@
-app.controller("DashboardController", function($scope, $location, $http, rawDataService, anchorSmoothScroll, TestingService) {
+app.controller("DashboardController", function($scope, $location, $http, rawDataService, anchorSmoothScroll, DataService) {
+    // Initialize Chart variables
+    $scope.labesCategory;
+    $scope.dataCategory;
+    $scope.optionsCategory;
+
     $scope.chart;
     $scope.line = "line";
     $scope.bar = "bar";
@@ -9,13 +14,13 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     $scope.title = "Analytics Controller";
     $scope.rawData = rawDataService;
 
-    // First Chart, Bar Cgart
-    $scope.labelsCategory = asArr(rawTransObj(rawDataService, "Category"), "key");
-    $scope.dataCategory = asArr(rawTransObj(rawDataService, "Category"), "value");
-    $scope.optionsCategory = dataOptions("Cases per Cateogry");
-    $scope.backgroundColor = [
-        "#000000", "#000000", "#000000", "#000000",
-    ]
+    // First Chart, Bar Chart
+    var vsCategory = DataService.getCasesVSCategory().then(function(res){
+        console.log(JSON.stringify(res, null, 4));
+        $scope.labelsCategory = res[0];
+        $scope.dataCategory = res[1];
+        $scope.optionsCategory = dataOptions("Cases per Cateogry");
+    });
 
     // Second Chart, Bar Chart
     $scope.labelsServicer = asArr(rawTransObj(rawDataService, "Assignee"), "key");
@@ -33,11 +38,8 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     $scope.emailsRegion = circleOptions("Cases in Each Region");
 
     $scope.datasetOverride = [{
-        yAxisID: "y-axis-1"
-    }, {
-        yAxisID: "y-axis-2"
-    }];
-
+        backgroundColour: ['#000000']
+    }]
     $scope.showData = function(event) {
         console.log(event);
     }
