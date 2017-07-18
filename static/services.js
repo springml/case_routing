@@ -1,3 +1,9 @@
+app.service('TestingService', function($http){
+    return $http.post('/getRawData').then(function(response){
+        console.log(JSON.stringify(response, null, 4));
+    });
+});
+
 app.service('rawDataService', function() {
     return [{
             "caseID": "00001",

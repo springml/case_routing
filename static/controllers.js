@@ -1,4 +1,4 @@
-app.controller("DashboardController", function($scope, $location, $http, rawDataService, anchorSmoothScroll) {
+app.controller("DashboardController", function($scope, $location, $http, rawDataService, anchorSmoothScroll, TestingService) {
     $scope.chart;
     $scope.line = "line";
     $scope.bar = "bar";

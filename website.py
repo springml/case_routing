@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 app = Flask(__name__, static_url_path='')
 import os
 import time
@@ -17,7 +17,7 @@ import random
 # gcloud beta ml language analyze-entities --content="Michelangelo Caravaggio, Italian painter, is known for 'The Calling of Saint Matthew'."
 
 GROUP_NAMES = ['Legal', 'Information', 'Emergencies', 'TechSupport', 'Utilities', 'Sales']
-DATA_PATH = '/Users/hemanthkondapalli/CaseRouting/'
+DATA_PATH = '/Users/Edrich/programming/CaseRoutingDemo/'
 BAG_OF_WORDS_PATH = DATA_PATH + 'full_bags_3.pk'
 
 spanner_client = spanner.Client()
@@ -41,6 +41,13 @@ def index():
 
 	print results
 	return render_template('index.html', results=results)
+
+@app.route('/getRawData', methods=['POST'])
+def run_get_raw_data():
+	data = {}
+	dimensions, measures  = run_query("SELECT Category, count(*) FROM cases Group By Category;")
+	data["categories"] = [dimensions, measures]
+	return jsonify(data)
 
 @app.route('/request')
 def show_request():
@@ -114,12 +121,12 @@ def run_pipeline():
 
 
 	sample_request_timestamp = sample_request_timestamp.strftime('%Y-%m-%d %H:%M:%S')
-	ticket_id = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in xrange(6))	
+	ticket_id = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in xrange(6))
 	category = GROUP_NAMES[response['predictions'][0]['classes']]
 
 	assignee = random.choice(Case_Assignments[category])
 	region = random.choice(regions)
-	
+
 
 	with database.batch() as batch:
 		batch.insert(
@@ -133,7 +140,7 @@ def run_pipeline():
 
 def run_query(query):
 	data = database.execute_sql(query)
-	
+
 	dimensions = []
 	measures = []
 
