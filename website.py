@@ -42,7 +42,7 @@ def index():
 	print results
 	return render_template('index.html', results=results)
 
-@app.route('/getRawData', methods=['POST'])
+@app.route('/getCasesVSCategory', methods=['POST'])
 def run_get_raw_data():
 	data = {}
 	dimensions, measures  = run_query("SELECT Category, count(*) FROM cases Group By Category;")

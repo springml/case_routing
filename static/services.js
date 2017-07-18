@@ -1,7 +1,20 @@
-app.service('TestingService', function($http){
-    return $http.post('/getRawData').then(function(response){
-        console.log(JSON.stringify(response, null, 4));
-    });
+app.service('DataService', function($http){
+    return {
+        getCasesVSCategory: function(){
+            return $http.post('/getCasesVSCategory').then(function(response){
+                return response.data.categories;
+            });
+        },
+        getCasesVSAssignee: function(){
+
+        },
+        getCasesVSTime: function(){
+
+        },
+        getCasesVSRegion: function(){
+
+        }
+    }
 });
 
 app.service('rawDataService', function() {
