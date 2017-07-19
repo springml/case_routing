@@ -6,19 +6,25 @@ app.service('DataService', function($http){
             });
         },
         getCasesVSAssignee: function(){
-                return $http.post('/getCasesVSAssignee').then(function(response){
+            return $http.post('/getCasesVSAssignee').then(function(response){
                 return response.data.assignees;
             });
         },
         getCasesVSTime: function(){
-                return $http.post('/getCasesVSTime').then(function(response){
+            return $http.post('/getCasesVSTime').then(function(response){
                 return response.data.time;
             });
         },
         getCasesVSRegion: function(){
-               return $http.post('/getCasesVSRegion').then(function(response){
+            return $http.post('/getCasesVSRegion').then(function(response){
                 return response.data.regions;
             });
+       },
+        getAllData: function(){
+            console.log("I got hit");
+            // return $http.post('/getAllData').then(function(response){
+            //     return response;
+            // });
         }
     }
 });
