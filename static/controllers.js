@@ -16,6 +16,7 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     $scope.radar = "radar";
     $scope.doughnut = "doughnut";
     $scope.pie = "pie";
+    $scope.horizontalBar = "horizontalBar";
 
     $scope.title = "Analytics Controller";
     $scope.rawData = rawDataService;
@@ -57,7 +58,7 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     DataService.getCasesVSRegion().then(function(res){
         $scope.labelsRegion = res[0];
         $scope.dataRegion = res[1];
-        $scope.emailsRegion = circleOptions("Cases per Region");
+        $scope.emailsRegion = dataOptions("Cases per Region");
         $scope.colorsRegion = [
             "#C8E6C9", "#A5D6A7", "#81C784",
             "#66BB6A", "#4CAF50", "#43A047",
