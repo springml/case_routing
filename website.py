@@ -65,6 +65,11 @@ def get_time_data():
 	data["time"] = [dimensions, measures]
 	return jsonify(data)
 
+@app.route('/getAllData', methods=['POST'])
+def get_all_data():
+	data = {"all": run_all_query("SELECT * FROM cases;")}
+	return jsonify(data)
+
 
 @app.route('/request')
 def show_request():
@@ -87,6 +92,8 @@ def run_pipeline():
 
 	sample_request_subject = request.get_json().get('subject', '')
 	sample_request_content = request.get_json().get('content', '')
+	# Hemanth this is new: It's for the priority
+	sample_request_priority = request.get_json().get('priority', '')
 
 	sample_request_timestamp = datetime.datetime.now()
 
@@ -166,9 +173,18 @@ def run_query(query):
 		measures.append(row[1])
 
 	return dimensions, measures
-
-
-
+# [
+# 	u'CXKFEW',
+# 	u'Please help computer issue',
+# 	u'My mac turned off  what do I do? Should I press the start button?',
+# 	u'Legal',
+# 	TimestampWithNanoseconds(2017, 7, 19, 9, 48, 5, 25304, tzinfo=<UTC>),
+# 	u'South',
+# 	u'Charles Anderson'
+# ]
+def run_all_query(query):
+	data = database.execute_sql(query)
+	return data
 
 def clean_text(message_subject, message_content):
 	message_subject = re.sub('[^A-Za-z0-9.?!; ]+', ' ', message_subject)

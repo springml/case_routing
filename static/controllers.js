@@ -1,4 +1,9 @@
 app.controller("DashboardController", function($scope, $location, $http, rawDataService, anchorSmoothScroll, DataService) {
+    // testing
+    // DataService.getAllData().then(function(res){
+    //     console.log(res);
+    // })
+
     // Initialize Chart variables
     $scope.labesCategory;
     $scope.dataCategory;
@@ -21,18 +26,18 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     $scope.title = "Analytics Controller";
     $scope.rawData = rawDataService;
 
-    // First Chart, Bar Chart
+    // Cases Per Category
     DataService.getCasesVSCategory().then(function(res){
         $scope.labelsCategory = res[0];
         $scope.dataCategory = res[1];
-        $scope.optionsCategory = dataOptions("Cases per Cateogry");
+        $scope.optionsCategory = dataOptions("Cases per Category");
         $scope.colorsCategory = [
             "#E1F5FE", "#B3E5FC", "#81D4FA",
             "#4FC3F7", "#29B6F6", "#03A9F4",
             "#039BE5", "#0288D1", "#0277BD"
         ];
     });
-    // Second Chart, Bar Chart
+    // Cases Per Assignee
     DataService.getCasesVSAssignee().then(function(res){
         $scope.labelsAssignee = res[0];
         $scope.dataAssignee = res[1];
@@ -43,7 +48,7 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
             "#00897B", "#00796B", "#00695C"
         ];
     });
-    // Third Chart, Time Series
+    // Cases VS. Time
     DataService.getCasesVSTime().then(function(res){
         $scope.labelsDate = res[0];
         $scope.dataDate = res[1];
@@ -54,7 +59,7 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
             "#00897B", "#00796B", "#00695C"
         ];
     });
-    // Fourth Chart, Doughnut
+    // Cases Per Region
     DataService.getCasesVSRegion().then(function(res){
         $scope.labelsRegion = res[0];
         $scope.dataRegion = res[1];
@@ -82,14 +87,16 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
 });
 
 app.controller("EmailUsController", function($scope, $location, $http, rawDataService, anchorSmoothScroll) {
-    $scope.submitEmail = function(subject, content) {
-        if (subject && content) {
+    $scope.submitEmail = function(subject, content, priority) {
+        if (subject && content && priority) {
             $http.post("/submit", {
                 subject: subject,
-                content: content
-            }).success(function(response){
-                this.subject = "";
-                this.content = "";
+                content: content,
+                priority: priority
+            }).then(function(response){
+                $scope.subject = "";
+                $scope.content = "";
+                $scope.priority = "";
             });
         }
     }
