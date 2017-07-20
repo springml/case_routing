@@ -167,6 +167,10 @@ def run_query(query):
 
 	return dimensions, measures
 
+def run_table_query(query):
+	data = database.execute_sql(query)
+
+	return [row for row in data]
 
 
 
