@@ -17,7 +17,7 @@
 from googlecloudsdk.api_lib.service_management import services_util
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.service_management import arg_parsers
-from googlecloudsdk.command_lib.service_management import completion_callbacks
+from googlecloudsdk.command_lib.service_management import common_flags
 from googlecloudsdk.core import resources
 
 
@@ -45,12 +45,9 @@ class Describe(base.DescribeCommand):
           on the command line after this command. Positional arguments are
           allowed.
     """
-    callback = completion_callbacks.ProducerServiceFlagCompletionCallback
-    parser.add_argument('--service',
-                        completion_resource=services_util.SERVICES_COLLECTION,
-                        list_command_callback_fn=callback,
-                        help='The service from which to retrieve the '
-                             'configuration.')
+    common_flags.producer_service_flag(
+        flag_name='--service',
+        suffix='from which to retrieve the configuration.').AddToParser(parser)
 
     parser.add_argument('config_id',
                         help='The configuration ID to retrieve.')

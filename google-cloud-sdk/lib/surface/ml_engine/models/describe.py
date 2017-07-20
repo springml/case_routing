@@ -24,8 +24,16 @@ def _AddDescribeArgs(parser):
   flags.GetModelName().AddToParser(parser)
 
 
+# TODO(b/62998601): don't repeat the first sentence due. Also if b/62998171 is
+# resolved this should be obsolete.
 class Describe(base.DescribeCommand):
-  """Describe an existing Cloud ML Engine model."""
+  """Describe an existing Cloud ML Engine model.
+
+  Describe an existing Cloud ML Engine model.
+
+  If you would like to see all versions of a model, use
+  `gcloud ml-engine versions list`.
+  """
 
   @staticmethod
   def Args(parser):

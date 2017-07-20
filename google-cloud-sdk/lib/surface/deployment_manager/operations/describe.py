@@ -15,10 +15,11 @@
 """operations describe command."""
 from apitools.base.py import exceptions as apitools_exceptions
 
-from googlecloudsdk.api_lib.deployment_manager import dm_v2_util
+from googlecloudsdk.api_lib.deployment_manager import dm_api_util
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions
-from googlecloudsdk.command_lib.deployment_manager import dm_base
+from googlecloudsdk.command_lib.deployment_manager import dm_v2_base
 
 
 class Describe(base.DescribeCommand):
@@ -61,11 +62,11 @@ class Describe(base.DescribeCommand):
           request.
     """
     try:
-      return dm_base.GetClient().operations.Get(
-          dm_base.GetMessages().DeploymentmanagerOperationsGetRequest(
+      return dm_v2_base.GetClient().operations.Get(
+          dm_v2_base.GetMessages().DeploymentmanagerOperationsGetRequest(
               project=dm_base.GetProject(),
               operation=args.operation_name,
           )
       )
     except apitools_exceptions.HttpError as error:
-      raise exceptions.HttpException(error, dm_v2_util.HTTP_ERROR_FORMAT)
+      raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)

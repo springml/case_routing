@@ -102,7 +102,6 @@ class CreateGA(base.CreateCommand):
         required=True,
         help='A valid IP-v4 address representing the remote tunnel endpoint')
 
-    # TODO(b/36053573) Add other group members
     parser.add_argument(
         '--shared-secret',
         type=ValidateSimpleSharedSecret,

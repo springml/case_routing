@@ -53,7 +53,8 @@ class Cancel(base.Command):
     """
     adapter = self.context['api_adapter']
 
-    op_ref = adapter.ParseOperation(args.operation_id)
+    op_ref = adapter.ParseOperation(args.operation_id,
+                                    getattr(args, 'region', None))
     try:
       op = adapter.GetOperation(op_ref)
     except apitools_exceptions.HttpError as error:

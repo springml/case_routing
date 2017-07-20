@@ -14,9 +14,10 @@
 
 """operations wait command."""
 
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.api_lib.deployment_manager import exceptions
 from googlecloudsdk.calliope import base
-from googlecloudsdk.command_lib.deployment_manager import dm_base
+from googlecloudsdk.command_lib.deployment_manager import dm_v2_base
 from googlecloudsdk.command_lib.deployment_manager import dm_write
 from googlecloudsdk.core import log
 
@@ -70,7 +71,9 @@ class Wait(base.Command):
     failed_ops = []
     for operation_name in args.operation_name:
       try:
-        dm_write.WaitForOperation(operation_name, '', dm_base.GetProject(),
+        dm_write.WaitForOperation(dm_v2_base.GetClient(),
+                                  dm_v2_base.GetMessages(),
+                                  operation_name, '', dm_base.GetProject(),
                                   timeout=OPERATION_TIMEOUT)
       except exceptions.OperationError:
         failed_ops.append(operation_name)

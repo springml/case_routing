@@ -25,8 +25,10 @@ class Predict(base.Command):
   """Run Cloud ML Engine online prediction.
 
      `{command}` sends a prediction request to Cloud ML Engine for the given
-     instances. This command will only accept up to 100 instances at a time. If
-     you are predicting on more instances, you should use batch prediction via
+     instances. This command will read up to 100 instances, though the service
+     itself will accept instances up to the payload limit size (currently,
+     1.5MB). If you are predicting on more instances, you should use batch
+     prediction via
 
          $ {parent_command} jobs submit prediction.
   """

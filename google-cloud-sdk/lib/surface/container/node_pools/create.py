@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Create node pool command."""
 
 import argparse
@@ -28,14 +27,15 @@ from googlecloudsdk.command_lib.container import flags
 from googlecloudsdk.command_lib.container import messages
 from googlecloudsdk.core import log
 
-
 DETAILED_HELP = {
-    'DESCRIPTION': """\
+    'DESCRIPTION':
+        """\
         *{command}* facilitates the creation of a node pool in a Google
         Container Engine cluster. A variety of options exists to customize the
         node configuration and the number of nodes created.
         """,
-    'EXAMPLES': """\
+    'EXAMPLES':
+        """\
         To create a new node pool "node-pool-1" with the default options in the
         cluster "sample-cluster", run:
 
@@ -68,10 +68,7 @@ def _Args(parser):
       'API management features.')
   # Timeout in seconds for operation
   parser.add_argument(
-      '--timeout',
-      type=int,
-      default=1800,
-      help=argparse.SUPPRESS)
+      '--timeout', type=int, default=1800, help=argparse.SUPPRESS)
   parser.add_argument(
       '--num-nodes',
       type=int,
@@ -79,7 +76,8 @@ def _Args(parser):
       'cluster\'s zones.',
       default=3)
   parser.add_argument(
-      '--machine-type', '-m',
+      '--machine-type',
+      '-m',
       help='The type of machine to use for nodes. Defaults to n1-standard-1')
   parser.add_argument(
       '--disk-size',
@@ -109,8 +107,11 @@ Available aliases are:
 Alias,URI
 {aliases}
 |========
+
+{scope_deprecation_msg}
 """.format(
-    aliases=compute_constants.ScopesForHelp()))
+    aliases=compute_constants.ScopesForHelp(),
+    scope_deprecation_msg=compute_constants.DEPRECATED_SCOPES_MESSAGES))
   flags.AddImageTypeFlag(parser, 'node pool')
   flags.AddNodeLabelsFlag(parser, for_node_pool=True)
   flags.AddTagsFlag(parser, """\
@@ -125,6 +126,28 @@ See https://cloud.google.com/sdk/gcloud/reference/compute/firewall-rules/create
 for examples.
 """)
   flags.AddDiskTypeFlag(parser, suppressed=True)
+  parser.display_info.AddFormat(util.NODEPOOLS_FORMAT)
+
+
+def ParseCreateNodePoolOptionsBase(args):
+  return api_adapter.CreateNodePoolOptions(
+      machine_type=args.machine_type,
+      disk_size_gb=args.disk_size,
+      scopes=args.scopes,
+      enable_cloud_endpoints=args.enable_cloud_endpoints,
+      num_nodes=args.num_nodes,
+      local_ssd_count=args.local_ssd_count,
+      tags=args.tags,
+      node_labels=args.node_labels,
+      enable_autoscaling=args.enable_autoscaling,
+      max_nodes=args.max_nodes,
+      min_nodes=args.min_nodes,
+      image_type=args.image_type,
+      preemptible=args.preemptible,
+      enable_autorepair=args.enable_autorepair,
+      enable_autoupgrade=args.enable_autoupgrade,
+      service_account=args.service_account,
+      disk_type=args.disk_type)
 
 
 @base.ReleaseTracks(base.ReleaseTrack.GA)
@@ -142,24 +165,7 @@ class Create(base.CreateCommand):
     flags.AddServiceAccountFlag(parser, suppressed=True)
 
   def ParseCreateNodePoolOptions(self, args):
-    return api_adapter.CreateNodePoolOptions(
-        machine_type=args.machine_type,
-        disk_size_gb=args.disk_size,
-        scopes=args.scopes,
-        enable_cloud_endpoints=args.enable_cloud_endpoints,
-        num_nodes=args.num_nodes,
-        local_ssd_count=args.local_ssd_count,
-        tags=args.tags,
-        node_labels=args.node_labels,
-        enable_autoscaling=args.enable_autoscaling,
-        max_nodes=args.max_nodes,
-        min_nodes=args.min_nodes,
-        image_type=args.image_type,
-        preemptible=args.preemptible,
-        enable_autorepair=args.enable_autorepair,
-        enable_autoupgrade=args.enable_autoupgrade,
-        service_account=args.service_account,
-        disk_type=args.disk_type)
+    return ParseCreateNodePoolOptionsBase(args)
 
   def Run(self, args):
     """This is what gets called when the user runs this command.
@@ -175,23 +181,24 @@ class Create(base.CreateCommand):
       util.Error, if creation failed.
     """
     adapter = self.context['api_adapter']
-
     if not args.scopes:
       args.scopes = []
 
     try:
       if not args.scopes:
         args.scopes = []
-      pool_ref = adapter.ParseNodePool(args.name)
+      pool_ref = adapter.ParseNodePool(args.name, getattr(args, 'region', None))
       options = self.ParseCreateNodePoolOptions(args)
 
       if options.enable_autorepair is not None:
-        log.status.Print(messages.AutoUpdateUpgradeRepairMessage(
-            options.enable_autorepair, 'autorepair'))
+        log.status.Print(
+            messages.AutoUpdateUpgradeRepairMessage(options.enable_autorepair,
+                                                    'autorepair'))
 
       if options.enable_autoupgrade is not None:
-        log.status.Print(messages.AutoUpdateUpgradeRepairMessage(
-            options.enable_autoupgrade, 'autoupgrade'))
+        log.status.Print(
+            messages.AutoUpdateUpgradeRepairMessage(options.enable_autoupgrade,
+                                                    'autoupgrade'))
 
       operation_ref = adapter.CreateNodePool(pool_ref, options)
 
@@ -204,13 +211,7 @@ class Create(base.CreateCommand):
       raise exceptions.HttpException(error, util.HTTP_ERROR_FORMAT)
 
     log.CreatedResource(pool_ref)
-    return pool
-
-  def Collection(self):
-    return 'container.projects.zones.clusters.nodePools'
-
-  def DeprecatedFormat(self, args):
-    return self.ListFormat(args)
+    return [pool]
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA)
@@ -232,6 +233,11 @@ class CreateBeta(Create):
 class CreateAlpha(Create):
   """Create a node pool in a running cluster."""
 
+  def ParseCreateNodePoolOptions(self, args):
+    ops = ParseCreateNodePoolOptionsBase(args)
+    ops.accelerators = args.accelerator
+    return ops
+
   @staticmethod
   def Args(parser):
     _Args(parser)
@@ -241,6 +247,7 @@ class CreateAlpha(Create):
     flags.AddEnableAutoRepairFlag(parser, for_node_pool=True)
     flags.AddEnableAutoUpgradeFlag(parser, for_node_pool=True)
     flags.AddServiceAccountFlag(parser)
+    flags.AddAcceleratorArgs(parser)
 
 
 Create.detailed_help = DETAILED_HELP

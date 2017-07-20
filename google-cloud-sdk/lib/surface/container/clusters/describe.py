@@ -44,7 +44,9 @@ class Describe(base.DescribeCommand):
     adapter = self.context['api_adapter']
     self._upgrade_hint = None
     vv = VersionVerifier()
-    c = adapter.GetCluster(adapter.ParseCluster(args.name))
+    c = adapter.GetCluster(
+        adapter.ParseCluster(args.name,
+                             getattr(args, 'region', None)))
     ver_status = vv.Compare(c.currentMasterVersion, c.currentNodeVersion)
 
     if ver_status == VersionVerifier.UPGRADE_AVAILABLE:

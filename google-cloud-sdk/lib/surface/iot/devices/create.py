@@ -16,6 +16,7 @@ from googlecloudsdk.api_lib.cloudiot import devices
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iot import flags
 from googlecloudsdk.command_lib.iot import util
+from googlecloudsdk.core import log
 
 
 class Create(base.CreateCommand):
@@ -38,8 +39,10 @@ class Create(base.CreateCommand):
     credentials = util.ParseCredentials(args.public_keys,
                                         messages=client.messages)
 
-    return client.Create(
+    response = client.Create(
         registry_ref, args.id,
         enabled_state=enabled_state,
         credentials=credentials
     )
+    log.CreatedResource(args.id, 'device')
+    return response

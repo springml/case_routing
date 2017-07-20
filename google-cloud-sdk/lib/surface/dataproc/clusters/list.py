@@ -73,7 +73,7 @@ class List(base.ListCommand):
     """)
 
   def Run(self, args):
-    dataproc = dp.Dataproc()
+    dataproc = dp.Dataproc(self.ReleaseTrack())
 
     project = properties.VALUES.core.project.GetOrFail()
     region = properties.VALUES.dataproc.region.GetOrFail()
@@ -98,5 +98,3 @@ class List(base.ListCommand):
 
     return messages.DataprocProjectsRegionsClustersListRequest(
         projectId=project, region=region, filter=backend_filter)
-
-

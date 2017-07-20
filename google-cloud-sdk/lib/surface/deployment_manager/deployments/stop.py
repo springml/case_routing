@@ -15,10 +15,10 @@
 """deployments stop command."""
 from apitools.base.py import exceptions as apitools_exceptions
 
-from googlecloudsdk.api_lib.deployment_manager import dm_v2_util
+from googlecloudsdk.api_lib.deployment_manager import dm_api_util
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions
-from googlecloudsdk.command_lib.deployment_manager import dm_base
 from googlecloudsdk.command_lib.deployment_manager import dm_util
 from googlecloudsdk.command_lib.deployment_manager import dm_write
 from googlecloudsdk.command_lib.deployment_manager import flags
@@ -28,7 +28,8 @@ from googlecloudsdk.core import log
 OPERATION_TIMEOUT = 20 * 60  # 20 mins
 
 
-class Stop(base.Command):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2)
+class Stop(base.Command, dm_base.DmCommand):
   """Stop a pending or running deployment update or creation.
 
   This command will stop a currently running or pending operation on
@@ -85,41 +86,43 @@ class Stop(base.Command):
       # If no fingerprint is present, default to an empty fingerprint.
       # TODO(b/34966984): Remove the empty default after cleaning up all
       # deployments that has no fingerprint
-      fingerprint = dm_v2_util.FetchDeploymentFingerprint(
-          dm_base.GetClient(),
-          dm_base.GetMessages(),
+      fingerprint = dm_api_util.FetchDeploymentFingerprint(
+          self.client,
+          self.messages,
           dm_base.GetProject(),
           args.deployment_name) or ''
     try:
-      operation = dm_base.GetClient().deployments.Stop(
-          dm_base.GetMessages().DeploymentmanagerDeploymentsStopRequest(
+      operation = self.client.deployments.Stop(
+          self.messages.DeploymentmanagerDeploymentsStopRequest(
               project=dm_base.GetProject(),
               deployment=args.deployment_name,
               deploymentsStopRequest=(
-                  dm_base.GetMessages().DeploymentsStopRequest(
+                  self.messages.DeploymentsStopRequest(
                       fingerprint=fingerprint)
               ),
           )
       )
     except apitools_exceptions.HttpError as error:
-      raise exceptions.HttpException(error, dm_v2_util.HTTP_ERROR_FORMAT)
+      raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)
     if args.async:
       return operation
     else:
       op_name = operation.name
       try:
-        dm_write.WaitForOperation(op_name,
+        dm_write.WaitForOperation(self.client,
+                                  self.messages,
+                                  op_name,
                                   'stop',
                                   dm_base.GetProject(),
                                   timeout=OPERATION_TIMEOUT)
         log.status.Print('Stop operation ' + op_name
                          + ' completed successfully.')
       except apitools_exceptions.HttpError as error:
-        raise exceptions.HttpException(error, dm_v2_util.HTTP_ERROR_FORMAT)
+        raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)
       try:
         # Fetch a list of the stopped resources.
-        response = dm_base.GetClient().resources.List(
-            dm_base.GetMessages().DeploymentmanagerResourcesListRequest(
+        response = self.client.resources.List(
+            self.messages.DeploymentmanagerResourcesListRequest(
                 project=dm_base.GetProject(),
                 deployment=args.deployment_name,
             )
@@ -127,4 +130,4 @@ class Stop(base.Command):
         # TODO(b/36055861): Pagination
         return response.resources if response.resources else []
       except apitools_exceptions.HttpError as error:
-        raise exceptions.HttpException(error, dm_v2_util.HTTP_ERROR_FORMAT)
+        raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)

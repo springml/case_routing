@@ -43,11 +43,8 @@ class ListFromJson(base.ListCommand):
         help=('A file containing JSON data for a single resource or a list of'
               ' resources of the same type. If omitted then the standard input'
               ' is read.'))
-
-  @staticmethod
-  def GetUriCacheUpdateOp():
-    """No resource URIs."""
-    return None
+    parser.display_info.AddFormat('json')
+    parser.display_info.AddCacheUpdater(None)  # No resource URIs.
 
   def Run(self, args):
     if args.json_file:
@@ -56,6 +53,3 @@ class ListFromJson(base.ListCommand):
     else:
       resources = json.load(sys.stdin)
     return resources
-
-  def DeprecatedFormat(self, unused_args):
-    return 'json'

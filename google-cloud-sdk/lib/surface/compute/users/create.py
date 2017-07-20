@@ -13,6 +13,8 @@
 # limitations under the License.
 """Command for creating users."""
 from googlecloudsdk.api_lib.compute import base_classes
+from googlecloudsdk.api_lib.compute import request_helper
+from googlecloudsdk.api_lib.compute import utils
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.compute.users import utils as user_utils
 from googlecloudsdk.command_lib.util import gaia
@@ -38,7 +40,6 @@ class Create(base.CreateCommand):
 
   def Run(self, args):
     """Issues requests necessary for adding users."""
-    compute_holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
     holder = base_classes.ComputeUserAccountsApiHolder(self.ReleaseTrack())
     client = holder.client
 
@@ -64,8 +65,18 @@ class Create(base.CreateCommand):
     request = client.MESSAGES_MODULE.ClouduseraccountsUsersInsertRequest(
         project=user_ref.project,
         user=user)
-    return compute_holder.client.MakeRequests([(client.users,
-                                                'Insert', request)])
+
+    errors = []
+    responses = list(
+        request_helper.MakeRequests(
+            requests=[(client.users, 'Insert', request)],
+            http=client.http,
+            batch_url='https://www.googleapis.com/batch/',
+            errors=errors))
+    if errors:
+      utils.RaiseToolException(
+          errors, error_message='Could not fetch resource:')
+    return responses
 
 
 Create.detailed_help = {

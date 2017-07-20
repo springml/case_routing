@@ -813,7 +813,8 @@ class OAuth2Credentials(Credentials):
 
         logger.info('Refreshing access_token')
         resp, content = http_request(
-            self.token_uri, method='POST', body=body, headers=headers)
+            self.token_uri.encode('idna'), method='POST',
+            body=body, headers=headers)
         content = _helpers._from_bytes(content)
         if resp.status == http_client.OK:
             d = json.loads(content)

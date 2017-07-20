@@ -22,17 +22,37 @@ from googlecloudsdk.calliope import parser_extensions
 from googlecloudsdk.command_lib.meta import cache_util
 from googlecloudsdk.command_lib.util import parameter_info_lib
 from googlecloudsdk.core import log
+from googlecloudsdk.core import module_util
 from googlecloudsdk.core.console import console_io
-from googlecloudsdk.core.util import pkg_resources
+
+
+class _FunctionCompleter(object):
+  """Convert an argparse function completer to a resource_cache completer."""
+
+  def __init__(self, completer):
+    self._completer = completer
+    self.parameters = None
+
+  def ParameterInfo(self, parsed_args, argument):
+    del argument
+    return parsed_args
+
+  def Complete(self, prefix, parameter_info):
+    return self._completer(prefix, parsed_args=parameter_info)
 
 
 def _GetCompleter(module_path, cache=None, qualify=None, **kwargs):
   """Returns an instantiated completer for module_path."""
-  completer_class = pkg_resources.ImportModule(module_path)
-  return completer_class(
-      cache=cache,
-      qualified_parameter_names=qualify,
-      **kwargs)
+  completer = module_util.ImportModule(module_path)
+  if not isinstance(completer, type):
+    return _FunctionCompleter(completer)
+  try:
+    return completer(
+        cache=cache,
+        qualified_parameter_names=qualify,
+        **kwargs)
+  except TypeError:
+    return _FunctionCompleter(completer())
 
 
 class AddCompleterResourceFlags(parser_extensions.DynamicPositionalAction):

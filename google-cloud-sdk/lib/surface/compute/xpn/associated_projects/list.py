@@ -44,6 +44,6 @@ class List(base.ListCommand):
   def Run(self, args):
     xpn_client = xpn_api.GetXpnClient()
     xpn_types = xpn_client.messages.XpnResourceId.TypeValueValuesEnum
-    resources = xpn_client.ListEnabledResources(args.project).resources
+    resources = xpn_client.ListEnabledResources(args.project)
     return [resource for resource in resources if
             resource.type == xpn_types.PROJECT]

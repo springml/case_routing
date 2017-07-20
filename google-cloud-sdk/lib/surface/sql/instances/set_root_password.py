@@ -19,6 +19,7 @@ from googlecloudsdk.api_lib.sql import api_util
 from googlecloudsdk.api_lib.sql import operations
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib import deprecation_utils
+from googlecloudsdk.command_lib.sql import flags
 from googlecloudsdk.command_lib.sql import validate
 from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
@@ -43,7 +44,7 @@ class SetRootPassword(base.Command):
     parser.add_argument(
         'instance',
         type=validate.InstanceNameRegexpValidator(),
-        completion_resource='sql.instances',
+        completer=flags.InstanceCompleter,
         help='Cloud SQL instance ID.')
     password_group = parser.add_mutually_exclusive_group(required=True)
     password_group.add_argument(

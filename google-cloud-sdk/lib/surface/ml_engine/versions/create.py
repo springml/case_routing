@@ -69,7 +69,13 @@ def _AddCreateArgs(parser):
 
 
 class Create(base.CreateCommand):
-  """Create a new Cloud ML Engine version."""
+  """Create a new Cloud ML Engine version.
+
+  Creates a new version of a Cloud ML Engine model.
+
+  For more details on managing ML Engine models and versions see
+  <https://cloud.google.com/ml-engine/docs/how-tos/managing-models-jobs>
+  """
 
   @staticmethod
   def Args(parser):

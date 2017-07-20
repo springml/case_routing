@@ -45,6 +45,7 @@ class GetPublicKey(base_classes.BaseIamCommand, base.Command):
     parser.add_argument(
         '--iam-account',
         required=True,
+        type=iam_util.GetIamAccountFormatValidator(),
         help='A textual name to display for the account.')
 
     parser.add_argument(

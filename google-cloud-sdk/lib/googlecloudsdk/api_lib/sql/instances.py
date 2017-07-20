@@ -20,7 +20,6 @@ from googlecloudsdk.api_lib.sql import constants
 from googlecloudsdk.calliope import arg_parsers
 from googlecloudsdk.calliope import exceptions
 from googlecloudsdk.command_lib.util import labels_util
-from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
 from googlecloudsdk.core.console import console_io
 
@@ -94,7 +93,8 @@ class _BaseInstances(object):
 
     def YieldInstancesWithAModifiedState():
       for result in yielded:
-        if result.settings.activationPolicy == 'NEVER':
+        # TODO(b/63139112): Investigate impact of instances without settings.
+        if result.settings and result.settings.activationPolicy == 'NEVER':
           result.state = 'STOPPED'
         yield result
 
@@ -298,6 +298,22 @@ class _BaseInstances(object):
         args.storage_auto_increase is not None):
       instance_resource.settings.storageAutoResize = args.storage_auto_increase
 
+    if (hasattr(args, 'storage_auto_increase_limit') and
+        args.IsSpecified('storage_auto_increase_limit')):
+      # Resize limit should be settable if the original instance has resize
+      # turned on, or if the instance to be created has resize flag.
+      if (original and original.settings.storageAutoResize) or (
+          args.storage_auto_increase):
+        # If the limit is set to None, we want it to be set to 0. This is a
+        # backend requirement.
+        instance_resource.settings.storageAutoResizeLimit = (
+            args.storage_auto_increase_limit) or 0
+      else:
+        raise exceptions.RequiredArgumentException(
+            '--storage-auto-increase', 'To set the storage capacity limit '
+            'using [--storage-auto-increase-limit], [--storage-auto-increase] '
+            'must be enabled.')
+
     return instance_resource
 
   @staticmethod
@@ -368,10 +384,6 @@ class _BaseInstances(object):
 
     # Reverting to default if creating instance and no flags are set.
     if not machine_type and not instance:
-      # TODO(b/37718516): Remove warning when defaults are changed.
-      log.warning('The default instance type will change from First Generation '
-                  '"D1" to Second Generation "db-n1-standard-1" on 2017-07-19. '
-                  'Specifying a tier will avoid unexpected behavior.')
       machine_type = constants.DEFAULT_MACHINE_TYPE
 
     return machine_type

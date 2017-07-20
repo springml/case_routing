@@ -309,8 +309,9 @@ class RuntimeTests(testutil.TestBase):
                          ['Too many java artifacts to deploy (.jar, .war, or '
                           'Java Web App).'])
 
-    # TODO(ludo) cover the case were the app.yaml might not be called app.yaml.
-    # For example: "gen-config --config=foo.yaml <path>" will use foo.yaml
+    # TODO(b/63385240): cover the case were the app.yaml might not be called
+    # app.yaml. For example: "gen-config --config=foo.yaml <path>"
+    # will use foo.yaml
     def test_java_files_with_war_and_yaml(self):
         self.write_file('foo.war', '')
         appinfo = testutil.AppInfoFake(

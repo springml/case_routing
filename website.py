@@ -11,9 +11,9 @@ import collections
 import predict
 
 import random
-# export GOOGLE_APPLICATION_CREDENTIALS=emailinsight-3b9291f24d02.json
+# export GOOGLE_APPLICATION_CREDENTIALS=emailinsight-7f04f034fa9b.json
 # export API_KEY=AIzaSyAY9T1IVheKFOCI9vdTp6-J77Rzk2XUiW0
-# gcloud auth activate-service-account  --key-file emailinsight-3b9291f24d02.json
+# gcloud auth activate-service-account  --key-file emailinsight-7f04f034fa9b.json
 # gcloud beta ml language analyze-entities --content="Michelangelo Caravaggio, Italian painter, is known for 'The Calling of Saint Matthew'."
 
 GROUP_NAMES = ['Legal', 'Information', 'Emergencies', 'TechSupport', 'Utilities', 'Sales']
@@ -67,7 +67,8 @@ def get_time_data():
 
 @app.route('/getAllData', methods=['POST'])
 def get_all_data():
-	data = {"all": run_all_query("SELECT * FROM cases;")}
+	data = {}
+	test = run_query_all_columns("SELECT * FROM cases;")
 	return jsonify(data)
 
 
@@ -182,9 +183,10 @@ def run_query(query):
 # 	u'South',
 # 	u'Charles Anderson'
 # ]
-def run_all_query(query):
+def run_query_all_columns(query):
 	data = database.execute_sql(query)
-	return data
+	print data
+	return jsonify(data)
 
 def clean_text(message_subject, message_content):
 	message_subject = re.sub('[^A-Za-z0-9.?!; ]+', ' ', message_subject)

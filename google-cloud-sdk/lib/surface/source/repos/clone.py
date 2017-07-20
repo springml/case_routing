@@ -27,81 +27,12 @@ from googlecloudsdk.core.credentials import store as c_store
 
 @base.ReleaseTracks(base.ReleaseTrack.GA)
 class CloneGA(base.Command):
-  """Clone project git repository in the current directory.
-
-  This command clones git repository for the currently active
-  Google Cloud Platform project into the specified folder in the
-  current directory.
-
-  ## EXAMPLES
-
-  To use the default Google Cloud repository for development, use the
-  following commands. We recommend that you use your project name as
-  TARGET_DIR to make it apparent which directory is used for which
-  project. We also recommend to clone the repository named 'default'
-  since it is automatically created for each project, and its
-  contents can be browsed and edited in the Developers Console.
-
-    $ gcloud init
-    $ gcloud source repos clone default TARGET_DIR
-    $ cd TARGET_DIR
-    ... create/edit files and create one or more commits ...
-    $ git push origin master
-  """
-
-  @staticmethod
-  def Args(parser):
-    parser.add_argument(
-        '--dry-run',
-        action='store_true',
-        help=('If provided, prints the command that would be run to standard '
-              'out instead of executing it.'))
-
-    parser.add_argument(
-        'src',
-        metavar='REPOSITORY_NAME',
-        help=('Name of the repository. '
-              'Note: Google Cloud Platform projects generally have (if '
-              'created) a repository named "default"'))
-    parser.add_argument(
-        'dst',
-        metavar='DIRECTORY_NAME',
-        nargs='?',
-        help=('Directory name for the cloned repo. Defaults to the repository '
-              'name.'))
-
-  def Run(self, args):
-    """Clone a GCP repository to the current directory.
-
-    Args:
-      args: argparse.Namespace, the arguments this command is run with.
-
-    Raises:
-      ToolException: on project initialization errors.
-
-    Returns:
-      The path to the new git repository.
-    """
-    # Ensure that we're logged in.
-    c_store.Load()
-
-    project_id = properties.VALUES.core.project.Get(required=True)
-    project_repo = git.Git(project_id, args.src)
-    path = project_repo.Clone(destination_path=args.dst or args.src,
-                              dry_run=args.dry_run)
-    if path and not args.dry_run:
-      log.status.write('Project [{prj}] repository [{repo}] was cloned to '
-                       '[{path}].\n'.format(prj=project_id, path=path,
-                                            repo=project_repo.GetName()))
-
-
-@base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
-class CloneAlpha(base.Command):
   """Clone a cloud source repository.
 
   This command clones a git repository for the currently active
   Google Cloud Platform project into the specified directory or into
-  the current directory if no target directory is specified.
+  the current directory if no target directory is specified.  This command
+  gives a warning if the cloud source repository is a mirror.
 
   The clone operation configures the local clone to use your gcloud
   credentials to authenticate future git operations.
@@ -126,20 +57,25 @@ class CloneAlpha(base.Command):
         help=('If provided, prints the command that would be run to standard '
               'out instead of executing it.'))
     parser.add_argument(
-        '--use-full-gcloud-path',
-        action='store_true',
-        help=
-        ('If provided, use the full gcloud path for the git credential.helper. '
-         'Using the full path means that gcloud does not need to be in '
-         'the path for future git operations on the repository.'))
-    parser.add_argument(
-        'src', metavar='REPOSITORY_NAME', help='Name of the repository. ')
+        'src', metavar='REPOSITORY_NAME', help='Name of the repository.')
     parser.add_argument(
         'dst',
         metavar='DIRECTORY_NAME',
         nargs='?',
         help=('Directory name for the cloned repo. Defaults to the repository '
               'name.'))
+
+  def UseFullGcloudPath(self, args):
+    """Always false because --use-full-gcloud-path argument is not in GA."""
+    return False
+
+  def ActionIfMirror(self, project, repo, mirror_url):
+    """Prints a warning if the repository is a mirror."""
+    message = ('Repository "{repo}" in project "{prj}" is a mirror. Pushing to '
+               'this clone will have no effect.  Instead, directly clone the '
+               'mirrored repository directly with \n$ git clone '
+               '{url}'.format(repo=repo, prj=project, url=mirror_url))
+    log.warn(message)
 
   def Run(self, args):
     """Clone a GCP repository to the current directory.
@@ -174,18 +110,60 @@ class CloneAlpha(base.Command):
       raise c_exc.InvalidArgumentException('REPOSITORY_NAME', message)
     if hasattr(repo, 'mirrorConfig') and repo.mirrorConfig:
       mirror_url = repo.mirrorConfig.url
-      message = ('Repository "{src}" in project "{prj}" is a mirror. Clone the '
-                 'mirrored repository directly with \n$ git clone '
-                 '{url}'.format(
-                     src=args.src, prj=res.projectsId, url=mirror_url))
-      raise c_exc.InvalidArgumentException('REPOSITORY_NAME', message)
+      self.ActionIfMirror(args.src, res.projectsId, mirror_url)
     # do the actual clone
     git_helper = git.Git(res.projectsId, args.src, uri=repo.url)
     path = git_helper.Clone(
         destination_path=args.dst or args.src,
         dry_run=args.dry_run,
-        full_path=args.use_full_gcloud_path)
+        full_path=self.UseFullGcloudPath(args))
     if path and not args.dry_run:
       log.status.write('Project [{prj}] repository [{repo}] was cloned '
                        'to [{path}].\n'.format(
                            prj=res.projectsId, path=path, repo=args.src))
+
+
+@base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
+class CloneAlpha(CloneGA):
+  """Clone a cloud source repository.
+
+  This command clones a git repository for the currently active
+  Google Cloud Platform project into the specified directory or into
+  the current directory if no target directory is specified.  This command
+  gives an error if the cloud source repository is a mirror.
+
+  The clone operation configures the local clone to use your gcloud
+  credentials to authenticate future git operations.
+
+  ## EXAMPLES
+
+  The example commands below show a sample workflow.
+
+    $ gcloud init
+    $ {command} REPOSITORY_NAME DIRECTORY_NAME
+    $ cd DIRECTORY_NAME
+    ... create/edit files and create one or more commits ...
+    $ git push origin master
+  """
+
+  @staticmethod
+  def Args(parser):
+    CloneGA.Args(parser)
+    parser.add_argument(
+        '--use-full-gcloud-path',
+        action='store_true',
+        help=
+        ('If provided, use the full gcloud path for the git credential.helper. '
+         'Using the full path means that gcloud does not need to be in '
+         'the path for future git operations on the repository.'))
+
+  def UseFullGcloudPath(self, args):
+    """Use value of --use-full-gcloud-path argument in beta and alpha."""
+    return args.use_full_gcloud_path
+
+  def ActionIfMirror(self, project, repo, mirror_url):
+    """Raises an exception if the repository is a mirror."""
+    message = ('Repository "{repo}" in project "{prj}" is a mirror. Clone the '
+               'mirrored repository directly with \n$ git clone '
+               '{url}'.format(repo=repo, prj=project, url=mirror_url))
+    raise c_exc.InvalidArgumentException('REPOSITORY_NAME', message)

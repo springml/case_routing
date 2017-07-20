@@ -17,6 +17,7 @@ from googlecloudsdk.api_lib.sql import api_util
 from googlecloudsdk.api_lib.sql import operations
 from googlecloudsdk.api_lib.sql import validate
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.sql import flags
 from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
 from googlecloudsdk.core.console import console_io
@@ -41,7 +42,7 @@ class RestoreBackup(base.Command):
     """
     parser.add_argument(
         'instance',
-        completion_resource='sql.instances',
+        completer=flags.InstanceCompleter,
         help='Cloud SQL instance ID that will be restored.')
 
     # TODO(b/21877717): Remove backup_id_group after deprecation period.
@@ -58,7 +59,7 @@ class RestoreBackup(base.Command):
 
     parser.add_argument(
         '--backup-instance',
-        completion_resource='sql.instances',
+        completer=flags.InstanceCompleter,
         help='The ID of the instance that the backup was taken from.')
     parser.add_argument(
         '--async',

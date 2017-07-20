@@ -22,11 +22,8 @@ from googlecloudsdk.core import resources
 
 
 def _GetUriFunction(resource):
-  return resources.REGISTRY.Parse(
+  return resources.REGISTRY.ParseRelativeName(
       resource.name,
-      params={
-          'projectsId': properties.VALUES.core.project.GetOrFail,
-      },
       collection='bigtableadmin.projects.instances.clusters').SelfLink()
 
 
@@ -61,6 +58,9 @@ class ListClusters(base.ListCommand):
     Yields:
       Some value that we want to have printed later.
     """
+    # TODO(b/33272823): Remove after deprecation period
+    arguments.ProcessInstances(args)
+
     cli = util.GetAdminClient()
     instances = args.instances or ['-']
     for instance in instances:

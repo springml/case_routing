@@ -14,9 +14,9 @@
 
 """type-providers delete command."""
 
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.api_lib.deployment_manager import exceptions
 from googlecloudsdk.calliope import base
-from googlecloudsdk.command_lib.deployment_manager import dm_beta_base
 from googlecloudsdk.command_lib.deployment_manager import dm_write
 from googlecloudsdk.command_lib.deployment_manager import flags
 from googlecloudsdk.command_lib.deployment_manager import type_providers
@@ -31,7 +31,8 @@ def LogResource(request, async):
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
-class Delete(base.DeleteCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2BETA)
+class Delete(base.DeleteCommand, dm_base.DmCommand):
   """Delete a type provider.
 
   This command deletes a type provider.
@@ -68,7 +69,6 @@ class Delete(base.DeleteCommand):
       HttpException: An http error response was received while executing api
           request.
     """
-    messages = dm_beta_base.GetMessages()
     type_provider_ref = type_providers.GetReference(args.provider_name)
     if not args.quiet:
       prompt_message = 'Are you sure you want to delete [{0}]?'.format(
@@ -76,11 +76,14 @@ class Delete(base.DeleteCommand):
       if not console_io.PromptContinue(message=prompt_message, default=False):
         raise exceptions.OperationError('Deletion aborted by user.')
 
-    request = messages.DeploymentmanagerTypeProvidersDeleteRequest(
+    request = self.messages.DeploymentmanagerTypeProvidersDeleteRequest(
         project=type_provider_ref.project,
         typeProvider=type_provider_ref.typeProvider)
 
-    dm_write.Execute(request,
+    dm_write.Execute(self.client,
+                     self.messages,
+                     self.resources,
+                     request,
                      args.async,
-                     dm_beta_base.GetClient().typeProviders.Delete,
+                     self.client.typeProviders.Delete,
                      LogResource)

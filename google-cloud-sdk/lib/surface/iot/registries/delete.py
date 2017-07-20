@@ -16,6 +16,7 @@ from googlecloudsdk.api_lib.cloudiot import registries
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iot import flags
 from googlecloudsdk.command_lib.iot import util
+from googlecloudsdk.core import log
 
 
 class Delete(base.DeleteCommand):
@@ -27,5 +28,7 @@ class Delete(base.DeleteCommand):
 
   def Run(self, args):
     client = registries.RegistriesClient()
-    return client.Delete(util.ParseRegistry(args.id, region=args.region))
-
+    registry_ref = util.ParseRegistry(args.id, region=args.region)
+    response = client.Delete(registry_ref)
+    log.DeletedResource(registry_ref.Name(), 'registry')
+    return response

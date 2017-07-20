@@ -539,6 +539,7 @@ class BigqueryClient(object):
       raise ValueError('Cannot set dataset_id without project_id')
 
 
+
   def GetHttp(self):
     """Returns the httplib2 Http to use."""
 
@@ -646,6 +647,7 @@ class BigqueryClient(object):
     """Return the apiclient that supports insert operation."""
     insert_client = self.apiclient
     return insert_client
+
 
 
 
@@ -941,6 +943,7 @@ class BigqueryClient(object):
 
 
 
+
   def ReadSchemaAndRows(self, table_dict, start_row=None, max_rows=None,
                         selected_fields=None):
     """Convenience method to get the schema and rows from a table.
@@ -1035,7 +1038,7 @@ class BigqueryClient(object):
     elif reference_type == ApiClientHelper.TableReference:
       if print_format == 'list':
         formatter.AddColumns(('tableId', 'Type',))
-        formatter.AddColumns(('Labels',))
+        formatter.AddColumns(('Labels', 'Time Partitioning'))
       if print_format == 'show':
         use_default = True
         if object_info is not None:
@@ -1050,7 +1053,7 @@ class BigqueryClient(object):
         if use_default:
           formatter.AddColumns(('Last modified', 'Schema',
                                 'Total Rows', 'Total Bytes',
-                                'Expiration'))
+                                'Expiration', 'Time Partitioning'))
         formatter.AddColumns(('Labels',))
       if print_format == 'view':
         formatter.AddColumns(('Query',))
@@ -1315,6 +1318,13 @@ class BigqueryClient(object):
           int(result['expirationTime']) / 1000)
     if 'labels' in result:
       result['Labels'] = _FormatLabels(result['labels'])
+    if 'timePartitioning' in result:
+      if 'type' in result['timePartitioning']:
+        result['Time Partitioning'] = result['timePartitioning']['type']
+        if 'expirationMs' in result['timePartitioning']:
+          expiration_ms = int(result['timePartitioning']['expirationMs'])
+          result['Time Partitioning'] += (
+              ' (expirationMs: %d)' % (expiration_ms,))
     if 'type' in result:
       result['Type'] = result['type']
       if 'view' in result and 'query' in result['view']:
@@ -1324,6 +1334,7 @@ class BigqueryClient(object):
           result['Total URIs'] = len(
               result['externalDataConfiguration']['sourceUris'])
     return result
+
 
 
   @staticmethod
@@ -1368,6 +1379,7 @@ class BigqueryClient(object):
     if page_token is not None:
       request['pageToken'] = page_token
     return request
+
 
   def _NormalizeProjectReference(self, reference):
     if reference is None:
@@ -1423,6 +1435,7 @@ class BigqueryClient(object):
         result = self.apiclient.jobs().list(**request).execute()
         results.extend(result.get('jobs', []))
     return results
+
 
   def ListProjectRefs(self, **kwds):
     """List the project references this user has access to."""
@@ -1548,6 +1561,7 @@ class BigqueryClient(object):
     except BigqueryNotFoundError:
       return False
 
+
   def CreateDataset(self, reference, ignore_existing=False, description=None,
                     friendly_name=None, acl=None,
                     default_table_expiration_ms=None,
@@ -1665,6 +1679,8 @@ class BigqueryClient(object):
     except BigqueryDuplicateError:
       if not ignore_existing:
         raise
+
+
 
   def UpdateTable(self,
                   reference,
@@ -1860,6 +1876,7 @@ class BigqueryClient(object):
     except BigqueryNotFoundError:
       if not ignore_not_found:
         raise
+
 
   #################################
   ## Job control
@@ -2950,4 +2967,6 @@ class ApiClientHelper(object):
     def GetProjectReference(self):
       return ApiClientHelper.ProjectReference.Create(
           projectId=self.projectId)
+
+
 

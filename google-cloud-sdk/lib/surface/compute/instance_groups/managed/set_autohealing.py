@@ -18,12 +18,9 @@ from googlecloudsdk.api_lib.compute import managed_instance_groups_utils
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.compute import flags
 from googlecloudsdk.command_lib.compute import scope as compute_scope
+from googlecloudsdk.command_lib.compute.health_checks import flags as health_checks_flags
 from googlecloudsdk.command_lib.compute.instance_groups import flags as instance_groups_flags
-
-
-def _AddArgs(parser):
-  """Adds args."""
-  managed_instance_groups_utils.AddAutohealingArgs(parser)
+from googlecloudsdk.command_lib.compute.managed_instance_groups import auto_healing_utils
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
@@ -45,9 +42,15 @@ class SetAutohealing(base.Command):
   RUNNING or UNHEALTHY. This value must be from range [0, 3600].
   """
 
-  @staticmethod
-  def Args(parser):
-    _AddArgs(parser=parser)
+  HEALTH_CHECK_ARG = health_checks_flags.HealthCheckArgument(
+      '', '--health-check', required=False)
+
+  @classmethod
+  def Args(cls, parser):
+    health_check_group = parser.add_mutually_exclusive_group()
+    cls.HEALTH_CHECK_ARG.AddArgument(health_check_group)
+    auto_healing_utils.AddAutohealingArgs(
+        parser=parser, health_check_group=health_check_group)
     instance_groups_flags.MULTISCOPE_INSTANCE_GROUP_MANAGER_ARG.AddArgument(
         parser)
 
@@ -60,9 +63,11 @@ class SetAutohealing(base.Command):
                    args, holder.resources,
                    default_scope=compute_scope.ScopeEnum.ZONE,
                    scope_lister=flags.GetDefaultScopeLister(client))
+    health_check = managed_instance_groups_utils.GetHealthCheckUri(
+        holder.resources, args, self.HEALTH_CHECK_ARG)
     auto_healing_policies = (
         managed_instance_groups_utils.CreateAutohealingPolicies(
-            holder.resources, client.messages, args))
+            client.messages, health_check, args.initial_delay))
 
     if igm_ref.Collection() == 'compute.instanceGroupManagers':
       service = client.apitools_client.instanceGroupManagers

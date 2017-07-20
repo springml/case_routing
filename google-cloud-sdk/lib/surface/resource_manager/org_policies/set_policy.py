@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Command to set an OrgPolicy."""
+"""Command to set an Organization Policy."""
 
 from googlecloudsdk.api_lib.resource_manager import org_policies
 from googlecloudsdk.calliope import base
@@ -19,17 +19,16 @@ from googlecloudsdk.command_lib.resource_manager import org_policies_base
 from googlecloudsdk.command_lib.resource_manager import org_policies_flags as flags
 
 
-@base.Hidden
-@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
+@base.ReleaseTracks(base.ReleaseTrack.ALPHA, base.ReleaseTrack.BETA)
 class SetPolicy(base.DescribeCommand):
-  """Set OrgPolicy.
+  """Set Organization Policy.
 
-  Sets an OrgPolicy associated with the specified resource from
-  a file that contains the JSON or YAML encoded OrgPolicy.
+  Sets an Organization Policy associated with the specified resource from
+  a file that contains the JSON or YAML encoded Organization Policy.
 
   ## EXAMPLES
 
-  The following command sets an OrgPolicy for a constraint
+  The following command sets an Organization Policy for a constraint
   on project `foo-project` from file `/tmp/policy.yaml`:
 
     $ {command} --project=foo-project /tmp/policy.yaml
@@ -40,7 +39,8 @@ class SetPolicy(base.DescribeCommand):
     flags.AddResourceFlagsToParser(parser)
     base.Argument(
         'policy_file',
-        help='JSON or YAML file with the OrgPolicy.').AddToParser(parser)
+        help='JSON or YAML file with the Organization Policy.').AddToParser(
+            parser)
 
   def Run(self, args):
     flags.CheckResourceFlags(args)

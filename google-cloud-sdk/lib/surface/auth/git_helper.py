@@ -32,6 +32,7 @@ import subprocess
 import sys
 import textwrap
 
+from googlecloudsdk.api_lib.auth import exceptions as auth_exceptions
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions as c_exc
 from googlecloudsdk.core import log
@@ -63,14 +64,14 @@ class GitHelper(base.Command):
                         help=('Produce no output and exit with 0 when given '
                               'an unknown method (e.g. store) or host.'))
 
-  @c_exc.RaiseToolExceptionInsteadOf(c_store.Error, client.Error)
+  @c_exc.RaiseErrorInsteadOf(auth_exceptions.AuthenticationError, client.Error)
   def Run(self, args):
     """Run the helper command."""
 
     if args.method not in GitHelper.METHODS:
       if args.ignore_unknown:
         return
-      raise c_exc.ToolException(
+      raise auth_exceptions.GitCredentialHelperError(
           'Unexpected method [{meth}]. One of [{methods}] expected.'
           .format(meth=args.method, methods=', '.join(GitHelper.METHODS)))
 
@@ -82,8 +83,8 @@ class GitHelper(base.Command):
     if info.get('host') not in credentialed_domains:
       if args.ignore_unknown:
         return
-      raise c_exc.ToolException('Unknown host [{host}].'
-                                .format(host=info.get('host')))
+      raise auth_exceptions.GitCredentialHelperError(
+          'Unknown host [{host}].'.format(host=info.get('host')))
 
     if args.method == GitHelper.GET:
       account = properties.VALUES.core.account.Get()
@@ -145,20 +146,24 @@ class GitHelper(base.Command):
         continue
       match = _KEYVAL_RE.match(line)
       if not match:
-        raise c_exc.ToolException('Invalid input line format: [{format}].'
-                                  .format(format=line.rstrip('\n')))
+        raise auth_exceptions.GitCredentialHelperError(
+            'Invalid input line format: [{format}].'
+            .format(format=line.rstrip('\n')))
       key, val = match.groups()
       info[key] = val.strip()
 
     if 'protocol' not in info:
-      raise c_exc.ToolException('Required key "protocol" missing.')
+      raise auth_exceptions.GitCredentialHelperError(
+          'Required key "protocol" missing.')
 
     if 'host' not in info:
-      raise c_exc.ToolException('Required key "host" missing.')
+      raise auth_exceptions.GitCredentialHelperError(
+          'Required key "host" missing.')
 
     if info.get('protocol') != 'https':
-      raise c_exc.ToolException('Invalid protocol [{p}].  "https" expected.'
-                                .format(p=info.get('protocol')))
+      raise auth_exceptions.GitCredentialHelperError(
+          'Invalid protocol [{p}].  "https" expected.'
+          .format(p=info.get('protocol')))
     return info
 
   def _CheckNetrc(self):

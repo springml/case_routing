@@ -26,6 +26,12 @@ if os.path.isdir(_THIRD_PARTY_DIR):
   sys.path.insert(0, _THIRD_PARTY_DIR)
 
 
+def _import_gcloud_main():
+  # pylint:disable=g-import-not-at-top
+  import googlecloudsdk.gcloud_main
+  return googlecloudsdk.gcloud_main
+
+
 def main():
 
   if '_ARGCOMPLETE' in os.environ:
@@ -39,9 +45,9 @@ def main():
         raise
 
   try:
-    # pylint:disable=g-import-not-at-top
-    import googlecloudsdk.gcloud_main
-  except ImportError as err:
+    gcloud_main = _import_gcloud_main()
+  except Exception as err:  # pylint: disable=broad-except
+    # We want to catch *everything* here to display a nice message to the user
     # pylint:disable=g-import-not-at-top
     import traceback
     # We DON'T want to suggest `gcloud components reinstall` here (ex. as
@@ -63,7 +69,7 @@ def main():
              '\n'.join(traceback.format_exc().splitlines()[2::2]),
              sys.executable))
     sys.exit(1)
-  sys.exit(googlecloudsdk.gcloud_main.main())
+  sys.exit(gcloud_main.main())
 
 
 if __name__ == '__main__':

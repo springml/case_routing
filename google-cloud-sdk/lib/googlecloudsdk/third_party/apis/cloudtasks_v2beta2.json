@@ -147,13 +147,13 @@
           "description": "The queue name.\n\nThe queue name must have the following format:\n`projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID`\n\n* `PROJECT_ID` can contain uppercase and lowercase letters,\n  numbers, hyphens, colons, and periods; that is, it must match\n  the regular expression: `[a-zA-Z\\\\d-:\\\\.]+`.\n* `QUEUE_ID` can contain uppercase and lowercase letters,\n  numbers, and hyphens; that is, it must match the regular\n  expression: `[a-zA-Z\\\\d-]+`. The maximum length is 100\n  characters.\n\nCaller-specified and required in CreateQueueRequest, after which\nit becomes output only.",
           "type": "string"
         },
-        "pullQueueConfig": {
-          "description": "Pull queue config.",
-          "$ref": "PullQueueConfig"
-        },
         "appEngineQueueConfig": {
           "description": "App Engine queue config.",
           "$ref": "AppEngineQueueConfig"
+        },
+        "pullQueueConfig": {
+          "description": "Pull queue config.",
+          "$ref": "PullQueueConfig"
         },
         "throttleConfig": {
           "description": "Config for throttling task dispatches.",
@@ -167,7 +167,7 @@
           "description": "Output only.\n\nThe state of the queue.\n\n`queue_state` can only be changed by called\nCloudTasks.PauseQueue, CloudTasks.EnableQueue, or uploading\n[queue.yaml](https:\/\/cloud.google.com\/appengine\/docs\/python\/config\/queueref).\nCloudTasks.UpdateQueue cannot be used to change `queue_state`.",
           "enumDescriptions": [
             "Unspecified state.",
-            "Queue is enabled. Tasks are executing normally.",
+            "Queue is enabled. Tasks can be dispatched.",
             "Tasks are paused by the user. If the queue is paused then Cloud\nTasks will stop delivering tasks from it, but more tasks can\nstill be added to it by the user. When a pull queue is paused,\nall CloudTasks.PullTasks calls will return a\n`FAILED_PRECONDITION` error.",
             "Disabled indicates that queue has been removed from queue.yaml.\n\nWhen you remove a queue from\n[queue.yaml](https:\/\/cloud.google.com\/appengine\/docs\/python\/config\/queueref),\nit is marked as `DISABLED`. You cannot directly disable a queue.\n\nWhen a queue is disabled, tasks can still be added to a queue\nbut the tasks are not dispatched and CloudTasks.PullTasks calls\nreturn a `FAILED_PRECONDITION` error.\n\nTo permanently delete this queue and all of its tasks, call\nCloudTasks.DeleteQueue."
           ],
@@ -180,25 +180,9 @@
           ]
         },
         "purgeTime": {
-          "description": "Output only.\n\nThe last time this queue was purged. All tasks that were\ncreated before this time were purged.\n\nA queue can be purged using CloudTasks.PurgeQueue, the\n[App Engine Task Queue SDK, or the Cloud Console](https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/taskqueue\/push\/deleting-tasks-and-queues#purging_all_tasks_from_a_queue).\n\nPurge time will be truncated to the nearest microsecond.",
+          "description": "Output only.\n\nThe last time this queue was purged. All tasks that were\ncreated before this time were purged.\n\nA queue can be purged using CloudTasks.PurgeQueue, the\n[App Engine Task Queue SDK, or the Cloud Console](https:\/\/cloud.google.com\/appengine\/docs\/standard\/python\/taskqueue\/push\/deleting-tasks-and-queues#purging_all_tasks_from_a_queue).\n\nPurge time will be truncated to the nearest microsecond. Purge\ntime will be zero if the queue has never been purged.",
           "type": "string",
           "format": "google-datetime"
-        }
-      }
-    },
-    "PullQueueConfig": {
-      "id": "PullQueueConfig",
-      "description": "Pull queue config.",
-      "type": "object",
-      "properties": {
-        "maxAttempts": {
-          "description": "The maximum number of attempts for a task.\n\nCloud Tasks will attempt the task `max_attempts` times. If the first\nattempt fails, then there will be `max_attempts - 1` retries.\nMust be > 0.",
-          "type": "integer",
-          "format": "int32"
-        },
-        "unlimitedAttempts": {
-          "description": "If true, then the number of attempts is unlimited.",
-          "type": "boolean"
         }
       }
     },
@@ -230,7 +214,7 @@
     },
     "AppEngineRouting": {
       "id": "AppEngineRouting",
-      "description": "App Engine Routing.\n\nFor more information about services, versions, and instances see\n[An Overview of App\nEngine](https:\/\/cloud.google.com\/appengine\/docs\/python\/an-overview-of-app-engine)\nand\n[Microservices Architecture on Google App\nEngine](https:\/\/cloud.google.com\/appengine\/docs\/python\/microservices-on-app-engine).\n\nNote: The routing for some queues or tasks which were not created\nusing the Cloud Tasks API may not be parsable into\nAppEngineRouting. For example, if numeric version names are\nused, then urls such as `123.my-service.appspot.com` are ambiguous\nbecause `123` can be interpretted as a version or instance number. See\n[here](https:\/\/cloud.google.com\/appengine\/docs\/python\/how-requests-are-routed#soft_routing)\nfor more information. If the routing is unparsable,\nAppEngineRouting will be empty; the routing information can be\nviewed in the HOST header in AppEngineQueueConfig.headers and\nAppEngineTaskTarget.headers.",
+      "description": "App Engine Routing.\n\nFor more information about services, versions, and instances see\n[An Overview of App\nEngine](https:\/\/cloud.google.com\/appengine\/docs\/python\/an-overview-of-app-engine)\nand\n[Microservices Architecture on Google App\nEngine](https:\/\/cloud.google.com\/appengine\/docs\/python\/microservices-on-app-engine).\n\nNote: The routing for some queues or tasks which were not created\nusing the Cloud Tasks API may not be parsable into\nAppEngineRouting. For example, if numeric version names are\nused, then urls such as `123.my-service.appspot.com` are ambiguous\nbecause `123` can be interpreted as a version or instance number. See\n[here](https:\/\/cloud.google.com\/appengine\/docs\/python\/how-requests-are-routed#soft_routing)\nfor more information. If the routing is unparsable,\nAppEngineRouting will be empty; the routing information can be\nviewed in the HOST header in AppEngineQueueConfig.headers and\nAppEngineTaskTarget.headers.",
       "type": "object",
       "properties": {
         "service": {
@@ -320,9 +304,46 @@
         }
       }
     },
+    "PullQueueConfig": {
+      "id": "PullQueueConfig",
+      "description": "Pull queue config.",
+      "type": "object",
+      "properties": {
+        "maxAttempts": {
+          "description": "The maximum number of attempts for a task.\n\nCloud Tasks will attempt the task `max_attempts` times. If the first\nattempt fails, then there will be `max_attempts - 1` retries.\nMust be > 0.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "unlimitedAttempts": {
+          "description": "If true, then the number of attempts is unlimited.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Empty": {
+      "id": "Empty",
+      "description": "A generic empty message that you can re-use to avoid defining duplicated\nempty messages in your APIs. A typical example is to use it as the request\nor the response type of an API method. For instance:\n\n    service Foo {\n      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);\n    }\n\nThe JSON representation for `Empty` is empty JSON object `{}`.",
+      "type": "object",
+      "properties": {
+      }
+    },
     "PurgeQueueRequest": {
       "id": "PurgeQueueRequest",
       "description": "Request message for CloudTasks.PurgeQueue.",
+      "type": "object",
+      "properties": {
+      }
+    },
+    "PauseQueueRequest": {
+      "id": "PauseQueueRequest",
+      "description": "Request message for CloudTasks.PauseQueue.",
+      "type": "object",
+      "properties": {
+      }
+    },
+    "EnableQueueRequest": {
+      "id": "EnableQueueRequest",
+      "description": "Request message for CloudTasks.EnableQueue.",
       "type": "object",
       "properties": {
       }
@@ -355,13 +376,13 @@
           "description": "The task name.\n\nThe task name must have the following format:\n`projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID\/tasks\/TASK_ID`\n\n* `PROJECT_ID` can contain uppercase and lowercase letters,\n  numbers, hyphens, colons, and periods; that is, it must match\n  the regular expression: `[a-zA-Z\\\\d-:\\\\.]+`.\n* `QUEUE_ID` can contain uppercase and lowercase letters,\n  numbers, and hyphens; that is, it must match the regular\n  expression: `[a-zA-Z\\\\d-]+`. The maximum length is 100\n  characters.\n* `TASK_ID` contain uppercase and lowercase letters, numbers,\n  underscores, and hyphens; that is, it must match the regular\n  expression: `[a-zA-Z\\\\d_-]+`. The maximum length is 500\n  characters.\n\nOptionally caller-specified in CreateTaskRequest, after which it\nbecomes output only.",
           "type": "string"
         },
-        "pullTaskTarget": {
-          "description": "Pull task target. Can be used only if Queue.pull_queue_config is set.",
-          "$ref": "PullTaskTarget"
-        },
         "appEngineTaskTarget": {
           "description": "App Engine task target. Can be used only if\nQueue.app_engine_queue_config is set.",
           "$ref": "AppEngineTaskTarget"
+        },
+        "pullTaskTarget": {
+          "description": "Pull task target. Can be used only if Queue.pull_queue_config is set.",
+          "$ref": "PullTaskTarget"
         },
         "scheduleTime": {
           "description": "The time when the task is scheduled to be attempted.\n\nFor pull queues, this is the time when the task is available to\nbe leased; if a task is currently leased, this is the time when\nthe current lease expires, that is, the time that the task was\nleased plus the PullTasksRequest.lease_duration.\n\nFor App Engine queues, this is when the task will be attempted or retried.\n\nschedule_time will be truncated to the nearest microsecond.",
@@ -397,35 +418,9 @@
         }
       }
     },
-    "PullTaskTarget": {
-      "id": "PullTaskTarget",
-      "description": "Pull task target.\n\nThis proto can only be used for tasks in a queue which has\nQueue.pull_queue_config set.",
-      "type": "object",
-      "properties": {
-        "payload": {
-          "description": "A data payload consumed by the task worker to execute the task.",
-          "type": "string",
-          "format": "byte"
-        },
-        "tag": {
-          "description": "A meta-data tag for this task.\n\nThis value is used by CloudTasks.PullTasks calls when\nPullTasksRequest.filter is `tag=<tag>`.\n\nThe tag must be less than 500 bytes.",
-          "type": "string",
-          "format": "byte"
-        },
-        "maxAttempts": {
-          "description": "The maximum number of attempts for a task.\n\nCloud Tasks will attempt the task `max_attempts` times. If the first\nattempt fails, then there will be `max_attempts - 1` retries).\nMust be > 0.",
-          "type": "integer",
-          "format": "int32"
-        },
-        "unlimitedAttempts": {
-          "description": "If true, then the number of attempts is unlimited.\nIf false, then by default Cloud Tasks will retry the task 100 times.",
-          "type": "boolean"
-        }
-      }
-    },
     "AppEngineTaskTarget": {
       "id": "AppEngineTaskTarget",
-      "description": "App Engine task target.\n\nThis proto can only be used for tasks in a queue which has\nQueue.app_engine_queue_config set.\n\nWhen creating this type of task target, the following scope\nmust be used: `https:\/\/www.googleapis.com\/auth\/cloud-platform`.\n\nThe task will be delivered to the URL specified by the\nAppEngineQueueConfig and AppEngineTaskTarget in the App Engine app\nwhich belongs to the same project as the queue. See\n[here](https:\/\/cloud.google.com\/appengine\/docs\/python\/how-requests-are-routed)\nfor information on how requests are routed in App Engine and how\nrouting is affected by\n[dispatch\nfiles](https:\/\/cloud.google.com\/appengine\/docs\/python\/config\/dispatchref).\n\nThe AppEngineRouting used to construct the URL can be set at\nthe queue-level or task-level:\n\n*  If set, AppEngineQueueConfig.app_engine_routing_overrides is used for\nall\n   tasks in the queue, no matter what the setting is for the\n   task-level app_engine_routing.\n\n\nThe `url` that the task will be sent to is:\n\n* `url = host +` AppEngineTaskTarget.relative_url\n\n* `host = [application_domain_name]`<\/br>\n  `| [service] + '.' + [application_domain_name]`<\/br>\n  `| [version] + '.' + [application_domain_name]`<\/br>\n  `| [version_dot_service]+ '.' + [application_domain_name]`<\/br>\n  `| [instance] + '.' + [application_domain_name]`<\/br>\n  `| [instance_dot_service] + '.' + [application_domain_name]`<\/br>\n  `| [instance_dot_version] + '.' + [application_domain_name]`<\/br>\n  `| [instance_dot_version_dot_service] + '.' + [application_domain_name]`\n\n* `application_domain_name` = The domain name of the app, for\n  example <app-id>.appspot.com, which is associated with the\n  queue's project ID.\n\n* `service =` AppEngineRouting.service\n\n* `version =` AppEngineRouting.version\n\n* `version_dot_service =`\n  AppEngineRouting.version `+ '.' +` AppEngineRouting.service\n\n* `instance =` AppEngineRouting.instance\n\n* `instance_dot_service =`\n  AppEngineRouting.instance `+ '.' +` AppEngineRouting.service\n\n* `instance_dot_version =`\n  AppEngineRouting.instance `+ '.' +` AppEngineRouting.version\n\n* `instance_dot_version_dot_service =`\n  AppEngineRouting.instance `+ '.' +`\n  AppEngineRouting.version `+ '.' +` AppEngineRouting.service\n\nIf AppEngineRouting.service is empty, then the task will be sent\nto the service which is the default service when the task is attempted.\n\nIf AppEngineRouting.version is empty, then the task will be sent\nto the version which is the default version when the task is attempted.\n\nIf AppEngineRouting.instance is empty, then the task will be sent\nto an instance which is available when the task is attempted.\n\nIf AppEngineRouting.service, AppEngineRouting.version, or\nAppEngineRouting.instance is invalid, then the task will be sent\nto the default version of the default service when the task is attempted.\n\nThe task will be sent to a task handler by an HTTP\nrequest using the specified AppEngineTaskTarget.http_method (for example\nPOST, HTTP GET, etc). The task attempt has succeeded if the task handler\nreturns an HTTP response code in the range [200 - 299]. Error 503 is\nconsidered an App Engine system error instead of an application error.\nRequests returning error 503 will be retried regardless of retry\nconfiguration and not counted against retry counts.\nAny other response code or a failure to receive a response before the\ndeadline is a failed attempt.",
+      "description": "App Engine task target.\n\nThis proto can only be used for tasks in a queue which has\nQueue.app_engine_queue_config set.\n\nWhen creating this type of task target, the following scope\nmust be used: `https:\/\/www.googleapis.com\/auth\/cloud-platform`.\n\nThe task will be delivered to the URL specified by the\nAppEngineQueueConfig and AppEngineTaskTarget in the App Engine app\nwhich belongs to the same project as the queue. See\n[here](https:\/\/cloud.google.com\/appengine\/docs\/python\/how-requests-are-routed)\nfor information on how requests are routed in App Engine and how\nrouting is affected by\n[dispatch\nfiles](https:\/\/cloud.google.com\/appengine\/docs\/python\/config\/dispatchref).\n\nThe AppEngineRouting used to construct the URL can be set at\nthe queue-level or task-level:\n\n*  If set, AppEngineQueueConfig.app_engine_routing_overrides is used for\n   all tasks in the queue, no matter what the setting is for the\n   task-level app_engine_routing.\n\n\nThe `url` that the task will be sent to is:\n\n* `url = host +` AppEngineTaskTarget.relative_url\n\n* `host = [application_domain_name]`<\/br>\n  `| [service] + '.' + [application_domain_name]`<\/br>\n  `| [version] + '.' + [application_domain_name]`<\/br>\n  `| [version_dot_service]+ '.' + [application_domain_name]`<\/br>\n  `| [instance] + '.' + [application_domain_name]`<\/br>\n  `| [instance_dot_service] + '.' + [application_domain_name]`<\/br>\n  `| [instance_dot_version] + '.' + [application_domain_name]`<\/br>\n  `| [instance_dot_version_dot_service] + '.' + [application_domain_name]`\n\n* `application_domain_name` = The domain name of the app, for\n  example <app-id>.appspot.com, which is associated with the\n  queue's project ID.\n\n* `service =` AppEngineRouting.service\n\n* `version =` AppEngineRouting.version\n\n* `version_dot_service =`\n  AppEngineRouting.version `+ '.' +` AppEngineRouting.service\n\n* `instance =` AppEngineRouting.instance\n\n* `instance_dot_service =`\n  AppEngineRouting.instance `+ '.' +` AppEngineRouting.service\n\n* `instance_dot_version =`\n  AppEngineRouting.instance `+ '.' +` AppEngineRouting.version\n\n* `instance_dot_version_dot_service =`\n  AppEngineRouting.instance `+ '.' +`\n  AppEngineRouting.version `+ '.' +` AppEngineRouting.service\n\nIf AppEngineRouting.service is empty, then the task will be sent\nto the service which is the default service when the task is attempted.\n\nIf AppEngineRouting.version is empty, then the task will be sent\nto the version which is the default version when the task is attempted.\n\nIf AppEngineRouting.instance is empty, then the task will be sent\nto an instance which is available when the task is attempted.\n\nIf AppEngineRouting.service, AppEngineRouting.version, or\nAppEngineRouting.instance is invalid, then the task will be sent\nto the default version of the default service when the task is attempted.\n\nThe task will be sent to a task handler by an HTTP\nrequest using the specified AppEngineTaskTarget.http_method (for example\nPOST, HTTP GET, etc). The task attempt has succeeded if the task handler\nreturns an HTTP response code in the range [200 - 299]. Error 503 is\nconsidered an App Engine system error instead of an application error.\nRequests returning error 503 will be retried regardless of retry\nconfiguration and not counted against retry counts.\nAny other response code or a failure to receive a response before the\ndeadline is a failed attempt.",
       "type": "object",
       "properties": {
         "httpMethod": {
@@ -471,6 +466,32 @@
         "retryConfig": {
           "description": "Deprecated. Task.retry_config replaces this field. If both this field\nand Task.retry_config are specified, Task.retry_config takes\nprecedence.\n\nSettings that determine the retry behavior.\n\nThe task's retry configuration\noverrides the\nqueue's retry configuration.",
           "$ref": "RetryConfig"
+        }
+      }
+    },
+    "PullTaskTarget": {
+      "id": "PullTaskTarget",
+      "description": "Pull task target.\n\nThis proto can only be used for tasks in a queue which has\nQueue.pull_queue_config set.",
+      "type": "object",
+      "properties": {
+        "payload": {
+          "description": "A data payload consumed by the task worker to execute the task.",
+          "type": "string",
+          "format": "byte"
+        },
+        "tag": {
+          "description": "A meta-data tag for this task.\n\nThis value is used by CloudTasks.PullTasks calls when\nPullTasksRequest.filter is `tag=<tag>`.\n\nThe tag must be less than 500 bytes.",
+          "type": "string",
+          "format": "byte"
+        },
+        "maxAttempts": {
+          "description": "The maximum number of attempts for a task.\n\nCloud Tasks will attempt the task `max_attempts` times. If the first\nattempt fails, then there will be `max_attempts - 1` retries).\nMust be > 0.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "unlimitedAttempts": {
+          "description": "If true, then the number of attempts is unlimited.\nIf false, then by default Cloud Tasks will retry the task 100 times.",
+          "type": "boolean"
         }
       }
     },
@@ -520,7 +541,7 @@
           "format": "google-datetime"
         },
         "responseStatus": {
-          "description": "Output only.\n\nThe response from the target for this attempt.\n\nIf the task has not been attempted or the task is currently running\nthen the response status will be UNKNOWN.",
+          "description": "Output only.\n\nThe response from the target for this attempt.\n\nIf the task has not been attempted or the task is currently running\nthen the response status will be google.rpc.Code.UNKNOWN.",
           "$ref": "Status"
         }
       }
@@ -540,7 +561,7 @@
           "type": "string"
         },
         "details": {
-          "description": "A list of messages that carry the error details.  There will be a\ncommon set of message types for APIs to use.",
+          "description": "A list of messages that carry the error details.  There is a common set of\nmessage types for APIs to use.",
           "type": "array",
           "items": {
             "type": "object",
@@ -575,13 +596,6 @@
             "FULL"
           ]
         }
-      }
-    },
-    "Empty": {
-      "id": "Empty",
-      "description": "A generic empty message that you can re-use to avoid defining duplicated\nempty messages in your APIs. A typical example is to use it as the request\nor the response type of an API method. For instance:\n\n    service Foo {\n      rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);\n    }\n\nThe JSON representation for `Empty` is empty JSON object `{}`.",
-      "type": "object",
-      "properties": {
       }
     },
     "PullTasksRequest": {
@@ -777,6 +791,93 @@
                     "https://www.googleapis.com/auth/cloud-platform"
                   ]
                 },
+                "create": {
+                  "id": "cloudtasks.projects.locations.queues.create",
+                  "path": "v2beta2/{+parent}/queues",
+                  "flatPath": "v2beta2/projects/{projectsId}/locations/{locationsId}/queues",
+                  "httpMethod": "POST",
+                  "description": "Creates a queue.\n\nWARNING: This method is only available to whitelisted\nusers. Using this method carries some risk. Read\n[Overview of Queue Management and queue.yaml](https:\/\/cloud.google.com\/cloud-tasks\/docs\/queue-yaml)\ncarefully and then sign up for\n[whitelist access to this method](https:\/\/goo.gl\/Fe5mUy).",
+                  "parameters": {
+                    "parent": {
+                      "description": "Required.\n\nThe location name in which the queue will be created.\nFor example: `projects\/PROJECT_ID\/locations\/LOCATION_ID`\n\nThe list of allowed locations can be obtained by calling Cloud\nTasks' implementation of\ngoogle.cloud.location.Locations.ListLocations.",
+                      "location": "path",
+                      "required": true,
+                      "pattern": "^projects\/[^\/]+\/locations\/[^\/]+$",
+                      "type": "string"
+                    }
+                  },
+                  "parameterOrder": [
+                    "parent"
+                  ],
+                  "request": {
+                    "$ref": "Queue"
+                  },
+                  "response": {
+                    "$ref": "Queue"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "patch": {
+                  "id": "cloudtasks.projects.locations.queues.patch",
+                  "path": "v2beta2/{+name}",
+                  "flatPath": "v2beta2/projects/{projectsId}/locations/{locationsId}/queues/{queuesId}",
+                  "httpMethod": "PATCH",
+                  "description": "Updates a queue.\n\nThis method creates the queue if it does not exist and updates\nthe queue if it does exist.\n\nWARNING: This method is only available to whitelisted\nusers. Using this method carries some risk. Read\n[Overview of Queue Management and queue.yaml](https:\/\/cloud.google.com\/cloud-tasks\/docs\/queue-yaml)\ncarefully and then sign up for\n[whitelist access to this method](https:\/\/goo.gl\/Fe5mUy).",
+                  "parameters": {
+                    "name": {
+                      "description": "The queue name.\n\nThe queue name must have the following format:\n`projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID`\n\n* `PROJECT_ID` can contain uppercase and lowercase letters,\n  numbers, hyphens, colons, and periods; that is, it must match\n  the regular expression: `[a-zA-Z\\\\d-:\\\\.]+`.\n* `QUEUE_ID` can contain uppercase and lowercase letters,\n  numbers, and hyphens; that is, it must match the regular\n  expression: `[a-zA-Z\\\\d-]+`. The maximum length is 100\n  characters.\n\nCaller-specified and required in CreateQueueRequest, after which\nit becomes output only.",
+                      "location": "path",
+                      "required": true,
+                      "pattern": "^projects\/[^\/]+\/locations\/[^\/]+\/queues\/[^\/]+$",
+                      "type": "string"
+                    },
+                    "updateMask": {
+                      "description": "A  mask used to specify which fields of the queue are being updated.\n\nQueue.name cannot be changed and cannot be specified in the\nupdate_mask.",
+                      "location": "query",
+                      "type": "string",
+                      "format": "google-fieldmask"
+                    }
+                  },
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "request": {
+                    "$ref": "Queue"
+                  },
+                  "response": {
+                    "$ref": "Queue"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "delete": {
+                  "id": "cloudtasks.projects.locations.queues.delete",
+                  "path": "v2beta2/{+name}",
+                  "flatPath": "v2beta2/projects/{projectsId}/locations/{locationsId}/queues/{queuesId}",
+                  "httpMethod": "DELETE",
+                  "description": "Deletes a queue.\n\nThis command will delete the queue even if it has tasks in it.\n\nNote: If you delete a queue, a queue with the same name can't be created\nfor 7 days.\n\nWARNING: This method is only available to whitelisted\nusers. Using this method carries some risk. Read\n[Overview of Queue Management and queue.yaml](https:\/\/cloud.google.com\/cloud-tasks\/docs\/queue-yaml)\ncarefully and then sign up for\n[whitelist access to this method](https:\/\/goo.gl\/Fe5mUy).",
+                  "parameters": {
+                    "name": {
+                      "description": "Required.\n\nThe queue name. For example:\n`projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID`",
+                      "location": "path",
+                      "required": true,
+                      "pattern": "^projects\/[^\/]+\/locations\/[^\/]+\/queues\/[^\/]+$",
+                      "type": "string"
+                    }
+                  },
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "response": {
+                    "$ref": "Empty"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
                 "purge": {
                   "id": "cloudtasks.projects.locations.queues.purge",
                   "path": "v2beta2/{+name}:purge",
@@ -797,6 +898,62 @@
                   ],
                   "request": {
                     "$ref": "PurgeQueueRequest"
+                  },
+                  "response": {
+                    "$ref": "Queue"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "pause": {
+                  "id": "cloudtasks.projects.locations.queues.pause",
+                  "path": "v2beta2/{+name}:pause",
+                  "flatPath": "v2beta2/projects/{projectsId}/locations/{locationsId}/queues/{queuesId}:pause",
+                  "httpMethod": "POST",
+                  "description": "Pauses the queue.\n\nIf a queue is paused then the system will stop executing the\ntasks in the queue until it is re-enabled via\nCloudTasks.EnableQueue. Tasks can still be added when the\nqueue is paused. The state of the queue is stored in\nQueue.queue_state; if paused it will be set to\nQueue.QueueState.PAUSED.\n\nWARNING: This method is only available to whitelisted\nusers. Using this method carries some risk. Read\n[Overview of Queue Management and queue.yaml](https:\/\/cloud.google.com\/cloud-tasks\/docs\/queue-yaml)\ncarefully and then sign up for\n[whitelist access to this method](https:\/\/goo.gl\/Fe5mUy).",
+                  "parameters": {
+                    "name": {
+                      "description": "Required.\n\nThe queue name. For example:\n`projects\/PROJECT_ID\/location\/LOCATION_ID\/queues\/QUEUE_ID`",
+                      "location": "path",
+                      "required": true,
+                      "pattern": "^projects\/[^\/]+\/locations\/[^\/]+\/queues\/[^\/]+$",
+                      "type": "string"
+                    }
+                  },
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "request": {
+                    "$ref": "PauseQueueRequest"
+                  },
+                  "response": {
+                    "$ref": "Queue"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "enable": {
+                  "id": "cloudtasks.projects.locations.queues.enable",
+                  "path": "v2beta2/{+name}:enable",
+                  "flatPath": "v2beta2/projects/{projectsId}/locations/{locationsId}/queues/{queuesId}:enable",
+                  "httpMethod": "POST",
+                  "description": "Enable a queue.\n\nThis method re-enables a queue after it has been\nQueue.QueueState.PAUSED or Queue.QueueState.DISABLED. The state of\na queue is stored in Queue.queue_state; after calling this method it\nwill be set to Queue.QueueState.ENABLED.\n\nWARNING: This method is only available to whitelisted\nusers. Using this method carries some risk. Read\n[Overview of Queue Management and queue.yaml](https:\/\/cloud.google.com\/cloud-tasks\/docs\/queue-yaml)\ncarefully and then sign up for\n[whitelist access to this method](https:\/\/goo.gl\/Fe5mUy).\n\nWARNING: Re-enabling many high-QPS queues at the same time can\nlead to target overloading. If you are re-enabling high-QPS\nqueues, follow the 500\/50\/5 pattern described in\n[Managing Cloud Tasks Scaling Risks](https:\/\/cloud.google.com\/cloud-tasks\/pdfs\/managing-cloud-tasks-scaling-risks-2017-06-05.pdf).",
+                  "parameters": {
+                    "name": {
+                      "description": "Required.\n\nThe queue name. For example:\n`projects\/PROJECT_ID\/location\/LOCATION_ID\/queues\/QUEUE_ID`",
+                      "location": "path",
+                      "required": true,
+                      "pattern": "^projects\/[^\/]+\/locations\/[^\/]+\/queues\/[^\/]+$",
+                      "type": "string"
+                    }
+                  },
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "request": {
+                    "$ref": "EnableQueueRequest"
                   },
                   "response": {
                     "$ref": "Queue"
@@ -955,7 +1112,7 @@
                       "path": "v2beta2/{+name}/tasks:pull",
                       "flatPath": "v2beta2/projects/{projectsId}/locations/{locationsId}/queues/{queuesId}/tasks:pull",
                       "httpMethod": "POST",
-                      "description": "Pulls tasks from a pull queue and acquires a lease on them for a\nspecified PullTasksRequest.lease_duration.\n\nThis method is invoked by the lease holder to obtain the\nlease. The lease holder must acknowledge the task via\nCloudTasks.AcknowledgeTask after they have performed the work\nassociated with the task.\n\nThe payload is intended to store data that the lease holder needs\nto perform the work associated with the task. To return the\npayloads in the PullTasksResponse, set\nPullTasksRequest.response_view to FULL.",
+                      "description": "Pulls tasks from a pull queue and acquires a lease on them for a\nspecified PullTasksRequest.lease_duration.\n\nThis method is invoked by the lease holder to obtain the\nlease. The lease holder must acknowledge the task via\nCloudTasks.AcknowledgeTask after they have performed the work\nassociated with the task.\n\nThe payload is intended to store data that the lease holder needs\nto perform the work associated with the task. To return the\npayloads in the PullTasksResponse, set\nPullTasksRequest.response_view to Task.View.FULL.",
                       "parameters": {
                         "name": {
                           "description": "Required.\n\nThe queue name. For example:\n`projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID`",

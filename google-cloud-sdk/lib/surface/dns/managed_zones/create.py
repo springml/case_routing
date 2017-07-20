@@ -43,6 +43,7 @@ class Create(base.CreateCommand):
         'The name of the managed-zone to be created.').AddToParser(parser)
     flags.GetManagedZonesDnsNameArg().AddToParser(parser)
     flags.GetManagedZonesDescriptionArg(required=True).AddToParser(parser)
+    parser.display_info.AddCacheUpdater(flags.ManagedZoneCompleter)
 
   def Collection(self):
     return 'dns.managedZones'
@@ -66,7 +67,7 @@ class Create(base.CreateCommand):
         messages.DnsManagedZonesCreateRequest(managedZone=zone,
                                               project=zone_ref.project))
     log.CreatedResource(zone_ref)
-    return result
+    return [result]
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA)
@@ -97,6 +98,7 @@ class CreateBeta(base.CreateCommand):
     flags.GetManagedZonesDnsNameArg().AddToParser(parser)
     flags.GetManagedZonesDescriptionArg(required=True).AddToParser(parser)
     flags.AddCommonManagedZonesDnssecArgs(parser)
+    parser.display_info.AddCacheUpdater(flags.ManagedZoneCompleter)
 
   def Collection(self):
     return 'dns.managedZones'
@@ -134,4 +136,4 @@ class CreateBeta(base.CreateCommand):
         messages.DnsManagedZonesCreateRequest(managedZone=zone,
                                               project=zone_ref.project))
     log.CreatedResource(zone_ref)
-    return result
+    return [result]

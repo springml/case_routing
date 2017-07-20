@@ -36,9 +36,9 @@ class Diagnose(base.Command):
         help='The name of the cluster to diagnose.')
 
   def Run(self, args):
-    dataproc = dp.Dataproc()
+    dataproc = dp.Dataproc(self.ReleaseTrack())
 
-    cluster_ref = dataproc.ParseCluster(args.name)
+    cluster_ref = util.ParseCluster(args.name, dataproc)
 
     request = dataproc.messages.DataprocProjectsRegionsClustersDiagnoseRequest(
         clusterName=cluster_ref.clusterName,
@@ -47,7 +47,8 @@ class Diagnose(base.Command):
 
     operation = dataproc.client.projects_regions_clusters.Diagnose(request)
     # TODO(b/36052522): Stream output during polling.
-    operation = dataproc.WaitForOperation(
+    operation = util.WaitForOperation(
+        dataproc,
         operation,
         message='Waiting for cluster diagnose operation',
         timeout_s=args.timeout)

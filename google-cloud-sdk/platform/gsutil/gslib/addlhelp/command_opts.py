@@ -19,10 +19,6 @@ from __future__ import absolute_import
 from gslib.help_provider import HelpProvider
 
 _DETAILED_HELP_TEXT = ("""
-<B>SYNOPSIS</B>
-  Top-level gsutil Options
-
-
 <B>DESCRIPTION</B>
   gsutil supports separate options for the top-level gsutil command and
   the individual sub-commands (like cp, rm, etc.) The top-level options
@@ -52,17 +48,21 @@ _DETAILED_HELP_TEXT = ("""
               filename=filename.ext"), to avoid having the shell split them
               into separate arguments.
 
-              The following headers are supported:
+              The following headers are stored as object metadata and used
+              in future requests on the object:
 
                 Cache-Control
                 Content-Disposition
                 Content-Encoding
                 Content-Language
-                Content-MD5
                 Content-Type
 
-              Custom metadata headers with a matching Cloud Storage Provider
-              prefix, such as:
+              The following headers are used to check data integrity:
+
+                Content-MD5
+
+              gsutil also supports custom metadata headers with a matching
+              Cloud Storage Provider prefix, such as:
 
                 x-goog-meta-
 

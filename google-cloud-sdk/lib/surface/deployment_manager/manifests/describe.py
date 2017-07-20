@@ -16,10 +16,11 @@
 
 from apitools.base.py import exceptions as apitools_exceptions
 
-from googlecloudsdk.api_lib.deployment_manager import dm_v2_util
+from googlecloudsdk.api_lib.deployment_manager import dm_api_util
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions
-from googlecloudsdk.command_lib.deployment_manager import dm_base
+from googlecloudsdk.command_lib.deployment_manager import dm_v2_base
 
 
 class Describe(base.DescribeCommand):
@@ -68,8 +69,8 @@ class Describe(base.DescribeCommand):
     """
     if not args.manifest:
       try:
-        deployment = dm_base.GetClient().deployments.Get(
-            dm_base.GetMessages().DeploymentmanagerDeploymentsGetRequest(
+        deployment = dm_v2_base.GetClient().deployments.Get(
+            dm_v2_base.GetMessages().DeploymentmanagerDeploymentsGetRequest(
                 project=dm_base.GetProject(),
                 deployment=args.deployment
             )
@@ -77,17 +78,17 @@ class Describe(base.DescribeCommand):
       except apitools_exceptions.HttpError as error:
         raise exceptions.HttpException(error)
 
-      manifest = dm_v2_util.ExtractManifestName(deployment)
+      manifest = dm_api_util.ExtractManifestName(deployment)
       if manifest:
         args.manifest = manifest
 
     try:
-      return dm_base.GetClient().manifests.Get(
-          dm_base.GetMessages().DeploymentmanagerManifestsGetRequest(
+      return dm_v2_base.GetClient().manifests.Get(
+          dm_v2_base.GetMessages().DeploymentmanagerManifestsGetRequest(
               project=dm_base.GetProject(),
               deployment=args.deployment,
               manifest=args.manifest,
           )
       )
     except apitools_exceptions.HttpError as error:
-      raise exceptions.HttpException(error, dm_v2_util.HTTP_ERROR_FORMAT)
+      raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)

@@ -20,6 +20,7 @@ import textwrap
 
 from googlecloudsdk.calliope import actions
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.resource_manager import completers as resource_manager_completers
 from googlecloudsdk.core import properties
 
 
@@ -45,8 +46,7 @@ class Gcloud(base.Group):
         dest='project',
         category=base.COMMONLY_USED_FLAGS,
         suggestion_aliases=['--application'],
-        completion_resource='cloudresourcemanager.projects',
-        list_command_path='beta projects list --uri',
+        completer=resource_manager_completers.ProjectCompleter,
         action=actions.StoreProperty(properties.VALUES.core.project),
         help="""\
         The Google Cloud Platform project name to use for this invocation. If
@@ -64,6 +64,10 @@ class Gcloud(base.Group):
         help="""\
         Disable all interactive prompts when running gcloud commands. If input
         is required, defaults will be used, or an error will be raised.
+        Overrides the default core/disable_prompts property value for this
+        command invocation. Must be used at the beginning of commands. This
+        is equivalent to setting the environment variable
+        `CLOUDSDK_CORE_DISABLE_PROMPTS` to 1.
         """)
 
     trace_group = parser.add_mutually_exclusive_group()

@@ -16,6 +16,7 @@ from googlecloudsdk.api_lib.cloudiot import devices
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iot import flags
 from googlecloudsdk.command_lib.iot import util
+from googlecloudsdk.core import log
 from googlecloudsdk.core.console import console_io
 
 
@@ -44,4 +45,6 @@ class Delete(base.DeleteCommand):
         message='This will delete the following credential: {}'.format(
             credential),
         cancel_on_no=True)
-    return client.Patch(device_ref, credentials=credentials)
+    response = client.Patch(device_ref, credentials=credentials)
+    log.DeletedResource(device_ref.Name(), 'credentials for device')
+    return response

@@ -131,6 +131,27 @@ https://cloud.google.com/compute/docs/disks/local-ssd for more information."""
       default=0)
 
 
+def AddAcceleratorArgs(parser):
+  """Adds Accelerator-related args."""
+  parser.add_argument(
+      '--accelerator',
+      type=arg_parsers.ArgDict(spec={
+          'type': str,
+          'count': int,
+      }, required_keys=['type'], max_length=2),
+      metavar='type=TYPE,[count=COUNT]',
+      help="""\
+      Attaches accelerators (e.g. GPUs) to all nodes.
+
+      *type*::: (Required) The specific type (e.g. nvidia-tesla-k80 for nVidia Tesla K80)
+      of accelerator to attach to the instances. Use 'gcloud compute
+      accelerator-types list' to learn about all available accelerator types.
+
+      *count*::: (Optional) The number of pieces of the accelerator to attach to the
+      instances. The default value is 1.
+      """)
+
+
 def AddZoneFlag(parser):
   # TODO(b/33343238): Remove the short form of the zone flag.
   # TODO(b/18105938): Add zone prompting
@@ -139,6 +160,21 @@ def AddZoneFlag(parser):
       '--zone', '-z',
       help='The compute zone (e.g. us-central1-a) for the cluster',
       action=actions.StoreProperty(properties.VALUES.compute.zone))
+
+
+def AddZoneAndRegionFlags(parser, region_hidden=False):
+  """Adds the --zone and --region flags to the parser."""
+  group = parser.add_mutually_exclusive_group()
+  group.add_argument(
+      '--zone', '-z',
+      help='The compute zone (e.g. us-central1-a) for the cluster',
+      action=actions.StoreProperty(properties.VALUES.compute.zone))
+  group.add_argument(
+      '--region',
+      help='The compute region (e.g. us-central1) for the cluster. '
+           'For the given cluster, only one of flags --zone and --region can '
+           'be specified.',
+      hidden=region_hidden)
 
 
 def AddAsyncFlag(parser):
@@ -551,3 +587,106 @@ Type of the node VM boot disk.
       '--disk-type',
       help=help_text,
       choices=['pd-standard', 'pd-ssd'])
+
+
+def AddIPAliasFlags(parser, hidden=False):
+  """Adds flags related to IP aliases to the parser.
+
+  Args:
+    parser: A given parser.
+    hidden: Whether or not to hide the help text.
+  """
+
+  parser.add_argument(
+      '--enable-ip-alias',
+      action='store_true',
+      default=None,
+      hidden=hidden,
+      help="""\
+Enable use of alias IPs (https://cloud.google.com/compute/docs/alias-ip/)
+for pod IPs. This will create two new subnetworks, one for the
+instance and pod IPs, and another to reserve space for the services
+range.
+
+Can not be specified unless '--enable-kubernetes-alpha' is also specified.
+""")
+
+  parser.add_argument(
+      '--services-ipv4-cidr',
+      metavar='CIDR',
+      hidden=hidden,
+      help="""\
+Set the IP range for the services IPs.
+
+Can be specified as a netmask size (e.g. '/20') or as in CIDR notion
+(e.g. '10.100.0.0/20'). If given as a netmask size, the IP range will
+be choosen automatically from the available space in the network.
+
+If unspecified, the services CIDR range will use automatic defaults.
+
+Can not be specified unless '--enable-ip-alias' is also specified.
+""")
+
+  parser.add_argument(
+      '--create-subnetwork',
+      metavar='KEY=VALUE',
+      hidden=hidden,
+      type=arg_parsers.ArgDict(),
+      help="""\
+Create a new subnetwork for the cluster. The name and range of the
+subnetwork can be customized via optional 'name' and 'range' key-value
+pairs.
+
+'name' specifies the name of the subnetwork to be created.
+
+'range' specifies the IP range for the new subnetwork. This can either
+be a netmask size (e.g. '/20') or a CIDR range (e.g. '10.0.0.0/20').
+If a netmask size is specified, the IP is automatically taken from
+the free space in the cluster's network.
+
+Examples:
+
+Create a new subnetwork named "my-subnet" with netmask of size 21.
+
+      $ {command} --create-subnetwork name=my-subnet,range=/21
+
+Create a new subnetwork with a default name with the primary range of
+10.100.0.0/16.
+
+      $ {command} --create-subnetwork range=10.100.0.0/16
+
+Create a new subnetwork with the name "my-subnet" with a default range.
+
+      $ {command} --create-subnetwork name=my-subnet
+
+Can not be specified unless '--enable-ip-alias' is also specified. Can
+not be used in conjunction with the '--subnetwork' option.
+""")
+
+
+def AddTagOrDigestPositional(parser, verb, repeated=True, tags_only=False,
+                             arg_name=None, metavar=None):
+  digest_str = '*.gcr.io/project_id/image_path@sha256:<digest> or'
+  if tags_only:
+    digest_str = ''
+
+  if not arg_name:
+    arg_name = 'image_names' if repeated else 'image_name'
+    metavar = metavar or 'IMAGE_NAME'
+
+  parser.add_argument(
+      arg_name,
+      metavar=metavar or arg_name.upper(),
+      nargs='+' if repeated else None,
+      help=('The fully qualified name(s) of image(s) to {verb}. '
+            'The name(s) should be formatted as {digest_str} '
+            '*.gcr.io/project_id/image_path[:<tag>].'.format(
+                verb=verb, digest_str=digest_str)))
+
+
+def AddImagePositional(parser, verb):
+  parser.add_argument(
+      'image_name',
+      help=('The fully qualified image name of the image to {verb}. The name '
+            'format should be *.gcr.io/project_id/image_path. '.format(
+                verb=verb)))

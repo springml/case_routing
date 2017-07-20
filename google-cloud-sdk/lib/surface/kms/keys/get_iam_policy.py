@@ -18,7 +18,7 @@ from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.kms import flags
 
 
-class GetIamPolicy(base.Command):
+class GetIamPolicy(base.ListCommand):
   """Get the IAM policy for a key.
 
   Gets the IAM policy for the given key.
@@ -37,6 +37,7 @@ class GetIamPolicy(base.Command):
   @staticmethod
   def Args(parser):
     flags.AddCryptoKeyArgument(parser, 'whose IAM policy to fetch')
+    base.URI_FLAG.RemoveFromParser(parser)
 
   def Run(self, args):
     return iam.GetCryptoKeyIamPolicy(flags.ParseCryptoKeyName(args))

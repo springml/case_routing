@@ -14,6 +14,7 @@
 """Parse cloudbuild config files.
 
 """
+import base64
 import os
 
 from apitools.base.protorpclite import messages as proto_messages
@@ -28,7 +29,7 @@ import yaml.parser
 # Don't apply camel case to keys for dict or list values with these field names.
 # These correspond to map fields in our proto message, where we expect keys to
 # be sent exactly as the user typed them, without transformation to camelCase.
-_SKIP_CAMEL_CASE = ['secretEnv', 'secret_env']
+_SKIP_CAMEL_CASE = ['secretEnv', 'secret_env', 'substitutions']
 
 
 class NotFoundException(exceptions.Error):
@@ -208,7 +209,17 @@ def LoadCloudbuildConfigFromStream(stream, messages, params=None,
   except ValueError as e:
     raise BadConfigException(path, '%s' % e)
 
-  build.substitutions = cloudbuild_util.EncodeSubstitutions(params, messages)
+  subst = structured_data.get('substitutions', {})
+  if params:
+    subst.update(params)
+  build.substitutions = cloudbuild_util.EncodeSubstitutions(subst, messages)
+
+  # Re-base64-encode secrets[].secretEnv values, which apitools' DictToMessage
+  # "helpfully" base64-decodes since it can tell it's a bytes field. We need to
+  # send a base64-encoded string in the JSON request, not raw bytes.
+  for s in build.secrets:
+    for i in s.secretEnv.additionalProperties:
+      i.value = base64.b64encode(i.value)
 
   # Some problems can be caught before talking to the cloudbuild service.
   if build.source:

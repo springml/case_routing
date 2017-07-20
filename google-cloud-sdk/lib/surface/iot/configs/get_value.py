@@ -19,7 +19,7 @@ from googlecloudsdk.command_lib.iot import util
 from googlecloudsdk.core import log
 
 
-class GetValue(base.DescribeCommand):
+class GetValue(base.Command):
   """Show the binary data of a device's latest configuration."""
 
   @staticmethod

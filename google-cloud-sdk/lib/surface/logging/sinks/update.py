@@ -14,15 +14,10 @@
 
 """'logging sinks update' command."""
 
-from apitools.base.py import exceptions as apitools_exceptions
-
 from googlecloudsdk.api_lib.logging import util
-from googlecloudsdk.api_lib.util import exceptions
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions as calliope_exceptions
 from googlecloudsdk.core import log
-from googlecloudsdk.core import properties
-from googlecloudsdk.core import resources
 from googlecloudsdk.core.console import console_io
 
 
@@ -57,12 +52,6 @@ class Update(base.UpdateCommand):
         '--log-filter', required=False,
         help=('A new filter expression for the sink. '
               'If omitted, the sink\'s existing filter (if any) is unchanged.'))
-    parser.add_argument(
-        '--output-version-format', required=False,
-        help=('DEPRECATED. Format of the log entries being exported. '
-              'Detailed information: '
-              'https://cloud.google.com/logging/docs/api/introduction_v2'),
-        choices=('V2',))
     util.AddNonProjectArgs(parser, 'Update a sink')
 
   def GetSink(self, parent, sink_ref):
@@ -75,10 +64,6 @@ class Update(base.UpdateCommand):
   def UpdateSink(self, parent, sink_data):
     """Updates a sink specified by the arguments."""
     messages = util.GetMessages()
-    # Change string value to enum.
-    sink_data['outputVersionFormat'] = getattr(
-        messages.LogSink.OutputVersionFormatValueValuesEnum,
-        sink_data['outputVersionFormat'])
     return util.GetClient().projects_sinks.Update(
         messages.LoggingProjectsSinksUpdateRequest(
             sinkName=util.CreateResourceName(
@@ -96,30 +81,18 @@ class Update(base.UpdateCommand):
     Returns:
       The updated sink with its new destination.
     """
-    if args.output_version_format:
-      log.warn(
-          '--output-version-format is deprecated and will soon be removed.')
-
     # One of the flags is required to update the sink.
     # log_filter can be an empty string, so check explicitly for None.
-    if not (args.destination or args.log_filter is not None or
-            args.output_version_format):
-      raise calliope_exceptions.ToolException(
-          '[destination], --log-filter or --output-version-format is required')
+    if not args.destination and args.log_filter is None:
+      raise calliope_exceptions.MinimumArgumentException(
+          ['[destination]', '--log-filter'],
+          'Please specify at least one property to update')
 
-    sink_ref = resources.REGISTRY.Parse(
-        args.sink_name,
-        params={'projectsId': properties.VALUES.core.project.GetOrFail},
-        collection='logging.projects.sinks')
+    sink_ref = util.GetSinkReference(args.sink_name, args)
 
     # Calling Update on a non-existing sink creates it.
     # We need to make sure it exists, otherwise we would create it.
-    try:
-      sink = self.GetSink(util.GetParentFromArgs(args), sink_ref)
-    except apitools_exceptions.HttpError as error:
-      if exceptions.HttpException(error).payload.status_code == 404:
-        log.status.Print('Sink was not found.')
-      raise error
+    sink = self.GetSink(util.GetParentFromArgs(args), sink_ref)
 
     # Only update fields that were passed to the command.
     if args.destination:
@@ -132,16 +105,10 @@ class Update(base.UpdateCommand):
     else:
       log_filter = sink.filter
 
-    if args.output_version_format:
-      output_format = args.output_version_format
-    else:
-      output_format = sink.outputVersionFormat.name
-
     sink_data = {
         'name': sink_ref.sinksId,
         'destination': destination,
         'filter': log_filter,
-        'outputVersionFormat': output_format,
         'includeChildren': sink.includeChildren,
         'startTime': sink.startTime,
         'endTime': sink.endTime
@@ -157,9 +124,13 @@ class Update(base.UpdateCommand):
           'account will be displayed after a successful update operation.',
           cancel_on_no=True, default=False)
 
-    result = util.TypedLogSink(
-        self.UpdateSink(util.GetParentFromArgs(args), sink_data))
+    result = self.UpdateSink(util.GetParentFromArgs(args), sink_data)
 
-    log.UpdatedResource(sink_ref, kind='sink')
-    util.PrintPermissionInstructions(result.destination, result.writer_identity)
+    log.UpdatedResource(sink_ref)
+    self._epilog_result_destination = result.destination
+    self._epilog_writer_identity = result.writerIdentity
     return result
+
+  def Epilog(self, unused_resources_were_displayed):
+    util.PrintPermissionInstructions(self._epilog_result_destination,
+                                     self._epilog_writer_identity)

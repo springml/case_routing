@@ -46,14 +46,14 @@ def main(args):
     # Get the first argument, should be the source root directory.
     path = args[1]
 
-    # Show warnings or errors depending on whether nodejs has been explicitly
-    # specified.
+    # Show failures in debug or error depending on whether nodejs has been
+    # explicitly specified.
     config = comm.get_config()
     if ((config.params.appinfo and config.params.appinfo.runtime) or
         config.params.runtime):
-        warn = comm.error
+        log_detect_error = comm.error
     else:
-        warn = comm.debug
+        log_detect_error = comm.debug
 
     comm.info('Checking for Node.js.')
     package_json = os.path.join(path, 'package.json')
@@ -69,6 +69,9 @@ def main(args):
         use_yarn = False
     else:
         got_package_json = True
+        # If there's a package.json file, that's unusual enough that any
+        # errors should be surfaced to the user.
+        log_detect_error = comm.error
 
         # Consider the yarn.lock file as present if and only if the yarn.lock
         # file exists and is not specified as being skipped in app.yaml.
@@ -98,7 +101,8 @@ def main(args):
             # something funny going on here so fail recognition.
             # A package.json that exists is unusual enough that we want to warn
             # regardless of whether the nodejs runtime was specified.
-            comm.warn('node.js checker: error accessing package.json: %r' % ex)
+            log_detect_error('node.js checker: error accessing package.json: '
+                             '%r' % ex)
             return 1
 
         # See if we've got a scripts.start field.
@@ -111,7 +115,7 @@ def main(args):
         except AttributeError:
             # Most likely "engines" wasn't a dictionary.
             comm.warn('node.js checker: ignoring invalid "engines" field in '
-                    'package.json')
+                      'package.json')
             node_version = None
 
         if node_version is None:
@@ -130,8 +134,9 @@ def main(args):
                                 appinfo=appinfo)
 
     else:
-        warn('node.js checker: Neither "start" in the "scripts" section ' +
-             'of "package.json" nor the "server.js" file were found.')
+        log_detect_error('node.js checker: Neither "start" in the "scripts" '
+                         'section of "package.json" nor the "server.js" file '
+                         'were found.')
         return 1
 
     return 0

@@ -35,10 +35,10 @@ def _CommonArgs(parser):
       type=arg_parsers.BinarySize(lower_bound='1GB'),
       help="""\
         Indicates the new size of the disks. The value must be a whole
-        number followed by a size unit of ``KB'' for kilobyte, ``MB''
-        for megabyte, ``GB'' for gigabyte, or ``TB'' for terabyte. For
-        example, ``10GB'' will produce 10 gigabyte disks.  Disk size
-        must be a multiple of 10 GB.
+        number followed by a size unit of ``GB'' for gigabyte, or
+        ``TB'' for terabyte. If no size unit is specified, GB is
+        assumed. For example, ``10GB'' will produce 10 gigabyte disks.
+        Disk size must be a multiple of 1 GB.
         """)
 
 

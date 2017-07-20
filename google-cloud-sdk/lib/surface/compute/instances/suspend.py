@@ -28,6 +28,9 @@ class Suspend(base.SilentCommand):
   it is in the RUNNING state.  A suspended instance will be put in
   SUSPENDED state.
 
+  Note: A suspended instance can be resumed by running the
+  `gcloud alpha compute instances start` command.
+
   Alpha restrictions: Suspending a Preemptible VM is not supported and
   will result in an API error. Suspending a VM that is using CSEK or GPUs
   is not supported and will result in an API error.
@@ -64,3 +67,4 @@ class Suspend(base.SilentCommand):
                        'Suspend', self._CreateSuspendRequest(
                            client, instance_ref, args.discard_local_ssd)))
     return client.MakeRequests(requests)
+

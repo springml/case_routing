@@ -16,10 +16,11 @@
 
 from apitools.base.py import exceptions as apitools_exceptions
 
-from googlecloudsdk.api_lib.deployment_manager import dm_v2_util
+from googlecloudsdk.api_lib.deployment_manager import dm_api_util
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions
-from googlecloudsdk.command_lib.deployment_manager import dm_base
+from googlecloudsdk.command_lib.deployment_manager import dm_v2_base
 
 
 class Describe(base.DescribeCommand):
@@ -62,12 +63,12 @@ class Describe(base.DescribeCommand):
           request.
     """
     try:
-      return dm_base.GetClient().resources.Get(
-          dm_base.GetMessages().DeploymentmanagerResourcesGetRequest(
+      return dm_v2_base.GetClient().resources.Get(
+          dm_v2_base.GetMessages().DeploymentmanagerResourcesGetRequest(
               project=dm_base.GetProject(),
               deployment=args.deployment,
               resource=args.resource
           )
       )
     except apitools_exceptions.HttpError as error:
-      raise exceptions.HttpException(error, dm_v2_util.HTTP_ERROR_FORMAT)
+      raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)

@@ -16,6 +16,7 @@
 
 from apitools.base.py import encoding
 
+from googlecloudsdk.api_lib.compute import constants as compute_constants
 from googlecloudsdk.api_lib.compute import utils as api_utils
 from googlecloudsdk.api_lib.dataproc import compute_helpers
 from googlecloudsdk.api_lib.dataproc import constants
@@ -90,10 +91,6 @@ def _CommonArgs(parser):
       Specifies the subnet that the cluster will be part of. This is mutally
       exclusive with --network.
       """)
-  parser.add_argument(
-      '--zone', '-z',
-      help='The compute zone (e.g. us-central1-a) for the cluster.',
-      action=actions.StoreProperty(properties.VALUES.compute.zone))
   parser.add_argument(
       '--num-worker-local-ssds',
       type=int,
@@ -181,10 +178,13 @@ Available aliases are:
 Alias,URI
 {aliases}
 |========
+
+{scope_deprecation_msg}
 """.format(
     minimum_scopes='\n'.join(constants.MINIMUM_SCOPE_URIS),
     additional_scopes='\n'.join(constants.ADDITIONAL_DEFAULT_SCOPE_URIS),
-    aliases=compute_helpers.SCOPE_ALIASES_FOR_HELP))
+    aliases=compute_helpers.SCOPE_ALIASES_FOR_HELP,
+    scope_deprecation_msg=compute_constants.DEPRECATED_SCOPES_MESSAGES))
 
   master_boot_disk = parser.add_mutually_exclusive_group()
   worker_boot_disk = parser.add_mutually_exclusive_group()
@@ -242,6 +242,11 @@ class Create(base.CreateCommand):
   @staticmethod
   def Args(parser):
     _CommonArgs(parser)
+    parser.add_argument(
+        '--zone',
+        '-z',
+        help='The compute zone (e.g. us-central1-a) for the cluster.',
+        action=actions.StoreProperty(properties.VALUES.compute.zone))
     parser.add_argument('--num-masters', type=int, hidden=True)
     parser.add_argument('--single-node', action='store_true', hidden=True)
     parser.add_argument('--no-address', action='store_true', hidden=True)
@@ -276,9 +281,9 @@ class Create(base.CreateCommand):
   def Run(self, args):
     self.ValidateArgs(args)
 
-    dataproc = dp.Dataproc()
+    dataproc = dp.Dataproc(self.ReleaseTrack())
 
-    cluster_ref = dataproc.ParseCluster(args.name)
+    cluster_ref = util.ParseCluster(args.name, dataproc)
 
     compute_resources = compute_helpers.GetComputeResources(
         self.ReleaseTrack(), args.name)
@@ -428,7 +433,8 @@ class Create(base.CreateCommand):
               cluster_ref, operation.name))
       return
 
-    operation = dataproc.WaitForOperation(
+    operation = util.WaitForOperation(
+        dataproc,
         operation,
         message='Waiting for cluster creation operation',
         timeout_s=args.timeout)
@@ -440,7 +446,16 @@ class Create(base.CreateCommand):
     cluster = dataproc.client.projects_regions_clusters.Get(get_request)
     if cluster.status.state == (
         dataproc.messages.ClusterStatus.StateValueValuesEnum.RUNNING):
-      log.CreatedResource(cluster_ref)
+
+      zone_uri = cluster.config.gceClusterConfig.zoneUri
+      zone_short_name = zone_uri.split('/')[-1]
+
+      # Log the URL of the cluster
+      log.CreatedResource(
+          cluster_ref,
+          # Also indicate which zone the cluster was placed in. This is helpful
+          # if the server picked a zone (auto zone)
+          details='Cluster placed in zone [{0}]'.format(zone_short_name))
     else:
       log.error('Create cluster failed!')
       if operation.details:
@@ -466,6 +481,16 @@ class CreateBeta(Create):
   @staticmethod
   def Args(parser):
     _CommonArgs(parser)
+    parser.add_argument(
+        '--zone',
+        '-z',
+        help="""
+            The compute zone (e.g. us-central1-a) for the cluster. If empty,
+            and --region is set to a value other than 'global', the server will
+            pick a zone in the region.
+            """,
+        action=actions.StoreProperty(properties.VALUES.compute.zone))
+
     parser.add_argument(
         '--num-masters',
         type=int,

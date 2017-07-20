@@ -50,7 +50,7 @@ class Delete(base.DeleteCommand):
         nargs='+',
         help='The names of the users to delete.')
 
-  def GetOwnerAccounts(self, compute_client, client, owners):
+  def GetOwnerAccounts(self, client, owners):
     """Look up all users on the current project owned by the list of owners."""
     requests = []
     for owner in owners:
@@ -61,8 +61,8 @@ class Delete(base.DeleteCommand):
     errors = []
     responses = request_helper.MakeRequests(
         requests=requests,
-        http=compute_client.apitools_client.http,
-        batch_url=compute_client.batch_url,
+        http=client.http,
+        batch_url='https://www.googleapis.com/batch/',
         errors=errors)
 
     if errors:
@@ -72,12 +72,11 @@ class Delete(base.DeleteCommand):
 
   def Run(self, args):
     """Issues requests necessary for deleting users."""
-    compute_holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
     holder = base_classes.ComputeUserAccountsApiHolder(self.ReleaseTrack())
     client = holder.client
 
     if args.owners:
-      names = self.GetOwnerAccounts(compute_holder.client, client, args.names)
+      names = self.GetOwnerAccounts(client, args.names)
     else:
       names = args.names
 
@@ -95,4 +94,14 @@ class Delete(base.DeleteCommand):
           user=user_ref.Name())
       requests.append((client.users, 'Delete', request))
 
-    return compute_holder.client.MakeRequests(requests)
+    errors = []
+    responses = list(
+        request_helper.MakeRequests(
+            requests=requests,
+            http=client.http,
+            batch_url='https://www.googleapis.com/batch/',
+            errors=errors))
+    if errors:
+      utils.RaiseToolException(
+          errors, error_message='Could not fetch resource:')
+    return responses

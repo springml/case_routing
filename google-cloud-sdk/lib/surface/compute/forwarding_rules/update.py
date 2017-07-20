@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Command to update labels for forwarding-rules."""
+"""Command to update forwarding-rules."""
 
 from googlecloudsdk.api_lib.compute import base_classes
 from googlecloudsdk.api_lib.compute.operations import poller
@@ -23,7 +23,13 @@ from googlecloudsdk.command_lib.compute.forwarding_rules import flags
 from googlecloudsdk.command_lib.util import labels_util
 
 
-@base.ReleaseTracks(base.ReleaseTrack.ALPHA, base.ReleaseTrack.BETA)
+def _Args(cls, parser):
+  cls.FORWARDING_RULE_ARG = flags.ForwardingRuleArgument()
+  cls.FORWARDING_RULE_ARG.AddArgument(parser)
+  labels_util.AddUpdateLabelsFlags(parser)
+
+
+@base.ReleaseTracks(base.ReleaseTrack.BETA)
 class Update(base.UpdateCommand):
   r"""Update a Google Compute Engine forwarding rule.
 
@@ -49,9 +55,26 @@ class Update(base.UpdateCommand):
 
   @classmethod
   def Args(cls, parser):
-    cls.FORWARDING_RULE_ARG = flags.ForwardingRuleArgument()
-    cls.FORWARDING_RULE_ARG.AddArgument(parser)
-    labels_util.AddUpdateLabelsFlags(parser)
+    _Args(cls, parser)
+
+  def _CreateGlobalSetLabelsRequest(self, messages, forwarding_rule_ref,
+                                    forwarding_rule, replacement):
+    return messages.ComputeGlobalForwardingRulesSetLabelsRequest(
+        project=forwarding_rule_ref.project,
+        resource=forwarding_rule_ref.Name(),
+        globalSetLabelsRequest=messages.GlobalSetLabelsRequest(
+            labelFingerprint=forwarding_rule.labelFingerprint,
+            labels=replacement))
+
+  def _CreateRegionalSetLabelsRequest(self, messages, forwarding_rule_ref,
+                                      forwarding_rule, replacement):
+    return messages.ComputeForwardingRulesSetLabelsRequest(
+        project=forwarding_rule_ref.project,
+        resource=forwarding_rule_ref.Name(),
+        region=forwarding_rule_ref.region,
+        regionSetLabelsRequest=messages.RegionSetLabelsRequest(
+            labelFingerprint=forwarding_rule.labelFingerprint,
+            labels=replacement))
 
   def Run(self, args):
     holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
@@ -91,12 +114,8 @@ class Update(base.UpdateCommand):
       return forwarding_rule
 
     if forwarding_rule_ref.Collection() == 'compute.globalForwardingRules':
-      request = messages.ComputeGlobalForwardingRulesSetLabelsRequest(
-          project=forwarding_rule_ref.project,
-          resource=forwarding_rule_ref.Name(),
-          globalSetLabelsRequest=messages.GlobalSetLabelsRequest(
-              labelFingerprint=forwarding_rule.labelFingerprint,
-              labels=replacement))
+      request = self._CreateGlobalSetLabelsRequest(
+          messages, forwarding_rule_ref, forwarding_rule, replacement)
 
       operation = client.globalForwardingRules.SetLabels(request)
       operation_ref = holder.resources.Parse(
@@ -104,13 +123,8 @@ class Update(base.UpdateCommand):
 
       operation_poller = poller.Poller(client.globalForwardingRules)
     else:
-      request = messages.ComputeForwardingRulesSetLabelsRequest(
-          project=forwarding_rule_ref.project,
-          resource=forwarding_rule_ref.Name(),
-          region=forwarding_rule_ref.region,
-          regionSetLabelsRequest=messages.RegionSetLabelsRequest(
-              labelFingerprint=forwarding_rule.labelFingerprint,
-              labels=replacement))
+      request = self._CreateRegionalSetLabelsRequest(
+          messages, forwarding_rule_ref, forwarding_rule, replacement)
 
       operation = client.forwardingRules.SetLabels(request)
       operation_ref = holder.resources.Parse(
@@ -121,3 +135,120 @@ class Update(base.UpdateCommand):
     return waiter.WaitFor(operation_poller, operation_ref,
                           'Updating labels of forwarding rule [{0}]'.format(
                               forwarding_rule_ref.Name()))
+
+
+@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
+class UpdateAlpha(Update):
+  r"""Update a Google Compute Engine forwarding rule.
+
+  *{command}* updates labels and network tier for a Google Compute Engine
+  forwarding rule.
+
+  Example to update labels:
+
+    $ {command} example-fr --region us-central1 \
+      --update-labels=k0=value1,k1=value2 --remove-labels=k3
+
+  will add/update labels ``k0'' and ``k1'' and remove labels with key ``k3''.
+
+  Labels can be used to identify the forwarding rule and to filter them as in
+
+    $ {parent_command} list --filter='labels.k1:value2'
+
+  To list existing labels
+
+    $ {parent_command} describe example-fr --format='default(labels)'
+
+  """
+
+  @classmethod
+  def Args(cls, parser):
+    _Args(cls, parser)
+    flags.AddNetworkTier(parser, include_alpha=True, for_update=True)
+
+  def ConstructNetworkTier(self, messages, network_tier):
+    if network_tier:
+      return messages.ForwardingRule.NetworkTierValueValuesEnum(network_tier)
+    else:
+      return
+
+  def Modify(self, messages, args, existing):
+    """Returns a modified forwarding rule message and included fields."""
+    if args.network_tier is None:
+      return None
+    else:
+      return messages.ForwardingRule(
+          name=existing.name,
+          networkTier=self.ConstructNetworkTier(messages, args.network_tier))
+
+  def Run(self, args):
+    """Returns a list of requests necessary for updating forwarding rules."""
+    holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
+    client = holder.client.apitools_client
+    messages = holder.client.messages
+
+    forwarding_rule_ref = self.FORWARDING_RULE_ARG.ResolveAsResource(
+        args,
+        holder.resources,
+        scope_lister=compute_flags.GetDefaultScopeLister(holder.client))
+
+    update_labels = labels_util.GetUpdateLabelsDictFromArgs(args)
+    remove_labels = labels_util.GetRemoveLabelsListFromArgs(args)
+    if (update_labels is None and remove_labels is None and
+        args.network_tier is None):
+      raise calliope_exceptions.ToolException(
+          'At least one property must be specified.')
+
+    # Get replacement.
+    if forwarding_rule_ref.Collection() == 'compute.globalForwardingRules':
+      get_request = (client.globalForwardingRules, 'Get',
+                     messages.ComputeGlobalForwardingRulesGetRequest(
+                         forwardingRule=forwarding_rule_ref.Name(),
+                         project=forwarding_rule_ref.project))
+      labels_value = messages.GlobalSetLabelsRequest.LabelsValue
+    else:
+      get_request = (client.forwardingRules, 'Get',
+                     messages.ComputeForwardingRulesGetRequest(
+                         forwardingRule=forwarding_rule_ref.Name(),
+                         project=forwarding_rule_ref.project,
+                         region=forwarding_rule_ref.region))
+      labels_value = messages.RegionSetLabelsRequest.LabelsValue
+
+    objects = holder.client.MakeRequests([get_request])
+    forwarding_rule = objects[0]
+
+    forwarding_rule_replacement = self.Modify(messages, args, forwarding_rule)
+    label_replacement = labels_util.UpdateLabels(
+        forwarding_rule.labels,
+        labels_value,
+        update_labels=update_labels,
+        remove_labels=remove_labels)
+
+    # Create requests.
+    requests = []
+
+    if forwarding_rule_ref.Collection() == 'compute.globalForwardingRules':
+      if forwarding_rule_replacement:
+        request = messages.ComputeGlobalForwardingRulesPatchRequest(
+            forwardingRule=forwarding_rule_ref.Name(),
+            forwardingRuleResource=forwarding_rule_replacement,
+            project=forwarding_rule_ref.project)
+        requests.append((client.globalForwardingRules, 'Patch', request))
+      if label_replacement:
+        request = self._CreateGlobalSetLabelsRequest(
+            messages, forwarding_rule_ref, forwarding_rule, label_replacement)
+        requests.append((client.globalForwardingRules, 'SetLabels', request))
+    else:
+      if forwarding_rule_replacement:
+        request = messages.ComputeForwardingRulesPatchRequest(
+            forwardingRule=forwarding_rule_ref.Name(),
+            forwardingRuleResource=forwarding_rule_replacement,
+            project=forwarding_rule_ref.project,
+            region=forwarding_rule_ref.region)
+        requests.append((client.forwardingRules, 'Patch', request))
+      if label_replacement:
+        request = self._CreateRegionalSetLabelsRequest(
+            messages, forwarding_rule_ref, forwarding_rule, label_replacement)
+        requests.append((client.forwardingRules, 'SetLabels', request))
+
+    return holder.client.MakeRequests(requests)

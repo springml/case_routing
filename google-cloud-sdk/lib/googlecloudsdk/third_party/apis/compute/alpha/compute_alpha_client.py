@@ -3863,32 +3863,6 @@ You can specify a maximum of 1000 instances with this method per request.
         supports_download=False,
     )
 
-    def DeleteOverrides(self, request, global_params=None):
-      """Delete selected overrides for the managed instance group.
-
-      Args:
-        request: (ComputeInstanceGroupManagersDeleteOverridesRequest) input message
-        global_params: (StandardQueryParameters, default: None) global arguments
-      Returns:
-        (Operation) The response message.
-      """
-      config = self.GetMethodConfig('DeleteOverrides')
-      return self._RunMethod(
-          config, request, global_params=global_params)
-
-    DeleteOverrides.method_config = lambda: base_api.ApiMethodInfo(
-        http_method=u'POST',
-        method_id=u'compute.instanceGroupManagers.deleteOverrides',
-        ordered_params=[u'project', u'zone', u'instanceGroupManager'],
-        path_params=[u'instanceGroupManager', u'project', u'zone'],
-        query_params=[],
-        relative_path=u'projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/deleteOverrides',
-        request_field=u'instanceGroupManagersDeleteOverridesRequest',
-        request_type_name=u'ComputeInstanceGroupManagersDeleteOverridesRequest',
-        response_type_name=u'Operation',
-        supports_download=False,
-    )
-
     def DeletePerInstanceConfigs(self, request, global_params=None):
       """Delete selected per-instance configs for the managed instance group.
 
@@ -4018,32 +3992,6 @@ A managed instance group can have up to 1000 VM instances per group. Please cont
         request_field='',
         request_type_name=u'ComputeInstanceGroupManagersListManagedInstancesRequest',
         response_type_name=u'InstanceGroupManagersListManagedInstancesResponse',
-        supports_download=False,
-    )
-
-    def ListOverrides(self, request, global_params=None):
-      """Lists all of the overrides defined for the managed instance group.
-
-      Args:
-        request: (ComputeInstanceGroupManagersListOverridesRequest) input message
-        global_params: (StandardQueryParameters, default: None) global arguments
-      Returns:
-        (InstanceGroupManagersListOverridesResponse) The response message.
-      """
-      config = self.GetMethodConfig('ListOverrides')
-      return self._RunMethod(
-          config, request, global_params=global_params)
-
-    ListOverrides.method_config = lambda: base_api.ApiMethodInfo(
-        http_method=u'POST',
-        method_id=u'compute.instanceGroupManagers.listOverrides',
-        ordered_params=[u'project', u'zone', u'instanceGroupManager'],
-        path_params=[u'instanceGroupManager', u'project', u'zone'],
-        query_params=[u'filter', u'maxResults', u'orderBy', u'pageToken'],
-        relative_path=u'projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/listOverrides',
-        request_field='',
-        request_type_name=u'ComputeInstanceGroupManagersListOverridesRequest',
-        response_type_name=u'InstanceGroupManagersListOverridesResponse',
         supports_download=False,
     )
 
@@ -4313,32 +4261,6 @@ If the group is part of a backend service that has enabled connection draining, 
         relative_path=u'projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}',
         request_field=u'instanceGroupManagerResource',
         request_type_name=u'ComputeInstanceGroupManagersUpdateRequest',
-        response_type_name=u'Operation',
-        supports_download=False,
-    )
-
-    def UpdateOverrides(self, request, global_params=None):
-      """Insert or patch (for the ones that already exist) overrides for the managed instance group.
-
-      Args:
-        request: (ComputeInstanceGroupManagersUpdateOverridesRequest) input message
-        global_params: (StandardQueryParameters, default: None) global arguments
-      Returns:
-        (Operation) The response message.
-      """
-      config = self.GetMethodConfig('UpdateOverrides')
-      return self._RunMethod(
-          config, request, global_params=global_params)
-
-    UpdateOverrides.method_config = lambda: base_api.ApiMethodInfo(
-        http_method=u'POST',
-        method_id=u'compute.instanceGroupManagers.updateOverrides',
-        ordered_params=[u'project', u'zone', u'instanceGroupManager'],
-        path_params=[u'instanceGroupManager', u'project', u'zone'],
-        query_params=[u'requestId'],
-        relative_path=u'projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/updateOverrides',
-        request_field=u'instanceGroupManagersUpdateOverridesRequest',
-        request_type_name=u'ComputeInstanceGroupManagersUpdateOverridesRequest',
         response_type_name=u'Operation',
         supports_download=False,
     )
@@ -6604,7 +6526,7 @@ If the group is part of a backend service that has enabled connection draining, 
           }
 
     def DisableXpnHost(self, request, global_params=None):
-      """Disable this project as an XPN host project.
+      """Disable this project as a shared VPC host project.
 
       Args:
         request: (ComputeProjectsDisableXpnHostRequest) input message
@@ -6630,7 +6552,7 @@ If the group is part of a backend service that has enabled connection draining, 
     )
 
     def DisableXpnResource(self, request, global_params=None):
-      """Disable an XPN resource associated with this host project.
+      """Disable a serivce resource (a.k.a service project) associated with this host project.
 
       Args:
         request: (ComputeProjectsDisableXpnResourceRequest) input message
@@ -6656,7 +6578,7 @@ If the group is part of a backend service that has enabled connection draining, 
     )
 
     def EnableXpnHost(self, request, global_params=None):
-      """Enable this project as an XPN host project.
+      """Enable this project as a shared VPC host project.
 
       Args:
         request: (ComputeProjectsEnableXpnHostRequest) input message
@@ -6682,7 +6604,7 @@ If the group is part of a backend service that has enabled connection draining, 
     )
 
     def EnableXpnResource(self, request, global_params=None):
-      """Enable XPN resource (a.k.a service project or service folder in the future) for a host project, so that subnetworks in the host project can be used by instances in the service project or folder.
+      """Enable service resource (a.k.a service project) for a host project, so that subnets in the host project can be used by instances in the service project.
 
       Args:
         request: (ComputeProjectsEnableXpnResourceRequest) input message
@@ -6734,7 +6656,7 @@ If the group is part of a backend service that has enabled connection draining, 
     )
 
     def GetXpnHost(self, request, global_params=None):
-      """Get the XPN host project that this project links to. May be empty if no link exists.
+      """Get the shared VPC host project that this project links to. May be empty if no link exists.
 
       Args:
         request: (ComputeProjectsGetXpnHostRequest) input message
@@ -6760,7 +6682,7 @@ If the group is part of a backend service that has enabled connection draining, 
     )
 
     def GetXpnResources(self, request, global_params=None):
-      """Get XPN resources associated with this host project.
+      """Get service resources (a.k.a service project) associated with this host project.
 
       Args:
         request: (ComputeProjectsGetXpnResourcesRequest) input message
@@ -6786,7 +6708,7 @@ If the group is part of a backend service that has enabled connection draining, 
     )
 
     def ListXpnHosts(self, request, global_params=None):
-      """List all XPN host projects visible to the user in an organization.
+      """List all shared VPC host projects visible to the user in an organization.
 
       Args:
         request: (ComputeProjectsListXpnHostsRequest) input message
@@ -7893,32 +7815,6 @@ You can specify a maximum of 1000 instances with this method per request.
         supports_download=False,
     )
 
-    def DeleteOverrides(self, request, global_params=None):
-      """Delete selected overrides for the managed instance group.
-
-      Args:
-        request: (ComputeRegionInstanceGroupManagersDeleteOverridesRequest) input message
-        global_params: (StandardQueryParameters, default: None) global arguments
-      Returns:
-        (Operation) The response message.
-      """
-      config = self.GetMethodConfig('DeleteOverrides')
-      return self._RunMethod(
-          config, request, global_params=global_params)
-
-    DeleteOverrides.method_config = lambda: base_api.ApiMethodInfo(
-        http_method=u'POST',
-        method_id=u'compute.regionInstanceGroupManagers.deleteOverrides',
-        ordered_params=[u'project', u'region', u'instanceGroupManager'],
-        path_params=[u'instanceGroupManager', u'project', u'region'],
-        query_params=[],
-        relative_path=u'projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/deleteOverrides',
-        request_field=u'regionInstanceGroupManagersDeleteOverridesRequest',
-        request_type_name=u'ComputeRegionInstanceGroupManagersDeleteOverridesRequest',
-        response_type_name=u'Operation',
-        supports_download=False,
-    )
-
     def DeletePerInstanceConfigs(self, request, global_params=None):
       """Delete selected per-instance configs for the managed instance group.
 
@@ -8048,32 +7944,6 @@ A regional managed instance group can contain up to 2000 instances.
         request_field='',
         request_type_name=u'ComputeRegionInstanceGroupManagersListManagedInstancesRequest',
         response_type_name=u'RegionInstanceGroupManagersListInstancesResponse',
-        supports_download=False,
-    )
-
-    def ListOverrides(self, request, global_params=None):
-      """Lists all of the overrides defined for the managed instance group.
-
-      Args:
-        request: (ComputeRegionInstanceGroupManagersListOverridesRequest) input message
-        global_params: (StandardQueryParameters, default: None) global arguments
-      Returns:
-        (RegionInstanceGroupManagersListOverridesResponse) The response message.
-      """
-      config = self.GetMethodConfig('ListOverrides')
-      return self._RunMethod(
-          config, request, global_params=global_params)
-
-    ListOverrides.method_config = lambda: base_api.ApiMethodInfo(
-        http_method=u'POST',
-        method_id=u'compute.regionInstanceGroupManagers.listOverrides',
-        ordered_params=[u'project', u'region', u'instanceGroupManager'],
-        path_params=[u'instanceGroupManager', u'project', u'region'],
-        query_params=[u'filter', u'maxResults', u'orderBy', u'pageToken'],
-        relative_path=u'projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/listOverrides',
-        request_field='',
-        request_type_name=u'ComputeRegionInstanceGroupManagersListOverridesRequest',
-        response_type_name=u'RegionInstanceGroupManagersListOverridesResponse',
         supports_download=False,
     )
 
@@ -8313,32 +8183,6 @@ If the group is part of a backend service that has enabled connection draining, 
         relative_path=u'projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}',
         request_field=u'instanceGroupManagerResource',
         request_type_name=u'ComputeRegionInstanceGroupManagersUpdateRequest',
-        response_type_name=u'Operation',
-        supports_download=False,
-    )
-
-    def UpdateOverrides(self, request, global_params=None):
-      """Insert or patch (for the ones that already exist) overrides for the managed instance group.
-
-      Args:
-        request: (ComputeRegionInstanceGroupManagersUpdateOverridesRequest) input message
-        global_params: (StandardQueryParameters, default: None) global arguments
-      Returns:
-        (Operation) The response message.
-      """
-      config = self.GetMethodConfig('UpdateOverrides')
-      return self._RunMethod(
-          config, request, global_params=global_params)
-
-    UpdateOverrides.method_config = lambda: base_api.ApiMethodInfo(
-        http_method=u'POST',
-        method_id=u'compute.regionInstanceGroupManagers.updateOverrides',
-        ordered_params=[u'project', u'region', u'instanceGroupManager'],
-        path_params=[u'instanceGroupManager', u'project', u'region'],
-        query_params=[],
-        relative_path=u'projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/updateOverrides',
-        request_field=u'regionInstanceGroupManagersUpdateOverridesRequest',
-        request_type_name=u'ComputeRegionInstanceGroupManagersUpdateOverridesRequest',
         response_type_name=u'Operation',
         supports_download=False,
     )

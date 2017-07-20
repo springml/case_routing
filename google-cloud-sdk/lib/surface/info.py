@@ -46,12 +46,19 @@ class Info(base.Command):
         '--run-diagnostics',
         action='store_true',
         help='Run diagnostics on your installation of the Cloud SDK.')
+    parser.add_argument(
+        '--anonymize',
+        action='store_true',
+        help='Minimize any personal identifiable information. '
+             'Use it when sharing output with others.')
 
   def Run(self, args):
     if args.run_diagnostics:
       network_diagnostics.NetworkDiagnostic().RunChecks()
       return
-    holder = info_holder.InfoHolder()
+    holder = info_holder.InfoHolder(
+        anonymizer=info_holder.Anonymizer()
+        if args.anonymize else info_holder.NoopAnonymizer())
     python_version = platforms.PythonVersion()
     if not python_version.IsSupported():
       log.warn(('Only Python version {0} is supported for the Cloud SDK. Many '

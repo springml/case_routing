@@ -20,9 +20,10 @@ from googlecloudsdk.calliope import base
 class TestingArgFiles(base.TopicCommand):
   """Supplementary help for arg-files to be used with *gcloud firebase test*."""
 
+  # pylint: disable=line-too-long
   detailed_help = {
-
-      'DESCRIPTION': """\
+      'DESCRIPTION':
+          """\
           {description}
 
           All *gcloud firebase test android run* arguments may be specified by
@@ -81,8 +82,8 @@ class TestingArgFiles(base.TopicCommand):
           group using the *include:* keyword.
 
           """,
-
-      'EXAMPLES': """\
+      'EXAMPLES':
+          """\
 
           Here are the contents of a very simple YAML argument file which
           we'll assume is stored in a file named excelsior_args.yaml:
@@ -132,17 +133,20 @@ class TestingArgFiles(base.TopicCommand):
           If your app has a login screen, or has additional UI elements which
           require input text, you may specify the resource names of the Android
           target UI elements, along with their corresponding input values, in
-          the 'robo-directives' map argument. In the example below,
+          the 'robo-directives' map argument. You may also specify the elements
+          which the Robo test should prioritize clicking. In the example below,
           "username_resource" is the resource name of the username field and
-          "username" is the input for that field (similarly for password).
+          "username" is the input for that field (similarly for password), and
+          "signin_button_resource" is the resource name of the sign in button.
 
             # Run a 'robo' test on the 'Excelsior' app with login credentials.
             robo-test-with-login:
               app: path/to/excelsior.apk
               type: robo
               robo-directives:
-                username_resource: username
-                password_resource: password
+                "text:username_resource": username
+                "text:password_resource": password
+                "click:sigin_button_resource": ""
 
           Assuming the above YAML text is appended to the arg-file named
           excelsior_args.yaml, you may invoke the test by running:
@@ -186,4 +190,4 @@ class TestingArgFiles(base.TopicCommand):
           command line overrides the device-ids: specification inside the
           arg-file because command-line arguments have higher precedence.
           """,
-      }
+  }

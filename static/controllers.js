@@ -1,8 +1,8 @@
 app.controller("DashboardController", function($scope, $location, $http, rawDataService, anchorSmoothScroll, DataService) {
     // testing
-    // DataService.getAllData().then(function(res){
-    //     console.log(res);
-    // })
+    DataService.getAllData().then(function(res){
+        console.log(res);
+    })
 
     // Initialize Chart variables
     $scope.labesCategory;

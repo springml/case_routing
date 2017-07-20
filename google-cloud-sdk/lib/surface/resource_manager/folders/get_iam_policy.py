@@ -18,9 +18,8 @@ from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.resource_manager import flags
 
 
-@base.Hidden
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)
-class GetIamPolicy(base.Command):
+class GetIamPolicy(base.ListCommand):
   """Get IAM policy for a folder.
 
   Gets the IAM policy for a folder, given a folder ID.
@@ -36,6 +35,7 @@ class GetIamPolicy(base.Command):
   @staticmethod
   def Args(parser):
     flags.FolderIdArg('whose policy you want to get.').AddToParser(parser)
+    base.URI_FLAG.RemoveFromParser(parser)
 
   def Run(self, args):
     return folders.GetIamPolicy(args.id)

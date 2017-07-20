@@ -84,14 +84,14 @@ class Submit(base.CreateCommand):
         '--gcs-source-staging-dir',
         help='Directory in Google Cloud Storage to stage a copy of the source '
              'used for the build. If the bucket does not exist, it will be '
-             'created. If not set, ```gs://<project id>_cloudbuild/source``` '
+             'created. If not set, `gs://<project id>_cloudbuild/source` '
              'is used.',
     )
     parser.add_argument(
         '--gcs-log-dir',
-        help='Directory in Google Cloud Storage to hold build logs. If the '
-             'bucket does not exist, it will be created. If not set, '
-             '```gs://<project id>_cloudbuild/logs``` is used.',
+        help='Directory in Google Cloud Storage to hold build logs. If not '
+             'set, `gs://<project num>.cloudbuild-logs.googleusercontent.com/` '
+             'will be created and used.',
     )
     parser.add_argument(
         '--timeout',

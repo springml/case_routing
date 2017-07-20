@@ -13,6 +13,7 @@
 # limitations under the License.
 """Command for listing users."""
 from googlecloudsdk.api_lib.compute import base_classes
+from googlecloudsdk.api_lib.compute import lister
 
 
 class List(base_classes.GlobalLister):
@@ -29,5 +30,14 @@ class List(base_classes.GlobalLister):
   @property
   def messages(self):
     return self.clouduseraccounts.MESSAGES_MODULE
+
+  def GetResources(self, args, errors):
+    return lister.GetGlobalResources(
+        service=self.service,
+        project=self.project,
+        filter_expr=self.GetFilterExpr(args),
+        http=self.http,
+        batch_url='https://www.googleapis.com/batch/',
+        errors=errors)
 
 List.detailed_help = base_classes.GetGlobalListerHelp('users')

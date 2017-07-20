@@ -52,8 +52,8 @@ class Create(base.Command):
     Returns:
       Some value that we want to have printed later.
     """
-    op = databases.UpdateDdl(
-        args.instance, args.database, flags.FixDdl(args.ddl or []))
+    op = databases.UpdateDdl(args.instance, args.database,
+                             flags.SplitDdlIntoStatements(args.ddl or []))
     if args.async:
       return op
     return database_operations.Await(op, 'DDL updating')

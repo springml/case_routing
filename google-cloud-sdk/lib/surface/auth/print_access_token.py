@@ -15,6 +15,7 @@
 """A hidden command that prints access tokens.
 """
 
+from googlecloudsdk.api_lib.auth import exceptions as auth_exceptions
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions as c_exc
 from googlecloudsdk.core.credentials import store as c_store
@@ -33,7 +34,7 @@ class AccessToken(base.Command):
               'active account.'))
     parser.display_info.AddFormat('value(access_token)')
 
-  @c_exc.RaiseToolExceptionInsteadOf(c_store.Error, client.Error)
+  @c_exc.RaiseErrorInsteadOf(auth_exceptions.AuthenticationError, client.Error)
   def Run(self, args):
     """Run the helper command."""
 
@@ -41,6 +42,6 @@ class AccessToken(base.Command):
     c_store.Refresh(cred)
 
     if not cred.access_token:
-      raise c_exc.ToolException(
+      raise auth_exceptions.InvalidCredentialsError(
           'No access token could be obtained from the current credentials.')
     return cred

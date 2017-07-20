@@ -22,7 +22,7 @@ from googlecloudsdk.core import resources
 
 @base.ReleaseTracks(base.ReleaseTrack.GA, base.ReleaseTrack.ALPHA,
                     base.ReleaseTrack.BETA)
-class GetIamPolicy(base.DescribeCommand):
+class GetIamPolicy(base.ListCommand):
   """Get the IAM policy for the named cloud source repository.
 
   This command gets the IAM policy for the given repository.
@@ -38,6 +38,7 @@ class GetIamPolicy(base.DescribeCommand):
   @staticmethod
   def Args(parser):
     parser.add_argument('repository_name', help='Name of the repository.')
+    base.URI_FLAG.RemoveFromParser(parser)
 
   def Run(self, args):
     """Gets the IAM policy for the repository.

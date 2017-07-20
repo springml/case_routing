@@ -16,6 +16,7 @@ from googlecloudsdk.api_lib.cloudiot import devices
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iot import flags
 from googlecloudsdk.command_lib.iot import util
+from googlecloudsdk.core import log
 
 
 class Delete(base.DeleteCommand):
@@ -31,4 +32,6 @@ class Delete(base.DeleteCommand):
     device_ref = util.ParseDevice(args.id, registry=args.registry,
                                   region=args.region)
 
-    return client.Delete(device_ref)
+    response = client.Delete(device_ref)
+    log.DeletedResource(device_ref.Name(), 'device')
+    return response

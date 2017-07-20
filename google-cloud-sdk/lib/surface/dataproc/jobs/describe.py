@@ -15,6 +15,7 @@
 """Describe job command."""
 
 from googlecloudsdk.api_lib.dataproc import dataproc as dp
+from googlecloudsdk.api_lib.dataproc import util
 from googlecloudsdk.calliope import base
 
 
@@ -38,9 +39,9 @@ class Describe(base.DescribeCommand):
         help='The ID of the job to describe.')
 
   def Run(self, args):
-    dataproc = dp.Dataproc()
+    dataproc = dp.Dataproc(self.ReleaseTrack())
 
-    job_ref = dataproc.ParseJob(args.id)
+    job_ref = util.ParseJob(args.id, dataproc)
 
     return dataproc.client.projects_regions_jobs.Get(
         dataproc.messages.DataprocProjectsRegionsJobsGetRequest(

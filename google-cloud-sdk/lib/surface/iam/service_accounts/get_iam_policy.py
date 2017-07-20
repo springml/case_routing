@@ -16,11 +16,12 @@
 
 import textwrap
 
+from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iam import base_classes
 from googlecloudsdk.command_lib.iam import iam_util
 
 
-class GetIamPolicy(base_classes.BaseIamCommand):
+class GetIamPolicy(base_classes.BaseIamCommand, base.ListCommand):
   """Get the IAM policy for a service account.
 
   This command gets the IAM policy for a service account. If formatted as
@@ -41,9 +42,11 @@ class GetIamPolicy(base_classes.BaseIamCommand):
   @staticmethod
   def Args(parser):
     iam_util.AddServiceAccountNameArg(
-        parser, help_text='The service account whose policy to get.')
+        parser,
+        action='whose policy to get')
+    base.URI_FLAG.RemoveFromParser(parser)
 
   def Run(self, args):
     return self.iam_client.projects_serviceAccounts.GetIamPolicy(
         self.messages.IamProjectsServiceAccountsGetIamPolicyRequest(
-            resource=iam_util.EmailToAccountResourceName(args.name)))
+            resource=iam_util.EmailToAccountResourceName(args.service_account)))

@@ -16,6 +16,7 @@
 
 from googlecloudsdk.api_lib.dataproc import dataproc as dp
 from googlecloudsdk.api_lib.dataproc import exceptions
+from googlecloudsdk.api_lib.dataproc import util
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.util import labels_util
 from googlecloudsdk.core import log
@@ -51,9 +52,9 @@ class Update(base.UpdateCommand):
     labels_util.AddUpdateLabelsFlags(parser)
 
   def Run(self, args):
-    dataproc = dp.Dataproc()
+    dataproc = dp.Dataproc(self.ReleaseTrack())
 
-    job_ref = dataproc.ParseJob(args.id)
+    job_ref = util.ParseJob(args.id, dataproc)
 
     changed_fields = []
 

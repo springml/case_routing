@@ -16,10 +16,10 @@
 
 from apitools.base.py import exceptions as apitools_exceptions
 
-from googlecloudsdk.api_lib.deployment_manager import dm_v2_util
+from googlecloudsdk.api_lib.deployment_manager import dm_api_util
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions
-from googlecloudsdk.command_lib.deployment_manager import dm_base
 from googlecloudsdk.command_lib.deployment_manager import flags
 
 
@@ -32,7 +32,8 @@ class _Results(object):
     self.outputs = outputs
 
 
-class Describe(base.DescribeCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2)
+class Describe(base.DescribeCommand, dm_base.DmCommand):
   """Provide information about a deployment.
 
   This command prints out all available details about a deployment.
@@ -89,15 +90,15 @@ class Describe(base.DescribeCommand):
           request.
     """
     try:
-      deployment = dm_base.GetClient().deployments.Get(
-          dm_base.GetMessages().DeploymentmanagerDeploymentsGetRequest(
+      deployment = self.client.deployments.Get(
+          self.messages.DeploymentmanagerDeploymentsGetRequest(
               project=dm_base.GetProject(), deployment=args.deployment_name))
     except apitools_exceptions.HttpError as error:
-      raise exceptions.HttpException(error, dm_v2_util.HTTP_ERROR_FORMAT)
+      raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)
 
     try:
-      response = dm_base.GetClient().resources.List(
-          dm_base.GetMessages().DeploymentmanagerResourcesListRequest(
+      response = self.client.resources.List(
+          self.messages.DeploymentmanagerResourcesListRequest(
               project=dm_base.GetProject(), deployment=deployment.name))
       resources = response.resources
     except apitools_exceptions.HttpError:
@@ -106,11 +107,11 @@ class Describe(base.DescribeCommand):
 
     outputs = []
 
-    manifest = dm_v2_util.ExtractManifestName(deployment)
+    manifest = dm_api_util.ExtractManifestName(deployment)
 
     if manifest:
-      manifest_response = dm_base.GetClient().manifests.Get(
-          dm_base.GetMessages().DeploymentmanagerManifestsGetRequest(
+      manifest_response = self.client.manifests.Get(
+          self.messages.DeploymentmanagerManifestsGetRequest(
               project=dm_base.GetProject(),
               deployment=args.deployment_name,
               manifest=manifest,
@@ -118,6 +119,6 @@ class Describe(base.DescribeCommand):
       )
       # We might be lacking a layout if the manifest failed expansion.
       if manifest_response.layout:
-        outputs = dm_v2_util.FlattenLayoutOutputs(manifest_response.layout)
+        outputs = dm_api_util.FlattenLayoutOutputs(manifest_response.layout)
 
     return _Results(deployment, resources, outputs)

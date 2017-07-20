@@ -80,7 +80,7 @@ class List(base.ListCommand):
     parser.display_info.AddFormat('table(name:label=OPERATION_NAME, done)')
 
   def Run(self, args):
-    dataproc = dp.Dataproc()
+    dataproc = dp.Dataproc(self.ReleaseTrack())
 
     # Parse Operations endpoint.
     region_callback = properties.VALUES.dataproc.region.GetOrFail

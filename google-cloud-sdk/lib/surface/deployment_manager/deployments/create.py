@@ -16,12 +16,12 @@
 
 from apitools.base.py import exceptions as apitools_exceptions
 
-from googlecloudsdk.api_lib.deployment_manager import dm_v2_util
+from googlecloudsdk.api_lib.deployment_manager import dm_api_util
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.api_lib.deployment_manager import exceptions as dm_exceptions
 from googlecloudsdk.api_lib.deployment_manager import importer
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions
-from googlecloudsdk.command_lib.deployment_manager import dm_base
 from googlecloudsdk.command_lib.deployment_manager import dm_util
 from googlecloudsdk.command_lib.deployment_manager import dm_write
 from googlecloudsdk.command_lib.deployment_manager import flags
@@ -34,7 +34,8 @@ OPERATION_TIMEOUT = 20 * 60  # 20 mins
 
 @base.UnicodeIsSupported
 @base.ReleaseTracks(base.ReleaseTrack.GA)
-class Create(base.CreateCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2)
+class Create(base.CreateCommand, dm_base.DmCommand):
   """Create a deployment.
 
   This command inserts (creates) a new deployment based on a provided config
@@ -71,18 +72,16 @@ class Create(base.CreateCommand):
     flags.AddAsyncFlag(group)
     flags.AddDeploymentNameFlag(parser)
     flags.AddPropertiesFlag(parser)
+    labels_util.AddCreateLabelsFlags(parser)
 
-    if version in [base.ReleaseTrack.ALPHA]:
-      labels_util.AddCreateLabelsFlags(parser)
-
-      group.add_argument(
-          '--automatic-rollback-on-error',
-          help='If the create request results in a deployment with resource '
-          'errors, delete that deployment immediately after creation. '
-          '(default=False)',
-          dest='automatic_rollback',
-          default=False,
-          action='store_true')
+    group.add_argument(
+        '--automatic-rollback-on-error',
+        help='If the create request results in a deployment with resource '
+        'errors, delete that deployment immediately after creation. '
+        '(default=False)',
+        dest='automatic_rollback',
+        default=False,
+        action='store_true')
 
     parser.add_argument(
         '--description',
@@ -138,17 +137,17 @@ class Create(base.CreateCommand):
         (args.async or getattr(args, 'automatic_rollback', False))):
       args.format = flags.OPERATION_FORMAT
 
-    deployment = dm_base.GetMessages().Deployment(
+    deployment = self.messages.Deployment(
         name=args.deployment_name,  # TODO(b/37913150): Use resource parser.
         target=importer.BuildTargetConfig(
-            dm_base.GetMessages(), args.config, args.properties),
+            self.messages, args.config, args.properties),
     )
 
     self._SetMetadata(args, deployment)
 
     try:
-      operation = dm_base.GetClient().deployments.Insert(
-          dm_base.GetMessages().DeploymentmanagerDeploymentsInsertRequest(
+      operation = self.client.deployments.Insert(
+          self.messages.DeploymentmanagerDeploymentsInsertRequest(
               project=dm_base.GetProject(),
               deployment=deployment,
               preview=args.preview,
@@ -156,21 +155,23 @@ class Create(base.CreateCommand):
       )
 
       # Fetch and print the latest fingerprint of the deployment.
-      fingerprint = dm_v2_util.FetchDeploymentFingerprint(
-          dm_base.GetClient(),
-          dm_base.GetMessages(),
+      fingerprint = dm_api_util.FetchDeploymentFingerprint(
+          self.client,
+          self.messages,
           dm_base.GetProject(),
           args.deployment_name)
       dm_util.PrintFingerprint(fingerprint)
 
     except apitools_exceptions.HttpError as error:
-      raise exceptions.HttpException(error, dm_v2_util.HTTP_ERROR_FORMAT)
+      raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)
     if args.async:
       return operation
     else:
       op_name = operation.name
       try:
-        dm_write.WaitForOperation(op_name,
+        dm_write.WaitForOperation(self.client,
+                                  self.messages,
+                                  op_name,
                                   operation_description='create',
                                   project=dm_base.GetProject(),
                                   timeout=OPERATION_TIMEOUT)
@@ -178,7 +179,7 @@ class Create(base.CreateCommand):
                          + ' completed successfully.')
       except apitools_exceptions.HttpError as error:
         # TODO(b/37911296): Use gcloud default error handling.
-        raise exceptions.HttpException(error, dm_v2_util.HTTP_ERROR_FORMAT)
+        raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)
       except dm_exceptions.OperationError as error:
         response = self._HandleOperationError(error,
                                               args,
@@ -186,17 +187,31 @@ class Create(base.CreateCommand):
                                               dm_base.GetProject())
         return response
 
-      return dm_v2_util.FetchResourcesAndOutputs(dm_base.GetClient(),
-                                                 dm_base.GetMessages(),
-                                                 dm_base.GetProject(),
-                                                 args.deployment_name)
+      return dm_api_util.FetchResourcesAndOutputs(self.client,
+                                                  self.messages,
+                                                  dm_base.GetProject(),
+                                                  args.deployment_name)
 
   def _HandleOperationError(self, error, args, operation, project):
+    if args.automatic_rollback:
+      delete_operation = self._PerformRollback(args.deployment_name,
+                                               str(error))
+      create_operation = dm_api_util.GetOperation(self.client, self.messages,
+                                                  operation, project)
+
+      return [create_operation, delete_operation]
+
     raise error
 
   def _SetMetadata(self, args, deployment):
     if args.description:
       deployment.description = args.description
+    label_dict = labels_util.GetUpdateLabelsDictFromArgs(args)
+    if label_dict:
+      deployment.labels = [
+          self.messages.DeploymentLabelEntry(key=k, value=v)
+          for k, v in sorted(label_dict.iteritems())
+      ]
 
   def _PerformRollback(self, deployment_name, error_message):
     # Print information about the failure.
@@ -208,29 +223,33 @@ class Create(base.CreateCommand):
 
     # Delete the deployment.
     try:
-      delete_operation = dm_base.GetClient().deployments.Delete(
-          dm_base.GetMessages().DeploymentmanagerDeploymentsDeleteRequest(
+      delete_operation = self.client.deployments.Delete(
+          self.messages.DeploymentmanagerDeploymentsDeleteRequest(
               project=dm_base.GetProject(),
               deployment=deployment_name,
           )
       )
     except apitools_exceptions.HttpError as error:
-      raise exceptions.HttpException(error, dm_v2_util.HTTP_ERROR_FORMAT)
+      raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)
 
     # TODO(b/37481635): Use gcloud default operation polling.
-    dm_write.WaitForOperation(delete_operation.name,
+    dm_write.WaitForOperation(self.client,
+                              self.messages,
+                              delete_operation.name,
                               'delete',
                               dm_base.GetProject(),
                               timeout=OPERATION_TIMEOUT)
 
-    completed_operation = dm_v2_util.GetOperation(delete_operation,
-                                                  dm_base.GetProject())
+    completed_operation = dm_api_util.GetOperation(self.client,
+                                                   self.messages,
+                                                   delete_operation,
+                                                   dm_base.GetProject())
     return completed_operation
 
 
 @base.UnicodeIsSupported
 @base.ReleaseTracks(base.ReleaseTrack.BETA)
-class CreateBETA(Create):
+class CreateBeta(Create):
   """Create a deployment.
 
   This command inserts (creates) a new deployment based on a provided config
@@ -244,7 +263,7 @@ class CreateBETA(Create):
 
 @base.UnicodeIsSupported
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)
-class CreateALPHA(Create):
+class CreateAlpha(Create):
   """Create a deployment.
 
   This command inserts (creates) a new deployment based on a provided config
@@ -254,24 +273,3 @@ class CreateALPHA(Create):
   @staticmethod
   def Args(parser):
     Create.Args(parser, version=base.ReleaseTrack.ALPHA)
-
-  def _HandleOperationError(self, error, args, operation, project):
-    if args.automatic_rollback:
-      delete_operation = self._PerformRollback(args.deployment_name,
-                                               str(error))
-      create_operation = dm_v2_util.GetOperation(operation, project)
-
-      return [create_operation, delete_operation]
-    else:
-      return super(CreateALPHA, self)._HandleOperationError(
-          error, args, operation, project)
-
-  def _SetMetadata(self, args, deployment):
-    label_dict = labels_util.GetUpdateLabelsDictFromArgs(args)
-    label_entry = []
-    if label_dict:
-      label_entry = [dm_base.GetMessages().DeploymentLabelEntry(key=k,
-                                                                value=v)
-                     for k, v in sorted(label_dict.iteritems())]
-      deployment.labels = label_entry
-    super(CreateALPHA, self)._SetMetadata(args, deployment)

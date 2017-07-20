@@ -14,6 +14,7 @@
 
 """Describe operation command."""
 from googlecloudsdk.api_lib.dataproc import dataproc as dp
+from googlecloudsdk.api_lib.dataproc import util
 from googlecloudsdk.calliope import base
 
 
@@ -35,9 +36,9 @@ class Describe(base.DescribeCommand):
         'operation', help='The ID of the operation to describe.')
 
   def Run(self, args):
-    dataproc = dp.Dataproc()
+    dataproc = dp.Dataproc(self.ReleaseTrack())
 
-    operation_ref = dataproc.ParseOperation(args.operation)
+    operation_ref = util.ParseOperation(args.operation, dataproc)
 
     request = dataproc.messages.DataprocProjectsRegionsOperationsGetRequest(
         name=operation_ref.RelativeName())

@@ -16,7 +16,15 @@
 from googlecloudsdk.calliope import base
 
 
+def _GetUri(resource):
+  return 'https://spanner.googleapis.com/{}/{}'.format('v1', resource.name)
+
+
 @base.ReleaseTracks(base.ReleaseTrack.GA, base.ReleaseTrack.BETA,
                     base.ReleaseTrack.ALPHA)
 class Spanner(base.Group):
   """Command groups for Cloud Spanner."""
+
+  @staticmethod
+  def Args(parser):
+    parser.display_info.AddUriFunc(_GetUri)

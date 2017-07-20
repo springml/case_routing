@@ -87,8 +87,8 @@ class Update(base.UpdateCommand):
     Raises:
       util.Error, if creation failed.
     """
-    adapter = api_adapter.NewAPIAdapter()
-    pool_ref = adapter.ParseNodePool(args.name)
+    adapter = self.context['api_adapter']
+    pool_ref = adapter.ParseNodePool(args.name, getattr(args, 'region', None))
     options = self.ParseUpdateNodePoolOptions(args)
     if options.enable_autorepair is None and options.enable_autoupgrade is None:
       raise exceptions.MinimumArgumentException(
@@ -115,11 +115,5 @@ class Update(base.UpdateCommand):
 
     log.UpdatedResource(pool_ref)
     return pool
-
-  def Collection(self):
-    return 'container.projects.zones.clusters.nodePools'
-
-  def DeprecatedFormat(self, args):
-    return self.ListFormat(args)
 
 Update.detailed_help = DETAILED_HELP

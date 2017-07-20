@@ -29,7 +29,8 @@ class List(base.ListCommand):
   @staticmethod
   def Args(parser):
     _AddListArgs(parser)
-    parser.display_info.AddFormat('table(name.basename(), deploymentUri)')
+    parser.display_info.AddFormat(
+        'table(name.basename(), deploymentUri, state)')
 
   def Run(self, args):
     return versions_util.List(versions_api.VersionsClient(),

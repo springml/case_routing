@@ -33,7 +33,6 @@ class Delete(base.DeleteCommand):
   def Args(parser):
     parser.add_argument(
         'capture_id', metavar='ID', nargs='+',
-        completion_resource='source.captures',
         help="""\
             The ID of an existing capture to delete.
         """)

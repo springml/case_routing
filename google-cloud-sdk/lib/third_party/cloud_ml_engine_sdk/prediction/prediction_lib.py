@@ -506,7 +506,7 @@ def _validate_model_class(user_class):
                           % user_class_name)
 
 
-class DefaultModel(Model):
+class DefaultModel(object):
   """The default implementation of the Model interface.
 
   This implementation optionally performs preprocessing and postprocessing

@@ -17,9 +17,9 @@
 import argparse
 import textwrap
 
+from googlecloudsdk.api_lib.auth import exceptions as auth_exceptions
 from googlecloudsdk.api_lib.auth import util as auth_util
 from googlecloudsdk.calliope import base
-from googlecloudsdk.calliope import exceptions as c_exc
 from googlecloudsdk.command_lib.util import check_browser
 from googlecloudsdk.core import config
 from googlecloudsdk.core import log
@@ -74,7 +74,6 @@ class Login(base.Command):
         'account', nargs='?', help='User account used for authorization.')
     parser.display_info.AddFormat('none')
 
-  @c_exc.RaiseToolExceptionInsteadOf(c_store.Error)
   def Run(self, args):
     """Run the authentication command."""
 
@@ -133,7 +132,7 @@ class Login(base.Command):
     creds = auth_util.DoInstalledAppBrowserFlow(launch_browser, scopes)
     web_flow_account = creds.id_token['email']
     if account and account.lower() != web_flow_account.lower():
-      raise c_exc.ToolException(
+      raise auth_exceptions.WrongAccountError(
           'You attempted to log in as account [{account}] but the received '
           'credentials were for account [{web_flow_account}].\n\n'
           'Please check that your browser is logged in as account [{account}] '

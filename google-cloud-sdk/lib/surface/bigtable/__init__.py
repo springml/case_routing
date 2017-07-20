@@ -13,7 +13,6 @@
 # limitations under the License.
 """The main command group for bigtable."""
 
-from googlecloudsdk.api_lib.util import apis
 from googlecloudsdk.calliope import base
 
 
