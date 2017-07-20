@@ -37,6 +37,12 @@ def index():
 
 	return render_template('index.html')
 
+@app.route('/getCasesVSCategory', methods=['GET' , 'POST'])
+def update_category():
+
+	update_value('Category', new_category)
+	return 
+
 @app.route('/getCasesVSCategory', methods=['POST'])
 def get_cat_data():
 	data = {}
@@ -190,6 +196,15 @@ def run_table_query(query):
 # 	u'South',
 # 	u'Charles Anderson'
 # ]
+def update_value(CaseID, Column, value):
+	with database.batch() as batch:
+    	batch.update(
+        	table='cases',
+        	columns=(
+                'CaseID', Column),
+        	values=[
+            	(CaseID, value)])
+    return 
 def run_all_query(query):
 	data = database.execute_sql(query)
 	return data
