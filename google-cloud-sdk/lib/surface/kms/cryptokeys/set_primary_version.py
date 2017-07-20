@@ -39,7 +39,7 @@ class SetPrimaryVersion(base.Command):
     parser.add_argument(
         '--version',
         required=True,
-        completion_resource=flags.CRYPTO_KEY_VERSION_COLLECTION,
+        completer=flags.KeyVersionCompleter,
         help='The version to make primary.')
 
   def Run(self, args):

@@ -275,7 +275,7 @@ class RuntimeTests(testutil.TestBase):
     def test_detect_no_start_with_server(self):
         """Ensure appinfo generated if no scripts.start, server.js exists."""
         self.write_file('server.js', 'bogus contents')
-        self.write_file('package.json', '{"scripts": {"start": "foo.js"}}')
+        self.write_file('package.json', '{"scripts": {"not-start": "foo.js"}}')
         configurator = self.detect()
         self.assertEqual(configurator.generated_appinfo,
                          {'runtime': 'nodejs',
@@ -421,23 +421,19 @@ class FailureLoggingTests(testutil.TestBase):
     def test_invalid_package_json(self):
         self.write_file('package.json', '')
         self.write_file('server.js', '')
-        with mock.patch.dict(ext_runtime._LOG_FUNCS,
-                             {'warn': self.warn_fake}):
-            self.generate_configs()
-        self.assertTrue(self.warnings[0].startswith(
-            'node.js checker: error accessing package.json'))
 
         variations = [
             (testutil.AppInfoFake(runtime='nodejs'), None),
             (None, 'nodejs'),
+            (None, None)
         ]
         for appinfo, runtime in variations:
-            self.warnings = []
+            self.errors = []
             with mock.patch.dict(ext_runtime._LOG_FUNCS,
-                                 {'warn': self.warn_fake}):
+                                 {'error': self.error_fake}):
                 self.generate_configs(appinfo=appinfo, runtime=runtime)
 
-            self.assertTrue(self.warnings[0].startswith(
+            self.assertTrue(self.errors[0].startswith(
                 'node.js checker: error accessing package.json'))
 
     def test_no_startup_script(self):
@@ -451,7 +447,7 @@ class FailureLoggingTests(testutil.TestBase):
 
         variations = [
             (testutil.AppInfoFake(runtime='nodejs'), None),
-            (None, 'nodejs'),
+            (None, 'nodejs')
         ]
         for appinfo, runtime in variations:
             self.errors = []
@@ -461,6 +457,24 @@ class FailureLoggingTests(testutil.TestBase):
             self.assertTrue(self.errors[0].startswith(
                 'node.js checker: Neither "start" in the "scripts" section '
                 'of "package.json" nor the "server.js" file were found.'))
+
+    def test_package_json_no_startup_script(self):
+        self.write_file('package.json', '{"scripts": {"not-start": "foo.js"}}')
+
+        variations = [
+            (testutil.AppInfoFake(runtime='nodejs'), None),
+            (None, 'nodejs'),
+            (None, None)
+        ]
+        for appinfo, runtime in variations:
+            self.errors = []
+            with mock.patch.dict(ext_runtime._LOG_FUNCS,
+                                 {'error': self.error_fake}):
+                self.generate_configs(appinfo=appinfo, runtime=runtime)
+            self.assertTrue(self.errors[0].startswith(
+                'node.js checker: Neither "start" in the "scripts" section '
+                'of "package.json" nor the "server.js" file were found.'))
+
 
 if __name__ == '__main__':
   unittest.main()

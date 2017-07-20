@@ -16,6 +16,7 @@ from googlecloudsdk.api_lib.cloudiot import devices
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iot import flags
 from googlecloudsdk.command_lib.iot import util
+from googlecloudsdk.core import log
 from googlecloudsdk.core.console import console_io
 
 
@@ -35,4 +36,7 @@ class Clear(base.Command):
         message='This will delete ALL CREDENTIALS for device [{}]'.format(
             device_ref.Name()),
         cancel_on_no=True)
-    return client.Patch(device_ref, credentials=[])
+    response = client.Patch(device_ref, credentials=[])
+    log.status.Print(
+        'Cleared all credentials for device [{}].'.format(device_ref.Name()))
+    return response

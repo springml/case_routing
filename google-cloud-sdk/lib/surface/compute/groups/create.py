@@ -13,6 +13,8 @@
 # limitations under the License.
 """Command for creating groups."""
 from googlecloudsdk.api_lib.compute import base_classes
+from googlecloudsdk.api_lib.compute import request_helper
+from googlecloudsdk.api_lib.compute import utils
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.compute.groups import flags
 from googlecloudsdk.core import properties
@@ -36,7 +38,6 @@ class Create(base.CreateCommand):
 
   def Run(self, args):
     """Issues requests necessary for adding users."""
-    compute_holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
     holder = base_classes.ComputeUserAccountsApiHolder(self.ReleaseTrack())
     client = holder.client
 
@@ -58,7 +59,16 @@ class Create(base.CreateCommand):
           group=group)
       requests.append((client.groups, 'Insert', request))
 
-    return compute_holder.client.MakeRequests(requests)
+    errors = []
+    responses = list(request_helper.MakeRequests(
+        requests=requests,
+        http=client.http,
+        batch_url='https://www.googleapis.com/batch/',
+        errors=errors))
+    if errors:
+      utils.RaiseToolException(
+          errors, error_message='Could not fetch resource:')
+    return responses
 
 
 Create.detailed_help = {

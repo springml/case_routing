@@ -30,8 +30,9 @@ from surface.container.clusters.upgrade import VersionVerifier
 class List(base.ListCommand):
   """List existing clusters for running containers."""
 
-  def Collection(self):
-    return 'container.projects.zones.clusters'
+  @staticmethod
+  def Args(parser):
+    parser.display_info.AddFormat(util.CLUSTERS_FORMAT)
 
   def Run(self, args):
     """This is what gets called when the user runs this command.
@@ -46,14 +47,21 @@ class List(base.ListCommand):
     adapter = self.context['api_adapter']
 
     project = properties.VALUES.core.project.Get(required=True)
-    zone = None
-    if args.zone:
-      zone = adapter.registry.Parse(args.zone, params={'project': project},
-                                    collection='compute.zones').zone
+    if getattr(args, 'region', None):
+      location = adapter.registry.Parse(args.region,
+                                        params={'project': project},
+                                        collection='compute.regions').region
+    elif getattr(args, 'zone', None):
+      location = adapter.registry.Parse(args.zone,
+                                        params={'project': project},
+                                        collection='compute.zones').zone
+    else:
+      location = None
+
     def sort_key(cluster):
       return (cluster.zone, cluster.name)
     try:
-      clusters = adapter.ListClusters(project, zone)
+      clusters = adapter.ListClusters(project, location)
       clusters.clusters = sorted(clusters.clusters, key=sort_key)
 
       if clusters.missingZones:

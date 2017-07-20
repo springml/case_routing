@@ -16,11 +16,12 @@
 
 from apitools.base.py import exceptions as apitools_exceptions
 
-from googlecloudsdk.api_lib.deployment_manager import dm_v2_util
+from googlecloudsdk.api_lib.deployment_manager import dm_api_util
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.api_lib.deployment_manager import exceptions
 from googlecloudsdk.api_lib.util import exceptions as api_exceptions
 from googlecloudsdk.calliope import base
-from googlecloudsdk.command_lib.deployment_manager import dm_base
+from googlecloudsdk.command_lib.deployment_manager import dm_v2_base
 from googlecloudsdk.command_lib.deployment_manager import dm_write
 from googlecloudsdk.command_lib.deployment_manager import flags
 from googlecloudsdk.core import exceptions as core_exceptions
@@ -32,7 +33,8 @@ from googlecloudsdk.core.console import console_io
 OPERATION_TIMEOUT = 20 * 60  # 20 mins
 
 
-class Delete(base.DeleteCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2)
+class Delete(base.DeleteCommand, dm_base.DmCommand):
   """Delete a deployment.
 
   This command deletes a deployment and deletes all associated resources.
@@ -69,7 +71,8 @@ class Delete(base.DeleteCommand):
     """
     parser.add_argument('deployment_name', nargs='+', help='Deployment name.')
     flags.AddDeletePolicyFlag(
-        parser, dm_base.GetMessages().DeploymentmanagerDeploymentsDeleteRequest)
+        parser, dm_v2_base.GetMessages()
+        .DeploymentmanagerDeploymentsDeleteRequest)
     flags.AddAsyncFlag(parser)
 
   def Run(self, args):
@@ -97,11 +100,11 @@ class Delete(base.DeleteCommand):
     errors = []
     for deployment_name in args.deployment_name:
       try:
-        operation = dm_base.GetClient().deployments.Delete(
-            dm_base.GetMessages().DeploymentmanagerDeploymentsDeleteRequest(
+        operation = self.client.deployments.Delete(
+            self.messages.DeploymentmanagerDeploymentsDeleteRequest(
                 project=dm_base.GetProject(),
                 deployment=deployment_name,
-                deletePolicy=(dm_base.GetMessages()
+                deletePolicy=(self.messages
                               .DeploymentmanagerDeploymentsDeleteRequest
                               .DeletePolicyValueValuesEnum(args.delete_policy)),
             )
@@ -112,7 +115,9 @@ class Delete(base.DeleteCommand):
           op_name = operation.name
           try:
             # TODO(b/62720778): Refactor to use waiter.CloudOperationPoller
-            dm_write.WaitForOperation(op_name,
+            dm_write.WaitForOperation(self.client,
+                                      self.messages,
+                                      op_name,
                                       'delete',
                                       dm_base.GetProject(),
                                       timeout=OPERATION_TIMEOUT)
@@ -121,8 +126,8 @@ class Delete(base.DeleteCommand):
           except exceptions.OperationError as e:
             errors.append(exceptions.OperationError(
                 u'Delete operation {0} failed.\n{1}'.format(op_name, e)))
-          completed_operation = dm_base.GetClient().operations.Get(
-              dm_base.GetMessages().DeploymentmanagerOperationsGetRequest(
+          completed_operation = dm_v2_base.GetClient().operations.Get(
+              dm_v2_base.GetMessages().DeploymentmanagerOperationsGetRequest(
                   project=dm_base.GetProject(),
                   operation=op_name,
               )
@@ -130,7 +135,7 @@ class Delete(base.DeleteCommand):
           operations.append(completed_operation)
       except apitools_exceptions.HttpError as error:
         errors.append(api_exceptions.HttpException(
-            error, dm_v2_util.HTTP_ERROR_FORMAT))
+            error, dm_api_util.HTTP_ERROR_FORMAT))
 
     if errors:
       raise core_exceptions.MultiError(errors)

@@ -15,9 +15,10 @@
 """operations list command."""
 from apitools.base.py import list_pager
 
-from googlecloudsdk.api_lib.deployment_manager import dm_v2_util
+from googlecloudsdk.api_lib.deployment_manager import dm_api_util
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.calliope import base
-from googlecloudsdk.command_lib.deployment_manager import dm_base
+from googlecloudsdk.command_lib.deployment_manager import dm_v2_base
 from googlecloudsdk.command_lib.deployment_manager import flags
 
 
@@ -48,7 +49,7 @@ class List(base.ListCommand):
           on the command line after this command. Positional arguments are
           allowed.
     """
-    dm_v2_util.SIMPLE_LIST_FLAG.AddToParser(parser)
+    dm_api_util.SIMPLE_LIST_FLAG.AddToParser(parser)
     parser.display_info.AddFormat(flags.OPERATION_FORMAT)
 
   def Run(self, args):
@@ -65,9 +66,9 @@ class List(base.ListCommand):
       HttpException: An http error response was received while executing api
           request.
     """
-    request = dm_base.GetMessages().DeploymentmanagerOperationsListRequest(
+    request = dm_v2_base.GetMessages().DeploymentmanagerOperationsListRequest(
         project=dm_base.GetProject(),
     )
-    return dm_v2_util.YieldWithHttpExceptions(list_pager.YieldFromList(
-        dm_base.GetClient().operations, request, field='operations',
+    return dm_api_util.YieldWithHttpExceptions(list_pager.YieldFromList(
+        dm_v2_base.GetClient().operations, request, field='operations',
         limit=args.limit, batch_size=args.page_size))

@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Command to delete an OrgPolicy."""
+"""Command to delete an Organization Policy."""
 
 from googlecloudsdk.api_lib.resource_manager import org_policies
 from googlecloudsdk.calliope import base
@@ -20,16 +20,15 @@ from googlecloudsdk.command_lib.resource_manager import org_policies_flags as fl
 from googlecloudsdk.core import log
 
 
-@base.Hidden
-@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
+@base.ReleaseTracks(base.ReleaseTrack.ALPHA, base.ReleaseTrack.BETA)
 class DeletePolicy(base.DeleteCommand):
-  """Delete an OrgPolicy.
+  """Delete an Organization Policy.
 
-  Deletes an OrgPolicy associated with the specified resource.
+  Deletes an Organization Policy associated with the specified resource.
 
   ## EXAMPLES
 
-  The following command clears an OrgPolicy for constraint
+  The following command clears an Organization Policy for constraint
   `serviceuser.services` on project `foo-project`:
 
     $ {command} serviceuser.services --project=foo-project

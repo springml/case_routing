@@ -24,6 +24,7 @@ from containerregistry.client.v2_2 import docker_image as v2_2_image
 from containerregistry.client.v2_2 import docker_session as v2_2_session
 from googlecloudsdk.api_lib.container.images import util
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.container import flags
 from googlecloudsdk.core import http
 from googlecloudsdk.core import log
 from googlecloudsdk.core.console import console_io
@@ -65,22 +66,13 @@ class Create(base.CreateCommand):
       """,
   }
 
-  def Collection(self):
-    return 'container.images'
-
   @staticmethod
   def Args(parser):
-    parser.add_argument(
-        'src_image',
-        help=('The fully qualified image '
-              'reference to add a tag for.\n'
-              '*.gcr.io/repository:tag'
-              '*.gcr.io/repository@digest'))
-    parser.add_argument(
-        'dest_image',
-        help=('The fully qualified image '
-              'reference to be the new tag.\n'
-              '*.gcr.io/repository:tag'))
+    flags.AddTagOrDigestPositional(parser, arg_name='src_image',
+                                   verb='add a tag for', repeated=False)
+    flags.AddTagOrDigestPositional(parser, arg_name='dest_image',
+                                   verb='be the new tag', repeated=False,
+                                   tags_only=True)
 
   def Run(self, args):
     # pylint: disable=missing-docstring

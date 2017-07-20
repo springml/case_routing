@@ -15,10 +15,8 @@
 
 """The gcloud app deploy command."""
 
-from googlecloudsdk.api_lib.app import runtime_builders
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.app import deploy_util
-from googlecloudsdk.core import properties
 
 
 _DETAILED_HELP = {
@@ -56,7 +54,8 @@ class DeployGA(base.SilentCommand):
     deploy_util.ArgsDeploy(parser)
 
   def Run(self, args):
-    runtime_builder_strategy = runtime_builders.RuntimeBuilderStrategy.NEVER
+    runtime_builder_strategy = deploy_util.GetRuntimeBuilderStrategy(
+        base.ReleaseTrack.GA)
     return deploy_util.RunDeploy(
         args, runtime_builder_strategy=runtime_builder_strategy)
 
@@ -71,12 +70,8 @@ class DeployBeta(base.SilentCommand):
     deploy_util.ArgsDeploy(parser)
 
   def Run(self, args):
-    # The runtime builders are property-configurable AND beta-only
-    if properties.VALUES.app.use_runtime_builders.GetBool():
-      runtime_builder_strategy = runtime_builders.RuntimeBuilderStrategy.ALWAYS
-    else:
-      runtime_builder_strategy = (
-          runtime_builders.RuntimeBuilderStrategy.WHITELIST)
+    runtime_builder_strategy = deploy_util.GetRuntimeBuilderStrategy(
+        base.ReleaseTrack.BETA)
     return deploy_util.RunDeploy(
         args,
         enable_endpoints=True,

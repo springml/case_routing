@@ -41,9 +41,9 @@ class Delete(base.DeleteCommand):
         help='The ID of the job to delete.')
 
   def Run(self, args):
-    dataproc = dp.Dataproc()
+    dataproc = dp.Dataproc(self.ReleaseTrack())
 
-    job_ref = dataproc.ParseJob(args.id)
+    job_ref = util.ParseJob(args.id, dataproc)
     request = dataproc.messages.DataprocProjectsRegionsJobsDeleteRequest(
         projectId=job_ref.projectId,
         region=job_ref.region,

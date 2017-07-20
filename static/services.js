@@ -21,10 +21,9 @@ app.service('DataService', function($http){
             });
        },
         getAllData: function(){
-            console.log("I got hit");
-            // return $http.post('/getAllData').then(function(response){
-            //     return response;
-            // });
+            return $http.post('/getAllData').then(function(response){
+                return response;
+            });
         }
     }
 });

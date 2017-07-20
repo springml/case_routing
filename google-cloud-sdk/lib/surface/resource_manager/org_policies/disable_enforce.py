@@ -19,17 +19,16 @@ from googlecloudsdk.command_lib.resource_manager import org_policies_base
 from googlecloudsdk.command_lib.resource_manager import org_policies_flags as flags
 
 
-@base.Hidden
-@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
+@base.ReleaseTracks(base.ReleaseTrack.ALPHA, base.ReleaseTrack.BETA)
 class DisableEnforce(base.Command):
-  """Turns off enforcement of boolean OrgPolicy constraint.
+  """Turns off enforcement of boolean Organization Policy constraint.
 
-  Turns off enforcement of a boolean OrgPolicy constraint at the specified
-  resource.
+  Turns off enforcement of a boolean Organization Policy constraint at
+  the specified resource.
 
   ## EXAMPLES
 
-  The following command disables enforcement of the OrgPolicy boolean
+  The following command disables enforcement of the Organization Policy boolean
   constraint `compute.disableSerialPortAccess` on project `foo-project`:
 
     $ {command} compute.disableSerialPortAccess --project=foo-project

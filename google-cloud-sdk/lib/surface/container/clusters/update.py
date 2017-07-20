@@ -161,7 +161,8 @@ class Update(base.UpdateCommand):
     """
     adapter = self.context['api_adapter']
 
-    cluster_ref = adapter.ParseCluster(args.name)
+    cluster_ref = adapter.ParseCluster(args.name,
+                                       getattr(args, 'region', None))
     # Make sure it exists (will raise appropriate error if not)
     cluster = adapter.GetCluster(cluster_ref)
 

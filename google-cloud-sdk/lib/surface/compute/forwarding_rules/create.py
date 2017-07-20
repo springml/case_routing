@@ -101,11 +101,8 @@ class Create(base.CreateCommand):
         IPAddress=address,
         IPProtocol=protocol,
         portRange=port_range,
-        target=target_ref.SelfLink())
-    if args.load_balancing_scheme == 'INTERNAL':
-      forwarding_rule.loadBalancingScheme = (
-          client.messages.ForwardingRule
-          .LoadBalancingSchemeValueValuesEnum.INTERNAL)
+        target=target_ref.SelfLink(),
+        loadBalancingScheme=_GetLoadBalancingScheme(args, client.messages))
 
     request = client.messages.ComputeGlobalForwardingRulesInsertRequest(
         forwardingRule=forwarding_rule,
@@ -116,8 +113,8 @@ class Create(base.CreateCommand):
   def _CreateRegionalRequests(self, client, resources, args,
                               forwarding_rule_ref):
     """Create a regionally scoped request."""
-    target_ref, region_ref = utils.GetRegionalTarget(client, resources, args,
-                                                     forwarding_rule_ref)
+    target_ref, region_ref = utils.GetRegionalTarget(
+        client, resources, args, forwarding_rule_ref, include_alpha=False)
     if not args.region and region_ref:
       args.region = region_ref
     protocol = self.ConstructProtocol(client.messages, args)
@@ -130,11 +127,8 @@ class Create(base.CreateCommand):
         description=args.description,
         name=forwarding_rule_ref.Name(),
         IPAddress=address,
-        IPProtocol=protocol)
-    if args.load_balancing_scheme == 'INTERNAL':
-      forwarding_rule.loadBalancingScheme = (
-          client.messages.ForwardingRule
-          .LoadBalancingSchemeValueValuesEnum.INTERNAL)
+        IPProtocol=protocol,
+        loadBalancingScheme=_GetLoadBalancingScheme(args, client.messages))
 
     if target_ref.Collection() == 'compute.regionBackendServices':
       forwarding_rule.portRange = args.port_range
@@ -222,11 +216,8 @@ class CreateBeta(Create):
         IPProtocol=protocol,
         portRange=port_range,
         target=target_ref.SelfLink(),
-        ipVersion=ip_version)
-    if args.load_balancing_scheme == 'INTERNAL':
-      forwarding_rule.loadBalancingScheme = (
-          client.messages.ForwardingRule
-          .LoadBalancingSchemeValueValuesEnum.INTERNAL)
+        ipVersion=ip_version,
+        loadBalancingScheme=_GetLoadBalancingScheme(args, client.messages))
 
     request = client.messages.ComputeGlobalForwardingRulesInsertRequest(
         forwardingRule=forwarding_rule,
@@ -281,11 +272,8 @@ class CreateAlpha(Create):
         portRange=port_range,
         target=target_ref.SelfLink(),
         ipVersion=ip_version,
-        networkTier=network_tier)
-    if args.load_balancing_scheme == 'INTERNAL':
-      forwarding_rule.loadBalancingScheme = (
-          client.messages.ForwardingRule
-          .LoadBalancingSchemeValueValuesEnum.INTERNAL)
+        networkTier=network_tier,
+        loadBalancingScheme=_GetLoadBalancingScheme(args, client.messages))
 
     request = client.messages.ComputeGlobalForwardingRulesInsertRequest(
         forwardingRule=forwarding_rule,
@@ -296,8 +284,8 @@ class CreateAlpha(Create):
   def _CreateRegionalRequests(self, client, resources, args,
                               forwarding_rule_ref):
     """Create a regionally scoped request."""
-    target_ref, region_ref = utils.GetRegionalTarget(client, resources, args,
-                                                     forwarding_rule_ref)
+    target_ref, region_ref = utils.GetRegionalTarget(
+        client, resources, args, forwarding_rule_ref, include_alpha=True)
     if not args.region and region_ref:
       args.region = region_ref
     protocol = self.ConstructProtocol(client.messages, args)
@@ -312,11 +300,8 @@ class CreateAlpha(Create):
         name=forwarding_rule_ref.Name(),
         IPAddress=address,
         IPProtocol=protocol,
-        networkTier=network_tier)
-    if args.load_balancing_scheme == 'INTERNAL':
-      forwarding_rule.loadBalancingScheme = (
-          client.messages.ForwardingRule
-          .LoadBalancingSchemeValueValuesEnum.INTERNAL)
+        networkTier=network_tier,
+        loadBalancingScheme=_GetLoadBalancingScheme(args, client.messages))
 
     if (target_ref.Collection() == 'compute.regionBackendServices'
        ) or (target_ref.Collection() == 'compute.targetInstances' and
@@ -397,3 +382,11 @@ def _GetPortList(range_list):
   for port_range in range_list:
     ports.extend(range(port_range.start, port_range.end + 1))
   return sorted(ports)
+
+
+def _GetLoadBalancingScheme(args, messages):
+  if args.load_balancing_scheme == 'INTERNAL':
+    return messages.ForwardingRule.LoadBalancingSchemeValueValuesEnum.INTERNAL
+  elif args.load_balancing_scheme == 'EXTERNAL':
+    return messages.ForwardingRule.LoadBalancingSchemeValueValuesEnum.EXTERNAL
+  return None

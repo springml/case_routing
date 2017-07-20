@@ -16,6 +16,7 @@
 from googlecloudsdk.api_lib.cloudkms import iam
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iam import iam_util
+from googlecloudsdk.command_lib.kms import completers
 from googlecloudsdk.command_lib.kms import flags
 
 
@@ -28,6 +29,7 @@ class AddIamPolicyBinding(base.Command):
   policy role and member types.
 
   ## EXAMPLES
+
   The following command will add an IAM policy binding for the role of
   'roles/editor' for the user 'test-user@gmail.com' on the CryptoKey
   `frodo` with the KeyRing `fellowship` and Location `global`:
@@ -46,8 +48,8 @@ class AddIamPolicyBinding(base.Command):
   @staticmethod
   def Args(parser):
     flags.AddCryptoKeyArgument(parser, 'whose IAM policy to modify')
-    iam_util.AddArgsForAddIamPolicyBinding(parser, 'cryptokey',
-                                           flags.CRYPTO_KEY_COLLECTION)
+    iam_util.AddArgsForAddIamPolicyBinding(
+        parser, completer=completers.CryptoKeysIamRolesCompleter)
 
   def Run(self, args):
     crypto_key_ref = flags.ParseCryptoKeyName(args)

@@ -13,6 +13,7 @@
 # limitations under the License.
 """Command for creating instances."""
 import argparse
+import re
 
 from googlecloudsdk.api_lib.compute import base_classes
 from googlecloudsdk.api_lib.compute import base_classes_resource_registry as resource_registry
@@ -23,6 +24,7 @@ from googlecloudsdk.api_lib.compute import metadata_utils
 from googlecloudsdk.api_lib.compute import utils
 from googlecloudsdk.api_lib.compute import zone_utils
 from googlecloudsdk.calliope import base
+from googlecloudsdk.calliope import exceptions
 from googlecloudsdk.command_lib.compute import flags
 from googlecloudsdk.command_lib.compute.instances import flags as instances_flags
 from googlecloudsdk.command_lib.util import labels_util
@@ -65,8 +67,6 @@ def _CommonArgs(parser, multiple_network_interface_cards, release_track,
   instances_flags.AddDiskArgs(parser, enable_regional)
   if release_track in [base.ReleaseTrack.ALPHA]:
     instances_flags.AddCreateDiskArgs(parser)
-  if release_track in [base.ReleaseTrack.ALPHA, base.ReleaseTrack.BETA]:
-    instances_flags.AddExtendedMachineTypeArgs(parser)
   if support_local_ssd_size:
     instances_flags.AddLocalSsdArgsWithSize(parser)
   else:
@@ -126,25 +126,35 @@ class Create(base.CreateCommand):
   def Collection(self):
     return 'compute.instances'
 
-  def WarnForSourceInstanceTemplateLimitations(self, args):
-    """Warn if --source-instance-template is mixed with unsupported flags."""
-    pass
-
   def GetSourceInstanceTemplate(self, args, resources):
     """Get sourceInstanceTemplate value as required by API."""
     return None
 
   def _CreateRequests(self, args, compute_client, resource_parser):
+    # gcloud creates default values for some fields in Instance resource
+    # when no value was specified on command line.
+    # When --source-instance-template was specified, defaults are taken from
+    # Instance Template and gcloud flags are used to override them - by default
+    # fields should not be initialized.
+    source_instance_template = self.GetSourceInstanceTemplate(
+        args, resource_parser)
+    skip_defaults = source_instance_template is not None
+
     # This feature is only exposed in alpha/beta
     allow_rsa_encrypted = self.ReleaseTrack() in [base.ReleaseTrack.ALPHA,
                                                   base.ReleaseTrack.BETA]
     self.csek_keys = csek_utils.CsekKeyStore.FromArgs(args, allow_rsa_encrypted)
 
-    scheduling = instance_utils.CreateSchedulingMessage(
-        messages=compute_client.messages,
-        maintenance_policy=args.maintenance_policy,
-        preemptible=args.preemptible,
-        restart_on_failure=args.restart_on_failure)
+    if (skip_defaults and not args.IsSpecified('maintenance_policy') and
+        not args.IsSpecified('preemptible') and
+        not args.IsSpecified('restart_on_failure')):
+      scheduling = None
+    else:
+      scheduling = instance_utils.CreateSchedulingMessage(
+          messages=compute_client.messages,
+          maintenance_policy=args.maintenance_policy,
+          preemptible=args.preemptible,
+          restart_on_failure=args.restart_on_failure)
 
     if args.tags:
       tags = compute_client.messages.Tags(items=args.tags)
@@ -160,10 +170,14 @@ class Create(base.CreateCommand):
                   key=key, value=value)
               for key, value in sorted(args.labels.iteritems())])
 
-    metadata = metadata_utils.ConstructMetadataMessage(
-        compute_client.messages,
-        metadata=args.metadata,
-        metadata_from_file=args.metadata_from_file)
+    if (skip_defaults and not args.IsSpecified('metadata') and
+        not args.IsSpecified('metadata_from_file')):
+      metadata = None
+    else:
+      metadata = metadata_utils.ConstructMetadataMessage(
+          compute_client.messages,
+          metadata=args.metadata,
+          metadata_from_file=args.metadata_from_file)
 
     # If the user already provided an initial Windows password and
     # username through metadata, then there is no need to check
@@ -193,35 +207,55 @@ class Create(base.CreateCommand):
       if self._support_public_dns is True:
         instances_flags.ValidatePublicDnsFlags(args)
 
-      network_tier = getattr(args, 'network_tier', None)
+      if (skip_defaults and not args.IsSpecified('network') and
+          not args.IsSpecified('subnet') and
+          not args.IsSpecified('private_network_ip') and
+          not args.IsSpecified('no_address') and
+          not args.IsSpecified('address') and
+          not args.IsSpecified('network_tier') and
+          not args.IsSpecified('no_public_dns') and
+          not args.IsSpecified('public_dns') and
+          not args.IsSpecified('no_public_ptr') and
+          not args.IsSpecified('public_ptr') and
+          not args.IsSpecified('no_public_ptr_domain') and
+          not args.IsSpecified('public_ptr_domain')):
+        network_interfaces = []
+      else:
+        network_tier = getattr(args, 'network_tier', None)
 
-      network_interfaces = [
-          instance_utils.CreateNetworkInterfaceMessage(
-              resources=resource_parser,
-              compute_client=compute_client,
-              network=args.network,
-              subnet=args.subnet,
-              private_network_ip=args.private_network_ip,
-              no_address=args.no_address,
-              address=args.address,
-              instance_refs=instance_refs,
-              network_tier=network_tier,
-              no_public_dns=getattr(args, 'no_public_dns', None),
-              public_dns=getattr(args, 'public_dns', None),
-              no_public_ptr=getattr(args, 'no_public_ptr', None),
-              public_ptr=getattr(args, 'public_ptr', None),
-              no_public_ptr_domain=getattr(args, 'no_public_ptr_domain', None),
-              public_ptr_domain=getattr(args, 'public_ptr_domain', None))
-      ]
+        network_interfaces = [
+            instance_utils.CreateNetworkInterfaceMessage(
+                resources=resource_parser,
+                compute_client=compute_client,
+                network=args.network,
+                subnet=args.subnet,
+                private_network_ip=args.private_network_ip,
+                no_address=args.no_address,
+                address=args.address,
+                instance_refs=instance_refs,
+                network_tier=network_tier,
+                no_public_dns=getattr(args, 'no_public_dns', None),
+                public_dns=getattr(args, 'public_dns', None),
+                no_public_ptr=getattr(args, 'no_public_ptr', None),
+                public_ptr=getattr(args, 'public_ptr', None),
+                no_public_ptr_domain=getattr(args, 'no_public_ptr_domain',
+                                             None),
+                public_ptr_domain=getattr(args, 'public_ptr_domain', None))
+        ]
 
-    machine_type_uris = instance_utils.CreateMachineTypeUris(
-        resources=resource_parser,
-        compute_client=compute_client,
-        machine_type=args.machine_type,
-        custom_cpu=args.custom_cpu,
-        custom_memory=args.custom_memory,
-        ext=getattr(args, 'custom_extensions', None),
-        instance_refs=instance_refs)
+    if (skip_defaults and not args.IsSpecified('machine_type') and
+        not args.IsSpecified('custom_cpu') and
+        not args.IsSpecified('custom_memory')):
+      machine_type_uris = [None for _ in instance_refs]
+    else:
+      machine_type_uris = instance_utils.CreateMachineTypeUris(
+          resources=resource_parser,
+          compute_client=compute_client,
+          machine_type=args.machine_type,
+          custom_cpu=args.custom_cpu,
+          custom_memory=args.custom_memory,
+          ext=getattr(args, 'custom_extensions', None),
+          instance_refs=instance_refs)
 
     create_boot_disk = not instance_utils.UseExistingBootDisk(args.disk or [])
     if create_boot_disk:
@@ -245,47 +279,57 @@ class Create(base.CreateCommand):
     # TODO(b/36050875): Simplify since resources.Resource is now hashable.
     existing_boot_disks = {}
 
-    for instance_ref in instance_refs:
-      persistent_disks, boot_disk_ref = (
-          instance_utils.CreatePersistentAttachedDiskMessages(
-              resource_parser, compute_client, self.csek_keys,
-              args.disk or [], instance_ref))
-      persistent_create_disks = (
-          instance_utils.CreatePersistentCreateDiskMessages(
-              compute_client,
-              resource_parser,
-              self.csek_keys,
-              getattr(args, 'create_disk', []),
-              instance_ref))
-      local_ssds = []
-      for x in args.local_ssd or []:
-        local_ssds.append(
-            instance_utils.CreateLocalSsdMessage(
+    if (skip_defaults and not args.IsSpecified('disk') and
+        not args.IsSpecified('create_disk') and
+        not args.IsSpecified('local_ssd') and
+        not args.IsSpecified('boot_disk_type') and
+        not args.IsSpecified('boot_disk_device_name') and
+        not args.IsSpecified('boot_disk_auto_delete') and
+        not args.IsSpecified('require_csek_key_create')):
+      disks_messages = [[] for _ in instance_refs]
+    else:
+      for instance_ref in instance_refs:
+        persistent_disks, boot_disk_ref = (
+            instance_utils.CreatePersistentAttachedDiskMessages(
+                resource_parser, compute_client, self.csek_keys,
+                args.disk or [], instance_ref))
+        persistent_create_disks = (
+            instance_utils.CreatePersistentCreateDiskMessages(
+                compute_client,
                 resource_parser,
-                compute_client.messages,
-                x.get('device-name'),
-                x.get('interface'),
-                x.get('size'),
-                instance_ref.zone)
-        )
+                self.csek_keys,
+                getattr(args, 'create_disk', []),
+                instance_ref))
+        local_ssds = []
+        for x in args.local_ssd or []:
+          local_ssds.append(
+              instance_utils.CreateLocalSsdMessage(
+                  resource_parser,
+                  compute_client.messages,
+                  x.get('device-name'),
+                  x.get('interface'),
+                  x.get('size'),
+                  instance_ref.zone,
+                  instance_ref.project)
+          )
 
-      if create_boot_disk:
-        boot_disk = instance_utils.CreateDefaultBootAttachedDiskMessage(
-            compute_client, resource_parser,
-            disk_type=args.boot_disk_type,
-            disk_device_name=args.boot_disk_device_name,
-            disk_auto_delete=args.boot_disk_auto_delete,
-            disk_size_gb=boot_disk_size_gb,
-            require_csek_key_create=(
-                args.require_csek_key_create if self.csek_keys else None),
-            image_uri=image_uri,
-            instance_ref=instance_ref,
-            csek_keys=self.csek_keys)
-        persistent_disks = [boot_disk] + persistent_disks
-      else:
-        existing_boot_disks[boot_disk_ref.zone] = boot_disk_ref
-      disks_messages.append(persistent_disks + persistent_create_disks +
-                            local_ssds)
+        if create_boot_disk:
+          boot_disk = instance_utils.CreateDefaultBootAttachedDiskMessage(
+              compute_client, resource_parser,
+              disk_type=args.boot_disk_type,
+              disk_device_name=args.boot_disk_device_name,
+              disk_auto_delete=args.boot_disk_auto_delete,
+              disk_size_gb=boot_disk_size_gb,
+              require_csek_key_create=(
+                  args.require_csek_key_create if self.csek_keys else None),
+              image_uri=image_uri,
+              instance_ref=instance_ref,
+              csek_keys=self.csek_keys)
+          persistent_disks = [boot_disk] + persistent_disks
+        else:
+          existing_boot_disks[boot_disk_ref.zone] = boot_disk_ref
+        disks_messages.append(persistent_disks + persistent_create_disks +
+                              local_ssds)
 
     accelerator_args = getattr(args, 'accelerator', None)
 
@@ -318,14 +362,25 @@ class Create(base.CreateCommand):
           service_account = None
         else:
           service_account = args.service_account
-        service_accounts = instance_utils.CreateServiceAccountMessages(
-            messages=compute_client.messages,
-            scopes=scopes,
-            service_account=service_account)
+        if (skip_defaults and not args.IsSpecified('scopes') and
+            not args.IsSpecified('no_scopes') and
+            not args.IsSpecified('service_account') and
+            not args.IsSpecified('no_service_account')):
+          service_accounts = []
+        else:
+          service_accounts = instance_utils.CreateServiceAccountMessages(
+              messages=compute_client.messages,
+              scopes=scopes,
+              service_account=service_account)
         project_to_sa[instance_ref.project] = service_accounts
 
+      if skip_defaults and not args.IsSpecified('can_ip_forward'):
+        can_ip_forward = None
+      else:
+        can_ip_forward = args.can_ip_forward
+
       instance = compute_client.messages.Instance(
-          canIpForward=args.can_ip_forward,
+          canIpForward=can_ip_forward,
           disks=disks,
           description=args.description,
           machineType=machine_type_uri,
@@ -358,20 +413,8 @@ class Create(base.CreateCommand):
           project=instance_ref.project,
           zone=instance_ref.zone)
 
-      source_instance_template = self.GetSourceInstanceTemplate(
-          args, resource_parser)
       if source_instance_template:
         request.sourceInstanceTemplate = source_instance_template
-
-        # Labels and MachineType are currently overridable.
-        # If no custom value was specified, default to None. Otherwise gcloud
-        # auto-default value will be considered as an override by Arcus.
-        if (not args.IsSpecified('machine_type') and
-            not args.IsSpecified('custom_cpu') and
-            not args.IsSpecified('custom_memory')):
-          request.instance.machineType = None
-        if not args.IsSpecified('labels'):
-          request.instance.labels = None
 
       sole_tenancy_host_arg = getattr(args, 'sole_tenancy_host', None)
       if sole_tenancy_host_arg:
@@ -393,14 +436,23 @@ class Create(base.CreateCommand):
     instances_flags.ValidateServiceAccountAndScopeArgs(args)
     instances_flags.ValidateAcceleratorArgs(args)
 
-    self.WarnForSourceInstanceTemplateLimitations(args)
-
     holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
     compute_client = holder.client
     resource_parser = holder.resources
 
     requests = self._CreateRequests(args, compute_client, resource_parser)
-    return compute_client.MakeRequests(requests)
+    try:
+      return compute_client.MakeRequests(requests)
+    except exceptions.ToolException as e:
+      invalid_machine_type_message_regex = (
+          r'Invalid value for field \'resource.machineType\': .+. '
+          r'Machine type with name \'.+\' does not exist in zone \'.+\'\.')
+      if re.search(invalid_machine_type_message_regex, e.message):
+        raise exceptions.ToolException(
+            e.message +
+            '\nUse `gcloud compute machine-types list --zones` to see the '
+            'available machine  types.')
+      raise
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA)
@@ -443,9 +495,6 @@ class CreateAlpha(Create):
     CreateAlpha.SOURCE_INSTANCE_TEMPLATE = (
         instances_flags.MakeSourceInstanceTemplateArg())
     CreateAlpha.SOURCE_INSTANCE_TEMPLATE.AddArgument(parser)
-
-  def WarnForSourceInstanceTemplateLimitations(self, args):
-    instances_flags.WarnForSourceInstanceTemplateLimitations(args)
 
   def GetSourceInstanceTemplate(self, args, resources):
     if not args.IsSpecified('source_instance_template'):

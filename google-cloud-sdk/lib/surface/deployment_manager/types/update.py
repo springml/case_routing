@@ -14,10 +14,10 @@
 
 """types update command."""
 
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.api_lib.deployment_manager import dm_labels
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.deployment_manager import composite_types
-from googlecloudsdk.command_lib.deployment_manager import dm_beta_base
 from googlecloudsdk.command_lib.deployment_manager import dm_write
 from googlecloudsdk.command_lib.deployment_manager import flags
 from googlecloudsdk.command_lib.util import labels_util
@@ -31,7 +31,8 @@ def LogResource(request, async):
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
-class Update(base.UpdateCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2BETA)
+class Update(base.UpdateCommand, dm_base.DmCommand):
   """Update a composite type."""
 
   detailed_help = {
@@ -68,33 +69,35 @@ class Update(base.UpdateCommand):
       HttpException: An http error response was received while executing api
           request.
     """
-    messages = dm_beta_base.GetMessages()
     composite_type_ref = composite_types.GetReference(args.name)
-    get_request = messages.DeploymentmanagerCompositeTypesGetRequest(
+    get_request = self.messages.DeploymentmanagerCompositeTypesGetRequest(
         project=composite_type_ref.project,
         compositeType=args.name)
-    existing_ct = dm_beta_base.GetClient().compositeTypes.Get(get_request)
+    existing_ct = self.client.compositeTypes.Get(get_request)
 
     labels = dm_labels.UpdateLabels(
         existing_ct.labels,
-        messages.CompositeTypeLabelEntry,
+        self.messages.CompositeTypeLabelEntry,
         labels_util.GetUpdateLabelsDictFromArgs(args),
         labels_util.GetRemoveLabelsListFromArgs(args))
 
-    composite_type = messages.CompositeType(
+    composite_type = self.messages.CompositeType(
         name=args.name,
         description=args.description,
         status=args.status,
         templateContents=existing_ct.templateContents,
         labels=labels)
 
-    update_request = messages.DeploymentmanagerCompositeTypesUpdateRequest(
+    update_request = self.messages.DeploymentmanagerCompositeTypesUpdateRequest(
         project=composite_type_ref.project,
         compositeType=args.name,
         compositeTypeResource=composite_type)
 
-    dm_write.Execute(update_request,
+    dm_write.Execute(self.client,
+                     self.messages,
+                     self.resources,
+                     update_request,
                      args.async,
-                     dm_beta_base.GetClient().compositeTypes.Update,
+                     self.client.compositeTypes.Update,
                      LogResource)
 

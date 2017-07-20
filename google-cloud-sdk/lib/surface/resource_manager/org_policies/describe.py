@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Command to describe an OrgPolicy."""
+"""Command to describe an Organization Policy."""
 
 from googlecloudsdk.api_lib.resource_manager import org_policies
 from googlecloudsdk.calliope import base
@@ -19,21 +19,20 @@ from googlecloudsdk.command_lib.resource_manager import org_policies_base
 from googlecloudsdk.command_lib.resource_manager import org_policies_flags as flags
 
 
-@base.Hidden
-@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
+@base.ReleaseTracks(base.ReleaseTrack.ALPHA, base.ReleaseTrack.BETA)
 class Describe(base.DescribeCommand):
-  """Describe an OrgPolicy.
+  """Describe an Organization Policy.
 
-  Describes an OrgPolicy associated with the specified resource.
+  Describes an Organization Policy associated with the specified resource.
 
   ## EXAMPLES
 
-  The following command retrieves an OrgPolicy
+  The following command retrieves an Organization Policy
   for constraint `serviceuser.services` on project `foo-project`:
 
     $ {command} serviceuser.services --project=foo-project
 
-  The following command retrieves the effective Org Policy
+  The following command retrieves the effective Organization Policy
   for constraint `serviceuser.services` on project `foo-project`:
 
     $ {command} serviceuser.services --project=foo-project --effective

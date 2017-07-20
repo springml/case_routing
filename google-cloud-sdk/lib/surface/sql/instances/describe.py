@@ -41,7 +41,7 @@ class Get(base.DescribeCommand):
     """
     parser.add_argument(
         'instance',
-        completion_resource='sql.instances',
+        completer=flags.InstanceCompleter,
         help='Cloud SQL instance ID.')
     parser.display_info.AddFormat(
         '{0} default'.format(flags.INSTANCES_USERLABELS_FORMAT))

@@ -97,7 +97,7 @@ class Create(base.CreateCommand):
       log.warn('include-children only has an effect for sinks at the folder '
                'or organization level')
 
-    sink_ref = util.GetSinkReference(args.sink_name, None, None, args)
+    sink_ref = util.GetSinkReference(args.sink_name, args)
 
     sink_data = {
         'name': sink_ref.sinksId,
@@ -106,14 +106,13 @@ class Create(base.CreateCommand):
         'includeChildren': args.include_children
     }
 
-    result = util.TypedLogSink(
-        self.CreateSink(util.GetParentFromArgs(args), sink_data))
+    result = self.CreateSink(util.GetParentFromArgs(args), sink_data)
 
     log.CreatedResource(sink_ref)
     self._epilog_result_destination = result.destination
-    self._writer_identity = result.writer_identity
+    self._epilog_writer_identity = result.writerIdentity
     return result
 
   def Epilog(self, unused_resources_were_displayed):
     util.PrintPermissionInstructions(self._epilog_result_destination,
-                                     self._writer_identity)
+                                     self._epilog_writer_identity)

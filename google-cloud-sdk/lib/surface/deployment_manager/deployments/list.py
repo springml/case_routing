@@ -16,12 +16,13 @@
 
 from apitools.base.py import list_pager
 
-from googlecloudsdk.api_lib.deployment_manager import dm_v2_util
+from googlecloudsdk.api_lib.deployment_manager import dm_api_util
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.calliope import base
-from googlecloudsdk.command_lib.deployment_manager import dm_base
 
 
-class List(base.ListCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2)
+class List(base.ListCommand, dm_base.DmCommand):
   """List deployments in a project.
 
   Prints a table with summary information on all deployments in the project.
@@ -48,7 +49,7 @@ class List(base.ListCommand):
           on the command line after this command. Positional arguments are
           allowed.
     """
-    dm_v2_util.SIMPLE_LIST_FLAG.AddToParser(parser)
+    dm_api_util.SIMPLE_LIST_FLAG.AddToParser(parser)
     parser.display_info.AddFormat("""
           table(
             name,
@@ -74,9 +75,9 @@ class List(base.ListCommand):
       HttpException: An http error response was received while executing api
           request.
     """
-    request = dm_base.GetMessages().DeploymentmanagerDeploymentsListRequest(
+    request = self.messages.DeploymentmanagerDeploymentsListRequest(
         project=dm_base.GetProject(),
     )
-    return dm_v2_util.YieldWithHttpExceptions(list_pager.YieldFromList(
-        dm_base.GetClient().deployments, request, field='deployments',
+    return dm_api_util.YieldWithHttpExceptions(list_pager.YieldFromList(
+        self.client.deployments, request, field='deployments',
         limit=args.limit, batch_size=args.page_size))

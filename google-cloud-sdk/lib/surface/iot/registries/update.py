@@ -16,6 +16,7 @@ from googlecloudsdk.api_lib.cloudiot import registries
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iot import flags
 from googlecloudsdk.command_lib.iot import util
+from googlecloudsdk.core import log
 
 
 class Update(base.UpdateCommand):
@@ -35,7 +36,9 @@ class Update(base.UpdateCommand):
                                             client=client)
     pubsub_topic_ref = util.ParsePubsubTopic(args.pubsub_topic)
 
-    return client.Patch(
+    response = client.Patch(
         registry_ref,
         pubsub_topic=pubsub_topic_ref,
         mqtt_config_state=mqtt_state)
+    log.UpdatedResource(registry_ref.Name(), 'registry')
+    return response

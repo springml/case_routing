@@ -36,6 +36,9 @@ from gslib.translation_helper import CopyObjectMetadata
 from gslib.translation_helper import ObjectMetadataFromHeaders
 from gslib.translation_helper import PreconditionsFromHeaders
 from gslib.util import GetCloudApiInstance
+from gslib.util import InsistAsciiHeader
+from gslib.util import InsistAsciiHeaderValue
+from gslib.util import IsCustomMetadataHeader
 from gslib.util import NO_MAX
 from gslib.util import Retry
 
@@ -112,7 +115,7 @@ _DETAILED_HELP_TEXT = ("""
 # gsutil3 at the time gsutil4 was released.
 SETTABLE_FIELDS = ['cache-control', 'content-disposition',
                    'content-encoding', 'content-language',
-                   'content-md5', 'content-type']
+                   'content-type']
 
 
 def _SetMetadataExceptionHandler(cls, e):
@@ -280,16 +283,11 @@ class SetMetaCommand(Command):
     num_cust_metadata_minus_elems = 0
 
     for md_arg in headers:
-      parts = md_arg.split(':')
-      if len(parts) not in (1, 2):
-        raise CommandException(
-            'Invalid argument: must be either header or header:value (%s)' %
-            md_arg)
-      if len(parts) == 2:
-        (header, value) = parts
-      else:
-        (header, value) = (parts[0], None)
-      _InsistAsciiHeader(header)
+      # Use partition rather than split, as we should treat all characters past
+      # the initial : as part of the header's value.
+      parts = md_arg.partition(':')
+      (header, _, value) = parts
+      InsistAsciiHeader(header)
 
       # Translate headers to lowercase to match the casing assumed by our
       # sanity-checking operations.
@@ -300,7 +298,7 @@ class SetMetaCommand(Command):
       # processing any of the URLs. This means we will not detect if the user
       # tries to set an x-goog-meta- field on an another provider's object,
       # for example.
-      is_custom_meta = _IsCustomMeta(lowercase_header)
+      is_custom_meta = IsCustomMetadataHeader(lowercase_header)
       if not is_custom_meta and lowercase_header not in SETTABLE_FIELDS:
         raise CommandException(
             'Invalid or disallowed header (%s).\nOnly these fields (plus '
@@ -316,7 +314,7 @@ class SetMetaCommand(Command):
           # Don't unicode encode other fields because that would perturb their
           # content (e.g., adding %2F's into the middle of a Cache-Control
           # value).
-          _InsistAsciiHeaderValue(header, value)
+          InsistAsciiHeaderValue(header, value)
           value = str(value)
           metadata_plus[lowercase_header] = value
           num_metadata_plus_elems += 1
@@ -339,22 +337,3 @@ class SetMetaCommand(Command):
     metadata_minus.update(cust_metadata_minus)
     return (metadata_minus, metadata_plus)
 
-
-def _InsistAscii(string, message):
-  if not all(ord(c) < 128 for c in string):
-    raise CommandException(message)
-
-
-def _InsistAsciiHeader(header):
-  _InsistAscii(header, 'Invalid non-ASCII header (%s).' % header)
-
-
-def _InsistAsciiHeaderValue(header, value):
-  _InsistAscii(
-      value, ('Invalid non-ASCII value (%s) was provided for header %s.'
-              % (value, header)))
-
-
-def _IsCustomMeta(header):
-  """Returns true if header (which must be lowercase) is a custom header."""
-  return header.startswith('x-goog-meta-') or header.startswith('x-amz-meta-')

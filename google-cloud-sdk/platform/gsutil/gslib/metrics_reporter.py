@@ -18,11 +18,44 @@ import os
 import pickle
 import sys
 
+# pylint:disable=g-import-not-at-top
 try:
-  from gslib.util import GetNewHttp  # pylint:disable=g-import-not-at-top
-except Exception:  # pylint: disable=broad-except
-  # Do nothing if we can't import the lib.
-  sys.exit(0)
+  from gslib.util import GetNewHttp
+  from gslib.util import ConfigureCertsFile
+except:  # pylint: disable=bare-except
+  # Some environments import their own version of standard Python libraries
+  # which might cause the import of gslib.util to fail.  Try this alternative
+  # import in such cases.
+  try:
+    # Fall back to httplib (no proxy) if we can't import libraries normally.
+    import httplib
+
+    def GetNewHttp():
+      """Returns an httplib-based metrics reporter."""
+
+      class HttplibReporter(object):
+
+        def __init__(self):
+          pass
+
+        # pylint: disable=invalid-name
+        def request(self, endpoint, method=None, body=None,
+                    headers=None):
+          # Strip 'https://'
+          https_con = httplib.HTTPSConnection(endpoint[8:].split('/')[0])
+          https_con.request(method, endpoint, body=body,
+                            headers=headers)
+          response = https_con.getresponse()
+          # Return status like an httplib2 response.
+          return ({'status': response.status},)
+        # pylint: enable=invalid-name
+
+      return HttplibReporter()
+
+    def ConfigureCertsFile():
+      pass
+  except:
+    sys.exit(0)
 
 LOG_FILE_PATH = os.path.expanduser(os.path.join('~', '.gsutil/metrics.log'))
 
@@ -43,6 +76,7 @@ def ReportMetrics(metrics_file_path, log_level):
     metrics = pickle.load(metrics_file)
   os.remove(metrics_file_path)
 
+  ConfigureCertsFile()
   http = GetNewHttp()
 
   for metric in metrics:

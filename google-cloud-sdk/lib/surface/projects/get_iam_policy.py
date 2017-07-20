@@ -19,7 +19,7 @@ from googlecloudsdk.command_lib.projects import flags
 from googlecloudsdk.command_lib.projects import util as command_lib_util
 
 
-class GetIamPolicy(base.Command):
+class GetIamPolicy(base.ListCommand):
   """Get IAM policy for a project.
 
   Gets the IAM policy for a project, given a project ID.
@@ -35,6 +35,7 @@ class GetIamPolicy(base.Command):
   @staticmethod
   def Args(parser):
     flags.GetProjectFlag('get IAM policy for').AddToParser(parser)
+    base.URI_FLAG.RemoveFromParser(parser)
 
   def Run(self, args):
     project_ref = command_lib_util.ParseProject(args.id)

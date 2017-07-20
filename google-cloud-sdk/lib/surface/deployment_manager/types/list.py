@@ -18,11 +18,11 @@ import collections
 
 from apitools.base.py import list_pager
 
-from googlecloudsdk.api_lib.deployment_manager import dm_v2_util
+from googlecloudsdk.api_lib.deployment_manager import dm_api_util
+from googlecloudsdk.api_lib.deployment_manager import dm_base
+from googlecloudsdk.api_lib.util import apis
 from googlecloudsdk.api_lib.util import exceptions as api_exceptions
 from googlecloudsdk.calliope import base
-from googlecloudsdk.command_lib.deployment_manager import dm_base
-from googlecloudsdk.command_lib.deployment_manager import dm_beta_base
 from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
 
@@ -31,7 +31,8 @@ GCP_TYPES_PROJECT = 'gcp-types'
 
 
 @base.ReleaseTracks(base.ReleaseTrack.GA)
-class List(base.ListCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2)
+class List(base.ListCommand, dm_base.DmCommand):
   """List types in a project.
 
   Prints a list of the available resource types.
@@ -63,10 +64,10 @@ class List(base.ListCommand):
       HttpException: An http error response was received while executing api
           request.
     """
-    request = dm_base.GetMessages().DeploymentmanagerTypesListRequest(
+    request = self.messages.DeploymentmanagerTypesListRequest(
         project=dm_base.GetProject())
-    return dm_v2_util.YieldWithHttpExceptions(
-        list_pager.YieldFromList(dm_base.GetClient().types, request,
+    return dm_api_util.YieldWithHttpExceptions(
+        list_pager.YieldFromList(self.client.types, request,
                                  field='types', batch_size=args.page_size,
                                  limit=args.limit))
 
@@ -75,7 +76,7 @@ class List(base.ListCommand):
       log.status.Print('No types were found for your project!')
 
 
-def TypeProviderClient():
+def TypeProviderClient(version):
   """Return a Type Provider client specially suited for listing types.
 
   Listing types requires many API calls, some of which may fail due to bad
@@ -83,16 +84,20 @@ def TypeProviderClient():
   alleviate some of the latency and usability issues this causes by tuning
   the client.
 
+  Args:
+      version: DM API version used for the client.
+
   Returns:
     A Type Provider API client.
   """
-  main_client = dm_beta_base.GetClient()
+  main_client = apis.GetClientInstance('deploymentmanager', version.id)
   main_client.num_retries = 2
   return main_client.typeProviders
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
-class ListALPHA(base.ListCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2BETA)
+class ListALPHA(base.ListCommand, dm_base.DmCommand):
   """Describe a type provider type.
 
   By default, you will see types from your project and gcp-types. To see types
@@ -138,7 +143,7 @@ class ListALPHA(base.ListCommand):
       HttpException: An http error response was received while executing api
           request.
     """
-    type_provider_ref = dm_beta_base.GetResources().Parse(
+    type_provider_ref = self.resources.Parse(
         args.provider if args.provider else 'NOT_A_PROVIDER',
         params={'project': properties.VALUES.core.project.GetOrFail},
         collection='deploymentmanager.typeProviders')
@@ -159,16 +164,16 @@ class ListALPHA(base.ListCommand):
       for project in projects:
         type_providers[project] = [type_provider_ref.typeProvider]
 
-    return dm_v2_util.YieldWithHttpExceptions(
+    return dm_api_util.YieldWithHttpExceptions(
         self._YieldPrintableTypesOrErrors(type_providers))
 
   def _GetTypeProviders(self, projects, type_providers):
     for project in projects:
-      request = (dm_beta_base.GetMessages().
+      request = (self.messages.
                  DeploymentmanagerTypeProvidersListRequest(
                      project=project))
-      project_providers = dm_v2_util.YieldWithHttpExceptions(
-          list_pager.YieldFromList(TypeProviderClient(),
+      project_providers = dm_api_util.YieldWithHttpExceptions(
+          list_pager.YieldFromList(TypeProviderClient(self.version),
                                    request,
                                    field='typeProviders',
                                    batch_size=self.page_size,
@@ -192,13 +197,13 @@ class ListALPHA(base.ListCommand):
     """
     for project in type_providers.keys():
       for type_provider in type_providers[project]:
-        request = (dm_beta_base.GetMessages().
+        request = (self.messages.
                    DeploymentmanagerTypeProvidersListTypesRequest(
                        project=project,
                        typeProvider=type_provider))
         try:
-          paginated_types = dm_v2_util.YieldWithHttpExceptions(
-              list_pager.YieldFromList(TypeProviderClient(),
+          paginated_types = dm_api_util.YieldWithHttpExceptions(
+              list_pager.YieldFromList(TypeProviderClient(self.version),
                                        request,
                                        method='ListTypes',
                                        field='types',

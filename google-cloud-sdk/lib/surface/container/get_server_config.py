@@ -20,6 +20,7 @@ from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
 
 
+@base.ReleaseTracks(base.ReleaseTrack.GA, base.ReleaseTrack.BETA)
 class GetServerConfig(base.Command):
   """Get Container Engine server config."""
 
@@ -38,7 +39,25 @@ class GetServerConfig(base.Command):
     adapter = self.context['api_adapter']
 
     project_id = properties.VALUES.core.project.Get(required=True)
-    zone = properties.VALUES.compute.zone.Get(required=True)
+    location = getattr(args, 'region', None)
+    if not location:
+      location = properties.VALUES.compute.zone.Get(required=True)
 
-    log.status.Print('Fetching server config for {zone}'.format(zone=zone))
-    return adapter.GetServerConfig(project_id, zone)
+    log.status.Print('Fetching server config for {zone}'.format(zone=location))
+    return adapter.GetServerConfig(project_id, location)
+
+
+@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
+class GetServerConfigAlpha(GetServerConfig):
+  """Get Container Engine server config."""
+
+  @staticmethod
+  def Args(parser):
+    """Add arguments to the parser.
+
+    Args:
+      parser: argparse.ArgumentParser, This is a standard argparser parser with
+        which you can register arguments.  See the public argparse documentation
+        for its capabilities.
+    """
+    flags.AddZoneAndRegionFlags(parser, region_hidden=True)

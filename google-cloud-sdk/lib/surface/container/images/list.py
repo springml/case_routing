@@ -20,6 +20,7 @@ from googlecloudsdk.api_lib.container.images import util
 from googlecloudsdk.calliope import base
 from googlecloudsdk.core import exceptions
 from googlecloudsdk.core import http
+from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
 
 
@@ -44,9 +45,6 @@ class List(base.ListCommand):
       """,
   }
 
-  def Collection(self):
-    return 'container.images'
-
   @staticmethod
   def Args(parser):
     """Register flags for this command.
@@ -60,6 +58,7 @@ class List(base.ListCommand):
         required=False,
         help=('The name of the repository. Format: *.gcr.io/repository. '
               'Defaults to gcr.io/<project>, for the active project.'))
+    parser.display_info.AddFormat('table(name)')
 
   def Run(self, args):
     """This is what gets called when the user runs this command.
@@ -78,9 +77,12 @@ class List(base.ListCommand):
       accessing GCR.
     """
     repository_arg = args.repository
+    self._epilog = None
     if not repository_arg:
       repository_arg = 'gcr.io/{0}'.format(
           properties.VALUES.core.project.Get(required=True))
+      self._epilog = 'Only listing images in {0}. '.format(repository_arg)
+      self._epilog += 'Use --repository to list images in other repositories.'
 
     # Throws if invalid.
     repository = util.ValidateRepositoryPath(repository_arg)
@@ -103,3 +105,9 @@ class List(base.ListCommand):
           raise exceptions.Error('Not found: {0}'.format(repository))
         else:
           raise
+
+  def Epilog(self, resources_were_displayed=True):
+    super(List, self).Epilog(resources_were_displayed)
+
+    if self._epilog:
+      log.status.Print(self._epilog)

@@ -15,6 +15,7 @@
 """Wait for a job to complete."""
 
 from googlecloudsdk.api_lib.dataproc import dataproc as dp
+from googlecloudsdk.api_lib.dataproc import util
 from googlecloudsdk.calliope import base
 from googlecloudsdk.core import log
 
@@ -39,9 +40,9 @@ class Wait(base.Command):
         help='The ID of the job to wait.')
 
   def Run(self, args):
-    dataproc = dp.Dataproc()
+    dataproc = dp.Dataproc(self.ReleaseTrack())
 
-    job_ref = dataproc.ParseJob(args.id)
+    job_ref = util.ParseJob(args.id, dataproc)
 
     job = dataproc.client.projects_regions_jobs.Get(
         dataproc.messages.DataprocProjectsRegionsJobsGetRequest(
@@ -51,7 +52,8 @@ class Wait(base.Command):
 
     # TODO(b/36050945) Check if Job is still running and fail or handle 401.
 
-    job = dataproc.WaitForJobTermination(
+    job = util.WaitForJobTermination(
+        dataproc,
         job,
         message='Waiting for job completion',
         goal_state=dataproc.messages.JobStatus.StateValueValuesEnum.DONE,

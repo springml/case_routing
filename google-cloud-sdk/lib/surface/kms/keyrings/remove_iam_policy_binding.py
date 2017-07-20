@@ -16,6 +16,7 @@
 from googlecloudsdk.api_lib.cloudkms import iam
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iam import iam_util
+from googlecloudsdk.command_lib.kms import completers
 from googlecloudsdk.command_lib.kms import flags
 
 
@@ -41,8 +42,8 @@ class RemoveIamPolicyBinding(base.Command):
   def Args(parser):
     flags.AddKeyRingArgument(parser,
                              'from which to remove an IAM policy binding')
-    iam_util.AddArgsForRemoveIamPolicyBinding(parser, 'keyring',
-                                              flags.CRYPTO_KEY_COLLECTION)
+    iam_util.AddArgsForRemoveIamPolicyBinding(
+        parser, completer=completers.CryptoKeysKeyRingIamRolesCompleter)
 
   def Run(self, args):
     return iam.RemovePolicyBindingFromKeyRing(

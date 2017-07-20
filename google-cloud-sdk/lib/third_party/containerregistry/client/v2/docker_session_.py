@@ -153,7 +153,7 @@ class Push(object):
     resp, unused_content = self._transport.Request(
         location, method='PATCH', body=image.blob(digest),
         content_type='application/octet-stream',
-        accepted_codes=[httplib.NO_CONTENT, httplib.ACCEPTED])
+        accepted_codes=[httplib.NO_CONTENT, httplib.ACCEPTED, httplib.CREATED])
 
     location = self._add_digest(resp['location'], digest)
     self._transport.Request(
@@ -202,7 +202,7 @@ class Push(object):
     if resp.status == httplib.NOT_FOUND:  # pytype: disable=attribute-error
       return None
 
-    return resp['docker-content-digest']
+    return resp.get('docker-content-digest')
 
   def _put_manifest(self, image):
     """Upload the manifest for this image."""

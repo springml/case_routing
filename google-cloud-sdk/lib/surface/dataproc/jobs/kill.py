@@ -15,6 +15,7 @@
 """Kill job command."""
 
 from googlecloudsdk.api_lib.dataproc import dataproc as dp
+from googlecloudsdk.api_lib.dataproc import util
 from googlecloudsdk.calliope import base
 from googlecloudsdk.core import log
 from googlecloudsdk.core.console import console_io
@@ -40,9 +41,9 @@ class Kill(base.Command):
         help='The ID of the job to kill.')
 
   def Run(self, args):
-    dataproc = dp.Dataproc()
+    dataproc = dp.Dataproc(self.ReleaseTrack())
 
-    job_ref = dataproc.ParseJob(args.id)
+    job_ref = util.ParseJob(args.id, dataproc)
     request = dataproc.messages.DataprocProjectsRegionsJobsCancelRequest(
         projectId=job_ref.projectId,
         region=job_ref.region,
@@ -60,7 +61,8 @@ class Kill(base.Command):
     log.status.Print(
         'Job cancellation initiated for [{0}].'.format(job_ref.jobId))
 
-    job = dataproc.WaitForJobTermination(
+    job = util.WaitForJobTermination(
+        dataproc,
         job,
         message='Waiting for job cancellation',
         goal_state=dataproc.messages.JobStatus.StateValueValuesEnum.CANCELLED)

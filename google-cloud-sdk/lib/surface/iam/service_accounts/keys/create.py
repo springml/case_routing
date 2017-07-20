@@ -47,6 +47,7 @@ class Create(base_classes.BaseIamCommand):
 
     parser.add_argument('--iam-account',
                         required=True,
+                        type=iam_util.GetIamAccountFormatValidator(),
                         help='The service account for which to create a key.')
 
     parser.add_argument('output',

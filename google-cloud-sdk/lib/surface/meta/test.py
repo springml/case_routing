@@ -19,6 +19,7 @@ import sys
 import time
 
 from googlecloudsdk.calliope import base
+from googlecloudsdk.calliope import parser_errors
 from googlecloudsdk.command_lib.compute import completers
 from googlecloudsdk.core import exceptions
 from googlecloudsdk.core import execution_utils
@@ -39,6 +40,11 @@ class Test(base.Command):
         completer=completers.TestCompleter,
         help='command_lib.compute.TestCompleter instance name test.')
     scenarios = parser.add_mutually_exclusive_group()
+    scenarios.add_argument(
+        '--argumenterror-outside-argparse',
+        action='store_true',
+        help=('Trigger a calliope.parser_errors.ArgumentError exception '
+              'outside of argparse.'))
     scenarios.add_argument(
         '--core-exception',
         action='store_true',
@@ -66,6 +72,10 @@ class Test(base.Command):
         '--uncaught-exception',
         action='store_true',
         help='Trigger an exception that is not caught.')
+
+  def _RunArgumenterrorOutsideArgparse(self, args):
+    raise parser_errors.RequiredArgumentError(
+        'Argument required exception.', argument='--some-flag')
 
   def _RunCoreException(self, args):
     raise exceptions.Error('Some core exception.')
@@ -95,7 +105,9 @@ class Test(base.Command):
     raise ValueError('Catch me if you can.')
 
   def Run(self, args):
-    if args.core_exception:
+    if args.argumenterror_outside_argparse:
+      self._RunArgumenterrorOutsideArgparse(args)
+    elif args.core_exception:
       self._RunCoreException(args)
     elif args.exec_file:
       self._RunExecFile(args)

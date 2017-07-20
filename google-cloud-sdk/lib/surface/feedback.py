@@ -137,7 +137,7 @@ class Feedback(base.Command):
         help='Path to the log file from a prior gcloud run.')
 
   def Run(self, args):
-    info = info_holder.InfoHolder()
+    info = info_holder.InfoHolder(anonymizer=info_holder.Anonymizer())
     log_data = None
     if args.log_file:
       try:

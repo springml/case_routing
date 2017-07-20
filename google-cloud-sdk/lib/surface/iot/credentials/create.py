@@ -16,6 +16,7 @@ from googlecloudsdk.api_lib.cloudiot import devices
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iot import flags
 from googlecloudsdk.command_lib.iot import util
+from googlecloudsdk.core import log
 
 
 class Create(base.CreateCommand):
@@ -44,4 +45,6 @@ class Create(base.CreateCommand):
           'Cannot create a new public key credential for this device; '
           'maximum {} keys are allowed.'.format(util.MAX_PUBLIC_KEY_NUM))
     credentials.append(new_credential)
-    return client.Patch(device_ref, credentials=credentials)
+    response = client.Patch(device_ref, credentials=credentials)
+    log.CreatedResource(device_ref.Name(), 'credentials for device')
+    return response

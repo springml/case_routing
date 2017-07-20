@@ -221,7 +221,7 @@
           "type": "string"
         },
         "masterAuthorizedNetworks": {
-          "description": "The configuration options for master authorized networks feature.",
+          "description": "Deprecated. The configuration options for master authorized networks\nfeature.",
           "$ref": "MasterAuthorizedNetworks"
         },
         "legacyAbac": {
@@ -235,6 +235,10 @@
         "ipAllocationPolicy": {
           "description": "Configuration for cluster IP allocation.",
           "$ref": "IPAllocationPolicy"
+        },
+        "masterAuthorizedNetworksConfig": {
+          "description": "Master authorized networks is a Beta feature.\nThe configuration options for master authorized networks feature.",
+          "$ref": "MasterAuthorizedNetworksConfig"
         },
         "selfLink": {
           "description": "[Output only] Server-defined URL for the resource.",
@@ -382,7 +386,7 @@
           }
         },
         "diskType": {
-          "description": "Type of the disk attached to each node (e.g. 'pd-standard' or 'pd-ssd')\n\nIf unspecified, the default disk type is 'pd-standard'",
+          "description": "Type of the disk attached to each node (e.g. 'pd-standard' or 'pd-ssd')\n\nIf unspecified, the default disk type is 'pd-standard'\nCurrently restricted because of b\/36071127#comment27",
           "type": "string"
         }
       }
@@ -392,12 +396,12 @@
       "description": "AcceleratorConfig represents a Hardware Accelerator request.",
       "type": "object",
       "properties": {
-        "count": {
+        "acceleratorCount": {
           "description": "The number of the accelerator cards exposed to an instance.",
           "type": "string",
           "format": "int64"
         },
-        "type": {
+        "acceleratorType": {
           "description": "The accelerator type resource name. List of supported accelerators\n[here](\/compute\/docs\/gpus\/#Introduction)",
           "type": "string"
         }
@@ -457,6 +461,10 @@
         "horizontalPodAutoscaling": {
           "description": "Configuration for the horizontal pod autoscaling feature, which\nincreases or decreases the number of replica pods a replication controller\nhas based on the resource usage of the existing pods.",
           "$ref": "HorizontalPodAutoscaling"
+        },
+        "kubernetesDashboard": {
+          "description": "Configuration for the Kubernetes Dashboard.",
+          "$ref": "KubernetesDashboard"
         }
       }
     },
@@ -478,6 +486,17 @@
       "properties": {
         "disabled": {
           "description": "Whether the Horizontal Pod Autoscaling feature is enabled in the cluster.\nWhen enabled, it ensures that a Heapster pod is running in the cluster,\nwhich is also used by the Cloud Monitoring service.",
+          "type": "boolean"
+        }
+      }
+    },
+    "KubernetesDashboard": {
+      "id": "KubernetesDashboard",
+      "description": "Configuration for the Kubernetes Dashboard.",
+      "type": "object",
+      "properties": {
+        "disabled": {
+          "description": "Whether the Kubernetes Dashboard is enabled for this cluster.",
           "type": "boolean"
         }
       }
@@ -612,7 +631,7 @@
     },
     "MasterAuthorizedNetworks": {
       "id": "MasterAuthorizedNetworks",
-      "description": "Configuration options for the master authorized networks feature. Enabled\nmaster authorized networks will disallow all external traffic to access\nKubernetes master through HTTPS except traffic from the given CIDR blocks,\nGoogle Compute Engine Public IPs and Google Prod IPs.",
+      "description": "Deprecated. Configuration options for the master authorized networks\nfeature. Enabled master authorized networks will disallow all external\ntraffic to access Kubernetes master through HTTPS except traffic from the\ngiven CIDR blocks, Google Compute Engine Public IPs and Google Prod IPs.",
       "type": "object",
       "properties": {
         "enabled": {
@@ -667,7 +686,7 @@
           ],
           "type": "string",
           "enum": [
-            "UNKNOWN",
+            "PROVIDER_UNSPECIFIED",
             "CALICO"
           ]
         },
@@ -704,6 +723,39 @@
         },
         "servicesIpv4Cidr": {
           "description": "The IP address range of the services IPs in this cluster. If blank, a range\nwill be automatically chosen with the default size.\n\nThis field is only applicable when `use_ip_aliases` is true.\n\nSet to blank to have a range will be chosen with the default size.\n\nSet to \/netmask (e.g. `\/14`) to have a range be chosen with a specific\nnetmask.\n\nSet to a [CIDR](http:\/\/en.wikipedia.org\/wiki\/Classless_Inter-Domain_Routing)\nnotation (e.g. `10.96.0.0\/14`) from the RFC-1918 private networks (e.g.\n`10.0.0.0\/8`, `172.16.0.0\/12`, `192.168.0.0\/16`) to pick a specific range\nto use.",
+          "type": "string"
+        }
+      }
+    },
+    "MasterAuthorizedNetworksConfig": {
+      "id": "MasterAuthorizedNetworksConfig",
+      "description": "Master authorized networks is a Beta feature.\nConfiguration options for the master authorized networks feature. Enabled\nmaster authorized networks will disallow all external traffic to access\nKubernetes master through HTTPS except traffic from the given CIDR blocks,\nGoogle Compute Engine Public IPs and Google Prod IPs.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Whether or not master authorized networks is enabled.",
+          "type": "boolean"
+        },
+        "cidrBlocks": {
+          "description": "cidr_blocks define up to 10 external networks that could access\nKubernetes master through HTTPS.",
+          "type": "array",
+          "items": {
+            "$ref": "CidrBlock"
+          }
+        }
+      }
+    },
+    "CidrBlock": {
+      "id": "CidrBlock",
+      "description": "CidrBlock contains an optional name and one CIDR block.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "display_name is an optional field for users to identify CIDR blocks.",
+          "type": "string"
+        },
+        "cidrBlock": {
+          "description": "cidr_block must be specified in CIDR notation.",
           "type": "string"
         }
       }
@@ -856,8 +908,12 @@
           }
         },
         "desiredMasterAuthorizedNetworks": {
-          "description": "The desired configuration options for master authorized networks feature.",
+          "description": "Deprecated. The desired configuration options for master authorized\nnetworks feature.",
           "$ref": "MasterAuthorizedNetworks"
+        },
+        "desiredMasterAuthorizedNetworksConfig": {
+          "description": "Master authorized networks is a Beta feature.\nThe desired configuration options for master authorized networks feature.",
+          "$ref": "MasterAuthorizedNetworksConfig"
         },
         "desiredMasterVersion": {
           "description": "The Kubernetes version to change the master to. The only valid value is the\nlatest supported version. Use \"-\" to have the server automatically select\nthe latest version.",
@@ -1263,6 +1319,144 @@
         }
       }
     },
+    "AuditEventList": {
+      "id": "AuditEventList",
+      "description": "A request to audit write audit events (to Cloud Audit Logging and\/or Gin).\nThe request contains items to audit.\n\nThis should look very close to the EventList struct in\nhttps:\/\/github.com\/kubernetes\/kubernetes\/blob\/master\/staging\/src\/k8s.io\/apiserver\/pkg\/apis\/audit\/v1alpha1\/generated.proto.\nThis message has 4 GKE-specific fields that get mapped from the path, but the\nother fields (the expected JSON payload) must match EventList.",
+      "type": "object",
+      "properties": {
+        "items": {
+          "description": "The list of events to audit log.",
+          "type": "array",
+          "items": {
+            "$ref": "AuditEvent"
+          }
+        }
+      }
+    },
+    "AuditEvent": {
+      "id": "AuditEvent",
+      "description": "Event captures all the information that can be included in an API audit log.\n\nShould match Event in\nhttps:\/\/github.com\/kubernetes\/kubernetes\/blob\/master\/staging\/src\/k8s.io\/apiserver\/pkg\/apis\/audit\/v1alpha1\/generated.proto.",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "Time the request reached the apiserver.",
+          "type": "string",
+          "format": "google-datetime"
+        },
+        "auditID": {
+          "description": "Unique audit ID, generated for each request.",
+          "type": "string"
+        },
+        "stage": {
+          "description": "Stage of the request handling when this event instance was generated.",
+          "type": "string"
+        },
+        "requestURI": {
+          "description": "RequestURI is the request URI as sent by the client to a server.",
+          "type": "string"
+        },
+        "verb": {
+          "description": "Verb is the kubernetes verb associated with the request.  For non-resource\nrequests, this is identical to HttpMethod.",
+          "type": "string"
+        },
+        "user": {
+          "description": "Authenticated user information.",
+          "$ref": "AuthnV1UserInfo"
+        },
+        "impersonatedUser": {
+          "description": "Impersonated user information.\n+optional",
+          "$ref": "AuthnV1UserInfo"
+        },
+        "sourceIPs": {
+          "description": "Source IPs, from where the request originated and intermediate proxies.\n+optional",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "objectRef": {
+          "description": "Object reference this request is targeted at.  Does not apply for List-type\nrequests, or non-resource requests.\n+optional",
+          "$ref": "AuditObjectReference"
+        },
+        "responseStatus": {
+          "description": "The response status, populated even when the ResponseObject is not a Status\ntype.  For successful responses, this will only include the Code and\nStatusSuccess.  For non-status type error responses, this will be\nauto-populated with the error Message.\n+optional",
+          "$ref": "MetaV1Status"
+        },
+        "requestObject": {
+          "description": "API object from the request, in JSON format. The RequestObject is recorded\nas-is in the request (possibly re-encoded as JSON), prior to version\nconversion, defaulting, admission or merging. It is an external versioned\nobject type, and may not be a valid object on its own.  Omitted for\nnon-resource requests.  Only logged at Request Level and higher.\n+optional",
+          "type": "object",
+          "additionalProperties": {
+            "type": "any",
+            "description": "Properties of the object."
+          }
+        },
+        "responseObject": {
+          "description": "API object returned in the response, in JSON. The ResponseObject is\nrecorded after conversion to the external type, and serialized as JSON.\nOmitted for non-resource requests.  Only logged at Response Level and\nhigher.\n+optional",
+          "type": "object",
+          "additionalProperties": {
+            "type": "any",
+            "description": "Properties of the object."
+          }
+        }
+      }
+    },
+    "AuthnV1UserInfo": {
+      "id": "AuthnV1UserInfo",
+      "description": "The attributes of an authenticated user.\n\nShould match UserInfo in\nhttps:\/\/github.com\/kubernetes\/kubernetes\/blob\/master\/staging\/src\/k8s.io\/client-go\/pkg\/apis\/authentication\/v1\/generated.proto",
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The name of the user. This should be the email address associated with the\nGAIA identity of the user.",
+          "type": "string"
+        }
+      }
+    },
+    "AuditObjectReference": {
+      "id": "AuditObjectReference",
+      "description": "AuditObjectReference contains enough information to let you inspect or modify the referred object.\n\nShould match ObjectReference in\nhttps:\/\/github.com\/kubernetes\/kubernetes\/blob\/master\/staging\/src\/k8s.io\/apiserver\/pkg\/apis\/audit\/v1alpha1\/generated.proto.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "+optional",
+          "type": "string"
+        },
+        "name": {
+          "description": "+optional",
+          "type": "string"
+        },
+        "apiVersion": {
+          "description": "+optional\n\nIn alpha, this field follows Kubernetes conventions, except there is a\nleading slash for the core group.  I.e. the core group is represented as\n\"\/v1\"; other group versions are represented as\n\"fully.qualified.group.name\/v1\".",
+          "type": "string"
+        },
+        "subresource": {
+          "description": "+optional",
+          "type": "string"
+        }
+      }
+    },
+    "MetaV1Status": {
+      "id": "MetaV1Status",
+      "description": "MetaV1Status is a return value for calls that don't return other objects.\n\nShould match Status in\nhttps:\/\/github.com\/kubernetes\/kubernetes\/blob\/master\/staging\/src\/k8s.io\/apimachinery\/pkg\/apis\/meta\/v1\/generated.proto.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "A human-readable description of the status of this operation.\n+optional",
+          "type": "string"
+        },
+        "code": {
+          "description": "Suggested HTTP return code for this status, 0 if not set.\n+optional",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "AuditResponse": {
+      "id": "AuditResponse",
+      "description": "Response sent to audit log requests.",
+      "type": "object",
+      "properties": {
+      }
+    },
     "AuthenticateRequest": {
       "id": "AuthenticateRequest",
       "description": "A request to authenticate a user based on a provided OAuth2 token.\n\nThis should look very close to the TokenReview struct in\nhttp:\/\/github.com\/kubernetes\/kubernetes\/blob\/master\/pkg\/apis\/authentication.k8s.io\/v1beta1\/types.go.\nThis message has 4 GKE-specific fields that get mapped from the path, but the\nother fields (the expected JSON payload) must match TokenReview.",
@@ -1283,10 +1477,6 @@
         "status": {
           "description": "The response for the provided request. (this won't be filled in for an\nAuthenticateRequest, but it is part of the struct, so we need it here to be\nsafe).",
           "$ref": "TokenReviewStatus"
-        },
-        "metadata": {
-          "description": "\"pkg\/api\/types\".ObjectMeta\nTODO (b\/30563544): Remove these unused fields.",
-          "$ref": "ObjectMeta"
         }
       }
     },
@@ -1318,7 +1508,7 @@
     },
     "UserInfo": {
       "id": "UserInfo",
-      "description": "The attributes of an authenticated user.\nThis should match the UserInfo struct in\npkg\/apis\/authentication.k8s.io\/v1beta1\/types.go",
+      "description": "The attributes of an authenticated user.\nThis should match the UserInfo struct in\npkg\/apis\/authentication.k8s.io\/v1beta1\/types.go\n\nTODO(b\/62143841) Convert token authenticator to use v1 types and use\nAuthnV1UserInfo.",
       "type": "object",
       "properties": {
         "username": {
@@ -1335,49 +1525,25 @@
           "items": {
             "type": "string"
           }
+        },
+        "extra": {
+          "description": "Any additional information provided by the authenticator to be passed\nto the authorizer.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "ExtraValue"
+          }
         }
       }
     },
-    "ObjectMeta": {
-      "id": "ObjectMeta",
-      "description": "This maps to the \"apimachinery\/pkg\/apis\/meta\/v1\".ObjectMeta type, although\nnot all fields are populated and represented here.\nTODO (b\/30563544, b\/34947157): Remove unused fields.\n\nCurrently, if a request includes metadata fields that aren't explicitly\nmodeled here, the caller will receive a 400 response instead of ignoring the\nunrecognized fields. We should consider following b\/28297888 to enable\n\"ignore_unknown_fields\" in order to make this less brittle.",
+    "ExtraValue": {
+      "id": "ExtraValue",
+      "description": "ExtraValue allows the extra field to be a mapstringstring",
       "type": "object",
       "properties": {
-        "name": {
-          "description": "The name of the resource, unique within a namespace.",
-          "type": "string"
-        },
-        "generateName": {
-          "description": "An optional prefix, used by the server, to generate a unique name ONLY IF\nthe name field has not been provided.",
-          "type": "string"
-        },
-        "selfLink": {
-          "description": "A URL representing this object.",
-          "type": "string"
-        },
-        "uid": {
-          "description": "A unique identifier in time and space for this object.",
-          "type": "string"
-        },
-        "resourceVersion": {
-          "description": "An opaque value that represents the internal version of this object that\ncan be used by clients to determine when objects have changed.",
-          "type": "string"
-        },
-        "creationTimestamp": {
-          "description": "Timestamp representing the server time when this object was created.",
-          "type": "string"
-        },
-        "labels": {
-          "description": "Key-value pairs that may be used to scope and select individual resources.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "annotations": {
-          "description": "Unstructured key-value pairs that are not queryable and should be preserved\nwhen modifying objects.",
-          "type": "object",
-          "additionalProperties": {
+        "items": {
+          "description": "items, if empty, will result in an empty slice",
+          "type": "array",
+          "items": {
             "type": "string"
           }
         }
@@ -1426,10 +1592,6 @@
         "status": {
           "description": "The response for the provided request (this won't be filled in for an\nAuthorizeRequest, but it is part of the struct, so we need it here to be\nsafe).",
           "$ref": "SubjectAccessReviewStatus"
-        },
-        "metadata": {
-          "description": "Fields from \"pkg\/api\/types\".ObjectMeta\nTODO (b\/30563544): Remove these unused fields.",
-          "$ref": "ObjectMeta"
         }
       }
     },
@@ -1516,20 +1678,6 @@
         }
       }
     },
-    "ExtraValue": {
-      "id": "ExtraValue",
-      "description": "ExtraValue allows the extra field to be a mapstringstring",
-      "type": "object",
-      "properties": {
-        "items": {
-          "description": "items, if empty, will result in an empty slice",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "SubjectAccessReviewStatus": {
       "id": "SubjectAccessReviewStatus",
       "description": "The result of the request for authorization.\nThis should match the SubjectAccessReviewStatus struct in\npkg\/apis\/authorization\/v1beta1\/types.go.",
@@ -1588,10 +1736,6 @@
         "status": {
           "description": "The response for the provided request (this won't be filled in for an\nAuthorizeRequest, but it is part of the struct, so we need it here to be\nsafe).",
           "$ref": "ImageReviewStatus"
-        },
-        "metadata": {
-          "description": "Fields from \"pkg\/api\/types\".ObjectMeta\nTODO (b\/30563544): Remove these unused fields.",
-          "$ref": "ObjectMeta"
         }
       }
     },
@@ -1706,10 +1850,6 @@
         "status": {
           "description": "The status is populated at response time, and holds information about the\nsuccess or failure of the operation along with the signed certificate.",
           "$ref": "CertificateSigningRequestStatus"
-        },
-        "metadata": {
-          "description": "Additional metadata about the Kubernetes object.",
-          "$ref": "ObjectMeta"
         }
       }
     },
@@ -3005,6 +3145,55 @@
       "resources": {
         "zones": {
           "methods": {
+            "audit": {
+              "id": "container.masterProjects.zones.audit",
+              "path": "v1/masterProjects/{masterProjectId}/zones/{zone}/{projectNumber}/{clusterId}/audit",
+              "flatPath": "v1/masterProjects/{masterProjectId}/zones/{zone}/{projectNumber}/{clusterId}/audit",
+              "httpMethod": "POST",
+              "description": "Audits the provided events to Cloud Audit Logging and\/or Gin, depending on\npolicies defined by GKE.",
+              "parameters": {
+                "masterProjectId": {
+                  "description": "The hosted master project in which this master resides.  This can be\neither a [project ID or project\nnumber](https:\/\/support.google.com\/cloud\/answer\/6158840).",
+                  "location": "path",
+                  "required": true,
+                  "type": "string"
+                },
+                "zone": {
+                  "description": "The zone of this master's cluster.",
+                  "location": "path",
+                  "required": true,
+                  "type": "string"
+                },
+                "projectNumber": {
+                  "description": "The project number for which the request is being authorized.  This is\nthe project in which this master's cluster resides.\n\nThis is an int64, so it must be a project number, not a project ID.",
+                  "location": "path",
+                  "required": true,
+                  "type": "string",
+                  "format": "int64"
+                },
+                "clusterId": {
+                  "description": "The name of this master's cluster.",
+                  "location": "path",
+                  "required": true,
+                  "type": "string"
+                }
+              },
+              "parameterOrder": [
+                "masterProjectId",
+                "zone",
+                "projectNumber",
+                "clusterId"
+              ],
+              "request": {
+                "$ref": "AuditEventList"
+              },
+              "response": {
+                "$ref": "AuditResponse"
+              },
+              "scopes": [
+                "https://www.googleapis.com/auth/userinfo.email"
+              ]
+            },
             "authenticate": {
               "id": "container.masterProjects.zones.authenticate",
               "path": "v1/masterProjects/{masterProjectId}/zones/{zone}/{projectNumber}/{clusterId}/authenticate",

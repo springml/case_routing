@@ -16,6 +16,7 @@ from googlecloudsdk.api_lib.cloudiot import devices
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iot import flags
 from googlecloudsdk.command_lib.iot import util
+from googlecloudsdk.core import log
 from googlecloudsdk.core.util import times
 
 
@@ -44,4 +45,6 @@ class Update(base.DescribeCommand):
     except IndexError:
       raise util.BadCredentialIndexError(device_ref.Name(), credentials,
                                          args.index)
-    return client.Patch(device_ref, credentials=credentials)
+    response = client.Patch(device_ref, credentials=credentials)
+    log.UpdatedResource(device_ref.Name(), 'credentials for device')
+    return response

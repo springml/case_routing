@@ -14,6 +14,8 @@
 """Command for removing a user from a group."""
 
 from googlecloudsdk.api_lib.compute import base_classes
+from googlecloudsdk.api_lib.compute import request_helper
+from googlecloudsdk.api_lib.compute import utils
 from googlecloudsdk.calliope import arg_parsers
 from googlecloudsdk.calliope import base
 from googlecloudsdk.core import properties
@@ -41,7 +43,6 @@ class RemoveMembers(base.SilentCommand):
         help='The names or fully-qualified URLs of the users to remove.')
 
   def Run(self, args):
-    compute_holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
     holder = base_classes.ComputeUserAccountsApiHolder(self.ReleaseTrack())
     client = holder.client
 
@@ -68,8 +69,16 @@ class RemoveMembers(base.SilentCommand):
                 groupName=group_ref.Name()))
         requests.append((client.groups, 'RemoveMember', request))
 
-    return compute_holder.client.MakeRequests(requests)
-
+    errors = []
+    responses = list(request_helper.MakeRequests(
+        requests=requests,
+        http=client.http,
+        batch_url='https://www.googleapis.com/batch/',
+        errors=errors))
+    if errors:
+      utils.RaiseToolException(
+          errors, error_message='Could not fetch resource:')
+    return responses
 
 RemoveMembers.detailed_help = {
     'EXAMPLES': """\

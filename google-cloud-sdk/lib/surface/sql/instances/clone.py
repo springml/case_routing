@@ -58,8 +58,7 @@ class Clone(base.CreateCommand):
         cls.GetTrackedAttribute(flags, 'INSTANCES_FORMAT'))
     parser.add_argument(
         'source',
-        completion_resource='sql.instances',
-        list_command_path='sql instances list --uri',
+        completer=flags.InstanceCompleter,
         help='Cloud SQL instance ID of the source.')
     parser.add_argument(
         'destination', help='Cloud SQL instance ID of the clone.')

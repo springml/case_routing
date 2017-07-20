@@ -32,6 +32,7 @@ from googlecloudsdk.api_lib.app import yaml_parsing
 from googlecloudsdk.api_lib.storage import storage_util
 from googlecloudsdk.api_lib.util import exceptions as core_api_exceptions
 from googlecloudsdk.calliope import actions
+from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.app import create_util
 from googlecloudsdk.command_lib.app import deployables
 from googlecloudsdk.command_lib.app import exceptions
@@ -241,14 +242,14 @@ class ServiceDeployer(object):
           service_info, source_dir, code_bucket_ref)
 
     # Actually create the new version of the service.
+    metrics.CustomTimedEvent(metric_names.DEPLOY_API_START)
+    self.api_client.DeployService(new_version.service, new_version.id,
+                                  service_info, manifest, image,
+                                  endpoints_info)
+    metrics.CustomTimedEvent(metric_names.DEPLOY_API)
     message = 'Updating service [{service}]'.format(
         service=new_version.service)
     with progress_tracker.ProgressTracker(message):
-      metrics.CustomTimedEvent(metric_names.DEPLOY_API_START)
-      self.api_client.DeployService(new_version.service, new_version.id,
-                                    service_info, manifest, image,
-                                    endpoints_info)
-      metrics.CustomTimedEvent(metric_names.DEPLOY_API)
       self._PossiblyPromote(all_services, new_version)
 
 
@@ -538,9 +539,9 @@ def _PossiblyRepairApp(api_client, app):
     resources, including code bucket.
   """
   if not app.codeBucket:
-    with progress_tracker.ProgressTracker('Initializing App Engine resources'):
-      api_client.RepairApplication()
-      app = api_client.GetApplication()
+    message = 'Initializing App Engine resources'
+    api_client.RepairApplication(progress_message=message)
+    app = api_client.GetApplication()
   return app
 
 
@@ -558,3 +559,37 @@ def _RaiseIfStopped(api_client, app):
   """
   if api_client.IsStopped(app):
     raise StoppedApplicationError(app)
+
+
+def GetRuntimeBuilderStrategy(release_track):
+  """Gets the appropriate strategy to use for runtime builders.
+
+  Depends on the release track (beta or GA; alpha is not supported) and whether
+  the hidden `app/use_runtime_builders` configuration property is set (in which
+  case it overrides).
+
+  Args:
+    release_track: the base.ReleaseTrack that determines the default strategy.
+
+  Returns:
+    The RuntimeBuilderStrategy to use.
+
+  Raises:
+    ValueError: if the release track is not supported (and there is no property
+      override set).
+  """
+  # Use Get(), not GetBool, since GetBool() doesn't differentiate between "None"
+  # and "False"
+  if properties.VALUES.app.use_runtime_builders.Get() is not None:
+    if properties.VALUES.app.use_runtime_builders.GetBool():
+      return runtime_builders.RuntimeBuilderStrategy.ALWAYS
+    else:
+      return runtime_builders.RuntimeBuilderStrategy.NEVER
+
+  if release_track is base.ReleaseTrack.GA:
+    return runtime_builders.RuntimeBuilderStrategy.WHITELIST_GA
+  elif release_track is base.ReleaseTrack.BETA:
+    return runtime_builders.RuntimeBuilderStrategy.WHITELIST_BETA
+  else:
+    raise ValueError('Unrecognized release track [{}]'.format(release_track))
+

@@ -34,11 +34,7 @@ class Create(base.CreateCommand):
           allowed.
     """
     flags.Instance().AddToParser(parser)
-    parser.add_argument(
-        '--config',
-        required=True,
-        completion_resource='spanner.projects.instanceConfigs',
-        help='Instance config for the instance.')
+    flags.Config().AddToParser(parser)
     flags.Description().AddToParser(parser)
     flags.Nodes().AddToParser(parser)
     base.ASYNC_FLAG.AddToParser(parser)

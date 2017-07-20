@@ -22,6 +22,7 @@ from googlecloudsdk.api_lib.sql import operations
 from googlecloudsdk.api_lib.sql import validate
 from googlecloudsdk.calliope import arg_parsers
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.sql import flags
 from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
 
@@ -46,7 +47,7 @@ class Export(base.Command):
     base.ASYNC_FLAG.AddToParser(parser)
     parser.add_argument(
         'instance',
-        completion_resource='sql.instances',
+        completer=flags.InstanceCompleter,
         help='Cloud SQL instance ID.')
     parser.add_argument(
         'uri',

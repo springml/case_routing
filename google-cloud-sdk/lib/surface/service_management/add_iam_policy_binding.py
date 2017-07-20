@@ -82,7 +82,8 @@ class AddIamPolicyBinding(base.Command):
       else:
         raise
 
-    iam_util.AddBindingToIamPolicy(messages, policy, args.member, args.role)
+    iam_util.AddBindingToIamPolicy(
+        messages.Binding, policy, args.member, args.role)
 
     # Send updated access policy to backend
     request = messages.ServicemanagementServicesSetIamPolicyRequest(

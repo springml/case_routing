@@ -62,7 +62,8 @@ class GetCredentials(base.Command):
     """
     util.CheckKubectlInstalled()
     adapter = self.context['api_adapter']
-    cluster_ref = adapter.ParseCluster(args.name)
+    cluster_ref = adapter.ParseCluster(args.name,
+                                       getattr(args, 'region', None))
 
     log.status.Print('Fetching cluster endpoint and auth data.')
     # Call DescribeCluster to get auth info and cache for next time

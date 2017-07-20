@@ -46,6 +46,7 @@ class Describe(base.DescribeCommand):
     adapter = self.context['api_adapter']
 
     try:
-      return adapter.GetOperation(adapter.ParseOperation(args.operation_id))
+      return adapter.GetOperation(adapter.ParseOperation(
+          args.operation_id, getattr(args, 'region', None)))
     except apitools_exceptions.HttpError as error:
       raise exceptions.HttpException(error, util.HTTP_ERROR_FORMAT)

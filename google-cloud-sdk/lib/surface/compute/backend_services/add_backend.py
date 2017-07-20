@@ -124,11 +124,16 @@ class AddBackend(base.UpdateCommand):
 
     for backend in existing.backends:
       if group_uri == backend.group:
+        if group_ref.Collection() == 'compute.instanceGroups':
+          scope = 'zone'
+        elif group_ref.Collection() == 'compute.regionInstanceGroups':
+          scope = 'region'
         raise exceptions.ToolException(
-            'Backend [{0}] in zone [{1}] already exists in backend service '
-            '[{2}].'.format(group_ref.Name(),
-                            group_ref.zone,
-                            backend_service_ref.Name()))
+            'Backend [{}] in {} [{}] already exists in backend service '
+            '[{}].'.format(group_ref.Name(),
+                           scope,
+                           getattr(group_ref, scope),
+                           backend_service_ref.Name()))
 
     if args.balancing_mode:
       balancing_mode = client.messages.Backend.BalancingModeValueValuesEnum(

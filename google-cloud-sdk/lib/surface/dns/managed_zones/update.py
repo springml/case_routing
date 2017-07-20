@@ -41,6 +41,7 @@ class Update(base.UpdateCommand):
         'The name of the managed-zone to be updated..').AddToParser(parser)
     flags.AddCommonManagedZonesDnssecArgs(parser)
     flags.GetManagedZonesDescriptionArg().AddToParser(parser)
+    parser.display_info.AddCacheUpdater(flags.ManagedZoneCompleter)
 
   def Run(self, args):
     dns = apis.GetClientInstance('dns', 'v2beta1')

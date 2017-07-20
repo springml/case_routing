@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Command to add values to an OrgPolicy whitelist."""
+"""Command to add values to an Organization Policy whitelist."""
 
 from googlecloudsdk.api_lib.resource_manager import exceptions
 from googlecloudsdk.api_lib.resource_manager import org_policies
@@ -20,21 +20,20 @@ from googlecloudsdk.command_lib.resource_manager import org_policies_base
 from googlecloudsdk.command_lib.resource_manager import org_policies_flags as flags
 
 
-@base.Hidden
-@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
+@base.ReleaseTracks(base.ReleaseTrack.ALPHA, base.ReleaseTrack.BETA)
 class Allow(base.Command):
-  """Add values to an OrgPolicy allowed_values list policy.
+  """Add values to an Organization Policy allowed_values list policy.
 
-  Adds one or more values to the specified OrgPolicy allowed_values list policy
-  associated with the specified resource.
+  Adds one or more values to the specified Organization Policy allowed_values
+  list policy associated with the specified resource.
 
   ## EXAMPLES
 
-  The following command adds `devEnv` and `prodEnv` to an OrgPolicy
+  The following command adds `devEnv` and `prodEnv` to an Organization Policy
   allowed_values list policy for constraint `serviceuser.services`
   on project `foo-project`:
 
-  $ {command} serviceuser.services --project=foo-project devEnv prodEnv
+    $ {command} serviceuser.services --project=foo-project devEnv prodEnv
   """
 
   @staticmethod

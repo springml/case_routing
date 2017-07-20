@@ -15,6 +15,8 @@
 
 from googlecloudsdk.api_lib.compute import base_classes
 from googlecloudsdk.api_lib.compute import file_utils
+from googlecloudsdk.api_lib.compute import request_helper
+from googlecloudsdk.api_lib.compute import utils
 from googlecloudsdk.calliope import arg_parsers
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions
@@ -58,7 +60,6 @@ class AddKeys(base.SilentCommand):
         """)
 
   def Run(self, args):
-    compute_holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
     holder = base_classes.ComputeUserAccountsApiHolder(self.ReleaseTrack())
     client = holder.client
 
@@ -102,7 +103,16 @@ class AddKeys(base.SilentCommand):
               user=user_ref.Name()))
       requests.append((client.users, 'AddPublicKey', request))
 
-    return compute_holder.client.MakeRequests(requests)
+    errors = []
+    responses = list(request_helper.MakeRequests(
+        requests=requests,
+        http=client.http,
+        batch_url='https://www.googleapis.com/batch/',
+        errors=errors))
+    if errors:
+      utils.RaiseToolException(
+          errors, error_message='Could not fetch resource:')
+    return responses
 
 AddKeys.detailed_help = {
     'EXAMPLES': """\

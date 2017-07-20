@@ -73,7 +73,7 @@ class Create(base.CreateCommand):
                                    request)])
 
 
-@base.ReleaseTracks(base.ReleaseTrack.BETA)
+@base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
 class BetaCreate(Create):
   """Create a Google Compute Engine firewall rule.
 
@@ -83,13 +83,17 @@ class BetaCreate(Create):
 
   @classmethod
   def Args(cls, parser):
-    parser.display_info.AddFormat(flags.DEFAULT_ALPHA_LIST_FORMAT)
+    parser.display_info.AddFormat(flags.DEFAULT_BETA_LIST_FORMAT)
     cls.FIREWALL_RULE_ARG = flags.FirewallRuleArgument()
     cls.FIREWALL_RULE_ARG.AddArgument(parser, operation_type='create')
     cls.NETWORK_ARG = network_flags.NetworkArgumentForOtherResource(
         'The network to which this rule is attached.', required=False)
     firewalls_utils.AddCommonArgs(
-        parser, for_update=False, with_egress_support=True)
+        parser,
+        for_update=False,
+        with_egress_support=True,
+        with_service_account=True)
+    firewalls_utils.AddArgsForServiceAccount(parser, for_update=False)
 
   def _CreateFirewall(self, holder, args):
     client = holder.client
@@ -142,33 +146,7 @@ class BetaCreate(Create):
           args.rules, client.messages, firewalls_utils.ActionType.DENY)
     firewall.allowed = allowed
     firewall.denied = denied
-    return firewall, firewall_ref.project
 
-
-@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
-class AlphaCreate(BetaCreate):
-  """Create a Google Compute Engine firewall rule.
-
-  *{command}* is used to create firewall rules to allow/deny
-  incoming/outgoing traffic.
-  """
-
-  @classmethod
-  def Args(cls, parser):
-    parser.display_info.AddFormat(flags.DEFAULT_ALPHA_LIST_FORMAT)
-    cls.FIREWALL_RULE_ARG = flags.FirewallRuleArgument()
-    cls.FIREWALL_RULE_ARG.AddArgument(parser, operation_type='create')
-    cls.NETWORK_ARG = network_flags.NetworkArgumentForOtherResource(
-        'The network to which this rule is attached.', required=False)
-    firewalls_utils.AddCommonArgs(
-        parser,
-        for_update=False,
-        with_egress_support=True,
-        with_service_account=True)
-    firewalls_utils.AddArgsForServiceAccount(parser, for_update=False)
-
-  def _CreateFirewall(self, holder, args):
-    firewall, project = super(AlphaCreate, self)._CreateFirewall(holder, args)
     firewall.sourceServiceAccounts = args.source_service_accounts
     firewall.targetServiceAccounts = args.target_service_accounts
-    return firewall, project
+    return firewall, firewall_ref.project

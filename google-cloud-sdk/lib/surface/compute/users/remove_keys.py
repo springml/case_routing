@@ -14,6 +14,7 @@
 """Command for removing public keys to users."""
 
 from googlecloudsdk.api_lib.compute import base_classes
+from googlecloudsdk.api_lib.compute import request_helper
 from googlecloudsdk.api_lib.compute import utils
 from googlecloudsdk.api_lib.compute.users import client as users_client
 from googlecloudsdk.calliope import arg_parsers
@@ -42,7 +43,6 @@ class RemoveKeys(base.SilentCommand):
         'Else, the default user will be used.'))
 
   def Run(self, args):
-    compute_holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
     holder = base_classes.ComputeUserAccountsApiHolder(self.ReleaseTrack())
     client = holder.client
     name = args.name
@@ -59,7 +59,7 @@ class RemoveKeys(base.SilentCommand):
     else:
       fetcher = users_client.UserResourceFetcher(
           client, user_ref.project, client.http,
-          compute_holder.client.batch_url)
+          'https://www.googleapis.com/batch/')
 
       fingerprints = [k.fingerprint for k in
                       fetcher.LookupUser(user_ref.Name()).publicKeys]
@@ -79,8 +79,17 @@ class RemoveKeys(base.SilentCommand):
               user=user_ref.Name()))
       requests.append((client.users, 'RemovePublicKey', request))
 
-    return compute_holder.client.MakeRequests(requests)
-
+    errors = []
+    responses = list(
+        request_helper.MakeRequests(
+            requests=requests,
+            http=client.http,
+            batch_url='https://www.googleapis.com/batch/',
+            errors=errors))
+    if errors:
+      utils.RaiseToolException(
+          errors, error_message='Could not fetch resource:')
+    return responses
 
 RemoveKeys.detailed_help = {
     'EXAMPLES': """\

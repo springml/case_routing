@@ -77,8 +77,9 @@ class ActivateServiceAccount(base.SilentCommand):
   def Run(self, args):
     """Create service account credentials."""
 
-    if _IsJsonFile(args.key_file):
-      cred = auth_service_account.CredentialsFromAdcFile(args.key_file)
+    file_content, is_json = _IsJsonFile(args.key_file)
+    if is_json:
+      cred = auth_service_account.CredentialsFromAdcDict(file_content)
       if args.password_file or args.prompt_for_password:
         raise c_exc.InvalidArgumentException(
             '--password-file',
@@ -104,8 +105,8 @@ class ActivateServiceAccount(base.SilentCommand):
       elif args.prompt_for_password:
         password = getpass.getpass('Password: ')
 
-      cred = auth_service_account.CredentialsFromP12File(
-          args.key_file, account, password=password)
+      cred = auth_service_account.CredentialsFromP12Key(
+          file_content, account, password=password)
 
     try:
       c_store.ActivateCredentials(account, cred)
@@ -125,12 +126,11 @@ class ActivateServiceAccount(base.SilentCommand):
 
 def _IsJsonFile(filename):
   """Check and validate if given filename is proper json file."""
-  content = files.GetFileContents(filename)
+  content = files.GetFileOrStdinContents(filename, binary=True)
   try:
-    json.loads(content)
-    return True
+    return json.loads(content), True
   except ValueError as e:
     if filename.endswith('.json'):
       raise auth_service_account.BadCredentialFileException(
           'Could not read json file {0}: {1}'.format(filename, e))
-  return False
+  return content, False

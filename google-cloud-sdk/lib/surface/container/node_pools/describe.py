@@ -52,6 +52,7 @@ class Describe(base.DescribeCommand):
     adapter = self.context['api_adapter']
 
     try:
-      return adapter.GetNodePool(adapter.ParseNodePool(args.name))
+      return adapter.GetNodePool(
+          adapter.ParseNodePool(args.name, getattr(args, 'region', None)))
     except apitools_exceptions.HttpError as error:
       raise exceptions.HttpException(error, util.HTTP_ERROR_FORMAT)

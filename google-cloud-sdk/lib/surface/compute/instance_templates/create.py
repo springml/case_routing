@@ -36,8 +36,6 @@ def _CommonArgs(parser,
   instances_flags.AddDiskArgs(parser)
   if release_track in [base.ReleaseTrack.ALPHA]:
     instances_flags.AddCreateDiskArgs(parser)
-  if release_track in [base.ReleaseTrack.ALPHA, base.ReleaseTrack.BETA]:
-    instances_flags.AddExtendedMachineTypeArgs(parser)
   if support_local_ssd_size:
     instances_flags.AddLocalSsdArgsWithSize(parser)
   else:

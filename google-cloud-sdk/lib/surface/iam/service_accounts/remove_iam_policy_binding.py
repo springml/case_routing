@@ -34,19 +34,19 @@ class RemoveIamPolicyBinding(base_classes.BaseIamCommand):
   def Args(parser):
     iam_util.AddServiceAccountNameArg(
         parser,
-        help_text='The service account to remove the policy binding from.')
+        action='to remove the policy binding from')
     iam_util.AddArgsForRemoveIamPolicyBinding(parser)
 
   @http_retry.RetryOnHttpStatus(httplib.CONFLICT)
   def Run(self, args):
     policy = self.iam_client.projects_serviceAccounts.GetIamPolicy(
         self.messages.IamProjectsServiceAccountsGetIamPolicyRequest(
-            resource=iam_util.EmailToAccountResourceName(args.name)))
+            resource=iam_util.EmailToAccountResourceName(args.service_account)))
 
     iam_util.RemoveBindingFromIamPolicy(policy, args.member, args.role)
 
     return self.iam_client.projects_serviceAccounts.SetIamPolicy(
         self.messages.IamProjectsServiceAccountsSetIamPolicyRequest(
-            resource=iam_util.EmailToAccountResourceName(args.name),
+            resource=iam_util.EmailToAccountResourceName(args.service_account),
             setIamPolicyRequest=self.messages.SetIamPolicyRequest(
                 policy=policy)))
