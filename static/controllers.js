@@ -1,7 +1,7 @@
 app.controller("DashboardController", function($scope, $location, $http, rawDataService, anchorSmoothScroll, DataService) {
     // testing
     DataService.getAllData().then(function(res){
-        console.log(res);
+        console.log(JSON.stringify(res, null, 4));
     })
 
     // Initialize Chart variables

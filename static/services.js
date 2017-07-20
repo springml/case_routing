@@ -22,7 +22,6 @@ app.service('DataService', function($http){
        },
         getAllData: function(){
             return $http.post('/getAllData').then(function(response){
-                console.log(response);
                 return response;
             });
         }
