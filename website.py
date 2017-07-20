@@ -68,7 +68,8 @@ def get_time_data():
 @app.route('/getAllData', methods=['POST'])
 def get_all_data():
 	data = {}
-	test = run_query_all_columns("SELECT * FROM cases;")
+	results = run_table_query("SELECT * FROM cases;")
+	data["allColumns"] = results
 	return jsonify(data)
 
 
@@ -165,15 +166,19 @@ def run_pipeline():
 
 def run_query(query):
 	data = database.execute_sql(query)
-
 	dimensions = []
 	measures = []
-
 	for row in data:
 		dimensions.append(row[0])
 		measures.append(row[1])
-
 	return dimensions, measures
+
+def run_table_query(query):
+	data = database.execute_sql(query)
+
+	return [row for row in data]
+
+
 # [
 # 	u'CXKFEW',
 # 	u'Please help computer issue',
@@ -183,10 +188,6 @@ def run_query(query):
 # 	u'South',
 # 	u'Charles Anderson'
 # ]
-def run_query_all_columns(query):
-	data = database.execute_sql(query)
-	print data
-	return jsonify(data)
 
 def clean_text(message_subject, message_content):
 	message_subject = re.sub('[^A-Za-z0-9.?!; ]+', ' ', message_subject)
