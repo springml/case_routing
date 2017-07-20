@@ -30,7 +30,7 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     DataService.getCasesVSCategory().then(function(res){
         $scope.labelsCategory = res[0];
         $scope.dataCategory = res[1];
-        $scope.optionsCategory = dataOptions("Cases per Category");
+        $scope.optionsCategory = barOptions("Cases per Category");
         $scope.colorsCategory = [
             "#E1F5FE", "#B3E5FC", "#81D4FA",
             "#4FC3F7", "#29B6F6", "#03A9F4",
@@ -41,7 +41,7 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     DataService.getCasesVSAssignee().then(function(res){
         $scope.labelsAssignee = res[0];
         $scope.dataAssignee = res[1];
-        $scope.optionsAssignee = dataOptions("Cases per Assignee");
+        $scope.optionsAssignee = barOptions("Cases per Assignee");
         $scope.colorsAssignee = [
             "#E0F2F1", "#B2DFDB", "#80CBC4",
             "#4DB6AC", "#26A69A", "#009688",
@@ -52,7 +52,7 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     DataService.getCasesVSTime().then(function(res){
         $scope.labelsDate = res[0];
         $scope.dataDate = res[1];
-        $scope.optionsDate = dataOptions("Cases vs Time");
+        $scope.optionsDate = barOptions("Cases vs Time");
         $scope.colorsAssignee = [
             "#E0F2F1", "#B2DFDB", "#80CBC4",
             "#4DB6AC", "#26A69A", "#009688",
@@ -63,7 +63,7 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     DataService.getCasesVSRegion().then(function(res){
         $scope.labelsRegion = res[0];
         $scope.dataRegion = res[1];
-        $scope.emailsRegion = dataOptions("Cases per Region");
+        $scope.emailsRegion = barOptions("Cases per Region");
         $scope.colorsRegion = [
             "#C8E6C9", "#A5D6A7", "#81C784",
             "#66BB6A", "#4CAF50", "#43A047",
@@ -160,8 +160,10 @@ function asArr(obj, keyOrVal) {
 
 function circleOptions(titleText) {
     return {
-        responsive: true,
-        maintainAspectRatio: true,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        },
         title: {
             display: true,
             text: titleText,
@@ -170,8 +172,12 @@ function circleOptions(titleText) {
     }
 }
 
-function dataOptions(titleText) {
+function barOptions(titleText) {
     return {
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        },
         legend: {
             display: false
         },
