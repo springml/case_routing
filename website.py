@@ -37,6 +37,11 @@ def index():
 
 	return render_template('index.html')
 
+@app.route('/getCasesVSCategory', methods=['GET' , 'POST'])
+def update_category():
+	update_value('Category', new_category)
+	return 
+
 @app.route('/getCasesVSCategory', methods=['POST'])
 def get_cat_data():
 	data = {}
@@ -178,16 +183,19 @@ def run_table_query(query):
 
 	return [row for row in data]
 
+def update_value(CaseID, Column, value):
+	with database.batch() as batch:
+    	batch.update(
+        	table='cases',
+        	columns=(
+                'CaseID', Column),
+        	values=[
+            	(CaseID, value)])
+    return 
+def run_all_query(query):
+	data = database.execute_sql(query)
+	return data
 
-# [
-# 	u'CXKFEW',
-# 	u'Please help computer issue',
-# 	u'My mac turned off  what do I do? Should I press the start button?',
-# 	u'Legal',
-# 	TimestampWithNanoseconds(2017, 7, 19, 9, 48, 5, 25304, tzinfo=<UTC>),
-# 	u'South',
-# 	u'Charles Anderson'
-# ]
 
 def clean_text(message_subject, message_content):
 	message_subject = re.sub('[^A-Za-z0-9.?!; ]+', ' ', message_subject)
