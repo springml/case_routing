@@ -42,9 +42,12 @@ def index():
 
 	return render_template('index.html')
 
-@app.route('/modifyCategory', methods=['GET' , 'POST'])
+@app.route('/modifyCategory', methods=['POST'])
 def update_category():
-	update_value('Category', new_category)
+	sample_request_category = request.get_json().get('Category', '')
+	sample_request_CaseID = request.get_json().get('CaseID', '')
+
+	update_value(sample_request_CaseID, sample_request_category)
 	return
 
 @app.route('/getCasesVSCategory', methods=['POST'])

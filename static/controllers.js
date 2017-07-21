@@ -107,7 +107,7 @@ app.controller("TicketsController", function($scope, $location, $http, DataServi
     $scope.allCategories;
 
     DataService.getAllData().then(function(data){
-        $scope.rawData = data;
+        $scope.rawData = data.reverse();
         $scope.allCategories = findAllCategories(data);
     });
 
@@ -115,8 +115,6 @@ app.controller("TicketsController", function($scope, $location, $http, DataServi
     $scope.leftPaneCaseID;
     $scope.rightPaneCaseID;
     $scope.changeBool = function(row, id) {
-        console.log("Row: " + JSON.stringify(row, null, 4));
-        console.log("ID: " + id);
         $scope.rightPaneCaseID = id;
         // Right panel opens or close, depending on which button is clicked
         if ($scope.notHidden === false) {
@@ -126,42 +124,20 @@ app.controller("TicketsController", function($scope, $location, $http, DataServi
         }
     }
     $scope.modifyCategory = function(modCat, id){
-        console.log(id);
-        console.log(modCat);
+        // console.log(id);
+        // console.log(modCat);
         if(modCat && id){
             $http.post("/modifyCategory", {
                 Category: modCat,
                 CaseID: id
+            }).then(function(response){
+                console.log("I'm here!");
             });
         }
     }
 });
 
 // User Defined Functions
-function rawTransObj(arr, key) {
-    var transObj = {};
-    arr.forEach(function(row) {
-        if (!transObj[row[key]]) {
-            transObj[row[key]] = 1;
-        } else {
-            transObj[row[key]] += 1;
-        }
-    })
-    return transObj;
-}
-
-function asArr(obj, keyOrVal) {
-    var retArr = [];
-    for (var key in obj) {
-        if (keyOrVal === "key") {
-            retArr.push(key);
-        } else if (keyOrVal === "value") {
-            retArr.push(obj[key]);
-        }
-    }
-    return retArr;
-}
-
 function circleOptions(titleText) {
     return {
         options: {
