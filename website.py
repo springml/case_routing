@@ -16,9 +16,14 @@ import random
 # gcloud auth activate-service-account  --key-file emailinsight-7f04f034fa9b.json
 # gcloud beta ml language analyze-entities --content="Michelangelo Caravaggio, Italian painter, is known for 'The Calling of Saint Matthew'."
 
-GROUP_NAMES = ['Legal', 'Information', 'Emergencies', 'TechSupport', 'Utilities', 'Sales']
-DATA_PATH = '/Users/Edrich/programming/CaseRoutingDemo/'
-BAG_OF_WORDS_PATH = DATA_PATH + 'full_bags_3.pk'
+GROUP_NAMES = ['Legal', 'AutoResponded', 'Emergencies', 'TechSupport', 'Utilities', 'Sales']
+# DATA_PATH = '/Users/Edrich/programming/CaseRoutingDemo/'
+# BAG_OF_WORDS_PATH = DATA_PATH + 'full_bags_3.pk'
+parser = argparse.ArgumentParser(
+	description='Arguments for running web server')
+parser.add_argument(
+	'--DATA_PATH', required=True, help='Bag of Words Path')
+args = parser.parse_args()
 
 spanner_client = spanner.Client()
 
@@ -37,10 +42,10 @@ def index():
 
 	return render_template('index.html')
 
-@app.route('/getCasesVSCategory', methods=['GET' , 'POST'])
+@app.route('/modifyCategory', methods=['GET' , 'POST'])
 def update_category():
 	update_value('Category', new_category)
-	return 
+	return
 
 @app.route('/getCasesVSCategory', methods=['POST'])
 def get_cat_data():
@@ -105,7 +110,7 @@ def run_pipeline():
 	sample_request_timestamp = datetime.datetime.now()
 
 	sample_request_subject, sample_request_content = clean_text(sample_request_subject, sample_request_content)
-	word_bags = unpack_word_bags(word_bags_path = BAG_OF_WORDS_PATH)
+	word_bags = unpack_word_bags(word_bags_path = args.DATA_PATH)
 	words_groups = get_bag_of_word_counts(sample_request_subject, sample_request_content, word_bags, GROUP_NAMES)
 	entity_count_person, entity_count_location, entity_count_organization, entity_count_event, entity_count_work_of_art, entity_count_consumer_good, sentiment_score = get_entity_counts_sentiment_score(sample_request_subject, sample_request_content)
 	subject_length, subject_word_count, content_length, content_word_count, is_am, is_weekday = get_basic_quantitative_features(sample_request_subject, sample_request_content, sample_request_timestamp)
@@ -185,13 +190,12 @@ def run_table_query(query):
 
 def update_value(CaseID, Column, value):
 	with database.batch() as batch:
-    	batch.update(
-        	table='cases',
-        	columns=(
-                'CaseID', Column),
-        	values=[
-            	(CaseID, value)])
-    return 
+		batch.update(
+			table='cases',
+			columns=('CaseID', Column),
+			values=[(CaseID, value)])
+	return
+
 def run_all_query(query):
 	data = database.execute_sql(query)
 	return data

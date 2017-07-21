@@ -1,9 +1,4 @@
-app.controller("DashboardController", function($scope, $location, $http, rawDataService, anchorSmoothScroll, DataService) {
-    // testing
-    DataService.getAllData().then(function(res){
-        console.log(JSON.stringify(res, null, 4));
-    })
-
+app.controller("DashboardController", function($scope, $location, $http, anchorSmoothScroll, DataService) {
     // Initialize Chart variables
     $scope.labesCategory;
     $scope.dataCategory;
@@ -15,6 +10,8 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     $scope.optionsAssignee;
     $scope.colorsAssignee;
 
+    $scope.rawData
+
     $scope.chart;
     $scope.line = "line";
     $scope.bar = "bar";
@@ -24,7 +21,10 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     $scope.horizontalBar = "horizontalBar";
 
     $scope.title = "Analytics Controller";
-    $scope.rawData = rawDataService;
+
+    DataService.getAllData().then(function(data){
+        $scope.rawData = data.reverse();
+    });
 
     // Cases Per Category
     DataService.getCasesVSCategory().then(function(res){
@@ -86,7 +86,7 @@ app.controller("DashboardController", function($scope, $location, $http, rawData
     };
 });
 
-app.controller("EmailUsController", function($scope, $location, $http, rawDataService, anchorSmoothScroll) {
+app.controller("EmailUsController", function($scope, $location, $http, anchorSmoothScroll) {
     $scope.submitEmail = function(subject, content, priority) {
         if (subject && content && priority) {
             $http.post("/submit", {
@@ -102,9 +102,15 @@ app.controller("EmailUsController", function($scope, $location, $http, rawDataSe
     }
 });
 
-app.controller("TicketsController", function($scope, $location, $http, rawDataService, anchorSmoothScroll) {
-    $scope.rawData = rawDataService;
-    $scope.allCategories = findAllCategories(rawDataService);
+app.controller("TicketsController", function($scope, $location, $http, DataService, anchorSmoothScroll) {
+    $scope.rawData;
+    $scope.allCategories;
+
+    DataService.getAllData().then(function(data){
+        $scope.rawData = data;
+        $scope.allCategories = findAllCategories(data);
+    });
+
     $scope.notHidden = false;
     $scope.leftPaneCaseID;
     $scope.rightPaneCaseID;
@@ -123,12 +129,10 @@ app.controller("TicketsController", function($scope, $location, $http, rawDataSe
         console.log(id);
         console.log(modCat);
         if(modCat && id){
-            // // (REMOVE COMMENT LINE 88-92) Talk to Hemanth on how to send this.
-            // // Sends
-            // $http.post("", {
-            //     Category: modCat,
-            //     CaseID: id
-            // });
+            $http.post("/modifyCategory", {
+                Category: modCat,
+                CaseID: id
+            });
         }
     }
 });
