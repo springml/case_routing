@@ -22,7 +22,23 @@ app.service('DataService', function($http){
        },
         getAllData: function(){
             return $http.post('/getAllData').then(function(response){
-                return response.data;
+                var returnArr = []
+                function templateObj(CaseID, Subject, Body, Category, Timestamp, Region, Assignee){
+                    return {
+                        CaseID: CaseID,
+                        Subject: Subject,
+                        Body: Body,
+                        Category: Category,
+                        Timestamp: Timestamp,
+                        Region: Region,
+                        Assignee: Assignee
+                    }
+                }
+
+                response.data.allColumns.forEach(function(row){
+                    returnArr.push(templateObj(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
+                });
+                return returnArr;
             });
         }
     }
