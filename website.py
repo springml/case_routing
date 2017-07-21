@@ -68,7 +68,7 @@ def get_time_data():
 @app.route('/getAllData', methods=['POST'])
 def get_all_data():
 	data = {}
-	results = run_table_query("SELECT * FROM cases;")
+	results = run_table_query("SELECT CaseID, Subject, Body, Category, FORMAT_TIMESTAMP('%F', Timestamp) as Date, Region, Assignee FROM cases Order By Date;")
 	data["allColumns"] = results
 	return jsonify(data)
 
