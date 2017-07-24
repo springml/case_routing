@@ -46,28 +46,28 @@ def index():
 def update_category():
 	update_value(request.get_json().get('CaseID', ''), 'Category', request.get_json().get('Category', ''))
 
-@app.route('/getCasesVSCategory', methods=['POST'])
+@app.route('/getCaseDetailsVSCategory', methods=['POST'])
 def get_cat_data():
 	data = {}
 	dimensions, measures  = run_query("SELECT Category, count(*) FROM CaseDetails Group By Category;")
 	data["categories"] = [dimensions, measures]
 	return jsonify(data)
 
-@app.route('/getCasesVSAssignee', methods=['POST'])
+@app.route('/getCaseDetailsVSAssignee', methods=['POST'])
 def get_assignee_data():
 	data = {}
 	dimensions, measures  = run_query("SELECT Assignee, count(*) FROM CaseDetails Group By Assignee;")
 	data["assignees"] = [dimensions, measures]
 	return jsonify(data)
 
-@app.route('/getCasesVSRegion', methods=['POST'])
+@app.route('/getCaseDetailsVSRegion', methods=['POST'])
 def get_region_data():
 	data = {}
 	dimensions, measures  = run_query("SELECT Region, count(*) FROM CaseDetails Group By Region;")
 	data["regions"] = [dimensions, measures]
 	return jsonify(data)
 
-@app.route('/getCasesVSTime', methods=['POST'])
+@app.route('/getCaseDetailsVSTime', methods=['POST'])
 def get_time_data():
 	data = {}
 	dimensions, measures  = run_query("SELECT FORMAT_TIMESTAMP('%F', Created_Date) as Date, count(*) FROM CaseDetails Group By Date HAVING Date is not null Order By Date;")
