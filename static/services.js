@@ -1,22 +1,22 @@
 app.service('DataService', function($http){
     return {
         getCasesVSCategory: function(){
-            return $http.post('/getCasesVSCategory').then(function(response){
+            return $http.post('/getCaseDetailsVSCategory').then(function(response){
                 return response.data.categories;
             });
         },
         getCasesVSAssignee: function(){
-            return $http.post('/getCasesVSAssignee').then(function(response){
+            return $http.post('/getCaseDetailsVSAssignee').then(function(response){
                 return response.data.assignees;
             });
         },
         getCasesVSTime: function(){
-            return $http.post('/getCasesVSTime').then(function(response){
+            return $http.post('/getCaseDetailsVSTime').then(function(response){
                 return response.data.time;
             });
         },
         getCasesVSRegion: function(){
-            return $http.post('/getCasesVSRegion').then(function(response){
+            return $http.post('/getCaseDetailsVSRegion').then(function(response){
                 return response.data.regions;
             });
        },
