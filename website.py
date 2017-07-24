@@ -9,7 +9,7 @@ import json
 import googleapiclient.discovery
 import collections
 import predict
-
+import numpy as np
 import random
 # export GOOGLE_APPLICATION_CREDENTIALS=emailinsight-7f04f034fa9b.json
 # export API_KEY=AIzaSyAY9T1IVheKFOCI9vdTp6-J77Rzk2XUiW0
@@ -46,38 +46,38 @@ def index():
 def update_category():
 	update_value(request.get_json().get('CaseID', ''), 'Category', request.get_json().get('Category', ''))
 
-@app.route('/getCasesVSCategory', methods=['POST'])
+@app.route('/getCaseDetailsVSCategory', methods=['POST'])
 def get_cat_data():
 	data = {}
-	dimensions, measures  = run_query("SELECT Category, count(*) FROM cases Group By Category;")
+	dimensions, measures  = run_query("SELECT Category, count(*) FROM CaseDetails Group By Category;")
 	data["categories"] = [dimensions, measures]
 	return jsonify(data)
 
-@app.route('/getCasesVSAssignee', methods=['POST'])
+@app.route('/getCaseDetailsVSAssignee', methods=['POST'])
 def get_assignee_data():
 	data = {}
-	dimensions, measures  = run_query("SELECT Assignee, count(*) FROM cases Group By Assignee;")
+	dimensions, measures  = run_query("SELECT Assignee, count(*) FROM CaseDetails Group By Assignee;")
 	data["assignees"] = [dimensions, measures]
 	return jsonify(data)
 
-@app.route('/getCasesVSRegion', methods=['POST'])
+@app.route('/getCaseDetailsVSRegion', methods=['POST'])
 def get_region_data():
 	data = {}
-	dimensions, measures  = run_query("SELECT Region, count(*) FROM cases Group By Region;")
+	dimensions, measures  = run_query("SELECT Region, count(*) FROM CaseDetails Group By Region;")
 	data["regions"] = [dimensions, measures]
 	return jsonify(data)
 
-@app.route('/getCasesVSTime', methods=['POST'])
+@app.route('/getCaseDetailsVSTime', methods=['POST'])
 def get_time_data():
 	data = {}
-	dimensions, measures  = run_query("SELECT FORMAT_TIMESTAMP('%F', Timestamp) as Date, count(*) FROM cases Group By Date HAVING Date is not null Order By Date;")
+	dimensions, measures  = run_query("SELECT FORMAT_TIMESTAMP('%F', Created_Date) as Date, count(*) FROM CaseDetails Group By Date HAVING Date is not null Order By Date;")
 	data["time"] = [dimensions, measures]
 	return jsonify(data)
 
 @app.route('/getAllData', methods=['POST'])
 def get_all_data():
 	data = {}
-	results = run_table_query("SELECT CaseID, Subject, Body, Category, FORMAT_TIMESTAMP('%F', Timestamp) as Date, Region, Assignee FROM cases Order By Date;")
+	results = run_table_query("SELECT CaseID, Subject, Body, Category, FORMAT_TIMESTAMP('%F', Created_Date) as Date, Region, Assignee FROM CaseDetails Order By Date;")
 	data["allColumns"] = results
 	return jsonify(data)
 
@@ -101,18 +101,19 @@ def run_pipeline():
 						"Region": ["West", "South", "Midwest", "Northeast"]
 	}
 
-	sample_request_subject = request.get_json().get('subject', '')
-	sample_request_content = request.get_json().get('content', '')
+	subject = request.get_json().get('subject', '')
+	content = request.get_json().get('content', '')
+
 	# Hemanth this is new: It's for the priority
-	sample_request_priority = request.get_json().get('priority', '')
+	priority = request.get_json().get('priority', '')
+	Created_Date = datetime.datetime.now()
+	
 
-	sample_request_timestamp = datetime.datetime.now()
-
-	sample_request_subject, sample_request_content = clean_text(sample_request_subject, sample_request_content)
+	subject, content = clean_text(subject, content)
 	word_bags = unpack_word_bags(word_bags_path = args.DATA_PATH)
-	words_groups = get_bag_of_word_counts(sample_request_subject, sample_request_content, word_bags, GROUP_NAMES)
-	entity_count_person, entity_count_location, entity_count_organization, entity_count_event, entity_count_work_of_art, entity_count_consumer_good, sentiment_score = get_entity_counts_sentiment_score(sample_request_subject, sample_request_content)
-	subject_length, subject_word_count, content_length, content_word_count, is_am, is_weekday = get_basic_quantitative_features(sample_request_subject, sample_request_content, sample_request_timestamp)
+	words_groups = get_bag_of_word_counts(subject, content, word_bags, GROUP_NAMES)
+	entity_count_person, entity_count_location, entity_count_organization, entity_count_event, entity_count_work_of_art, entity_count_consumer_good, sentiment_score = get_entity_counts_sentiment_score(subject, content)
+	subject_length, subject_word_count, content_length, content_word_count, is_am, is_weekday = get_basic_quantitative_features(subject, content, Created_Date)
 
 	#with open('instances.json') as f:
 	#	JSON = json.load(f)
@@ -145,30 +146,32 @@ def run_pipeline():
     	name=name,
     	body={'instances': [json_to_submit]}
 	).execute()
-	'''
-	bigquery_client = bigquery.Client()
-	dataset = bigquery_client.dataset('CaseRouting')
-	table = dataset.table('Tickets')
-	table.reload()
-	'''
 
 
+	
 
+	Close_Date = datetime.datetime.now() + datetime.timedelta(days=random.randint(1,10), hours = random.randint(-5, 5), )
 
-	sample_request_timestamp = sample_request_timestamp.strftime('%Y-%m-%d %H:%M:%S')
-	ticket_id = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in xrange(6))
-	category = GROUP_NAMES[response['predictions'][0]['classes']]
+	CaseID = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in xrange(6))
+	Category = GROUP_NAMES[response['predictions'][0]['classes']]
 
-	assignee = random.choice(Case_Assignments[category])
-	region = random.choice(regions)
+	Assignee = random.choice(Case_Assignments[Category])
+	Region = random.choice(regions)
+	Priority = random.choice(["P1", "P2", "P2", "P3", "P3"])
+	
+	#While loop to ensure CSAT always less than 5
+	CSAT = np.random.normal(3.4, .6)
+	while CSAT > 5:
+		CSAT = np.random.normal(3.4, .6)
 
+	print (CaseID, subject, content, Category, Assignee, Region, Created_Date, Priority, Close_Date, CSAT, 'Online', sentiment_score, '')
 
 	with database.batch() as batch:
 		batch.insert(
-		table='cases',
-		columns=('CaseID', 'Subject', 'Body', 'Category', 'Assignee', 'Region', 'Timestamp'),
+		table='CaseDetails',
+		columns=('CaseID', 'Subject', 'Body', 'Category', 'Assignee', 'Region', 'Created_Date', 'Priority', 'Close_Date', 'CSAT', 'Channel', 'Sentiment', 'Status'),
 		values=[
-			(ticket_id, sample_request_subject, sample_request_content, category, assignee, region, datetime.datetime.now())])
+			(CaseID, subject, content, Category, Assignee, Region, Created_Date, Priority, Close_Date, CSAT, 'Online', sentiment_score, '')])
 
 
 	return "Thank you for your submission"
@@ -190,7 +193,7 @@ def run_table_query(query):
 def update_value(CaseID, Column, value):
 	with database.batch() as batch:
 		batch.update(
-			table='cases',
+			table='CaseDetails',
 			columns=('CaseID', Column),
 			values=[(CaseID, value)])
 	return
@@ -205,39 +208,6 @@ def clean_text(message_subject, message_content):
 	message_content = re.sub('[^A-Za-z0-9.?!; ]+', ' ', message_content)
 
 	return message_subject, message_content
-
-def insert_data(instance_id, database_id):
-    """Inserts sample data into the given database.
-
-    The database and table must already exist and can be created using
-    `create_database`.
-    """
-    spanner_client = spanner.Client()
-    instance = spanner_client.instance(instance_id)
-    database = instance.database(database_id)
-
-    with database.batch() as batch:
-        batch.insert(
-            table='',
-            columns=('SingerId', 'FirstName', 'LastName',),
-            values=[
-                (1, u'Marc', u'Richards'),
-                (2, u'Catalina', u'Smith'),
-                (3, u'Alice', u'Trentor'),
-                (4, u'Lea', u'Martin'),
-                (5, u'David', u'Lomond')])
-
-        batch.insert(
-            table='Albums',
-            columns=('SingerId', 'AlbumId', 'AlbumTitle',),
-            values=[
-                (1, 1, u'Go, Go, Go'),
-                (1, 2, u'Total Junk'),
-                (2, 1, u'Green'),
-                (2, 2, u'Forever Hold Your Peace'),
-                (2, 3, u'Terrified')])
-
-    print('Inserted data.')
 
 def get_entity_counts_sentiment_score(message_subject, message_content):
 	"""Extract entities using google NLP API
