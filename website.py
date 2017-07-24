@@ -44,11 +44,7 @@ def index():
 
 @app.route('/modifyCategory', methods=['POST'])
 def update_category():
-	sample_request_category = request.get_json().get('Category', '')
-	sample_request_CaseID = request.get_json().get('CaseID', '')
-
-	update_value(sample_request_CaseID, sample_request_category)
-	return
+	update_value(request.get_json().get('CaseID', ''), 'Category', request.get_json().get('Category', ''))
 
 @app.route('/getCasesVSCategory', methods=['POST'])
 def get_cat_data():
