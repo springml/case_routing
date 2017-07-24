@@ -26,28 +26,6 @@ app.controller("DashboardController", function($scope, $location, $http, anchorS
         $scope.rawData = data.reverse();
     });
 
-    // Cases Per Category
-    DataService.getCasesVSCategory().then(function(res){
-        $scope.labelsCategory = res[0];
-        $scope.dataCategory = res[1];
-        $scope.optionsCategory = barOptions("Cases per Category");
-        $scope.colorsCategory = [
-            "#E1F5FE", "#B3E5FC", "#81D4FA",
-            "#4FC3F7", "#29B6F6", "#03A9F4",
-            "#039BE5", "#0288D1", "#0277BD"
-        ];
-    });
-    // Cases Per Assignee
-    DataService.getCasesVSAssignee().then(function(res){
-        $scope.labelsAssignee = res[0];
-        $scope.dataAssignee = res[1];
-        $scope.optionsAssignee = barOptions("Cases per Assignee");
-        $scope.colorsAssignee = [
-            "#E0F2F1", "#B2DFDB", "#80CBC4",
-            "#4DB6AC", "#26A69A", "#009688",
-            "#00897B", "#00796B", "#00695C"
-        ];
-    });
     // Cases VS. Time
     DataService.getCasesVSTime().then(function(res){
         $scope.labelsDate = res[0];
@@ -63,11 +41,33 @@ app.controller("DashboardController", function($scope, $location, $http, anchorS
     DataService.getCasesVSRegion().then(function(res){
         $scope.labelsRegion = res[0];
         $scope.dataRegion = res[1];
-        $scope.emailsRegion = barOptions("Cases per Region");
+        $scope.optionsRegion = barOptions("Cases per Region");
         $scope.colorsRegion = [
             "#C8E6C9", "#A5D6A7", "#81C784",
             "#66BB6A", "#4CAF50", "#43A047",
             "#388E3C", "#2E7D32", "#1B5E20"
+        ];
+    });
+    // Cases Per Category
+    DataService.getCasesVSCategory().then(function(res){
+        $scope.labelsCategory = res[0];
+        $scope.dataCategory = res[1];
+        $scope.optionsCategory = barOptions("Cases per Category");
+        $scope.colorsCategory = [
+            "#E1F5FE", "#B3E5FC", "#81D4FA",
+            "#4FC3F7", "#29B6F6", "#03A9F4",
+            "#039BE5", "#0288D1", "#0277BD"
+        ];
+    });
+    // Cases Per Assignee
+    DataService.getCasesVSAssignee().then(function(res){
+        $scope.labelsAssignee = res[0];
+        $scope.dataAssignee = res[1];
+        $scope.optionsAssignee = horizontalBarOptions("Cases per Assignee");
+        $scope.colorsAssignee = [
+            "#E0F2F1", "#B2DFDB", "#80CBC4",
+            "#4DB6AC", "#26A69A", "#009688",
+            "#00897B", "#00796B", "#00695C"
         ];
     });
 
@@ -134,6 +134,7 @@ app.controller("TicketsController", function($scope, $location, $http, DataServi
                 console.log("I'm here!");
             });
         }
+        $scope.notHidden = false;
     }
 });
 
@@ -172,7 +173,8 @@ function barOptions(titleText) {
             fontSize: 20
         },
         scales: {
-            yAxes: [{
+            yAxes: [
+                {
                     id: "y-axis-1",
                     type: "linear",
                     display: true,
@@ -182,12 +184,37 @@ function barOptions(titleText) {
                         callback: function (value) { if (Number.isInteger(value)) { return value; } },
                         stepSize: 1
                     }
-                },
+                }
+            ]
+        }
+    }
+}
+
+function horizontalBarOptions(titleText) {
+    return {
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        },
+        legend: {
+            display: false
+        },
+        elements: {
+            line: {
+                tension: 0.3,
+            }
+        },
+        title: {
+            display: true,
+            text: titleText,
+            fontSize: 20
+        },
+        scales: {
+            xAxes: [
                 {
-                    id: "y-axis-2",
-                    type: "linear",
-                    display: false,
-                    position: "right",
+                    id: "x-axis-1",
+                    display: true,
+                    position: "left",
                     ticks: {
                         beginAtZero: true,
                         callback: function (value) { if (Number.isInteger(value)) { return value; } },
