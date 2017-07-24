@@ -43,9 +43,9 @@ app.controller("DashboardController", function($scope, $location, $http, anchorS
         $scope.dataRegion = res[1];
         $scope.optionsRegion = barOptions("Cases per Region");
         $scope.colorsRegion = [
-            "#C8E6C9", "#A5D6A7", "#81C784",
-            "#66BB6A", "#4CAF50", "#43A047",
-            "#388E3C", "#2E7D32", "#1B5E20"
+            "#F9FBE7", "#F0F4C3", "#E6EE9C",
+            "#DCE775", "#D4E157", "#CDDC39",
+            "#C0CA33", "#AFB42B", "#9E9D24"
         ];
     });
     // Cases Per Category
@@ -67,7 +67,8 @@ app.controller("DashboardController", function($scope, $location, $http, anchorS
         $scope.colorsAssignee = [
             "#E0F2F1", "#B2DFDB", "#80CBC4",
             "#4DB6AC", "#26A69A", "#009688",
-            "#00897B", "#00796B", "#00695C"
+            "#00897B", "#00796B", "#00695C",
+            "#004D40", "#00392F", "#00231E"
         ];
     });
 
