@@ -20,23 +20,31 @@ app.service('DataService', function($http){
                 return response.data.regions;
             });
        },
+        getCasesVSRegionAndPriority: function(){
+            return $http.post('/getCaseDetailsVSRegionAndPriority').then(function(response){
+                return response.data.allColumns;
+            });
+       },
         getAllData: function(){
             return $http.post('/getAllData').then(function(response){
                 var returnArr = []
-                function templateObj(CaseID, Subject, Body, Category, Timestamp, Region, Assignee){
+                function templateObj(CaseID, Subject, Body, Priority, Category, Created_Date, Close_Date, Region, Assignee, Status){
                     return {
                         CaseID: CaseID,
                         Subject: Subject,
                         Body: Body,
+                        Priority: Priority,
                         Category: Category,
-                        Timestamp: Timestamp,
+                        Created_Date: Created_Date,
+                        Close_Date: Close_Date,
                         Region: Region,
-                        Assignee: Assignee
+                        Assignee: Assignee,
+                        Status: Status
                     }
                 }
 
                 response.data.allColumns.forEach(function(row){
-                    returnArr.push(templateObj(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
+                    returnArr.push(templateObj(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]));
                 });
                 return returnArr;
             });

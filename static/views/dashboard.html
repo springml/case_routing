@@ -68,6 +68,27 @@
         </div>
     </div>
 </div>
+<!-- TEST -->
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <canvas
+                id="chart"
+                class="chart-base"
+                chart="chart"
+                chart-color="colorRegionPriority"
+                chart-type="bar"
+                chart-series="seriesRegionPriority"
+                chart-data="dataRegionPriority"
+                chart-options="optionsRegionPriority"
+                chart-labels="labelsRegionPriority"
+                chart-colors="colorsRegionPriority"
+                chart-dataset-override="datasetOverride"
+                ng-click="showData($event)">
+            </canvas>
+        </div>
+    </div>
+</div>
 
 <!-- Values Table -->
 <div class="space"></div>
@@ -81,7 +102,9 @@
                         <th>Case ID</th>
                         <th>Subject</th>
                         <th>Body</th>
-                        <th>Date</th>
+                        <th>Priority</th>
+                        <th>Create Date</th>
+                        <th>Close Date</th>
                         <th>Category</th>
                         <th>Region</th>
                         <th>Assignee</th>
@@ -91,8 +114,10 @@
                     <tr ng-repeat="row in rawData | limitTo:10">
                         <td>{{row.CaseID}}</td>
                         <td>{{row.Subject}}</td>
-                        <td>{{row.Body}}</td>
-                        <td>{{row.Timestamp}}</td>
+                        <td>{{row.Body | limitTo: 50}}{{row.Body.length > 50 ? '...' : ''}}</td>
+                        <td>{{row.Priority}}</td>
+                        <td>{{row.Created_Date}}</td>
+                        <td>{{row.Close_Date}}</td>
                         <td>{{row.Category}}</td>
                         <td>{{row.Region}}</td>
                         <td>{{row.Assignee}}</td>
