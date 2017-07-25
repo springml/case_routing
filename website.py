@@ -178,7 +178,7 @@ def run_pipeline():
 		table='CaseDetails',
 		columns=('CaseID', 'Subject', 'Body', 'Category', 'Assignee', 'Region', 'Created_Date', 'Priority', 'Close_Date', 'CSAT', 'Channel', 'Sentiment', 'Status'),
 		values=[
-			(CaseID, subject, content, Category, Assignee, Region, Created_Date, Priority, Close_Date, CSAT, 'Online', sentiment_score, '')])
+			(CaseID, subject, content, Category, Assignee, Region, Created_Date, Priority, Close_Date, CSAT, 'Online', float(sentiment_score), '')])
 
 
 	return "Thank you for your submission"
