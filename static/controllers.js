@@ -73,9 +73,9 @@ app.controller("DashboardController", function($scope, $location, $http, anchorS
     });
     // Testing
     DataService.getCasesVSRegionAndPriority().then(function(res){
-        console.log(JSON.stringify(res, null, 4))
+        var cleanData = cleanRegionPriorityData(res)
         $scope.labelsRegionPriority = ["West", "Midwest", "South", "Northeast"];
-        $scope.dataRegionPriority = [[1, 2, 3, 4], [5, 3, 1, 0], [0, 0, 0, 0]];
+        $scope.dataRegionPriority = [cleanData.P1, cleanData.P2, cleanData.P3];
         $scope.seriesRegionPriority = ["P1", "P2", "P3"]
         $scope.optionsRegionPriority = stackedBarOptions("DEV (Testing)");
         $scope.colorsAssignee = [
@@ -152,8 +152,9 @@ app.controller("TicketsController", function($scope, $location, $http, DataServi
         $scope.notHidden = false;
     }
 });
-
-// User Defined Functions
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+// User Defined Functions  -- -- -- -- -- -- --
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 function circleOptions(titleText) {
     return {
         options: {
@@ -280,48 +281,22 @@ function horizontalBarOptions(titleText) {
         }
     }
 }
-// [
-//     [
-//         1,
-//         "P2",
-//         "West"
-//     ],
-//     [
-//         1,
-//         "P1",
-//         "Northeast"
-//     ],
-//     [
-//         1,
-//         "P3",
-//         "West"
-//     ],
-//     [
-//         1,
-//         "P1",
-//         "South"
-//     ],
-//     [
-//         1,
-//         "P3",
-//         "Midwest"
-//     ],
-//     [
-//         1,
-//         "P2",
-//         "South"
-//     ]
-// ]
 function cleanRegionPriorityData(arr){
-    // "West", "Midwest", "South", "Northeast"
-    var result = {
-        P1: [0, 0, 0, 0],
-        P2: [0, 0, 0, 0],
-        P3: [0, 0, 0, 0]
-    }
-    arr[0].forEach(function(point){
-        
+    var result = {P1: [0, 0, 0, 0], P2: [0, 0, 0, 0], P3: [0, 0, 0, 0]};
+    arr.forEach(function(point){
+        if(point[2] === "West"){
+            result[point[1]][0] = point[0];
+        } else if(point[2] === "Midwest"){
+            result[point[1]][1] = point[0];
+
+        } else if(point[2] === "South"){
+            result[point[1]][2] = point[0];
+
+        } else if(point[2] === "Northeast"){
+            result[point[1]][3] = point[0];
+        }
     });
+    return result;
 }
 
 function findAllCategories(arr){
