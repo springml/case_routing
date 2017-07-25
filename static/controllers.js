@@ -31,22 +31,29 @@ app.controller("DashboardController", function($scope, $location, $http, anchorS
         $scope.labelsDate = res[0];
         $scope.dataDate = res[1];
         $scope.optionsDate = barOptions("Cases vs Time");
-        $scope.colorsAssignee = [
-            "#E0F2F1", "#B2DFDB", "#80CBC4",
-            "#4DB6AC", "#26A69A", "#009688",
-            "#00897B", "#00796B", "#00695C"
-        ];
-    });
-    // Cases Per Region
-    DataService.getCasesVSRegion().then(function(res){
-        $scope.labelsRegion = res[0];
-        $scope.dataRegion = res[1];
-        $scope.optionsRegion = barOptions("Cases per Region");
-        $scope.colorsRegion = [
+        $scope.colorsDate = [
             "#F9FBE7", "#F0F4C3", "#E6EE9C",
             "#DCE775", "#D4E157", "#CDDC39",
             "#C0CA33", "#AFB42B", "#9E9D24"
         ];
+    });
+    // // Cases Per Region
+    // DataService.getCasesVSRegion().then(function(res){
+    //     $scope.labelsRegion = res[0];
+    //     $scope.dataRegion = res[1];
+    //     $scope.optionsRegion = barOptions("Cases per Region");
+    //     $scope.colorsRegion = [
+    //
+    //     ];
+    // });
+    // Cases Per Region and Priority
+    DataService.getCasesVSRegionAndPriority().then(function(res){
+        var cleanData = cleanRegionPriorityData(res)
+        $scope.labelsRegionPriority = ["West", "Midwest", "South", "Northeast"];
+        $scope.dataRegionPriority = [cleanData.P1, cleanData.P2, cleanData.P3];
+        $scope.seriesRegionPriority = ["P1", "P2", "P3"]
+        $scope.optionsRegionPriority = stackedBarOptions("Cases Per Region and Priority");
+        // $scope.colorsRegionPriority = [["#D4E157"], ["#29B6F6"], ["#26A69A"]];
     });
     // Cases Per Category
     DataService.getCasesVSCategory().then(function(res){
@@ -71,21 +78,6 @@ app.controller("DashboardController", function($scope, $location, $http, anchorS
             "#004D40", "#00392F", "#00231E"
         ];
     });
-    // Testing
-    DataService.getCasesVSRegionAndPriority().then(function(res){
-        var cleanData = cleanRegionPriorityData(res)
-        $scope.labelsRegionPriority = ["West", "Midwest", "South", "Northeast"];
-        $scope.dataRegionPriority = [cleanData.P1, cleanData.P2, cleanData.P3];
-        $scope.seriesRegionPriority = ["P1", "P2", "P3"]
-        $scope.optionsRegionPriority = stackedBarOptions("DEV (Testing)");
-        $scope.colorsAssignee = [
-            "#E0F2F1", "#B2DFDB", "#80CBC4",
-            "#4DB6AC", "#26A69A", "#009688",
-            "#00897B", "#00796B", "#00695C",
-            "#004D40", "#00392F", "#00231E"
-        ];
-    });
-
     $scope.datasetOverride = [{
         backgroundColour: ['#000000']
     }]
