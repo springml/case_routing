@@ -77,7 +77,7 @@ def get_time_data():
 @app.route('/getAllData', methods=['POST'])
 def get_all_data():
 	data = {}
-	results = run_table_query("SELECT CaseID, Subject, Body, Category, FORMAT_TIMESTAMP('%F', Created_Date) as Date, Region, Assignee FROM CaseDetails Order By Date;")
+	results = run_table_query("SELECT CaseID, Subject, Body, Priority, Category, FORMAT_TIMESTAMP('%F', Created_Date) as Created_Date, FORMAT_TIMESTAMP('%F', Close_Date) as Closed_Date, Region, Assignee, Status FROM CaseDetails Order By Date;")
 	data["allColumns"] = results
 	return jsonify(data)
 
@@ -107,7 +107,7 @@ def run_pipeline():
 	# Hemanth this is new: It's for the priority
 	priority = request.get_json().get('priority', '')
 	Created_Date = datetime.datetime.now()
-	
+
 
 	subject, content = clean_text(subject, content)
 	word_bags = unpack_word_bags(word_bags_path = args.DATA_PATH)
@@ -148,7 +148,7 @@ def run_pipeline():
 	).execute()
 
 
-	
+
 
 	Close_Date = datetime.datetime.now() + datetime.timedelta(days=random.randint(1,10), hours = random.randint(-5, 5), )
 
@@ -158,7 +158,7 @@ def run_pipeline():
 	Assignee = random.choice(Case_Assignments[Category])
 	Region = random.choice(regions)
 	Priority = random.choice(["P1", "P2", "P2", "P3", "P3"])
-	
+
 	#While loop to ensure CSAT always less than 5
 	CSAT = np.random.normal(3.4, .6)
 	while CSAT > 5:
