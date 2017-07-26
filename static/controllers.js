@@ -1,16 +1,14 @@
 app.controller("DashboardController", function($scope, $location, $http, anchorSmoothScroll, DataService) {
     // Initialize Chart variables
-    $scope.labesCategory;
-    $scope.dataCategory;
-    $scope.optionsCategory;
-    $scope.colorsCategory;
+    $scope.labelsDate, $scope.dataDate, $scope.optionsDate, $scope.colorsDate;
 
-    $scope.labelsAssignee;
-    $scope.dataAssignee;
-    $scope.optionsAssignee;
-    $scope.colorsAssignee;
+    $scope.labelsRegionPriority, $scope.dataRegionPriority, $scope.seriesRegionPriority, $scope.optionsRegionPriority;
 
-    $scope.rawData
+    $scope.labesCategory, $scope.dataCategory, $scope.optionsCategory, $scope.colorsCategory;
+
+    $scope.labelsAssignee, $scope.dataAssignee, $scope.optionsAssignee, $scope.colorsAssignee;
+
+    $scope.rawData;
 
     $scope.chart;
     $scope.line = "line";
