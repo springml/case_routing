@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.analysis.windowed &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.articulations" href="moduleArticulations.html" />
+    <link rel="prev" title="music21.analysis.reduction" href="moduleAnalysisReduction.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleArticulations.html" title="music21.articulations"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleAnalysisReduction.html" title="music21.analysis.reduction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleAnalysisReduction.html"
+                        title="previous chapter">music21.analysis.reduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleArticulations.html"
+                        title="next chapter">music21.articulations</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.analysis.windowed</a><ul>
+<li><a class="reference internal" href="#windowedanalysis">WindowedAnalysis</a></li>
+<li><a class="reference internal" href="#testmockprocesor">TestMockProcesor</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleAnalysisWindowed.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-analysis-windowed">
+<span id="moduleanalysiswindowed"></span><h1>music21.analysis.windowed<a class="headerlink" href="#music21-analysis-windowed" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.analysis.windowed"></span><p>This module describes classes for performing windowed and overlapping windowed analysis. 
+The <a class="reference internal" href="#music21.analysis.windowed.WindowedAnalysis" title="music21.analysis.windowed.WindowedAnalysis"><code class="xref py py-class docutils literal"><span class="pre">music21.analysis.windowed.WindowedAnalysis</span></code></a> provides a reusable framework for 
+systematic overlapping window analysis at the starting at the level of the quarter note 
+and moving to the size of an entire <a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">music21.stream.Stream</span></code></a>.</p>
+<p>Modular analysis procedures inherit from <a class="reference internal" href="moduleAnalysisDiscrete.html#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">music21.analysis.discrete.DiscreteAnalysis</span></code></a>. 
+The <a class="reference internal" href="moduleAnalysisDiscrete.html#music21.analysis.discrete.KrumhanslSchmuckler" title="music21.analysis.discrete.KrumhanslSchmuckler"><code class="xref py py-class docutils literal"><span class="pre">music21.analysis.discrete.KrumhanslSchmuckler</span></code></a> (for algorithmic key detection) 
+and <a class="reference internal" href="moduleAnalysisDiscrete.html#music21.analysis.discrete.Ambitus" title="music21.analysis.discrete.Ambitus"><code class="xref py py-class docutils literal"><span class="pre">music21.analysis.discrete.Ambitus</span></code></a> (for pitch range analysis) classes provide examples.</p>
+<div class="section" id="windowedanalysis">
+<h2>WindowedAnalysis<a class="headerlink" href="#windowedanalysis" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.analysis.windowed.WindowedAnalysis">
+<em class="property">class </em><code class="descclassname">music21.analysis.windowed.</code><code class="descname">WindowedAnalysis</code><span class="sig-paren">(</span><em>streamObj</em>, <em>analysisProcessor</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.windowed.WindowedAnalysis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.analysis.windowed.WindowedAnalysis" title="music21.analysis.windowed.WindowedAnalysis"><code class="xref py py-class docutils literal"><span class="pre">WindowedAnalysis</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.analysis.windowed.WindowedAnalysis.process">
+<code class="descclassname">WindowedAnalysis.</code><code class="descname">process</code><span class="sig-paren">(</span><em>minWindow=1</em>, <em>maxWindow=1</em>, <em>windowStepSize=1</em>, <em>windowType='overlap'</em>, <em>includeTotalWindow=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.windowed.WindowedAnalysis.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main method for windowed analysis across one or more window size.</p>
+<p>Calls <code class="xref py py-meth docutils literal"><span class="pre">_analyze()</span></code> for 
+the number of different window sizes to be analyzed.</p>
+<p>The <cite>minWindow</cite> and <cite>maxWindow</cite> set the range of window sizes in quarter lengths. 
+The <cite>windowStepSize</cite> parameter determines the increment between these window sizes, 
+in quarter lengths.</p>
+<p>If <cite>minWindow</cite> or <cite>maxWindow</cite> is None, the largest window size available will be set.</p>
+<p>If <cite>includeTotalWindow</cite> is True, the largest window size will always be added.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv324&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">KrumhanslSchmuckler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># placing one part into analysis</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wa</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">windowed</span><span class="o">.</span><span class="n">WindowedAnalysis</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">wa</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">includeTotalWindow</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># we only have one series of windows</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)</span> <span class="c1"># for each window, we get a solution and a color</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> 
+<span class="go">&lt;music21.pitch.Pitch B&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">wa</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">includeTotalWindow</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># we have two series of windows</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># the data returned is processor dependent; here we get</span>
+<span class="go">(&lt;music21.pitch.Pitch B&gt;, &#39;major&#39;, 0.6868258874056411)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)</span> <span class="c1"># a color is returned for each matching data position</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="testmockprocesor">
+<h2>TestMockProcesor<a class="headerlink" href="#testmockprocesor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.analysis.windowed.TestMockProcesor">
+<em class="property">class </em><code class="descclassname">music21.analysis.windowed.</code><code class="descname">TestMockProcesor</code><a class="headerlink" href="#music21.analysis.windowed.TestMockProcesor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.analysis.windowed.TestMockProcesor" title="music21.analysis.windowed.TestMockProcesor"><code class="xref py py-class docutils literal"><span class="pre">TestMockProcesor</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.analysis.windowed.TestMockProcesor.process">
+<code class="descclassname">TestMockProcesor.</code><code class="descname">process</code><span class="sig-paren">(</span><em>subStream</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.windowed.TestMockProcesor.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simply count the number of notes found</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleArticulations.html" title="music21.articulations"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleAnalysisReduction.html" title="music21.analysis.reduction"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

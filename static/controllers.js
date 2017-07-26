@@ -1,15 +1,10 @@
 app.controller("DashboardController", function($scope, $location, $http, anchorSmoothScroll, DataService) {
     // Initialize Chart variables
     $scope.labelsDate, $scope.dataDate, $scope.optionsDate, $scope.colorsDate;
-
     $scope.labelsRegionPriority, $scope.dataRegionPriority, $scope.seriesRegionPriority, $scope.optionsRegionPriority;
-
     $scope.labesCategory, $scope.dataCategory, $scope.optionsCategory, $scope.colorsCategory;
-
     $scope.labelsAssignee, $scope.dataAssignee, $scope.optionsAssignee, $scope.colorsAssignee;
-
     $scope.rawData;
-
     $scope.chart;
     $scope.line = "line";
     $scope.bar = "bar";
@@ -76,9 +71,33 @@ app.controller("DashboardController", function($scope, $location, $http, anchorS
             "#004D40", "#00392F", "#00231E"
         ];
     });
-    $scope.datasetOverride = [{
-        backgroundColour: ['#000000']
-    }]
+    $scope.overrideRegionPriority = [
+        {
+            backgroundColor: [
+                'rgba(244, 67, 54, 0.7)',
+                'rgba(244, 67, 54, 0.7)',
+                'rgba(244, 67, 54, 0.7)',
+                'rgba(244, 67, 54, 0.7)'
+            ],
+            borderColor : "rgba(220,220,220,1)"
+        }, {
+            backgroundColor: [
+                'rgba(156, 39, 176, 0.7)',
+                'rgba(156, 39, 176, 0.7)',
+                'rgba(156, 39, 176, 0.7)',
+                'rgba(156, 39, 176, 0.7)'
+            ],
+            borderColor : "rgba(220,220,220,1)"
+        }, {
+            backgroundColor: [
+                'rgba(33, 150, 243, 0.7)',
+                'rgba(33, 150, 243, 0.7)',
+                'rgba(33, 150, 243, 0.7)',
+                'rgba(33, 150, 243, 0.7)'
+            ],
+            borderColor : "rgba(220,220,220,1)"
+        }
+    ]
     $scope.showData = function(event) {
         console.log(event);
     }
@@ -188,8 +207,9 @@ function barOptions(titleText) {
                     ticks: {
                         beginAtZero: true,
                         callback: function (value) { if (Number.isInteger(value)) { return value; } },
-                        stepSize: 1
-                    }
+                        stepSize: 10
+                    },
+                    maxTicksLimit: 11
                 }
             ]
         }
@@ -229,7 +249,8 @@ function stackedBarOptions(titleText) {
                             return value;
                         }
                     },
-                    stepSize: 1
+                    stepSize: 10,
+                    maxTicksLimit: 11
                 }
             }]
         }
@@ -264,8 +285,9 @@ function horizontalBarOptions(titleText) {
                     ticks: {
                         beginAtZero: true,
                         callback: function (value) { if (Number.isInteger(value)) { return value; } },
-                        stepSize: 1
-                    }
+                        stepSize: 10
+                    },
+                    maxTicksLimit: 11
                 }
             ]
         }

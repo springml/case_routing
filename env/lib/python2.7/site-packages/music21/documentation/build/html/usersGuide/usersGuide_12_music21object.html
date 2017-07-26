@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User’s Guide, Chapter 12: Getting Back to Basics: The Music21Object &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="User’s Guide, Chapter 13: More Music21Object Attributes and Properties" href="usersGuide_13_music21object2.html" />
+    <link rel="prev" title="User’s Guide, Chapter 11: Corpus Searching" href="usersGuide_11_corpusSearching.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_13_music21object2.html" title="User’s Guide, Chapter 13: More Music21Object Attributes and Properties"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_11_corpusSearching.html" title="User’s Guide, Chapter 11: Corpus Searching"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_11_corpusSearching.html"
+                        title="previous chapter">User&#8217;s Guide, Chapter 11: Corpus Searching</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_13_music21object2.html"
+                        title="next chapter">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a><ul>
+<li><a class="reference internal" href="#attributes-and-properties">Attributes and Properties</a><ul>
+<li><a class="reference internal" href="#id"><code class="docutils literal"><span class="pre">id</span></code></a></li>
+<li><a class="reference internal" href="#groups">Groups</a></li>
+<li><a class="reference internal" href="#activesite">ActiveSite</a></li>
+<li><a class="reference internal" href="#offset">offset</a></li>
+<li><a class="reference internal" href="#priority">priority</a></li>
+<li><a class="reference internal" href="#classsortorder">classSortOrder</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_02_notes.html">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_03_pitches.html">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_05_listsOfLists.html">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_07_chords.html">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_08_installingMusicXML.html">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_11_corpusSearching.html">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_13_music21object2.html">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_15_key.html">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_21_sorting.html">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_25_postTonalTools1.html">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_26_clientWeakref.html">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_28_lyricSearcher.html">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_97_timespans.html">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_12_music21object.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-12-music21object"></span><div class="section" id="user-s-guide-chapter-12-getting-back-to-basics-the-music21object">
+<h1>User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object<a class="headerlink" href="#user-s-guide-chapter-12-getting-back-to-basics-the-music21object" title="Permalink to this headline">¶</a></h1>
+<p>Almost everything that we&#8217;ve been working with so far, <code class="docutils literal"><span class="pre">Note</span></code> objects,
+<code class="docutils literal"><span class="pre">Chord</span></code> objects, <code class="docutils literal"><span class="pre">Stream</span></code> objects, etc., are subclasses of a object
+that, for lack of a better name, is called
+<a class="reference internal" href="../moduleReference/moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>.</p>
+<p>A <code class="docutils literal"><span class="pre">Music21Object</span></code> is something that can go in a <code class="docutils literal"><span class="pre">Stream</span></code>, knows
+where it is in a Stream, and has a <code class="docutils literal"><span class="pre">Duration</span></code> at <code class="docutils literal"><span class="pre">.duration</span></code>.</p>
+<p>Of course, not every object in Python is a <code class="docutils literal"><span class="pre">Music21Object</span></code>, but a
+little surprisingly, not every object in <code class="docutils literal"><span class="pre">music21</span></code> is a
+&#8220;<code class="docutils literal"><span class="pre">Music21Object</span></code>&#8221;. For instance, the <a class="reference internal" href="../moduleReference/modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code></a>
+object is not. If you try to put one in a <code class="docutils literal"><span class="pre">Stream</span></code>, you&#8217;ll get an
+error:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s2">&quot;A-2&quot;</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="n">StreamException</span>                           <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">a403b4a9af26</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+      <span class="mi">3</span> <span class="n">p</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s2">&quot;A-2&quot;</span><span class="p">)</span>
+      <span class="mi">4</span> <span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">5</span> <span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">stream</span><span class="o">/</span><span class="n">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offsetOrItemOrList</span><span class="p">,</span> <span class="n">itemOrNone</span><span class="p">,</span> <span class="n">ignoreSort</span><span class="p">,</span> <span class="n">setActiveSite</span><span class="p">)</span>
+   <span class="mi">1657</span>         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">Music21Object</span><span class="p">):</span>
+   <span class="mi">1658</span>             <span class="k">raise</span> <span class="n">StreamException</span><span class="p">(</span><span class="s1">&#39;to put a non Music21Object in a stream, &#39;</span> <span class="o">+</span>
+<span class="o">-&gt;</span> <span class="mi">1659</span>                                   <span class="s1">&#39;create a music21.ElementWrapper for the item&#39;</span><span class="p">)</span>
+   <span class="mi">1660</span>         <span class="k">else</span><span class="p">:</span>
+   <span class="mi">1661</span>             <span class="n">element</span> <span class="o">=</span> <span class="n">item</span>
+
+
+<span class="n">StreamException</span><span class="p">:</span> <span class="n">to</span> <span class="n">put</span> <span class="n">a</span> <span class="n">non</span> <span class="n">Music21Object</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">stream</span><span class="p">,</span> <span class="n">create</span> <span class="n">a</span> <span class="n">music21</span><span class="o">.</span><span class="n">ElementWrapper</span> <span class="k">for</span> <span class="n">the</span> <span class="n">item</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../moduleReference/moduleDuration.html#music21.duration.Duration" title="music21.duration.Duration"><code class="xref py py-class docutils literal"><span class="pre">Duration</span></code></a>s are also not
+<code class="docutils literal"><span class="pre">Music21Objects</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="s1">&#39;half&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="n">StreamException</span>                           <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">54</span><span class="n">db82b20718</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+      <span class="mi">1</span> <span class="n">d</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="s1">&#39;half&#39;</span><span class="p">)</span>
+<span class="o">----&gt;</span> <span class="mi">2</span> <span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">stream</span><span class="o">/</span><span class="n">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offsetOrItemOrList</span><span class="p">,</span> <span class="n">itemOrNone</span><span class="p">,</span> <span class="n">ignoreSort</span><span class="p">,</span> <span class="n">setActiveSite</span><span class="p">)</span>
+   <span class="mi">1657</span>         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">Music21Object</span><span class="p">):</span>
+   <span class="mi">1658</span>             <span class="k">raise</span> <span class="n">StreamException</span><span class="p">(</span><span class="s1">&#39;to put a non Music21Object in a stream, &#39;</span> <span class="o">+</span>
+<span class="o">-&gt;</span> <span class="mi">1659</span>                                   <span class="s1">&#39;create a music21.ElementWrapper for the item&#39;</span><span class="p">)</span>
+   <span class="mi">1660</span>         <span class="k">else</span><span class="p">:</span>
+   <span class="mi">1661</span>             <span class="n">element</span> <span class="o">=</span> <span class="n">item</span>
+
+
+<span class="n">StreamException</span><span class="p">:</span> <span class="n">to</span> <span class="n">put</span> <span class="n">a</span> <span class="n">non</span> <span class="n">Music21Object</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">stream</span><span class="p">,</span> <span class="n">create</span> <span class="n">a</span> <span class="n">music21</span><span class="o">.</span><span class="n">ElementWrapper</span> <span class="k">for</span> <span class="n">the</span> <span class="n">item</span>
+</pre></div>
+</div>
+<p>Why don&#8217;t we just make everything a <code class="docutils literal"><span class="pre">Music21Object</span></code>? There&#8217;s an
+overhead in making a Music21Object, so if we did that, the system would
+probably run about 10x slower than it does. But there&#8217;s no reason to put
+a <code class="docutils literal"><span class="pre">Pitch</span></code> or a <code class="docutils literal"><span class="pre">Duration</span></code> in a Stream, when a <code class="docutils literal"><span class="pre">Note</span></code> is basically
+a <code class="docutils literal"><span class="pre">Pitch</span></code> plus a <code class="docutils literal"><span class="pre">Duration</span></code>. This works much better:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;A-2&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;half&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">A</span><span class="o">-&gt;</span>
+</pre></div>
+</div>
+<p>How can we tell that a <code class="docutils literal"><span class="pre">Note</span></code> is a <code class="docutils literal"><span class="pre">Music21Object</span></code>? Well we can read
+the docs (<a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a>) where it says:</p>
+<p><strong>Note</strong> <code class="docutils literal"><span class="pre">bases</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">NotRest</span>
+<span class="o">*</span> <span class="n">GeneralNote</span>
+<span class="o">*</span> <span class="n">Music21Object</span>
+</pre></div>
+</div>
+<p>Or we can use the <code class="docutils literal"><span class="pre">isinstance(obj,</span> <span class="pre">class)</span></code> operator on a given note.
+The class we are looking for is <code class="docutils literal"><span class="pre">base.Music21Object</span></code>. We still have
+our A♭ as <code class="docutils literal"><span class="pre">n</span></code>, so we can do:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">Music21Object</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Note that we need to have a Note object first, we can&#8217;t test the class
+itself:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">isinstance</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">Music21Object</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>There&#8217;s one other way that you can tell if an object is a
+<code class="docutils literal"><span class="pre">Music21Object</span></code>, that&#8217;s to check whether <code class="docutils literal"><span class="pre">Music21Object</span></code> appears in
+the object&#8217;s <code class="docutils literal"><span class="pre">.classes</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="s1">&#39;Music21Object&#39;</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">classes</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>But that&#8217;s a bit of a cop-out. Things that are not <code class="docutils literal"><span class="pre">Music21Objects</span></code>
+don&#8217;t generally have a <code class="docutils literal"><span class="pre">.classes</span></code> property, so that won&#8217;t work:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">27</span><span class="p">)</span>
+<span class="n">dt</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="s1">&#39;Music21Object&#39;</span> <span class="ow">in</span> <span class="n">dt</span><span class="o">.</span><span class="n">classes</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">AttributeError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="n">b332c49485ae</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="s1">&#39;Music21Object&#39;</span> <span class="ow">in</span> <span class="n">dt</span><span class="o">.</span><span class="n">classes</span>
+
+
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;datetime.datetime&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;classes&#39;</span>
+</pre></div>
+</div>
+<p>But it&#8217;s a useful and easy way of checking to see if something you know
+<em>is</em> a <code class="docutils literal"><span class="pre">Music21Object</span></code> is a specific class:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="s1">&#39;Chord&#39;</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">classes</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>In fact, it&#8217;s useful enough that we&#8217;ve put it in a few objects in
+<code class="docutils literal"><span class="pre">music21</span></code> that aren&#8217;t <code class="docutils literal"><span class="pre">Music21Objects</span></code></p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="s1">&#39;Duration&#39;</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">classes</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>The class of an object cannot (well, should not) change after it&#8217;s been
+created. Thus it can be thought of as totally stable. Streams have many
+ways of filtering out <code class="docutils literal"><span class="pre">Music21Object</span></code>s (a.k.a. &#8220;elements&#8221;) according
+to class. The easiest way is with <code class="docutils literal"><span class="pre">.getElementsByClass</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="p">())</span>
+<span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">))</span>
+<span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">))</span>
+<span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">())</span>
+<span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Note&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">A</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">B</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If you wanted to get the Notes and the Rest, you could figure out what
+their common ancestor class is and filter on that:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">()</span><span class="o">.</span><span class="n">classes</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span><span class="o">.</span><span class="n">classes</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">((</span><span class="s1">&#39;Rest&#39;</span><span class="p">,</span> <span class="s1">&#39;GeneralNote&#39;</span><span class="p">,</span> <span class="s1">&#39;Music21Object&#39;</span><span class="p">,</span> <span class="s1">&#39;object&#39;</span><span class="p">),</span>
+  <span class="p">(</span><span class="s1">&#39;Note&#39;</span><span class="p">,</span> <span class="s1">&#39;NotRest&#39;</span><span class="p">,</span> <span class="s1">&#39;GeneralNote&#39;</span><span class="p">,</span> <span class="s1">&#39;Music21Object&#39;</span><span class="p">,</span> <span class="s1">&#39;object&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;GeneralNote&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">A</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span> <span class="n">rest</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">B</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Or you could give a list of relevant classes:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">([</span><span class="s1">&#39;Note&#39;</span><span class="p">,</span> <span class="s1">&#39;Rest&#39;</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">A</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span> <span class="n">rest</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">B</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>For those who are familiar with HTML/Javascript/DOM programming, a
+Python Class is most similar to a DOM Tag (like &lt;img&gt;). So DOM methods
+such as <code class="docutils literal"><span class="pre">.getElementsByTagName</span></code> are similar to <code class="docutils literal"><span class="pre">music21</span></code>&#8216;s
+<code class="docutils literal"><span class="pre">.getElementsByClass</span></code>.</p>
+<p>It&#8217;s worth pointing out that there&#8217;s also a <code class="docutils literal"><span class="pre">.classSet</span></code> (v.2.1+) on
+every <code class="docutils literal"><span class="pre">Music21Object</span></code> that gives the string name of all base classes,
+the fully-qualified string name for every class, as well as the class
+object. Since it will return <code class="docutils literal"><span class="pre">True</span></code> for basically every form that
+someone might pass in a class selector, it&#8217;s used a lot internally for
+safety. It returns these objects as a <code class="docutils literal"><span class="pre">frozenset()</span></code>, meaning it will
+return in any order and cannot be manipulated:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">()</span>
+<span class="n">r</span><span class="o">.</span><span class="n">classSet</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="nb">frozenset</span><span class="p">({</span><span class="s1">&#39;music21.base.Music21Object&#39;</span><span class="p">,</span>
+            <span class="nb">object</span><span class="p">,</span>
+            <span class="s1">&#39;music21.note.Rest&#39;</span><span class="p">,</span>
+            <span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">GeneralNote</span><span class="p">,</span>
+            <span class="s1">&#39;Music21Object&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Rest&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;builtins.object&#39;</span><span class="p">,</span>
+            <span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">,</span>
+            <span class="s1">&#39;music21.note.GeneralNote&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;object&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;GeneralNote&#39;</span><span class="p">,</span>
+            <span class="n">music21</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">Music21Object</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;Rest&#39;</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">classSet</span><span class="p">,</span> <span class="s1">&#39;music21.note.GeneralNote&#39;</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">classSet</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">Music21Object</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">classSet</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="attributes-and-properties">
+<h2>Attributes and Properties<a class="headerlink" href="#attributes-and-properties" title="Permalink to this headline">¶</a></h2>
+<p>Once you know that something is a <code class="docutils literal"><span class="pre">music21Object</span></code> you can exploit the
+attributes of the object for musical purposes.</p>
+<div class="section" id="id">
+<h3><code class="docutils literal"><span class="pre">id</span></code><a class="headerlink" href="#id" title="Permalink to this headline">¶</a></h3>
+<p>Each <code class="docutils literal"><span class="pre">music21Object</span></code> has a (should be) unique id stored in the <code class="docutils literal"><span class="pre">.id</span></code>
+attribute:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C#4&quot;</span><span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">id</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">4513862936</span>
+</pre></div>
+</div>
+<p>By default, this <code class="docutils literal"><span class="pre">.id</span></code> is the same as the location of the object in
+memory, which the built-in Python function <code class="docutils literal"><span class="pre">id()</span></code> returns:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">id</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">4513862936</span>
+</pre></div>
+</div>
+<p>But we can set it manually so that the object is easier to find later:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;first_note&#39;</span>
+<span class="n">n</span><span class="o">.</span><span class="n">id</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;first_note&#39;</span>
+</pre></div>
+</div>
+<p>We advise <code class="docutils literal"><span class="pre">.id</span></code> not to include spaces or special characters, and may
+enforce it in the future.</p>
+<p>This <code class="docutils literal"><span class="pre">.id</span></code> is especially useful for <code class="docutils literal"><span class="pre">Stream</span></code> objects because it will
+be displayed in the representation of the Stream and, if there&#8217;s no
+other metadata, can be used as the name of the part:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;empty_stream&#39;</span>
+<span class="n">s</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Stream</span> <span class="n">empty_stream</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Parts can be retrieved from the <code class="docutils literal"><span class="pre">.parts</span></code> attribute of a score by id.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bach</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="n">sopr</span> <span class="o">=</span> <span class="n">bach</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="s1">&#39;soprano&#39;</span><span class="p">]</span>
+<span class="n">sopr</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Part</span> <span class="n">Soprano</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">sopr</span><span class="o">.</span><span class="n">id</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;Soprano&#39;</span>
+</pre></div>
+</div>
+<p>There are some properties such as <code class="docutils literal"><span class="pre">.getElementById()</span></code> that retrieve
+objects by <code class="docutils literal"><span class="pre">.id</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;first_note&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt; first_note</span>
+</pre></div>
+</div>
+<p>If you know HTML/Javascript/DOM programming, the similarity between
+<code class="docutils literal"><span class="pre">music21</span></code>&#8216;s <code class="docutils literal"><span class="pre">.getElementById()</span></code> and HTML&#8217;s <code class="docutils literal"><span class="pre">.getElementById()</span></code> is
+intentional.</p>
+</div>
+<div class="section" id="groups">
+<h3>Groups<a class="headerlink" href="#groups" title="Permalink to this headline">¶</a></h3>
+<p>A group is a collection of labels for an object. Think of
+<a class="reference internal" href="../moduleReference/moduleBase.html#music21.base.Groups" title="music21.base.Groups"><code class="xref py py-class docutils literal"><span class="pre">Groups</span></code></a> as being like <code class="docutils literal"><span class="pre">.id</span></code> with two
+differences: (1) each <code class="docutils literal"><span class="pre">Music21Object</span></code> can have zero, one, or multiple
+Groups &#8211; but it has exactly one <code class="docutils literal"><span class="pre">.id</span></code> and (2) a single group label
+can belong to multiple <code class="docutils literal"><span class="pre">Music21Objects</span></code>.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">groups</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">Groups</span></code> are wrappers around lists that enforce the restriction that
+the label must be a string. Since they&#8217;re otherwise just lists, you can
+add a group to any object just by appending a string to the group:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;black_key&#39;</span><span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;sharped&#39;</span><span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">groups</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="s1">&#39;black_key&#39;</span><span class="p">,</span> <span class="s1">&#39;sharped&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We advise groups not to have spaces in them and will be enforcing this
+in v.3.</p>
+<p>Now we can search through Streams that <code class="docutils literal"><span class="pre">n</span></code> is in to find it by
+searching for the group <code class="docutils literal"><span class="pre">'sharped'</span></code> (or <code class="docutils literal"><span class="pre">'black</span> <span class="pre">key'</span></code>). We use
+<code class="docutils literal"><span class="pre">Stream.getElementsByGroup()</span></code>. Note that it is plural <code class="docutils literal"><span class="pre">Elements</span></code>
+while the previous call was <code class="docutils literal"><span class="pre">getElementById</span></code> singular. That&#8217;s because
+there should be only one object with each id but there could be many
+with the same group:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByGroup</span><span class="p">(</span><span class="s1">&#39;sharped&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt; first_note</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">Groups</span></code> are the equivalent of the HTML/Javascript/DOM &#8220;class&#8221;. (Since
+<code class="docutils literal"><span class="pre">class</span></code> means something else in Python, we&#8217;ve changed the term).
+Eventually, <code class="docutils literal"><span class="pre">Groups</span></code> will be able to be used in styling objects
+automatically. For now we can just do it by hand:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByGroup</span><span class="p">(</span><span class="s1">&#39;black_key&#39;</span><span class="p">):</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">notehead</span> <span class="o">=</span> <span class="s1">&#39;circle-x&#39;</span>
+
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_12_music21object_52_0.png" src="../_images/usersGuide_12_music21object_52_0.png" />
+</div>
+<div class="section" id="activesite">
+<h3>ActiveSite<a class="headerlink" href="#activesite" title="Permalink to this headline">¶</a></h3>
+<p>A <code class="docutils literal"><span class="pre">Music21Object</span></code> that is inside one or more Streams should be able to
+get its most recently stream via its <code class="docutils literal"><span class="pre">.activeSite</span></code> attribute. We&#8217;ve
+put <code class="docutils literal"><span class="pre">n</span></code> in <code class="docutils literal"><span class="pre">s</span></code>, which is called (now incorrectly)
+<code class="docutils literal"><span class="pre">'empty</span> <span class="pre">stream'</span></code>, so n&#8217;s <code class="docutils literal"><span class="pre">.activeSite</span></code> should be <code class="docutils literal"><span class="pre">s</span></code>.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">activeSite</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Stream</span> <span class="n">empty_stream</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The activeSite may change over time; obviously if the note is put in
+another Stream then that Stream will become the activeSite. Let&#8217;s put
+the note in a new stream, four quarter notes from the start:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;new_stream&#39;</span>
+<span class="n">t</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="n">n</span><span class="o">.</span><span class="n">activeSite</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Stream</span> <span class="n">new_stream</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We can also change the activeSite...</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">activeSite</span> <span class="o">=</span> <span class="n">s</span>
+<span class="n">n</span><span class="o">.</span><span class="n">activeSite</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Stream</span> <span class="n">empty_stream</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>As long as it is a Stream that the Element is already a part of:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;unrelated_stream&#39;</span><span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">activeSite</span> <span class="o">=</span> <span class="n">q</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">KeyError</span>                                  <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">stream</span><span class="o">/</span><span class="n">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">elementOffset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">stringReturns</span><span class="p">)</span>
+   <span class="mi">1541</span>         <span class="k">try</span><span class="p">:</span>
+<span class="o">-&gt;</span> <span class="mi">1542</span>             <span class="n">o</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_offsetDict</span><span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="n">element</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># 2.3 million times found in TestStream</span>
+   <span class="mi">1543</span>             <span class="c1">#if returnedElement is not element: # stale reference...</span>
+
+
+<span class="ne">KeyError</span><span class="p">:</span> <span class="mi">4513862936</span>
+
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+
+<span class="n">SitesException</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">base</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_setActiveSite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">site</span><span class="p">)</span>
+   <span class="mi">2035</span>             <span class="k">try</span><span class="p">:</span>
+<span class="o">-&gt;</span> <span class="mi">2036</span>                 <span class="n">storedOffset</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">elementOffset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+   <span class="mi">2037</span>             <span class="k">except</span> <span class="n">SitesException</span><span class="p">:</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">stream</span><span class="o">/</span><span class="n">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">elementOffset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">stringReturns</span><span class="p">)</span>
+   <span class="mi">1552</span>                     <span class="s2">&quot;an entry for this object 0x</span><span class="si">%x</span><span class="s2"> is not stored in stream </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+<span class="o">-&gt;</span> <span class="mi">1553</span>                     <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">element</span><span class="p">),</span> <span class="bp">self</span><span class="p">))</span>
+   <span class="mi">1554</span>
+
+
+<span class="n">SitesException</span><span class="p">:</span> <span class="n">an</span> <span class="n">entry</span> <span class="k">for</span> <span class="n">this</span> <span class="nb">object</span> <span class="mh">0x10d0c1518</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">stored</span> <span class="ow">in</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Stream</span> <span class="n">unrelated_stream</span><span class="o">&gt;</span>
+
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+
+<span class="n">SitesException</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">32</span><span class="o">-</span><span class="mi">60101</span><span class="n">d344ac8</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+      <span class="mi">1</span> <span class="n">q</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;unrelated_stream&#39;</span><span class="p">)</span>
+<span class="o">----&gt;</span> <span class="mi">2</span> <span class="n">n</span><span class="o">.</span><span class="n">activeSite</span> <span class="o">=</span> <span class="n">q</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">base</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_setActiveSite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">site</span><span class="p">)</span>
+   <span class="mi">2037</span>             <span class="k">except</span> <span class="n">SitesException</span><span class="p">:</span>
+   <span class="mi">2038</span>                 <span class="k">raise</span> <span class="n">SitesException</span><span class="p">(</span><span class="s2">&quot;v2.1. -- you may not assign an activesite for &quot;</span> <span class="o">+</span>
+<span class="o">-&gt;</span> <span class="mi">2039</span>                                      <span class="s2">&quot;an object </span><span class="si">{}</span><span class="s2"> not in the Stream </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">site</span><span class="p">))</span>
+   <span class="mi">2040</span>
+   <span class="mi">2041</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_activeSiteStoredOffset</span> <span class="o">=</span> <span class="n">storedOffset</span>
+
+
+<span class="n">SitesException</span><span class="p">:</span> <span class="n">v2</span><span class="o">.</span><span class="mf">1.</span> <span class="o">--</span> <span class="n">you</span> <span class="n">may</span> <span class="ow">not</span> <span class="n">assign</span> <span class="n">an</span> <span class="n">activesite</span> <span class="k">for</span> <span class="n">an</span> <span class="nb">object</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt; not in the Stream &lt;music21.stream.Stream unrelated_stream&gt;</span>
+</pre></div>
+</div>
+<p>Newly created objects have an <code class="docutils literal"><span class="pre">.activeSite</span></code> of <code class="docutils literal"><span class="pre">None</span></code></p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">activeSite</span> <span class="ow">is</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">.activeSite</span></code> of an object will determine which other objects it
+is connected to, where it thinks it is, etc. The best way to demonstrate
+that is with the next attribute...</p>
+</div>
+<div class="section" id="offset">
+<h3>offset<a class="headerlink" href="#offset" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">.offset</span></code> of a <code class="docutils literal"><span class="pre">Music21Object</span></code> is the number of quarter notes
+from the start of the Stream it is a part of. The Stream that is
+referenced is the <code class="docutils literal"><span class="pre">.activeSite</span></code>. Remember that <code class="docutils literal"><span class="pre">n</span></code> was inserted at
+offset 0 of <code class="docutils literal"><span class="pre">s</span></code> (<code class="docutils literal"><span class="pre">'empty</span> <span class="pre">stream'</span></code>) and offset 4 of <code class="docutils literal"><span class="pre">t</span></code>
+(<code class="docutils literal"><span class="pre">'new</span> <span class="pre">stream'</span></code>):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">activeSite</span> <span class="o">=</span> <span class="n">s</span>
+<span class="n">n</span><span class="o">.</span><span class="n">offset</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">activeSite</span> <span class="o">=</span> <span class="n">t</span>
+<span class="n">n</span><span class="o">.</span><span class="n">offset</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">4.0</span>
+</pre></div>
+</div>
+<p>If we change the offset of the <code class="docutils literal"><span class="pre">Note</span></code> it changes it in the <code class="docutils literal"><span class="pre">Stream</span></code>,
+so that if we change the activeSite away and back, the offset is
+preserved. It&#8217;s more easily demonstrated than explained in words:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">activeSite</span> <span class="o">=</span> <span class="n">s</span>
+<span class="n">n</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">n</span><span class="o">.</span><span class="n">activeSite</span> <span class="o">=</span> <span class="n">t</span>
+<span class="n">n</span><span class="o">.</span><span class="n">activeSite</span> <span class="o">=</span> <span class="n">s</span>
+<span class="n">n</span><span class="o">.</span><span class="n">offset</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+<p>A newly created <code class="docutils literal"><span class="pre">Music21Object</span></code> has a great advantage &#8211; it can set
+its offset to anything it wants and then when it is inserted into a
+Stream with a single argument, it appears at that offset.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;G-2&#39;</span><span class="p">)</span>
+<span class="n">n2</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="mf">20.0</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+<span class="n">n2</span><span class="o">.</span><span class="n">activeSite</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Stream</span> <span class="n">empty_stream</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n2</span><span class="o">.</span><span class="n">offset</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">20.0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="priority">
+<h3>priority<a class="headerlink" href="#priority" title="Permalink to this headline">¶</a></h3>
+<p>If you have a Stream with two elements at the same offset, how can you
+know which one of them should come first? The easiest way to ensure that
+one comes before the other is to change the <code class="docutils literal"><span class="pre">.priority</span></code> of one of
+them. <code class="docutils literal"><span class="pre">.priority</span></code> is any integer, with a default of zero. Let&#8217;s create
+some a new Stream and some notes:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Both notes are at offset 0, but D was inserted first, so it comes first.
+But we can move E by making it&#8217;s <code class="docutils literal"><span class="pre">.priority</span></code> lower than D&#8217;s:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">priority</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Think of <cite>priority</cite> like a number line.  So negative numbers come before positive.  Don&#8217;t think of a
+&#8220;high priority&#8221; like 2000 meaning that you will encounter that object first. It is the opposite.</p>
+<p>Prior to v3.0.1 (alpha), changing the priority of an object did not automatically tell its sites
+that they needed to be sorted again.  To get this output in earlier versions, call <cite>s.elementsChanged()</cite></p>
+<p class="last">If there is enough demand, priority may become a per-site attribute like <cite>offset</cite> but this is a problem we
+plan to tackle when need arises.</p>
+</div>
+<p>If we return e&#8217;s priority to the default of <code class="docutils literal"><span class="pre">0</span></code>, it will again appear
+after d:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="classsortorder">
+<h3>classSortOrder<a class="headerlink" href="#classsortorder" title="Permalink to this headline">¶</a></h3>
+<p>Objects seem to be sorted by offset first, then priority, then when they
+were inserted. But what about this:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">tc</span> <span class="o">=</span> <span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">tc</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>How did the Stream (correctly) know that the treble clef should come
+first? It&#8217;s not because of its priority:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">tc</span><span class="o">.</span><span class="n">priority</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">priority</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">priority</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It&#8217;s because there is another property that aids in sorting, and that is
+called <code class="docutils literal"><span class="pre">.classSortOrder</span></code>. We can see that <code class="docutils literal"><span class="pre">c</span></code>, our treble clef, has
+a lower <code class="docutils literal"><span class="pre">.classSortOrder</span></code> than <code class="docutils literal"><span class="pre">d</span></code> and <code class="docutils literal"><span class="pre">e</span></code> by virtue of being of
+the class <code class="docutils literal"><span class="pre">Clef</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">tc</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">.classSortOrder</span></code> is like <code class="docutils literal"><span class="pre">.priority</span></code> in that lower numbers come
+first. We&#8217;ve arbitrarily placed Clef at <code class="docutils literal"><span class="pre">0</span></code> and Note at <code class="docutils literal"><span class="pre">20</span></code> and
+lots of other Classes in between. <code class="docutils literal"><span class="pre">.classSortOrder</span></code> is what is called
+a Class Attribute, meaning that the class objects have this attribute
+set:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And any change in <code class="docutils literal"><span class="pre">.classSortOrder</span></code> applied to the class changes it
+for all its members:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">.</span><span class="n">classSortOrder</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="o">.</span><span class="n">classSortOrder</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="p">(</span><span class="n">tc</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>But don&#8217;t do that! For one thing, the ordering of existing Streams is
+not changed, for another, we&#8217;ve carefully balanced the
+<code class="docutils literal"><span class="pre">classSortOrder</span></code> so that musically logical order is maintained (have
+you ever seen a score where the first note comes before the first
+clef?). So we&#8217;ll change it back here.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">.</span><span class="n">classSortOrder</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="o">.</span><span class="n">classSortOrder</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="p">(</span><span class="n">tc</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you do need to do something wacky, like have notes before clefs, you
+can always change the <code class="docutils literal"><span class="pre">.priority</span></code> instead.</p>
+<p>For more information about how sorting works, jump to
+<a class="reference internal" href="usersGuide_21_sorting.html#usersguide-21-sorting"><span class="std std-ref">Chapter 21: Ordering and Sorting of Stream Elements</span></a></p>
+<p>That seems like a good place for a break. We&#8217;ve got some more to cover,
+so I&#8217;ve split this chapter into two parts, we&#8217;ll continue in
+<a class="reference internal" href="usersGuide_13_music21object2.html#usersguide-13-music21object2"><span class="std std-ref">Chapter 13: More Music21Object Attributes and Methods</span></a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_13_music21object2.html" title="User’s Guide, Chapter 13: More Music21Object Attributes and Properties"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_11_corpusSearching.html" title="User’s Guide, Chapter 11: Corpus Searching"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User’s Guide, Chapter 5: Lists of Lists, Functions, and Recursion &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="User’s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening" href="usersGuide_06_stream2.html" />
+    <link rel="prev" title="User’s Guide, Chapter 4: Lists, Streams (I) and Output" href="usersGuide_04_stream1.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_06_stream2.html" title="User’s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_04_stream1.html" title="User’s Guide, Chapter 4: Lists, Streams (I) and Output"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_04_stream1.html"
+                        title="previous chapter">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_06_stream2.html"
+                        title="next chapter">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a><ul>
+<li><a class="reference internal" href="#lists-of-lists">Lists of Lists</a></li>
+<li><a class="reference internal" href="#functions-and-recursion">Functions and Recursion</a></li>
+<li><a class="reference internal" href="#wrapup">Wrapup</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_02_notes.html">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_03_pitches.html">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_07_chords.html">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_08_installingMusicXML.html">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_11_corpusSearching.html">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_12_music21object.html">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_13_music21object2.html">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_15_key.html">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_21_sorting.html">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_25_postTonalTools1.html">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_26_clientWeakref.html">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_28_lyricSearcher.html">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_97_timespans.html">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_05_listsOfLists.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-05-listsoflists"></span><div class="section" id="user-s-guide-chapter-5-lists-of-lists-functions-and-recursion">
+<h1>User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion<a class="headerlink" href="#user-s-guide-chapter-5-lists-of-lists-functions-and-recursion" title="Permalink to this headline">¶</a></h1>
+<p>In the last Chapter, we discussed Python Lists, how the
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a> object is similar to a List, and how
+we can put <a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a> objects into a <code class="docutils literal"><span class="pre">Stream</span></code>, look
+at their offsets, and <code class="docutils literal"><span class="pre">.show()</span></code> the <code class="docutils literal"><span class="pre">Stream</span></code> in MusicXML or as text.
+We ended by putting one <code class="docutils literal"><span class="pre">Stream</span></code> inside another <code class="docutils literal"><span class="pre">Stream</span></code>, which
+seemed like a neat trick until we discovered that we couldn&#8217;t get at the
+elements inside the inner <code class="docutils literal"><span class="pre">Stream</span></code>.</p>
+<p>In this chapter we will work on how to exploit the power of nested
+<code class="docutils literal"><span class="pre">Streams</span></code>. We&#8217;ll begin with a discussion of recursive lists (since
+<code class="docutils literal"><span class="pre">Streams</span></code> work a lot like lists). Those with some programming will
+probably want to skip to the following section.</p>
+<div class="section" id="lists-of-lists">
+<h2>Lists of Lists<a class="headerlink" href="#lists-of-lists" title="Permalink to this headline">¶</a></h2>
+<p>Lists (similar to Arrays in other languages) can hold all sorts of other
+things inside them including other lists. So let&#8217;s begin by creating two
+lists:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">listA</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+<span class="n">listB</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">listA</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now when we look at listB, we&#8217;ll see that listA is inside it:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">listB</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>Notice that when we look at the length (<code class="docutils literal"><span class="pre">len()</span></code>) of listB it shows
+that there are 4 elements, not 6:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">listB</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>That&#8217;s because the fourth element of listB (which, you&#8217;ll recall, is
+called <code class="docutils literal"><span class="pre">listB[3]</span></code> not <code class="docutils literal"><span class="pre">listB[4]</span></code>) is itself a list, listA:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">listB</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">listB</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="ow">is</span> <span class="n">listA</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>So if we want to get the third element of listA, there is an easy way to
+do it:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">listA</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">30</span>
+</pre></div>
+</div>
+<p>But we can also think that <code class="docutils literal"><span class="pre">30</span></code> is also the third element <em>of the
+fourth element</em> of listB. So we can write this instead:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">listB</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">30</span>
+</pre></div>
+</div>
+<p>Oh, and since each of these is the last elements of their respective
+lists, we could instead write:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">listB</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">30</span>
+</pre></div>
+</div>
+<p>which means &#8220;get the last element of the last element of listB&#8221;</p>
+<p>But what if we just wanted to know every number stored anywhere in
+listB, even if that number is inside a list itself? This won&#8217;t work:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">listB</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">1</span>
+ <span class="mi">2</span>
+ <span class="mi">3</span>
+ <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Instead, we have to test to see if each &#8220;number&#8221; in <code class="docutils literal"><span class="pre">listB</span></code> is
+actually a number or a list. And if it&#8217;s a list, we should find each
+number in that and print it instead. Here&#8217;s a slightly more complicated
+set of commands to do that (remember, don&#8217;t type the &gt;&gt;&gt; or ... ;
+they&#8217;ll appear automatically in Python&#8217;s shell):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">thing</span> <span class="ow">in</span> <span class="n">listB</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">thing</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">thing</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">thing</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">1</span>
+ <span class="mi">2</span>
+ <span class="mi">3</span>
+ <span class="mi">10</span>
+ <span class="mi">20</span>
+ <span class="mi">30</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">That did it! How does it work? Well we look at each &#8220;thing&#8221; in
+<code class="docutils literal"><span class="pre">listB</span></code> &#8211; we call it &#8220;thing&#8221; here, because we&#8217;re not sure if it&#8217;s a
+number of a list. Then in the next line
+<code class="docutils literal"><span class="pre">if</span> <span class="pre">isinstance(thing,</span> <span class="pre">list):</span></code> checks if the thing is a list. If that
+is <code class="docutils literal"><span class="pre">True</span></code> then we get to an inner loop, where we look at &#8220;thing&#8221;
+(which in this case is <code class="docutils literal"><span class="pre">listA</span></code>, but the program doesn&#8217;t know that)
+and get the &#8220;number&#8221; from it. But if &#8220;thing&#8221; is not a list, that&#8217;s
+where the <code class="docutils literal"><span class="pre">else</span></code> comes in, which is what we run if we don&#8217;t have a
+list, which just says, print the number.</div>
+</div>
+<div class="line-block">
+<div class="line">(We&#8217;re assuming in this case that there are only two types of things
+in <code class="docutils literal"><span class="pre">listB</span></code>, numbers and other lists.) If you get an error, be sure
+not to forget the ending &#8221;:&#8221; or to indent the next line.</div>
+</div>
+</div>
+<div class="section" id="functions-and-recursion">
+<h2>Functions and Recursion<a class="headerlink" href="#functions-and-recursion" title="Permalink to this headline">¶</a></h2>
+<p>But what if we did this:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">listC</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="n">listB</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now since listB contains listA, we end up with a list within a list
+within a list:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">listC</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]]]</span>
+</pre></div>
+</div>
+<p>If we wanted to print all the numbers in listC, we could write an ugly
+set of commands like this one (I&#8217;ll understand if you don&#8217;t actually
+want to type this and just want to trust me that this works):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">thing</span> <span class="ow">in</span> <span class="n">listC</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">thing</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">innerThing</span> <span class="ow">in</span> <span class="n">thing</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">innerThing</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">innerThing</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">innerThing</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">thing</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">100</span>
+ <span class="mi">200</span>
+ <span class="mi">300</span>
+ <span class="mi">1</span>
+ <span class="mi">2</span>
+ <span class="mi">3</span>
+ <span class="mi">10</span>
+ <span class="mi">20</span>
+ <span class="mi">30</span>
+</pre></div>
+</div>
+<p>Whew! If this were the only way to do it, I wouldn&#8217;t blame you if you
+decided that programming just wasn&#8217;t worth the headache. Especially
+since you&#8217;ve probably already guessed that we could make:
+<code class="docutils literal"><span class="pre">listD</span> <span class="pre">=</span> <span class="pre">[4,</span> <span class="pre">5,</span> <span class="pre">listC,</span> <span class="pre">6,</span> <span class="pre">7]</span></code> and get another layer of lists.
+Fortunately, there&#8217;s a little bit of programming magic called
+&#8220;recursion&#8221; that we can use to get to the heart of the matter. Notice
+that in the code I just wrote, there are a few lines that are basically
+the same (with a few words changed) as other parts of the code. With
+recursive coding, we&#8217;ll find a way to save those lines to reuse them.
+Type these six lines:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flatPrint</span><span class="p">(</span><span class="n">myList</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">thing</span> <span class="ow">in</span> <span class="n">myList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">thing</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">flatPrint</span><span class="p">(</span><span class="n">thing</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">thing</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What we&#8217;ve done is created a new function called &#8216;&#8217;flatPrint&#8217;&#8217; which
+reaches into lists of lists and prints anything that is in them.</p>
+<p>Now try:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">flatPrint</span><span class="p">(</span><span class="n">listC</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">100</span>
+ <span class="mi">200</span>
+ <span class="mi">300</span>
+ <span class="mi">1</span>
+ <span class="mi">2</span>
+ <span class="mi">3</span>
+ <span class="mi">10</span>
+ <span class="mi">20</span>
+ <span class="mi">30</span>
+</pre></div>
+</div>
+<p>It works! But how? Here&#8217;s how functions work in general (skip this, if
+you know all about functions):</p>
+<p>The <code class="docutils literal"><span class="pre">def</span></code> statement says that we&#8217;re going to &#8216;&#8217;define&#8217;&#8217; a new
+function. After the word <code class="docutils literal"><span class="pre">def</span></code> comes the name of the function &#8211;
+something we&#8217;ll be able to call it to use it later. (We call the process
+of taking nested structures and turning them into something linear
+&#8220;flattening&#8221; them, like crushing a cardboard box. Since this is a
+flattener that also prints what&#8217;s inside it, <code class="docutils literal"><span class="pre">flatPrint</span></code> is a good
+name for it. Notice that just like with variables, case matters in
+Python, so <code class="docutils literal"><span class="pre">flatPrint</span></code> isn&#8217;t the same as <code class="docutils literal"><span class="pre">flatprint</span></code> or
+<code class="docutils literal"><span class="pre">Flatprint</span></code> or <code class="docutils literal"><span class="pre">FlAtPrInT</span></code>.)</p>
+<p>After &#8220;flatPrint&#8221;, within parentheses comes the variable name
+<code class="docutils literal"><span class="pre">myList</span></code>. Notice that we haven&#8217;t used the name <code class="docutils literal"><span class="pre">myList</span></code> yet &#8211; it
+doesn&#8217;t exist. What <code class="docutils literal"><span class="pre">myList</span></code> means here is that any time we use the
+function <code class="docutils literal"><span class="pre">flatPrint</span></code>, whatever the name of the list was, within
+<code class="docutils literal"><span class="pre">flatPrint</span></code> it will be called <code class="docutils literal"><span class="pre">myList</span></code>. So you could say
+<code class="docutils literal"><span class="pre">flatPrint(listC)</span></code>, as we just did, and within the function
+<code class="docutils literal"><span class="pre">flatPrint</span></code>, <code class="docutils literal"><span class="pre">listC</span></code> will be known as <code class="docutils literal"><span class="pre">myList</span></code>.</p>
+<p>Here&#8217;s a simpler function that will explain that better. <code class="docutils literal"><span class="pre">squareMe</span></code>
+takes in a number and prints its square:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">squareMe</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number</span> <span class="o">*</span> <span class="n">number</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can try:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">squareMe</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">100</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">squareMe</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">6.25</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14</span>
+<span class="n">squareMe</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">9.8596</span>
+</pre></div>
+</div>
+<p>Notice two things in the last case. First that pi isn&#8217;t exactly 3.14 &#8211;
+we all know that; I just wanted to make sure the math teachers in the
+room didn&#8217;t go into conniptions. Second that we gave the variable <code class="docutils literal"><span class="pre">pi</span></code>
+to the function <code class="docutils literal"><span class="pre">squareMe</span></code>. But within the function <code class="docutils literal"><span class="pre">squareMe</span></code> we
+didn&#8217;t write: <code class="docutils literal"><span class="pre">print(pi</span> <span class="pre">*</span> <span class="pre">pi)</span></code>; instead within the function, <code class="docutils literal"><span class="pre">pi</span></code>
+(or any other variable or number) will simply be called <code class="docutils literal"><span class="pre">number</span></code>. (By
+the way, instead of writing <code class="docutils literal"><span class="pre">print(number</span> <span class="pre">*</span> <span class="pre">number)</span></code> we could have
+written <code class="docutils literal"><span class="pre">print(number**2)</span></code> since &#8216;&#8217; ** &#8216;&#8217; is how Python denotes
+exponents).</p>
+<p>At the end of a function, you can either <code class="docutils literal"><span class="pre">print</span></code> something out, or
+<code class="docutils literal"><span class="pre">return</span></code> a value, which can be used for anything else. Here&#8217;s
+<code class="docutils literal"><span class="pre">cubeMe</span></code> which works a lot like <code class="docutils literal"><span class="pre">squareMe</span></code>, but it cubes the number
+and instead of printing it, it returns it:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cubeMe</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">number</span> <span class="o">*</span> <span class="n">number</span> <span class="o">*</span> <span class="n">number</span>
+</pre></div>
+</div>
+<p>Because we&#8217;re not printing <code class="docutils literal"><span class="pre">number</span></code>, we can assign the value of cubeMe
+to another variable:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">cubeMe</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">8</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">cubeMe</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">512</span>
+</pre></div>
+</div>
+<p>Notice that if <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">cubeMe(2)</span></code> and <code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">cubeMe(x)</span></code> then we can
+substitute <code class="docutils literal"><span class="pre">cubeMe(2)</span></code> for <code class="docutils literal"><span class="pre">x</span></code> and write:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">cubeMe</span><span class="p">(</span><span class="n">cubeMe</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">y</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">512</span>
+</pre></div>
+</div>
+<p>Thus, using <code class="docutils literal"><span class="pre">return</span></code> instead of <code class="docutils literal"><span class="pre">print</span></code> is more powerful, so after
+finishing with <code class="docutils literal"><span class="pre">flatPrint</span></code>, we&#8217;ll mostly write <code class="docutils literal"><span class="pre">return</span></code> and not
+<code class="docutils literal"><span class="pre">print</span></code> functions.</p>
+<p>So, getting back to <code class="docutils literal"><span class="pre">flatPrint</span></code>, which you&#8217;ll recall is (I&#8217;m adding
+commented line numbers again so I can refer to them):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flatPrint</span><span class="p">(</span><span class="n">myList</span><span class="p">):</span>              <span class="c1"># 1</span>
+    <span class="k">for</span> <span class="n">thing</span> <span class="ow">in</span> <span class="n">myList</span><span class="p">:</span>            <span class="c1"># 2</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">thing</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span> <span class="c1"># 3</span>
+            <span class="n">flatPrint</span><span class="p">(</span><span class="n">thing</span><span class="p">)</span>        <span class="c1"># 4</span>
+        <span class="k">else</span><span class="p">:</span>                       <span class="c1"># 5</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">thing</span><span class="p">)</span>            <span class="c1"># 6</span>
+</pre></div>
+</div>
+<p>Let&#8217;s look at it line by line.</p>
+<p>Line 1, as we said, defines the function called <code class="docutils literal"><span class="pre">flatPrint</span></code> which
+expects a list which we&#8217;ll call <code class="docutils literal"><span class="pre">myList</span></code>.</p>
+<p>Line 2, says &#8220;for each thing that is inside myList, grab it and call it
+<code class="docutils literal"><span class="pre">thing</span></code>.&#8221; Once we&#8217;re done with <code class="docutils literal"><span class="pre">thing</span></code>, the program will jump back
+to line 2 to get the next thing.</p>
+<p>Line 3, checks if <code class="docutils literal"><span class="pre">thing</span></code> is a list. If so, we do line 4. If not we
+jump to line 5.</p>
+<p>Line 4: This is where the magic happens. We know now that <code class="docutils literal"><span class="pre">thing</span></code> is a
+list. So how do we print a list (which might have other lists inside of
+it)? We use <code class="docutils literal"><span class="pre">flatPrint</span></code>! In essence <code class="docutils literal"><span class="pre">flatPrint</span></code> uses its own power
+of discerning between lists and numbers to print any internal lists. We
+call functions that use (&#8220;call&#8221;) themselves <em>recursive functions</em> and
+the process of using recursive functions is called <em>recursion</em>. It&#8217;s a
+powerful tool and one we&#8217;ll use in music21 a lot.</p>
+<p>Line 5, is where we jump to from line 3 if <code class="docutils literal"><span class="pre">thing</span></code> is not a list, so
+then Python executes line 6</p>
+<p>Line 6, simply prints <code class="docutils literal"><span class="pre">thing</span></code>, which we know by now is a number.</p>
+<p>A warning: unlike some programming languages (Java, C, etc.), Python
+never checks that what you pass to <code class="docutils literal"><span class="pre">flatPrint</span></code> actually is a list. So
+you can try doing something like <code class="docutils literal"><span class="pre">flatPrint(30)</span></code> but since <code class="docutils literal"><span class="pre">30</span></code>
+isn&#8217;t a list, you&#8217;ll get an error:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">flatPrint</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">TypeError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">26</span><span class="o">-</span><span class="n">d6916f79680c</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">flatPrint</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">25</span><span class="o">-</span><span class="mi">910</span><span class="n">b883fde2e</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">flatPrint</span><span class="p">(</span><span class="n">myList</span><span class="p">)</span>
+      <span class="mi">1</span> <span class="k">def</span> <span class="nf">flatPrint</span><span class="p">(</span><span class="n">myList</span><span class="p">):</span>              <span class="c1"># 1</span>
+<span class="o">----&gt;</span> <span class="mi">2</span>     <span class="k">for</span> <span class="n">thing</span> <span class="ow">in</span> <span class="n">myList</span><span class="p">:</span>            <span class="c1"># 2</span>
+      <span class="mi">3</span>         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">thing</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span> <span class="c1"># 3</span>
+      <span class="mi">4</span>             <span class="n">flatPrint</span><span class="p">(</span><span class="n">thing</span><span class="p">)</span>        <span class="c1"># 4</span>
+      <span class="mi">5</span>         <span class="k">else</span><span class="p">:</span>                       <span class="c1"># 5</span>
+
+
+<span class="ne">TypeError</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span> <span class="nb">object</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">iterable</span>
+</pre></div>
+</div>
+<p>For more information on data structures (lists, lists of lists, and
+things we didn&#8217;t get to, I suggest watching Google&#8217;s Python tutorial,
+especially class 2).</p>
+</div>
+<div class="section" id="wrapup">
+<h2>Wrapup<a class="headerlink" href="#wrapup" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter we looked at how we can look inside lists of lists,
+which will be important when we consider how to work with <code class="docutils literal"><span class="pre">Streams</span></code> of
+<code class="docutils literal"><span class="pre">Streams</span></code> in music21, to look at <code class="docutils literal"><span class="pre">Measures</span></code> within <code class="docutils literal"><span class="pre">Parts</span></code> within
+a <code class="docutils literal"><span class="pre">Score</span></code>. We also learned how to define a function and write
+recursive functions to do powerful work in just a few lines of code. In
+the next chapter we apply all this to music with
+<a class="reference internal" href="usersGuide_06_stream2.html#usersguide-06-stream2"><span class="std std-ref">Streams of Streams</span></a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_06_stream2.html" title="User’s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_04_stream1.html" title="User’s Guide, Chapter 4: Lists, Streams (I) and Output"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

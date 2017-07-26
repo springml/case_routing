@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.alpha.trecento.notation &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.alpha.trecento.polyphonicSnippet" href="moduleAlphaTrecentoPolyphonicSnippet.html" />
+    <link rel="prev" title="music21.alpha.trecento.findTrecentoFragments" href="moduleAlphaTrecentoFindTrecentoFragments.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleAlphaTrecentoPolyphonicSnippet.html" title="music21.alpha.trecento.polyphonicSnippet"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleAlphaTrecentoFindTrecentoFragments.html" title="music21.alpha.trecento.findTrecentoFragments"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleAlphaTrecentoFindTrecentoFragments.html"
+                        title="previous chapter">music21.alpha.trecento.findTrecentoFragments</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleAlphaTrecentoPolyphonicSnippet.html"
+                        title="next chapter">music21.alpha.trecento.polyphonicSnippet</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.alpha.trecento.notation</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#brevislengthtranslator">BrevisLengthTranslator</a></li>
+<li><a class="reference internal" href="#cleftoken">ClefToken</a></li>
+<li><a class="reference internal" href="#divisione">Divisione</a></li>
+<li><a class="reference internal" href="#divisionetoken">DivisioneToken</a></li>
+<li><a class="reference internal" href="#flagsmodifier">FlagsModifier</a></li>
+<li><a class="reference internal" href="#ligaturenoteheadmodifier">LigatureNoteheadModifier</a></li>
+<li><a class="reference internal" href="#ligaturereversemodifier">LigatureReverseModifier</a></li>
+<li><a class="reference internal" href="#ligaturestate">LigatureState</a></li>
+<li><a class="reference internal" href="#ligaturestemsmodifier">LigatureStemsModifier</a></li>
+<li><a class="reference internal" href="#mensuraltypemodifier">MensuralTypeModifier</a></li>
+<li><a class="reference internal" href="#punctus">Punctus</a></li>
+<li><a class="reference internal" href="#punctustoken">PunctusToken</a></li>
+<li><a class="reference internal" href="#stemsmodifier">StemsModifier</a></li>
+<li><a class="reference internal" href="#trecentonotetoken">TrecentoNoteToken</a></li>
+<li><a class="reference internal" href="#trecentoresttoken">TrecentoRestToken</a></li>
+<li><a class="reference internal" href="#trecentotinyconverter">TrecentoTinyConverter</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleAlphaTrecentoNotation.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-alpha-trecento-notation">
+<span id="modulealphatrecentonotation"></span><h1>music21.alpha.trecento.notation<a class="headerlink" href="#music21-alpha-trecento-notation" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.alpha.trecento.notation"></span><p>Tools for creating Note, Ligature and Divisione objects unique to Trecento notation.</p>
+<p>Other objects found in medieval and renaissance music (such as rests, notes,
+and clef) can be found in the module <cite>music21.medren</cite>.</p>
+<p>Also contains functions for converting Trecento notation to modern notation.</p>
+<p>Also a good example of subclassing TinyNotation</p>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.alpha.trecento.notation.convertBrevisLength">
+<code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">convertBrevisLength</code><span class="sig-paren">(</span><em>brevisLength</em>, <em>convertedStream</em>, <em>inpDiv=None</em>, <em>measureNumOffset=0</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.convertBrevisLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes two required arguments, a measure object and a stream containing modern objects.
+Takes two optional arguments, inpDiv and measureNumOffset.</p>
+<p><a class="reference internal" href="#music21.alpha.trecento.notation.convertBrevisLength" title="music21.alpha.trecento.notation.convertBrevisLength"><code class="xref py py-meth docutils literal"><span class="pre">music21.alpha.trecento.notation.convertBrevisLength()</span></code></a> converts each of the 
+objects in the measure to their modern equivalents using the BrevisLengthTranslator object.</p>
+<p>inpDiv is a divisione possibly coming from a some higher context. 
+measureNumOffset helps calculate measure number.</p>
+<p>This acts as a helper method to improve the efficiency of 
+<a class="reference internal" href="#music21.alpha.trecento.notation.convertTrecentoStream" title="music21.alpha.trecento.notation.convertTrecentoStream"><code class="xref py py-meth docutils literal"><span class="pre">music21.alpha.trecento.notation.convertTrecentoStream()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.alpha.trecento.notation.convertTrecentoStream">
+<code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">convertTrecentoStream</code><span class="sig-paren">(</span><em>inpStream</em>, <em>inpDiv=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.convertTrecentoStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take one argument: input stream.
+Converts an entire stream containing only mensural and trecento objects into one 
+containing modern clef, note, and time signature objects.
+The converted stream preserves the structure of the original stream, converting only 
+the mensural and trecento objects.</p>
+<p>This stream must have all of the qualifications present in the documentation 
+for <code class="xref py py-meth docutils literal"><span class="pre">music21.medren.breakMensuralStreamIntoBrevisLengths()</span></code>. Furthermore, no 
+non-mensural or non-trecento objects (other than streams and formatting) may be 
+present in the input streams.</p>
+<p>Examples:</p>
+<a class="reference internal image-reference" href="../_images/medren_SePerDureca.jpg"><img alt="../_images/medren_SePerDureca.jpg" src="../_images/medren_SePerDureca.jpg" style="width: 600px;" /></a>
+<p>Anonymous, Se per dureça.  Padua, Biblioteca Universitaria, MS 1115.  Folio Ar.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">=</span> <span class="s2">&quot;.p. $C1 g(B) g(M) f e g f e p g(SB) f(SM) e d e(M) f p &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">+=</span> <span class="s2">&quot;e(SB) e(SM) f e d(M) c p &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">+=</span> <span class="s2">&quot;d(SB) r e p f(M) e d e d c p d(SB) c(M) d c d p e(SB) r(M) &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">+=</span> <span class="s2">&quot;g f e p g(SB) a(SM) g f e(M) d p &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">+=</span> <span class="s2">&quot;e(SB) f(SM) e d c(M) d e(L) a(SB) a p b(M) a g a g f p g f e f e f p &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">+=</span> <span class="s2">&quot;g(SB) g(SM) a g f e d p e(SB) r(M) f(SM) e d e(M) p d(SB) r e(M) f p &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">+=</span> <span class="s2">&quot;g(SB) d r(M) e p f e d e d c p d(SB) d(M) e(SB) &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">+=</span> <span class="s2">&quot;c(M) p d(SB) c(M) d c B c(L) &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">+=</span> <span class="s2">&quot;c&#39;(SB)[D] c&#39; p c&#39;(SM) b a  b(M) c&#39; b c&#39; p b(SM) a g a(M) b a b p &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">+=</span> <span class="s2">&quot;g(SB) g(SM) a g f e d p e(SB) r e(M) f p g f e f e f p g(SB) r g(M) f p &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">+=</span> <span class="s2">&quot;g(SB) f(SM) e d e(M) f e(L) a(M) b a b g(SB) p c&#39;(M) b a c&#39; b a p &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">+=</span> <span class="s2">&quot;b c&#39; b a g a p b(SB) c&#39;(SM) b a g(M) f p a(SB) a(M) g(SB) f(M) p &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">+=</span> <span class="s2">&quot;e(SB) r g(M) f p g f e f e d p c(SB) d r p a g(SM) a g f &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">upperString</span> <span class="o">+=</span> <span class="s2">&quot;e d p e(M) r f(SM) e d e(SB) d(Mx)&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lowerString</span> <span class="o">=</span> <span class="s2">&quot;.p. $C3 c(L) G(B) A(SB) B c p d c r p A B c p d &quot;</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lowerString</span> <span class="o">+=</span> <span class="s2">&quot;c B p lig{A&lt;o&gt;[DL] G} A c B A(L) &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lowerString</span> <span class="o">+=</span> <span class="s2">&quot;A(SB) A p  G A B p c c(M) B(SB) A(M) p G(SB) G p A B c p d A r p G[D] A p &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lowerString</span> <span class="o">+=</span> <span class="s2">&quot;B B(M) c(SB) c(M) p d(SB) d(M) A(SB) A(M) p G(SB) A B C(L) &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lowerString</span> <span class="o">+=</span> <span class="s2">&quot;c(SB)[D] c e(B) d c(SB) c d p e d r p c c(M) d(SB) d(M) p c(SB) r r p &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lowerString</span> <span class="o">+=</span> <span class="s2">&quot;c d c(M) d e(L) d(SB)[D] e p c[D] d p e e(M) d(SB) c(M) p B(SB) A B(M) c p &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lowerString</span> <span class="o">+=</span> <span class="s2">&quot;d(SB) d(M) c(SB) d(M) p e(SB) d r p c c(M) A(SB) B(M) p &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lowerString</span> <span class="o">+=</span> <span class="s2">&quot;c(SB) B B p A B[D] p A B c d(Mx)&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SePerDureca</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SePerDureca</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">TrecentoTinyConverter</span><span class="p">(</span><span class="n">upperString</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">)</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">flat</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SePerDureca</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">TrecentoTinyConverter</span><span class="p">(</span><span class="n">lowerString</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">)</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">flat</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SePerDurecaConverted</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">convertTrecentoStream</span><span class="p">(</span><span class="n">SePerDureca</span><span class="p">)</span>
+
+<span class="go">Converting stream ... </span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/medren_SePerDurecaConverted.png"><img alt="../_images/medren_SePerDurecaConverted.png" src="../_images/medren_SePerDurecaConverted.png" style="width: 600px;" /></a>
+</dd></dl>
+
+</div>
+<div class="section" id="brevislengthtranslator">
+<h2>BrevisLengthTranslator<a class="headerlink" href="#brevislengthtranslator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.BrevisLengthTranslator">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">BrevisLengthTranslator</code><span class="sig-paren">(</span><em>divisione=None</em>, <em>BL=None</em>, <em>pDS=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.BrevisLengthTranslator" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>The class <a class="reference internal" href="#music21.alpha.trecento.notation.BrevisLengthTranslator" title="music21.alpha.trecento.notation.BrevisLengthTranslator"><code class="xref py py-class docutils literal"><span class="pre">music21.alpha.trecento.notation.BrevisLengthTranslator</span></code></a> takes a
+divisione sign and a list comprising one brevis length&#8217;s worth of mensural
+or trecento objects as arguments.</p>
+<p>The method
+<a class="reference internal" href="#music21.alpha.trecento.notation.BrevisLengthTranslator.getKnownLengths" title="music21.alpha.trecento.notation.BrevisLengthTranslator.getKnownLengths"><code class="xref py py-meth docutils literal"><span class="pre">music21.alpha.trecento.notation.BrevisLengthTranslator.getKnownLengths()</span></code></a>
+takes no arguments, and returns a list of floats corresponding to the
+length (in minima) of each object in the list.</p>
+<p>Currently, this class is used only to improve the efficiency of
+<code class="xref py py-attr docutils literal"><span class="pre">music21.medren.GeneralMensuralNote.duration</span></code>.</p>
+<p>This acts a helper class to improve the efficiency of
+<a class="reference internal" href="#music21.alpha.trecento.notation.convertBrevisLength" title="music21.alpha.trecento.notation.convertBrevisLength"><code class="xref py py-class docutils literal"><span class="pre">music21.alpha.trecento.notation.convertBrevisLength</span></code></a>.</p>
+</div></blockquote>
+<p>#    &gt;&gt;&gt; names = [&#8216;SM&#8217;, &#8216;SM&#8217;, &#8216;SM&#8217;, &#8216;SM&#8217;, &#8216;SB&#8217;, &#8216;SB&#8217;, &#8216;SB&#8217;, &#8216;SB&#8217;, &#8216;SB&#8217;, &#8216;SM&#8217;, &#8216;SM&#8217;, &#8216;SM&#8217;]
+#    &gt;&gt;&gt; BL = [medren.MensuralNote(&#8216;A&#8217;, n) for n in names]
+#    &gt;&gt;&gt; BL[3] = medren.MensuralRest(&#8216;SM&#8217;)
+#    &gt;&gt;&gt; for mn in BL[-3:]:
+#    ...    mn.setFlag(&#8216;up&#8217;, &#8216;left&#8217;)
+#    &gt;&gt;&gt; for mn in BL[4:9]:
+#    ...    mn.setStem(&#8216;down&#8217;)
+#    &gt;&gt;&gt; TBL = alpha.trecento.notation.BrevisLengthTranslator(div, BL)
+#    &gt;&gt;&gt; TBL.getKnownLengths()
+#    [0.5, 0.5, 0.5, 0.5, 4.0, 4.0, 4.0, 4.0, 4.0, 0.666..., 0.666..., 0.666...]</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.BrevisLengthTranslator" title="music21.alpha.trecento.notation.BrevisLengthTranslator"><code class="xref py py-class docutils literal"><span class="pre">BrevisLengthTranslator</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.BrevisLengthTranslator.classifyUnknownNotesByType">
+<code class="descclassname">BrevisLengthTranslator.</code><code class="descname">classifyUnknownNotesByType</code><span class="sig-paren">(</span><em>unchangeableNoteLengthsList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.BrevisLengthTranslator.classifyUnknownNotesByType" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a dictionary where keys are types of notes (&#8216;semibrevis_downstem&#8217;)
+and the values are a list of indices in self.brevisLength (and unchangeableNoteLengthsList)
+which are those types...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.alpha</span> <span class="k">import</span> <span class="n">medren</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;.n.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchangeableNoteLengths</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchangeableNoteLengths</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">kldict</span><span class="p">[</span><span class="s1">&#39;semibrevis&#39;</span><span class="p">])</span>
+<span class="go">[0, 4]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.BrevisLengthTranslator.determineStrongestMeasureLengths">
+<code class="descclassname">BrevisLengthTranslator.</code><code class="descname">determineStrongestMeasureLengths</code><span class="sig-paren">(</span><em>lengths</em>, <em>change_tup</em>, <em>num_tup</em>, <em>diff_tup</em>, <em>lenRem</em>, <em>shrinkable_indices=()</em>, <em>multi=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.BrevisLengthTranslator.determineStrongestMeasureLengths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets all possible length combinations. Returns the lengths combination of the 
+&#8220;strongest&#8221; list,
+along with the remaining length.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lengths</strong> &#8211; list of lengths to be updated</li>
+<li><strong>change_tup</strong> &#8211; tuple, each element is the sub-list of self.brevisLength to be changed.</li>
+<li><strong>num_tup</strong> &#8211; tuple, each element is an integer, the maximum number of elements 
+in the corresponding list of change_tup that can be changed</li>
+<li><strong>diff_tup</strong> &#8211; tuple, each element is the amount by which to change the elements 
+of the corresponding list in change_tup.</li>
+<li><strong>lenRem</strong> &#8211; input of the remaining SM in the measure. Gets updated and returned.</li>
+<li><strong>shrinkable_indices</strong> &#8211; tuple of indices of elements able to take up slack 
+(i.e. ending SB, or downstem SB)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.alpha</span> <span class="k">import</span> <span class="n">medren</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;.n.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">determineStrongestMeasureLengths</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">],</span> 
+<span class="gp">... </span>        <span class="p">([</span><span class="mi">0</span><span class="p">],),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">shrinkable_indices</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span>
+<span class="go">([3.0, 1.0, 1.0, 1.0, 3.0], 0.0)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.BrevisLengthTranslator.getBreveStrength">
+<code class="descclassname">BrevisLengthTranslator.</code><code class="descname">getBreveStrength</code><span class="sig-paren">(</span><em>lengths</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.BrevisLengthTranslator.getBreveStrength" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-meth docutils literal"><span class="pre">BrevisLengthTranslator._evaluateBL()</span></code> takes divisione, a brevis
+length&#8217;s worth of mensural or trecento objects in a list, and a list of lengths
+corresponding to each of those objects as arguments.</p>
+<p>This method returns the <em>strength</em> of the list based on those lengths.
+A <em>strong</em> list has longer notes on its stronger beats. Only valid for Trecento notation.</p>
+<p>In this example, we test two possible interpretations for the same measure
+and see that the second is more logical.  Note that the strength itself is meaningless
+except when compared to other possible lengths for the same notes.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.alpha</span> <span class="k">import</span> <span class="n">medren</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;.n.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">getBreveStrength</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
+<span class="go">2.0555...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">getBreveStrength</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="go">2.8333...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.BrevisLengthTranslator.getKnownLengths">
+<code class="descclassname">BrevisLengthTranslator.</code><code class="descname">getKnownLengths</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.BrevisLengthTranslator.getKnownLengths" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.BrevisLengthTranslator.getUnchangeableNoteLengths">
+<code class="descclassname">BrevisLengthTranslator.</code><code class="descname">getUnchangeableNoteLengths</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.BrevisLengthTranslator.getUnchangeableNoteLengths" title="Permalink to this definition">¶</a></dt>
+<dd><p>takes the music in self.brevisLength and returns a list where element i in this list
+corresponds to the length in minimas of element i in self.brevisLength.  If the length
+cannot be determined without taking into account the context (e.g., semiminims, semibreves)
+then None is placed in that list.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.alpha</span> <span class="k">import</span> <span class="n">medren</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;.i.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="go">[None, 1.0, None]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="go">[6.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="go">[12.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Mx&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="go">[24.0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.BrevisLengthTranslator.translate">
+<code class="descclassname">BrevisLengthTranslator.</code><code class="descname">translate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.BrevisLengthTranslator.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates and returns a list of lengths for all the notes in self.brevisLength</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.BrevisLengthTranslator.translateDivI">
+<code class="descclassname">BrevisLengthTranslator.</code><code class="descname">translateDivI</code><span class="sig-paren">(</span><em>unchangeableNoteLengthsList=None</em>, <em>unknownLengthsDict=None</em>, <em>minRem=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.BrevisLengthTranslator.translateDivI" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.alpha</span> <span class="k">import</span> <span class="n">medren</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;.i.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span>
+<span class="go">[None, 1.0, None]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivI</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="go">[2.0, 1.0, 3.0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.BrevisLengthTranslator.translateDivN">
+<code class="descclassname">BrevisLengthTranslator.</code><code class="descname">translateDivN</code><span class="sig-paren">(</span><em>unchangeableNoteLengthsList=None</em>, <em>unknownLengthsDict=None</em>, <em>minRem=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.BrevisLengthTranslator.translateDivN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate the Novanaria (9) Divisio; returns the number of minims for each note.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.alpha</span> <span class="k">import</span> <span class="n">medren</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;.n.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivN</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="go">[3.0, 1.0, 1.0, 1.0, 2.0, 1.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">setStem</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivN</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="go">[2.0, 1.0, 1.0, 1.0, 3.0, 1.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivN</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">)</span>
+<span class="go">[3.0, 1.0, 1.0, 1.0, 3.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivN</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">)</span>
+<span class="go">[2.0, 1.0, 6.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">setStem</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivN</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">)</span>
+<span class="go">[5.0, 1.0, 3.0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.BrevisLengthTranslator.translateDivOD">
+<code class="descclassname">BrevisLengthTranslator.</code><code class="descname">translateDivOD</code><span class="sig-paren">(</span><em>unchangeableNoteLengthsList=None</em>, <em>unknownLengthsDict=None</em>, <em>minRem=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.BrevisLengthTranslator.translateDivOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates the octonaria and duodenaria divisions</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.alpha</span> <span class="k">import</span> <span class="n">medren</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">divO</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;.o.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">setStem</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">divO</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivOD</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">)</span>
+<span class="go">[2.0, 4.0, 2.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">divO</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivOD</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">)</span>
+<span class="go">[0.666..., 0.666..., 0.666..., 2.0, 3.999...]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">divD</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;.d.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">divD</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivOD</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">)</span>
+<span class="go">[4.0, 8.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">divD</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivOD</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">)</span>
+<span class="go">[4.0, 4.0, 4.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">divD</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivOD</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">)</span>
+<span class="go">[2.0, 2.0, 4.0, 4.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">setStem</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">setStem</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">divD</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span>
+<span class="go">[None, None, None, None]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivOD</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">)</span>
+<span class="go">[2.0, 4.0, 4.0, 2.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">divD</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivOD</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">)</span>
+<span class="go">[2.0, 2.0, 0.5, 0.5, 0.5, 0.5, 2.0, 4.0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.BrevisLengthTranslator.translateDivPQ">
+<code class="descclassname">BrevisLengthTranslator.</code><code class="descname">translateDivPQ</code><span class="sig-paren">(</span><em>unchangeableNoteLengthsList=None</em>, <em>unknownLengthsDict=None</em>, <em>minRem=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.BrevisLengthTranslator.translateDivPQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates P and Q (6 and 4)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.alpha</span> <span class="k">import</span> <span class="n">medren</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;.q.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivPQ</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span>
+<span class="go">[2.0, 2.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">medren</span><span class="o">.</span><span class="n">MensuralRest</span><span class="p">(</span><span class="s1">&#39;SM&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">setFlag</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">setFlag</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivPQ</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
+<span class="go">[1.0, 0.5, 0.5, 0.666..., 0.666..., 0.666...]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">div</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;.p.&#39;</span><span class="p">)</span>
+<span class="go">        &gt;&gt;&gt; names = [&#39;SB&#39;, &#39;SB&#39;, &#39;SB&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivPQ</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">)</span>
+<span class="go">[2.0, 2.0, 2.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">setStem</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivPQ</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+<span class="go">[1.0, 4.0, 0.5, 0.5]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SM&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span> <span class="o">=</span> <span class="p">[</span><span class="n">medren</span><span class="o">.</span><span class="n">MensuralNote</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">BL</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">medren</span><span class="o">.</span><span class="n">MensuralRest</span><span class="p">(</span><span class="s1">&#39;SM&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">mn</span> <span class="ow">in</span> <span class="n">BL</span><span class="p">[:</span><span class="mi">3</span><span class="p">]:</span>
+<span class="gp">... </span>   <span class="n">mn</span><span class="o">.</span><span class="n">setFlag</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">BrevisLengthTranslator</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">BL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unchlist</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">getUnchangeableNoteLengths</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unkldict</span> <span class="o">=</span> <span class="n">TBL</span><span class="o">.</span><span class="n">classifyUnknownNotesByType</span><span class="p">(</span><span class="n">unchlist</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">TBL</span><span class="o">.</span><span class="n">translateDivPQ</span><span class="p">(</span><span class="n">unchlist</span><span class="p">,</span> <span class="n">unkldict</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">)</span>
+<span class="go">[0.666..., 0.666..., 0.666..., 0.5, 0.5, 0.5, 0.5, 2.0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="cleftoken">
+<h2>ClefToken<a class="headerlink" href="#cleftoken" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.ClefToken">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">ClefToken</code><span class="sig-paren">(</span><em>token=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.ClefToken" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.ClefToken" title="music21.alpha.trecento.notation.ClefToken"><code class="xref py py-class docutils literal"><span class="pre">ClefToken</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Token" title="music21.tinyNotation.Token"><code class="xref py py-class docutils literal"><span class="pre">Token</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.ClefToken" title="music21.alpha.trecento.notation.ClefToken"><code class="xref py py-class docutils literal"><span class="pre">ClefToken</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.ClefToken.parse">
+<code class="descclassname">ClefToken.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.ClefToken.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="divisione">
+<h2>Divisione<a class="headerlink" href="#divisione" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.Divisione">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">Divisione</code><span class="sig-paren">(</span><em>nameOrSymbol='.p.'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.Divisione" title="Permalink to this definition">¶</a></dt>
+<dd><p>An object representing a divisione found in Trecento Notation.
+Takes one argument, nameOrSymbol. This is the name of the divisione, or 
+its corresponding letter.</p>
+<p>The default value for this argument is &#8216;.p.&#8217;</p>
+<p>Valid names are &#8216;quaternaria&#8217;, &#8216;senaria imperfect&#8217;, &#8216;senaria perfecta&#8217;, &#8216;novenaria&#8217;, 
+&#8216;octonaria&#8217;, and &#8216;duodenaria&#8217;.</p>
+<p>The corresponding symbols are &#8216;.q.&#8217;, &#8216;.i.&#8217;, &#8216;.p.&#8217;, &#8216;.n.&#8217;, &#8216;.o.&#8217;, and &#8216;.d.&#8217;.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;senaria imperfecta&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">standardSymbol</span>
+<span class="go">&#39;.i.&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;.p.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;senaria perfecta&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">standardSymbol</span>
+<span class="go">&#39;.q.&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.Divisione" title="music21.alpha.trecento.notation.Divisione"><code class="xref py py-class docutils literal"><span class="pre">Divisione</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.Divisione" title="music21.alpha.trecento.notation.Divisione"><code class="xref py py-class docutils literal"><span class="pre">Divisione</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.beatCountName" title="music21.meter.TimeSignature.beatCountName"><code class="xref py py-attr docutils literal"><span class="pre">beatCountName</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.beatDivisionCount" title="music21.meter.TimeSignature.beatDivisionCount"><code class="xref py py-attr docutils literal"><span class="pre">beatDivisionCount</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.beatDivisionCountName" title="music21.meter.TimeSignature.beatDivisionCountName"><code class="xref py py-attr docutils literal"><span class="pre">beatDivisionCountName</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.beatDivisionDurations" title="music21.meter.TimeSignature.beatDivisionDurations"><code class="xref py py-attr docutils literal"><span class="pre">beatDivisionDurations</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.beatDuration" title="music21.meter.TimeSignature.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.beatLengthToQuarterLengthRatio" title="music21.meter.TimeSignature.beatLengthToQuarterLengthRatio"><code class="xref py py-attr docutils literal"><span class="pre">beatLengthToQuarterLengthRatio</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.beatSubDivisionDurations" title="music21.meter.TimeSignature.beatSubDivisionDurations"><code class="xref py py-attr docutils literal"><span class="pre">beatSubDivisionDurations</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.classification" title="music21.meter.TimeSignature.classification"><code class="xref py py-attr docutils literal"><span class="pre">classification</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.quarterLengthToBeatLengthRatio" title="music21.meter.TimeSignature.quarterLengthToBeatLengthRatio"><code class="xref py py-attr docutils literal"><span class="pre">quarterLengthToBeatLengthRatio</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.totalLength" title="music21.meter.TimeSignature.totalLength"><code class="xref py py-attr docutils literal"><span class="pre">totalLength</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.Divisione" title="music21.alpha.trecento.notation.Divisione"><code class="xref py py-class docutils literal"><span class="pre">Divisione</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.alpha.trecento.notation.Divisione.minimaPerBrevis">
+<code class="descclassname">Divisione.</code><code class="descname">minimaPerBrevis</code><a class="headerlink" href="#music21.alpha.trecento.notation.Divisione.minimaPerBrevis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to get and set the number of minima in a &#8216;measure&#8217; 
+(the number of minima before a punctus occurs) under the given divisione.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">Divisione</span><span class="p">(</span><span class="s1">&#39;.n.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">minimaPerBrevis</span>
+<span class="go">9</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">minimaPerBrevis</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">minimaPerBrevis</span>
+<span class="go">18</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Read/write properties inherited from <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.barDuration" title="music21.meter.TimeSignature.barDuration"><code class="xref py py-attr docutils literal"><span class="pre">barDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.beatCount" title="music21.meter.TimeSignature.beatCount"><code class="xref py py-attr docutils literal"><span class="pre">beatCount</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.denominator" title="music21.meter.TimeSignature.denominator"><code class="xref py py-attr docutils literal"><span class="pre">denominator</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.numerator" title="music21.meter.TimeSignature.numerator"><code class="xref py py-attr docutils literal"><span class="pre">numerator</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.ratioString" title="music21.meter.TimeSignature.ratioString"><code class="xref py py-attr docutils literal"><span class="pre">ratioString</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.Divisione" title="music21.alpha.trecento.notation.Divisione"><code class="xref py py-class docutils literal"><span class="pre">Divisione</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.averageBeatStrength" title="music21.meter.TimeSignature.averageBeatStrength"><code class="xref py py-meth docutils literal"><span class="pre">averageBeatStrength()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.getAccent" title="music21.meter.TimeSignature.getAccent"><code class="xref py py-meth docutils literal"><span class="pre">getAccent()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.getAccentWeight" title="music21.meter.TimeSignature.getAccentWeight"><code class="xref py py-meth docutils literal"><span class="pre">getAccentWeight()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.getBeams" title="music21.meter.TimeSignature.getBeams"><code class="xref py py-meth docutils literal"><span class="pre">getBeams()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.getBeat" title="music21.meter.TimeSignature.getBeat"><code class="xref py py-meth docutils literal"><span class="pre">getBeat()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.getBeatDepth" title="music21.meter.TimeSignature.getBeatDepth"><code class="xref py py-meth docutils literal"><span class="pre">getBeatDepth()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.getBeatDuration" title="music21.meter.TimeSignature.getBeatDuration"><code class="xref py py-meth docutils literal"><span class="pre">getBeatDuration()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.getBeatOffsets" title="music21.meter.TimeSignature.getBeatOffsets"><code class="xref py py-meth docutils literal"><span class="pre">getBeatOffsets()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.getBeatProgress" title="music21.meter.TimeSignature.getBeatProgress"><code class="xref py py-meth docutils literal"><span class="pre">getBeatProgress()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.getBeatProportion" title="music21.meter.TimeSignature.getBeatProportion"><code class="xref py py-meth docutils literal"><span class="pre">getBeatProportion()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.getBeatProportionStr" title="music21.meter.TimeSignature.getBeatProportionStr"><code class="xref py py-meth docutils literal"><span class="pre">getBeatProportionStr()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.getOffsetFromBeat" title="music21.meter.TimeSignature.getOffsetFromBeat"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetFromBeat()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.load" title="music21.meter.TimeSignature.load"><code class="xref py py-meth docutils literal"><span class="pre">load()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.loadRatio" title="music21.meter.TimeSignature.loadRatio"><code class="xref py py-meth docutils literal"><span class="pre">loadRatio()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.quarteroffsetToBeat" title="music21.meter.TimeSignature.quarteroffsetToBeat"><code class="xref py py-meth docutils literal"><span class="pre">quarteroffsetToBeat()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.ratioEqual" title="music21.meter.TimeSignature.ratioEqual"><code class="xref py py-meth docutils literal"><span class="pre">ratioEqual()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.resetValues" title="music21.meter.TimeSignature.resetValues"><code class="xref py py-meth docutils literal"><span class="pre">resetValues()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.setAccentWeight" title="music21.meter.TimeSignature.setAccentWeight"><code class="xref py py-meth docutils literal"><span class="pre">setAccentWeight()</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.setDisplay" title="music21.meter.TimeSignature.setDisplay"><code class="xref py py-meth docutils literal"><span class="pre">setDisplay()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.Divisione" title="music21.alpha.trecento.notation.Divisione"><code class="xref py py-class docutils literal"><span class="pre">Divisione</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.accentSequence" title="music21.meter.TimeSignature.accentSequence"><code class="xref py py-attr docutils literal"><span class="pre">accentSequence</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.beamSequence" title="music21.meter.TimeSignature.beamSequence"><code class="xref py py-attr docutils literal"><span class="pre">beamSequence</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.beatSequence" title="music21.meter.TimeSignature.beatSequence"><code class="xref py py-attr docutils literal"><span class="pre">beatSequence</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.displaySequence" title="music21.meter.TimeSignature.displaySequence"><code class="xref py py-attr docutils literal"><span class="pre">displaySequence</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.symbol" title="music21.meter.TimeSignature.symbol"><code class="xref py py-attr docutils literal"><span class="pre">symbol</span></code></a></li>
+<li><a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.symbolizeDenominator" title="music21.meter.TimeSignature.symbolizeDenominator"><code class="xref py py-attr docutils literal"><span class="pre">symbolizeDenominator</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="divisionetoken">
+<h2>DivisioneToken<a class="headerlink" href="#divisionetoken" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.DivisioneToken">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">DivisioneToken</code><span class="sig-paren">(</span><em>token=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.DivisioneToken" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.DivisioneToken" title="music21.alpha.trecento.notation.DivisioneToken"><code class="xref py py-class docutils literal"><span class="pre">DivisioneToken</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Token" title="music21.tinyNotation.Token"><code class="xref py py-class docutils literal"><span class="pre">Token</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.DivisioneToken" title="music21.alpha.trecento.notation.DivisioneToken"><code class="xref py py-class docutils literal"><span class="pre">DivisioneToken</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.DivisioneToken.parse">
+<code class="descclassname">DivisioneToken.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.DivisioneToken.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="flagsmodifier">
+<h2>FlagsModifier<a class="headerlink" href="#flagsmodifier" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.FlagsModifier">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">FlagsModifier</code><span class="sig-paren">(</span><em>modifierData</em>, <em>modifierString</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.FlagsModifier" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.FlagsModifier" title="music21.alpha.trecento.notation.FlagsModifier"><code class="xref py py-class docutils literal"><span class="pre">FlagsModifier</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.FlagsModifier" title="music21.alpha.trecento.notation.FlagsModifier"><code class="xref py py-class docutils literal"><span class="pre">FlagsModifier</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.FlagsModifier.postParse">
+<code class="descclassname">FlagsModifier.</code><code class="descname">postParse</code><span class="sig-paren">(</span><em>m21Obj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.FlagsModifier.postParse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier.preParse" title="music21.tinyNotation.Modifier.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="ligaturenoteheadmodifier">
+<h2>LigatureNoteheadModifier<a class="headerlink" href="#ligaturenoteheadmodifier" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.LigatureNoteheadModifier">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">LigatureNoteheadModifier</code><span class="sig-paren">(</span><em>modifierData</em>, <em>modifierString</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.LigatureNoteheadModifier" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.LigatureNoteheadModifier" title="music21.alpha.trecento.notation.LigatureNoteheadModifier"><code class="xref py py-class docutils literal"><span class="pre">LigatureNoteheadModifier</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.LigatureNoteheadModifier" title="music21.alpha.trecento.notation.LigatureNoteheadModifier"><code class="xref py py-class docutils literal"><span class="pre">LigatureNoteheadModifier</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.LigatureNoteheadModifier.postParse">
+<code class="descclassname">LigatureNoteheadModifier.</code><code class="descname">postParse</code><span class="sig-paren">(</span><em>m21Obj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.LigatureNoteheadModifier.postParse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier.preParse" title="music21.tinyNotation.Modifier.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="ligaturereversemodifier">
+<h2>LigatureReverseModifier<a class="headerlink" href="#ligaturereversemodifier" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.LigatureReverseModifier">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">LigatureReverseModifier</code><span class="sig-paren">(</span><em>modifierData</em>, <em>modifierString</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.LigatureReverseModifier" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.LigatureReverseModifier" title="music21.alpha.trecento.notation.LigatureReverseModifier"><code class="xref py py-class docutils literal"><span class="pre">LigatureReverseModifier</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.LigatureReverseModifier" title="music21.alpha.trecento.notation.LigatureReverseModifier"><code class="xref py py-class docutils literal"><span class="pre">LigatureReverseModifier</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.LigatureReverseModifier.postParse">
+<code class="descclassname">LigatureReverseModifier.</code><code class="descname">postParse</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.LigatureReverseModifier.postParse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier.preParse" title="music21.tinyNotation.Modifier.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="ligaturestate">
+<h2>LigatureState<a class="headerlink" href="#ligaturestate" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.LigatureState">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">LigatureState</code><span class="sig-paren">(</span><em>parent</em>, <em>stateInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.LigatureState" title="Permalink to this definition">¶</a></dt>
+<dd><p>defines that the notes in here will be in a ligature</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.LigatureState" title="music21.alpha.trecento.notation.LigatureState"><code class="xref py py-class docutils literal"><span class="pre">LigatureState</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.State" title="music21.tinyNotation.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.LigatureState" title="music21.alpha.trecento.notation.LigatureState"><code class="xref py py-class docutils literal"><span class="pre">LigatureState</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.LigatureState.affectTokenAfterParse">
+<code class="descclassname">LigatureState.</code><code class="descname">affectTokenAfterParse</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.LigatureState.affectTokenAfterParse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.LigatureState.affectTokenAfterParseBeforeModifiers">
+<code class="descclassname">LigatureState.</code><code class="descname">affectTokenAfterParseBeforeModifiers</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.LigatureState.affectTokenAfterParseBeforeModifiers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.LigatureState.end">
+<code class="descclassname">LigatureState.</code><code class="descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.LigatureState.end" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.LigatureState.start">
+<code class="descclassname">LigatureState.</code><code class="descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.LigatureState.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.State" title="music21.tinyNotation.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.State.affectTokenBeforeParse" title="music21.tinyNotation.State.affectTokenBeforeParse"><code class="xref py py-meth docutils literal"><span class="pre">affectTokenBeforeParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="ligaturestemsmodifier">
+<h2>LigatureStemsModifier<a class="headerlink" href="#ligaturestemsmodifier" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.LigatureStemsModifier">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">LigatureStemsModifier</code><span class="sig-paren">(</span><em>modifierData</em>, <em>modifierString</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.LigatureStemsModifier" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.LigatureStemsModifier" title="music21.alpha.trecento.notation.LigatureStemsModifier"><code class="xref py py-class docutils literal"><span class="pre">LigatureStemsModifier</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.LigatureStemsModifier" title="music21.alpha.trecento.notation.LigatureStemsModifier"><code class="xref py py-class docutils literal"><span class="pre">LigatureStemsModifier</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.LigatureStemsModifier.postParse">
+<code class="descclassname">LigatureStemsModifier.</code><code class="descname">postParse</code><span class="sig-paren">(</span><em>m21Obj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.LigatureStemsModifier.postParse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier.preParse" title="music21.tinyNotation.Modifier.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="mensuraltypemodifier">
+<h2>MensuralTypeModifier<a class="headerlink" href="#mensuraltypemodifier" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.MensuralTypeModifier">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">MensuralTypeModifier</code><span class="sig-paren">(</span><em>modifierData</em>, <em>modifierString</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.MensuralTypeModifier" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.MensuralTypeModifier" title="music21.alpha.trecento.notation.MensuralTypeModifier"><code class="xref py py-class docutils literal"><span class="pre">MensuralTypeModifier</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.MensuralTypeModifier" title="music21.alpha.trecento.notation.MensuralTypeModifier"><code class="xref py py-class docutils literal"><span class="pre">MensuralTypeModifier</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.MensuralTypeModifier.postParse">
+<code class="descclassname">MensuralTypeModifier.</code><code class="descname">postParse</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.MensuralTypeModifier.postParse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier.preParse" title="music21.tinyNotation.Modifier.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="punctus">
+<h2>Punctus<a class="headerlink" href="#punctus" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.Punctus">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">Punctus</code><a class="headerlink" href="#music21.alpha.trecento.notation.Punctus" title="Permalink to this definition">¶</a></dt>
+<dd><p>An object representing a punctus, found in Trecento notation.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.Punctus" title="music21.alpha.trecento.notation.Punctus"><code class="xref py py-class docutils literal"><span class="pre">Punctus</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.Punctus" title="music21.alpha.trecento.notation.Punctus"><code class="xref py py-class docutils literal"><span class="pre">Punctus</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.alpha.trecento.notation.Punctus.fontString">
+<code class="descclassname">Punctus.</code><code class="descname">fontString</code><a class="headerlink" href="#music21.alpha.trecento.notation.Punctus.fontString" title="Permalink to this definition">¶</a></dt>
+<dd><p>The utf-8 code corresponding the punctus in Cicionia font</p>
+</dd></dl>
+
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.Punctus" title="music21.alpha.trecento.notation.Punctus"><code class="xref py py-class docutils literal"><span class="pre">Punctus</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.Punctus" title="music21.alpha.trecento.notation.Punctus"><code class="xref py py-class docutils literal"><span class="pre">Punctus</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.Punctus" title="music21.alpha.trecento.notation.Punctus"><code class="xref py py-class docutils literal"><span class="pre">Punctus</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="punctustoken">
+<h2>PunctusToken<a class="headerlink" href="#punctustoken" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.PunctusToken">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">PunctusToken</code><span class="sig-paren">(</span><em>token=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.PunctusToken" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.PunctusToken" title="music21.alpha.trecento.notation.PunctusToken"><code class="xref py py-class docutils literal"><span class="pre">PunctusToken</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Token" title="music21.tinyNotation.Token"><code class="xref py py-class docutils literal"><span class="pre">Token</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.PunctusToken" title="music21.alpha.trecento.notation.PunctusToken"><code class="xref py py-class docutils literal"><span class="pre">PunctusToken</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.PunctusToken.parse">
+<code class="descclassname">PunctusToken.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.PunctusToken.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="stemsmodifier">
+<h2>StemsModifier<a class="headerlink" href="#stemsmodifier" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.StemsModifier">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">StemsModifier</code><span class="sig-paren">(</span><em>modifierData</em>, <em>modifierString</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.StemsModifier" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.StemsModifier" title="music21.alpha.trecento.notation.StemsModifier"><code class="xref py py-class docutils literal"><span class="pre">StemsModifier</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.StemsModifier" title="music21.alpha.trecento.notation.StemsModifier"><code class="xref py py-class docutils literal"><span class="pre">StemsModifier</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.StemsModifier.postParse">
+<code class="descclassname">StemsModifier.</code><code class="descname">postParse</code><span class="sig-paren">(</span><em>m21Obj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.StemsModifier.postParse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Modifier.preParse" title="music21.tinyNotation.Modifier.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="trecentonotetoken">
+<h2>TrecentoNoteToken<a class="headerlink" href="#trecentonotetoken" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.TrecentoNoteToken">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">TrecentoNoteToken</code><span class="sig-paren">(</span><em>token=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.TrecentoNoteToken" title="Permalink to this definition">¶</a></dt>
+<dd><p>For documentation please see <a class="reference internal" href="#music21.alpha.trecento.notation.TrecentoTinyConverter" title="music21.alpha.trecento.notation.TrecentoTinyConverter"><code class="xref py py-class docutils literal"><span class="pre">music21.alpha.trecento.notation.TrecentoTinyConverter</span></code></a>.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.TrecentoNoteToken" title="music21.alpha.trecento.notation.TrecentoNoteToken"><code class="xref py py-class docutils literal"><span class="pre">TrecentoNoteToken</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteToken" title="music21.tinyNotation.NoteToken"><code class="xref py py-class docutils literal"><span class="pre">NoteToken</span></code></a></li>
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteOrRestToken" title="music21.tinyNotation.NoteOrRestToken"><code class="xref py py-class docutils literal"><span class="pre">NoteOrRestToken</span></code></a></li>
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Token" title="music21.tinyNotation.Token"><code class="xref py py-class docutils literal"><span class="pre">Token</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.TrecentoNoteToken" title="music21.alpha.trecento.notation.TrecentoNoteToken"><code class="xref py py-class docutils literal"><span class="pre">TrecentoNoteToken</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.TrecentoNoteToken.parse">
+<code class="descclassname">TrecentoNoteToken.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.TrecentoNoteToken.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteToken" title="music21.tinyNotation.NoteToken"><code class="xref py py-class docutils literal"><span class="pre">NoteToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteToken.editorialAccidental" title="music21.tinyNotation.NoteToken.editorialAccidental"><code class="xref py py-meth docutils literal"><span class="pre">editorialAccidental()</span></code></a></li>
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteToken.flats" title="music21.tinyNotation.NoteToken.flats"><code class="xref py py-meth docutils literal"><span class="pre">flats()</span></code></a></li>
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteToken.getPitch" title="music21.tinyNotation.NoteToken.getPitch"><code class="xref py py-meth docutils literal"><span class="pre">getPitch()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteToken.highOctave" title="music21.tinyNotation.NoteToken.highOctave"><code class="xref py py-meth docutils literal"><span class="pre">highOctave()</span></code></a></li>
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteToken.lowOctave" title="music21.tinyNotation.NoteToken.lowOctave"><code class="xref py py-meth docutils literal"><span class="pre">lowOctave()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteToken.natural" title="music21.tinyNotation.NoteToken.natural"><code class="xref py py-meth docutils literal"><span class="pre">natural()</span></code></a></li>
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteToken.sharps" title="music21.tinyNotation.NoteToken.sharps"><code class="xref py py-meth docutils literal"><span class="pre">sharps()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteOrRestToken" title="music21.tinyNotation.NoteOrRestToken"><code class="xref py py-class docutils literal"><span class="pre">NoteOrRestToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteOrRestToken.applyDuration" title="music21.tinyNotation.NoteOrRestToken.applyDuration"><code class="xref py py-meth docutils literal"><span class="pre">applyDuration()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteOrRestToken.dots" title="music21.tinyNotation.NoteOrRestToken.dots"><code class="xref py py-meth docutils literal"><span class="pre">dots()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteOrRestToken.durationType" title="music21.tinyNotation.NoteOrRestToken.durationType"><code class="xref py py-meth docutils literal"><span class="pre">durationType()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="trecentoresttoken">
+<h2>TrecentoRestToken<a class="headerlink" href="#trecentoresttoken" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.TrecentoRestToken">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">TrecentoRestToken</code><span class="sig-paren">(</span><em>token=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.TrecentoRestToken" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.TrecentoRestToken" title="music21.alpha.trecento.notation.TrecentoRestToken"><code class="xref py py-class docutils literal"><span class="pre">TrecentoRestToken</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.RestToken" title="music21.tinyNotation.RestToken"><code class="xref py py-class docutils literal"><span class="pre">RestToken</span></code></a></li>
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteOrRestToken" title="music21.tinyNotation.NoteOrRestToken"><code class="xref py py-class docutils literal"><span class="pre">NoteOrRestToken</span></code></a></li>
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Token" title="music21.tinyNotation.Token"><code class="xref py py-class docutils literal"><span class="pre">Token</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.TrecentoRestToken" title="music21.alpha.trecento.notation.TrecentoRestToken"><code class="xref py py-class docutils literal"><span class="pre">TrecentoRestToken</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.trecento.notation.TrecentoRestToken.parse">
+<code class="descclassname">TrecentoRestToken.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.TrecentoRestToken.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteOrRestToken" title="music21.tinyNotation.NoteOrRestToken"><code class="xref py py-class docutils literal"><span class="pre">NoteOrRestToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteOrRestToken.applyDuration" title="music21.tinyNotation.NoteOrRestToken.applyDuration"><code class="xref py py-meth docutils literal"><span class="pre">applyDuration()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteOrRestToken.dots" title="music21.tinyNotation.NoteOrRestToken.dots"><code class="xref py py-meth docutils literal"><span class="pre">dots()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.NoteOrRestToken.durationType" title="music21.tinyNotation.NoteOrRestToken.durationType"><code class="xref py py-meth docutils literal"><span class="pre">durationType()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="trecentotinyconverter">
+<h2>TrecentoTinyConverter<a class="headerlink" href="#trecentotinyconverter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.trecento.notation.TrecentoTinyConverter">
+<em class="property">class </em><code class="descclassname">music21.alpha.trecento.notation.</code><code class="descname">TrecentoTinyConverter</code><span class="sig-paren">(</span><em>stringRep=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.trecento.notation.TrecentoTinyConverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>These are modified from a standard lilypond format called TinyNotation.</p>
+<p>Here are some important points about how to create notes and streams:</p>
+<ol class="arabic">
+<li><p class="first">Note names are: a,b,c,d,e,f,g. r indicates a rest, and p indicates a
+punctus.</p>
+</li>
+<li><p class="first">Note octaves are specified as follows:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">CC to BB:</th><td class="field-body">from C below bass clef to second-line B in bass clef</td>
+</tr>
+<tr class="field-even field"><th class="field-name">C to B:</th><td class="field-body">from bass clef C to B below middle C.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">c  to b:</th><td class="field-body">from middle C to the middle of treble clef</td>
+</tr>
+<tr class="field-even field"><th class="field-name">c&#8217; to b&#8217;:</th><td class="field-body">from C in treble clef to B above treble clef (make sure you’re NOT
+putting in smart quotes)</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<p>In 14th c. music, C to B and c to b will be most common</p>
+<ol class="arabic" start="3">
+<li><p class="first">Flats, sharps, and naturals are notated as #,- (not b), and (if needed)
+n. If the accidental is above the staff (i.e., editorial), enclose it
+in parentheses: (#), etc.  Make sure that flats in the key signatures
+are explicitly specified.</p>
+</li>
+<li><p class="first">The syntax structure for a mensural note is as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pitch</span><span class="p">(</span><span class="n">mensuralType</span><span class="p">)[</span><span class="n">stems</span><span class="p">]</span><span class="n">_flags</span>
+</pre></div>
+</div>
+<p>A mensuralType may be any of Mx for maxima, L for longa, B for brevis,
+SB for semibrevis, M for minima, or SM for semimina. For more
+information on mensural types, please see the documentation for
+<code class="xref py py-class docutils literal"><span class="pre">music21.medren.generalMensuralNote</span></code>.</p>
+<p>If no mensural type is specified, it is assumed to be the same as the
+previous note. I.e., c(SB) B c d is a string of semibreves.</p>
+</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">TrecentoTinyConverter</span><span class="p">(</span><span class="s1">&#39;a(M)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span><span class="o">.</span><span class="n">pitch</span>
+<span class="go">&lt;music21.pitch.Pitch A4&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span><span class="o">.</span><span class="n">mensuralType</span>
+<span class="go">&#39;minima&#39;</span>
+</pre></div>
+</div>
+<p>An additional stem may be added by specifying direction: S for a sidestem,
+D for a downstem, and an empty string to reset.</p>
+<p>For example, adding [D] to a note string would add a downstem to that note.
+Stems must still follow the rules outlined in
+<code class="xref py py-meth docutils literal"><span class="pre">music21.medren.MensuralNote.setStem()</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">TrecentoTinyConverter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;a(SB)[S]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span><span class="o">.</span><span class="n">getStems</span><span class="p">()</span>
+<span class="go">[&#39;side&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">TrecentoTinyConverter</span><span class="p">(</span><span class="s1">&#39;a(M)[D]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span><span class="o">.</span><span class="n">getStems</span><span class="p">()</span>
+<span class="go">[&#39;up&#39;, &#39;down&#39;]</span>
+</pre></div>
+</div>
+<p>A flag may be added by specifying direction of stem and orientation of
+flag. Valid directions are U for up, D for down, and an empty string to
+reset (sidestems cannot have flags). Valid orientations are L for left, R
+for right, and an empty string to reset. For example, adding _DL to a note
+string would add a left flag to that note&#8217;s downstem. Flags must still
+follow the rules outlined in <code class="xref py py-meth docutils literal"><span class="pre">music21.medren.MensuralNote.setFlag()</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">TrecentoTinyConverter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;a(SM)_UL&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span><span class="o">.</span><span class="n">getStems</span><span class="p">()</span>
+<span class="go">[&#39;up&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span> <span class="o">=</span> <span class="n">tTNN</span><span class="o">.</span><span class="n">getFlags</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">flags</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="go">[&#39;up&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;up&#39;</span><span class="p">]</span>
+<span class="go">&#39;left&#39;</span>
+</pre></div>
+</div>
+<p>Multiple flags may be added by placing a slash between
+direction-orientation pairs, as shown in the following complex example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">TrecentoTinyConverter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;a(SM)[D]_UL/DR&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span><span class="o">.</span><span class="n">pitch</span>
+<span class="go">&lt;music21.pitch.Pitch A4&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span><span class="o">.</span><span class="n">getStems</span><span class="p">()</span>
+<span class="go">[&#39;up&#39;, &#39;down&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span> <span class="o">=</span> <span class="n">tTNN</span><span class="o">.</span><span class="n">getFlags</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">flags</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="go">[&#39;down&#39;, &#39;up&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;down&#39;</span><span class="p">]</span>
+<span class="go">&#39;right&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;up&#39;</span><span class="p">]</span>
+<span class="go">&#39;left&#39;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li>It is also possible to create ligatures using the
+TinyTrecentoNotationNote class. Put all notes in a ligature within <cite>lig{</cite>
+and <cite>}</cite> symbols.</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ttc</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">TrecentoTinyConverter</span><span class="p">(</span><span class="s1">&#39;lig{f g a g f }&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">ttc</span><span class="o">.</span><span class="n">stream</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">    {0.0} &lt;music21...medren.Ligature object at 0x...&gt;</span>
+<span class="go">    {0.0} &lt;music21.bar.Barline style=final&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Ligature&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span>
+<span class="go">&lt;music21...medren.Ligature...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">tTNN</span><span class="o">.</span><span class="n">pitches</span><span class="p">]</span>
+<span class="go">[&#39;F4&#39;, &#39;G4&#39;, &#39;A4&#39;, &#39;G4&#39;, &#39;F4&#39;, &#39;C4&#39;]</span>
+</pre></div>
+</div>
+<p>The notes within a ligature have the syntax pitch&lt;notehead&gt;[stems](maxima).
+Valid notehead shapes are s for square and o for oblique. Valid stem
+directions are U for up and D for down, and valid orientations are L for
+left and R for right. To set a note of a ligature as a maxima, append (Mx)
+to the note string. To set a note of a ligature as reversed, append a
+forward slash followed by an R (&#8220;/R&#8221;) to the note string.</p>
+<p>Note, ligatures must follow the rules outlined by
+<code class="xref py py-class docutils literal"><span class="pre">music21.medren.Ligature</span></code>.</p>
+<p>Examples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">TrecentoTinyConverter</span><span class="p">(</span><span class="s1">r&#39;lig{f a[DL]/R}&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span><span class="o">.</span><span class="n">stream</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Ligature&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span><span class="o">.</span><span class="n">getStem</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">(&#39;down&#39;, &#39;left&#39;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span><span class="o">.</span><span class="n">isReversed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">TrecentoTinyConverter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;lig{f&lt;o&gt; g a[UR] g f(Mx)}&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Ligature&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">([</span><span class="n">n</span><span class="o">.</span><span class="n">mensuralType</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">tTNN</span><span class="o">.</span><span class="n">notes</span><span class="p">])</span>
+<span class="go">[&#39;longa&#39;, &#39;brevis&#39;, &#39;semibrevis&#39;, &#39;semibrevis&#39;, &#39;maxima&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tTNN</span><span class="o">.</span><span class="n">getNoteheadShape</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;oblique&#39;</span>
+</pre></div>
+</div>
+<ol class="arabic" start="6">
+<li><p class="first">Separate objects in a tiny notation by spaces. To add a mensural
+clef to the stream, add $, followed by the clef type (F or C) to the
+string. If the clef line on the staff is non-standard, include that
+after the type.</p>
+<p>For example, $F2 would indicate an F-clef on the second line of the
+staff. To add a divisione to a tiny notation stream, simply include the
+divisione abbreviation in the string. For example, .p. would indicate
+senaria perfecta.</p>
+</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tTNS</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">trecento</span><span class="o">.</span><span class="n">notation</span><span class="o">.</span><span class="n">TrecentoTinyConverter</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;$C3 .p. c(SB) d e p d(B) lig{e d c}&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">flat</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tTNS</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.bar.Barline style=final&gt;</span>
+<span class="go">{0.0} &lt;music21.clef.MensuralClef&gt;</span>
+<span class="go">{0.0} &lt;music21.alpha.trecento.notation.Divisione .p.&gt;</span>
+<span class="go">{0.0} &lt;music21...medren.MensuralNote semibrevis C&gt;</span>
+<span class="go">{0.0} &lt;music21...medren.MensuralNote semibrevis D&gt;</span>
+<span class="go">{0.0} &lt;music21...medren.MensuralNote semibrevis E&gt;</span>
+<span class="go">{0.0} &lt;music21.alpha.trecento.notation.Punctus...&gt;</span>
+<span class="go">{0.0} &lt;music21...medren.MensuralNote brevis D&gt;</span>
+<span class="go">{0.0} &lt;music21...medren.Ligature...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.TrecentoTinyConverter" title="music21.alpha.trecento.notation.TrecentoTinyConverter"><code class="xref py py-class docutils literal"><span class="pre">TrecentoTinyConverter</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Converter" title="music21.tinyNotation.Converter"><code class="xref py py-class docutils literal"><span class="pre">Converter</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.trecento.notation.TrecentoTinyConverter" title="music21.alpha.trecento.notation.TrecentoTinyConverter"><code class="xref py py-class docutils literal"><span class="pre">TrecentoTinyConverter</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Converter" title="music21.tinyNotation.Converter"><code class="xref py py-class docutils literal"><span class="pre">Converter</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Converter.parse" title="music21.tinyNotation.Converter.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Converter.parseOne" title="music21.tinyNotation.Converter.parseOne"><code class="xref py py-meth docutils literal"><span class="pre">parseOne()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Converter.postParse" title="music21.tinyNotation.Converter.postParse"><code class="xref py py-meth docutils literal"><span class="pre">postParse()</span></code></a></li>
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Converter.setupRegularExpressions" title="music21.tinyNotation.Converter.setupRegularExpressions"><code class="xref py py-meth docutils literal"><span class="pre">setupRegularExpressions()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleTinyNotation.html#music21.tinyNotation.Converter.splitPreTokens" title="music21.tinyNotation.Converter.splitPreTokens"><code class="xref py py-meth docutils literal"><span class="pre">splitPreTokens()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleAlphaTrecentoPolyphonicSnippet.html" title="music21.alpha.trecento.polyphonicSnippet"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleAlphaTrecentoFindTrecentoFragments.html" title="music21.alpha.trecento.findTrecentoFragments"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

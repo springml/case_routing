@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User’s Guide, Chapter 15: Keys and KeySignatures &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="User’s Guide: Chapter 17: Derivations" href="usersGuide_17_derivations.html" />
+    <link rel="prev" title="User’s Guide: Chapter 14: Time Signatures and Beats" href="usersGuide_14_timeSignatures.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_17_derivations.html" title="User’s Guide: Chapter 17: Derivations"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_14_timeSignatures.html" title="User’s Guide: Chapter 14: Time Signatures and Beats"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_14_timeSignatures.html"
+                        title="previous chapter">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_17_derivations.html"
+                        title="next chapter">User&#8217;s Guide: Chapter 17: Derivations</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a><ul>
+<li><a class="reference internal" href="#example-adjusting-notes-to-fit-the-key-signature">Example: Adjusting notes to fit the Key Signature</a></li>
+<li><a class="reference internal" href="#key-objects">Key objects</a></li>
+<li><a class="reference internal" href="#key-context-and-note-spelling">Key Context and Note Spelling</a></li>
+<li><a class="reference internal" href="#example-prepare-a-vocal-exercise-in-all-major-keys-ascending-by-step">Example: Prepare a vocal exercise in all major keys, ascending by step.</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_02_notes.html">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_03_pitches.html">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_05_listsOfLists.html">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_07_chords.html">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_08_installingMusicXML.html">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_11_corpusSearching.html">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_12_music21object.html">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_13_music21object2.html">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_21_sorting.html">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_25_postTonalTools1.html">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_26_clientWeakref.html">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_28_lyricSearcher.html">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_97_timespans.html">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_15_key.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-15-key"></span><div class="section" id="user-s-guide-chapter-15-keys-and-keysignatures">
+<h1>User&#8217;s Guide, Chapter 15: Keys and KeySignatures<a class="headerlink" href="#user-s-guide-chapter-15-keys-and-keysignatures" title="Permalink to this headline">¶</a></h1>
+<p>Music21 has two main objects for working with keys: the
+<a class="reference internal" href="../moduleReference/moduleKey.html#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a> object, which handles the spelling
+of key signatures and the <a class="reference internal" href="../moduleReference/moduleKey.html#music21.key.Key" title="music21.key.Key"><code class="xref py py-class docutils literal"><span class="pre">Key</span></code></a> object which does
+everything a KeySignature object does but also knows more advanced
+aspects of tonal harmony. We&#8217;ll go through the basics of each one here.</p>
+<p>We start, like always, by importing music21:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>Now let&#8217;s get a couple of different key signatures, representing
+different numbers of sharps:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ks2</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ks2</span><span class="o">.</span><span class="n">sharps</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">2</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ks7</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">ks7</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">7</span> <span class="n">sharps</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We can get a list of which pitches (as <a class="reference internal" href="../moduleReference/modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code></a>
+objects) are altered by the key signature with the <code class="docutils literal"><span class="pre">.alteredPitches</span></code>
+property:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ks2</span><span class="o">.</span><span class="n">alteredPitches</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">F</span><span class="c1">#&gt;, &lt;music21.pitch.Pitch C#&gt;]</span>
+</pre></div>
+</div>
+<p>There&#8217;s also a method that lets us see what the accidental is for any
+given step:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ks2</span><span class="o">.</span><span class="n">accidentalByStep</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">accidental</span> <span class="n">sharp</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ks2</span><span class="o">.</span><span class="n">accidentalByStep</span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Notice that we give a string of just a letter name from C-B. This won&#8217;t
+work:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ks2</span><span class="o">.</span><span class="n">accidentalByStep</span><span class="p">(</span><span class="s1">&#39;C#&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can create key signatures with absurd numbers of sharps and get
+strange accidentals:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ks12</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ks12</span><span class="o">.</span><span class="n">accidentalByStep</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">accidental</span> <span class="n">double</span><span class="o">-</span><span class="n">sharp</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>These absurd key signatures display in some programs (such as Lilypond)
+and are exported into MusicXML but do not display in most MusicXML
+readers.</p>
+<p>Key Signatures transpose like Pitches and Notes, taking each of the
+notes and moving it:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ks4</span> <span class="o">=</span> <span class="n">ks2</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;M2&#39;</span><span class="p">)</span>
+<span class="n">ks4</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">4</span> <span class="n">sharps</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>And the number of sharps can be changed after the fact:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ks4</span><span class="o">.</span><span class="n">sharps</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ks4</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="n">no</span> <span class="n">sharps</span> <span class="ow">or</span> <span class="n">flats</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We can get the Major or Minor scale corresponding to the Key Signature:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ks2</span><span class="o">.</span><span class="n">getScale</span><span class="p">(</span><span class="s1">&#39;major&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">MajorScale</span> <span class="n">D</span> <span class="n">major</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ks2</span><span class="o">.</span><span class="n">getScale</span><span class="p">(</span><span class="s1">&#39;minor&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">MinorScale</span> <span class="n">B</span> <span class="n">minor</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We&#8217;ll see what we can do with scales in a bit.</p>
+<p>If we put a KeySignature into a Stream, we can see it:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">))</span>
+<span class="n">m</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ks2</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">fis</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;F#&#39;</span><span class="p">)</span> <span class="c1"># German name</span>
+<span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">fis</span><span class="p">])</span>
+<span class="n">m</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_23_0.png" src="../_images/usersGuide_15_key_23_0.png" />
+<p>Note that the Note &#8216;C&#8217; is treated as C-natural and thus needs the
+natural sign in front of it. The Note F# however does not need a natural
+sign to be displayed. The process of calling <code class="docutils literal"><span class="pre">.show()</span></code> on the stream
+made a copy of the notes and set the <code class="docutils literal"><span class="pre">.pitch.accidental.displayStatus</span></code>
+on the F# to <code class="docutils literal"><span class="pre">False</span></code> and created an accidental for the C note with a
+natural and a displayStatus of True. Then the copies were discarded, so
+we don&#8217;t see them here:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fis</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">displayStatus</span>
+</pre></div>
+</div>
+<p>But we could instead call <code class="docutils literal"><span class="pre">.makeNotation(inPlace=True)</span></code> or
+<code class="docutils literal"><span class="pre">.makeAccidentals(inPlace=True)</span></code> on the Measure to do this manually:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">makeAccidentals</span><span class="p">(</span><span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fis</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">displayStatus</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">False</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">displayStatus</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">accidental</span> <span class="n">natural</span><span class="o">&gt;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If we have a <code class="docutils literal"><span class="pre">Measure</span></code> (not just any <code class="docutils literal"><span class="pre">Stream</span></code>) we can also set the
+KeySignature for the beginning of the measure with the Measure object&#8217;s
+<code class="docutils literal"><span class="pre">.keySignature</span></code> property:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">keySignature</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_30_0.png" src="../_images/usersGuide_15_key_30_0.png" />
+<p>Of course life isn&#8217;t all about sharps; it&#8217;d be a pretty terrible
+KeySignature object if we couldn&#8217;t have flats. To do it, just specify
+the number of flats as a negative number. So -1 = one flat, -2 = two
+flats. Or if you have the number as a positive already, just multiply by
+-1.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">eroicaFlats</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">ksEroica</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">eroicaFlats</span><span class="p">)</span>
+<span class="n">ksEroica</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">3</span> <span class="n">flats</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ksEroica</span><span class="o">.</span><span class="n">sharps</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">-</span><span class="mi">3</span>
+</pre></div>
+</div>
+<p>There is no <code class="docutils literal"><span class="pre">.flats</span></code> routine:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ksEroica</span><span class="o">.</span><span class="n">flats</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">AttributeError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">33</span><span class="o">-</span><span class="mi">3</span><span class="n">d7909036cfb</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">ksEroica</span><span class="o">.</span><span class="n">flats</span>
+
+
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;KeySignature&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;flats&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="example-adjusting-notes-to-fit-the-key-signature">
+<h2>Example: Adjusting notes to fit the Key Signature<a class="headerlink" href="#example-adjusting-notes-to-fit-the-key-signature" title="Permalink to this headline">¶</a></h2>
+<p>Here&#8217;s a nice study, suppose you had a score like this:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">m1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="n">m1</span><span class="o">.</span><span class="n">timeSignature</span> <span class="o">=</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;2/4&#39;</span><span class="p">)</span>
+<span class="n">m1</span><span class="o">.</span><span class="n">keySignature</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">m1</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">),</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)])</span>
+<span class="n">m2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="n">m2</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;B-&#39;</span><span class="p">),</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;G#&#39;</span><span class="p">)])</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">])</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_37_0.png" src="../_images/usersGuide_15_key_37_0.png" />
+<p>Let&#8217;s pretend that this was played by a young oboe player who was having
+trouble with the strange key signature. She got the B-flat right, and
+remembered to play some accidental on the G, but didn&#8217;t do very well
+overall. Let&#8217;s fix these notes so that they fit with the key signature.</p>
+<p>Now we could simply do something like this for each note:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">m1</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">accidental</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Accidental</span><span class="p">(</span><span class="s1">&#39;flat&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>But that wouldn&#8217;t be as great as getting the notes from the Key itself.
+Let&#8217;s do that with the accidentalByStep routine:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ks</span> <span class="o">=</span> <span class="n">m1</span><span class="o">.</span><span class="n">keySignature</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>  <span class="c1"># we need to recurse because the notes are in measures...</span>
+    <span class="n">nStep</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">step</span>
+    <span class="n">rightAccidental</span> <span class="o">=</span> <span class="n">ks</span><span class="o">.</span><span class="n">accidentalByStep</span><span class="p">(</span><span class="n">nStep</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span> <span class="o">=</span> <span class="n">rightAccidental</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_41_0.png" src="../_images/usersGuide_15_key_41_0.png" />
+<p>Yep, now our student is ready to play the concert! Though wouldn&#8217;t this
+be easier:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_43_0.png" src="../_images/usersGuide_15_key_43_0.png" />
+</div>
+<div class="section" id="key-objects">
+<h2>Key objects<a class="headerlink" href="#key-objects" title="Permalink to this headline">¶</a></h2>
+<p>A Key is a lot like a KeySignature, but much more powerful. Unlike a
+KeySignature, which we initialize with the number of sharps and flats,
+we initialize a Key with a tonic string or Pitch:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">kD</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="n">kD</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">D</span> <span class="n">major</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bFlat</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-&#39;</span><span class="p">)</span>
+<span class="n">kBflat</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="n">bFlat</span><span class="p">)</span>
+<span class="n">kBflat</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">B</span><span class="o">-</span> <span class="n">major</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>By default, keys are major, but we can make minor keys by specifying
+&#8216;minor&#8217; as the second argument:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">kd</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;minor&#39;</span><span class="p">)</span>
+<span class="n">kd</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">d</span> <span class="n">minor</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Note that the key is represented as lowercase (&#8216;d minor&#8217; as opposed to
+&#8216;D minor&#8217;). This is a clue as to a shortcut for making minor keys:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">kg</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">kg</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">g</span> <span class="n">minor</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We can also take KeySignatures and turn them into Keys by using the
+<code class="docutils literal"><span class="pre">asKey(mode)</span></code> method on them:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">ksEroica</span><span class="o">.</span><span class="n">asKey</span><span class="p">(</span><span class="s1">&#39;major&#39;</span><span class="p">),</span> <span class="n">ksEroica</span><span class="o">.</span><span class="n">asKey</span><span class="p">(</span><span class="s1">&#39;minor&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">E</span><span class="o">-</span> <span class="n">major</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">c</span> <span class="n">minor</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(In the latter case we should probably have called the variable
+ksFifthSymphony...)</p>
+<p>We can also make church modes:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">amixy</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;mixolydian&#39;</span><span class="p">)</span>
+<span class="n">amixy</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">A</span> <span class="n">mixolydian</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If you&#8217;ve forgotten how many sharps or flats are in the key of A
+mixolydian, you&#8217;ll be happy to know that all the properties and methods
+of KeySignatures are also available to Keys:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">amixy</span><span class="o">.</span><span class="n">sharps</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">2</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">amixy</span><span class="o">.</span><span class="n">alteredPitches</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">F</span><span class="c1">#&gt;, &lt;music21.pitch.Pitch C#&gt;]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">amixy</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;M3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">C</span><span class="c1"># mixolydian&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">aDarkKey</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;B--&#39;</span><span class="p">,</span> <span class="s1">&#39;locrian&#39;</span><span class="p">)</span>
+<span class="n">aDarkKey</span><span class="o">.</span><span class="n">alteredPitches</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">B</span><span class="o">-&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">E</span><span class="o">-&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">A</span><span class="o">-&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">D</span><span class="o">-&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">G</span><span class="o">-&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">C</span><span class="o">-&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">F</span><span class="o">-&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">B</span><span class="o">--&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">E</span><span class="o">--&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">A</span><span class="o">--&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">D</span><span class="o">--&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">G</span><span class="o">--&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">C</span><span class="o">--&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">F</span><span class="o">--&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>(as a music historian and someone who specializes in history of music
+theory, I am contractually obliged to mention that &#8220;locrian&#8221; is not a
+historic mode and doesn&#8217;t really exist in actual music before the 20th
+c. But it&#8217;s fun to play with).</p>
+<p>Keys know their <code class="docutils literal"><span class="pre">.mode</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">kg</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">amixy</span><span class="o">.</span><span class="n">mode</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="s1">&#39;minor&#39;</span><span class="p">,</span> <span class="s1">&#39;mixolydian&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>They also know their tonic pitches:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">kg</span><span class="o">.</span><span class="n">tonic</span><span class="p">,</span> <span class="n">amixy</span><span class="o">.</span><span class="n">tonic</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">G</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">A</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For major and minor keys, we can get the relative (minor or major) and
+parallel (minor or major) keys simply:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">kg</span><span class="o">.</span><span class="n">relative</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">B</span><span class="o">-</span> <span class="n">major</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">kg</span><span class="o">.</span><span class="n">parallel</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">G</span> <span class="n">major</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>And because two keys are equal if their modes and tonics are the same,
+this is true:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">kg</span><span class="o">.</span><span class="n">relative</span><span class="o">.</span><span class="n">relative</span> <span class="o">==</span> <span class="n">kg</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>This is pretty helpful from time to time:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">kg</span><span class="o">.</span><span class="n">tonicPitchNameWithCase</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;g&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">kg</span><span class="o">.</span><span class="n">parallel</span><span class="o">.</span><span class="n">tonicPitchNameWithCase</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;G&#39;</span>
+</pre></div>
+</div>
+<p>Some analysis routines produce keys:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bach</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="n">bach</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">f</span><span class="c1"># minor&gt;</span>
+</pre></div>
+</div>
+<p>The keys from these routines have two extra cool features. They have a
+certainty measure:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fis</span> <span class="o">=</span> <span class="n">bach</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
+<span class="n">fis</span><span class="o">.</span><span class="n">correlationCoefficient</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">0.8154708925762492</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fis</span><span class="o">.</span><span class="n">tonalCertainty</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">1.1394369435112481</span>
+</pre></div>
+</div>
+<p>Here are some of the other keys that the Bach piece could have been in:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fis</span><span class="o">.</span><span class="n">alternateInterpretations</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">A</span> <span class="n">major</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">b</span> <span class="n">minor</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">E</span> <span class="n">major</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">c</span><span class="c1"># minor&gt;]</span>
+</pre></div>
+</div>
+<p>And the least likely:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fis</span><span class="o">.</span><span class="n">alternateInterpretations</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">B</span><span class="o">-</span> <span class="n">major</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">E</span><span class="o">-</span> <span class="n">major</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">c</span> <span class="n">minor</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bach</span><span class="o">.</span><span class="n">measures</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_81_0.png" src="../_images/usersGuide_15_key_81_0.png" />
+<p>Yeah, that passes the smell test to me!</p>
+<p>So, how does it know what the key is? The key analysis routines are a
+variation of the famous (well at least in the small world of
+computational music theory) algorithm developed by Carol Krumhansl and
+Mark A. Schmuckler called probe-tone key finding. The distribution of
+pitches used in the piece are compared to sample distributions of
+pitches for major and minor keys and the closest matches are reported.
+(see <a class="reference external" href="http://rnhart.net/articles/key-finding/">http://rnhart.net/articles/key-finding/</a> for more details).
+<code class="docutils literal"><span class="pre">Music21</span></code> can be asked to use the sample distributions of several
+authors, including Krumhansl and Schmuckler&#8217;s original weights:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bach</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="s1">&#39;key.krumhanslschmuckler&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">NameError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">7665</span><span class="n">beda943f</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">bach</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="s1">&#39;key.krumhanslschmuckler&#39;</span><span class="p">)</span>
+
+
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;bach&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</pre></div>
+</div>
+<p>Calling <code class="docutils literal"><span class="pre">.analyze()</span></code> on a Stream calls
+<a class="reference internal" href="../moduleReference/moduleAnalysisDiscrete.html#music21.analysis.discrete.analyzeStream" title="music21.analysis.discrete.analyzeStream"><code class="xref py py-func docutils literal"><span class="pre">music21.analysis.discrete.analyzeStream()</span></code></a> which then calls an
+appropriate Class there.</p>
+<p>A Key object is derived from a KeySignature object and also a Scale
+object, which we will explain more about later.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;E-&#39;</span><span class="p">)</span>
+<span class="n">k</span><span class="o">.</span><span class="n">classes</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="s1">&#39;Key&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;KeySignature&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;DiatonicScale&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;ConcreteScale&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Scale&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Music21Object&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;object&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>But for now, a few methods that are present on scales that might end up
+being useful for Keys as well include:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">.</span><span class="n">pitchFromDegree</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">F4</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>(octaves in 4 and 5 are chosen just to give some ordering to the
+pitches)</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">.</span><span class="n">solfeg</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;mi&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="key-context-and-note-spelling">
+<h2>Key Context and Note Spelling<a class="headerlink" href="#key-context-and-note-spelling" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Key</span></code> and <code class="docutils literal"><span class="pre">KeySignature</span></code> objects affect how notes are spelled in
+some situations. Let&#8217;s set up a simple situation of a F-natural whole
+note in D major and then B-flat minor.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">))</span>
+<span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;whole&#39;</span><span class="p">))</span>
+<span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="s1">&#39;minor&#39;</span><span class="p">))</span>
+<span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;whole&#39;</span><span class="p">))</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">makeNotation</span><span class="p">()</span>
+<span class="n">s2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_104_0.png" src="../_images/usersGuide_15_key_104_0.png" />
+<p>When we transpose each note up a half step (<code class="docutils literal"><span class="pre">n.transpose(1)</span></code>), music21
+understands that the first F-natural should become F-sharp, while the
+second one will fit better as a G-flat.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">s2</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">s2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_106_0.png" src="../_images/usersGuide_15_key_106_0.png" />
+</div>
+<div class="section" id="example-prepare-a-vocal-exercise-in-all-major-keys-ascending-by-step">
+<h2>Example: Prepare a vocal exercise in all major keys, ascending by step.<a class="headerlink" href="#example-prepare-a-vocal-exercise-in-all-major-keys-ascending-by-step" title="Permalink to this headline">¶</a></h2>
+<p><em>requires v3 or higher</em></p>
+<p>Let&#8217;s create a simple exercise in playing or singing thirds. I think I
+remember this from the <a class="reference external" href="https://www.google.com/search?q=First+Division+Band+Method&amp;tbm=isch">First Division Band
+Method</a>
+&#8220;Blue Book&#8221;:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">pitchStream</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="n">pitchStream</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;4/4&#39;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;eighth&#39;</span><span class="p">)</span>
+    <span class="n">pitchStream</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">pitchStream</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;quarter&#39;</span>
+<span class="n">pitchStream</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">(</span><span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pitchStream</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_108_0.png" src="../_images/usersGuide_15_key_108_0.png" />
+<p>This melody does not have a key associated with it. Let&#8217;s put a Key of C
+Major at the beginning of the piece:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">pitchStream</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="n">pitchStream</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_110_0.png" src="../_images/usersGuide_15_key_110_0.png" />
+<p>Note that putting the key of C into the Stream doesn&#8217;t change what it
+looks like when we show the Stream, since there are no sharps or flats.
+But what makes the difference between an instrumental and a vocal
+exercise is the act of transposition. When we transpose the <code class="docutils literal"><span class="pre">Key</span></code>
+object up 1 semitone, to D-flat major, it will show up:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pitchStream</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_112_0.png" src="../_images/usersGuide_15_key_112_0.png" />
+<p>Now the key signature is D-flat, but the notes are still in C-major, so
+we should transpose them also:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">pitchStream</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">pitchStream</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_114_0.png" src="../_images/usersGuide_15_key_114_0.png" />
+<p>Notice that we choose a semitone transposition and not a diatonic
+transposition such as minor second (<code class="docutils literal"><span class="pre">&quot;m2&quot;</span></code>); minor second would work
+just as good in this case, but then to do another half-step up, we would
+need to remember to transpose by an augmented unison (<code class="docutils literal"><span class="pre">&quot;A1&quot;</span></code>) so that
+D-flat became D-natural and not E-double-flat. The semitone
+transposition is smart enough to make sure that the <code class="docutils literal"><span class="pre">Key</span></code> object
+remains between six-flats and six-sharps. Not only that, but the notes
+will match the best spelling for the current key signature.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">pitchStream</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pitchStream</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_116_0.png" src="../_images/usersGuide_15_key_116_0.png" />
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">k</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">pitchStream</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pitchStream</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_117_0.png" src="../_images/usersGuide_15_key_117_0.png" />
+<p>So, we can make a nice, ascending vocal exercise by varying the
+transposition amount from 0 to 7 (or however high you can sing) and
+putting each of the two-measure excerpts together into one Part.</p>
+<p>We will introduce the tinyNotation format here, which will be described
+in the next chapter:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">out</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="n">pitchStream</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinyNotation: 4/4 c8 e d f e g f a g e f d c e c4&quot;</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+    <span class="n">pitchStream</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">k</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">pitchStream</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+        <span class="n">n</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">pitchStream</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">out</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_15_key_119_0.png" src="../_images/usersGuide_15_key_119_0.png" />
+<p>And we can listen to it as well:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">out</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;midi&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div id='midiPlayerDiv18546'></div>
+<link rel="stylesheet" href="http://artusi.xyz/music21j/css/m21.css"
+    type="text/css" />
+<script>
+require.config({
+    paths: {'music21': 'http://artusi.xyz/music21j/src/music21'}
+});
+require(['music21'], function() {
+               mp = new music21.miditools.MidiPlayer();
+               mp.addPlayer('#midiPlayerDiv18546');
+               mp.base64Load('data:audio/midi;base64,TVRoZAAAAAYAAQABBABNVHJrAAAEtgD/AwAA4ABAAP9ZAgAAAP9YBAQCGAiIAJA8WoQAgDwAAJBAWoQAgEAAAJA+WoQAgD4AAJBBWoQAgEEAAJBAWoQAgEAAAJBDWoQAgEMAAJBBWoQAgEEAAJBFWoQAgEUAAJBDWoQAgEMAAJBAWoQAgEAAAJBBWoQAgEEAAJA+WoQAgD4AAJA8WoQAgDwAAJBAWoQAgEAAAJA8WgD/WQL7AAD/WAQEAhgIiACAPAAAkD1ahACAPQAAkEFahACAQQAAkD9ahACAPwAAkEJahACAQgAAkEFahACAQQAAkERahACARAAAkEJahACAQgAAkEZahACARgAAkERahACARAAAkEFahACAQQAAkEJahACAQgAAkD9ahACAPwAAkD1ahACAPQAAkEFahACAQQAAkD1aAP9ZAgIAAP9YBAQCGAiIAIA9AACQPlqEAIA+AACQQlqEAIBCAACQQFqEAIBAAACQQ1qEAIBDAACQQlqEAIBCAACQRVqEAIBFAACQQ1qEAIBDAACQR1qEAIBHAACQRVqEAIBFAACQQlqEAIBCAACQQ1qEAIBDAACQQFqEAIBAAACQPlqEAIA+AACQQlqEAIBCAACQPloA/1kC/QAA/1gEBAIYCIgAgD4AAJA/WoQAgD8AAJBDWoQAgEMAAJBBWoQAgEEAAJBEWoQAgEQAAJBDWoQAgEMAAJBGWoQAgEYAAJBEWoQAgEQAAJBIWoQAgEgAAJBGWoQAgEYAAJBDWoQAgEMAAJBEWoQAgEQAAJBBWoQAgEEAAJA/WoQAgD8AAJBDWoQAgEMAAJA/WgD/WQIEAAD/WAQEAhgIiACAPwAAkEBahACAQAAAkERahACARAAAkEJahACAQgAAkEVahACARQAAkERahACARAAAkEdahACARwAAkEVahACARQAAkElahACASQAAkEdahACARwAAkERahACARAAAkEVahACARQAAkEJahACAQgAAkEBahACAQAAAkERahACARAAAkEBaAP9ZAv8AAP9YBAQCGAiIAIBAAACQQVqEAIBBAACQRVqEAIBFAACQQ1qEAIBDAACQRlqEAIBGAACQRVqEAIBFAACQSFqEAIBIAACQRlqEAIBGAACQSlqEAIBKAACQSFqEAIBIAACQRVqEAIBFAACQRlqEAIBGAACQQ1qEAIBDAACQQVqEAIBBAACQRVqEAIBFAACQQVoA/1kCBgAA/1gEBAIYCIgAgEEAAJBCWoQAgEIAAJBGWoQAgEYAAJBEWoQAgEQAAJBHWoQAgEcAAJBGWoQAgEYAAJBJWoQAgEkAAJBHWoQAgEcAAJBLWoQAgEsAAJBJWoQAgEkAAJBGWoQAgEYAAJBHWoQAgEcAAJBEWoQAgEQAAJBCWoQAgEIAAJBGWoQAgEYAAJBCWgD/WQIBAAD/WAQEAhgIiACAQgAAkENahACAQwAAkEdahACARwAAkEVahACARQAAkEhahACASAAAkEdahACARwAAkEpahACASgAAkEhahACASAAAkExahACATAAAkEpahACASgAAkEdahACARwAAkEhahACASAAAkEVahACARQAAkENahACAQwAAkEdahACARwAAkENaiACAQwCIAP8vAA==');
+        });
+</script><p>That&#8217;s enough about keys for now, let&#8217;s move on to a fast way of getting
+small amounts of music into music21, with TinyNotation.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_17_derivations.html" title="User’s Guide: Chapter 17: Derivations"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_14_timeSignatures.html" title="User’s Guide: Chapter 14: Time Signatures and Beats"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

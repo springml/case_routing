@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.metadata.caching &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.metadata.primitives" href="moduleMetadataPrimitives.html" />
+    <link rel="prev" title="music21.metadata.bundles" href="moduleMetadataBundles.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMetadataPrimitives.html" title="music21.metadata.primitives"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleMetadataBundles.html" title="music21.metadata.bundles"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleMetadataBundles.html"
+                        title="previous chapter">music21.metadata.bundles</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleMetadataPrimitives.html"
+                        title="next chapter">music21.metadata.primitives</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.metadata.caching</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#jobprocessor">JobProcessor</a></li>
+<li><a class="reference internal" href="#metadatacachingjob">MetadataCachingJob</a></li>
+<li><a class="reference internal" href="#workerprocess">WorkerProcess</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleMetadataCaching.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-metadata-caching">
+<span id="modulemetadatacaching"></span><h1>music21.metadata.caching<a class="headerlink" href="#music21-metadata-caching" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.metadata.caching"></span><div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.metadata.caching.cacheMetadata">
+<code class="descclassname">music21.metadata.caching.</code><code class="descname">cacheMetadata</code><span class="sig-paren">(</span><em>corpusNames=('local'</em>, <em>'core'</em>, <em>'virtual')</em>, <em>useMultiprocessing=True</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.caching.cacheMetadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cache metadata from corpora in <cite>corpusNames</cite> as local cache files:</p>
+<p>Call as <code class="docutils literal"><span class="pre">metadata.cacheMetadata()</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="jobprocessor">
+<h2>JobProcessor<a class="headerlink" href="#jobprocessor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.metadata.caching.JobProcessor">
+<em class="property">class </em><code class="descclassname">music21.metadata.caching.</code><code class="descname">JobProcessor</code><a class="headerlink" href="#music21.metadata.caching.JobProcessor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Processes metadata-caching jobs, either serially (e.g. single-threaded) or
+in parallel, as a generator.</p>
+<p>Yields a dictionary of:</p>
+<ul class="simple">
+<li>MetadataEntry instances</li>
+<li>failed file paths</li>
+<li>the last processed file path</li>
+<li>the number of remaining jobs</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">jobs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">corpusPath</span> <span class="ow">in</span> <span class="n">corpus</span><span class="o">.</span><span class="n">getMonteverdiMadrigals</span><span class="p">()[:</span><span class="mi">3</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">job</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">caching</span><span class="o">.</span><span class="n">MetadataCachingJob</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">corpusPath</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">useCorpus</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="p">)</span>
+<span class="gp">... </span>    <span class="n">jobs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jobGenerator</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">caching</span><span class="o">.</span><span class="n">JobProcessor</span><span class="o">.</span><span class="n">process_serial</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">jobGenerator</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;remainingJobs&#39;</span><span class="p">])</span>
+<span class="gp">...</span>
+<span class="go">2</span>
+<span class="go">1</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.metadata.caching.JobProcessor" title="music21.metadata.caching.JobProcessor"><code class="xref py py-class docutils literal"><span class="pre">JobProcessor</span></code></a> methods</p>
+<dl class="staticmethod">
+<dt id="music21.metadata.caching.JobProcessor.process_parallel">
+<em class="property">static </em><code class="descclassname">JobProcessor.</code><code class="descname">process_parallel</code><span class="sig-paren">(</span><em>jobs</em>, <em>processCount=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.caching.JobProcessor.process_parallel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process jobs in parallel, with <cite>processCount</cite> processes.</p>
+<p>If <cite>processCount</cite> is none, use 1 fewer process than the number of
+available cores.</p>
+<p>jobs is a list of <code class="xref py py-class docutils literal"><span class="pre">MetadataCachingJob</span></code> objects.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="music21.metadata.caching.JobProcessor.process_serial">
+<em class="property">static </em><code class="descclassname">JobProcessor.</code><code class="descname">process_serial</code><span class="sig-paren">(</span><em>jobs</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.caching.JobProcessor.process_serial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process jobs serially.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="metadatacachingjob">
+<h2>MetadataCachingJob<a class="headerlink" href="#metadatacachingjob" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.metadata.caching.MetadataCachingJob">
+<em class="property">class </em><code class="descclassname">music21.metadata.caching.</code><code class="descname">MetadataCachingJob</code><span class="sig-paren">(</span><em>filePath</em>, <em>jobNumber=0</em>, <em>useCorpus=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.caching.MetadataCachingJob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses one corpus path, and attempts to extract metadata from it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">metadata</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">job</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">caching</span><span class="o">.</span><span class="n">MetadataCachingJob</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;bach/bwv66.6&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">useCorpus</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">job</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="go">((&lt;music21.metadata.bundles.MetadataEntry: bach_bwv66_6&gt;,), ())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">getResults</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">errors</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">getErrors</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>TODO: error list, nut just numbers needs to be reported back up.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.metadata.caching.MetadataCachingJob" title="music21.metadata.caching.MetadataCachingJob"><code class="xref py py-class docutils literal"><span class="pre">MetadataCachingJob</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.metadata.caching.MetadataCachingJob.cleanFilePath">
+<code class="descclassname">MetadataCachingJob.</code><code class="descname">cleanFilePath</code><a class="headerlink" href="#music21.metadata.caching.MetadataCachingJob.cleanFilePath" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.metadata.caching.MetadataCachingJob" title="music21.metadata.caching.MetadataCachingJob"><code class="xref py py-class docutils literal"><span class="pre">MetadataCachingJob</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.metadata.caching.MetadataCachingJob.getErrors">
+<code class="descclassname">MetadataCachingJob.</code><code class="descname">getErrors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.caching.MetadataCachingJob.getErrors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.metadata.caching.MetadataCachingJob.getResults">
+<code class="descclassname">MetadataCachingJob.</code><code class="descname">getResults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.caching.MetadataCachingJob.getResults" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.metadata.caching.MetadataCachingJob.parseFilePath">
+<code class="descclassname">MetadataCachingJob.</code><code class="descname">parseFilePath</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.caching.MetadataCachingJob.parseFilePath" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.metadata.caching.MetadataCachingJob.parseNonOpus">
+<code class="descclassname">MetadataCachingJob.</code><code class="descname">parseNonOpus</code><span class="sig-paren">(</span><em>parsedObject</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.caching.MetadataCachingJob.parseNonOpus" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.metadata.caching.MetadataCachingJob.parseOpus">
+<code class="descclassname">MetadataCachingJob.</code><code class="descname">parseOpus</code><span class="sig-paren">(</span><em>parsedObject</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.caching.MetadataCachingJob.parseOpus" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.metadata.caching.MetadataCachingJob.parseOpusScore">
+<code class="descclassname">MetadataCachingJob.</code><code class="descname">parseOpusScore</code><span class="sig-paren">(</span><em>score</em>, <em>scoreNumber</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.caching.MetadataCachingJob.parseOpusScore" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.metadata.caching.MetadataCachingJob.run">
+<code class="descclassname">MetadataCachingJob.</code><code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.caching.MetadataCachingJob.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="workerprocess">
+<h2>WorkerProcess<a class="headerlink" href="#workerprocess" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.metadata.caching.WorkerProcess">
+<em class="property">class </em><code class="descclassname">music21.metadata.caching.</code><code class="descname">WorkerProcess</code><span class="sig-paren">(</span><em>job_queue</em>, <em>result_queue</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.caching.WorkerProcess" title="Permalink to this definition">¶</a></dt>
+<dd><p>A worker process for use by the multithreaded metadata-caching job
+processor.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.metadata.caching.WorkerProcess" title="music21.metadata.caching.WorkerProcess"><code class="xref py py-class docutils literal"><span class="pre">WorkerProcess</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.metadata.caching.WorkerProcess.run">
+<code class="descclassname">WorkerProcess.</code><code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.caching.WorkerProcess.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMetadataPrimitives.html" title="music21.metadata.primitives"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleMetadataBundles.html" title="music21.metadata.bundles"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

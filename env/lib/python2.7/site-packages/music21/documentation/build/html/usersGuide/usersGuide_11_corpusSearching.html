@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User’s Guide, Chapter 11: Corpus Searching &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="User’s Guide, Chapter 12: Getting Back to Basics: The Music21Object" href="usersGuide_12_music21object.html" />
+    <link rel="prev" title="User’s Guide, Chapter 10: Examples 1" href="usersGuide_10_examples1.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_12_music21object.html" title="User’s Guide, Chapter 12: Getting Back to Basics: The Music21Object"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_10_examples1.html" title="User’s Guide, Chapter 10: Examples 1"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_10_examples1.html"
+                        title="previous chapter">User&#8217;s Guide, Chapter 10: Examples 1</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_12_music21object.html"
+                        title="next chapter">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User&#8217;s Guide, Chapter 11: Corpus Searching</a><ul>
+<li><a class="reference internal" href="#types-of-corpora">Types of corpora</a></li>
+<li><a class="reference internal" href="#simple-searches-of-the-corpus">Simple searches of the corpus</a></li>
+<li><a class="reference internal" href="#metadata-search-fields">Metadata search fields</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_02_notes.html">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_03_pitches.html">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_05_listsOfLists.html">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_07_chords.html">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_08_installingMusicXML.html">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_12_music21object.html">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_13_music21object2.html">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_15_key.html">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_21_sorting.html">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_25_postTonalTools1.html">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_26_clientWeakref.html">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_28_lyricSearcher.html">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_97_timespans.html">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_11_corpusSearching.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-11-corpussearching"></span><div class="section" id="user-s-guide-chapter-11-corpus-searching">
+<h1>User&#8217;s Guide, Chapter 11: Corpus Searching<a class="headerlink" href="#user-s-guide-chapter-11-corpus-searching" title="Permalink to this headline">¶</a></h1>
+<p>One of music21&#8217;s important features is its capability to help users
+examine large bodies of musical works, or <em>corpora</em>.</p>
+<p>Music21 comes with a substantial corpus called the <em>core</em> corpus. When
+you download music21 you can immediately start working with the files in
+the corpus directory, including the complete chorales of Bach, many
+Haydn and Beethoven string quartets, three books of madrigals by
+Monteverdi, thousands of folk songs from the Essen and various ABC
+databases, and many more.</p>
+<p>To load a file from the corpus, simply call <em>corpus.parse</em> and assign
+that file to a variable:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">bach</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv66.6&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">music21</span></code> local corpus comes with many thousands of works. All of
+them (or at least all the collections) are listed on the
+<a class="reference internal" href="../about/referenceCorpus.html#referencecorpus"><span class="std std-ref">Corpus Reference</span></a>.</p>
+<p>Users can also build their own corpora to index and quickly search their
+own collections on disk including multiple local corpora, for different
+projects, that can be accessed individually.</p>
+<p>This user&#8217;s guide will cover more about the corpus&#8217;s basic features
+soon. This chapter focuses on music21&#8217;s tools for extracting useful
+metadata - titles, locations, composers names, the key signatures used
+in each piece, total durations, ambitus (range) and so forth.</p>
+<p>This metadata is collected in <em>metadata bundles</em> for each corpus. The
+<em>corpus</em> module has tools to search these bundles and persist them disk
+for later research.</p>
+<div class="section" id="types-of-corpora">
+<h2>Types of corpora<a class="headerlink" href="#types-of-corpora" title="Permalink to this headline">¶</a></h2>
+<p>Music21 works with three categories of <em>corpora</em>, made explicit via the
+<code class="docutils literal"><span class="pre">corpus.Corpus</span></code> abstract class.</p>
+<p>The first category is the <em>core</em> corpus, a large collection of musical
+works packaged with most music21 installations, including many works
+from the common practice era, and inumerable folk songs, in a variety of
+formats:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">coreCorpus</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">corpora</span><span class="o">.</span><span class="n">CoreCorpus</span><span class="p">()</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">coreCorpus</span><span class="o">.</span><span class="n">getPaths</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">2570</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you&#8217;ve installed a &#8220;no corpus&#8221; version of music21, you can still access
+the <em>core</em> corpus with a little work.  Download the <em>core</em> corpus from
+music21&#8217;s website, and install it on your system somewhere. Then, teach
+music21 where you installed it like this:</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">coreCorpus</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">corpora</span><span class="o">.</span><span class="n">CoreCorpus</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coreCorpus</span><span class="o">.</span><span class="n">manualCoreCorpusPath</span> <span class="o">=</span> <span class="s1">&#39;path/to/core/corpus&#39;</span>
+</pre></div>
+</div>
+</div>
+<p>Music21 also has the notion of a <em>virtual</em> corpus: a collection of
+musical works to be found at various locations online which, for reasons
+of licensing, haven&#8217;t been included in the <em>core</em> corpus. There are not
+too many files in there, but it is something we hope to expand. Here&#8217;s
+one such path:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">virtualCorpus</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">corpora</span><span class="o">.</span><span class="n">VirtualCorpus</span><span class="p">()</span>
+<span class="n">virtualCorpus</span><span class="o">.</span><span class="n">getPaths</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;http://kern.ccarh.org/cgi-bin/ksdata?l=cc/bach/cello&amp;file=bwv1007-01.krn&amp;f=xml&#39;</span>
+</pre></div>
+</div>
+<p>Finally, music21 allows for <em>local</em> corpora: bodies of works provided
+and configured by individual music21 users for their own research.
+<em>Local</em> corpora behave identically to the <em>core</em> and <em>virtual</em> corpora,
+and can be searched and cached in the same manner:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">localCorpus</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">corpora</span><span class="o">.</span><span class="n">LocalCorpus</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You can add and remove paths from a <em>local</em> corpus with the
+<code class="docutils literal"><span class="pre">addPath()</span></code> and <code class="docutils literal"><span class="pre">removePath()</span></code> methods:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">localCorpus</span><span class="o">.</span><span class="n">addPath</span><span class="p">(</span><span class="s1">&#39;~/Desktop&#39;</span><span class="p">)</span>
+<span class="n">localCorpus</span><span class="o">.</span><span class="n">directoryPaths</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="s1">&#39;/Users/josiah/Desktop&#39;</span><span class="p">,)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">localCorpus</span><span class="o">.</span><span class="n">removePath</span><span class="p">(</span><span class="s1">&#39;~/Desktop&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By default, a call to <code class="docutils literal"><span class="pre">corpus.parse</span></code> or <code class="docutils literal"><span class="pre">corpus.search</span></code> will look
+for files in any corpus, core, local, or virtual.</p>
+</div>
+<div class="section" id="simple-searches-of-the-corpus">
+<h2>Simple searches of the corpus<a class="headerlink" href="#simple-searches-of-the-corpus" title="Permalink to this headline">¶</a></h2>
+<p>When you search the corpus, music21 examines each metadata object in the
+metadata bundle for the whole corpus and attempts to match your search
+string against the contents of the various search fields saved in that
+metadata object.</p>
+<p>You can use <code class="docutils literal"><span class="pre">corpus.search()</span></code> to search the metadata associated with
+all known corpora, <em>core</em>, <em>virtual</em> and even each <em>local</em> corpus:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">sixEight</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;6/8&#39;</span><span class="p">)</span>
+<span class="n">sixEight</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">bundles</span><span class="o">.</span><span class="n">MetadataBundle</span> <span class="p">{</span><span class="mi">2162</span> <span class="n">entries</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To work with all those pieces, you can parse treat the MetadataBundle
+like a list and call <code class="docutils literal"><span class="pre">.parse()</span></code> on any element:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">myPiece</span> <span class="o">=</span> <span class="n">sixEight</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="n">myPiece</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">title</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;Pady Whack&#39;</span>
+</pre></div>
+</div>
+<p>This will return a <code class="docutils literal"><span class="pre">music21.stream.Score</span></code> object which you can work
+with like any other stream. Or if you just want to see it, there&#8217;s a
+convenience <code class="docutils literal"><span class="pre">.show()</span></code> method you can call directly on a MetadataEntry.</p>
+<p>You can also search against a single <code class="docutils literal"><span class="pre">Corpus</span></code> instance, like this one
+which ignores anything in your local corpus:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">corpus</span><span class="o">.</span><span class="n">corpora</span><span class="o">.</span><span class="n">CoreCorpus</span><span class="p">()</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;6/8&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">bundles</span><span class="o">.</span><span class="n">MetadataBundle</span> <span class="p">{</span><span class="mi">2162</span> <span class="n">entries</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Because the result of every metadata search is also a metadata bundle,
+you can search your search results to do more complex searches. Remember
+that <code class="docutils literal"><span class="pre">bachBundle</span></code> is a collection of all works where the composer is
+Bach. Here we will limit to those pieces in 3/4 time:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bachBundle</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;bach&#39;</span><span class="p">,</span> <span class="s1">&#39;composer&#39;</span><span class="p">)</span>
+<span class="n">bachBundle</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">bundles</span><span class="o">.</span><span class="n">MetadataBundle</span> <span class="p">{</span><span class="mi">22</span> <span class="n">entries</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bachBundle</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">bundles</span><span class="o">.</span><span class="n">MetadataBundle</span> <span class="p">{</span><span class="mi">5</span> <span class="n">entries</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>There are actually many more pieces by Bach in the music21 corpus,
+but many of them are without the metadata specifying him as a
+composer; his name is only in the filename. To get all the pieces
+by Bach use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">allBach</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;bach&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="last">This will search filenames as well.  We will aim to get more complete
+metadata in the core corpus in the near future, and would appreciate
+community help to achieve this goal.</p>
+</div>
+</div>
+<div class="section" id="metadata-search-fields">
+<h2>Metadata search fields<a class="headerlink" href="#metadata-search-fields" title="Permalink to this headline">¶</a></h2>
+<p>When you search metadata bundles, you can search either through every
+search field in every metadata instance, or through a single, specific
+search field. As we mentioned above, searching for &#8220;bach&#8221; as a composer
+renders different results from searching for the word &#8220;bach&#8221; in general:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">corpus</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;bach&#39;</span><span class="p">,</span> <span class="s1">&#39;composer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">bundles</span><span class="o">.</span><span class="n">MetadataBundle</span> <span class="p">{</span><span class="mi">22</span> <span class="n">entries</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">corpus</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;bach&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">bundles</span><span class="o">.</span><span class="n">MetadataBundle</span> <span class="p">{</span><span class="mi">20</span> <span class="n">entries</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">corpus</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;bach&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">bundles</span><span class="o">.</span><span class="n">MetadataBundle</span> <span class="p">{</span><span class="mi">151</span> <span class="n">entries</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>So what fields can we actually search through? You can find out like
+this (in v2, replace <code class="docutils literal"><span class="pre">corpus.manager</span></code> with <code class="docutils literal"><span class="pre">corpus.corpora.Corpus</span></code>):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">corpus</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">listSearchFields</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="n">alternativeTitle</span>
+ <span class="n">ambitus</span>
+ <span class="n">composer</span>
+ <span class="n">date</span>
+ <span class="n">keySignatureFirst</span>
+ <span class="n">keySignatures</span>
+ <span class="n">localeOfComposition</span>
+ <span class="n">movementName</span>
+ <span class="n">movementNumber</span>
+ <span class="n">noteCount</span>
+ <span class="n">number</span>
+ <span class="n">opusNumber</span>
+ <span class="n">pitchHighest</span>
+ <span class="n">pitchLowest</span>
+ <span class="n">quarterLength</span>
+ <span class="n">tempoFirst</span>
+ <span class="n">tempos</span>
+ <span class="n">timeSignatureFirst</span>
+ <span class="n">timeSignatures</span>
+ <span class="n">title</span>
+</pre></div>
+</div>
+<p>This field will grow in the future now that the development team is
+seeing how useful this searching method can be! Now that we know what
+all the search fields are, we can search through some of the more
+obscure corners of the <em>core</em> corpus:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">corpus</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;taiwan&#39;</span><span class="p">,</span> <span class="s1">&#39;locale&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">bundles</span><span class="o">.</span><span class="n">MetadataBundle</span> <span class="p">{</span><span class="mi">27</span> <span class="n">entries</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>What if you are not searching for an exact match? If you&#8217;re searching
+for short pieces, you probably don&#8217;t want to find pieces with exactly 1
+note then union that set with pieces with exactly 2 notes, etc. Or for
+pieces from the 19th century, you won&#8217;t want to search for 1801, 1802,
+etc. What you can do is set up a &#8220;predicate callable&#8221; which is a
+function (either a full python <code class="docutils literal"><span class="pre">def</span></code> statement or a short <code class="docutils literal"><span class="pre">lambda</span></code>
+function) to filter the results. Each piece will be checked against your
+predicate and only those that return true. Here we&#8217;ll search for pieces
+with between 400 and 500 notes, only in the <code class="docutils literal"><span class="pre">core</span></code> corpus:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">predicate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">400</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">500</span>
+<span class="n">corpus</span><span class="o">.</span><span class="n">corpora</span><span class="o">.</span><span class="n">CoreCorpus</span><span class="p">()</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">predicate</span><span class="p">,</span> <span class="s1">&#39;noteCount&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">bundles</span><span class="o">.</span><span class="n">MetadataBundle</span> <span class="p">{</span><span class="mi">49</span> <span class="n">entries</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>You can also pass in compiled regular expressions into the search. In
+this case we will use a regular expression likely to find Handel and
+Haydn and perhaps not much else:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">haydnOrHandel</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">r&#39;ha.d.*&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+<span class="n">corpus</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">haydnOrHandel</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">bundles</span><span class="o">.</span><span class="n">MetadataBundle</span> <span class="p">{</span><span class="mi">176</span> <span class="n">entries</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Unfortunately this really wasn&#8217;t a good search, since we mostly got folk
+songs with the title of &#8220;Shandy&#8221;. Best to use a &#8216;*^*&#8217; search to match
+at the beginning of the word next time.</p>
+<p>We&#8217;ve now gone fairly high level in our searching. We will return to the
+lowest level in
+<a class="reference internal" href="usersGuide_12_music21object.html#usersguide-12-music21object"><span class="std std-ref">Chapter 12: The Music21Object</span></a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_12_music21object.html" title="User’s Guide, Chapter 12: Getting Back to Basics: The Music21Object"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_10_examples1.html" title="User’s Guide, Chapter 10: Examples 1"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User’s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1) &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="User’s Guide, Chapter 9: Chordify" href="usersGuide_09_chordify.html" />
+    <link rel="prev" title="User’s Guide, Chapter 7: Chords" href="usersGuide_07_chords.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_09_chordify.html" title="User’s Guide, Chapter 9: Chordify"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_07_chords.html" title="User’s Guide, Chapter 7: Chords"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_07_chords.html"
+                        title="previous chapter">User&#8217;s Guide, Chapter 7: Chords</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_09_chordify.html"
+                        title="next chapter">User&#8217;s Guide, Chapter 9: Chordify</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a><ul>
+<li><a class="reference internal" href="#parsing-files-in-general">Parsing Files in General</a></li>
+<li><a class="reference internal" href="#file-types-available-to-music21">File types available to <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li><a class="reference internal" href="#getting-and-working-with-musicxml-files">Getting and working with MusicXML Files</a></li>
+<li><a class="reference internal" href="#getting-and-working-with-humdrum-files">Getting and working with Humdrum Files</a></li>
+<li><a class="reference internal" href="#getting-and-working-with-abc-files">Getting and working with ABC Files</a><ul>
+<li><a class="reference internal" href="#abc-opus-files">ABC Opus files</a></li>
+<li><a class="reference internal" href="#abc-single-part-opus-files">ABC single-part Opus files</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#parsing-musedata-files">Parsing Musedata Files</a></li>
+<li><a class="reference internal" href="#parsing-midi-files">Parsing MIDI Files</a></li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_02_notes.html">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_03_pitches.html">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_05_listsOfLists.html">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_07_chords.html">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_11_corpusSearching.html">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_12_music21object.html">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_13_music21object2.html">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_15_key.html">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_21_sorting.html">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_25_postTonalTools1.html">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_26_clientWeakref.html">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_28_lyricSearcher.html">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_97_timespans.html">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_08_installingMusicXML.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-08-installingmusicxml"></span><div class="section" id="user-s-guide-chapter-8-installing-musicxml-readers-and-file-formats-1">
+<h1>User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)<a class="headerlink" href="#user-s-guide-chapter-8-installing-musicxml-readers-and-file-formats-1" title="Permalink to this headline">¶</a></h1>
+<p>Music21 can import and export a bunch of different musical data formats.</p>
+<p>Pieces in many of these formats are distributed with music21 as part of
+the corpus module (see <a class="reference internal" href="../moduleReference/moduleCorpus.html#modulecorpus"><span class="std std-ref">music21.corpus</span></a>); look at
+<a class="reference internal" href="../about/referenceCorpus.html#referencecorpus"><span class="std std-ref">List of Works Found in the music21 Corpus</span></a> to see them all.</p>
+<p>In general, to load a file from disk, call
+<a class="reference internal" href="../moduleReference/moduleConverter.html#music21.converter.parse" title="music21.converter.parse"><code class="xref py py-func docutils literal"><span class="pre">music21.converter.parse()</span></code></a>, which can handle importing all
+supported formats. (For complete documentation on file and data formats,
+see <a class="reference internal" href="../moduleReference/moduleConverter.html#moduleconverter"><span class="std std-ref">music21.converter</span></a>.) If you want to convert a file from the
+corpus just use <a class="reference internal" href="../moduleReference/moduleCorpus.html#music21.corpus.parse" title="music21.corpus.parse"><code class="xref py py-func docutils literal"><span class="pre">music21.corpus.parse()</span></code></a>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv66.6&#39;</span><span class="p">)</span>
+<span class="n">b</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># I&#39;ve altered this so it&#39;s much shorter than it should be...</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_08_installingMusicXML_3_0.png" src="../_images/usersGuide_08_installingMusicXML_3_0.png" />
+<p>Okay, so say you&#8217;re having some problems seeing things. The first things
+to ask are:</p>
+<ul class="simple">
+<li>Do you have Finale, Sibelius, or MuseScore? Even the free version of
+Finale Notepad will work.</li>
+<li>Will you got to <a class="reference external" href="http://www.finalemusic.com/products/finale-notepad/">http://www.finalemusic.com/products/finale-notepad/</a>
+or <a class="reference external" href="https://musescore.org">https://musescore.org</a> and get a Free copy?</li>
+</ul>
+<p>Once you have one of these three installed, we can move on. (It <em>is</em>
+possible to use <code class="docutils literal"><span class="pre">music21</span></code> with Lilypond alone, but that&#8217;s much harder
+to get configured properly, so please try this first)</p>
+<p>Run this command (after the <code class="docutils literal"><span class="pre">from</span> <span class="pre">music21</span> <span class="pre">import</span> <span class="pre">*</span></code>):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">configure</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You can say &#8220;no&#8221; to everything that is &#8220;Yes/No&#8221;, but make sure that it
+is finding your copy of MuseScore, Finale, or Sibelius.</p>
+<div class="section" id="parsing-files-in-general">
+<h2>Parsing Files in General<a class="headerlink" href="#parsing-files-in-general" title="Permalink to this headline">¶</a></h2>
+<p>You can parse a file on your hard drive by calling
+<a class="reference internal" href="../moduleReference/moduleConverter.html#music21.converter.parse" title="music21.converter.parse"><code class="xref py py-func docutils literal"><span class="pre">music21.converter.parse()</span></code></a>. This returns a
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> usually, though sometimes
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Part" title="music21.stream.Part"><code class="xref py py-class docutils literal"><span class="pre">Part</span></code></a> (for a format that only handles single
+parts) or <a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Opus" title="music21.stream.Opus"><code class="xref py py-class docutils literal"><span class="pre">Opus</span></code></a> (for multiple scores bound
+together) comes back instead. You won&#8217;t do much with that unless you
+assign it to a variable, such as <code class="docutils literal"><span class="pre">c</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;/Users/cuthbert/Desktop/myXML.xml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you&#8217;re on a PC, one of the things to notice is that you can use
+forward slashes, as in:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;C:/Users/cuthbert/Desktop/myXML.xml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or you can use backslashes, as long as you put an <code class="docutils literal"><span class="pre">r</span></code> before the quote
+before the file name:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">r&#39;C:\Users\cuthbert\Desktop\myXML.xml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you&#8217;re in the directory of the file, you can just use the local
+filename (for instance if you start in <code class="docutils literal"><span class="pre">/Users/cuthbert/</span></code> you could
+just use <code class="docutils literal"><span class="pre">'Desktop/myXML.xml'</span></code>.</p>
+<p>If the file you want is on the web, we can give a URL to the
+<a class="reference internal" href="../moduleReference/moduleConverter.html#music21.converter.parse" title="music21.converter.parse"><code class="xref py py-func docutils literal"><span class="pre">music21.converter.parse()</span></code></a> function that points to the desired
+file. Assuming proper system configuration (see <a class="reference internal" href="../tutorials/environment.html#environment"><span class="std std-ref">Configuring Environment Settings</span></a>),
+the file will be downloaded and parsed.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://kern.ccarh.org/cgi-bin/ksdata?l=cc/bach/cello&amp;file=bwv1007-01.krn&amp;f=xml&#39;</span>
+<span class="n">sAlt</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">sAlt</span><span class="o">.</span><span class="n">measures</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># show first 5 measures</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_08_installingMusicXML_16_0.png" src="../_images/usersGuide_08_installingMusicXML_16_0.png" />
+<p>Usually, the file format can be guessed from the filename, but if the
+filename does not have a suffix <em>(Damn you, OS X!)</em> or the URL has the
+wrong suffix, you can give a <code class="docutils literal"><span class="pre">format=&quot;FORMAT&quot;</span></code> parameter to the file:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;/Users/cuthbert/Desktop/myXML&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;musicxml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>One of the things you&#8217;ll notice over time is that once you parse a file
+into <code class="docutils literal"><span class="pre">music21</span></code> once, the next time you parse it it&#8217;ll be between 2 and
+5 times faster. That&#8217;s because we save an optimized version of the file
+the first time you create a file, and subsequent times you open it it
+will check to see if the original file has changed, and if it hasn&#8217;t, it
+will read the optimized version instead.</p>
+<p>For most people, this will work 100% of the time. But if you&#8217;ve done
+something sneaky (like changed the file without changing its
+modification time) or you&#8217;ve changed the format of the <code class="docutils literal"><span class="pre">music21</span></code>
+parser, or if something&#8217;s not right, or if you just want to do things
+slower, you can put a <code class="docutils literal"><span class="pre">forceSource=True</span></code> keyword into the <code class="docutils literal"><span class="pre">parse</span></code>
+format.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;/Users/cuthbert/Desktop/myXML.xml&#39;</span><span class="p">,</span> <span class="n">forceSource</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By the way...if you&#8217;ve read any really old <code class="docutils literal"><span class="pre">music21</span></code> publications, you
+might see <code class="docutils literal"><span class="pre">parseWork</span></code> mentioned instead of <code class="docutils literal"><span class="pre">parse</span></code>. It&#8217;s the same
+thing, so anywhere you see <code class="docutils literal"><span class="pre">parseWork</span></code>, type <code class="docutils literal"><span class="pre">parse</span></code> instead.</p>
+</div>
+<div class="section" id="file-types-available-to-music21">
+<h2>File types available to <code class="docutils literal"><span class="pre">music21</span></code><a class="headerlink" href="#file-types-available-to-music21" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Music21</span></code> can read and write a lot of different file formats. Some of
+them are pretty obscure. Some of them are world standards. The
+<code class="docutils literal"><span class="pre">converter</span></code> module&#8217;s capital-c-<code class="docutils literal"><span class="pre">Converter</span></code> object can give a list
+of some of them. Each tool to work with one format is called a
+<code class="docutils literal"><span class="pre">subConverter</span></code>. Here are the formats that <code class="docutils literal"><span class="pre">music21</span></code> can read:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">converter</span><span class="o">.</span><span class="n">Converter</span><span class="p">()</span><span class="o">.</span><span class="n">subconvertersList</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterABC</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterCapella</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterClercqTemperley</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterHumdrum</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterMEI</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterMidi</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterMuseData</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterMusicXML</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterNoteworthy</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterNoteworthyBinary</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterRomanText</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterScala</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterTinyNotation</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>And the formats that it can write:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">converter</span><span class="o">.</span><span class="n">Converter</span><span class="p">()</span><span class="o">.</span><span class="n">subconvertersList</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterBraille</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterLilypond</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterMidi</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterMusicXML</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterScala</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterText</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterTextLine</span><span class="p">,</span>
+  <span class="n">music21</span><span class="o">.</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterVexflow</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>To output a file, either call <code class="docutils literal"><span class="pre">.show(&quot;format&quot;)</span></code> on the stream (where
+format can be <code class="docutils literal"><span class="pre">musicxml</span></code>, <code class="docutils literal"><span class="pre">braille</span></code>, <code class="docutils literal"><span class="pre">midi</span></code>, etc.) or to keep the
+file on disk, use <code class="docutils literal"><span class="pre">.write(&quot;format&quot;,</span> <span class="pre">&quot;filename&quot;)</span></code>.</p>
+<p>Some of the available formats will be listed below; the most important
+ones for now are the output formats (since music21 will figure out
+inputs automatically). They are <code class="docutils literal"><span class="pre">braille</span></code>, <code class="docutils literal"><span class="pre">lilypond</span></code>, <code class="docutils literal"><span class="pre">midi</span></code>,
+<code class="docutils literal"><span class="pre">musicxml</span></code>, <code class="docutils literal"><span class="pre">scala</span></code>, <code class="docutils literal"><span class="pre">text</span></code>, and <code class="docutils literal"><span class="pre">vexflow</span></code>.</p>
+<p>Some formats have sub-formats, for instance both <code class="docutils literal"><span class="pre">musicxml</span></code> and
+<code class="docutils literal"><span class="pre">lilypond</span></code> have a <code class="docutils literal"><span class="pre">.png</span></code> subformat which converts directly to a
+<code class="docutils literal"><span class="pre">.png</span></code> file. To use that, call <code class="docutils literal"><span class="pre">.show(&quot;musicxml.png&quot;)</span></code>.</p>
+<p>Some formats have abbreviations also, so <code class="docutils literal"><span class="pre">musicxml</span></code> is also <code class="docutils literal"><span class="pre">xml</span></code>,
+<code class="docutils literal"><span class="pre">lilypond</span></code> is <code class="docutils literal"><span class="pre">lily</span></code>, and (for ease of typing), <code class="docutils literal"><span class="pre">text</span></code> is <code class="docutils literal"><span class="pre">t</span></code>.</p>
+</div>
+<div class="section" id="getting-and-working-with-musicxml-files">
+<h2>Getting and working with MusicXML Files<a class="headerlink" href="#getting-and-working-with-musicxml-files" title="Permalink to this headline">¶</a></h2>
+<p>Numerous MusicXML files can be found at the following URLs.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.musescore.com/">http://www.musescore.com/</a></li>
+<li><a class="reference external" href="http://www.gutenberg.org/">http://www.gutenberg.org/</a></li>
+</ul>
+<p>MusicXML files sometimes have the extension <code class="docutils literal"><span class="pre">.xml</span></code> and sometimes
+<code class="docutils literal"><span class="pre">.mxl</span></code>. Usually the latter are compressed music XML files; they load
+just the same.</p>
+<p>The format for musicxml, is, of course, <code class="docutils literal"><span class="pre">musicxml</span></code>.</p>
+</div>
+<div class="section" id="getting-and-working-with-humdrum-files">
+<h2>Getting and working with Humdrum Files<a class="headerlink" href="#getting-and-working-with-humdrum-files" title="Permalink to this headline">¶</a></h2>
+<p>Humdrum is a file format developed by David Huron at Ohio State
+University which is great at encoding works for computational analysis.
+The Humdrum format includes many subformats (&#8220;spine classes&#8221;) of which
+<code class="docutils literal"><span class="pre">music21</span></code> supports the general class, the <code class="docutils literal"><span class="pre">kern</span></code> format, and the
+<code class="docutils literal"><span class="pre">dynam</span></code> dynamics format.</p>
+<p>Parsing Humdrum files is exactly as parsing other data formats. Simply
+call the music21.converter.parse() function on the desired file path or
+URL.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">sBach</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://kern.ccarh.org/cgi-bin/ksdata?&#39;</span> <span class="o">+</span>
+                        <span class="s1">&#39;l=users/craig/classical/bach/cello&amp;file=bwv1007-01.krn&amp;f=kern&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Over one hundred thousand Kern files can be found at the following URL.</p>
+<p><a class="reference external" href="http://kern.humdrum.org/">http://kern.humdrum.org/</a></p>
+</div>
+<div class="section" id="getting-and-working-with-abc-files">
+<h2>Getting and working with ABC Files<a class="headerlink" href="#getting-and-working-with-abc-files" title="Permalink to this headline">¶</a></h2>
+<p>ABC is a text-based format that can encode lots of musical types, but is
+especially great for monophonic songs, such as folk songs. If you&#8217;re in
+the folk song world, you&#8217;ll love working with ABC.</p>
+<p>Parsing ABC files is exactly as parsing other data formats. Simply call
+the <a class="reference internal" href="../moduleReference/moduleConverter.html#music21.converter.parse" title="music21.converter.parse"><code class="xref py py-func docutils literal"><span class="pre">music21.converter.parse()</span></code></a> function on the desired file path
+or URL.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">o</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;/Users/cuthbert/Documents/Music21/praludium.abc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Large collections of ABC are available from numerous on-line
+repositories. The following links are just a few of the many resources
+available.</p>
+<p><a class="reference external" href="http://abcnotation.com">http://abcnotation.com</a></p>
+<p><a class="reference external" href="http://www.serpentpublications.org">http://www.serpentpublications.org</a></p>
+<div class="section" id="abc-opus-files">
+<h3>ABC Opus files<a class="headerlink" href="#abc-opus-files" title="Permalink to this headline">¶</a></h3>
+<p>Note that many ABC files define more than one complete musical work. If
+an ABC file defines more than one work, an
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Opus" title="music21.stream.Opus"><code class="xref py py-class docutils literal"><span class="pre">Opus</span></code></a> object is returned. Opus objects, a
+Stream subclass, provide convenience methods for accessing multiple
+Score objects.</p>
+<p>You can get a whole bunch of pieces together just by parsing the file.
+For instance, here&#8217;s an Opus:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">o</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;josquin/ovenusbant&#39;</span><span class="p">)</span>
+<span class="n">o</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Opus</span> <span class="mh">0x10d0e82e8</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Reference work numbers (e.g., the &#8220;X:&#8221; metadata tag in ABC) are stored
+in <a class="reference internal" href="../moduleReference/moduleMetadata.html#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a> objects in each contained
+Score. Access to these numbers from the Opus is available with the
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Opus.getNumbers" title="music21.stream.Opus.getNumbers"><code class="xref py py-meth docutils literal"><span class="pre">music21.stream.Opus.getNumbers()</span></code></a> method. Additionally, the
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> object can be directly obtained with
+the <a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Opus.getScoreByNumber" title="music21.stream.Opus.getScoreByNumber"><code class="xref py py-meth docutils literal"><span class="pre">getScoreByNumber()</span></code></a> method.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">o</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;josquin/ovenusbant&#39;</span><span class="p">)</span>
+<span class="n">o</span><span class="o">.</span><span class="n">getNumbers</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">getScoreByNumber</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">title</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;O Venus bant&#39;</span>
+</pre></div>
+</div>
+<p>Direct access to Score objects contained in an Opus by title is
+available with the <a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Opus.getScoreByTitle" title="music21.stream.Opus.getScoreByTitle"><code class="xref py py-meth docutils literal"><span class="pre">getScoreByTitle()</span></code></a>
+method.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">o</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;essenFolksong/erk5&#39;</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">getScoreByTitle</span><span class="p">(</span><span class="s1">&#39;Vrienden, kommt alle gaere&#39;</span><span class="p">)</span>
+<span class="n">s</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Score</span> <span class="mh">0x1092f4668</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">title</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;Vrienden, kommt alle gaere&#39;</span>
+</pre></div>
+</div>
+<p>Some ABC files, such as those in <code class="docutils literal"><span class="pre">corpus/essenFolksong</span></code> have hundreds
+or thousands of files. The way we&#8217;ve been doing things before is to
+parse all of them and then select the one we want. If you know the
+number of the file you want, however, you can pass to
+<code class="docutils literal"><span class="pre">converter.parse</span></code> or <code class="docutils literal"><span class="pre">corpus.parse</span></code> a <code class="docutils literal"><span class="pre">number=X</span></code> attribute to get
+just that one. It will return a <code class="docutils literal"><span class="pre">Score</span></code> object</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;essenFolksong/erk5&#39;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">s</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Score</span> <span class="mh">0x10f5a07f0</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="abc-single-part-opus-files">
+<h3>ABC single-part Opus files<a class="headerlink" href="#abc-single-part-opus-files" title="Permalink to this headline">¶</a></h3>
+<p>In some cases an ABC file may define individual parts each as a separate
+score, sort of like a Renaissance partbook. When parsed, these parts can
+be combined from the Opus into a single Score with the
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Opus.mergeScores" title="music21.stream.Opus.mergeScores"><code class="xref py py-meth docutils literal"><span class="pre">music21.stream.Opus.mergeScores()</span></code></a> method.</p>
+<p>For instance, here is Josquin&#8217;s &#8220;Mille Regretz&#8221; (spelled with an s)
+stored as four individual parts each as its own score:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">o</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;josquin/milleRegrets&#39;</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">scores</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">4</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">parts</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>So, that&#8217;s not too helpful. We can run <code class="docutils literal"><span class="pre">mergeScores</span></code> to bring them
+into a single score with four parts.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">mergeScores</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">title</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;Mille regrets&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">parts</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="parsing-musedata-files">
+<h2>Parsing Musedata Files<a class="headerlink" href="#parsing-musedata-files" title="Permalink to this headline">¶</a></h2>
+<p>Musedata is a format devised by Walter Hewlett (yes, of HP lineage) in
+the 1980s that is highly memory efficient. Probably not the best format
+for modern computers, but there&#8217;s a huge collection of Musedata files
+out on the net of many standard repertory pieces.</p>
+<p>Both stage 1 (limited encoding) and stage 2 (rich encoding) Musedata
+file formats are supported by Music21. Multi-part Musedata (stage 2)
+files, zipped archives, and directories containing individual files for
+each part (stage 1 or stage 2) can be imported with the
+<a class="reference internal" href="../moduleReference/moduleConverter.html#music21.converter.parse" title="music21.converter.parse"><code class="xref py py-func docutils literal"><span class="pre">music21.converter.parse()</span></code></a> function on the desired file path or
+URL.</p>
+<p>Note that access restrictions prevent demonstrating Musedata conversion.
+Downloading or using Musedata files requires sending a written access
+agreement to the owners.</p>
+</div>
+<div class="section" id="parsing-midi-files">
+<h2>Parsing MIDI Files<a class="headerlink" href="#parsing-midi-files" title="Permalink to this headline">¶</a></h2>
+<p>MIDI input and output is handled in the same was other formats. Simply
+call the <a class="reference internal" href="../moduleReference/moduleConverter.html#music21.converter.parse" title="music21.converter.parse"><code class="xref py py-func docutils literal"><span class="pre">music21.converter.parse()</span></code></a> function on the desired file
+path or URL.</p>
+<p>Remember (or learn if you haven&#8217;t yet), that MIDI has no information
+about enharmonic spelling (C# and Db are the same), and that detecting
+the lengths of notes can be difficult. <code class="docutils literal"><span class="pre">Music21</span></code> does very well with
+MIDI files that were created in notation software or sequencing
+software, but has a harder time handling MIDI files created by recording
+live input. For those files, we suggest converting the MIDI files in
+software such as Finale that has a more sophisticated MIDI to MusicXML
+conversion routine.</p>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>One of <code class="docutils literal"><span class="pre">music21</span></code>&#8216;s core strengths is the number of different file
+formats it handles. Some people who don&#8217;t use <code class="docutils literal"><span class="pre">music21</span></code> for anything
+else use it as a format converter. We&#8217;re happy about that, but think,
+hey, there&#8217;s a lot more that you can do with it than that. Let&#8217;s move on
+in the next chapter to one of the tools that <code class="docutils literal"><span class="pre">music21</span></code> has for
+analysis that almost nothing else out there has:
+<a class="reference internal" href="usersGuide_09_chordify.html#usersguide-09-chordify"><span class="std std-ref">Chapter 9: Chordify</span></a> which reduces
+scores to chordal collections.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_09_chordify.html" title="User’s Guide, Chapter 9: Chordify"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_07_chords.html" title="User’s Guide, Chapter 7: Chords"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

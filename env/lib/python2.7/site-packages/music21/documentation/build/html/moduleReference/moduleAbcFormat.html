@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.abcFormat &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.abcFormat.translate" href="moduleAbcFormatTranslate.html" />
+    <link rel="prev" title="Module Reference" href="index.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleAbcFormatTranslate.html" title="music21.abcFormat.translate"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Module Reference"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Module Reference</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleAbcFormatTranslate.html"
+                        title="next chapter">music21.abcFormat.translate</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.abcFormat</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#abcfile">ABCFile</a></li>
+<li><a class="reference internal" href="#abchandler">ABCHandler</a></li>
+<li><a class="reference internal" href="#abchandlerbar">ABCHandlerBar</a></li>
+<li><a class="reference internal" href="#abcaccent">ABCAccent</a></li>
+<li><a class="reference internal" href="#abcbar">ABCBar</a></li>
+<li><a class="reference internal" href="#abcbrokenrhythmmarker">ABCBrokenRhythmMarker</a></li>
+<li><a class="reference internal" href="#abcchord">ABCChord</a></li>
+<li><a class="reference internal" href="#abccrescstart">ABCCrescStart</a></li>
+<li><a class="reference internal" href="#abcdimstart">ABCDimStart</a></li>
+<li><a class="reference internal" href="#abcdownbow">ABCDownbow</a></li>
+<li><a class="reference internal" href="#abcgracestart">ABCGraceStart</a></li>
+<li><a class="reference internal" href="#abcgracestop">ABCGraceStop</a></li>
+<li><a class="reference internal" href="#abcmetadata">ABCMetadata</a></li>
+<li><a class="reference internal" href="#abcnote">ABCNote</a></li>
+<li><a class="reference internal" href="#abcparenstop">ABCParenStop</a></li>
+<li><a class="reference internal" href="#abcslurstart">ABCSlurStart</a></li>
+<li><a class="reference internal" href="#abcstaccato">ABCStaccato</a></li>
+<li><a class="reference internal" href="#abcstraccent">ABCStraccent</a></li>
+<li><a class="reference internal" href="#abctenuto">ABCTenuto</a></li>
+<li><a class="reference internal" href="#abctie">ABCTie</a></li>
+<li><a class="reference internal" href="#abctoken">ABCToken</a></li>
+<li><a class="reference internal" href="#abctuplet">ABCTuplet</a></li>
+<li><a class="reference internal" href="#abcupbow">ABCUpbow</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleAbcFormat.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-abcformat">
+<span id="moduleabcformat"></span><h1>music21.abcFormat<a class="headerlink" href="#music21-abcformat" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.abcFormat"></span><p>ABC is a music format that, while being able to encode all sorts of scores, is especially
+strong at representing monophonic music, and folk music in particular.</p>
+<p>Modules in the <cite>music21.abcFormat</cite> package deal with importing ABC into music21.  Most people
+working with ABC data won&#8217;t need to use this package.  To convert ABC from a file or URL 
+to a <a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a> use the <a class="reference internal" href="moduleConverter.html#music21.converter.parse" title="music21.converter.parse"><code class="xref py py-func docutils literal"><span class="pre">parse()</span></code></a> function of
+the <cite>converter</cite> module:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abcScore</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;/users/ariza/myScore.abc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For users who will be editing ABC extensively or need a way to have music21 output ABC
+(which it doesn&#8217;t do natively), we suggest using the open source EasyABC package:
+<a class="reference external" href="http://www.nilsliberg.se/ksp/easyabc/">http://www.nilsliberg.se/ksp/easyabc/</a> .  You can set it up as a MusicXML reader through:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">us</span> <span class="o">=</span> <span class="n">environment</span><span class="o">.</span><span class="n">UserSettings</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">us</span><span class="p">[</span><span class="s1">&#39;musicxmlPath&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/Applications/EasyABC.app&#39;</span>
+</pre></div>
+</div>
+<p>or wherever you have downloaded EasyABC to 
+(PC users might need: &#8216;c:/program files (x86)/easyabc/easyabc.exe&#8217;)
+(Thanks to Norman Schmidt for the heads up)</p>
+<p>There is a two-step process in converting ABC files to Music21 Streams.  First this module
+reads in the text-based .abc file and converts all the information into ABCToken objects.  Then
+the function <a class="reference internal" href="moduleAbcFormatTranslate.html#music21.abcFormat.translate.abcToStreamScore" title="music21.abcFormat.translate.abcToStreamScore"><code class="xref py py-func docutils literal"><span class="pre">music21.abcFormat.translate.abcToStreamScore()</span></code></a> of 
+the <a class="reference internal" href="moduleAbcFormatTranslate.html#moduleabcformattranslate"><span class="std std-ref">music21.abcFormat.translate</span></a> module
+translates those Tokens into music21 objects.</p>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.abcFormat.mergeLeadingMetaData">
+<code class="descclassname">music21.abcFormat.</code><code class="descname">mergeLeadingMetaData</code><span class="sig-paren">(</span><em>barHandlers</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.mergeLeadingMetaData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a list of ABCHandlerBar objects, return a list of ABCHandlerBar 
+objects where leading metadata is merged, if possible, 
+with the bar data following.</p>
+<p>This consolidates all metadata in bar-like entities.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="abcfile">
+<h2>ABCFile<a class="headerlink" href="#abcfile" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCFile">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCFile</code><a class="headerlink" href="#music21.abcFormat.ABCFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>ABC File or String access</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCFile" title="music21.abcFormat.ABCFile"><code class="xref py py-class docutils literal"><span class="pre">ABCFile</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.abcFormat.ABCFile.close">
+<code class="descclassname">ABCFile.</code><code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCFile.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCFile.extractReferenceNumber">
+<code class="descclassname">ABCFile.</code><code class="descname">extractReferenceNumber</code><span class="sig-paren">(</span><em>strSrc</em>, <em>number</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCFile.extractReferenceNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract a single reference number from many defined in a file. 
+This permits loading a single work from a collection/opus 
+without parsing the entire file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCFile.open">
+<code class="descclassname">ABCFile.</code><code class="descname">open</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCFile.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open a file for reading</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCFile.openFileLike">
+<code class="descclassname">ABCFile.</code><code class="descname">openFileLike</code><span class="sig-paren">(</span><em>fileLike</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCFile.openFileLike" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign a file-like object, such as those provided by 
+StringIO, as an open file object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">StringIO</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fileLikeOpen</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCFile.read">
+<code class="descclassname">ABCFile.</code><code class="descname">read</code><span class="sig-paren">(</span><em>number=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCFile.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a file. Note that this calls readstring, 
+which processes all tokens.</p>
+<p>If <cite>number</cite> is given, a work number will be extracted if possible.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCFile.readstr">
+<code class="descclassname">ABCFile.</code><code class="descname">readstr</code><span class="sig-paren">(</span><em>strSrc</em>, <em>number=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCFile.readstr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a string and process all Tokens. 
+Returns a ABCHandler instance.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="abchandler">
+<h2>ABCHandler<a class="headerlink" href="#abchandler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCHandler">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCHandler</code><a class="headerlink" href="#music21.abcFormat.ABCHandler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCHandler" title="music21.abcFormat.ABCHandler"><code class="xref py py-class docutils literal"><span class="pre">ABCHandler</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.abcFormat.ABCHandler.tokens">
+<code class="descclassname">ABCHandler.</code><code class="descname">tokens</code><a class="headerlink" href="#music21.abcFormat.ABCHandler.tokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set tokens for this Handler</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCHandler" title="music21.abcFormat.ABCHandler"><code class="xref py py-class docutils literal"><span class="pre">ABCHandler</span></code></a> methods</p>
+<dl class="staticmethod">
+<dt id="music21.abcFormat.ABCHandler.barlineTokenFilter">
+<em class="property">static </em><code class="descclassname">ABCHandler.</code><code class="descname">barlineTokenFilter</code><span class="sig-paren">(</span><em>token</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCHandler.barlineTokenFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Some single barline tokens are better replaced 
+with two tokens. This method, given a token, 
+returns a list of tokens. If there is no change 
+necessary, the provided token will be returned in the list.</p>
+<p>Staticmethod</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCHandler</span><span class="o">.</span><span class="n">barlineTokenFilter</span><span class="p">(</span><span class="s1">&#39;::&#39;</span><span class="p">)</span>
+<span class="go">[&lt;music21.abcFormat.ABCBar &#39;:|&#39;&gt;, &lt;music21.abcFormat.ABCBar &#39;|:&#39;&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCHandler.definesMeasures">
+<code class="descclassname">ABCHandler.</code><code class="descname">definesMeasures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCHandler.definesMeasures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if this token structure defines Measures in a normal Measure form.  
+Otherwise False</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abcStr</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;M:6/8</span><span class="se">\n</span><span class="s1">L:1/8</span><span class="se">\n</span><span class="s1">K:G</span><span class="se">\n</span><span class="s1">V:1 name=&quot;Whistle&quot; &#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>    <span class="s1">&#39;snm=&quot;wh&quot;</span><span class="se">\n</span><span class="s1">B3 A3 | G6 | B3 A3 | G6 ||</span><span class="se">\n</span><span class="s1">V:2 name=&quot;violin&quot; &#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>    <span class="s1">&#39;snm=&quot;v&quot;</span><span class="se">\n</span><span class="s1">BdB AcA | GAG D3 | BdB AcA | GAG D6 ||</span><span class="se">\n</span><span class="s1">V:3 name=&quot;Bass&quot; &#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>    <span class="s1">&#39;snm=&quot;b&quot; clef=bass</span><span class="se">\n</span><span class="s1">D3 D3 | D6 | D3 D3 | D6 ||&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">junk</span> <span class="o">=</span> <span class="n">ah</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">abcStr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah</span><span class="o">.</span><span class="n">definesMeasures</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abcStr</span> <span class="o">=</span> <span class="s1">&#39;M:6/8</span><span class="se">\n</span><span class="s1">L:1/8</span><span class="se">\n</span><span class="s1">K:G</span><span class="se">\n</span><span class="s1">B3 A3 G6 B3 A3 G6&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">junk</span> <span class="o">=</span> <span class="n">ah</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">abcStr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah</span><span class="o">.</span><span class="n">definesMeasures</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCHandler.definesReferenceNumbers">
+<code class="descclassname">ABCHandler.</code><code class="descname">definesReferenceNumbers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCHandler.definesReferenceNumbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if this token structure defines more than 1 reference number,
+usually implying multiple pieces encoded in one file.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abcStr</span> <span class="o">=</span> <span class="s1">&#39;X:5</span><span class="se">\n</span><span class="s1">M:6/8</span><span class="se">\n</span><span class="s1">L:1/8</span><span class="se">\n</span><span class="s1">K:G</span><span class="se">\n</span><span class="s1">B3 A3 | G6 | B3 A3 | G6 ||&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">junk</span> <span class="o">=</span> <span class="n">ah</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">abcStr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah</span><span class="o">.</span><span class="n">definesReferenceNumbers</span><span class="p">()</span> <span class="c1"># only one returns False</span>
+<span class="go">False </span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abcStr</span> <span class="o">=</span> <span class="s1">&#39;X:5</span><span class="se">\n</span><span class="s1">M:6/8</span><span class="se">\n</span><span class="s1">L:1/8</span><span class="se">\n</span><span class="s1">K:G</span><span class="se">\n</span><span class="s1">B3 A3 | G6 | B3 A3 | G6 ||</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abcStr</span> <span class="o">+=</span> <span class="s1">&#39;X:6</span><span class="se">\n</span><span class="s1">M:6/8</span><span class="se">\n</span><span class="s1">L:1/8</span><span class="se">\n</span><span class="s1">K:G</span><span class="se">\n</span><span class="s1">B3 A3 | G6 | B3 A3 | G6 ||&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">junk</span> <span class="o">=</span> <span class="n">ah</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">abcStr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah</span><span class="o">.</span><span class="n">definesReferenceNumbers</span><span class="p">()</span> <span class="c1"># two tokens so returns True</span>
+<span class="go">True </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCHandler.getReferenceNumber">
+<code class="descclassname">ABCHandler.</code><code class="descname">getReferenceNumber</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCHandler.getReferenceNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>If tokens are processed, get the first 
+reference number defined.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abcStr</span> <span class="o">=</span> <span class="s1">&#39;X:5</span><span class="se">\n</span><span class="s1">M:6/8</span><span class="se">\n</span><span class="s1">L:1/8</span><span class="se">\n</span><span class="s1">K:G</span><span class="se">\n</span><span class="s1">B3 A3 | G6 | B3 A3 | G6 ||&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">junk</span> <span class="o">=</span> <span class="n">ah</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">abcStr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah</span><span class="o">.</span><span class="n">getReferenceNumber</span><span class="p">()</span>
+<span class="go">&#39;5&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCHandler.getTitle">
+<code class="descclassname">ABCHandler.</code><code class="descname">getTitle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCHandler.getTitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the first title tag. Used for testing.</p>
+<p>Requires tokens to have been processed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCHandler.hasNotes">
+<code class="descclassname">ABCHandler.</code><code class="descname">hasNotes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCHandler.hasNotes" title="Permalink to this definition">¶</a></dt>
+<dd><p>If tokens are processed, return True if ABCNote or 
+ABCChord classes are defined</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abcStr</span> <span class="o">=</span> <span class="s1">&#39;M:6/8</span><span class="se">\n</span><span class="s1">L:1/8</span><span class="se">\n</span><span class="s1">K:G</span><span class="se">\n</span><span class="s1">&#39;</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah1</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">junk</span> <span class="o">=</span> <span class="n">ah1</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">abcStr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah1</span><span class="o">.</span><span class="n">hasNotes</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abcStr</span> <span class="o">=</span> <span class="s1">&#39;M:6/8</span><span class="se">\n</span><span class="s1">L:1/8</span><span class="se">\n</span><span class="s1">K:G</span><span class="se">\n</span><span class="s1">c1D2&#39;</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah2</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">junk</span> <span class="o">=</span> <span class="n">ah2</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">abcStr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah2</span><span class="o">.</span><span class="n">hasNotes</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCHandler.process">
+<code class="descclassname">ABCHandler.</code><code class="descname">process</code><span class="sig-paren">(</span><em>strSrc</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCHandler.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCHandler.splitByMeasure">
+<code class="descclassname">ABCHandler.</code><code class="descname">splitByMeasure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCHandler.splitByMeasure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divide a token list by Measures, also 
+defining start and end bars of each Measure.</p>
+<p>If a component does not have notes, leave 
+as an empty bar. This is often done with leading metadata.</p>
+<p>Returns a list of ABCHandlerBar instances. 
+The first usually defines only Metadata</p>
+<p>TODO: Test and examples</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCHandler.splitByReferenceNumber">
+<code class="descclassname">ABCHandler.</code><code class="descname">splitByReferenceNumber</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCHandler.splitByReferenceNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split tokens by reference numbers.</p>
+<p>Returns a dictionary of ABCHandler instances, where the reference number 
+is used to access the music. If no reference numbers are defined, 
+the tune is available under the dictionary entry None.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abcStr</span> <span class="o">=</span> <span class="s1">&#39;X:5</span><span class="se">\n</span><span class="s1">M:6/8</span><span class="se">\n</span><span class="s1">L:1/8</span><span class="se">\n</span><span class="s1">K:G</span><span class="se">\n</span><span class="s1">B3 A3 | G6 | B3 A3 | G6 ||&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abcStr</span> <span class="o">+=</span> <span class="s1">&#39;X:6</span><span class="se">\n</span><span class="s1">M:6/8</span><span class="se">\n</span><span class="s1">L:1/8</span><span class="se">\n</span><span class="s1">K:G</span><span class="se">\n</span><span class="s1">B3 A3 | G6 | B3 A3 | G6 ||&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">junk</span> <span class="o">=</span> <span class="n">ah</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">abcStr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">ah</span><span class="p">)</span>
+<span class="go">28</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ahDict</span> <span class="o">=</span> <span class="n">ah</span><span class="o">.</span><span class="n">splitByReferenceNumber</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">5</span> <span class="ow">in</span> <span class="n">ahDict</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">6</span> <span class="ow">in</span> <span class="n">ahDict</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">7</span> <span class="ow">in</span> <span class="n">ahDict</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>Each entry is its own ABCHandler object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ahDict</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<span class="go">&lt;music21.abcFormat.ABCHandler object at 0x10b0cf5f8&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">ahDict</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">tokens</span><span class="p">)</span>
+<span class="go">14</span>
+</pre></div>
+</div>
+<p>Header information (except for comments) should be appended to all pieces.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abcStrWHeader</span> <span class="o">=</span> <span class="s1">&#39;%abc-2.1</span><span class="se">\n</span><span class="s1">O: Irish</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">abcStr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">junk</span> <span class="o">=</span> <span class="n">ah</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">abcStrWHeader</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">ah</span><span class="p">)</span>
+<span class="go">29</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ahDict</span> <span class="o">=</span> <span class="n">ah</span><span class="o">.</span><span class="n">splitByReferenceNumber</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">5</span> <span class="ow">in</span> <span class="n">ahDict</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">6</span> <span class="ow">in</span> <span class="n">ahDict</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">7</span> <span class="ow">in</span> <span class="n">ahDict</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>Did we get the origin header in each score?</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ahDict</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&lt;music21.abcFormat.ABCMetadata &#39;O: Irish&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ahDict</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&lt;music21.abcFormat.ABCMetadata &#39;O: Irish&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCHandler.splitByVoice">
+<code class="descclassname">ABCHandler.</code><code class="descname">splitByVoice</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCHandler.splitByVoice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a processed token list, look for voices. If voices exist, 
+split into parts: common metadata, then next voice, next voice, etc.</p>
+<p>Each part is returned as a ABCHandler instance.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abcStr</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;M:6/8</span><span class="se">\n</span><span class="s1">L:1/8</span><span class="se">\n</span><span class="s1">K:G</span><span class="se">\n</span><span class="s1">V:1 name=&quot;Whistle&quot; &#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>    <span class="s1">&#39;snm=&quot;wh&quot;</span><span class="se">\n</span><span class="s1">B3 A3 | G6 | B3 A3 | G6 ||</span><span class="se">\n</span><span class="s1">V:2 name=&quot;violin&quot; &#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>    <span class="s1">&#39;snm=&quot;v&quot;</span><span class="se">\n</span><span class="s1">BdB AcA | GAG D3 | BdB AcA | GAG D6 ||</span><span class="se">\n</span><span class="s1">V:3 name=&quot;Bass&quot; &#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>    <span class="s1">&#39;snm=&quot;b&quot; clef=bass</span><span class="se">\n</span><span class="s1">D3 D3 | D6 | D3 D3 | D6 ||&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ah</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">junk</span> <span class="o">=</span> <span class="n">ah</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">abcStr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenColls</span> <span class="o">=</span> <span class="n">ah</span><span class="o">.</span><span class="n">splitByVoice</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenColls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&lt;music21.abcFormat.ABCHandler object at 0x...&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">src</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokenColls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tokens</span><span class="p">]</span> <span class="c1"># common headers are first</span>
+<span class="go">[&#39;M:6/8&#39;, &#39;L:1/8&#39;, &#39;K:G&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># then each voice</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">src</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokenColls</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tokens</span><span class="p">]</span> 
+<span class="go">[&#39;V:1 name=&quot;Whistle&quot; snm=&quot;wh&quot;&#39;, &#39;B3&#39;, &#39;A3&#39;, &#39;|&#39;, &#39;G6&#39;, &#39;|&#39;, &#39;B3&#39;, &#39;A3&#39;, &#39;|&#39;, &#39;G6&#39;, &#39;||&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">src</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokenColls</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tokens</span><span class="p">]</span> 
+<span class="go">[&#39;V:2 name=&quot;violin&quot; snm=&quot;v&quot;&#39;, &#39;B&#39;, &#39;d&#39;, &#39;B&#39;, &#39;A&#39;, &#39;c&#39;, &#39;A&#39;, &#39;|&#39;, </span>
+<span class="go"> &#39;G&#39;, &#39;A&#39;, &#39;G&#39;, &#39;D3&#39;, &#39;|&#39;, &#39;B&#39;, &#39;d&#39;, &#39;B&#39;, &#39;A&#39;, &#39;c&#39;, &#39;A&#39;, &#39;|&#39;, &#39;G&#39;, &#39;A&#39;, &#39;G&#39;, &#39;D6&#39;, &#39;||&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">src</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokenColls</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">tokens</span><span class="p">]</span> 
+<span class="go">[&#39;V:3 name=&quot;Bass&quot; snm=&quot;b&quot; clef=bass&#39;, &#39;D3&#39;, &#39;D3&#39;, &#39;|&#39;, &#39;D6&#39;, &#39;|&#39;, </span>
+<span class="go"> &#39;D3&#39;, &#39;D3&#39;, &#39;|&#39;, &#39;D6&#39;, &#39;||&#39;]</span>
+</pre></div>
+</div>
+<p>Then later the metadata can be merged at the start of each voice...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mergedTokens</span> <span class="o">=</span> <span class="n">tokenColls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">tokenColls</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mergedTokens</span>
+<span class="go">&lt;music21.abcFormat.ABCHandler object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">src</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">mergedTokens</span><span class="o">.</span><span class="n">tokens</span><span class="p">]</span> 
+<span class="go">[&#39;M:6/8&#39;, &#39;L:1/8&#39;, &#39;K:G&#39;, &#39;V:1 name=&quot;Whistle&quot; snm=&quot;wh&quot;&#39;, </span>
+<span class="go"> &#39;B3&#39;, &#39;A3&#39;, &#39;|&#39;, &#39;G6&#39;, &#39;|&#39;, &#39;B3&#39;, &#39;A3&#39;, &#39;|&#39;, &#39;G6&#39;, &#39;||&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCHandler.tokenProcess">
+<code class="descclassname">ABCHandler.</code><code class="descname">tokenProcess</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCHandler.tokenProcess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process all token objects. First, calls preParse(), then 
+does context assignments, then calls parse().</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCHandler.tokenize">
+<code class="descclassname">ABCHandler.</code><code class="descname">tokenize</code><span class="sig-paren">(</span><em>strSrc</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCHandler.tokenize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Walk the abc string, creating ABC objects along the way.</p>
+<p>This may be called separately from process(), in the case 
+that pre/post parse processing is not needed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abch</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abch</span><span class="o">.</span><span class="n">_tokens</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abch</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="s1">&#39;X: 1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abch</span><span class="o">.</span><span class="n">_tokens</span>
+<span class="go">[&lt;music21.abcFormat.ABCMetadata &#39;X: 1&#39;&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCHandler.tokensToBarIndices">
+<code class="descclassname">ABCHandler.</code><code class="descname">tokensToBarIndices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCHandler.tokensToBarIndices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of indices indicating which tokens in self.tokens are
+bar lines or the last piece of metadata before a note or chord.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="abchandlerbar">
+<h2>ABCHandlerBar<a class="headerlink" href="#abchandlerbar" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCHandlerBar">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCHandlerBar</code><a class="headerlink" href="#music21.abcFormat.ABCHandlerBar" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Handler specialized for storing bars. All left 
+and right bars are collected and assigned to attributes.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCHandlerBar" title="music21.abcFormat.ABCHandlerBar"><code class="xref py py-class docutils literal"><span class="pre">ABCHandlerBar</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler" title="music21.abcFormat.ABCHandler"><code class="xref py py-class docutils literal"><span class="pre">ABCHandler</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCHandlerBar" title="music21.abcFormat.ABCHandlerBar"><code class="xref py py-class docutils literal"><span class="pre">ABCHandlerBar</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="#music21.abcFormat.ABCHandler" title="music21.abcFormat.ABCHandler"><code class="xref py py-class docutils literal"><span class="pre">ABCHandler</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.tokens" title="music21.abcFormat.ABCHandler.tokens"><code class="xref py py-attr docutils literal"><span class="pre">tokens</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCHandlerBar" title="music21.abcFormat.ABCHandlerBar"><code class="xref py py-class docutils literal"><span class="pre">ABCHandlerBar</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCHandler" title="music21.abcFormat.ABCHandler"><code class="xref py py-class docutils literal"><span class="pre">ABCHandler</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.barlineTokenFilter" title="music21.abcFormat.ABCHandler.barlineTokenFilter"><code class="xref py py-meth docutils literal"><span class="pre">barlineTokenFilter()</span></code></a></li>
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.definesMeasures" title="music21.abcFormat.ABCHandler.definesMeasures"><code class="xref py py-meth docutils literal"><span class="pre">definesMeasures()</span></code></a></li>
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.definesReferenceNumbers" title="music21.abcFormat.ABCHandler.definesReferenceNumbers"><code class="xref py py-meth docutils literal"><span class="pre">definesReferenceNumbers()</span></code></a></li>
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.getReferenceNumber" title="music21.abcFormat.ABCHandler.getReferenceNumber"><code class="xref py py-meth docutils literal"><span class="pre">getReferenceNumber()</span></code></a></li>
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.getTitle" title="music21.abcFormat.ABCHandler.getTitle"><code class="xref py py-meth docutils literal"><span class="pre">getTitle()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.hasNotes" title="music21.abcFormat.ABCHandler.hasNotes"><code class="xref py py-meth docutils literal"><span class="pre">hasNotes()</span></code></a></li>
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.process" title="music21.abcFormat.ABCHandler.process"><code class="xref py py-meth docutils literal"><span class="pre">process()</span></code></a></li>
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.splitByMeasure" title="music21.abcFormat.ABCHandler.splitByMeasure"><code class="xref py py-meth docutils literal"><span class="pre">splitByMeasure()</span></code></a></li>
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.splitByReferenceNumber" title="music21.abcFormat.ABCHandler.splitByReferenceNumber"><code class="xref py py-meth docutils literal"><span class="pre">splitByReferenceNumber()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.splitByVoice" title="music21.abcFormat.ABCHandler.splitByVoice"><code class="xref py py-meth docutils literal"><span class="pre">splitByVoice()</span></code></a></li>
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.tokenProcess" title="music21.abcFormat.ABCHandler.tokenProcess"><code class="xref py py-meth docutils literal"><span class="pre">tokenProcess()</span></code></a></li>
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.tokenize" title="music21.abcFormat.ABCHandler.tokenize"><code class="xref py py-meth docutils literal"><span class="pre">tokenize()</span></code></a></li>
+<li><a class="reference internal" href="#music21.abcFormat.ABCHandler.tokensToBarIndices" title="music21.abcFormat.ABCHandler.tokensToBarIndices"><code class="xref py py-meth docutils literal"><span class="pre">tokensToBarIndices()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcaccent">
+<h2>ABCAccent<a class="headerlink" href="#abcaccent" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCAccent">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCAccent</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCAccent" title="Permalink to this definition">¶</a></dt>
+<dd><p>ABCAccent tokens &#8220;K&#8221; precede a note or chord;
+they are a property of that note/chord.
+These appear as &#8220;&gt;&#8221; in the output.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCAccent" title="music21.abcFormat.ABCAccent"><code class="xref py py-class docutils literal"><span class="pre">ABCAccent</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCAccent" title="music21.abcFormat.ABCAccent"><code class="xref py py-class docutils literal"><span class="pre">ABCAccent</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcbar">
+<h2>ABCBar<a class="headerlink" href="#abcbar" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCBar">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCBar</code><span class="sig-paren">(</span><em>src</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCBar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCBar" title="music21.abcFormat.ABCBar"><code class="xref py py-class docutils literal"><span class="pre">ABCBar</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCBar" title="music21.abcFormat.ABCBar"><code class="xref py py-class docutils literal"><span class="pre">ABCBar</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.abcFormat.ABCBar.getBarObject">
+<code class="descclassname">ABCBar.</code><code class="descname">getBarObject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCBar.getBarObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a music21 bar object</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCBar</span><span class="p">(</span><span class="s1">&#39;|:&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">post</span> <span class="o">=</span> <span class="n">ab</span><span class="o">.</span><span class="n">getBarObject</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCBar.isRegular">
+<code class="descclassname">ABCBar.</code><code class="descname">isRegular</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCBar.isRegular" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if this is a regular, single, light bar line.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCBar</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">isRegular</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCBar.isRepeat">
+<code class="descclassname">ABCBar.</code><code class="descname">isRepeat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCBar.isRepeat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCBar.isRepeatBracket">
+<code class="descclassname">ABCBar.</code><code class="descname">isRepeatBracket</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCBar.isRepeatBracket" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return true if this defines a repeat bracket for an alternate ending</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCBar</span><span class="p">(</span><span class="s1">&#39;[2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">isRepeat</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">isRepeatBracket</span><span class="p">()</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCBar.parse">
+<code class="descclassname">ABCBar.</code><code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCBar.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign the bar-type based on the source string.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCBar</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span>
+<span class="go">&lt;music21.abcFormat.ABCBar &#39;|&#39;&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">barType</span>
+<span class="go">&#39;barline&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">barStyle</span>
+<span class="go">&#39;regular&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCBar</span><span class="p">(</span><span class="s1">&#39;||&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">barType</span>
+<span class="go">&#39;barline&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">barStyle</span>
+<span class="go">&#39;light-light&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCBar</span><span class="p">(</span><span class="s1">&#39;|:&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">barType</span>
+<span class="go">&#39;repeat&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">barStyle</span>
+<span class="go">&#39;heavy-light&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ab</span><span class="o">.</span><span class="n">repeatForm</span>
+<span class="go">&#39;start&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcbrokenrhythmmarker">
+<h2>ABCBrokenRhythmMarker<a class="headerlink" href="#abcbrokenrhythmmarker" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCBrokenRhythmMarker">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCBrokenRhythmMarker</code><span class="sig-paren">(</span><em>src</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCBrokenRhythmMarker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCBrokenRhythmMarker" title="music21.abcFormat.ABCBrokenRhythmMarker"><code class="xref py py-class docutils literal"><span class="pre">ABCBrokenRhythmMarker</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCBrokenRhythmMarker" title="music21.abcFormat.ABCBrokenRhythmMarker"><code class="xref py py-class docutils literal"><span class="pre">ABCBrokenRhythmMarker</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.abcFormat.ABCBrokenRhythmMarker.preParse">
+<code class="descclassname">ABCBrokenRhythmMarker.</code><code class="descname">preParse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCBrokenRhythmMarker.preParse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called before context adjustments: need to have access to data</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">abrm</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCBrokenRhythmMarker</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abrm</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abrm</span><span class="o">.</span><span class="n">data</span>
+<span class="go">&#39;&gt;&gt;&gt;&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcchord">
+<h2>ABCChord<a class="headerlink" href="#abcchord" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCChord">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCChord</code><span class="sig-paren">(</span><em>src</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCChord" title="Permalink to this definition">¶</a></dt>
+<dd><p>A representation of an ABC Chord, which contains within its delimiters individual notes.</p>
+<p>A subclass of ABCNote.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCChord" title="music21.abcFormat.ABCChord"><code class="xref py py-class docutils literal"><span class="pre">ABCChord</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCNote" title="music21.abcFormat.ABCNote"><code class="xref py py-class docutils literal"><span class="pre">ABCNote</span></code></a></li>
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCChord" title="music21.abcFormat.ABCChord"><code class="xref py py-class docutils literal"><span class="pre">ABCChord</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.abcFormat.ABCChord.parse">
+<code class="descclassname">ABCChord.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>forceKeySignature=None</em>, <em>forceDefaultQuarterLength=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCChord.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abccrescstart">
+<h2>ABCCrescStart<a class="headerlink" href="#abccrescstart" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCCrescStart">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCCrescStart</code><span class="sig-paren">(</span><em>src</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCCrescStart" title="Permalink to this definition">¶</a></dt>
+<dd><p>ABCCrescStart tokens always precede the notes in a crescendo.
+These tokens coincide with the string &#8221;!crescendo(&#8221;;
+the closing string &#8221;!crescendo)&#8221; counts as an ABCParenStop.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCCrescStart" title="music21.abcFormat.ABCCrescStart"><code class="xref py py-class docutils literal"><span class="pre">ABCCrescStart</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCCrescStart" title="music21.abcFormat.ABCCrescStart"><code class="xref py py-class docutils literal"><span class="pre">ABCCrescStart</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.abcFormat.ABCCrescStart.fillCresc">
+<code class="descclassname">ABCCrescStart.</code><code class="descname">fillCresc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCCrescStart.fillCresc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcdimstart">
+<h2>ABCDimStart<a class="headerlink" href="#abcdimstart" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCDimStart">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCDimStart</code><span class="sig-paren">(</span><em>src</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCDimStart" title="Permalink to this definition">¶</a></dt>
+<dd><p>ABCDimStart tokens always precede the notes in a diminuendo.
+They function identically to ABCCrescStart tokens.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCDimStart" title="music21.abcFormat.ABCDimStart"><code class="xref py py-class docutils literal"><span class="pre">ABCDimStart</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCDimStart" title="music21.abcFormat.ABCDimStart"><code class="xref py py-class docutils literal"><span class="pre">ABCDimStart</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.abcFormat.ABCDimStart.fillDim">
+<code class="descclassname">ABCDimStart.</code><code class="descname">fillDim</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCDimStart.fillDim" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcdownbow">
+<h2>ABCDownbow<a class="headerlink" href="#abcdownbow" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCDownbow">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCDownbow</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCDownbow" title="Permalink to this definition">¶</a></dt>
+<dd><p>ABCStaccato tokens &#8221;.&#8221; precede a note or chord;
+they are a property of that note/chord.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCDownbow" title="music21.abcFormat.ABCDownbow"><code class="xref py py-class docutils literal"><span class="pre">ABCDownbow</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCDownbow" title="music21.abcFormat.ABCDownbow"><code class="xref py py-class docutils literal"><span class="pre">ABCDownbow</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcgracestart">
+<h2>ABCGraceStart<a class="headerlink" href="#abcgracestart" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCGraceStart">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCGraceStart</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCGraceStart" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCGraceStart" title="music21.abcFormat.ABCGraceStart"><code class="xref py py-class docutils literal"><span class="pre">ABCGraceStart</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCGraceStart" title="music21.abcFormat.ABCGraceStart"><code class="xref py py-class docutils literal"><span class="pre">ABCGraceStart</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcgracestop">
+<h2>ABCGraceStop<a class="headerlink" href="#abcgracestop" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCGraceStop">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCGraceStop</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCGraceStop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCGraceStop" title="music21.abcFormat.ABCGraceStop"><code class="xref py py-class docutils literal"><span class="pre">ABCGraceStop</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCGraceStop" title="music21.abcFormat.ABCGraceStop"><code class="xref py py-class docutils literal"><span class="pre">ABCGraceStop</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcmetadata">
+<h2>ABCMetadata<a class="headerlink" href="#abcmetadata" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCMetadata">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCMetadata</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCMetadata" title="music21.abcFormat.ABCMetadata"><code class="xref py py-class docutils literal"><span class="pre">ABCMetadata</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCMetadata" title="music21.abcFormat.ABCMetadata"><code class="xref py py-class docutils literal"><span class="pre">ABCMetadata</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.getClefObject">
+<code class="descclassname">ABCMetadata.</code><code class="descname">getClefObject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.getClefObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract any clef parameters stored in the key metadata token. 
+Assume that a clef definition suggests a transposition. 
+Return both the Clef and the transposition.</p>
+<p>Returns a two-element tuple of clefObj and transposition in semitones</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;K:Eb Lydian bass&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">getClefObject</span><span class="p">()</span>
+<span class="go">(&lt;music21.clef.BassClef&gt;, -24)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.getDefaultQuarterLength">
+<code class="descclassname">ABCMetadata.</code><code class="descname">getDefaultQuarterLength</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.getDefaultQuarterLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>If there is a quarter length representation available, return it as a floating point value</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;L:1/2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">getDefaultQuarterLength</span><span class="p">()</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;L:1/8&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">getDefaultQuarterLength</span><span class="p">()</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;M:C|&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">getDefaultQuarterLength</span><span class="p">()</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;M:2/4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">getDefaultQuarterLength</span><span class="p">()</span>
+<span class="go">0.25</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;M:6/8&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">getDefaultQuarterLength</span><span class="p">()</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.getKeySignatureObject">
+<code class="descclassname">ABCMetadata.</code><code class="descname">getKeySignatureObject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.getKeySignatureObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a music21 <a class="reference internal" href="moduleKey.html#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a> or <a class="reference internal" href="moduleKey.html#music21.key.Key" title="music21.key.Key"><code class="xref py py-class docutils literal"><span class="pre">Key</span></code></a>
+object for this metadata tag.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;K:G&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span> <span class="o">=</span> <span class="n">am</span><span class="o">.</span><span class="n">getKeySignatureObject</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span>
+<span class="go">&lt;music21.key.KeySignature of 1 sharp&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;K:Gmin&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span> <span class="o">=</span> <span class="n">am</span><span class="o">.</span><span class="n">getKeySignatureObject</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span>
+<span class="go">&lt;music21.key.Key of g minor&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">-2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.getMetronomeMarkObject">
+<code class="descclassname">ABCMetadata.</code><code class="descname">getMetronomeMarkObject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.getMetronomeMarkObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract any tempo parameters stored in a tempo metadata token.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;Q: &quot;Allegro&quot; 1/4=120&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">getMetronomeMarkObject</span><span class="p">()</span>
+<span class="go">&lt;music21.tempo.MetronomeMark Allegro Quarter=120.0&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;Q: 3/8=50 &quot;Slowly&quot;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">getMetronomeMarkObject</span><span class="p">()</span>
+<span class="go">&lt;music21.tempo.MetronomeMark Slowly Dotted Quarter=50.0&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;Q:1/2=120&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">getMetronomeMarkObject</span><span class="p">()</span>
+<span class="go">&lt;music21.tempo.MetronomeMark animato Half=120.0&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;Q:1/4 3/8 1/4 3/8=40&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">getMetronomeMarkObject</span><span class="p">()</span>
+<span class="go">&lt;music21.tempo.MetronomeMark grave Whole tied to Quarter (5 total QL)=40.0&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;Q:90&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">getMetronomeMarkObject</span><span class="p">()</span>
+<span class="go">&lt;music21.tempo.MetronomeMark maestoso Quarter=90.0&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.getTimeSignatureObject">
+<code class="descclassname">ABCMetadata.</code><code class="descname">getTimeSignatureObject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.getTimeSignatureObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a music21 <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a> 
+object for this metadata tag.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;M:2/2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">am</span><span class="o">.</span><span class="n">getTimeSignatureObject</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span>
+<span class="go">&lt;music21.meter.TimeSignature 2/2&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.isComposer">
+<code class="descclassname">ABCMetadata.</code><code class="descname">isComposer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.isComposer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the tag is &#8220;C&#8221; for composer, False otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.isDefaultNoteLength">
+<code class="descclassname">ABCMetadata.</code><code class="descname">isDefaultNoteLength</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.isDefaultNoteLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the tag is &#8220;L&#8221;, False otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.isKey">
+<code class="descclassname">ABCMetadata.</code><code class="descname">isKey</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.isKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the tag is &#8220;K&#8221;, False otherwise. 
+Note that in some cases a Key will encode clef information.</p>
+<p>(example from corpus: josquin/laDeplorationDeLaMorteDeJohannesOckeghem.abc)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.isMeter">
+<code class="descclassname">ABCMetadata.</code><code class="descname">isMeter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.isMeter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the tag is &#8220;M&#8221; for meter, False otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.isOrigin">
+<code class="descclassname">ABCMetadata.</code><code class="descname">isOrigin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.isOrigin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the tag is &#8220;O&#8221; for origin, False otherwise. 
+This value is set in the Metadata <cite>localOfComposition</cite> of field.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.isReferenceNumber">
+<code class="descclassname">ABCMetadata.</code><code class="descname">isReferenceNumber</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.isReferenceNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the tag is &#8220;X&#8221;, False otherwise.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">&#39;X:5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">tag</span>
+<span class="go">&#39;X&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">isReferenceNumber</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.isTempo">
+<code class="descclassname">ABCMetadata.</code><code class="descname">isTempo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.isTempo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the tag is &#8220;Q&#8221; for tempo, False otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.isTitle">
+<code class="descclassname">ABCMetadata.</code><code class="descname">isTitle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.isTitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the tag is &#8220;T&#8221; for title, False otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.isVoice">
+<code class="descclassname">ABCMetadata.</code><code class="descname">isVoice</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.isVoice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the tag is &#8220;V&#8221;, False otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.parse">
+<code class="descclassname">ABCMetadata.</code><code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCMetadata.preParse">
+<code class="descclassname">ABCMetadata.</code><code class="descname">preParse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCMetadata.preParse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called before contextual adjustments and needs 
+to have access to data.  Divides a token into
+.tag (a single capital letter or w) and .data representations.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCMetadata</span><span class="p">(</span><span class="s1">u&#39;T:tagData&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">preParse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">tag</span>
+<span class="go">u&#39;T&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">data</span>
+<span class="go">u&#39;tagData&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcnote">
+<h2>ABCNote<a class="headerlink" href="#abcnote" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCNote">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCNote</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>A model of an ABCNote.</p>
+<p>General usage requires multi-pass processing. After being tokenized, 
+each ABCNote needs a number of attributes updates. Attributes to 
+be updated after tokenizing, and based on the linear sequence of 
+tokens: <cite>inBar</cite>, <cite>inBeam</cite> (not used), <cite>inGrace</cite>, 
+<cite>activeDefaultQuarterLength</cite>, <cite>brokenRhythmMarker</cite>, and 
+<cite>activeKeySignature</cite>.</p>
+<p>The <cite>chordSymbols</cite> list stores one or more chord symbols (ABC calls 
+these guitar chords) associated with this note. This attribute is 
+updated when parse() is called.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCNote" title="music21.abcFormat.ABCNote"><code class="xref py py-class docutils literal"><span class="pre">ABCNote</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCNote" title="music21.abcFormat.ABCNote"><code class="xref py py-class docutils literal"><span class="pre">ABCNote</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.abcFormat.ABCNote.parse">
+<code class="descclassname">ABCNote.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>forceDefaultQuarterLength=None</em>, <em>forceKeySignature=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCNote.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcparenstop">
+<h2>ABCParenStop<a class="headerlink" href="#abcparenstop" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCParenStop">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCParenStop</code><span class="sig-paren">(</span><em>src</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCParenStop" title="Permalink to this definition">¶</a></dt>
+<dd><p>A general parenthesis stop;
+comes at the end of a tuplet, slur, or dynamic marking.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCParenStop" title="music21.abcFormat.ABCParenStop"><code class="xref py py-class docutils literal"><span class="pre">ABCParenStop</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCParenStop" title="music21.abcFormat.ABCParenStop"><code class="xref py py-class docutils literal"><span class="pre">ABCParenStop</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcslurstart">
+<h2>ABCSlurStart<a class="headerlink" href="#abcslurstart" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCSlurStart">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCSlurStart</code><span class="sig-paren">(</span><em>src</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCSlurStart" title="Permalink to this definition">¶</a></dt>
+<dd><p>ABCSlurStart tokens always precede the notes in a slur.
+For nested slurs, each open parenthesis gets its own token.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCSlurStart" title="music21.abcFormat.ABCSlurStart"><code class="xref py py-class docutils literal"><span class="pre">ABCSlurStart</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCSlurStart" title="music21.abcFormat.ABCSlurStart"><code class="xref py py-class docutils literal"><span class="pre">ABCSlurStart</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.abcFormat.ABCSlurStart.fillSlur">
+<code class="descclassname">ABCSlurStart.</code><code class="descname">fillSlur</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCSlurStart.fillSlur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a spanner object for each open paren associated with a slur;
+these slurs are filled with notes until end parens are read.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcstaccato">
+<h2>ABCStaccato<a class="headerlink" href="#abcstaccato" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCStaccato">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCStaccato</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCStaccato" title="Permalink to this definition">¶</a></dt>
+<dd><p>ABCStaccato tokens &#8221;.&#8221; precede a note or chord;
+they are a property of that note/chord.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCStaccato" title="music21.abcFormat.ABCStaccato"><code class="xref py py-class docutils literal"><span class="pre">ABCStaccato</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCStaccato" title="music21.abcFormat.ABCStaccato"><code class="xref py py-class docutils literal"><span class="pre">ABCStaccato</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcstraccent">
+<h2>ABCStraccent<a class="headerlink" href="#abcstraccent" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCStraccent">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCStraccent</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCStraccent" title="Permalink to this definition">¶</a></dt>
+<dd><p>ABCStraccent tokens &#8220;k&#8221; precede a note or chord;
+they are a property of that note/chord.
+These appear as &#8220;^&#8221; in the output.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCStraccent" title="music21.abcFormat.ABCStraccent"><code class="xref py py-class docutils literal"><span class="pre">ABCStraccent</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCStraccent" title="music21.abcFormat.ABCStraccent"><code class="xref py py-class docutils literal"><span class="pre">ABCStraccent</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abctenuto">
+<h2>ABCTenuto<a class="headerlink" href="#abctenuto" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCTenuto">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCTenuto</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCTenuto" title="Permalink to this definition">¶</a></dt>
+<dd><p>ABCTenuto tokens &#8220;M&#8221; precede a note or chord;
+they are a property of that note/chord.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCTenuto" title="music21.abcFormat.ABCTenuto"><code class="xref py py-class docutils literal"><span class="pre">ABCTenuto</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCTenuto" title="music21.abcFormat.ABCTenuto"><code class="xref py py-class docutils literal"><span class="pre">ABCTenuto</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abctie">
+<h2>ABCTie<a class="headerlink" href="#abctie" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCTie">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCTie</code><span class="sig-paren">(</span><em>src</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCTie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles instances of ties &#8216;-&#8216; between notes in an ABC score.
+Ties are treated as an attribute of the note before the &#8216;-&#8216;;
+the note after is marked as the end of the tie.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCTie" title="music21.abcFormat.ABCTie"><code class="xref py py-class docutils literal"><span class="pre">ABCTie</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCTie" title="music21.abcFormat.ABCTie"><code class="xref py py-class docutils literal"><span class="pre">ABCTie</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abctoken">
+<h2>ABCToken<a class="headerlink" href="#abctoken" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCToken">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCToken</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCToken" title="Permalink to this definition">¶</a></dt>
+<dd><p>ABC processing works with a multi-pass procedure. The first pass
+breaks the data stream into a list of ABCToken objects. ABCToken
+objects are specialized in subclasses.</p>
+<p>The multi-pass procedure is conducted by an ABCHandler object. 
+The ABCHandler.tokenize() method breaks the data stream into 
+ABCToken objects. The <a class="reference internal" href="#music21.abcFormat.ABCHandler.tokenProcess" title="music21.abcFormat.ABCHandler.tokenProcess"><code class="xref py py-meth docutils literal"><span class="pre">tokenProcess()</span></code></a> method first 
+calls the <a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a> method on each token, 
+then does contextual 
+adjustments to all tokens, then calls <a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a> on all tokens.</p>
+<p>The source ABC string itself is stored in self.src</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.abcFormat.ABCToken.parse">
+<code class="descclassname">ABCToken.</code><code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCToken.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dummy method that reads self.src and loads attributes. 
+It is called after contextual adjustments.</p>
+<p>It is designed to be subclassed or overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCToken.preParse">
+<code class="descclassname">ABCToken.</code><code class="descname">preParse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCToken.preParse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dummy method that is called before contextual adjustments. 
+Designed to be subclassed or overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCToken.stripComment">
+<code class="descclassname">ABCToken.</code><code class="descname">stripComment</code><span class="sig-paren">(</span><em>strSrc</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCToken.stripComment" title="Permalink to this definition">¶</a></dt>
+<dd><p>removes ABC-style comments from a string:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ao</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCToken</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ao</span><span class="o">.</span><span class="n">stripComment</span><span class="p">(</span><span class="s1">&#39;asdf&#39;</span><span class="p">)</span>
+<span class="go">&#39;asdf&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ao</span><span class="o">.</span><span class="n">stripComment</span><span class="p">(</span><span class="s1">&#39;asdf%234&#39;</span><span class="p">)</span>
+<span class="go">&#39;asdf&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ao</span><span class="o">.</span><span class="n">stripComment</span><span class="p">(</span><span class="s1">&#39;asdf  %     234&#39;</span><span class="p">)</span>
+<span class="go">&#39;asdf  &#39;        </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ao</span><span class="o">.</span><span class="n">stripComment</span><span class="p">(</span><span class="s1">&#39;[ceg]% this chord appears 50% more often than other chords do&#39;</span><span class="p">)</span>
+<span class="go">&#39;[ceg]&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="abctuplet">
+<h2>ABCTuplet<a class="headerlink" href="#abctuplet" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCTuplet">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCTuplet</code><span class="sig-paren">(</span><em>src</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCTuplet" title="Permalink to this definition">¶</a></dt>
+<dd><p>ABCTuplet tokens always precede the notes they describe.</p>
+<p>In ABCHandler.tokenProcess(), rhythms are adjusted.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCTuplet" title="music21.abcFormat.ABCTuplet"><code class="xref py py-class docutils literal"><span class="pre">ABCTuplet</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCTuplet" title="music21.abcFormat.ABCTuplet"><code class="xref py py-class docutils literal"><span class="pre">ABCTuplet</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.abcFormat.ABCTuplet.updateNoteCount">
+<code class="descclassname">ABCTuplet.</code><code class="descname">updateNoteCount</code><span class="sig-paren">(</span><em>durationActual=None</em>, <em>durationNormal=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCTuplet.updateNoteCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the note count of notes that are 
+affected by this tuplet.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.abcFormat.ABCTuplet.updateRatio">
+<code class="descclassname">ABCTuplet.</code><code class="descname">updateRatio</code><span class="sig-paren">(</span><em>keySignatureObj=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCTuplet.updateRatio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cannot be called until local meter context 
+is established.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">at</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCTuplet</span><span class="p">(</span><span class="s1">&#39;(3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">at</span><span class="o">.</span><span class="n">updateRatio</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">at</span><span class="o">.</span><span class="n">numberNotesActual</span><span class="p">,</span> <span class="n">at</span><span class="o">.</span><span class="n">numberNotesNormal</span>
+<span class="go">(3, 2)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">at</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCTuplet</span><span class="p">(</span><span class="s1">&#39;(5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">at</span><span class="o">.</span><span class="n">updateRatio</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">at</span><span class="o">.</span><span class="n">numberNotesActual</span><span class="p">,</span> <span class="n">at</span><span class="o">.</span><span class="n">numberNotesNormal</span>
+<span class="go">(5, 2)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">at</span> <span class="o">=</span> <span class="n">abcFormat</span><span class="o">.</span><span class="n">ABCTuplet</span><span class="p">(</span><span class="s1">&#39;(5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">at</span><span class="o">.</span><span class="n">updateRatio</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;6/8&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">at</span><span class="o">.</span><span class="n">numberNotesActual</span><span class="p">,</span> <span class="n">at</span><span class="o">.</span><span class="n">numberNotesNormal</span>
+<span class="go">(5, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="abcupbow">
+<h2>ABCUpbow<a class="headerlink" href="#abcupbow" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.abcFormat.ABCUpbow">
+<em class="property">class </em><code class="descclassname">music21.abcFormat.</code><code class="descname">ABCUpbow</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.abcFormat.ABCUpbow" title="Permalink to this definition">¶</a></dt>
+<dd><p>ABCStaccato tokens &#8221;.&#8221; precede a note or chord;
+they are a property of that note/chord.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCUpbow" title="music21.abcFormat.ABCUpbow"><code class="xref py py-class docutils literal"><span class="pre">ABCUpbow</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.abcFormat.ABCUpbow" title="music21.abcFormat.ABCUpbow"><code class="xref py py-class docutils literal"><span class="pre">ABCUpbow</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.abcFormat.ABCToken" title="music21.abcFormat.ABCToken"><code class="xref py py-class docutils literal"><span class="pre">ABCToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.parse" title="music21.abcFormat.ABCToken.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.preParse" title="music21.abcFormat.ABCToken.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.abcFormat.ABCToken.stripComment" title="music21.abcFormat.ABCToken.stripComment"><code class="xref py py-meth docutils literal"><span class="pre">stripComment()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleAbcFormatTranslate.html" title="music21.abcFormat.translate"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Module Reference"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

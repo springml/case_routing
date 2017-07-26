@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User’s Guide, Chapter 26: Clients and Weak References. &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="User’s Guide, Chapter 27: Grace Notes" href="usersGuide_27_graceNotes.html" />
+    <link rel="prev" title="User’s Guide, Chapter 25: Post-Tonal Tools (1)" href="usersGuide_25_postTonalTools1.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_27_graceNotes.html" title="User’s Guide, Chapter 27: Grace Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_25_postTonalTools1.html" title="User’s Guide, Chapter 25: Post-Tonal Tools (1)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_25_postTonalTools1.html"
+                        title="previous chapter">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_27_graceNotes.html"
+                        title="next chapter">User&#8217;s Guide, Chapter 27: Grace Notes</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a><ul>
+<li><a class="reference internal" href="#it-pays-to-have-good-references">It pays to have good references</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_02_notes.html">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_03_pitches.html">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_05_listsOfLists.html">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_07_chords.html">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_08_installingMusicXML.html">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_11_corpusSearching.html">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_12_music21object.html">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_13_music21object2.html">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_15_key.html">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_21_sorting.html">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_25_postTonalTools1.html">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_28_lyricSearcher.html">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_97_timespans.html">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_26_clientWeakref.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-26-clientweakref"></span><div class="section" id="user-s-guide-chapter-26-clients-and-weak-references">
+<h1>User&#8217;s Guide, Chapter 26: Clients and Weak References.<a class="headerlink" href="#user-s-guide-chapter-26-clients-and-weak-references" title="Permalink to this headline">¶</a></h1>
+<p>This chapter explains some of the underlying aspects of <code class="docutils literal"><span class="pre">music21</span></code>&#8216;s
+functioning that may be helpful for someone doing advanced work in
+understanding how the system works.</p>
+<div class="section" id="it-pays-to-have-good-references">
+<h2>It pays to have good references<a class="headerlink" href="#it-pays-to-have-good-references" title="Permalink to this headline">¶</a></h2>
+<p>I&#8217;ve mentioned several times indirectly or directly the concept of
+references in <code class="docutils literal"><span class="pre">music21</span></code> and it&#8217;s worth mentioning a bit what they are.
+(Programmers with a lot of past experience outside <code class="docutils literal"><span class="pre">music21</span></code> can skim
+or skip ahead)</p>
+<p>A reference is a relationship between two objects that allow them to
+share information with each other on a short or longer term basis. There
+are several types. Let me give an analogy that might help separate them.</p>
+<blockquote>
+<div><p>Suppose two people (let&#8217;s call them Jane and José &#8211; the names of
+two students who worked on <code class="docutils literal"><span class="pre">music21</span></code>) meet at a conference mixer
+and discover they have a lot in common (&#8220;You like computer music
+analysis too?!&#8221;). They can chat about whatever they want at the
+mixer but after they leave, they have no way to communicate with
+each other. We&#8217;ll call that being in the same scope (the mixer) but
+having no reference.</p>
+<p>On the other hand, say José and Jane exchange phone numbers and
+emails &#8211; now they&#8217;re able to ask each other anything at any time
+from here on out. I&#8217;ll call this having a normal reference (also
+called a hard reference) to each other.</p>
+<p>Imagine a third scenario where they exchange their hotel phone
+numbers (okay, unrealistic in 2015, but bear with me). Now they can
+chat about anything for a limited amount of time, but if Jane comes
+back in a month and dials room 348, odds are, she won&#8217;t find José
+there (my travel budget isn&#8217;t that big). Maybe they figure it&#8217;s
+unlikely that they&#8217;ll be in the same place again. Or sometimes it&#8217;s
+good to have single-serving friends. In computer speak, they have
+weak references to each other.</p>
+<p>It&#8217;s also possible that the references can be asymmetrical. Jane
+could have José&#8217;s permanent phone number, but José might only have
+Jane&#8217;s room number. In this case Jane has a hard reference to José
+but José only has a weak reference to Jane.</p>
+</div></blockquote>
+<p>Most items in <code class="docutils literal"><span class="pre">music21</span></code> have no reference to each other; they can only
+share information when we put them in the same scope (the mixer) and
+introduce them to each other (e.g., statements such as <code class="docutils literal"><span class="pre">if</span> <span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">y:</span></code>).</p>
+<p>On the other hand, some objects have hard references to other objects.
+For instance, each <code class="docutils literal"><span class="pre">Note</span></code> object has a hard reference to a <code class="docutils literal"><span class="pre">Pitch</span></code>
+object. Any note can get its pitch through the <code class="docutils literal"><span class="pre">.pitch</span></code> attribute. But
+<code class="docutils literal"><span class="pre">Pitch</span></code> objects do not have hard references to their <code class="docutils literal"><span class="pre">Note</span></code> objects.
+If you have a <code class="docutils literal"><span class="pre">Pitch</span></code> there&#8217;s no <code class="docutils literal"><span class="pre">.note</span></code> attribute that lets it find
+its own <code class="docutils literal"><span class="pre">Note</span></code>.</p>
+<p>This seems like a design flaw, and in an ideal world, they would have
+references to each other. Sometimes you have a variable, such as <code class="docutils literal"><span class="pre">p</span></code>,
+which is a <code class="docutils literal"><span class="pre">Pitch</span></code> and it&#8217;d be great to do <code class="docutils literal"><span class="pre">p.note</span></code> to figure out
+what <code class="docutils literal"><span class="pre">Note</span></code> it belongs to. But there&#8217;s a general rule in designing
+programs that&#8217;s worth following: it&#8217;s dangerous for two objects to have
+references to each other. Why? Because each object takes up space in the
+computer&#8217;s memory. At a certain point, operating systems need to free up
+objects that no one is using any more (like when you close a program,
+all that undo data tends to vanish). Operating systems know when an
+object is no longer being used when there are no (hard) references to
+it. If <code class="docutils literal"><span class="pre">p</span></code> had a <code class="docutils literal"><span class="pre">.note</span></code> attribute pointing to <code class="docutils literal"><span class="pre">n</span></code> and <code class="docutils literal"><span class="pre">n</span></code> had a
+<code class="docutils literal"><span class="pre">.pitch</span></code> attribute pointing to <code class="docutils literal"><span class="pre">p</span></code> then they would never get deleted
+even if they were no longer in use (this process is called &#8220;garbage
+collecting&#8221;).</p>
+<p>One way to get around this problem is through the use of weak
+references. A weak reference, like someone&#8217;s room number, lets a object
+communicate with another for a certain length of time, but not forever.
+For a computer system, if <code class="docutils literal"><span class="pre">object1</span></code> has a weak reference to
+<code class="docutils literal"><span class="pre">object2</span></code>, it says that <code class="docutils literal"><span class="pre">object1</span></code> would like to communicate with
+<code class="docutils literal"><span class="pre">object2</span></code> as long as possible, but that this relationship isn&#8217;t strong
+enough to prevent <code class="docutils literal"><span class="pre">object2</span></code> from disappearing when nothing else needs
+it.</p>
+<p><code class="docutils literal"><span class="pre">Note</span></code>s and other objects have strong references to their
+<code class="docutils literal"><span class="pre">Duration</span></code> objects, stored in the <code class="docutils literal"><span class="pre">.duration</span></code> attribute, but
+<code class="docutils literal"><span class="pre">Duration</span></code> objects only have weak references to their <code class="docutils literal"><span class="pre">Note</span></code>
+objects. This makes sense: as long as the <code class="docutils literal"><span class="pre">Note</span></code> exists, the
+<code class="docutils literal"><span class="pre">Duration</span></code> had better be around, but once the <code class="docutils literal"><span class="pre">Note</span></code> disappears,
+there&#8217;s no need to keep its <code class="docutils literal"><span class="pre">Duration</span></code>.</p>
+<p>Some objects that are in a weak reference relationship to others include
+<code class="docutils literal"><span class="pre">Note</span></code>s and <code class="docutils literal"><span class="pre">Stream</span></code>s. Streams have hard references to their
+notes &#8211; they can&#8217;t just have their notes disappearing unannounced! But
+Notes only have weak references to the Streams that they are in.</p>
+<p>There are many notes in a stream, but there&#8217;s only one duration on a
+note. When there is a one-to-one relationship between two objects, the
+object holding the hard reference is called, in <code class="docutils literal"><span class="pre">music21</span></code>, the
+&#8220;client.&#8221; Thus in a Note/Duration relationship, the <code class="docutils literal"><span class="pre">Note</span></code> is the
+client of the Duration. The relationship name implies that the Duration
+is there to serve the client, the Note. When there&#8217;s no client, the
+Duration is off duty and can go home.</p>
+<p>Weak references can be a bit of a pain to work with in Python compared
+to some other languages such as Perl (but much easier than, say,
+Javascript, where they are only beginning to exist). Thus <code class="docutils literal"><span class="pre">music21</span></code> as
+much as possible tries to hide its weak references. We hide things by
+making their attributes begin with an underscore <code class="docutils literal"><span class="pre">_</span></code>, which makes them
+not appear in the docs. For instance, if we create a <code class="docutils literal"><span class="pre">Note</span></code> and look
+at its <code class="docutils literal"><span class="pre">.duration.client</span></code> it looks like the Note itself:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;F##2&quot;</span><span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">client</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="c1">##&gt;</span>
+</pre></div>
+</div>
+<p>But actually <code class="docutils literal"><span class="pre">.client</span></code> is not an attribute or reference at all, but a
+property: a small method that is run invisibily without needing <code class="docutils literal"><span class="pre">()</span></code>
+marks that converts a weakref into a normal object. The actual weakref
+is stored at <code class="docutils literal"><span class="pre">._client</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">_client</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">weakref</span> <span class="n">at</span> <span class="mh">0x10cddfcc8</span><span class="p">;</span> <span class="n">to</span> <span class="s1">&#39;Note&#39;</span> <span class="n">at</span> <span class="mh">0x10ce28588</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We have already seen the use of weak references to store clients in the
+Derivation method:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">derivation</span><span class="o">.</span><span class="n">client</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="c1">##&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">derivation</span><span class="o">.</span><span class="n">client</span> <span class="ow">is</span> <span class="n">n</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_27_graceNotes.html" title="User’s Guide, Chapter 27: Grace Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_25_postTonalTools1.html" title="User’s Guide, Chapter 25: Post-Tonal Tools (1)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

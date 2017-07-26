@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using music21 with Git for Eclipse &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Developer Reference" href="index.html" />
+    <link rel="next" title="Using music21 with the Jupyter (iPython) Notebook" href="installJupyter.html" />
+    <link rel="prev" title="Building Documentation" href="buildingDocumentation.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installJupyter.html" title="Using music21 with the Jupyter (iPython) Notebook"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="buildingDocumentation.html" title="Building Documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Developer Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="buildingDocumentation.html"
+                        title="previous chapter">Building Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installJupyter.html"
+                        title="next chapter">Using <code class="docutils literal"><span class="pre">music21</span></code> with the Jupyter (iPython) Notebook</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using music21 with Git for Eclipse</a><ul>
+<li><a class="reference internal" href="#installing-git">Installing Git</a></li>
+<li><a class="reference internal" href="#installing-eclipse">Installing Eclipse</a><ul>
+<li><a class="reference internal" href="#installing-for-windows">Installing for Windows</a></li>
+<li><a class="reference internal" href="#installing-for-mac">Installing for Mac</a></li>
+<li><a class="reference internal" href="#installing-for-gnu-linux-freebsd-unix">Installing for GNU/Linux/FreeBSD/Unix</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installing-pydev-for-eclipse">Installing PyDev for Eclipse</a></li>
+<li><a class="reference internal" href="#forking-music21-on-github">Forking music21 on GitHub</a></li>
+<li><a class="reference internal" href="#cloning-your-music21-fork-in-eclipse">Cloning your music21 fork in Eclipse</a></li>
+<li><a class="reference internal" href="#configuring-your-music21-project-with-pydev">Configuring your music21 project with PyDev</a></li>
+<li><a class="reference internal" href="#configuring-the-music21-environment">Configuring the music21 Environment</a></li>
+<li><a class="reference internal" href="#committing-pushing-and-pulling">Committing, pushing and pulling</a></li>
+<li><a class="reference internal" href="#sending-pull-requests-to-the-official-music21-repository">Sending pull requests to the official music21 repository</a></li>
+<li><a class="reference internal" href="#getting-your-pull-requests-accepted">Getting your pull requests accepted</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting music21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buildingDocumentation.html">Building Documentation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Using music21 with Git for Eclipse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installJupyter.html">Using <code class="docutils literal"><span class="pre">music21</span></code> with the Jupyter (iPython) Notebook</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/developerReference/usingGit.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="using-music21-with-git-for-eclipse">
+<span id="usinggit"></span><h1>Using music21 with Git for Eclipse<a class="headerlink" href="#using-music21-with-git-for-eclipse" title="Permalink to this headline">¶</a></h1>
+<p>Music21 stores its master code base in the Git code format at the GitHub
+website (<a class="reference external" href="https://github.com/cuthbertLab/music21">https://github.com/cuthbertLab/music21</a> ).
+In order to have the latest, unreleased, versions of music21, which often incorporate new
+bug fixes, users will need to be familiar with Git.</p>
+<p>Developers of music21 who want access to support or committing to the code base need to
+use the IDE called Eclipse, which allows for easy debugging and enforcing of coding standards
+such as consistent whitespace, no unused variable names, and simple error catching. Thus, while
+Eclipse is not strictly necessary to editing the Python files that make up music21, it is the
+only supported environment for receiving technical assistance. Thus students and others who
+wish to be part of the development team for music21 will need to follow the instructions below
+on using Git for Eclipse.</p>
+<p><strong>IMPORTANT: BEFORE BEGINNING, UNINSTALL ALL EXISTING VERSIONS OF MUSIC21.
+ADDITIONAL VERSIONS OF MUSIC21 INSTALLED IN OTHER LOCATIONS CAN CAUSE DIRECTORY
+ROUTING PROBLEMS.</strong></p>
+<div class="section" id="installing-git">
+<h2>Installing Git<a class="headerlink" href="#installing-git" title="Permalink to this headline">¶</a></h2>
+<p>First, make sure you have Git installed. You can find binaries for Windows, OSX
+and Unix at <a class="reference external" href="http://git-scm.com/">http://git-scm.com/</a>.</p>
+<p>But the best way to do almost everything with Git and <cite>music21</cite> today is with the
+GitHub Desktop app, at <cite>https://desktop.github.com &lt;https://desktop.github.com&gt;</cite>.</p>
+</div>
+<div class="section" id="installing-eclipse">
+<h2>Installing Eclipse<a class="headerlink" href="#installing-eclipse" title="Permalink to this headline">¶</a></h2>
+<p>Once you have Git installed, download and install Eclipse. You can find the
+most recent version of Eclipse for Java EE at
+<a class="reference external" href="http://www.eclipse.org/downloads/">http://www.eclipse.org/downloads/</a>, and
+these instructions are written with Eclipse for Java EE 4.5 (Mars) in mind though
+some screenshots are from 4.3 (Kepler).</p>
+<div class="section" id="installing-for-windows">
+<h3>Installing for Windows<a class="headerlink" href="#installing-for-windows" title="Permalink to this headline">¶</a></h3>
+<p>For Windows users, the safest bet is the 32-bit version, regardless of your
+system&#8217;s capabilities.</p>
+<p>If you download the 32-bit version save the Eclipse folder within the zip file
+in your &#8220;Program Files (x86)&#8221; directory if there is one, or &#8220;Program Files&#8221; if
+there isn&#8217;t.</p>
+<p>If you choose the 64-bit version (getting more stable) then put the folder in
+the &#8220;Program Files&#8221; directory even if there is an &#8220;(x86)&#8221; directory.  You may
+need to give permission or your password to make this copy.</p>
+<p>After you&#8217;ve put the folder, go into the folder and drag a shortcut (by holding
+down Alt when dragging) to Eclipse to your start menu (or know how to find it
+later).</p>
+<p>If you try running Eclipse and it gives you a warning about not having Java
+installed, go to
+<a class="reference external" href="http://www.java.com/en/download/help/windows_manual_download.xml#download">http://www.java.com/en/download/help/windows_manual_download.xml#download</a> and
+download a copy there.</p>
+</div>
+<div class="section" id="installing-for-mac">
+<h3>Installing for Mac<a class="headerlink" href="#installing-for-mac" title="Permalink to this headline">¶</a></h3>
+<p>For Mac users, unless your computer is very old, download the 64-bit
+Java EE system.</p>
+<p>For Mac users, once the .tar file has been unzipped, drag the &#8216;eclipse&#8217; app.
+into the Applications folder in your Finder.  Once done, click on the
+Eclipse icon.</p>
+<p>You&#8217;ll be prompted to select a workspace directory, which, by default is
+created in your documents folder. Be sure to remember where this directory is,
+as it is where music21 will be installed.  I use &#8216;/Users/cuthbert/git&#8217; for
+my workspace (you probably wouldn&#8217;t use cuthbert).</p>
+</div>
+<div class="section" id="installing-for-gnu-linux-freebsd-unix">
+<h3>Installing for GNU/Linux/FreeBSD/Unix<a class="headerlink" href="#installing-for-gnu-linux-freebsd-unix" title="Permalink to this headline">¶</a></h3>
+<p>You&#8217;ve chosen to run Unix &#8211; you should be able to figure this out on your own.
+:-)</p>
+<p>Because there are so many slightly incompatible flavors of UNIX, the music21
+team provides free support for problems arising with Windows and Mac installations only;
+UNIX users have saved a few hundred dollars by running a free OS and can spend their
+savings on paid support.</p>
+</div>
+</div>
+<div class="section" id="installing-pydev-for-eclipse">
+<h2>Installing PyDev for Eclipse<a class="headerlink" href="#installing-pydev-for-eclipse" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are using Windows, make sure to install Python through the normal
+Windows installation routines. See <a class="reference internal" href="../installing/installWindows.html#installwindows"><span class="std std-ref">Installing Music21 in Windows</span></a>.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you are using Windows and have a firewall or anti-virus software
+active, we recommend disabling them while installing Eclipse plugins.
+Anti-virus software, such as AVG, can cause Eclipse to hang while
+attempting to fetch packages.</p>
+</div>
+<p>With Eclipse installed, you next need to install the plugin PyDev.</p>
+<p>PyDev is a Python IDE for Eclipse, which may be used in Python, Jython, and
+IronPython development. EGit is a plugin that allows Eclipse to work with Git
+repositories. Both of these can be installed via the Eclipse Marketplace.</p>
+<ol class="arabic">
+<li><p class="first">Launch the Eclipse Marketplace via Eclipse&#8217;s <strong>Help</strong> menu:</p>
+<img alt="../_images/eclipse__install_plugins__0.png" src="../_images/eclipse__install_plugins__0.png" />
+</li>
+<li><p class="first">Search for PyDev in the Marketplace search box, and click <strong>Install</strong> in
+the proper search results: (the latest version is now 3.5)</p>
+<img alt="../_images/eclipse__install_plugins__1__edited.png" src="../_images/eclipse__install_plugins__1__edited.png" />
+</li>
+<li><p class="first">When asked to confirm the installation, click <strong>Install More</strong> to return to
+the search dialog:</p>
+<img alt="../_images/eclipse__install_plugins__2__edited.png" src="../_images/eclipse__install_plugins__2__edited.png" />
+</li>
+</ol>
+<ol class="arabic" start="5">
+<li><p class="first">Now, when asked to confirm the installation of PyDev, click
+<strong>Confirm</strong>:</p>
+<img alt="../_images/eclipse__install_plugins__4__edited.png" src="../_images/eclipse__install_plugins__4__edited.png" />
+</li>
+<li><p class="first">You will be asked to accept the licensing for the plugin. Choose &#8220;I
+accept the terms of the license agreements&#8221; and click <strong>Finish</strong>:</p>
+<img alt="../_images/eclipse__install_plugins__5__edited.png" src="../_images/eclipse__install_plugins__5__edited.png" />
+</li>
+<li><p class="first">Eclipse will now go through the process of automatically installing the
+plugin. When it finishes, you&#8217;ll be asked to confirm the certificate for
+PyDev. Click the checkbox and press OK:</p>
+<img alt="../_images/eclipse__install_plugins__6__edited.png" src="../_images/eclipse__install_plugins__6__edited.png" />
+</li>
+<li><p class="first">Finally, Eclipse will ask to restart. Click <strong>Yes</strong> to complete the plugin
+installation process:</p>
+<img alt="../_images/eclipse__install_plugins__7.png" src="../_images/eclipse__install_plugins__7.png" />
+</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The 4.x series of PyDev - currently available in the Eclipse Marketplace -
+requires Java 7. The plugin will <strong>not</strong> activate in Eclipse without Java
+7.</p>
+</div>
+</div>
+<div class="section" id="forking-music21-on-github">
+<h2>Forking music21 on GitHub<a class="headerlink" href="#forking-music21-on-github" title="Permalink to this headline">¶</a></h2>
+<p>The main development paradigm in Git is to create a &#8220;Fork&#8221; or individualized
+copy of the music21 code base under your own name and make modifications there.
+You may &#8220;Pull&#8221; changes that we have made to the main music21 version into your
+own fork so that your fork stays up to date.  If you&#8217;d like to contribute your
+changes back to the main codebase, you will initiate something called a &#8220;pull
+request&#8221; later.</p>
+<p>To fork the official music21 repository, simply navigate to
+<a class="reference external" href="https://github.com/cuthbertLab/music21">https://github.com/cuthbertLab/music21</a> on GitHub while signed in to your
+GitHub account, and click <strong>Fork</strong> in the upper right-hand corner of the page.</p>
+<img alt="../_images/github__forking__01.png" src="../_images/github__forking__01.png" />
+</div>
+<div class="section" id="cloning-your-music21-fork-in-eclipse">
+<h2>Cloning your music21 fork in Eclipse<a class="headerlink" href="#cloning-your-music21-fork-in-eclipse" title="Permalink to this headline">¶</a></h2>
+<p>Once you&#8217;ve forked music21 on GitHub, you need to clone your fork locally to
+your machine in order to start working.</p>
+<p>To start the cloning process, choose <strong>Import...</strong> from Eclipse&#8217;s <strong>File</strong>
+menu, or right-click in the Package Explorer and choose <strong>Import</strong> from the
+contextual menu that appears.</p>
+<ol class="arabic">
+<li><p class="first">In the <strong>Import</strong> dialog, open the <strong>Git</strong> folder and select <strong>Projects
+from Git</strong>, then click <strong>Next</strong>:</p>
+<img alt="../_images/eclipse__clone__1__edited.png" src="../_images/eclipse__clone__1__edited.png" />
+<p>You may not see the &#8220;Repositories from GitHub&#8221; option on your computer. That&#8217;s okay,
+despite using GitHub, you won&#8217;t actually use this option.</p>
+</li>
+<li><p class="first">You&#8217;ll now be asked to choose a repository source. While you can try using
+the <strong>GitHub</strong> repository source - which allows dynamically searching
+GitHub for repositories - if you&#8217;ve just made your fork a few minutes ago
+it won&#8217;t show up when searching. We recommend selecting the <strong>Clone URI</strong>
+option. Once you&#8217;ve selected <strong>Clone URI</strong>, click <strong>Next</strong>:</p>
+<img alt="../_images/eclipse__clone__2__edited.png" src="../_images/eclipse__clone__2__edited.png" />
+</li>
+<li><p class="first">Now you need to enter information about your fork. For the purposes of this
+tutorial, we&#8217;ll use the fork of music21 found at
+<a class="reference external" href="https://github.com/josiah-wolf-oberholtzer/music21">https://github.com/josiah-wolf-oberholtzer/music21</a>, but take note of
+the information for your own fork when proceeding here. The GitHub webpage
+lists the clone URL for this fork partway-down the right side of the page.
+The HTTPS clone URL for this fork is
+<a class="reference external" href="https://github.com/josiah-wolf-oberholtzer/music21.git">https://github.com/josiah-wolf-oberholtzer/music21.git</a>.</p>
+<p>Enter the GitHub clone URL into the <strong>URI</strong> field in the <strong>Location</strong>
+section of Eclipse&#8217;s dialog, then enter your GitHub credentials in the
+<strong>Authentication</strong> section. The other fields will be filled in
+automatically, and you don&#8217;t need to touch them.</p>
+<p>When finished, press <strong>Next</strong>:</p>
+<img alt="../_images/eclipse__clone__3__edited.png" src="../_images/eclipse__clone__3__edited.png" />
+</li>
+<li><p class="first">In the <strong>Branch Selection</strong> dialog, simply click <strong>Next</strong>:</p>
+<img alt="../_images/eclipse__clone__4__edited.png" src="../_images/eclipse__clone__4__edited.png" />
+</li>
+<li><p class="first">In the <strong>Location Destination</strong> dialog, you can choose the local
+destination for the repository. By default, Eclipse will try and clone new
+repositories into a <strong>git</strong> folder in your home directory. In the example
+below, we&#8217;re opting to put it somewhere else.</p>
+<p>Choose a new directory, or accept Eclipse&#8217;s default. Then, click <strong>Next</strong>:</p>
+<img alt="../_images/eclipse__clone__5__edited.png" src="../_images/eclipse__clone__5__edited.png" />
+</li>
+<li><p class="first">Eclipse is now cloning your music21 fork! Sit tight: this will take a few
+minutes:</p>
+<img alt="../_images/eclipse__clone__6.png" src="../_images/eclipse__clone__6.png" />
+</li>
+<li><p class="first">Once the cloning process has finished, click <strong>Next</strong> in the following
+dialog:</p>
+<img alt="../_images/eclipse__clone__7__edited.png" src="../_images/eclipse__clone__7__edited.png" />
+</li>
+<li><p class="first">Finally, you&#8217;ll be given the option to choose how Eclipse will refer to the
+project. Choose <cite>music21base</cite> instead of <cite>music21</cite>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can name your <cite>music21</cite> Eclipse project whatever you like. However,
+we strongly recommend choosing a project name other than <cite>music21</cite>.
+Why? The project you&#8217;ve now downloaded contains a directory named
+<cite>music21</cite>. You may run into problems if you create subsequent projects
+in Eclipse which attempt to reference the <cite>music21</cite> Python package
+inside the <cite>music21</cite> Eclipse project. Naming the Eclipse project to
+something other than <cite>music21</cite> mitigates this reference problem.</p>
+</div>
+<img alt="../_images/eclipse__clone__8__edited.png" src="../_images/eclipse__clone__8__edited.png" />
+</li>
+</ol>
+</div>
+<div class="section" id="configuring-your-music21-project-with-pydev">
+<h2>Configuring your music21 project with PyDev<a class="headerlink" href="#configuring-your-music21-project-with-pydev" title="Permalink to this headline">¶</a></h2>
+<p>You need to teach Eclipse that music21 should be considered a PyDev project. In
+the <strong>Package Explorer</strong> window, right-click on your music21 project and choose
+<strong>Set as PyDev Project</strong> from the <strong>PyDev</strong> submenu:</p>
+<img alt="../_images/eclipse__configure_pydev__1.png" src="../_images/eclipse__configure_pydev__1.png" />
+<p>If you don&#8217;t see this option, see <a class="reference external" href="http://stackoverflow.com/questions/19873064/pydev-not-showing-up-in-eclipse">http://stackoverflow.com/questions/19873064/pydev-not-showing-up-in-eclipse</a></p>
+<p>You also need to tell PyDev that your project should be included in your Python
+path. If you don&#8217;t do this, Python won&#8217;t be able to find music21 at all.</p>
+<img alt="../_images/eclipse__configure_pydev__2.png" src="../_images/eclipse__configure_pydev__2.png" />
+</div>
+<div class="section" id="configuring-the-music21-environment">
+<h2>Configuring the music21 Environment<a class="headerlink" href="#configuring-the-music21-environment" title="Permalink to this headline">¶</a></h2>
+<p>Configuring the music21 Environment is done mostly like a normal install with
+one big difference noted below.</p>
+<p>To create a user environment settings file, open the music21/configure.py file
+and run it by pressing the green circle with a white arrowhead in it at the top
+of the Eclipse interface.</p>
+<a class="reference internal image-reference" href="../_images/runningconfigure.png"><img alt="../_images/runningconfigure.png" src="../_images/runningconfigure.png" style="width: 650px;" /></a>
+<p>A new &#8220;Run As&#8221; window will appear in which you will be prompted to select a way
+to run configure.py. Choose &#8220;Python Run&#8221; and click on &#8220;OK.&#8221; (You should always
+click this when running Python programs)</p>
+<a class="reference internal image-reference" href="../_images/runas.png"><img alt="../_images/runas.png" src="../_images/runas.png" style="width: 650px;" /></a>
+<p>In the console, you may see errors about installing additional packages, after
+which you will see a message beginning with &#8220;Welcome to the music21
+Configuration Assistant.&#8221;</p>
+<a class="reference internal image-reference" href="../_images/welcometoconfigassistant.png"><img alt="../_images/welcometoconfigassistant.png" src="../_images/welcometoconfigassistant.png" style="width: 650px;" /></a>
+<p>When asked if you would like to install music21 in the normal place for Python
+packages, type <code class="docutils literal"><span class="pre">no</span></code> and press Enter.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Make sure you write <code class="docutils literal"><span class="pre">no</span></code> here.</p>
+</div>
+<a class="reference internal image-reference" href="../_images/saynotosavingmusic21.png"><img alt="../_images/saynotosavingmusic21.png" src="../_images/saynotosavingmusic21.png" style="width: 650px;" /></a>
+<p>See <a class="reference internal" href="../tutorials/environment.html#environment"><span class="std std-ref">Configuring Environment Settings</span></a> for more information on configuring user settings.
+Otherwise, head to: <a class="reference internal" href="../about/what.html#what"><span class="std std-ref">What is Music21?</span></a> for further demos and
+tutorials on using music21.</p>
+</div>
+<div class="section" id="committing-pushing-and-pulling">
+<h2>Committing, pushing and pulling<a class="headerlink" href="#committing-pushing-and-pulling" title="Permalink to this headline">¶</a></h2>
+<p>This used to be really hard...now look at the instructions for the <strong>Github Desktop</strong> app.</p>
+</div>
+<div class="section" id="sending-pull-requests-to-the-official-music21-repository">
+<h2>Sending pull requests to the official music21 repository<a class="headerlink" href="#sending-pull-requests-to-the-official-music21-repository" title="Permalink to this headline">¶</a></h2>
+<p>To get your changes into the official music21 repository, you&#8217;ll have to make a
+<strong>pull request</strong> via the GitHub <strong>web site</strong> or the desktop app.</p>
+<p>A <strong>pull request</strong> is just what it sounds like:
+a request to another repository (the music21 team&#8217;s copy) for them
+to pull in changes from your repository and add them to the centralized version.</p>
+<p>Making pull requests is easy:</p>
+<ol class="arabic">
+<li><p class="first">Log into GitHub and find your fork of music21. Under the repository summary
+header you&#8217;ll see a green button with two arrows, labeled &#8220;Compare &amp;
+review&#8221;.</p>
+<p>Click that button:</p>
+<img alt="../_images/github__pull_requests__1.png" src="../_images/github__pull_requests__1.png" />
+</li>
+<li><p class="first">If your repository differs from the official music21 repository, you&#8217;ll be
+shown the diff stats, as well as a large banner with the text <code class="docutils literal"><span class="pre">Click</span> <span class="pre">to</span>
+<span class="pre">create</span> <span class="pre">a</span> <span class="pre">pull</span> <span class="pre">request</span> <span class="pre">for</span> <span class="pre">this</span> <span class="pre">comparison</span></code>.</p>
+<p>Click on that banner to continue:</p>
+<img alt="../_images/github__pull_requests__2.png" src="../_images/github__pull_requests__2.png" />
+</li>
+<li><p class="first">Almost done. Now you can write a description of what your pull request
+involves. While the music21 team can and will review the diffs for your
+request, please provide a useful description. What do your changes
+accomplish?  Do they address one of the issues in the official issue
+tracker? Which issue?  Do they represent an enhancement, or new
+functionality?</p>
+<p>When you&#8217;ve finished writing your description, click on the <code class="docutils literal"><span class="pre">Send</span> <span class="pre">pull</span>
+<span class="pre">request</span></code> button. You&#8217;ve sent your pull pull request!</p>
+<img alt="../_images/github__pull_requests__3.png" src="../_images/github__pull_requests__3.png" />
+</li>
+</ol>
+</div>
+<div class="section" id="getting-your-pull-requests-accepted">
+<h2>Getting your pull requests accepted<a class="headerlink" href="#getting-your-pull-requests-accepted" title="Permalink to this headline">¶</a></h2>
+<p>Once you&#8217;ve sent a pull request to the music21 team they&#8217;ll need to review the
+changes you&#8217;ve suggested.  They can opt to accept some, all or none of the
+commits you&#8217;ve included in your pull request. If the work looks good, they&#8217;ll
+merge your changes into the official repository.</p>
+<p>What do we mean by the &#8220;if the work looks good&#8221;? The first and highest priority
+is that if the code expands music21 in any way that it is well documented
+(see <a class="reference internal" href="documenting.html#documenting"><span class="std std-ref">Documenting music21</span></a>) and includes tests that ensure that future changes to
+the system will not break the code.  You will need to run test/multiprocessTest.py
+which will update the file test/lastResults.txt to show that the tests have passed.
+To run these tests you will need to install the optional modules such as NumPy,
+matplotlib, etc. The tests you have written cannot add appreciatively to the amount
+of time it takes to run the test suite (so a few milliseconds for a tiny addition, at
+most a second or two for a major contribution).  The code needs to be well placed
+within the structure of the library so as not to add unneeded complexity. For instance,
+if your new methods will only apply to a small number of users working on a constrained
+repertory (such as chorales, jazz, medieval music, etc.) it should not add ten new methods
+to Note or Stream. The contributions cannot require any new external dependencies and
+even optional dependencies should be discussed with the music21 team before attempting
+a Pull Request.  The code should work on Mac, Windows (watch out for file system calls),
+and Unix equally well.  It sounds hard, but after a while looking out for these caveats
+becomes second nature and will help ensure the toolkit is viable for at least a decade
+to come.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installJupyter.html" title="Using music21 with the Jupyter (iPython) Notebook"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="buildingDocumentation.html" title="Building Documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

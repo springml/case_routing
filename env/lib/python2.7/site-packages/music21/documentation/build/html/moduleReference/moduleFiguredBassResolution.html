@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.figuredBass.resolution &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.figuredBass.rules" href="moduleFiguredBassRules.html" />
+    <link rel="prev" title="music21.figuredBass.realizerScale" href="moduleFiguredBassRealizerScale.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassRules.html" title="music21.figuredBass.rules"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassRealizerScale.html" title="music21.figuredBass.realizerScale"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleFiguredBassRealizerScale.html"
+                        title="previous chapter">music21.figuredBass.realizerScale</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleFiguredBassRules.html"
+                        title="next chapter">music21.figuredBass.rules</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.figuredBass.resolution</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleFiguredBassResolution.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-figuredbass-resolution">
+<span id="modulefiguredbassresolution"></span><h1>music21.figuredBass.resolution<a class="headerlink" href="#music21-figuredbass-resolution" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.figuredBass.resolution"></span><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The terminology, V43, viio, iv, etc. are explained 
+more fully in <em>The Music Theory Handbook</em>
+by Marjorie Merryman.</p>
+</div>
+<p>This module contains methods which can properly resolve 
+<a class="reference external" href="http://en.wikipedia.org/wiki/Dominant_seventh_chord">dominant seventh</a>, 
+<a class="reference external" href="http://en.wikipedia.org/wiki/Diminished_seventh_chord">diminished seventh</a>, and 
+<a class="reference external" href="http://en.wikipedia.org/wiki/Augmented_sixth_chord">augmented sixth</a>
+chords expressed as possibilities (See <a class="reference internal" href="moduleFiguredBassPossibility.html#module-music21.figuredBass.possibility" title="music21.figuredBass.possibility"><code class="xref py py-mod docutils literal"><span class="pre">possibility</span></code></a>).
+Although these methods can stand alone, they are speed-enhanced for instances
+of <a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment" title="music21.figuredBass.segment.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a>, where there are many 
+possibilities formed around the same chord. If provided with additional
+arguments, the methods only <a class="reference internal" href="modulePitch.html#music21.pitch.Pitch.transpose" title="music21.pitch.Pitch.transpose"><code class="xref py py-meth docutils literal"><span class="pre">transpose()</span></code></a> each 
+<a class="reference internal" href="modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code></a> in a possibility by the appropriate interval.</p>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.figuredBass.resolution.augmentedSixthToDominant">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">augmentedSixthToDominant</code><span class="sig-paren">(</span><em>augSixthPossib</em>, <em>augSixthType=None</em>, <em>augSixthChordInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.augmentedSixthToDominant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves French (augSixthType = 1), German (augSixthType = 2), and Swiss (augSixthType = 3)
+augmented sixth chords to the root position dominant triad.</p>
+<p>Proper Italian augmented sixth resolutions not supported within this method.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bb2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Es4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E#4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Gs4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G#4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iv6</span> <span class="o">=</span> <span class="p">(</span><span class="n">G4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">itAug6</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frAug6</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grAug6</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">swAug6</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">Es4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">frRes</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">augmentedSixthToDominant</span><span class="p">(</span><span class="n">frAug6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frRes</span>
+<span class="go">(&lt;music21.pitch.Pitch A4&gt;, &lt;music21.pitch.Pitch E4&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch C#4&gt;, &lt;music21.pitch.Pitch A2&gt;)    </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">frRes</span><span class="p">]</span>
+<span class="go">[&#39;A4&#39;, &#39;E4&#39;, &#39;C#4&#39;, &#39;A2&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">grRes</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">augmentedSixthToDominant</span><span class="p">(</span><span class="n">grAug6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">grRes</span><span class="p">]</span>
+<span class="go">[&#39;A4&#39;, &#39;E4&#39;, &#39;C#4&#39;, &#39;A2&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">swRes</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">augmentedSixthToDominant</span><span class="p">(</span><span class="n">swAug6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">swRes</span><span class="p">]</span>
+<span class="go">[&#39;A4&#39;, &#39;E4&#39;, &#39;C#4&#39;, &#39;A2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">frAug6</span><span class="p">,</span> <span class="n">frRes</span><span class="p">,</span> <span class="n">grAug6</span><span class="p">,</span> <span class="n">grRes</span><span class="p">,</span> <span class="n">swAug6</span><span class="p">,</span> <span class="n">swRes</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/fbResolution_a6toV.png"><img alt="../_images/fbResolution_a6toV.png" src="../_images/fbResolution_a6toV.png" style="width: 700px;" /></a>
+</div></blockquote>
+<p>Above: French, German, and Swiss resolutions, respectively.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.resolution.augmentedSixthToMajorTonic">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">augmentedSixthToMajorTonic</code><span class="sig-paren">(</span><em>augSixthPossib</em>, <em>augSixthType=None</em>, <em>augSixthChordInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.augmentedSixthToMajorTonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves French (augSixthType = 1), German (augSixthType = 2), and Swiss (augSixthType = 3)
+augmented sixth chords to the major tonic 6,4.</p>
+<p>Proper Italian augmented sixth resolutions not supported within this method.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bb2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Es4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E#4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Gs4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G#4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iv6</span> <span class="o">=</span> <span class="p">(</span><span class="n">G4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">itAug6</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frAug6</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grAug6</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">swAug6</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">Es4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frRes</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">augmentedSixthToMajorTonic</span><span class="p">(</span><span class="n">frAug6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">frRes</span><span class="p">]</span>
+<span class="go">[&#39;A4&#39;, &#39;F#4&#39;, &#39;D4&#39;, &#39;A2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grRes</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">augmentedSixthToMajorTonic</span><span class="p">(</span><span class="n">grAug6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">grRes</span><span class="p">]</span>
+<span class="go">[&#39;A4&#39;, &#39;F#4&#39;, &#39;D4&#39;, &#39;A2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">swRes</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">augmentedSixthToMajorTonic</span><span class="p">(</span><span class="n">swAug6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">swRes</span><span class="p">]</span>
+<span class="go">[&#39;A4&#39;, &#39;F#4&#39;, &#39;D4&#39;, &#39;A2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">frAug6</span><span class="p">,</span> <span class="n">frRes</span><span class="p">,</span> <span class="n">grAug6</span><span class="p">,</span> <span class="n">grRes</span><span class="p">,</span> <span class="n">swAug6</span><span class="p">,</span> <span class="n">swRes</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/fbResolution_a6toI.png"><img alt="../_images/fbResolution_a6toI.png" src="../_images/fbResolution_a6toI.png" style="width: 700px;" /></a>
+</div></blockquote>
+<p>Above: French, German, and Swiss resolutions, respectively.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.resolution.augmentedSixthToMinorTonic">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">augmentedSixthToMinorTonic</code><span class="sig-paren">(</span><em>augSixthPossib</em>, <em>augSixthType=None</em>, <em>augSixthChordInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.augmentedSixthToMinorTonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves French (augSixthType = 1), German (augSixthType = 2), and Swiss (augSixthType = 3)
+augmented sixth chords to the minor tonic 6,4.</p>
+<p>Proper Italian augmented sixth resolutions not supported within this method.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bb2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Es4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E#4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Gs4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G#4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iv6</span> <span class="o">=</span> <span class="p">(</span><span class="n">G4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">itAug6</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frAug6</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grAug6</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">swAug6</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">Es4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frRes</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">augmentedSixthToMinorTonic</span><span class="p">(</span><span class="n">frAug6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">frRes</span><span class="p">]</span>
+<span class="go">[&#39;A4&#39;, &#39;F4&#39;, &#39;D4&#39;, &#39;A2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grRes</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">augmentedSixthToMinorTonic</span><span class="p">(</span><span class="n">grAug6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">grRes</span><span class="p">]</span>
+<span class="go">[&#39;A4&#39;, &#39;F4&#39;, &#39;D4&#39;, &#39;A2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">swRes</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">augmentedSixthToMinorTonic</span><span class="p">(</span><span class="n">swAug6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">swRes</span><span class="p">]</span>
+<span class="go">[&#39;A4&#39;, &#39;F4&#39;, &#39;D4&#39;, &#39;A2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">frAug6</span><span class="p">,</span> <span class="n">frRes</span><span class="p">,</span> <span class="n">grAug6</span><span class="p">,</span> <span class="n">grRes</span><span class="p">,</span> <span class="n">swAug6</span><span class="p">,</span> <span class="n">swRes</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/fbResolution_a6toIm.png"><img alt="../_images/fbResolution_a6toIm.png" src="../_images/fbResolution_a6toIm.png" style="width: 700px;" /></a>
+</div></blockquote>
+<p>Above: French, German, and Swiss resolutions, respectively.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.resolution.dominantSeventhToMajorTonic">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">dominantSeventhToMajorTonic</code><span class="sig-paren">(</span><em>domPossib</em>, <em>resolveV43toI6=False</em>, <em>domChordInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.dominantSeventhToMajorTonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves a dominant seventh chord in root position or any of its
+inversions to the major tonic, in root position or first inversion.</p>
+<p>The second inversion (4,3) dominant seventh chord can resolve to 
+the tonic in either inversion. This is controlled by
+resolveV43toI6, and is set to True 
+by <a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment.resolveDominantSeventhSegment" title="music21.figuredBass.segment.Segment.resolveDominantSeventhSegment"><code class="xref py py-meth docutils literal"><span class="pre">resolveDominantSeventhSegment()</span></code></a>
+only when the <a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment.segmentChord" title="music21.figuredBass.segment.Segment.segmentChord"><code class="xref py py-attr docutils literal"><span class="pre">segmentChord</span></code></a>
+of a <a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment" title="music21.figuredBass.segment.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a>
+spells out a dominant seventh chord in second inversion.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bb3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bb4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">domPossibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">D5</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">B3</span><span class="p">,</span> <span class="n">G2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA1</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">dominantSeventhToMajorTonic</span><span class="p">(</span><span class="n">domPossibA1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA1</span>
+<span class="go">(&lt;music21.pitch.Pitch C5&gt;, &lt;music21.pitch.Pitch E4&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch C4&gt;, &lt;music21.pitch.Pitch C3&gt;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">domPossibA1</span><span class="p">,</span> <span class="n">resPossibA1</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_V7toI_1.png"><img alt="../_images/fbResolution_V7toI_1.png" src="../_images/fbResolution_V7toI_1.png" style="width: 150px;" /></a>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">domPossibA2</span> <span class="o">=</span> <span class="p">(</span><span class="n">Bb3</span><span class="p">,</span> <span class="n">G3</span><span class="p">,</span> <span class="n">E3</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA2</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">dominantSeventhToMajorTonic</span><span class="p">(</span><span class="n">domPossibA2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibA2</span><span class="p">]</span>
+<span class="go">[&#39;A3&#39;, &#39;F3&#39;, &#39;F3&#39;, &#39;F3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">domPossibA2</span><span class="p">,</span> <span class="n">resPossibA2</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_V7toI_2.png"><img alt="../_images/fbResolution_V7toI_2.png" src="../_images/fbResolution_V7toI_2.png" style="width: 150px;" /></a>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">domPossibA3</span> <span class="o">=</span> <span class="p">(</span><span class="n">E5</span><span class="p">,</span> <span class="n">Bb4</span><span class="p">,</span> <span class="n">C4</span><span class="p">,</span> <span class="n">G3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA3a</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">dominantSeventhToMajorTonic</span><span class="p">(</span><span class="n">domPossibA3</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibA3a</span><span class="p">]</span>
+<span class="go">[&#39;F5&#39;, &#39;A4&#39;, &#39;C4&#39;, &#39;F3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA3b</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">dominantSeventhToMajorTonic</span><span class="p">(</span><span class="n">domPossibA3</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibA3b</span><span class="p">]</span>
+<span class="go">[&#39;F5&#39;, &#39;C5&#39;, &#39;C4&#39;, &#39;A3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">domPossibA3</span><span class="p">,</span> <span class="n">resPossibA3a</span><span class="p">,</span> <span class="n">domPossibA3</span><span class="p">,</span> <span class="n">resPossibA3b</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_V7toI_3.png"><img alt="../_images/fbResolution_V7toI_3.png" src="../_images/fbResolution_V7toI_3.png" style="width: 200px;" /></a>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.resolution.dominantSeventhToMinorTonic">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">dominantSeventhToMinorTonic</code><span class="sig-paren">(</span><em>domPossib</em>, <em>resolveV43toi6=False</em>, <em>domChordInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.dominantSeventhToMinorTonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves a dominant seventh chord in root position or any of its
+inversions to the minor tonic, in root position or first inversion,
+accordingly.</p>
+<p>The second inversion (4,3) dominant seventh chord can resolve to 
+the tonic in either inversion. This is controlled by
+resolveV43toi6, and is set to True by 
+<a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment.resolveDominantSeventhSegment" title="music21.figuredBass.segment.Segment.resolveDominantSeventhSegment"><code class="xref py py-meth docutils literal"><span class="pre">resolveDominantSeventhSegment()</span></code></a>
+only when the <a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment.segmentChord" title="music21.figuredBass.segment.Segment.segmentChord"><code class="xref py py-attr docutils literal"><span class="pre">segmentChord</span></code></a>
+of a <a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment" title="music21.figuredBass.segment.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a>
+spells out a dominant seventh chord in second inversion.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bb3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bb4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">domPossibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">D5</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">B3</span><span class="p">,</span> <span class="n">G2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA1</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">dominantSeventhToMinorTonic</span><span class="p">(</span><span class="n">domPossibA1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibA1</span><span class="p">]</span>
+<span class="go">[&#39;C5&#39;, &#39;E-4&#39;, &#39;C4&#39;, &#39;C3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">domPossibA1</span><span class="p">,</span> <span class="n">resPossibA1</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_V7toIm_1.png"><img alt="../_images/fbResolution_V7toIm_1.png" src="../_images/fbResolution_V7toIm_1.png" style="width: 150px;" /></a>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">domPossibA2</span> <span class="o">=</span> <span class="p">(</span><span class="n">Bb3</span><span class="p">,</span> <span class="n">G3</span><span class="p">,</span> <span class="n">E3</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA2</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">dominantSeventhToMinorTonic</span><span class="p">(</span><span class="n">domPossibA2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibA2</span><span class="p">])</span>
+<span class="go">&#39;A-3, F3, F3, F3&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">domPossibA2</span><span class="p">,</span> <span class="n">resPossibA2</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_V7toIm_2.png"><img alt="../_images/fbResolution_V7toIm_2.png" src="../_images/fbResolution_V7toIm_2.png" style="width: 150px;" /></a>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">domPossibA3</span> <span class="o">=</span> <span class="p">(</span><span class="n">E5</span><span class="p">,</span> <span class="n">Bb4</span><span class="p">,</span> <span class="n">C4</span><span class="p">,</span> <span class="n">G3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA3a</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">dominantSeventhToMinorTonic</span><span class="p">(</span><span class="n">domPossibA3</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibA3a</span><span class="p">]</span>
+<span class="go">[&#39;F5&#39;, &#39;A-4&#39;, &#39;C4&#39;, &#39;F3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA3b</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">dominantSeventhToMinorTonic</span><span class="p">(</span><span class="n">domPossibA3</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibA3b</span><span class="p">]</span>
+<span class="go">[&#39;F5&#39;, &#39;C5&#39;, &#39;C4&#39;, &#39;A-3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">domPossibA3</span><span class="p">,</span> <span class="n">resPossibA3a</span><span class="p">,</span> <span class="n">domPossibA3</span><span class="p">,</span> <span class="n">resPossibA3b</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_V7toIm_3.png"><img alt="../_images/fbResolution_V7toIm_3.png" src="../_images/fbResolution_V7toIm_3.png" style="width: 200px;" /></a>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.resolution.dominantSeventhToMajorSubmediant">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">dominantSeventhToMajorSubmediant</code><span class="sig-paren">(</span><em>domPossib</em>, <em>domChordInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.dominantSeventhToMajorSubmediant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves a dominant seventh chord in root position to the 
+major submediant (VI) in root position.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">domPossibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">D5</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">B3</span><span class="p">,</span> <span class="n">G2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA1</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">dominantSeventhToMajorSubmediant</span><span class="p">(</span><span class="n">domPossibA1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">nameWithOctave</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibA1</span><span class="p">]</span>
+<span class="go">[&#39;C5&#39;, &#39;E-4&#39;, &#39;C4&#39;, &#39;A-2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">domPossibA1</span><span class="p">,</span> <span class="n">resPossibA1</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_V7toVI.png"><img alt="../_images/fbResolution_V7toVI.png" src="../_images/fbResolution_V7toVI.png" style="width: 150px;" /></a>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.resolution.dominantSeventhToMinorSubmediant">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">dominantSeventhToMinorSubmediant</code><span class="sig-paren">(</span><em>domPossib</em>, <em>domChordInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.dominantSeventhToMinorSubmediant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves a dominant seventh chord in root position to the 
+minor submediant (vi) in root position.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">domPossibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">D5</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">B3</span><span class="p">,</span> <span class="n">G2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA1</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">dominantSeventhToMinorSubmediant</span><span class="p">(</span><span class="n">domPossibA1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">nameWithOctave</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibA1</span><span class="p">]</span>
+<span class="go">[&#39;C5&#39;, &#39;E4&#39;, &#39;C4&#39;, &#39;A2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">domPossibA1</span><span class="p">,</span> <span class="n">resPossibA1</span><span class="p">)</span>   
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_V7toVIm.png"><img alt="../_images/fbResolution_V7toVIm.png" src="../_images/fbResolution_V7toVIm.png" style="width: 150px;" /></a>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.resolution.dominantSeventhToMajorSubdominant">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">dominantSeventhToMajorSubdominant</code><span class="sig-paren">(</span><em>domPossib</em>, <em>domChordInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.dominantSeventhToMajorSubdominant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves a dominant seventh chord in root position
+to the major subdominant (IV) in first inversion.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">domPossibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">D5</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">B3</span><span class="p">,</span> <span class="n">G2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA1</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">dominantSeventhToMajorSubdominant</span><span class="p">(</span><span class="n">domPossibA1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">nameWithOctave</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibA1</span><span class="p">]</span>
+<span class="go">[&#39;C5&#39;, &#39;F4&#39;, &#39;C4&#39;, &#39;A2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">domPossibA1</span><span class="p">,</span> <span class="n">resPossibA1</span><span class="p">)</span>    
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_V7toIV.png"><img alt="../_images/fbResolution_V7toIV.png" src="../_images/fbResolution_V7toIV.png" style="width: 150px;" /></a>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.resolution.dominantSeventhToMinorSubdominant">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">dominantSeventhToMinorSubdominant</code><span class="sig-paren">(</span><em>domPossib</em>, <em>domChordInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.dominantSeventhToMinorSubdominant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves a dominant seventh chord in root position
+to the minor subdominant (iv) in first inversion.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">domPossibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">D5</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">B3</span><span class="p">,</span> <span class="n">G2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA1</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">dominantSeventhToMinorSubdominant</span><span class="p">(</span><span class="n">domPossibA1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">nameWithOctave</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibA1</span><span class="p">]</span>
+<span class="go">[&#39;C5&#39;, &#39;F4&#39;, &#39;C4&#39;, &#39;A-2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">domPossibA1</span><span class="p">,</span> <span class="n">resPossibA1</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_V7toIVm.png"><img alt="../_images/fbResolution_V7toIVm.png" src="../_images/fbResolution_V7toIVm.png" style="width: 150px;" /></a>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.resolution.diminishedSeventhToMajorTonic">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">diminishedSeventhToMajorTonic</code><span class="sig-paren">(</span><em>dimPossib</em>, <em>doubledRoot=False</em>, <em>dimChordInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.diminishedSeventhToMajorTonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves a fully diminished seventh chord to the major tonic,
+in root position or either inversion.</p>
+<p>The resolution of the diminished seventh chord can have a 
+doubled third (standard resolution) or a doubled root
+(alternate resolution), because the third of the diminished
+chord can either rise or fall. The desired resolution is
+attained using doubledRoot, and is set by 
+<a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment.resolveDiminishedSeventhSegment" title="music21.figuredBass.segment.Segment.resolveDiminishedSeventhSegment"><code class="xref py py-meth docutils literal"><span class="pre">resolveDiminishedSeventhSegment()</span></code></a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cs3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C#3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bb4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dimPossibA</span> <span class="o">=</span> <span class="p">(</span><span class="n">Bb4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">G3</span><span class="p">,</span> <span class="n">Cs3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibAa</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">diminishedSeventhToMajorTonic</span><span class="p">(</span><span class="n">dimPossibA</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibAa</span><span class="p">]</span>
+<span class="go">[&#39;A4&#39;, &#39;F#4&#39;, &#39;F#3&#39;, &#39;D3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibAb</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">diminishedSeventhToMajorTonic</span><span class="p">(</span><span class="n">dimPossibA</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">nameWithOctave</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibAb</span><span class="p">]</span>
+<span class="go">[&#39;A4&#39;, &#39;D4&#39;, &#39;F#3&#39;, &#39;D3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">dimPossibA</span><span class="p">,</span> <span class="n">resPossibAa</span><span class="p">,</span> <span class="n">dimPossibA</span><span class="p">,</span> <span class="n">resPossibAb</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_vii7toI.png"><img alt="../_images/fbResolution_vii7toI.png" src="../_images/fbResolution_vii7toI.png" style="width: 200px;" /></a>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.resolution.diminishedSeventhToMinorTonic">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">diminishedSeventhToMinorTonic</code><span class="sig-paren">(</span><em>dimPossib</em>, <em>doubledRoot=False</em>, <em>dimChordInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.diminishedSeventhToMinorTonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves a fully diminished seventh chord to the minor tonic,
+in root position or either inversion.</p>
+<p>The resolution of the diminished seventh chord can have a 
+doubled third (standard resolution) or a doubled root
+(alternate resolution), because the third of the diminished
+chord can either rise or fall. The desired resolution is
+attained using doubledRoot, and is set by 
+<a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment.resolveDiminishedSeventhSegment" title="music21.figuredBass.segment.Segment.resolveDiminishedSeventhSegment"><code class="xref py py-meth docutils literal"><span class="pre">resolveDiminishedSeventhSegment()</span></code></a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cs3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C#3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bb4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dimPossibA</span> <span class="o">=</span> <span class="p">(</span><span class="n">Bb4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">G3</span><span class="p">,</span> <span class="n">Cs3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibAa</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">diminishedSeventhToMinorTonic</span><span class="p">(</span><span class="n">dimPossibA</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">nameWithOctave</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibAa</span><span class="p">]</span>
+<span class="go">[&#39;A4&#39;, &#39;F4&#39;, &#39;F3&#39;, &#39;D3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibAb</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">diminishedSeventhToMinorTonic</span><span class="p">(</span><span class="n">dimPossibA</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">nameWithOctave</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibAb</span><span class="p">]</span>
+<span class="go">[&#39;A4&#39;, &#39;D4&#39;, &#39;F3&#39;, &#39;D3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">dimPossibA</span><span class="p">,</span> <span class="n">resPossibAa</span><span class="p">,</span> <span class="n">dimPossibA</span><span class="p">,</span> <span class="n">resPossibAb</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_vii7toIm.png"><img alt="../_images/fbResolution_vii7toIm.png" src="../_images/fbResolution_vii7toIm.png" style="width: 200px;" /></a>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.resolution.diminishedSeventhToMajorSubdominant">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">diminishedSeventhToMajorSubdominant</code><span class="sig-paren">(</span><em>dimPossib</em>, <em>dimChordInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.diminishedSeventhToMajorSubdominant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves a fully diminished seventh chord to the
+major subdominant (IV).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cs3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C#3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bb4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dimPossibA</span> <span class="o">=</span> <span class="p">(</span><span class="n">Bb4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">G3</span><span class="p">,</span> <span class="n">Cs3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">diminishedSeventhToMajorSubdominant</span><span class="p">(</span><span class="n">dimPossibA</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibA</span><span class="p">]</span>
+<span class="go">[&#39;B4&#39;, &#39;D4&#39;, &#39;G3&#39;, &#39;D3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">dimPossibA</span><span class="p">,</span> <span class="n">resPossibA</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_vii7toIV.png"><img alt="../_images/fbResolution_vii7toIV.png" src="../_images/fbResolution_vii7toIV.png" style="width: 150px;" /></a>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.resolution.diminishedSeventhToMinorSubdominant">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">diminishedSeventhToMinorSubdominant</code><span class="sig-paren">(</span><em>dimPossib</em>, <em>dimChordInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.diminishedSeventhToMinorSubdominant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resolves a fully diminished seventh chord to the
+minor subdominant (iv).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cs3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C#3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bb4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dimPossibA</span> <span class="o">=</span> <span class="p">(</span><span class="n">Bb4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">G3</span><span class="p">,</span> <span class="n">Cs3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossibA</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">diminishedSeventhToMinorSubdominant</span><span class="p">(</span><span class="n">dimPossibA</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">resPossibA</span><span class="p">]</span>
+<span class="go">[&#39;B-4&#39;, &#39;D4&#39;, &#39;G3&#39;, &#39;D3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resolution</span><span class="o">.</span><span class="n">showResolutions</span><span class="p">(</span><span class="n">dimPossibA</span><span class="p">,</span> <span class="n">resPossibA</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbResolution_vii7toIVm.png"><img alt="../_images/fbResolution_vii7toIVm.png" src="../_images/fbResolution_vii7toIVm.png" style="width: 150px;" /></a>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.resolution.showResolutions">
+<code class="descclassname">music21.figuredBass.resolution.</code><code class="descname">showResolutions</code><span class="sig-paren">(</span><em>*allPossib</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.resolution.showResolutions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in possibilities as arguments and adds them in order
+to a <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> which is then displayed
+in external software.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassRules.html" title="music21.figuredBass.rules"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassRealizerScale.html" title="music21.figuredBass.realizerScale"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

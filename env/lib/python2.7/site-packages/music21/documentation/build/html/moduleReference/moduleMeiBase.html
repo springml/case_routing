@@ -1,0 +1,2338 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.mei.base &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.metadata" href="moduleMetadata.html" />
+    <link rel="prev" title="music21.lily.translate" href="moduleLilyTranslate.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMetadata.html" title="music21.metadata"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleLilyTranslate.html" title="music21.lily.translate"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleLilyTranslate.html"
+                        title="previous chapter">music21.lily.translate</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleMetadata.html"
+                        title="next chapter">music21.metadata</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.mei.base</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#meitom21converter">MeiToM21Converter</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleMeiBase.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-mei-base">
+<span id="modulemeibase"></span><h1>music21.mei.base<a class="headerlink" href="#music21-mei-base" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.mei.base"></span><p>These are the public methods for the MEI module.</p>
+<p>To convert a string with MEI markup into music21 objects, 
+use <code class="xref py py-meth docutils literal"><span class="pre">MeiToM21Converter.convertFromString()</span></code>.</p>
+<p>In the future, most of the functions in this module should be moved to a separate, import-only
+module, so that functions for writing music21-to-MEI will fit nicely.</p>
+<p><strong>Simple &#8220;How-To&#8221;</strong></p>
+<p>Use <a class="reference internal" href="#music21.mei.base.MeiToM21Converter" title="music21.mei.base.MeiToM21Converter"><code class="xref py py-class docutils literal"><span class="pre">MeiToM21Converter</span></code></a> to convert a string to a set of music21 objects. In the future, the
+<code class="xref py py-class docutils literal"><span class="pre">M21ToMeiConverter</span></code> class will convert a set of music21 objects into a string with an MEI
+document.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">meiString</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;mei xmlns=&quot;http://www.music-encoding.org/ns/mei&quot; meiversion=&quot;2013&quot;&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;music&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;score&gt;</span>
+<span class="gp">... </span><span class="s2">        &lt;scoreDef meter.count=&quot;6&quot; meter.unit=&quot;8&quot;&gt;</span>
+<span class="gp">... </span><span class="s2">            &lt;staffGrp&gt;</span>
+<span class="gp">... </span><span class="s2">                &lt;staffDef n=&quot;1&quot; clef.shape=&quot;F&quot; clef.line=&quot;4&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">            &lt;/staffGrp&gt;</span>
+<span class="gp">... </span><span class="s2">        &lt;/scoreDef&gt;</span>
+<span class="gp">... </span><span class="s2">        &lt;section&gt;</span>
+<span class="gp">... </span><span class="s2">            &lt;scoreDef key.sig=&quot;1f&quot; key.mode=&quot;major&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">            &lt;measure n=&quot;1&quot;&gt;</span>
+<span class="gp">... </span><span class="s2">                &lt;staff n=&quot;1&quot;&gt;</span>
+<span class="gp">... </span><span class="s2">                    &lt;layer n=&quot;1&quot;&gt;</span>
+<span class="gp">... </span><span class="s2">                        &lt;beam&gt;</span>
+<span class="gp">... </span><span class="s2">                            &lt;note pname=&quot;E&quot; oct=&quot;3&quot; dur=&quot;8&quot; artic=&quot;stacc&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">                            &lt;note pname=&quot;E&quot; oct=&quot;3&quot; dur=&quot;8&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">                            &lt;note pname=&quot;E&quot; oct=&quot;3&quot; dur=&quot;8&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">                        &lt;/beam&gt;</span>
+<span class="gp">... </span><span class="s2">                        &lt;chord dur=&quot;4&quot; dots=&quot;1&quot;&gt;</span>
+<span class="gp">... </span><span class="s2">                            &lt;note pname=&quot;F&quot; oct=&quot;2&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">                            &lt;note pname=&quot;A&quot; oct=&quot;2&quot; accid=&quot;f&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">                        &lt;/chord&gt;</span>
+<span class="gp">... </span><span class="s2">                    &lt;/layer&gt;</span>
+<span class="gp">... </span><span class="s2">                &lt;/staff&gt;</span>
+<span class="gp">... </span><span class="s2">            &lt;/measure&gt;</span>
+<span class="gp">... </span><span class="s2">        &lt;/section&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;/score&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;/music&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;/mei&gt;</span>
+<span class="gp">... </span><span class="s2">&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conv</span> <span class="o">=</span> <span class="n">mei</span><span class="o">.</span><span class="n">MeiToM21Converter</span><span class="p">(</span><span class="n">meiString</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">&lt;class &#39;music21.stream.Score&#39;&gt;</span>
+</pre></div>
+</div>
+<p><strong>Terminology</strong></p>
+<p>This module&#8217;s documentation adheres to the following terminology regarding XML documents, using
+this snippet, <code class="docutils literal"><span class="pre">&lt;note</span> <span class="pre">pname=&quot;C&quot;/&gt;</span></code> as an example:</p>
+<ul class="simple">
+<li>the entire snippet is an <em>element</em>.</li>
+<li>the word <code class="docutils literal"><span class="pre">note</span></code> is the <em>tag</em>.</li>
+<li>the word <code class="docutils literal"><span class="pre">pname</span></code> is an <em>attribute</em>.</li>
+<li>the letter <code class="docutils literal"><span class="pre">C</span></code> is a <em>value</em>.</li>
+</ul>
+<p>Because Python also uses &#8220;attributes,&#8221; an XML attribute is always preceded by an &#8220;at sign,&#8221; as in
+&#64;pname, whereas a Python attribute is set as <code class="xref py py-attr docutils literal"><span class="pre">pname</span></code>.</p>
+<p><strong>Ignored Elements</strong></p>
+<p>The following elements are not yet imported, though you might expect they would be:</p>
+<ul class="simple">
+<li>&lt;sb&gt;: a system break, since this is not usually semantically significant</li>
+<li>&lt;lb&gt;: a line break, since this is not usually semantically significant</li>
+<li>&lt;pb&gt;: a page break, since this is not usually semantically significant</li>
+</ul>
+<p><strong>Where Elements Are Processed</strong></p>
+<p>Most elements are processed in functions called <code class="xref py py-func docutils literal"><span class="pre">tagFromElement()</span></code>, where &#8220;tag&#8221; is replaced by
+the element&#8217;s tag name (e.g., <a class="reference internal" href="#music21.mei.base.staffDefFromElement" title="music21.mei.base.staffDefFromElement"><code class="xref py py-func docutils literal"><span class="pre">staffDefFromElement()</span></code></a> for &lt;staffDef&gt; elements). These functions
+convert from a Python <code class="xref py py-class docutils literal"><span class="pre">xml.etree.ElementTree.Element</span></code> 
+object to the appropriate music21 object.</p>
+<p>However, certain elements are processed primarily in 
+another way, by &#8220;private&#8221; functions that are not
+documented in this API. Rather than converting an <code class="xref py py-class docutils literal"><span class="pre">Element</span></code> object into a music21 object,
+these functions modify the MEI document tree by adding instructions for the <code class="xref py py-func docutils literal"><span class="pre">tagFromElement()</span></code>
+functions. The elements processed by private functions include:</p>
+<ul class="simple">
+<li>&lt;slur&gt;</li>
+<li>&lt;tie&gt;</li>
+<li>&lt;beamSpan&gt;</li>
+<li>&lt;tupletSpan&gt;</li>
+</ul>
+<p>Whereas you can expect functions like <a class="reference internal" href="#music21.mei.base.clefFromElement" title="music21.mei.base.clefFromElement"><code class="xref py py-func docutils literal"><span class="pre">clefFromElement()</span></code></a> 
+to convert a &lt;clef&gt; into a <code class="xref py py-class docutils literal"><span class="pre">Clef</span></code>
+with no loss of information. Because we cannot provide a simple one-to-one conversion for  slurs,
+ties, and tuplets, we have kept their conversion functions &#8220;private,&#8221; 
+to emphasize the fact that you
+must use the <a class="reference internal" href="#music21.mei.base.MeiToM21Converter" title="music21.mei.base.MeiToM21Converter"><code class="xref py py-class docutils literal"><span class="pre">MeiToM21Converter</span></code></a> to process them properly.</p>
+<p><strong>Guidelines for Encoders</strong></p>
+<p>While we aim for the best possible compatibility, the MEI 
+specification is very large. The following
+guidelines will help you produce a file that this MEI-to-music21 module will import correctly and
+in the most efficient way. These should not necessarily be considered recommendations when using
+MEI in any other context.</p>
+<ul class="simple">
+<li>Tuplets indicated only in a &#64;tuplet attribute do not work.</li>
+<li>For elements that allow &#64;startid, &#64;endid, and &#64;plist attributes, 
+use all three for faster importing.</li>
+<li>For a &lt;tupletSpan&gt; that does not specify a &#64;plist attribute, a tuplet spanning more than two
+measures will always and unavoidably be imported incorrectly.</li>
+<li>For any tuplet, specify at least &#64;num and &#64;numbase. The module refuses to import a tuplet that
+does not have the &#64;numbase attribute.</li>
+<li>Retain consistent &#64;n values for the same layer, staff, and instrument throughout the score.</li>
+<li>Always indicate the duration of &lt;mRest&gt; and &lt;mSpace&gt; elements.</li>
+<li>Avoid using the &lt;barLine&gt; element if you require well-formatted output from music21, since (as of
+January 2015) the music21-to-something converters will only output a <code class="xref py py-class docutils literal"><span class="pre">Barline</span></code> that is
+part of a <code class="xref py py-class docutils literal"><span class="pre">Measure</span></code>.</li>
+</ul>
+<p><strong>List of Supported Elements</strong></p>
+<p>Alphabetical list of the elements currently supported by this module:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.mei.base.accidFromElement" title="music21.mei.base.accidFromElement"><code class="xref py py-func docutils literal"><span class="pre">accidFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.articFromElement" title="music21.mei.base.articFromElement"><code class="xref py py-func docutils literal"><span class="pre">articFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.barLineFromElement" title="music21.mei.base.barLineFromElement"><code class="xref py py-func docutils literal"><span class="pre">barLineFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.beamFromElement" title="music21.mei.base.beamFromElement"><code class="xref py py-func docutils literal"><span class="pre">beamFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.chordFromElement" title="music21.mei.base.chordFromElement"><code class="xref py py-func docutils literal"><span class="pre">chordFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.clefFromElement" title="music21.mei.base.clefFromElement"><code class="xref py py-func docutils literal"><span class="pre">clefFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.dotFromElement" title="music21.mei.base.dotFromElement"><code class="xref py py-func docutils literal"><span class="pre">dotFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.instrDefFromElement" title="music21.mei.base.instrDefFromElement"><code class="xref py py-func docutils literal"><span class="pre">instrDefFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.layerFromElement" title="music21.mei.base.layerFromElement"><code class="xref py py-func docutils literal"><span class="pre">layerFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.measureFromElement" title="music21.mei.base.measureFromElement"><code class="xref py py-func docutils literal"><span class="pre">measureFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.noteFromElement" title="music21.mei.base.noteFromElement"><code class="xref py py-func docutils literal"><span class="pre">noteFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.restFromElement" title="music21.mei.base.restFromElement"><code class="xref py py-func docutils literal"><span class="pre">restFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.mRestFromElement" title="music21.mei.base.mRestFromElement"><code class="xref py py-func docutils literal"><span class="pre">mRestFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.spaceFromElement" title="music21.mei.base.spaceFromElement"><code class="xref py py-func docutils literal"><span class="pre">spaceFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.mSpaceFromElement" title="music21.mei.base.mSpaceFromElement"><code class="xref py py-func docutils literal"><span class="pre">mSpaceFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.scoreFromElement" title="music21.mei.base.scoreFromElement"><code class="xref py py-func docutils literal"><span class="pre">scoreFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.scoreDefFromElement" title="music21.mei.base.scoreDefFromElement"><code class="xref py py-func docutils literal"><span class="pre">scoreDefFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.sectionFromElement" title="music21.mei.base.sectionFromElement"><code class="xref py py-func docutils literal"><span class="pre">sectionFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.staffFromElement" title="music21.mei.base.staffFromElement"><code class="xref py py-func docutils literal"><span class="pre">staffFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.staffDefFromElement" title="music21.mei.base.staffDefFromElement"><code class="xref py py-func docutils literal"><span class="pre">staffDefFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.staffGrpFromElement" title="music21.mei.base.staffGrpFromElement"><code class="xref py py-func docutils literal"><span class="pre">staffGrpFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.sylFromElement" title="music21.mei.base.sylFromElement"><code class="xref py py-func docutils literal"><span class="pre">sylFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.tupletFromElement" title="music21.mei.base.tupletFromElement"><code class="xref py py-func docutils literal"><span class="pre">tupletFromElement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.mei.base.verseFromElement" title="music21.mei.base.verseFromElement"><code class="xref py py-func docutils literal"><span class="pre">verseFromElement()</span></code></a></li>
+</ul>
+<p>To know which MEI attributes are known to import correctly, read the documentation for the relevant
+element. For example, to know whether the &#64;color attribute on a &lt;note&gt; element is supported, read
+the &#8220;Attributes/Elements Implemented&#8221; section of the <a class="reference internal" href="#music21.mei.base.noteFromElement" title="music21.mei.base.noteFromElement"><code class="xref py py-func docutils literal"><span class="pre">noteFromElement()</span></code></a> documentation.</p>
+<p><strong>List of Ignored Elements</strong></p>
+<p>The following elements are (silently) ignored by the MEI-to-music21 converter because they primarily
+affect the layout and typesetting of a musical score. We may choose to implement these elements in
+the future, but they are a lower priority because music21 is not primarily a layout or typesetting
+tool.</p>
+<ul class="simple">
+<li>&lt;multiRest&gt;: a multi-measure rest (these will be &#8220;converted&#8221; to single-measure rests)</li>
+<li>&lt;pb&gt;: a page break</li>
+<li>&lt;lb&gt;: a line break</li>
+<li>&lt;sb&gt;: a system break</li>
+</ul>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.mei.base.accidFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">accidFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.accidFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;accid&gt; Records a temporary alteration to the pitch of a note.</p>
+<p>In MEI 2013: pg.248 (262 in PDF) (MEI.shared module)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A string indicating the music21 representation of this accidental.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<p>Unlike most of the ___FromElement() functions, this does not return any music21 object&#8212;just
+a string. Accidentals up to triple-sharp and triple-flat are supported.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree</span> <span class="k">import</span> <span class="n">ElementTree</span> <span class="k">as</span> <span class="n">ET</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meiSnippet</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;accid accid=&quot;s&quot; xmlns=&quot;http://www.music-encoding.org/ns/mei&quot;/&gt;&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meiSnippet</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">meiSnippet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">accidFromElement</span><span class="p">(</span><span class="n">meiSnippet</span><span class="p">)</span>
+<span class="go">&#39;#&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meiSnippet</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;accid accid=&quot;tf&quot; xmlns=&quot;http://www.music-encoding.org/ns/mei&quot;/&gt;&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meiSnippet</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">meiSnippet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">accidFromElement</span><span class="p">(</span><span class="n">meiSnippet</span><span class="p">)</span>
+<span class="go">&#39;---&#39;</span>
+</pre></div>
+</div>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>&#64;accid (from att.accid.log)</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base) (att.id (&#64;xml:id))</p>
+</li>
+<li><p class="first">att.facsimile (&#64;facs)</p>
+</li>
+<li><p class="first">att.typography (&#64;fontfam, &#64;fontname, &#64;fontsize, &#64;fontstyle, &#64;fontweight)</p>
+</li>
+<li><p class="first">att.accid.log (&#64;func)</p>
+<blockquote>
+<div><ul>
+<li><p class="first">(att.controlevent</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.plist (&#64;plist, &#64;evaluate))</li>
+<li>(att.timestamp.musical (&#64;tstamp))</li>
+<li>(att.timestamp.performed (&#64;tstamp.ges, &#64;tstamp.real))</li>
+<li>(att.staffident (&#64;staff)) (att.layerident (&#64;layer)))</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.accid.vis (all)</p>
+</li>
+<li><p class="first">att.accid.gesatt.accid.anl (all)</p>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong> none</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.articFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">articFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.articFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;artic&gt; An indication of how to play a note or chord.</p>
+<p>In MEI 2013: pg.259 (273 in PDF) (MEI.shared module)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A list of <a class="reference internal" href="moduleArticulations.html#music21.articulations.Articulation" title="music21.articulations.Articulation"><code class="xref py py-class docutils literal"><span class="pre">Articulation</span></code></a> objects.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<p>This function is normally called by, for example, <a class="reference internal" href="#music21.mei.base.noteFromElement" title="music21.mei.base.noteFromElement"><code class="xref py py-func docutils literal"><span class="pre">noteFromElement()</span></code></a>, to determine the
+<code class="xref py py-class docutils literal"><span class="pre">Articulation</span></code> objects that will be assigned to the
+<a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.articulations" title="music21.note.GeneralNote.articulations"><code class="xref py py-attr docutils literal"><span class="pre">articulations</span></code></a> attribute.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree</span> <span class="k">import</span> <span class="n">ElementTree</span> <span class="k">as</span> <span class="n">ET</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meiSnippet</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;artic artic=&quot;acc&quot; xmlns=&quot;http://www.music-encoding.org/ns/mei&quot;/&gt;&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meiSnippet</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">meiSnippet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">articFromElement</span><span class="p">(</span><span class="n">meiSnippet</span><span class="p">)</span>
+<span class="go">[&lt;music21.articulations.Accent&gt;]</span>
+</pre></div>
+</div>
+<p>A single &lt;artic&gt; element may indicate many <code class="xref py py-class docutils literal"><span class="pre">Articulation</span></code> objects.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">meiSnippet</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;artic artic=&quot;acc ten&quot; xmlns=&quot;http://www.music-encoding.org/ns/mei&quot;/&gt;&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meiSnippet</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">meiSnippet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">articFromElement</span><span class="p">(</span><span class="n">meiSnippet</span><span class="p">)</span>
+<span class="go">[&lt;music21.articulations.Accent&gt;, &lt;music21.articulations.Tenuto&gt;]</span>
+</pre></div>
+</div>
+<p><strong>Attributes Implemented:</strong></p>
+<ul class="simple">
+<li>&#64;artic</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base) (att.id (&#64;xml:id))</p>
+</li>
+<li><p class="first">att.facsimile (&#64;facs)</p>
+</li>
+<li><p class="first">att.typography (&#64;fontfam, &#64;fontname, &#64;fontsize, &#64;fontstyle, &#64;fontweight)</p>
+</li>
+<li><p class="first">att.artic.log</p>
+<blockquote>
+<div><ul>
+<li><p class="first">(att.controlevent</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.plist (&#64;plist, &#64;evaluate))</li>
+<li>(att.timestamp.musical (&#64;tstamp))</li>
+<li>(att.timestamp.performed (&#64;tstamp.ges, &#64;tstamp.real))</li>
+<li>(att.staffident (&#64;staff))</li>
+<li>(att.layerident (&#64;layer)))</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.artic.vis (all)</p>
+</li>
+<li><p class="first">att.artic.gesatt.artic.anl (all)</p>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong> none</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.beamFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">beamFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.beamFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>&lt;beam&gt; A container for a series of explicitly beamed events that begins and ends entirely</dt>
+<dd>within a measure.</dd>
+</dl>
+<p>In MEI 2013: pg.264 (278 in PDF) (MEI.cmn module)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>elem</strong> (<code class="xref py py-class docutils literal"><span class="pre">Element</span></code>) &#8211; The <code class="docutils literal"><span class="pre">&lt;beam&gt;</span></code> element to process.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">An iterable of all the objects contained within the <code class="docutils literal"><span class="pre">&lt;beam&gt;</span></code> container.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<p>Here, three <code class="xref py py-class docutils literal"><span class="pre">Note</span></code> objects are beamed together. Take note that the function returns
+a list of three objects, none of which is a <code class="xref py py-class docutils literal"><span class="pre">Beam</span></code> or similar.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree</span> <span class="k">import</span> <span class="n">ElementTree</span> <span class="k">as</span> <span class="n">ET</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meiSnippet</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;beam xmlns=&quot;http://www.music-encoding.org/ns/mei&quot;&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;note pname=&#39;A&#39; oct=&#39;7&#39; dur=&#39;8&#39;/&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;note pname=&#39;B&#39; oct=&#39;7&#39; dur=&#39;8&#39;/&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;note pname=&#39;C&#39; oct=&#39;6&#39; dur=&#39;8&#39;/&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;/beam&gt;&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meiSnippet</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">meiSnippet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">beamFromElement</span><span class="p">(</span><span class="n">meiSnippet</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">nameWithOctave</span>
+<span class="go">&#39;A7&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">beams</span>
+<span class="go">&lt;music21.beam.Beams &lt;music21.beam.Beam 1/start&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">nameWithOctave</span>
+<span class="go">&#39;B7&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">beams</span>
+<span class="go">&lt;music21.beam.Beams &lt;music21.beam.Beam 1/continue&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">nameWithOctave</span>
+<span class="go">&#39;C6&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">beams</span>
+<span class="go">&lt;music21.beam.Beams &lt;music21.beam.Beam 1/stop&gt;&gt;</span>
+</pre></div>
+</div>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>&lt;clef&gt;, &lt;chord&gt;, &lt;note&gt;, &lt;rest&gt;, &lt;space&gt;, &lt;tuplet&gt;, &lt;beam&gt;, &lt;barLine&gt;</li>
+</ul>
+<p><strong>Attributes/Elements Ignored:</strong></p>
+<ul class="simple">
+<li>&#64;xml:id</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base)</p>
+</li>
+<li><p class="first">att.facsimile (&#64;facs)</p>
+</li>
+<li><p class="first">att.beam.log</p>
+<blockquote>
+<div><ul>
+<li><p class="first">(att.event</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.timestamp.musical (&#64;tstamp))</li>
+<li>(att.timestamp.performed (&#64;tstamp.ges, &#64;tstamp.real))</li>
+<li>(att.staffident (&#64;staff))</li>
+<li>(att.layerident (&#64;layer)))</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">(att.beamedwith (&#64;beam.with))</p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.beam.vis (all)</p>
+</li>
+<li><p class="first">att.beam.gesatt.beam.anl (all)</p>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul class="simple">
+<li>MEI.cmn: bTrem beatRpt fTrem halfmRpt meterSig meterSigGrp</li>
+<li>MEI.critapp: app</li>
+<li>MEI.edittrans: (all)</li>
+<li>MEI.mensural: ligature mensur proport</li>
+<li>MEI.shared: clefGrp custos keySig pad</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.chordFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">chordFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.chordFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;chord&gt; is a simultaneous sounding of two or 
+more notes in the same layer with the same duration.</p>
+<p>In MEI 2013: pg.280 (294 in PDF) (MEI.shared module)</p>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul>
+<li><p class="first">&#64;xml:id (or id), an XML id (submitted as the Music21Object &#8220;id&#8221;)</p>
+</li>
+<li><p class="first">&lt;note&gt; contained within</p>
+</li>
+<li><p class="first">&#64;dur, from att.duration.musical: (via _qlDurationFromAttr())</p>
+</li>
+<li><p class="first">&#64;dots, from att.augmentdots: [0..4]</p>
+</li>
+<li><p class="first">&#64;artic and &lt;artic&gt;</p>
+</li>
+<li><p class="first">&#64;tie, (many of &#8220;[i|m|t]&#8221;)</p>
+</li>
+<li><p class="first">&#64;slur, (many of &#8220;[i|m|t][1-6]&#8221;)</p>
+</li>
+<li><dl class="first docutils">
+<dt>&#64;grace, from att.note.ges.cmn: partial implementation (notes marked as grace, but the</dt>
+<dd><p class="first last">duration is 0 because we ignore the question of which neighbouring note to borrow time from)</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base)</p>
+</li>
+<li><p class="first">att.facsimile (&#64;facs)</p>
+</li>
+<li><p class="first">att.chord.log</p>
+<blockquote>
+<div><ul>
+<li><p class="first">(att.event</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.timestamp.musical (&#64;tstamp))</li>
+<li>(att.timestamp.performed (&#64;tstamp.ges, &#64;tstamp.real))</li>
+<li>(att.staffident (&#64;staff))</li>
+<li>(att.layerident (&#64;layer)))</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">(att.fermatapresent (&#64;fermata))</p>
+</li>
+<li><p class="first">(att.syltext (&#64;syl))</p>
+</li>
+<li><p class="first">(att.chord.log.cmn</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.tupletpresent (&#64;tuplet))</li>
+<li>(att.beamed (&#64;beam))</li>
+<li>(att.lvpresent (&#64;lv))</li>
+<li>(att.ornam (&#64;ornam)))</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.chord.vis (all)</p>
+</li>
+<li><p class="first">att.chord.ges</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.articulation.performed (&#64;artic.ges))</li>
+<li>(att.duration.performed (&#64;dur.ges))</li>
+<li>(att.instrumentident (&#64;instr))</li>
+<li>(att.chord.ges.cmn (att.graced (&#64;grace, &#64;grace.time)))  &lt;&#8211; partially implemented</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.chord.anl (all)</p>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul class="simple">
+<li>MEI.edittrans: (all)</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.clefFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">clefFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.clefFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;clef&gt; Indication of the exact location of a particular note on the staff and, therefore,
+the other notes as well.</p>
+<p>In MEI 2013: pg.284 (298 in PDF) (MEI.shared module)</p>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>&#64;xml:id (or id), an XML id (submitted as the Music21Object &#8220;id&#8221;)</li>
+<li>&#64;shape, from att.clef.gesatt.clef.log</li>
+<li>&#64;line, from att.clef.gesatt.clef.log</li>
+<li>&#64;dis, from att.clef.gesatt.clef.log</li>
+<li>&#64;dis.place, from att.clef.gesatt.clef.log</li>
+</ul>
+<p><strong>Attributes/Elements Ignored:</strong></p>
+<ul class="simple">
+<li>&#64;cautionary, since this has no obvious implication for a music21 Clef</li>
+<li>&#64;octave, since this is likely obscure</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base)</p>
+</li>
+<li><p class="first">att.event</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.timestamp.musical (&#64;tstamp))</li>
+<li>(att.timestamp.performed (&#64;tstamp.ges, &#64;tstamp.real))</li>
+<li>(att.staffident (&#64;staff))</li>
+<li>(att.layerident (&#64;layer))</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.facsimile (&#64;facs)</p>
+</li>
+<li><p class="first">att.clef.anl (all)</p>
+</li>
+<li><p class="first">att.clef.vis (all)</p>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong> none</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.dotFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">dotFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.dotFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal"><span class="pre">1</span></code> no matter what is passed in.</p>
+<p>&lt;dot&gt; Dot of augmentation or division.</p>
+<p>In MEI 2013: pg.304 (318 in PDF) (MEI.shared module)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">1</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes/Elements Implemented:</strong> none</p>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul class="simple">
+<li>att.common (&#64;label, &#64;n, &#64;xml:base) (att.id (&#64;xml:id))</li>
+<li>att.facsimile (&#64;facs)</li>
+<li>att.dot.log (all)</li>
+<li>att.dot.vis (all)</li>
+<li>att.dot.gesatt.dot.anl (all)</li>
+</ul>
+<p><strong>Elements not Implemented:</strong> none</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.instrDefFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">instrDefFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.instrDefFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;instrDef&gt; (instrument definition)&#8212;MIDI instrument declaration.</p>
+<p>In MEI 2013: pg.344 (358 in PDF) (MEI.midi module)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An <code class="xref py py-class docutils literal"><span class="pre">Instrument</span></code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>&#64;midi.instrname (att.midiinstrument)</li>
+<li>&#64;midi.instrnum (att.midiinstrument)</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes/Elements Ignored:</strong></p>
+<ul class="simple">
+<li>&#64;xml:id</li>
+</ul>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul class="simple">
+<li>att.common (&#64;label, &#64;n, &#64;xml:base)</li>
+<li>att.channelized (&#64;midi.channel, &#64;midi.duty, &#64;midi.port, &#64;midi.track)</li>
+<li>att.midiinstrument (&#64;midi.pan, &#64;midi.volume)</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong> none</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.layerFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">layerFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>overrideN=None</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.layerFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;layer&gt; An independent stream of events on a staff.</p>
+<p>In MEI 2013: pg.353 (367 in PDF) (MEI.shared module)</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">Voice</span></code> object&#8217;s <code class="xref py py-attr docutils literal"><span class="pre">id</span></code> attribute must be set
+properly in order to ensure continuity of voices between measures. If the <code class="docutils literal"><span class="pre">elem</span></code> does not
+have an &#64;n attribute, you can set one with the <code class="docutils literal"><span class="pre">overrideN</span></code> parameter in this function. If
+you provide a value for <code class="docutils literal"><span class="pre">overrideN</span></code>, it will be used instead of the <code class="docutils literal"><span class="pre">elemn</span></code> object&#8217;s
+&#64;n attribute.</p>
+<p class="last">Because improperly-set <code class="xref py py-attr docutils literal"><span class="pre">id</span></code> attributes nearly guarantees errors
+in the imported <code class="xref py py-class docutils literal"><span class="pre">Score</span></code>, either <code class="docutils literal"><span class="pre">overrideN</span></code> or &#64;n must be specified.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>elem</strong> (<code class="xref py py-class docutils literal"><span class="pre">Element</span></code>) &#8211; The <code class="docutils literal"><span class="pre">&lt;layer&gt;</span></code> element to process.</li>
+<li><strong>overrideN</strong> (<em>str</em>) &#8211; The value to be set as the <code class="docutils literal"><span class="pre">id</span></code> 
+attribute in the outputted <code class="xref py py-class docutils literal"><span class="pre">Voice</span></code>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A <code class="xref py py-class docutils literal"><span class="pre">Voice</span></code> with the objects found in the provided <code class="xref py py-class docutils literal"><span class="pre">Element</span></code>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="moduleStream.html#music21.stream.Voice" title="music21.stream.Voice"><code class="xref py py-class docutils literal"><span class="pre">music21.stream.Voice</span></code></a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">MeiAttributeError</span></code> if neither <code class="docutils literal"><span class="pre">overrideN</span></code> nor &#64;n are specified.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>&lt;clef&gt;, &lt;chord&gt;, &lt;note&gt;, &lt;rest&gt;, &lt;mRest&gt;, &lt;beam&gt;, &lt;tuplet&gt;, &lt;space&gt;, &lt;mSpace&gt; , and
+&lt;barLine&gt; contained within</li>
+<li>&#64;n, from att.common</li>
+</ul>
+<p><strong>Attributes Ignored:</strong></p>
+<ul class="simple">
+<li>&#64;xml:id</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul class="simple">
+<li>att.common (&#64;label, &#64;xml:base)</li>
+<li>att.declaring (&#64;decls)</li>
+<li>att.facsimile (&#64;facs)</li>
+<li>att.layer.log (&#64;def) and (att.meterconformance (&#64;metcon))</li>
+<li>att.layer.vis (att.visibility (&#64;visible))</li>
+<li>att.layer.gesatt.layer.anl (all)</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul>
+<li><dl class="first docutils">
+<dt>MEI.cmn: arpeg bTrem beamSpan beatRpt bend breath fTrem fermata gliss hairpin halfmRpt</dt>
+<dd><p class="first last">harpPedal mRpt mRpt2 meterSig meterSigGrp multiRest multiRpt octave pedal
+reh slur tie tuplet tupletSpan</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">MEI.cmnOrnaments: mordent trill turn</p>
+</li>
+<li><p class="first">MEI.critapp: app</p>
+</li>
+<li><p class="first">MEI.edittrans: (all)</p>
+</li>
+<li><p class="first">MEI.harmony: harm</p>
+</li>
+<li><p class="first">MEI.lyrics: lyrics</p>
+</li>
+<li><p class="first">MEI.mensural: ligature mensur proport</p>
+</li>
+<li><p class="first">MEI.midi: midi</p>
+</li>
+<li><p class="first">MEI.neumes: ineume syllable uneume</p>
+</li>
+<li><dl class="first docutils">
+<dt>MEI.shared: accid annot artic barLine clefGrp custos dir dot dynam keySig pad pb phrase sb</dt>
+<dd><p class="first last">scoreDef staffDef tempo</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">MEI.text: div</p>
+</li>
+<li><p class="first">MEI.usersymbols: anchoredText curve line symbol</p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.measureFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">measureFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>backupNum</em>, <em>expectedNs</em>, <em>slurBundle=None</em>, <em>activeMeter=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.measureFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;measure&gt; Unit of musical time consisting of a fixed number of note-values of a given type, as
+determined by the prevailing meter, and delimited in musical notation by two bar lines.</p>
+<p>In MEI 2013: pg.365 (379 in PDF) (MEI.cmn module)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>elem</strong> (<code class="xref py py-class docutils literal"><span class="pre">Element</span></code>) &#8211; The <code class="docutils literal"><span class="pre">&lt;measure&gt;</span></code> element to process.</li>
+<li><strong>backupNum</strong> (<em>int</em>) &#8211; A fallback value for the resulting 
+<code class="xref py py-class docutils literal"><span class="pre">Measure</span></code> objects&#8217; number attribute.</li>
+<li><strong>expectedNs</strong> (<em>iterable of str</em>) &#8211; A list of the expected &#64;n attributes for the &lt;staff&gt; tags in this &lt;measure&gt;.
+If an expected &lt;staff&gt; isn&#8217;t in the &lt;measure&gt;, it will be created with a full-measure rest.</li>
+<li><strong>activeMeter</strong> &#8211; The <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a> active in this &lt;measure&gt;. This is
+used to adjust the duration of an &lt;mRest&gt; that was given without a &#64;dur attribute.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A dictionary where keys are the &#64;n attributes for &lt;staff&gt; tags found in this
+&lt;measure&gt;, and values are <a class="reference internal" href="moduleStream.html#music21.stream.Measure" title="music21.stream.Measure"><code class="xref py py-class docutils literal"><span class="pre">Measure</span></code></a> objects that should be appended
+to the <code class="xref py py-class docutils literal"><span class="pre">Part</span></code> instance with the value&#8217;s &#64;n attributes.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict of <a class="reference internal" href="moduleStream.html#music21.stream.Measure" title="music21.stream.Measure"><code class="xref py py-class docutils literal"><span class="pre">music21.stream.Measure</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When the right barline is set to <code class="docutils literal"><span class="pre">'rptboth'</span></code> in MEI, it requires adjusting the left
+barline of the following &lt;measure&gt;. If this happens, the <code class="xref py py-class docutils literal"><span class="pre">Repeat</span></code> object is assigned
+to the <code class="docutils literal"><span class="pre">'next</span> <span class="pre">&#64;left'</span></code> key in the returned dictionary.</p>
+</div>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>contained elements: &lt;staff&gt; and &lt;staffDef&gt;</li>
+<li>&#64;right and &#64;left (att.measure.log)</li>
+<li>&#64;n (att.common)</li>
+</ul>
+<p><strong>Attributes Ignored:</strong></p>
+<ul class="simple">
+<li>&#64;xml:id (att.id)</li>
+<li>&lt;slur&gt; and &lt;tie&gt; contained within. These spanners will usually be attached to their starting
+and ending notes with &#64;xml:id attributes, so it&#8217;s not necessary to process them when
+encountered in a &lt;measure&gt;. Furthermore, because the possibility exists for cross-measure
+slurs and ties, we can&#8217;t guarantee we&#8217;ll be able to process all spanners until all
+spanner-attachable objects are processed. So we manage these tags at a higher level.</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul class="simple">
+<li>att.common (&#64;label, &#64;xml:base)</li>
+<li>att.declaring (&#64;decls)</li>
+<li>att.facsimile (&#64;facs)</li>
+<li>att.typed (&#64;type, &#64;subtype)</li>
+<li>att.pointing (&#64;xlink:actuate, &#64;xlink:role, &#64;xlink:show, &#64;target, &#64;targettype, &#64;xlink:title)</li>
+<li>att.measure.log (att.meterconformance.bar (&#64;metcon, &#64;control))</li>
+<li>att.measure.vis (all)</li>
+<li>att.measure.ges (att.timestamp.performed (&#64;tstamp.ges, &#64;tstamp.real))</li>
+<li>att.measure.anl (all)</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul>
+<li><dl class="first docutils">
+<dt>MEI.cmn: arpeg beamSpan bend breath fermata gliss hairpin harpPedal octave ossia pedal reh</dt>
+<dd><p class="first last">tupletSpan</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">MEI.cmnOrnaments: mordent trill turn</p>
+</li>
+<li><p class="first">MEI.critapp: app</p>
+</li>
+<li><dl class="first docutils">
+<dt>MEI.edittrans: add choice corr damage del gap handShift orig reg restore sic subst supplied</dt>
+<dd><p class="first last">unclear</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">MEI.harmony: harm</p>
+</li>
+<li><p class="first">MEI.lyrics: lyrics</p>
+</li>
+<li><p class="first">MEI.midi: midi</p>
+</li>
+<li><p class="first">MEI.shared: annot dir dynam pb phrase sb tempo</p>
+</li>
+<li><p class="first">MEI.text: div</p>
+</li>
+<li><p class="first">MEI.usersymbols: anchoredText curve line symbol</p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.noteFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">noteFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.noteFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;note&gt; is a single pitched event.</p>
+<p>In MEI 2013: pg.382 (396 in PDF) (MEI.shared module)</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If set, the &#64;accid.ges attribute is always imported as the music21 <code class="xref py py-class docutils literal"><span class="pre">Accidental</span></code>
+for this note. We assume it corresponds to the accidental implied by a key signature.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If <code class="docutils literal"><span class="pre">elem</span></code> contains both &lt;syl&gt; and &lt;verse&gt; elements as immediate children, the lyrics
+indicated with &lt;verse&gt; element(s) will always obliterate those given indicated with &lt;syl&gt;
+elements.</p>
+</div>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul>
+<li><p class="first">&#64;accid and &lt;accid&gt;</p>
+</li>
+<li><p class="first">&#64;accid.ges for key signatures</p>
+</li>
+<li><p class="first">&#64;pname, from att.pitch: [a&#8211;g]</p>
+</li>
+<li><p class="first">&#64;oct, from att.octave: [0..9]</p>
+</li>
+<li><p class="first">&#64;dur, from att.duration.musical: (via _qlDurationFromAttr())</p>
+</li>
+<li><p class="first">&#64;dots: [0..4], and &lt;dot&gt; contained within</p>
+</li>
+<li><p class="first">&#64;xml:id (or id), an XML id (submitted as the Music21Object &#8220;id&#8221;)</p>
+</li>
+<li><p class="first">&#64;artic and &lt;artic&gt;</p>
+</li>
+<li><p class="first">&#64;tie, (many of &#8220;[i|m|t]&#8221;)</p>
+</li>
+<li><p class="first">&#64;slur, (many of &#8220;[i|m|t][1-6]&#8221;)</p>
+</li>
+<li><dl class="first docutils">
+<dt>&#64;grace, from att.note.ges.cmn: partial implementation (notes marked as grace, but the</dt>
+<dd><p class="first last">duration is 0 because we ignore the question of which neighbouring note to borrow time from)</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">&lt;syl&gt; and &lt;verse&gt;</p>
+</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base)</p>
+</li>
+<li><p class="first">att.facsimile (&#64;facs)</p>
+</li>
+<li><p class="first">att.note.log</p>
+<blockquote>
+<div><ul>
+<li><p class="first">(att.event</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.timestamp.musical (&#64;tstamp))</li>
+<li>(att.timestamp.performed (&#64;tstamp.ges, &#64;tstamp.real))</li>
+<li>(att.staffident (&#64;staff))</li>
+<li>(att.layerident (&#64;layer)))</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">(att.fermatapresent (&#64;fermata))</p>
+</li>
+<li><p class="first">(att.syltext (&#64;syl))</p>
+</li>
+<li><p class="first">(att.note.log.cmn</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.tupletpresent (&#64;tuplet))</li>
+<li>(att.beamed (&#64;beam))</li>
+<li>(att.lvpresent (&#64;lv))</li>
+<li>(att.ornam (&#64;ornam)))</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">(att.note.log.mensural (&#64;lig))</p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.note.vis (all)</p>
+</li>
+<li><p class="first">att.note.ges</p>
+<blockquote>
+<div><ul>
+<li><p class="first">(&#64;oct.ges, &#64;pname.ges, &#64;pnum)</p>
+</li>
+<li><p class="first">att.articulation.performed (&#64;artic.ges))</p>
+</li>
+<li><p class="first">(att.duration.performed (&#64;dur.ges))</p>
+</li>
+<li><p class="first">(att.instrumentident (&#64;instr))</p>
+</li>
+<li><p class="first">(att.note.ges.cmn (&#64;gliss)</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.graced (&#64;grace, &#64;grace.time)))  &lt;&#8211; partially implemented</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">(att.note.ges.mensural (att.duration.ratio (&#64;num, &#64;numbase)))</p>
+</li>
+<li><p class="first">(att.note.ges.tablature (&#64;tab.fret, &#64;tab.string))</p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.note.anl (all)</p>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul class="simple">
+<li>MEI.critapp: app</li>
+<li>MEI.edittrans: (all)</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.spaceFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">spaceFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.spaceFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;space&gt;  A placeholder used to fill an incomplete measure, layer, etc. most often so that the
+combined duration of the events equals the number of beats in the measure.</p>
+<p>In MEI 2013: pg.440 (455 in PDF) (MEI.shared module)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.mSpaceFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">mSpaceFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.mSpaceFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;mSpace/&gt; A measure containing only empty space in any meter.</p>
+<p>In MEI 2013: pg.377 (391 in PDF) (MEI.cmn module)</p>
+<p>This is a function wrapper for <a class="reference internal" href="#music21.mei.base.spaceFromElement" title="music21.mei.base.spaceFromElement"><code class="xref py py-func docutils literal"><span class="pre">spaceFromElement()</span></code></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the &lt;mSpace&gt; element does not have a &#64;dur attribute, it will have the default
+duration of 1.0. This must be fixed later, so the <code class="xref py py-class docutils literal"><span class="pre">Space</span></code> object returned from this
+method is given the <code class="xref py py-attr docutils literal"><span class="pre">m21wasMRest</span></code> attribute, set to True.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.restFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">restFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.restFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;rest/&gt; is a non-sounding event found in the source being transcribed</p>
+<p>In MEI 2013: pg.424 (438 in PDF) (MEI.shared module)</p>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>xml:id (or id), an XML id (submitted as the Music21Object &#8220;id&#8221;)</li>
+<li>dur, from att.duration.musical: (via _qlDurationFromAttr())</li>
+<li>dots, from att.augmentdots: [0..4]</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base)</p>
+</li>
+<li><p class="first">att.facsimile (&#64;facs)</p>
+</li>
+<li><p class="first">att.rest.log</p>
+<blockquote>
+<div><ul>
+<li><p class="first">(att.event</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.timestamp.musical (&#64;tstamp))</li>
+<li>(att.timestamp.performed (&#64;tstamp.ges, &#64;tstamp.real))</li>
+<li>(att.staffident (&#64;staff))</li>
+<li>(att.layerident (&#64;layer)))</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">(att.fermatapresent (&#64;fermata))</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.tupletpresent (&#64;tuplet))</li>
+<li>(att.rest.log.cmn (att.beamed (&#64;beam)))</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.rest.vis (all)</p>
+</li>
+<li><p class="first">att.rest.ges (all)</p>
+</li>
+<li><p class="first">att.rest.anl (all)</p>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong> none</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.mRestFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">mRestFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.mRestFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;mRest/&gt; Complete measure rest in any meter.</p>
+<p>In MEI 2013: pg.375 (389 in PDF) (MEI.cmn module)</p>
+<p>This is a function wrapper for <a class="reference internal" href="#music21.mei.base.restFromElement" title="music21.mei.base.restFromElement"><code class="xref py py-func docutils literal"><span class="pre">restFromElement()</span></code></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the &lt;mRest&gt; element does not have a &#64;dur attribute, it will have the default
+duration of 1.0. This must be fixed later, so the <code class="xref py py-class docutils literal"><span class="pre">Rest</span></code> object returned from this
+method is given the <code class="xref py py-attr docutils literal"><span class="pre">m21wasMRest</span></code> attribute, set to True.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.scoreFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">scoreFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.scoreFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;score&gt; Full score view of the musical content.</p>
+<p>In MEI 2013: pg.430 (444 in PDF) (MEI.shared module)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>elem</strong> (<code class="xref py py-class docutils literal"><span class="pre">Element</span></code>) &#8211; The &lt;score&gt; element to process.</li>
+<li><strong>slurBundle</strong> (<a class="reference internal" href="moduleSpanner.html#music21.spanner.SpannerBundle" title="music21.spanner.SpannerBundle"><code class="xref py py-class docutils literal"><span class="pre">music21.spanner.SpannerBundle</span></code></a>) &#8211; This <code class="xref py py-class docutils literal"><span class="pre">SpannerBundle</span></code> holds the <a class="reference internal" href="moduleSpanner.html#music21.spanner.Slur" title="music21.spanner.Slur"><code class="xref py py-class docutils literal"><span class="pre">Slur</span></code></a> objects
+created during pre-processing. The slurs are attached to their respective <code class="xref py py-class docutils literal"><span class="pre">Note</span></code> and
+<code class="xref py py-class docutils literal"><span class="pre">Chord</span></code> objects as they are processed.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A completed <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> object.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<p><strong>Attributes Ignored:</strong></p>
+<p><strong>Attributes/Elements in Testing:</strong></p>
+<ul class="simple">
+<li>contained &lt;section&gt;, &lt;scoreDef&gt;, and &lt;staffDef&gt;</li>
+</ul>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base) (att.id (&#64;xml:id))</p>
+</li>
+<li><p class="first">att.declaring (&#64;decls)</p>
+</li>
+<li><p class="first">att.typed (&#64;type, &#64;subtype)</p>
+</li>
+<li><dl class="first docutils">
+<dt>att.score.anl (att.common.anl (&#64;copyof, &#64;corresp, &#64;next, &#64;prev, &#64;sameas, &#64;synch)</dt>
+<dd><p class="first last">(att.alignment (&#64;when)))</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul>
+<li><p class="first">MEI.critapp: app</p>
+</li>
+<li><dl class="first docutils">
+<dt>MEI.edittrans: add choice corr damage del gap handShift orig </dt>
+<dd><p class="first last">reg restore sic subst supplied unclear</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">MEI.shared: annot ending pb sb</p>
+</li>
+<li><p class="first">MEI.text: div</p>
+</li>
+<li><p class="first">MEI.usersymbols: anchoredText curve line symbol</p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.sectionFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">sectionFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>allPartNs</em>, <em>activeMeter</em>, <em>nextMeasureLeft</em>, <em>backupMeasureNum</em>, <em>slurBundle</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.sectionFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;section&gt; Segment of music data.</p>
+<p>In MEI 2013: pg.432 (446 in PDF) (MEI.shared module)</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The parameters and return values are exactly the same for <a class="reference internal" href="#music21.mei.base.sectionFromElement" title="music21.mei.base.sectionFromElement"><code class="xref py py-func docutils literal"><span class="pre">sectionFromElement()</span></code></a>
+and <a class="reference internal" href="#music21.mei.base.sectionScoreCore" title="music21.mei.base.sectionScoreCore"><code class="xref py py-func docutils literal"><span class="pre">sectionScoreCore()</span></code></a>, so refer to the latter function&#8217;s documentation for more
+information.</p>
+</div>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<p><strong>Attributes Ignored:</strong></p>
+<p><strong>Attributes/Elements in Testing:</strong></p>
+<ul class="simple">
+<li>&#64;label</li>
+<li>contained &lt;measure&gt;, &lt;scoreDef&gt;, &lt;staffDef&gt;, &lt;section&gt;</li>
+</ul>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;n, &#64;xml:base) (att.id (&#64;xml:id))</p>
+</li>
+<li><p class="first">att.declaring (&#64;decls)</p>
+</li>
+<li><p class="first">att.facsimile (&#64;facs)</p>
+</li>
+<li><p class="first">att.typed (&#64;type, &#64;subtype)</p>
+</li>
+<li><p class="first">att.pointing (&#64;xlink:actuate, &#64;xlink:role, &#64;xlink:show, &#64;target, &#64;targettype, &#64;xlink:title)</p>
+</li>
+<li><p class="first">att.section.vis (&#64;restart)</p>
+</li>
+<li><dl class="first docutils">
+<dt>att.section.anl (att.common.anl (&#64;copyof, &#64;corresp, &#64;next, &#64;prev, &#64;sameas, &#64;synch)</dt>
+<dd><p class="first last">(att.alignment (&#64;when)))</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul>
+<li><p class="first">MEI.critapp: app</p>
+</li>
+<li><dl class="first docutils">
+<dt>MEI.edittrans: add choice corr damage del gap handShift orig reg </dt>
+<dd><p class="first last">restore sic subst supplied unclear</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">MEI.shared: annot ending expansion pb sb section staff</p>
+</li>
+<li><p class="first">MEI.text: div</p>
+</li>
+<li><p class="first">MEI.usersymbols: anchoredText curve line symbol</p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.scoreDefFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">scoreDefFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.scoreDefFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;scoreDef&gt; Container for score meta-information.</p>
+<p>In MEI 2013: pg.431 (445 in PDF) (MEI.shared module)</p>
+<p>This function returns a dictionary with objects that may relate to the entire score, to all
+parts at a particular moment, or only to a specific part at a particular moment. The dictionary
+keys determine the object&#8217;s scope. If the key is...</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">'whole-score</span> <span class="pre">objects'</span></code>, it applies to the entire score (e.g., page size);</li>
+<li><code class="docutils literal"><span class="pre">'all-part</span> <span class="pre">objects'</span></code>, it applies to all parts at the moment this &lt;scoreDef&gt; appears;</li>
+<li>the &#64;n attribute of a part, it applies only to 
+that part at the moment this &lt;scoreDef&gt; appears.</li>
+</ul>
+<p>While the multi-part objects will be held in a list, the single-part objects will be in a dict
+like that returned by <a class="reference internal" href="#music21.mei.base.staffDefFromElement" title="music21.mei.base.staffDefFromElement"><code class="xref py py-func docutils literal"><span class="pre">staffDefFromElement()</span></code></a>.</p>
+<p>Note that it is the caller&#8217;s responsibility to determine the right action if there are
+conflicting objects in the returned dictionary.</p>
+<p>For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">meiDoc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;scoreDef meter.count=&quot;3&quot; meter.unit=&quot;4&quot; xmlns=&quot;http://www.music-encoding.org/ns/mei&quot;&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;staffGrp&gt;</span>
+<span class="gp">... </span><span class="s2">        &lt;staffDef n=&quot;1&quot; label=&quot;Clarinet&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">        &lt;staffGrp&gt;</span>
+<span class="gp">... </span><span class="s2">            &lt;staffDef n=&quot;2&quot; label=&quot;Flute&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">            &lt;staffDef n=&quot;3&quot; label=&quot;Violin&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">        &lt;/staffGrp&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;/staffGrp&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;/scoreDef&gt;</span>
+<span class="gp">... </span><span class="s2">&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree</span> <span class="k">import</span> <span class="n">ElementTree</span> <span class="k">as</span> <span class="n">ET</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreDef</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">meiDoc</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">scoreDefFromElement</span><span class="p">(</span><span class="n">scoreDef</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">]</span>
+<span class="go">{&#39;instrument&#39;: &lt;music21.instrument.Instrument 1: Clarinet: Clarinet&gt;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;3&#39;</span><span class="p">]</span>
+<span class="go">{&#39;instrument&#39;: &lt;music21.instrument.Instrument 3: Violin: Violin&gt;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;all-part objects&#39;</span><span class="p">]</span>
+<span class="go">[&lt;music21.meter.TimeSignature 3/4&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;whole-score objects&#39;</span><span class="p">]</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>elem</strong> (<code class="xref py py-class docutils literal"><span class="pre">Element</span></code>) &#8211; The <code class="docutils literal"><span class="pre">&lt;scoreDef&gt;</span></code> element to process.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Objects from the <code class="docutils literal"><span class="pre">&lt;scoreDef&gt;</span></code>, as described above.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>(att.meterSigDefault.log (&#64;meter.count, &#64;meter.unit))</li>
+<li>(att.keySigDefault.log (&#64;key.accid, &#64;key.mode, &#64;key.pname, &#64;key.sig))</li>
+<li>contained &lt;staffGrp&gt;</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> None</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base) (att.id (&#64;xml:id))</p>
+</li>
+<li><p class="first">att.scoreDef.log</p>
+<blockquote>
+<div><ul>
+<li><p class="first">(att.cleffing.log (&#64;clef.shape, &#64;clef.line, &#64;clef.dis, &#64;clef.dis.place))</p>
+</li>
+<li><p class="first">(att.duration.default (&#64;dur.default, &#64;num.default, &#64;numbase.default))</p>
+</li>
+<li><p class="first">(att.keySigDefault.log (&#64;key.sig.mixed))</p>
+</li>
+<li><p class="first">(att.octavedefault (&#64;octave.default))</p>
+</li>
+<li><p class="first">(att.transposition (&#64;trans.diat, &#64;trans.semi))</p>
+</li>
+<li><p class="first">(att.scoreDef.log.cmn (att.beaming.log (&#64;beam.group, &#64;beam.rests)))</p>
+</li>
+<li><p class="first">(att.scoreDef.log.mensural</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>(att.mensural.log (&#64;mensur.dot, &#64;mensur.sign, </dt>
+<dd><p class="first last">&#64;mensur.slash, &#64;proport.num, &#64;proport.numbase)</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">(att.mensural.shared (&#64;modusmaior, &#64;modusminor, &#64;prolatio, &#64;tempus))))</p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.scoreDef.vis (all)</p>
+</li>
+<li><p class="first">att.scoreDef.ges (all)</p>
+</li>
+<li><p class="first">att.scoreDef.anl (none exist)</p>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul class="simple">
+<li>MEI.cmn: meterSig meterSigGrp</li>
+<li>MEI.harmony: chordTable</li>
+<li>MEI.linkalign: timeline</li>
+<li>MEI.midi: instrGrp</li>
+<li>MEI.shared: keySig pgFoot pgFoot2 pgHead pgHead2</li>
+<li>MEI.usersymbols: symbolTable</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.staffFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">staffFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.staffFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;staff&gt; A group of equidistant horizontal lines on which notes are placed in order to
+represent pitch or a grouping element for individual &#8216;strands&#8217; of notes, rests, etc. that may
+or may not actually be rendered on staff lines; that is, both diastematic and non-diastematic
+signs.</p>
+<p>In MEI 2013: pg.444 (458 in PDF) (MEI.shared module)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>elem</strong> (<code class="xref py py-class docutils literal"><span class="pre">Element</span></code>) &#8211; The <code class="docutils literal"><span class="pre">&lt;staff&gt;</span></code> element to process.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The <code class="xref py py-class docutils literal"><span class="pre">Voice</span></code> classes corresponding to the <code class="docutils literal"><span class="pre">&lt;layer&gt;</span></code> tags in <code class="docutils literal"><span class="pre">elem</span></code>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of <a class="reference internal" href="moduleStream.html#music21.stream.Voice" title="music21.stream.Voice"><code class="xref py py-class docutils literal"><span class="pre">music21.stream.Voice</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>&lt;layer&gt; contained within</li>
+</ul>
+<p><strong>Attributes Ignored:</strong></p>
+<ul class="simple">
+<li>&#64;xml:id</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul class="simple">
+<li>att.common (&#64;label, &#64;n, &#64;xml:base)</li>
+<li>att.declaring (&#64;decls)</li>
+<li>att.facsimile (&#64;facs)</li>
+<li>att.staff.log (&#64;def) (att.meterconformance (&#64;metcon))</li>
+<li>att.staff.vis (att.visibility (&#64;visible))</li>
+<li>att.staff.gesatt.staff.anl (all)</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul class="simple">
+<li>MEI.cmn: ossia</li>
+<li>MEI.critapp: app</li>
+<li>MEI.edittrans: (all)</li>
+<li>MEI.shared: annot pb sb scoreDef staffDef</li>
+<li>MEI.text: div</li>
+<li>MEI.usersymbols: anchoredText curve line symbol</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.staffDefFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">staffDefFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.staffDefFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;staffDef&gt; Container for staff meta-information.</p>
+<p>In MEI 2013: pg.445 (459 in PDF) (MEI.shared module)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A dict with various types of metadata information, depending on what is specified in
+this &lt;staffDef&gt; element. Read below for more information.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Possible Return Values</strong></p>
+<p>The contents of the returned dictionary depend on the contents of the &lt;staffDef&gt; element. The
+dictionary keys correspond to types of information. Possible keys include:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">'instrument'</span></code>: for a <a class="reference internal" href="moduleInstrument.html#music21.instrument.Instrument" title="music21.instrument.Instrument"><code class="xref py py-class docutils literal"><span class="pre">music21.instrument.Instrument</span></code></a> subclass</li>
+<li><code class="docutils literal"><span class="pre">'clef'</span></code>: for a <a class="reference internal" href="moduleClef.html#music21.clef.Clef" title="music21.clef.Clef"><code class="xref py py-class docutils literal"><span class="pre">music21.clef.Clef</span></code></a> subclass</li>
+<li><code class="docutils literal"><span class="pre">'key'</span></code>: for a <a class="reference internal" href="moduleKey.html#music21.key.Key" title="music21.key.Key"><code class="xref py py-class docutils literal"><span class="pre">music21.key.Key</span></code></a> or <a class="reference internal" href="moduleKey.html#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a> subclass</li>
+<li><code class="docutils literal"><span class="pre">'meter'</span></code>: for a <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">music21.meter.TimeSignature</span></code></a></li>
+</ul>
+<p><strong>Examples</strong></p>
+<p>This &lt;staffDef&gt; only returns a single item.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">meiDoc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;staffDef n=&quot;1&quot; label=&quot;Clarinet&quot; xmlns=&quot;http://www.music-encoding.org/ns/mei&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree</span> <span class="k">import</span> <span class="n">ElementTree</span> <span class="k">as</span> <span class="n">ET</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staffDef</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">meiDoc</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">staffDefFromElement</span><span class="p">(</span><span class="n">staffDef</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+<span class="go">{&#39;instrument&#39;: &lt;music21.instrument.Instrument 1: Clarinet: Clarinet&gt;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;instrument&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">partId</span>
+<span class="go">&#39;1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;instrument&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">partName</span>
+<span class="go">&#39;Clarinet&#39;</span>
+</pre></div>
+</div>
+<p>This &lt;staffDef&gt; returns many objects.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">meiDoc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;staffDef n=&quot;2&quot; label=&quot;Tuba&quot; key.pname=&quot;B&quot; key.accid=&quot;f&quot; key.mode=&quot;major&quot;</span>
+<span class="gp">... </span><span class="s2"> xmlns=&quot;http://www.music-encoding.org/ns/mei&quot;&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;clef shape=&quot;F&quot; line=&quot;4&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;/staffDef&gt;</span>
+<span class="gp">... </span><span class="s2">&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree</span> <span class="k">import</span> <span class="n">ElementTree</span> <span class="k">as</span> <span class="n">ET</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">staffDef</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">meiDoc</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">staffDefFromElement</span><span class="p">(</span><span class="n">staffDef</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;instrument&#39;</span><span class="p">]</span>
+<span class="go">&lt;music21.instrument.Instrument 2: Tuba: Tuba&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;clef&#39;</span><span class="p">]</span>
+<span class="go">&lt;music21.clef.BassClef&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">]</span>
+<span class="go">&lt;music21.key.Key of B- major&gt;</span>
+</pre></div>
+</div>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>&#64;label (att.common) as Instrument.partName</li>
+<li>&#64;label.abbr (att.labels.addl) as Instrument.partAbbreviation</li>
+<li>&#64;n (att.common) as Instrument.partId</li>
+<li>(att.keySigDefault.log (&#64;key.accid, &#64;key.mode, &#64;key.pname, &#64;key.sig))</li>
+<li>(att.meterSigDefault.log (&#64;meter.count, &#64;meter.unit))</li>
+<li>(att.cleffing.log (&#64;clef.shape, &#64;clef.line, &#64;clef.dis, &#64;clef.dis.place)) 
+(via <a class="reference internal" href="#music21.mei.base.clefFromElement" title="music21.mei.base.clefFromElement"><code class="xref py py-func docutils literal"><span class="pre">clefFromElement()</span></code></a>)</li>
+<li>&#64;trans.diat and &#64;trans.demi (att.transposition)</li>
+<li>&lt;instrDef&gt; held within</li>
+<li>&lt;clef&gt; held within</li>
+</ul>
+<p><strong>Attributes/Elements Ignored:</strong></p>
+<ul class="simple">
+<li>&#64;key.sig.mixed (from att.keySigDefault.log)</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;n, &#64;xml:base) (att.id (&#64;xml:id))</p>
+</li>
+<li><p class="first">att.declaring (&#64;decls)</p>
+</li>
+<li><p class="first">att.staffDef.log</p>
+<blockquote>
+<div><ul>
+<li><p class="first">(att.duration.default (&#64;dur.default, &#64;num.default, &#64;numbase.default))</p>
+</li>
+<li><p class="first">(att.octavedefault (&#64;octave.default))</p>
+</li>
+<li><p class="first">(att.staffDef.log.cmn (att.beaming.log (&#64;beam.group, &#64;beam.rests)))</p>
+</li>
+<li><p class="first">(att.staffDef.log.mensural</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>(att.mensural.log (&#64;mensur.dot, &#64;mensur.sign, &#64;mensur.slash, </dt>
+<dd><p class="first last">&#64;proport.num, &#64;proport.numbase)</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">(att.mensural.shared (&#64;modusmaior, &#64;modusminor, &#64;prolatio, &#64;tempus))))</p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.staffDef.vis (all)</p>
+</li>
+<li><p class="first">att.staffDef.ges (all)</p>
+</li>
+<li><p class="first">att.staffDef.anl (none exist)</p>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul class="simple">
+<li>MEI.cmn: meterSig meterSigGrp</li>
+<li>MEI.mensural: mensur proport</li>
+<li>MEI.shared: clefGrp keySig label layerDef</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.staffGrpFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">staffGrpFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em>, <em>staffDefDict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.staffGrpFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;staffGrp&gt; A group of bracketed or braced staves.</p>
+<p>In MEI 2013: pg.448 (462 in PDF) (MEI.shared module)</p>
+<p>For now, this function is merely a container-processor  for &lt;staffDef&gt; elements contained
+in this &lt;staffGrp&gt; element given as the &#8220;elem&#8221; argument. That is, the function does not yet
+create the brackets/braces and labels expected of a staff group. 
+Note however that all &lt;staffDef&gt;
+elements will be processed, even if they&#8217;re contained within several layers of &lt;staffGrp&gt;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>elem</strong> (<code class="xref py py-class docutils literal"><span class="pre">Element</span></code>) &#8211; The <code class="docutils literal"><span class="pre">&lt;staffGrp&gt;</span></code> element to process.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary where keys are the &#64;n attribute on a contained &lt;staffDef&gt;, and values are
+the result of calling <a class="reference internal" href="#music21.mei.base.staffDefFromElement" title="music21.mei.base.staffDefFromElement"><code class="xref py py-func docutils literal"><span class="pre">staffDefFromElement()</span></code></a> with that &lt;staffDef&gt;.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>contained &lt;staffDef&gt;</li>
+<li>contained &lt;staffGrp&gt;</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base) (att.id (&#64;xml:id))</p>
+</li>
+<li><p class="first">att.declaring (&#64;decls)</p>
+</li>
+<li><p class="first">att.facsimile (&#64;facs)</p>
+</li>
+<li><p class="first">att.staffGrp.vis (&#64;barthru)</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.labels.addl (&#64;label.abbr))</li>
+<li>(att.staffgroupingsym (&#64;symbol))</li>
+<li>(att.visibility (&#64;visible))</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.staffGrp.ges (att.instrumentident (&#64;instr))</p>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul class="simple">
+<li>MEI.midi: instrDef</li>
+<li>MEI.shared: grpSym label</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.tupletFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">tupletFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.tupletFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;tuplet&gt; A group of notes with &#8220;irregular&#8221; (sometimes called &#8220;irrational&#8221;) rhythmic values,
+for example, three notes in the time normally occupied by two or nine in the time of five.</p>
+<p>In MEI 2013: pg.473 (487 in PDF) (MEI.cmn module)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>elem</strong> (<code class="xref py py-class docutils literal"><span class="pre">Element</span></code>) &#8211; The <code class="docutils literal"><span class="pre">&lt;tuplet&gt;</span></code> element to process.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">An iterable of all the objects contained within the <code class="docutils literal"><span class="pre">&lt;tuplet&gt;</span></code> container.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple of <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>&lt;tuplet&gt;, &lt;beam&gt;, &lt;note&gt;, &lt;rest&gt;, &lt;chord&gt;, &lt;clef&gt;, &lt;space&gt;, &lt;barLine&gt;</li>
+<li>&#64;num and &#64;numbase</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base) (att.id (&#64;xml:id))</p>
+</li>
+<li><p class="first">att.facsimile (&#64;facs)</p>
+</li>
+<li><p class="first">att.tuplet.log</p>
+<blockquote>
+<div><ul>
+<li><p class="first">(att.event</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.timestamp.musical (&#64;tstamp))</li>
+<li>(att.timestamp.performed (&#64;tstamp.ges, &#64;tstamp.real))</li>
+<li>(att.staffident (&#64;staff))</li>
+<li>(att.layerident (&#64;layer)))</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">(att.beamedwith (&#64;beam.with))</p>
+</li>
+<li><p class="first">(att.augmentdots (&#64;dots))</p>
+</li>
+<li><p class="first">(att.duration.additive (&#64;dur))</p>
+</li>
+<li><p class="first">(att.startendid (&#64;endid) (att.startid (&#64;startid)))</p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.tuplet.vis (all)</p>
+</li>
+<li><p class="first">att.tuplet.ges (att.duration.performed (&#64;dur.ges))</p>
+</li>
+<li><p class="first">att.tuplet.anl (all)</p>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul class="simple">
+<li>MEI.cmn: bTrem beatRpt fTrem halfmRpt meterSig meterSigGrp</li>
+<li>MEI.critapp: app</li>
+<li>MEI.edittrans: (all)</li>
+<li>MEI.mensural: ligature mensur proport</li>
+<li>MEI.shared: clefGrp custos keySig pad</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.addSlurs">
+<code class="descclassname">music21.mei.base.</code><code class="descname">addSlurs</code><span class="sig-paren">(</span><em>elem</em>, <em>obj</em>, <em>slurBundle</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.addSlurs" title="Permalink to this definition">¶</a></dt>
+<dd><p>If relevant, add a slur to an <code class="docutils literal"><span class="pre">obj</span></code> (object) that was created from an <code class="docutils literal"><span class="pre">elem</span></code> (element).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>elem</strong> (<code class="xref py py-class docutils literal"><span class="pre">xml.etree.ElementTree.Element</span></code>) &#8211; The <code class="xref py py-class docutils literal"><span class="pre">Element</span></code> that caused creation of the <code class="docutils literal"><span class="pre">obj</span></code>.</li>
+<li><strong>obj</strong> (<a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">music21.base.Music21Object</span></code></a>) &#8211; The musical object (<code class="xref py py-class docutils literal"><span class="pre">Note</span></code>, <code class="xref py py-class docutils literal"><span class="pre">Chord</span></code>, etc.) created from <code class="docutils literal"><span class="pre">elem</span></code>, to
+which a slur might be attached.</li>
+<li><strong>slurBundle</strong> (<a class="reference internal" href="moduleSpanner.html#music21.spanner.SpannerBundle" title="music21.spanner.SpannerBundle"><code class="xref py py-class docutils literal"><span class="pre">music21.spanner.SpannerBundle</span></code></a>) &#8211; The <code class="xref py py-class docutils literal"><span class="pre">Slur</span></code>-holding <code class="xref py py-class docutils literal"><span class="pre">SpannerBundle</span></code> associated with the
+<code class="xref py py-class docutils literal"><span class="pre">Stream</span></code> that holds <code class="docutils literal"><span class="pre">obj</span></code>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Whether at least one slur was added.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>A Note about Importing Slurs</strong></p>
+<p>Because of how the MEI format specifies slurs, the strategy required for proper import to
+music21 is not obvious. There are two ways to specify a slur:</p>
+<ol class="arabic simple">
+<li>With a <code class="docutils literal"><span class="pre">&#64;slur</span></code> attribute, in which case <a class="reference internal" href="#music21.mei.base.addSlurs" title="music21.mei.base.addSlurs"><code class="xref py py-func docutils literal"><span class="pre">addSlurs()</span></code></a> reads the attribute and manages
+creating a <code class="xref py py-class docutils literal"><span class="pre">Slur</span></code> object, adding the affected objects to it, and storing the
+<code class="xref py py-class docutils literal"><span class="pre">Slur</span></code> in the <code class="docutils literal"><span class="pre">slurBundle</span></code>.</li>
+<li>With a <code class="docutils literal"><span class="pre">&lt;slur&gt;</span></code> element, which requires pre-processing. In this case, <code class="xref py py-class docutils literal"><span class="pre">Slur</span></code> objects
+must already exist in the <code class="docutils literal"><span class="pre">slurBundle</span></code>, and special attributes must be added to the
+affected elements (<code class="docutils literal"><span class="pre">&#64;m21SlurStart</span></code> to the element at the start of the slur and
+<code class="docutils literal"><span class="pre">&#64;m21SlurEnd</span></code> to the element at the end). These attributes hold the <code class="docutils literal"><span class="pre">id</span></code> of a
+<code class="xref py py-class docutils literal"><span class="pre">Slur</span></code> in the <code class="docutils literal"><span class="pre">slurBundle</span></code>, allowing <a class="reference internal" href="#music21.mei.base.addSlurs" title="music21.mei.base.addSlurs"><code class="xref py py-func docutils literal"><span class="pre">addSlurs()</span></code></a> to find the slur and add
+<code class="docutils literal"><span class="pre">obj</span></code> to it.</li>
+</ol>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">If an <code class="docutils literal"><span class="pre">elem</span></code> has an &#64;m21SlurStart or &#64;m21SlurEnd attribute that refer to an
+object not found in the <code class="docutils literal"><span class="pre">slurBundle</span></code>, the slur is silently dropped.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.allPartsPresent">
+<code class="descclassname">music21.mei.base.</code><code class="descname">allPartsPresent</code><span class="sig-paren">(</span><em>scoreElem</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.allPartsPresent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the &#64;n values for all &lt;staffDef&gt; elements in a &lt;score&gt; element. This assumes that every
+MEI &lt;staff&gt; corresponds to a music21 <code class="xref py py-class docutils literal"><span class="pre">Part</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scoreElem</strong> &#8211; The &lt;score&gt; <code class="xref py py-class docutils literal"><span class="pre">Element</span></code> in which to find the part names.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">All the unique &#64;n values associated with a part in the &lt;score&gt;.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple of str</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">meiDoc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;score xmlns=&quot;http://www.music-encoding.org/ns/mei&quot;&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;scoreDef&gt;</span>
+<span class="gp">... </span><span class="s2">        &lt;staffGrp&gt;</span>
+<span class="gp">... </span><span class="s2">            &lt;staffDef n=&quot;1&quot; clef.shape=&quot;G&quot; clef.line=&quot;2&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">            &lt;staffDef n=&quot;2&quot; clef.shape=&quot;F&quot; clef.line=&quot;4&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">        &lt;/staffGrp&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;/scoreDef&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;section&gt;</span>
+<span class="gp">... </span><span class="s2">        &lt;!-- ... some music ... --&gt;</span>
+<span class="gp">... </span><span class="s2">        &lt;staffDef n=&quot;2&quot; clef.shape=&quot;C&quot; clef.line=&quot;4&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">        &lt;!-- ... some music ... --&gt;</span>
+<span class="gp">... </span><span class="s2">    &lt;/section&gt;</span>
+<span class="gp">... </span><span class="s2">&lt;/score&gt;&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ETree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">meiDoc</span> <span class="o">=</span> <span class="n">ETree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">meiDoc</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">allPartsPresent</span><span class="p">(</span><span class="n">meiDoc</span><span class="p">)</span>
+<span class="go">(&#39;1&#39;, &#39;2&#39;)</span>
+</pre></div>
+</div>
+<p>Even though there are three &lt;staffDef&gt; elements in the document, there are only two unique &#64;n
+attributes. The second appearance of &lt;staffDef&gt; with &#64;n=&#8221;2&#8221; signals a change of clef on that
+same staff&#8212;not that there is a new staff.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.barLineFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">barLineFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.barLineFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;barLine&gt; Vertical line drawn through one or more staves that divides musical notation into
+metrical units.</p>
+<p>In MEI 2013: pg.262 (276 in PDF) (MEI.shared module)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A <a class="reference internal" href="moduleBar.html#music21.bar.Barline" title="music21.bar.Barline"><code class="xref py py-class docutils literal"><span class="pre">music21.bar.Barline</span></code></a> or <a class="reference internal" href="moduleBar.html#music21.bar.Repeat" title="music21.bar.Repeat"><code class="xref py py-class docutils literal"><span class="pre">Repeat</span></code></a>, depending on the
+value of &#64;rend. If &#64;rend is <code class="docutils literal"><span class="pre">'rptboth'</span></code>, a 2-tuplet of <code class="xref py py-class docutils literal"><span class="pre">Repeat</span></code> objects will be
+returned, represented an &#8220;end&#8221; and &#8220;start&#8221; barline, as specified in the <a class="reference internal" href="moduleBar.html#module-music21.bar" title="music21.bar"><code class="xref py py-mod docutils literal"><span class="pre">music21.bar</span></code></a>
+documentation.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The music21-to-other converters expect that a <code class="xref py py-class docutils literal"><span class="pre">Barline</span></code> will be attached to a
+<code class="xref py py-class docutils literal"><span class="pre">Measure</span></code>, which it will not be when imported from MEI as a &lt;barLine&gt; element.
+However, this function does import correctly to a <code class="xref py py-class docutils literal"><span class="pre">Barline</span></code> that you can access from
+Python in the <code class="xref py py-class docutils literal"><span class="pre">Stream</span></code> object as expected.</p>
+</div>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>&#64;rend from att.barLine.log</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base) (att.id (&#64;xml:id))</p>
+</li>
+<li><p class="first">att.facsimile (&#64;facs)</p>
+</li>
+<li><p class="first">att.pointing (&#64;xlink:actuate, &#64;xlink:role, &#64;xlink:show, &#64;target, &#64;targettype, &#64;xlink:title)</p>
+</li>
+<li><p class="first">att.barLine.log</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.meterconformance.bar (&#64;metcon, &#64;control))</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.barLine.vis</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.barplacement (&#64;barplace, &#64;taktplace))</li>
+<li>(att.color (&#64;color))</li>
+<li>(att.measurement (&#64;unit))</li>
+<li>(att.width (&#64;width))</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.barLine.ges (att.timestamp.musical (&#64;tstamp))</p>
+</li>
+<li><p class="first">att.barLine.anl</p>
+<blockquote>
+<div><ul>
+<li><p class="first">(att.common.anl</p>
+<blockquote>
+<div><ul class="simple">
+<li>(&#64;copyof, &#64;corresp, &#64;next, &#64;prev, &#64;sameas, &#64;synch)</li>
+<li>(att.alignment (&#64;when)))</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong> none</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.beamTogether">
+<code class="descclassname">music21.mei.base.</code><code class="descname">beamTogether</code><span class="sig-paren">(</span><em>someThings</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.beamTogether" title="Permalink to this definition">¶</a></dt>
+<dd><p>Beam some things together. The function beams every object that has a <code class="xref py py-attr docutils literal"><span class="pre">beams</span></code> attribute,
+leaving the other objects unmodified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>things</strong> (iterable of <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>) &#8211; An iterable of things to beam together.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><code class="docutils literal"><span class="pre">someThings</span></code> with relevant objects beamed together.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">same as <code class="docutils literal"><span class="pre">someThings</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.getVoiceId">
+<code class="descclassname">music21.mei.base.</code><code class="descname">getVoiceId</code><span class="sig-paren">(</span><em>fromThese</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.getVoiceId" title="Permalink to this definition">¶</a></dt>
+<dd><p>From a list of objects with mixed type, find the &#8220;id&#8221; of the <a class="reference internal" href="moduleStream.html#music21.stream.Voice" title="music21.stream.Voice"><code class="xref py py-class docutils literal"><span class="pre">music21.stream.Voice</span></code></a>
+instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fromThese</strong> (<a class="reference internal" href="moduleSpanner.html#music21.spanner.SpannerBundle.list" title="music21.spanner.SpannerBundle.list"><em>list</em></a>) &#8211; A list of objects of any type, at least one of which must be a
+<a class="reference internal" href="moduleStream.html#music21.stream.Voice" title="music21.stream.Voice"><code class="xref py py-class docutils literal"><span class="pre">Voice</span></code></a> instance.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The <code class="docutils literal"><span class="pre">id</span></code> of the <code class="xref py py-class docutils literal"><span class="pre">Voice</span></code> instance.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">RuntimeError</span></code> if zero or many <code class="xref py py-class docutils literal"><span class="pre">Voice</span></code> objects are found.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.makeDuration">
+<code class="descclassname">music21.mei.base.</code><code class="descname">makeDuration</code><span class="sig-paren">(</span><em>base=0.0</em>, <em>dots=0</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.makeDuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a <code class="docutils literal"><span class="pre">base</span></code> duration and a number of <code class="docutils literal"><span class="pre">dots</span></code>, create a <a class="reference internal" href="moduleDuration.html#music21.duration.Duration" title="music21.duration.Duration"><code class="xref py py-class docutils literal"><span class="pre">Duration</span></code></a> 
+instance with the
+appropriate <code class="docutils literal"><span class="pre">quarterLength</span></code> value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base</strong> (<em>float</em>) &#8211; The base duration that will be augmented.</li>
+<li><strong>dots</strong> (<em>int</em>) &#8211; The number of dots with which to augment the <code class="docutils literal"><span class="pre">base</span></code> duration.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A <code class="xref py py-class docutils literal"><span class="pre">Duration</span></code> corresponding to the fully-augmented value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="moduleDuration.html#music21.duration.Duration" title="music21.duration.Duration"><code class="xref py py-class docutils literal"><span class="pre">music21.duration.Duration</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Examples</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fractions</span> <span class="k">import</span> <span class="n">Fraction</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">makeDuration</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">dots</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">quarterLength</span>  <span class="c1"># half note, no dots</span>
+<span class="go">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">makeDuration</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">dots</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">quarterLength</span>  <span class="c1"># half note, one dot</span>
+<span class="go">3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">makeDuration</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dots</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">quarterLength</span>  <span class="c1"># &#39;base&#39; can be an int or float</span>
+<span class="go">3.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">makeDuration</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">quarterLength</span>  <span class="c1"># you want ridiculous dots? Sure...</span>
+<span class="go">3.998046875</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">makeDuration</span><span class="p">(</span><span class="mf">0.33333333333333333333</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">quarterLength</span>  <span class="c1"># works with fractions too</span>
+<span class="go">Fraction(1, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mei</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">makeDuration</span><span class="p">(</span><span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.makeMetadata">
+<code class="descclassname">music21.mei.base.</code><code class="descname">makeMetadata</code><span class="sig-paren">(</span><em>documentRoot</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.makeMetadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Produce metadata objects for all the metadata stored in the MEI header.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>documentRoot</strong> (<code class="xref py py-class docutils literal"><span class="pre">Element</span></code>) &#8211; The MEI document&#8217;s root element.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A <code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code> object with some of the metadata stored in the MEI document.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="moduleMetadata.html#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">music21.metadata.Metadata</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.metaSetComposer">
+<code class="descclassname">music21.mei.base.</code><code class="descname">metaSetComposer</code><span class="sig-paren">(</span><em>work</em>, <em>meta</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.metaSetComposer" title="Permalink to this definition">¶</a></dt>
+<dd><p>From a &lt;work&gt; element, find the composer(s) and store the values in a <code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code> object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>work</strong> &#8211; A &lt;work&gt; <code class="xref py py-class docutils literal"><span class="pre">Element</span></code> with metadata you want to find.</li>
+<li><strong>meta</strong> &#8211; The <a class="reference internal" href="moduleMetadata.html#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a> object in which to store the metadata.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The <code class="docutils literal"><span class="pre">meta</span></code> argument, having relevant metadata added.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.metaSetDate">
+<code class="descclassname">music21.mei.base.</code><code class="descname">metaSetDate</code><span class="sig-paren">(</span><em>work</em>, <em>meta</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.metaSetDate" title="Permalink to this definition">¶</a></dt>
+<dd><p>From a &lt;work&gt; element, find the date (range) of composition and store the values in a
+<code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code> object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>work</strong> &#8211; A &lt;work&gt; <code class="xref py py-class docutils literal"><span class="pre">Element</span></code> with metadata you want to find.</li>
+<li><strong>meta</strong> &#8211; The <a class="reference internal" href="moduleMetadata.html#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a> object in which to store the metadata.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The <code class="docutils literal"><span class="pre">meta</span></code> argument, having relevant metadata added.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.metaSetTitle">
+<code class="descclassname">music21.mei.base.</code><code class="descname">metaSetTitle</code><span class="sig-paren">(</span><em>work</em>, <em>meta</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.metaSetTitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>From a &lt;work&gt; element, find the title, subtitle, and movement name (&lt;tempo&gt; element) and store
+the values in a <code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code> object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>work</strong> &#8211; A &lt;work&gt; <code class="xref py py-class docutils literal"><span class="pre">Element</span></code> with metadata you want to find.</li>
+<li><strong>meta</strong> &#8211; The <a class="reference internal" href="moduleMetadata.html#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a> object in which to store the metadata.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">The <code class="docutils literal"><span class="pre">meta</span></code> argument, having relevant metadata added.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.removeOctothorpe">
+<code class="descclassname">music21.mei.base.</code><code class="descname">removeOctothorpe</code><span class="sig-paren">(</span><em>xmlid</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.removeOctothorpe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a string with an &#64;xml:id to search for, remove a leading octothorpe, if present.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.mei.base</span> <span class="k">import</span> <span class="n">removeOctothorpe</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">removeOctothorpe</span><span class="p">(</span><span class="s1">&#39;110a923d-a13a-4a2e-b85c-e1d438e4c5d6&#39;</span><span class="p">)</span>
+<span class="go">&#39;110a923d-a13a-4a2e-b85c-e1d438e4c5d6&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">removeOctothorpe</span><span class="p">(</span><span class="s1">&#39;#e46cbe82-95fc-4522-9f7a-700e41a40c8e&#39;</span><span class="p">)</span>
+<span class="go">&#39;e46cbe82-95fc-4522-9f7a-700e41a40c8e&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.safePitch">
+<code class="descclassname">music21.mei.base.</code><code class="descname">safePitch</code><span class="sig-paren">(</span><em>name</em>, <em>accidental=None</em>, <em>octave=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.safePitch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Safely build a <code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code> from a string.</p>
+<p>When <code class="xref py py-meth docutils literal"><span class="pre">Pitch.__init__()</span></code> is given an empty string, it raises a <code class="xref py py-exc docutils literal"><span class="pre">PitchException</span></code>. This
+function instead returns a default <code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code> instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; Desired name of the <code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code>.</li>
+<li><strong>accidental</strong> (<em>str</em>) &#8211; (Optional) Symbol for the accidental.</li>
+<li><strong>octave</strong> (<em>str or int</em>) &#8211; (Optional) Octave number.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A <code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code> with the appropriate properties.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">music21.pitch.Pitch</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.scaleToTuplet">
+<code class="descclassname">music21.mei.base.</code><code class="descname">scaleToTuplet</code><span class="sig-paren">(</span><em>objs</em>, <em>elem</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.scaleToTuplet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scale the duration of some objects by a ratio indicated by a tuplet. The <code class="docutils literal"><span class="pre">elem</span></code> must have the
+&#64;m21TupletNum and &#64;m21TupletNumbase attributes set, and optionally the &#64;m21TupletSearch or
+&#64;m21TupletType attributes.</p>
+<p>The &#64;m21TupletNum and &#64;m21TupletNumbase attributes should be equal to the &#64;num and &#64;numbase
+values of the &lt;tuplet&gt; or &lt;tupletSpan&gt; that indicates this tuplet.</p>
+<p>The &#64;m21TupletSearch attribute, whose value must either be <code class="docutils literal"><span class="pre">'start'</span></code> or <code class="docutils literal"><span class="pre">'end'</span></code>, is required
+when a &lt;tupletSpan&gt; does not include a &#64;plist attribute. It indicates that the importer must
+&#8220;search&#8221; for a tuplet near the end of the import process, which involves scaling the durations
+of all objects discvoered between those with the &#8220;start&#8221; and &#8220;end&#8221; search values.</p>
+<p>The &#64;m21TupletType attribute is set directly as the <code class="xref py py-attr docutils literal"><span class="pre">type</span></code> attribute of the music21
+object&#8217;s <code class="xref py py-class docutils literal"><span class="pre">Tuplet</span></code> object. If &#64;m21TupletType is not set, the &#64;tuplet attribute will be
+consulted. Note that this attribute is ignored if the &#64;m21TupletSearch attribute is present,
+since the <code class="docutils literal"><span class="pre">type</span></code> will be set later by the tuplet-finding algorithm.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Objects without a <code class="xref py py-attr docutils literal"><span class="pre">duration</span></code> attribute will be skipped silently, unless they
+will be given the &#64;m21TupletSearch attribute.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objs</strong> ((list of) <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>) &#8211; The object(s) whose durations will be scaled. You may provie either a single object
+or an iterable; the return type corresponds to the input type.</li>
+<li><strong>elem</strong> (<code class="xref py py-class docutils literal"><span class="pre">xml.etree.ElementTree.Element</span></code>) &#8211; An <code class="xref py py-class docutils literal"><span class="pre">Element</span></code> with the appropriate attributes (as specified above).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">objs</span></code> with scaled durations.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(list of) <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.sectionScoreCore">
+<code class="descclassname">music21.mei.base.</code><code class="descname">sectionScoreCore</code><span class="sig-paren">(</span><em>elem</em>, <em>allPartNs</em>, <em>slurBundle</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.sectionScoreCore" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is the &#8220;core&#8221; of both <a class="reference internal" href="#music21.mei.base.sectionFromElement" title="music21.mei.base.sectionFromElement"><code class="xref py py-func docutils literal"><span class="pre">sectionFromElement()</span></code></a> and <a class="reference internal" href="#music21.mei.base.scoreFromElement" title="music21.mei.base.scoreFromElement"><code class="xref py py-func docutils literal"><span class="pre">scoreFromElement()</span></code></a>,
+since both elements are treated quite similarly (though not identically). It&#8217;s a separate and
+shared function to reduce code duplication and 
+increase ease of testing. It&#8217;s a &#8220;public&#8221; function
+to help spread the burden of API documentation complexity: while the parameters and return
+values are described in this function, the compliance with the MEI Guidelines is described in
+both <a class="reference internal" href="#music21.mei.base.sectionFromElement" title="music21.mei.base.sectionFromElement"><code class="xref py py-func docutils literal"><span class="pre">sectionFromElement()</span></code></a> and <a class="reference internal" href="#music21.mei.base.scoreFromElement" title="music21.mei.base.scoreFromElement"><code class="xref py py-func docutils literal"><span class="pre">scoreFromElement()</span></code></a>, as expected.</p>
+<p><strong>Required Parameters</strong></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>elem</strong> (<code class="xref py py-class docutils literal"><span class="pre">xml.etree.ElementTree.Element</span></code>) &#8211; The &lt;section&gt; or &lt;score&gt; element to process.</li>
+<li><strong>allPartNs</strong> (<em>iterable of str</em>) &#8211; A list or tuple of the expected &#64;n attributes for the &lt;staff&gt; tags in this
+&lt;section&gt;. This tells the function how many parts there are and what &#64;n values they use.</li>
+<li><strong>slurBundle</strong> (<a class="reference internal" href="moduleSpanner.html#music21.spanner.SpannerBundle" title="music21.spanner.SpannerBundle"><code class="xref py py-class docutils literal"><span class="pre">music21.spanner.SpannerBundle</span></code></a>) &#8211; This <code class="xref py py-class docutils literal"><span class="pre">SpannerBundle</span></code> holds the <a class="reference internal" href="moduleSpanner.html#music21.spanner.Slur" title="music21.spanner.Slur"><code class="xref py py-class docutils literal"><span class="pre">Slur</span></code></a> objects
+created during pre-processing. The slurs are attached to their respective <code class="xref py py-class docutils literal"><span class="pre">Note</span></code> and
+<code class="xref py py-class docutils literal"><span class="pre">Chord</span></code> objects as they are processed.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional Keyword Parameters</strong></p>
+<p>The following parameters are all optional, and must be specified as a keyword argument (i.e.,
+you specify the parameter name before its value).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>activeMeter</strong> (<a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">music21.meter.TimeSignature</span></code></a>) &#8211; The <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a> active at the start of this
+&lt;section&gt; or &lt;score&gt;. This is updated automatically as the music is processed, and the
+<code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code> active at the end of the element is returned.</li>
+<li><strong>nextMeasureLeft</strong> (<a class="reference internal" href="moduleBar.html#music21.bar.Barline" title="music21.bar.Barline"><code class="xref py py-class docutils literal"><span class="pre">music21.bar.Barline</span></code></a> or <a class="reference internal" href="moduleBar.html#music21.bar.Repeat" title="music21.bar.Repeat"><code class="xref py py-class docutils literal"><span class="pre">music21.bar.Repeat</span></code></a>) &#8211; The &#64;left attribute to use for the next &lt;measure&gt; element encountered.
+This is used for situations where one &lt;measure&gt; element specified a &#64;right attribute that
+must be imported by music21 as <em>both</em> the right barline of one measure and the left barline
+of the following; at the moment this is only &#64;rptboth, which requires a <code class="xref py py-class docutils literal"><span class="pre">Repeat</span></code> in
+both cases.</li>
+<li><strong>backupMeasureNum</strong> (<em>int</em>) &#8211; In case a &lt;measure&gt; element is missing its &#64;n attribute,
+<a class="reference internal" href="#music21.mei.base.measureFromElement" title="music21.mei.base.measureFromElement"><code class="xref py py-func docutils literal"><span class="pre">measureFromElement()</span></code></a> will use this automatically-incremented number instead. The
+<code class="docutils literal"><span class="pre">backupMeasureNum</span></code> corresponding to the final &lt;measure&gt; in this &lt;score&gt; or &lt;section&gt; is
+returned from this function.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Four-tuple with a dictionary of results, the new value of <code class="docutils literal"><span class="pre">activeMeter</span></code>, the new
+value of <code class="docutils literal"><span class="pre">nextMeasureLeft</span></code>, and the new value of <code class="docutils literal"><span class="pre">backupMeasureNum</span></code>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">(dict, <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a>, <a class="reference internal" href="moduleBar.html#music21.bar.Barline" title="music21.bar.Barline"><code class="xref py py-class docutils literal"><span class="pre">Barline</span></code></a>, int)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Return Value</strong></p>
+<p>In short, it&#8217;s <code class="docutils literal"><span class="pre">parsed</span></code>, <code class="docutils literal"><span class="pre">activeMeter</span></code>, <code class="docutils literal"><span class="pre">nextMeasureLeft</span></code>, <code class="docutils literal"><span class="pre">backupMeasureNum</span></code>.</p>
+<ul>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">'parsed'</span></code> is a dictionary where the keys are the values in <code class="docutils literal"><span class="pre">allPartNs</span></code> and the values are</dt>
+<dd><p class="first last">a list of all the <code class="xref py py-class docutils literal"><span class="pre">Measure</span></code> objects in that part, as found in this &lt;section&gt; or
+&lt;score&gt;.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">'activeMeter'</span></code> is the <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a> in effect at the end of this</dt>
+<dd><p class="first last">&lt;section&gt; or &lt;score&gt;.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">'nextMeasureLeft'</span></code> is the value that should be </dt>
+<dd><p class="first last">assigned to the <code class="xref py py-attr docutils literal"><span class="pre">leftBarline</span></code> attribute
+of the first <code class="xref py py-class docutils literal"><span class="pre">Measure</span></code> found in the next &lt;section&gt;. This will almost always be None.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal"><span class="pre">'backupMeasureNum'</span></code> is equal to the <code class="docutils literal"><span class="pre">backupMeasureNum</span></code> argument plus the number of</dt>
+<dd><p class="first last">&lt;measure&gt; elements found in this &lt;score&gt; or &lt;section&gt;.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.sylFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">sylFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.sylFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;syl&gt; Individual lyric syllable.</p>
+<p>In MEI 2013: pg.454 (468 in PDF) (MEI.shared module)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An appropriately-configured <a class="reference internal" href="moduleNote.html#music21.note.Lyric" title="music21.note.Lyric"><code class="xref py py-class docutils literal"><span class="pre">music21.note.Lyric</span></code></a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>&#64;con and &#64;wordpos (from att.syl.log)</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base) (att.id (&#64;xml:id))</p>
+</li>
+<li><p class="first">att.facsimile (&#64;facs)</p>
+</li>
+<li><p class="first">att.syl.vis (att.typography (&#64;fontfam, &#64;fontname, &#64;fontsize, &#64;fontstyle, &#64;fontweight))</p>
+<blockquote>
+<div><ul>
+<li><p class="first">(att.visualoffset (att.visualoffset.ho (&#64;ho))</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.visualoffset.to (&#64;to))</li>
+<li>(att.visualoffset.vo (&#64;vo)))</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">(att.xy (&#64;x, &#64;y))</p>
+</li>
+<li><p class="first">(att.horizontalalign (&#64;halign))</p>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.syl.anl (att.common.anl (&#64;copyof, &#64;corresp, &#64;next, &#64;prev, &#64;sameas, &#64;synch)</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.alignment (&#64;when)))</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul class="simple">
+<li>MEI.edittrans: (all)</li>
+<li>MEI.figtable: fig</li>
+<li>MEI.namesdates: corpName geogName periodName persName styleName</li>
+<li>MEI.ptrref: ptr ref</li>
+<li>MEI.shared: address bibl date identifier lb name num rend repository stack title</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.mei.base.verseFromElement">
+<code class="descclassname">music21.mei.base.</code><code class="descname">verseFromElement</code><span class="sig-paren">(</span><em>elem</em>, <em>backupN=None</em>, <em>slurBundle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.verseFromElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;verse&gt; Lyric verse.</p>
+<p>In MEI 2013: pg.480 (494 in PDF) (MEI.lyrics module)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>backupN</strong> (<em>int</em>) &#8211; The backup verse number to use if no &#64;n attribute exists on <code class="docutils literal"><span class="pre">elem</span></code>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The appropriately-configured <code class="xref py py-class docutils literal"><span class="pre">Lyric</span></code> objects.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of <a class="reference internal" href="moduleNote.html#music21.note.Lyric" title="music21.note.Lyric"><code class="xref py py-class docutils literal"><span class="pre">music21.note.Lyric</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Attributes/Elements Implemented:</strong></p>
+<ul class="simple">
+<li>&#64;n and &lt;syl&gt;</li>
+</ul>
+<p><strong>Attributes/Elements in Testing:</strong> none</p>
+<p><strong>Attributes not Implemented:</strong></p>
+<ul>
+<li><p class="first">att.common (&#64;label, &#64;n, &#64;xml:base) (att.id (&#64;xml:id))</p>
+</li>
+<li><p class="first">att.facsimile (&#64;facs)</p>
+</li>
+<li><p class="first">att.lang (&#64;xml:lang)</p>
+</li>
+<li><p class="first">att.verse.log (&#64;refrain, &#64;rhythm)</p>
+</li>
+<li><p class="first">att.verse.vis (att.typography (&#64;fontfam, &#64;fontname, &#64;fontsize, &#64;fontstyle, &#64;fontweight))</p>
+<blockquote>
+<div><ul>
+<li><p class="first">(att.visualoffset.to (&#64;to))</p>
+</li>
+<li><p class="first">((att.visualoffset.vo (&#64;vo))</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.xy (&#64;x, &#64;y))</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">att.verse.anl (att.common.anl (&#64;copyof, &#64;corresp, &#64;next, &#64;prev, &#64;sameas, &#64;synch)</p>
+<blockquote>
+<div><ul class="simple">
+<li>(att.alignment (&#64;when)))</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Contained Elements not Implemented:</strong></p>
+<ul class="simple">
+<li>MEI.shared: dir dynam lb space tempo</li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="meitom21converter">
+<h2>MeiToM21Converter<a class="headerlink" href="#meitom21converter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.mei.base.MeiToM21Converter">
+<em class="property">class </em><code class="descclassname">music21.mei.base.</code><code class="descname">MeiToM21Converter</code><span class="sig-paren">(</span><em>theDocument=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.MeiToM21Converter" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference internal" href="#music21.mei.base.MeiToM21Converter" title="music21.mei.base.MeiToM21Converter"><code class="xref py py-class docutils literal"><span class="pre">MeiToM21Converter</span></code></a> instance manages the conversion of an MEI document into music21
+objects.</p>
+<p>If <code class="docutils literal"><span class="pre">theDocument</span></code> does not have &lt;mei&gt; as the root element, the class raises an
+<code class="xref py py-class docutils literal"><span class="pre">MeiElementError</span></code>. If <code class="docutils literal"><span class="pre">theDocument</span></code> is not a valid XML file, the class raises an
+<code class="xref py py-class docutils literal"><span class="pre">MeiValidityError</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>theDocument</strong> (<em>str</em>) &#8211; A string containing an MEI document.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">MeiElementError</span></code> when the root element is not &lt;mei&gt;</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">MeiValidityError</span></code> when the MEI file is not valid XML.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.mei.base.MeiToM21Converter" title="music21.mei.base.MeiToM21Converter"><code class="xref py py-class docutils literal"><span class="pre">MeiToM21Converter</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.mei.base.MeiToM21Converter.run">
+<code class="descclassname">MeiToM21Converter.</code><code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.mei.base.MeiToM21Converter.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run conversion of the internal MEI document to produce a music21 object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A <code class="xref py py-class docutils literal"><span class="pre">Stream</span></code> subclass, depending on the MEI document.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">music21.stream.Stream</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMetadata.html" title="music21.metadata"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleLilyTranslate.html" title="music21.lily.translate"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.features.base &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.features.jSymbolic" href="moduleFeaturesJSymbolic.html" />
+    <link rel="prev" title="music21.expressions" href="moduleExpressions.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleFeaturesJSymbolic.html" title="music21.features.jSymbolic"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleExpressions.html" title="music21.expressions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleExpressions.html"
+                        title="previous chapter">music21.expressions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleFeaturesJSymbolic.html"
+                        title="next chapter">music21.features.jSymbolic</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.features.base</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#featureextractor">FeatureExtractor</a></li>
+<li><a class="reference internal" href="#datainstance">DataInstance</a></li>
+<li><a class="reference internal" href="#dataset">DataSet</a></li>
+<li><a class="reference internal" href="#feature">Feature</a></li>
+<li><a class="reference internal" href="#outputarff">OutputARFF</a></li>
+<li><a class="reference internal" href="#outputcsv">OutputCSV</a></li>
+<li><a class="reference internal" href="#outputformat">OutputFormat</a></li>
+<li><a class="reference internal" href="#outputtaborange">OutputTabOrange</a></li>
+<li><a class="reference internal" href="#streamforms">StreamForms</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleFeaturesBase.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-features-base">
+<span id="modulefeaturesbase"></span><h1>music21.features.base<a class="headerlink" href="#music21-features-base" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.features.base"></span><div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.features.base.allFeaturesAsList">
+<code class="descclassname">music21.features.base.</code><code class="descname">allFeaturesAsList</code><span class="sig-paren">(</span><em>streamInput</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.allFeaturesAsList" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a tuple containing ALL currentingly implemented feature extractors. The first
+in the tuple are jsymbolic vectors, and the second native vectors. Vectors are NOT nested</p>
+<p>streamInput can be Add a Stream, DataInstance, or path to a corpus or local 
+file to this data set.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 4/4 c4 d e2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">allFeaturesAsList</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">[[1], [0.689999...], [2]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">65</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">20</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.features.base.extractorById">
+<code class="descclassname">music21.features.base.</code><code class="descname">extractorById</code><span class="sig-paren">(</span><em>idOrList</em>, <em>library=('jSymbolic'</em>, <em>'native')</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.extractorById" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the first feature matched by extractorsById().</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;A4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">extractorById</span><span class="p">(</span><span class="s1">&#39;p20&#39;</span><span class="p">)(</span><span class="n">s</span><span class="p">)</span> <span class="c1"># call class</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fe</span><span class="o">.</span><span class="n">extract</span><span class="p">()</span><span class="o">.</span><span class="n">vector</span>
+<span class="go">[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.features.base.extractorsById">
+<code class="descclassname">music21.features.base.</code><code class="descname">extractorsById</code><span class="sig-paren">(</span><em>idOrList</em>, <em>library=('jSymbolic'</em>, <em>'native')</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.extractorsById" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given one or more <code class="xref py py-class docutils literal"><span class="pre">FeatureExtractor</span></code> ids, return the 
+appropriate  subclass. An optional <cite>library</cite> argument can be added to define which 
+module is used. Current options are jSymbolic and native.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">features</span><span class="o">.</span><span class="n">extractorsById</span><span class="p">(</span><span class="s1">&#39;p20&#39;</span><span class="p">)</span>
+<span class="go">[&lt;class &#39;music21.features.jSymbolic.PitchClassDistributionFeature&#39;&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">features</span><span class="o">.</span><span class="n">extractorsById</span><span class="p">(</span><span class="s1">&#39;p20&#39;</span><span class="p">)]</span>
+<span class="go">[&#39;P20&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">features</span><span class="o">.</span><span class="n">extractorsById</span><span class="p">([</span><span class="s1">&#39;p19&#39;</span><span class="p">,</span> <span class="s1">&#39;p20&#39;</span><span class="p">])]</span>
+<span class="go">[&#39;P19&#39;, &#39;P20&#39;]</span>
+</pre></div>
+</div>
+<p>Normalizes case...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">features</span><span class="o">.</span><span class="n">extractorsById</span><span class="p">([</span><span class="s1">&#39;r31&#39;</span><span class="p">,</span> <span class="s1">&#39;r32&#39;</span><span class="p">,</span> <span class="s1">&#39;r33&#39;</span><span class="p">,</span> <span class="s1">&#39;r34&#39;</span><span class="p">,</span> <span class="s1">&#39;r35&#39;</span><span class="p">,</span> <span class="s1">&#39;p1&#39;</span><span class="p">,</span> <span class="s1">&#39;p2&#39;</span><span class="p">])]</span>
+<span class="go">[&#39;R31&#39;, &#39;R32&#39;, &#39;R33&#39;, &#39;R34&#39;, &#39;R35&#39;, &#39;P1&#39;, &#39;P2&#39;]</span>
+</pre></div>
+</div>
+<p>Get all feature extractors from all libraries</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">features</span><span class="o">.</span><span class="n">extractorsById</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">([&#39;M1&#39;, &#39;M2&#39;, &#39;M3&#39;], [&#39;MD1&#39;, &#39;MC1&#39;])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.features.base.getIndex">
+<code class="descclassname">music21.features.base.</code><code class="descname">getIndex</code><span class="sig-paren">(</span><em>featureString</em>, <em>extractorType=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.getIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list index of the given feature extractor and the feature extractor
+category (jsymbolic or native). If feature extractor string is not in either 
+jsymbolic or native feature extractors, returns None</p>
+<p>optionally include the extractorType (&#8216;jsymbolic&#8217; or &#8216;native&#8217;) if known
+and searching will be made more efficient</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">features</span><span class="o">.</span><span class="n">getIndex</span><span class="p">(</span><span class="s1">&#39;Range&#39;</span><span class="p">)</span>
+<span class="go">(59, &#39;jsymbolic&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">features</span><span class="o">.</span><span class="n">getIndex</span><span class="p">(</span><span class="s1">&#39;Ends With Landini Melodic Contour&#39;</span><span class="p">)</span>
+<span class="go">(19, &#39;native&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">features</span><span class="o">.</span><span class="n">getIndex</span><span class="p">(</span><span class="s1">&#39;abrandnewfeature!&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">features</span><span class="o">.</span><span class="n">getIndex</span><span class="p">(</span><span class="s1">&#39;Fifths Pitch Histogram&#39;</span><span class="p">,</span><span class="s1">&#39;jsymbolic&#39;</span><span class="p">)</span>
+<span class="go">(68, &#39;jsymbolic&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">features</span><span class="o">.</span><span class="n">getIndex</span><span class="p">(</span><span class="s1">&#39;Tonal Certainty&#39;</span><span class="p">,</span><span class="s1">&#39;native&#39;</span><span class="p">)</span>
+<span class="go">(1, &#39;native&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.features.base.vectorById">
+<code class="descclassname">music21.features.base.</code><code class="descname">vectorById</code><span class="sig-paren">(</span><em>streamObj</em>, <em>vectorId</em>, <em>library=('jSymbolic'</em>, <em>'native')</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.vectorById" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function to get a vector from an extractor</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;A4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">features</span><span class="o">.</span><span class="n">vectorById</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s1">&#39;p20&#39;</span><span class="p">)</span>
+<span class="go">[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="featureextractor">
+<h2>FeatureExtractor<a class="headerlink" href="#featureextractor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.features.base.FeatureExtractor">
+<em class="property">class </em><code class="descclassname">music21.features.base.</code><code class="descname">FeatureExtractor</code><span class="sig-paren">(</span><em>dataOrStream=None</em>, <em>*arguments</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.FeatureExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>A model of process that extracts a feature from a Music21 Stream. 
+The main public interface is the extract() method.</p>
+<p>The extractor can be passed a Stream or a reference to a DataInstance. 
+All Streams are internally converted to a DataInstance if necessary. 
+Usage of a DataInstance offers significant performance advantages, as common forms of 
+the Stream are cached for easy processing.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.features.base.FeatureExtractor" title="music21.features.base.FeatureExtractor"><code class="xref py py-class docutils literal"><span class="pre">FeatureExtractor</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.features.base.FeatureExtractor.extract">
+<code class="descclassname">FeatureExtractor.</code><code class="descname">extract</code><span class="sig-paren">(</span><em>source=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.FeatureExtractor.extract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the feature and return the result.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.FeatureExtractor.getAttributeLabels">
+<code class="descclassname">FeatureExtractor.</code><code class="descname">getAttributeLabels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.FeatureExtractor.getAttributeLabels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of string in a form that is appropriate for data storage.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">AmountOfArpeggiationFeature</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fe</span><span class="o">.</span><span class="n">getAttributeLabels</span><span class="p">()</span>
+<span class="go">[&#39;Amount_of_Arpeggiation&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">FifthsPitchHistogramFeature</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fe</span><span class="o">.</span><span class="n">getAttributeLabels</span><span class="p">()</span>
+<span class="go">[&#39;Fifths_Pitch_Histogram_0&#39;, &#39;Fifths_Pitch_Histogram_1&#39;, &#39;Fifths_Pitch_Histogram_2&#39;, </span>
+<span class="go"> &#39;Fifths_Pitch_Histogram_3&#39;, &#39;Fifths_Pitch_Histogram_4&#39;, &#39;Fifths_Pitch_Histogram_5&#39;, </span>
+<span class="go"> &#39;Fifths_Pitch_Histogram_6&#39;, &#39;Fifths_Pitch_Histogram_7&#39;, &#39;Fifths_Pitch_Histogram_8&#39;, </span>
+<span class="go"> &#39;Fifths_Pitch_Histogram_9&#39;, &#39;Fifths_Pitch_Histogram_10&#39;, &#39;Fifths_Pitch_Histogram_11&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.FeatureExtractor.getBlankFeature">
+<code class="descclassname">FeatureExtractor.</code><code class="descname">getBlankFeature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.FeatureExtractor.getBlankFeature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a properly configured plain feature as a place holder</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">features</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fe</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">InitialTimeSignatureFeature</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fe</span><span class="o">.</span><span class="n">getBlankFeature</span><span class="p">()</span><span class="o">.</span><span class="n">vector</span>
+<span class="go">[0, 0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.FeatureExtractor.setData">
+<code class="descclassname">FeatureExtractor.</code><code class="descname">setData</code><span class="sig-paren">(</span><em>dataOrStream</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.FeatureExtractor.setData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the data that this FeatureExtractor will process. 
+Either a Stream or a DataInstance object can be provided.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="datainstance">
+<h2>DataInstance<a class="headerlink" href="#datainstance" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.features.base.DataInstance">
+<em class="property">class </em><code class="descclassname">music21.features.base.</code><code class="descname">DataInstance</code><span class="sig-paren">(</span><em>streamObj=None</em>, <em>id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataInstance" title="Permalink to this definition">¶</a></dt>
+<dd><p>A data instance for analysis. This object prepares a Stream 
+(by stripping ties, etc.) and stores 
+multiple commonly-used stream representations once, providing rapid processing.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.features.base.DataInstance" title="music21.features.base.DataInstance"><code class="xref py py-class docutils literal"><span class="pre">DataInstance</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.features.base.DataInstance.getClassValue">
+<code class="descclassname">DataInstance.</code><code class="descname">getClassValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataInstance.getClassValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.DataInstance.getId">
+<code class="descclassname">DataInstance.</code><code class="descname">getId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataInstance.getId" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.DataInstance.setClassLabel">
+<code class="descclassname">DataInstance.</code><code class="descname">setClassLabel</code><span class="sig-paren">(</span><em>classLabel</em>, <em>classValue=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataInstance.setClassLabel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the class label, as well as the class value if known. 
+The class label is the attribute name used to define the class of this data instance.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">di</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">DataInstance</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">di</span><span class="o">.</span><span class="n">setClassLabel</span><span class="p">(</span><span class="s1">&#39;Composer&#39;</span><span class="p">,</span> <span class="s1">&#39;Bach&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="dataset">
+<h2>DataSet<a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.features.base.DataSet">
+<em class="property">class </em><code class="descclassname">music21.features.base.</code><code class="descname">DataSet</code><span class="sig-paren">(</span><em>classLabel=None</em>, <em>featureExtractors=()</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>A set of features, as well as a collection of data to operate on</p>
+<p>Multiple DataInstance objects, a FeatureSet, and an OutputFormat.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">DataSet</span><span class="p">(</span><span class="n">classLabel</span><span class="o">=</span><span class="s1">&#39;Composer&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">PitchClassDistributionFeature</span><span class="p">,</span> 
+<span class="gp">... </span>     <span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">ChangesOfMeterFeature</span><span class="p">,</span> 
+<span class="gp">... </span>     <span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">InitialTimeSignatureFeature</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">addFeatureExtractors</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">addData</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">,</span> <span class="n">classValue</span><span class="o">=</span><span class="s1">&#39;Bach&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">addData</span><span class="p">(</span><span class="s1">&#39;bach/bwv324.xml&#39;</span><span class="p">,</span> <span class="n">classValue</span><span class="o">=</span><span class="s1">&#39;Bach&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">getFeaturesAsList</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">[&#39;bwv66.6&#39;, 0.0, 1.0, 0.375, 0.03125, 0.5, 0.1875, 0.90625, 0.0, 0.4375,</span>
+<span class="go"> 0.6875, 0.09375, 0.875, 0, 4, 4, &#39;Bach&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">getFeaturesAsList</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">[&#39;bach/bwv324.xml&#39;, 0.12, 0.0, 1.0, 0.12, 0.56..., 0.0, ..., 0.52..., </span>
+<span class="go"> 0.0, 0.68..., 0.0, 0.56..., 0, 4, 4, &#39;Bach&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">getString</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>By default, all exceptions are caught and printed if debug mode is on.</p>
+<p>Set ds.failFast = True to not catch them.</p>
+<p>Set ds.quiet = False to print them regardless of debug mode.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.features.base.DataSet" title="music21.features.base.DataSet"><code class="xref py py-class docutils literal"><span class="pre">DataSet</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.features.base.DataSet.addData">
+<code class="descclassname">DataSet.</code><code class="descname">addData</code><span class="sig-paren">(</span><em>dataOrStreamOrPath</em>, <em>classValue=None</em>, <em>id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataSet.addData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a Stream, DataInstance, or path to a corpus or local file to this data set.</p>
+<p>The class value passed here is assumed to be the same as 
+the classLabel assigned at startup.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.DataSet.addFeatureExtractors">
+<code class="descclassname">DataSet.</code><code class="descname">addFeatureExtractors</code><span class="sig-paren">(</span><em>values</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataSet.addFeatureExtractors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add one or more FeatureExtractor objects, either as a list or as an individual object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.DataSet.getAttributeLabels">
+<code class="descclassname">DataSet.</code><code class="descname">getAttributeLabels</code><span class="sig-paren">(</span><em>includeClassLabel=True</em>, <em>includeId=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataSet.getAttributeLabels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of all attribute labels. Optionally add a class 
+label field and/or an id field.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">PitchClassDistributionFeature</span><span class="p">,</span> 
+<span class="gp">... </span>     <span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">ChangesOfMeterFeature</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">DataSet</span><span class="p">(</span><span class="n">classLabel</span><span class="o">=</span><span class="s1">&#39;Composer&#39;</span><span class="p">,</span> <span class="n">featureExtractors</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">getAttributeLabels</span><span class="p">(</span><span class="n">includeId</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">[&#39;Pitch_Class_Distribution_0&#39;, </span>
+<span class="go"> &#39;Pitch_Class_Distribution_1&#39;, </span>
+<span class="go"> ...</span>
+<span class="go"> ...</span>
+<span class="go"> &#39;Pitch_Class_Distribution_11&#39;, </span>
+<span class="go"> &#39;Changes_of_Meter&#39;, </span>
+<span class="go"> &#39;Composer&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.DataSet.getClassLabel">
+<code class="descclassname">DataSet.</code><code class="descname">getClassLabel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataSet.getClassLabel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.DataSet.getClassPositionLabels">
+<code class="descclassname">DataSet.</code><code class="descname">getClassPositionLabels</code><span class="sig-paren">(</span><em>includeId=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataSet.getClassPositionLabels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return column labels for the presence of a class definition</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">PitchClassDistributionFeature</span><span class="p">,</span> 
+<span class="gp">... </span>     <span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">ChangesOfMeterFeature</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">DataSet</span><span class="p">(</span><span class="n">classLabel</span><span class="o">=</span><span class="s1">&#39;Composer&#39;</span><span class="p">,</span> <span class="n">featureExtractors</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">getClassPositionLabels</span><span class="p">()</span>
+<span class="go">[None, False, False, False, False, False, False, False, False, </span>
+<span class="go"> False, False, False, False, False, True]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.DataSet.getDiscreteLabels">
+<code class="descclassname">DataSet.</code><code class="descname">getDiscreteLabels</code><span class="sig-paren">(</span><em>includeClassLabel=True</em>, <em>includeId=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataSet.getDiscreteLabels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return column labels for discrete status.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">PitchClassDistributionFeature</span><span class="p">,</span> 
+<span class="gp">... </span>     <span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">ChangesOfMeterFeature</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">DataSet</span><span class="p">(</span><span class="n">classLabel</span><span class="o">=</span><span class="s1">&#39;Composer&#39;</span><span class="p">,</span> <span class="n">featureExtractors</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">getDiscreteLabels</span><span class="p">()</span>
+<span class="go">[None, False, False, False, False, False, False, False, False, False, </span>
+<span class="go"> False, False, False, True, True]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.DataSet.getFeaturesAsList">
+<code class="descclassname">DataSet.</code><code class="descname">getFeaturesAsList</code><span class="sig-paren">(</span><em>includeClassLabel=True</em>, <em>includeId=True</em>, <em>concatenateLists=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataSet.getFeaturesAsList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get processed data as a list of lists, merging any sub-lists 
+in multi-dimensional features.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.DataSet.getString">
+<code class="descclassname">DataSet.</code><code class="descname">getString</code><span class="sig-paren">(</span><em>outputFmt='tab'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataSet.getString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a string representation of the data set in a specific format.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.DataSet.getUniqueClassValues">
+<code class="descclassname">DataSet.</code><code class="descname">getUniqueClassValues</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataSet.getUniqueClassValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of unique class values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.DataSet.process">
+<code class="descclassname">DataSet.</code><code class="descname">process</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataSet.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process all Data with all FeatureExtractors. 
+Processed data is stored internally as numerous Feature objects.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.DataSet.write">
+<code class="descclassname">DataSet.</code><code class="descname">write</code><span class="sig-paren">(</span><em>fp=None</em>, <em>format=None</em>, <em>includeClassLabel=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.DataSet.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the output format object.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="feature">
+<h2>Feature<a class="headerlink" href="#feature" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.features.base.Feature">
+<em class="property">class </em><code class="descclassname">music21.features.base.</code><code class="descname">Feature</code><a class="headerlink" href="#music21.features.base.Feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>An object representation of a feature, capable of presentation in a variety of formats, 
+and returned from FeatureExtractor objects.</p>
+<p>Feature objects are simple. It is FeatureExtractors that store all metadata and processing 
+routines for creating Feature objects.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.features.base.Feature" title="music21.features.base.Feature"><code class="xref py py-class docutils literal"><span class="pre">Feature</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.features.base.Feature.normalize">
+<code class="descclassname">Feature.</code><code class="descname">normalize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.Feature.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize the vector between 0 and 1, assuming there is more than one value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.Feature.prepareVectors">
+<code class="descclassname">Feature.</code><code class="descname">prepareVectors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.Feature.prepareVectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare the vector stored in this feature.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="outputarff">
+<h2>OutputARFF<a class="headerlink" href="#outputarff" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.features.base.OutputARFF">
+<em class="property">class </em><code class="descclassname">music21.features.base.</code><code class="descname">OutputARFF</code><span class="sig-paren">(</span><em>dataSet=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.OutputARFF" title="Permalink to this definition">¶</a></dt>
+<dd><p>An ARFF (Attribute-Relation File Format) file.</p>
+<p>See <a class="reference external" href="http://weka.wikispaces.com/ARFF+%28stable+version%29">http://weka.wikispaces.com/ARFF+%28stable+version%29</a> for more details</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">oa</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">OutputARFF</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oa</span><span class="o">.</span><span class="n">_ext</span>
+<span class="go">&#39;.arff&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.features.base.OutputARFF" title="music21.features.base.OutputARFF"><code class="xref py py-class docutils literal"><span class="pre">OutputARFF</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.features.base.OutputFormat" title="music21.features.base.OutputFormat"><code class="xref py py-class docutils literal"><span class="pre">OutputFormat</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.features.base.OutputARFF" title="music21.features.base.OutputARFF"><code class="xref py py-class docutils literal"><span class="pre">OutputARFF</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.features.base.OutputARFF.getHeaderLines">
+<code class="descclassname">OutputARFF.</code><code class="descname">getHeaderLines</code><span class="sig-paren">(</span><em>includeClassLabel=True</em>, <em>includeId=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.OutputARFF.getHeaderLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the header as a list of lines.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">ChangesOfMeterFeature</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">DataSet</span><span class="p">(</span><span class="n">classLabel</span><span class="o">=</span><span class="s1">&#39;Composer&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">addFeatureExtractors</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">of</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">OutputARFF</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">of</span><span class="o">.</span><span class="n">getHeaderLines</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">@RELATION Composer</span>
+<span class="go">@ATTRIBUTE Identifier STRING</span>
+<span class="go">@ATTRIBUTE Changes_of_Meter NUMERIC</span>
+<span class="go">@ATTRIBUTE class {}</span>
+<span class="go">@DATA</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.OutputARFF.getString">
+<code class="descclassname">OutputARFF.</code><code class="descname">getString</code><span class="sig-paren">(</span><em>includeClassLabel=True</em>, <em>includeId=True</em>, <em>lineBreak=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.OutputARFF.getString" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.features.base.OutputFormat" title="music21.features.base.OutputFormat"><code class="xref py py-class docutils literal"><span class="pre">OutputFormat</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.features.base.OutputFormat.write" title="music21.features.base.OutputFormat.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="outputcsv">
+<h2>OutputCSV<a class="headerlink" href="#outputcsv" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.features.base.OutputCSV">
+<em class="property">class </em><code class="descclassname">music21.features.base.</code><code class="descname">OutputCSV</code><span class="sig-paren">(</span><em>dataSet=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.OutputCSV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comma-separated value list.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.features.base.OutputCSV" title="music21.features.base.OutputCSV"><code class="xref py py-class docutils literal"><span class="pre">OutputCSV</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.features.base.OutputFormat" title="music21.features.base.OutputFormat"><code class="xref py py-class docutils literal"><span class="pre">OutputFormat</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.features.base.OutputCSV" title="music21.features.base.OutputCSV"><code class="xref py py-class docutils literal"><span class="pre">OutputCSV</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.features.base.OutputCSV.getHeaderLines">
+<code class="descclassname">OutputCSV.</code><code class="descname">getHeaderLines</code><span class="sig-paren">(</span><em>includeClassLabel=True</em>, <em>includeId=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.OutputCSV.getHeaderLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the header as a list of lines.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">ChangesOfMeterFeature</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">DataSet</span><span class="p">(</span><span class="n">classLabel</span><span class="o">=</span><span class="s1">&#39;Composer&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">addFeatureExtractors</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">of</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">OutputCSV</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">of</span><span class="o">.</span><span class="n">getHeaderLines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">[&#39;Identifier&#39;, &#39;Changes_of_Meter&#39;, &#39;Composer&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.OutputCSV.getString">
+<code class="descclassname">OutputCSV.</code><code class="descname">getString</code><span class="sig-paren">(</span><em>includeClassLabel=True</em>, <em>includeId=True</em>, <em>lineBreak=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.OutputCSV.getString" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.features.base.OutputFormat" title="music21.features.base.OutputFormat"><code class="xref py py-class docutils literal"><span class="pre">OutputFormat</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.features.base.OutputFormat.write" title="music21.features.base.OutputFormat.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="outputformat">
+<h2>OutputFormat<a class="headerlink" href="#outputformat" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.features.base.OutputFormat">
+<em class="property">class </em><code class="descclassname">music21.features.base.</code><code class="descname">OutputFormat</code><span class="sig-paren">(</span><em>dataSet=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.OutputFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide output for a DataSet, passed as an initial argument.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.features.base.OutputFormat" title="music21.features.base.OutputFormat"><code class="xref py py-class docutils literal"><span class="pre">OutputFormat</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.features.base.OutputFormat.getHeaderLines">
+<code class="descclassname">OutputFormat.</code><code class="descname">getHeaderLines</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.OutputFormat.getHeaderLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the header as a list of lines.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.OutputFormat.write">
+<code class="descclassname">OutputFormat.</code><code class="descname">write</code><span class="sig-paren">(</span><em>fp=None</em>, <em>includeClassLabel=True</em>, <em>includeId=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.OutputFormat.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the file. If not file path is given, a temporary file will be written.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="outputtaborange">
+<h2>OutputTabOrange<a class="headerlink" href="#outputtaborange" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.features.base.OutputTabOrange">
+<em class="property">class </em><code class="descclassname">music21.features.base.</code><code class="descname">OutputTabOrange</code><span class="sig-paren">(</span><em>dataSet=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.OutputTabOrange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tab delimited file format used with Orange.</p>
+<p><a class="reference external" href="http://orange.biolab.si/doc/reference/Orange.data.formats/">http://orange.biolab.si/doc/reference/Orange.data.formats/</a></p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.features.base.OutputTabOrange" title="music21.features.base.OutputTabOrange"><code class="xref py py-class docutils literal"><span class="pre">OutputTabOrange</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.features.base.OutputFormat" title="music21.features.base.OutputFormat"><code class="xref py py-class docutils literal"><span class="pre">OutputFormat</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.features.base.OutputTabOrange" title="music21.features.base.OutputTabOrange"><code class="xref py py-class docutils literal"><span class="pre">OutputTabOrange</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.features.base.OutputTabOrange.getHeaderLines">
+<code class="descclassname">OutputTabOrange.</code><code class="descname">getHeaderLines</code><span class="sig-paren">(</span><em>includeClassLabel=True</em>, <em>includeId=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.OutputTabOrange.getHeaderLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the header as a list of lines.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">features</span><span class="o">.</span><span class="n">jSymbolic</span><span class="o">.</span><span class="n">ChangesOfMeterFeature</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">DataSet</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">addFeatureExtractors</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">of</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">OutputTabOrange</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">of</span><span class="o">.</span><span class="n">getHeaderLines</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">[&#39;Identifier&#39;, &#39;Changes_of_Meter&#39;]</span>
+<span class="go">[&#39;string&#39;, &#39;discrete&#39;]</span>
+<span class="go">[&#39;meta&#39;, &#39;&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">DataSet</span><span class="p">(</span><span class="n">classLabel</span><span class="o">=</span><span class="s1">&#39;Composer&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ds</span><span class="o">.</span><span class="n">addFeatureExtractors</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">of</span> <span class="o">=</span> <span class="n">features</span><span class="o">.</span><span class="n">OutputTabOrange</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">of</span><span class="o">.</span><span class="n">getHeaderLines</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">[&#39;Identifier&#39;, &#39;Changes_of_Meter&#39;, &#39;Composer&#39;]</span>
+<span class="go">[&#39;string&#39;, &#39;discrete&#39;, &#39;discrete&#39;]</span>
+<span class="go">[&#39;meta&#39;, &#39;&#39;, &#39;class&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.features.base.OutputTabOrange.getString">
+<code class="descclassname">OutputTabOrange.</code><code class="descname">getString</code><span class="sig-paren">(</span><em>includeClassLabel=True</em>, <em>includeId=True</em>, <em>lineBreak=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.OutputTabOrange.getString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the complete DataSet as a string with the appropriate headers.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.features.base.OutputFormat" title="music21.features.base.OutputFormat"><code class="xref py py-class docutils literal"><span class="pre">OutputFormat</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.features.base.OutputFormat.write" title="music21.features.base.OutputFormat.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="streamforms">
+<h2>StreamForms<a class="headerlink" href="#streamforms" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.features.base.StreamForms">
+<em class="property">class </em><code class="descclassname">music21.features.base.</code><code class="descname">StreamForms</code><span class="sig-paren">(</span><em>streamObj</em>, <em>prepareStream=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.StreamForms" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary-like wrapper of a Stream, providing 
+numerous representations, generated on-demand, and cached.</p>
+<p>A single StreamForms object can be created for an 
+entire Score, as well as one for each Part and/or Voice.</p>
+<p>A DataSet object manages one or more StreamForms 
+objects, and exposes them to FeatureExtractors for usage.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.features.base.StreamForms" title="music21.features.base.StreamForms"><code class="xref py py-class docutils literal"><span class="pre">StreamForms</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.features.base.StreamForms.keys">
+<code class="descclassname">StreamForms.</code><code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.features.base.StreamForms.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleFeaturesJSymbolic.html" title="music21.features.jSymbolic"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleExpressions.html" title="music21.expressions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

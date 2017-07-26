@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.midi.realtime &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.midi.translate" href="moduleMidiTranslate.html" />
+    <link rel="prev" title="music21.midi.percussion" href="moduleMidiPercussion.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMidiTranslate.html" title="music21.midi.translate"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleMidiPercussion.html" title="music21.midi.percussion"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleMidiPercussion.html"
+                        title="previous chapter">music21.midi.percussion</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleMidiTranslate.html"
+                        title="next chapter">music21.midi.translate</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.midi.realtime</a><ul>
+<li><a class="reference internal" href="#streamplayer">StreamPlayer</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleMidiRealtime.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-midi-realtime">
+<span id="modulemidirealtime"></span><h1>music21.midi.realtime<a class="headerlink" href="#music21-midi-realtime" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.midi.realtime"></span><p>Objects for realtime playback of Music21 Streams as MIDI.</p>
+<p>From an idea of Joe &#8220;Codeswell&#8221;:</p>
+<p><a class="reference external" href="http://joecodeswell.wordpress.com/2012/06/13/">http://joecodeswell.wordpress.com/2012/06/13/</a>
+how-to-produce-python-controlled-audio-output-from-music-made-with-music21</p>
+<p><a class="reference external" href="http://stackoverflow.com/questions/10983462/">http://stackoverflow.com/questions/10983462/</a>
+how-can-i-produce-real-time-audio-output-from-music-made-with-music21</p>
+<p>Requires pygame: <a class="reference external" href="http://www.pygame.org/download.shtml">http://www.pygame.org/download.shtml</a></p>
+<div class="section" id="streamplayer">
+<h2>StreamPlayer<a class="headerlink" href="#streamplayer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.midi.realtime.StreamPlayer">
+<em class="property">class </em><code class="descclassname">music21.midi.realtime.</code><code class="descname">StreamPlayer</code><span class="sig-paren">(</span><em>streamIn</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.realtime.StreamPlayer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a player for a stream that plays its midi version in realtime using pygame.</p>
+<p>Set up a detuned piano (where each key has a random but 
+consistent detuning from 30 cents flat to sharp)
+and play a Bach Chorale on it in real time.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">keyDetune</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">127</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="n">keyDetune</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">b</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="n">n</span><span class="o">.</span><span class="n">microtone</span> <span class="o">=</span> <span class="n">keyDetune</span><span class="p">[</span><span class="n">n</span><span class="o">.</span><span class="n">midi</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">realtime</span><span class="o">.</span><span class="n">StreamPlayer</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The stream is stored (unaltered) in <cite>StreamPlayer.streamIn</cite>, and can be changed any time the
+midi file is not playing.</p>
+<p>A number of mixer controls can be passed in with keywords:</p>
+<ul>
+<li><p class="first">mixerFreq (default 44100 &#8211; CD quality)</p>
+</li>
+<li><dl class="first docutils">
+<dt>mixerBitSize (default -16 (=unsigned 16bit) &#8211; </dt>
+<dd><p class="first last">really, are you going to do 24bit audio with Python?? :-)  )</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">mixerChannels (default 2 = stereo)</p>
+</li>
+<li><p class="first">mixerBuffer (default 1024 = number of samples)</p>
+</li>
+</ul>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.midi.realtime.StreamPlayer" title="music21.midi.realtime.StreamPlayer"><code class="xref py py-class docutils literal"><span class="pre">StreamPlayer</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.midi.realtime.StreamPlayer.getStringOrBytesIOFile">
+<code class="descclassname">StreamPlayer.</code><code class="descname">getStringOrBytesIOFile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.realtime.StreamPlayer.getStringOrBytesIOFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.realtime.StreamPlayer.play">
+<code class="descclassname">StreamPlayer.</code><code class="descname">play</code><span class="sig-paren">(</span><em>busyFunction=None</em>, <em>busyArgs=None</em>, <em>endFunction=None</em>, <em>endArgs=None</em>, <em>busyWaitMilliseconds=50</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.realtime.StreamPlayer.play" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.realtime.StreamPlayer.playStringIOFile">
+<code class="descclassname">StreamPlayer.</code><code class="descname">playStringIOFile</code><span class="sig-paren">(</span><em>stringIOFile</em>, <em>busyFunction=None</em>, <em>busyArgs=None</em>, <em>endFunction=None</em>, <em>endArgs=None</em>, <em>busyWaitMilliseconds=50</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.realtime.StreamPlayer.playStringIOFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMidiTranslate.html" title="music21.midi.translate"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleMidiPercussion.html" title="music21.midi.percussion"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

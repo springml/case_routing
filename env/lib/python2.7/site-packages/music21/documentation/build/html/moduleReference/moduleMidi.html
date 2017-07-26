@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.midi &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.midi.percussion" href="moduleMidiPercussion.html" />
+    <link rel="prev" title="music21.meter" href="moduleMeter.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMidiPercussion.html" title="music21.midi.percussion"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleMeter.html" title="music21.meter"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleMeter.html"
+                        title="previous chapter">music21.meter</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleMidiPercussion.html"
+                        title="next chapter">music21.midi.percussion</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.midi</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#deltatime">DeltaTime</a></li>
+<li><a class="reference internal" href="#enumeration">Enumeration</a></li>
+<li><a class="reference internal" href="#midievent">MidiEvent</a></li>
+<li><a class="reference internal" href="#midifile">MidiFile</a></li>
+<li><a class="reference internal" href="#miditrack">MidiTrack</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleMidi.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-midi">
+<span id="modulemidi"></span><h1>music21.midi<a class="headerlink" href="#music21-midi" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.midi"></span><p>Objects and tools for processing MIDI data.  Converts from MIDI files to
+<a class="reference internal" href="#music21.midi.MidiEvent" title="music21.midi.MidiEvent"><code class="xref py py-class docutils literal"><span class="pre">MidiEvent</span></code></a>, <a class="reference internal" href="#music21.midi.MidiTrack" title="music21.midi.MidiTrack"><code class="xref py py-class docutils literal"><span class="pre">MidiTrack</span></code></a>, and
+<a class="reference internal" href="#music21.midi.MidiFile" title="music21.midi.MidiFile"><code class="xref py py-class docutils literal"><span class="pre">MidiFile</span></code></a> objects, and vice-versa.</p>
+<p>Further conversion to-and-from MidiEvent/MidiTrack/MidiFile and music21 Stream,
+Note, etc., objects takes place in <a class="reference internal" href="moduleMidiTranslate.html#modulemiditranslate"><span class="std std-ref">music21.midi.translate</span></a>.</p>
+<p>This module uses routines from Will Ware&#8217;s public domain midi.py library from 2001
+see <a class="reference external" href="http://groups.google.com/group/alt.sources/msg/0c5fc523e050c35e">http://groups.google.com/group/alt.sources/msg/0c5fc523e050c35e</a></p>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.midi.charToBinary">
+<code class="descclassname">music21.midi.</code><code class="descname">charToBinary</code><span class="sig-paren">(</span><em>char</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.charToBinary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a char into its binary representation. Useful for debugging.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">charToBinary</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="go">&#39;01100001&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.getNumber">
+<code class="descclassname">music21.midi.</code><code class="descname">getNumber</code><span class="sig-paren">(</span><em>midiStr</em>, <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.getNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the value of a string byte or bytes if length &gt; 1
+from an 8-bit string or (PY3) bytes object</p>
+<p>Then, return the remaining string or bytes object</p>
+<p>The <cite>length</cite> is the number of chars to read. 
+This will sum a length greater than 1 if desired.</p>
+<p>Note that MIDI uses big-endian for everything.
+This is the inverse of Python&#8217;s chr() function.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getNumber</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">(0, &#39;test&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getNumber</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">(29797, &#39;st&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getNumber</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">(1952805748, &#39;&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.getNumbersAsList">
+<code class="descclassname">music21.midi.</code><code class="descname">getNumbersAsList</code><span class="sig-paren">(</span><em>midiStr</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.getNumbersAsList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate each char into a number, return in a list. 
+Used for reading data messages where each byte encodes 
+a different discrete value.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getNumbersAsList</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\x00\x00\x00\x03</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="go">[0, 0, 0, 3]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.getVariableLengthNumber">
+<code class="descclassname">music21.midi.</code><code class="descname">getVariableLengthNumber</code><span class="sig-paren">(</span><em>midiStr</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.getVariableLengthNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a string of data, strip off a the first character, or all high-byte characters 
+terminating with one whose ord() function is &lt; 0x80.  Thus a variable number of bytes
+might be read.</p>
+<p>After finding the appropriate termination, 
+return the remaining string.</p>
+<p>This is necessary as DeltaTime times are given with variable size, 
+and thus may be if different numbers of characters are used.</p>
+<p>(The ellipses below are just to make the doctests work on both Python 2 and
+Python 3 (where the output is in bytes).)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getVariableLengthNumber</span><span class="p">(</span><span class="s1">&#39;A-u&#39;</span><span class="p">)</span>
+<span class="go">(65, ...&#39;-u&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getVariableLengthNumber</span><span class="p">(</span><span class="s1">&#39;-u&#39;</span><span class="p">)</span>
+<span class="go">(45, ...&#39;u&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getVariableLengthNumber</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
+<span class="go">(117, ...&#39;&#39;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getVariableLengthNumber</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+<span class="go">(116, ...&#39;est&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getVariableLengthNumber</span><span class="p">(</span><span class="s1">&#39;E@-E&#39;</span><span class="p">)</span>
+<span class="go">(69, ...&#39;@-E&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getVariableLengthNumber</span><span class="p">(</span><span class="s1">&#39;@-E&#39;</span><span class="p">)</span>
+<span class="go">(64, ...&#39;-E&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getVariableLengthNumber</span><span class="p">(</span><span class="s1">&#39;-E&#39;</span><span class="p">)</span>
+<span class="go">(45, ...&#39;E&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getVariableLengthNumber</span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">)</span>
+<span class="go">(69, ...&#39;&#39;)</span>
+</pre></div>
+</div>
+<p>Test that variable length characters work:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getVariableLengthNumber</span><span class="p">(</span><span class="n">b</span><span class="s1">&#39;</span><span class="se">\xff\x7f</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="go">(16383, ...&#39;&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getVariableLengthNumber</span><span class="p">(</span><span class="s1">&#39;中xy&#39;</span><span class="p">)</span>
+<span class="go">(210638584, ...&#39;y&#39;)</span>
+</pre></div>
+</div>
+<p>If no low-byte character is encoded, raises an IndexError</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getVariableLengthNumber</span><span class="p">(</span><span class="s1">&#39;中国&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">IndexError</span>: <span class="n">...index out of range</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.intsToHexString">
+<code class="descclassname">music21.midi.</code><code class="descname">intsToHexString</code><span class="sig-paren">(</span><em>intList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.intsToHexString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a list of integers into a hex string, suitable for testing MIDI encoding.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># note on, middle c, 120 velocity</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">intsToHexString</span><span class="p">([</span><span class="mi">144</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">120</span><span class="p">])</span>
+<span class="go">b&#39;\x90&lt;x&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.putNumber">
+<code class="descclassname">music21.midi.</code><code class="descname">putNumber</code><span class="sig-paren">(</span><em>num</em>, <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.putNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Put a single number as a hex number at the end of a string <cite>length</cite> bytes long.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">putNumber</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">b&#39;\x00\x00\x00\x03&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">putNumber</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">b&#39;\x00&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.putNumbersAsList">
+<code class="descclassname">music21.midi.</code><code class="descname">putNumbersAsList</code><span class="sig-paren">(</span><em>numList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.putNumbersAsList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate a list of numbers (0-255) into a bytestring. 
+Used for encoding data messages where each byte encodes a different discrete value.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">putNumbersAsList</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">b&#39;\x00\x00\x00\x03&#39;</span>
+</pre></div>
+</div>
+<p>If a number is &lt; 0 then it wraps around from the top.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">putNumbersAsList</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">])</span>
+<span class="go">b&#39;\x00\x00\x00\xfd&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">putNumbersAsList</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">b&#39;\x00\x00\x00\xff&#39;</span>
+</pre></div>
+</div>
+<p>A number &gt; 255 is an exception:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">putNumbersAsList</span><span class="p">([</span><span class="mi">256</span><span class="p">])</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.midi.MidiException</span>: <span class="n">Cannot place a number &gt; 255 in a list: 256</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.putVariableLengthNumber">
+<code class="descclassname">music21.midi.</code><code class="descname">putVariableLengthNumber</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.putVariableLengthNumber" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">putVariableLengthNumber</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">b&#39;\x04&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">putVariableLengthNumber</span><span class="p">(</span><span class="mi">127</span><span class="p">)</span>
+<span class="go">b&#39;\x7f&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">putVariableLengthNumber</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">b&#39;\x00&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">putVariableLengthNumber</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+<span class="go">b&#39;\x88\x00&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">putVariableLengthNumber</span><span class="p">(</span><span class="mi">8192</span><span class="p">)</span>
+<span class="go">b&#39;\xc0\x00&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">putVariableLengthNumber</span><span class="p">(</span><span class="mi">16383</span><span class="p">)</span>
+<span class="go">b&#39;\xff\x7f&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">putVariableLengthNumber</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.midi.MidiException</span>: <span class="n">cannot putVariableLengthNumber() when number is negative: -1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="deltatime">
+<h2>DeltaTime<a class="headerlink" href="#deltatime" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.midi.DeltaTime">
+<em class="property">class </em><code class="descclassname">music21.midi.</code><code class="descname">DeltaTime</code><span class="sig-paren">(</span><em>track</em>, <em>time=None</em>, <em>channel=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.DeltaTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <code class="xref py py-class docutils literal"><span class="pre">MidiEvent</span></code> subclass that stores the 
+time change (in ticks) since the start or since the last MidiEvent.</p>
+<p>Pairs of DeltaTime and MidiEvent objects are the basic presentation of temporal data.</p>
+<p>The <cite>track</cite> argument must be a <code class="xref py py-class docutils literal"><span class="pre">MidiTrack</span></code> object.</p>
+<p>Time values are in integers, representing ticks.</p>
+<p>The <cite>channel</cite> attribute, inherited from MidiEvent is not used and set to None
+unless overridden (don&#8217;t!).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiTrack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">DeltaTime</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">380</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span>
+<span class="go">&lt;MidiEvent DeltaTime, t=380, track=1, channel=None&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.midi.DeltaTime" title="music21.midi.DeltaTime"><code class="xref py py-class docutils literal"><span class="pre">DeltaTime</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.midi.MidiEvent" title="music21.midi.MidiEvent"><code class="xref py py-class docutils literal"><span class="pre">MidiEvent</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.midi.DeltaTime" title="music21.midi.DeltaTime"><code class="xref py py-class docutils literal"><span class="pre">DeltaTime</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="#music21.midi.MidiEvent" title="music21.midi.MidiEvent"><code class="xref py py-class docutils literal"><span class="pre">MidiEvent</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.midi.MidiEvent.data" title="music21.midi.MidiEvent.data"><code class="xref py py-attr docutils literal"><span class="pre">data</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.midi.MidiEvent.pitch" title="music21.midi.MidiEvent.pitch"><code class="xref py py-attr docutils literal"><span class="pre">pitch</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.midi.MidiEvent.velocity" title="music21.midi.MidiEvent.velocity"><code class="xref py py-attr docutils literal"><span class="pre">velocity</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.midi.DeltaTime" title="music21.midi.DeltaTime"><code class="xref py py-class docutils literal"><span class="pre">DeltaTime</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.midi.DeltaTime.getBytes">
+<code class="descclassname">DeltaTime.</code><code class="descname">getBytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.DeltaTime.getBytes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.DeltaTime.read">
+<code class="descclassname">DeltaTime.</code><code class="descname">read</code><span class="sig-paren">(</span><em>oldstr</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.DeltaTime.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.midi.MidiEvent" title="music21.midi.MidiEvent"><code class="xref py py-class docutils literal"><span class="pre">MidiEvent</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.midi.MidiEvent.isDeltaTime" title="music21.midi.MidiEvent.isDeltaTime"><code class="xref py py-meth docutils literal"><span class="pre">isDeltaTime()</span></code></a></li>
+<li><a class="reference internal" href="#music21.midi.MidiEvent.isNoteOff" title="music21.midi.MidiEvent.isNoteOff"><code class="xref py py-meth docutils literal"><span class="pre">isNoteOff()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.midi.MidiEvent.isNoteOn" title="music21.midi.MidiEvent.isNoteOn"><code class="xref py py-meth docutils literal"><span class="pre">isNoteOn()</span></code></a></li>
+<li><a class="reference internal" href="#music21.midi.MidiEvent.matchedNoteOff" title="music21.midi.MidiEvent.matchedNoteOff"><code class="xref py py-meth docutils literal"><span class="pre">matchedNoteOff()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.midi.MidiEvent.setPitchBend" title="music21.midi.MidiEvent.setPitchBend"><code class="xref py py-meth docutils literal"><span class="pre">setPitchBend()</span></code></a></li>
+<li><a class="reference internal" href="#music21.midi.MidiEvent.updateSortOrder" title="music21.midi.MidiEvent.updateSortOrder"><code class="xref py py-meth docutils literal"><span class="pre">updateSortOrder()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="enumeration">
+<h2>Enumeration<a class="headerlink" href="#enumeration" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.midi.Enumeration">
+<em class="property">class </em><code class="descclassname">music21.midi.</code><code class="descname">Enumeration</code><span class="sig-paren">(</span><em>enumList=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.Enumeration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility object for defining binary MIDI message constants.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.midi.Enumeration" title="music21.midi.Enumeration"><code class="xref py py-class docutils literal"><span class="pre">Enumeration</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.midi.Enumeration.hasValue">
+<code class="descclassname">Enumeration.</code><code class="descname">hasValue</code><span class="sig-paren">(</span><em>attr</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.Enumeration.hasValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.Enumeration.hasattr">
+<code class="descclassname">Enumeration.</code><code class="descname">hasattr</code><span class="sig-paren">(</span><em>attr</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.Enumeration.hasattr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.Enumeration.whatis">
+<code class="descclassname">Enumeration.</code><code class="descname">whatis</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.Enumeration.whatis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="midievent">
+<h2>MidiEvent<a class="headerlink" href="#midievent" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.midi.MidiEvent">
+<em class="property">class </em><code class="descclassname">music21.midi.</code><code class="descname">MidiEvent</code><span class="sig-paren">(</span><em>track</em>, <em>type=None</em>, <em>time=None</em>, <em>channel=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>A model of a MIDI event, including note-on, note-off, program change, 
+controller change, any many others.</p>
+<p>MidiEvent objects are paired (preceded) by <code class="xref py py-class docutils literal"><span class="pre">DeltaTime</span></code> 
+objects in the list of events in a MidiTrack object.</p>
+<p>The <cite>track</cite> argument must be a <code class="xref py py-class docutils literal"><span class="pre">MidiTrack</span></code> object.</p>
+<p>The <cite>type</cite> attribute is a string representation of a Midi event from the channelVoiceMessages 
+or metaEvents definitions.</p>
+<p>The <cite>channel</cite> attribute is an integer channel id, from 1 to 16.</p>
+<p>The <cite>time</cite> attribute is an integer duration of the event in ticks. This value 
+can be zero. This value is not essential, as ultimate time positioning is 
+determined by <code class="xref py py-class docutils literal"><span class="pre">DeltaTime</span></code> objects.</p>
+<p>The <cite>pitch</cite> attribute is only defined for note-on and note-off messages. 
+The attribute stores an integer representation (0-127, with 60 = middle C).</p>
+<p>The <cite>velocity</cite> attribute is only defined for note-on and note-off messages. 
+The attribute stores an integer representation (0-127).  A note-on message with
+velocity 0 is generally assumed to be the same as a note-off message.</p>
+<p>The <cite>data</cite> attribute is used for storing other messages, 
+such as SEQUENCE_TRACK_NAME string values.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiTrack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;NOTE_ON&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">channel</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span>
+<span class="go">&lt;MidiEvent NOTE_ON, t=200, track=1, channel=3, pitch=60, velocity=120&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;SEQUENCE_TRACK_NAME&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;guitar&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span>
+<span class="go">&lt;MidiEvent SEQUENCE_TRACK_NAME, t=0, track=1, channel=None, data=b&#39;guitar&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.midi.MidiEvent" title="music21.midi.MidiEvent"><code class="xref py py-class docutils literal"><span class="pre">MidiEvent</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.midi.MidiEvent.data">
+<code class="descclassname">MidiEvent.</code><code class="descname">data</code><a class="headerlink" href="#music21.midi.MidiEvent.data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="music21.midi.MidiEvent.pitch">
+<code class="descclassname">MidiEvent.</code><code class="descname">pitch</code><a class="headerlink" href="#music21.midi.MidiEvent.pitch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="music21.midi.MidiEvent.velocity">
+<code class="descclassname">MidiEvent.</code><code class="descname">velocity</code><a class="headerlink" href="#music21.midi.MidiEvent.velocity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.midi.MidiEvent" title="music21.midi.MidiEvent"><code class="xref py py-class docutils literal"><span class="pre">MidiEvent</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.midi.MidiEvent.getBytes">
+<code class="descclassname">MidiEvent.</code><code class="descname">getBytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiEvent.getBytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a set of bytes for this MIDI event.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiEvent.isDeltaTime">
+<code class="descclassname">MidiEvent.</code><code class="descname">isDeltaTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiEvent.isDeltaTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a boolean if this is a DeltaTime subclass.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiTrack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">DeltaTime</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span><span class="o">.</span><span class="n">isDeltaTime</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiEvent.isNoteOff">
+<code class="descclassname">MidiEvent.</code><code class="descname">isNoteOff</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiEvent.isNoteOff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a boolean if this is should be interpreted as a note-off message, 
+either as a real note-off or as a note-on with zero velocity.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiTrack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;NOTE_OFF&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">isNoteOn</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">isNoteOff</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;NOTE_ON&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">isNoteOn</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">isNoteOff</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiEvent.isNoteOn">
+<code class="descclassname">MidiEvent.</code><code class="descname">isNoteOn</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiEvent.isNoteOn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a boolean if this is a note-on message and velocity is not zero.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiTrack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;NOTE_ON&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">isNoteOn</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">isNoteOff</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiEvent.matchedNoteOff">
+<code class="descclassname">MidiEvent.</code><code class="descname">matchedNoteOff</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiEvent.matchedNoteOff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if <cite>other</cite> is a MIDI event that specifies
+a note-off message for this message.  That is, this event
+is a NOTE_ON message, and the other is a NOTE_OFF message
+for this pitch on this channel.  Otherwise returns False</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiTrack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;NOTE_ON&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="mi">60</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;NOTE_ON&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="mi">60</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">matchedNoteOff</span><span class="p">(</span><span class="n">me2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="mi">61</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">matchedNoteOff</span><span class="p">(</span><span class="n">me2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;NOTE_OFF&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">matchedNoteOff</span><span class="p">(</span><span class="n">me2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">matchedNoteOff</span><span class="p">(</span><span class="n">me2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">channel</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">matchedNoteOff</span><span class="p">(</span><span class="n">me2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiEvent.read">
+<code class="descclassname">MidiEvent.</code><code class="descname">read</code><span class="sig-paren">(</span><em>time</em>, <em>midiStr</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiEvent.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the string that is given and take the beginning
+section and convert it into data for this event and return the
+now truncated string.</p>
+<p>The <cite>time</cite> value is the number of ticks into the Track 
+at which this event happens. This is derived from reading 
+data the level of the track.</p>
+<p>TODO: These instructions are inadequate.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># all note-on messages (144-159) can be found</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">145</span> <span class="o">&amp;</span> <span class="mh">0xF0</span> <span class="c1"># testing message type extraction</span>
+<span class="go">144</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">146</span> <span class="o">&amp;</span> <span class="mh">0xF0</span> <span class="c1"># testing message type extraction</span>
+<span class="go">144</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">144</span> <span class="o">&amp;</span> <span class="mh">0x0F</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># getting the channel</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">159</span> <span class="o">&amp;</span> <span class="mh">0x0F</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># getting the channel</span>
+<span class="go">16</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiEvent.setPitchBend">
+<code class="descclassname">MidiEvent.</code><code class="descname">setPitchBend</code><span class="sig-paren">(</span><em>cents</em>, <em>bendRange=2</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiEvent.setPitchBend" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Treat this event as a pitch bend value, and set the ._parameter1 and</dt>
+<dd>._parameter2 fields appropriately given a specified bend value in cents.</dd>
+</dl>
+<p>The <cite>bendRange</cite> parameter gives the number of half steps in the bend range.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiTrack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">setPitchBend</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">_parameter1</span><span class="p">,</span> <span class="n">me1</span><span class="o">.</span><span class="n">_parameter2</span>
+<span class="go">(0, 80)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">setPitchBend</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">_parameter1</span><span class="p">,</span> <span class="n">me1</span><span class="o">.</span><span class="n">_parameter2</span>
+<span class="go">(0, 96)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">setPitchBend</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">_parameter1</span><span class="p">,</span> <span class="n">me1</span><span class="o">.</span><span class="n">_parameter2</span>
+<span class="go">(127, 127)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">setPitchBend</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">_parameter1</span><span class="p">,</span> <span class="n">me1</span><span class="o">.</span><span class="n">_parameter2</span>
+<span class="go">(0, 48)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">setPitchBend</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">_parameter1</span><span class="p">,</span> <span class="n">me1</span><span class="o">.</span><span class="n">_parameter2</span>
+<span class="go">(0, 32)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiEvent.updateSortOrder">
+<code class="descclassname">MidiEvent.</code><code class="descname">updateSortOrder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiEvent.updateSortOrder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="midifile">
+<h2>MidiFile<a class="headerlink" href="#midifile" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.midi.MidiFile">
+<em class="property">class </em><code class="descclassname">music21.midi.</code><code class="descname">MidiFile</code><a class="headerlink" href="#music21.midi.MidiFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Low-level MIDI file writing, emulating methods from normal Python files.</p>
+<p>The <cite>ticksPerQuarterNote</cite> attribute must be set before writing. 1024 is a common value.</p>
+<p>This object is returned by some properties for directly writing files of midi representations.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.midi.MidiFile" title="music21.midi.MidiFile"><code class="xref py py-class docutils literal"><span class="pre">MidiFile</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.midi.MidiFile.close">
+<code class="descclassname">MidiFile.</code><code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiFile.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiFile.open">
+<code class="descclassname">MidiFile.</code><code class="descname">open</code><span class="sig-paren">(</span><em>filename</em>, <em>attrib='rb'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiFile.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open a MIDI file path for reading or writing.</p>
+<p>For writing to a MIDI file, <cite>attrib</cite> should be &#8220;wb&#8221;.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiFile.openFileLike">
+<code class="descclassname">MidiFile.</code><code class="descname">openFileLike</code><span class="sig-paren">(</span><em>fileLike</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiFile.openFileLike" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign a file-like object, such as those provided by StringIO, as an open file object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.ext.six</span> <span class="k">import</span> <span class="n">StringIO</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fileLikeOpen</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiFile</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span><span class="o">.</span><span class="n">openFileLike</span><span class="p">(</span><span class="n">fileLikeOpen</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiFile.read">
+<code class="descclassname">MidiFile.</code><code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiFile.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read and parse MIDI data stored in a file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiFile.readstr">
+<code class="descclassname">MidiFile.</code><code class="descname">readstr</code><span class="sig-paren">(</span><em>midiStr</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiFile.readstr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read and parse MIDI data as a string, putting the
+data in <cite>.ticksPerQuarterNote</cite> and a list of
+<cite>MidiTrack</cite> objects in the attribute <cite>.tracks</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiFile.write">
+<code class="descclassname">MidiFile.</code><code class="descname">write</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiFile.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write MIDI data as a file to the file opened with <cite>.open()</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiFile.writeMThdStr">
+<code class="descclassname">MidiFile.</code><code class="descname">writeMThdStr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiFile.writeMThdStr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the information in self.ticksPerQuarterNote
+into MIDI data header and return it as a string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiFile.writestr">
+<code class="descclassname">MidiFile.</code><code class="descname">writestr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiFile.writestr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the MIDI data header and convert the list of
+MidiTrack objects in self.tracks into MIDI data and return it as a string.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="miditrack">
+<h2>MidiTrack<a class="headerlink" href="#miditrack" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.midi.MidiTrack">
+<em class="property">class </em><code class="descclassname">music21.midi.</code><code class="descname">MidiTrack</code><span class="sig-paren">(</span><em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiTrack" title="Permalink to this definition">¶</a></dt>
+<dd><p>A MIDI Track. Each track contains a list of 
+<code class="xref py py-class docutils literal"><span class="pre">MidiChannel</span></code> objects, one for each channel.</p>
+<p>All events are stored in the <cite>events</cite> list, in order.</p>
+<p>An <cite>index</cite> is an integer identifier for this object.</p>
+<p>TODO: Better Docs</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiTrack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.midi.MidiTrack" title="music21.midi.MidiTrack"><code class="xref py py-class docutils literal"><span class="pre">MidiTrack</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.midi.MidiTrack.getBytes">
+<code class="descclassname">MidiTrack.</code><code class="descname">getBytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiTrack.getBytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a string of midi-data from the <cite>.events</cite> in the object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiTrack.getChannels">
+<code class="descclassname">MidiTrack.</code><code class="descname">getChannels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiTrack.getChannels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all channels used in this Track.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiTrack.getProgramChanges">
+<code class="descclassname">MidiTrack.</code><code class="descname">getProgramChanges</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiTrack.getProgramChanges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all unique program changes used in this Track, sorted.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiTrack.hasNotes">
+<code class="descclassname">MidiTrack.</code><code class="descname">hasNotes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiTrack.hasNotes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True/False if this track has any note-on/note-off pairs defined.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiTrack.read">
+<code class="descclassname">MidiTrack.</code><code class="descname">read</code><span class="sig-paren">(</span><em>midiStr</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiTrack.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read as much of the string (representing midi data) as necessary; 
+return the remaining string for reassignment and further processing.</p>
+<p>The string should begin with <cite>MTrk</cite>, specifying a Midi Track</p>
+<p>Creates and stores <code class="xref py py-class docutils literal"><span class="pre">DeltaTime</span></code> 
+and <code class="xref py py-class docutils literal"><span class="pre">MidiEvent</span></code> objects.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiTrack.setChannel">
+<code class="descclassname">MidiTrack.</code><code class="descname">setChannel</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiTrack.setChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the channel of all events in this Track.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.midi.MidiTrack.updateEvents">
+<code class="descclassname">MidiTrack.</code><code class="descname">updateEvents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.MidiTrack.updateEvents" title="Permalink to this definition">¶</a></dt>
+<dd><p>We may attach events to this track before setting their <cite>track</cite> parameter. 
+This method will move through all events and set their track to this track.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMidiPercussion.html" title="music21.midi.percussion"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleMeter.html" title="music21.meter"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

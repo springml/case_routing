@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.audioSearch &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.audioSearch.recording" href="moduleAudioSearchRecording.html" />
+    <link rel="prev" title="music21.articulations" href="moduleArticulations.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleAudioSearchRecording.html" title="music21.audioSearch.recording"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleArticulations.html" title="music21.articulations"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleArticulations.html"
+                        title="previous chapter">music21.articulations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleAudioSearchRecording.html"
+                        title="next chapter">music21.audioSearch.recording</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.audioSearch</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleAudioSearch.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-audiosearch">
+<span id="moduleaudiosearch"></span><h1>music21.audioSearch<a class="headerlink" href="#music21-audiosearch" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.audioSearch"></span><p>Base routines used throughout audioSearching and score-folling.</p>
+<p>Requires numpy, scipy, and matplotlib.</p>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.audioSearch.autocorrelationFunction">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">autocorrelationFunction</code><span class="sig-paren">(</span><em>recordedSignal</em>, <em>recordSampleRateIn</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.autocorrelationFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the temporal domain into a frequency domain. In order to do that, it
+uses the autocorrelation function, which finds periodicities in the signal
+in the temporal domain and, consequently, obtains the frequency in each instant
+of time.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">wave</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>  <span class="c1"># you need to have numpy, scipy, and matplotlib installed to use this</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wv</span> <span class="o">=</span> <span class="n">wave</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">getSourceFilePath</span><span class="p">()</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> 
+<span class="gp">... </span>       <span class="s1">&#39;audioSearch&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;test_audio.wav&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">wv</span><span class="o">.</span><span class="n">readframes</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">samps</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">finalResult</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">autocorrelationFunction</span><span class="p">(</span><span class="n">samps</span><span class="p">,</span> <span class="mi">44100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wv</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">finalResult</span><span class="p">)</span>
+<span class="go">143.6276...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.decisionProcess">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">decisionProcess</code><span class="sig-paren">(</span><em>partsList</em>, <em>notePrediction</em>, <em>beginningData</em>, <em>lastNotePosition</em>, <em>countdown</em>, <em>firstNotePage=None</em>, <em>lastNotePage=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.decisionProcess" title="Permalink to this definition">¶</a></dt>
+<dd><p>It decides which of the given parts of the score has a better matching with
+the recorded part of the song.
+If there is not a part of the score with a high probability to be the correct part,
+it starts a &#8220;countdown&#8221; in order stop the score following if the bad matching persists.
+In this case, it does not match the recorded part of the song with any part of the score.</p>
+<p>Inputs: partsList, contains all the possible parts of the score, sorted from the
+higher probability to be the best matching at the beginning to the lowest probability.
+notePrediction is the position of the score in which the next note should start.
+beginningData is a list with all the beginnings of the used fragments of the score to find
+the best matching.
+lastNotePosition is the position of the score in which the last matched fragment of the
+score finishes.
+Countdown is a counter of consecutive errors in the matching process.</p>
+<p>Outputs: It returns the beginning of the best matching fragment of
+score and the countdown.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scNotes</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;luca/gloria&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreStream</span> <span class="o">=</span> <span class="n">scNotes</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tf</span> <span class="o">=</span> <span class="s1">&#39;test_audio.wav&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freqFromAQList</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">getFrequenciesFromAudioFile</span><span class="p">(</span><span class="n">waveFilename</span><span class="o">=</span><span class="n">tf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chrome</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">ChromaticScale</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">detectedPitchesFreq</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">detectPitchFrequencies</span><span class="p">(</span><span class="n">freqFromAQList</span><span class="p">,</span> <span class="n">useScale</span><span class="o">=</span><span class="n">chrome</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">detectedPitchesFreq</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">smoothFrequencies</span><span class="p">(</span><span class="n">detectedPitchesFreq</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">detectedPitches</span><span class="p">,</span> <span class="n">listplot</span><span class="p">)</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">pitchFrequenciesToObjects</span><span class="p">(</span>
+<span class="gp">... </span>                                            <span class="n">detectedPitchesFreq</span><span class="p">,</span> <span class="n">useScale</span><span class="o">=</span><span class="n">chrome</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">notesList</span><span class="p">,</span> <span class="n">durationList</span><span class="p">)</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">joinConsecutiveIdenticalPitches</span><span class="p">(</span><span class="n">detectedPitches</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transcribedScore</span><span class="p">,</span> <span class="n">qle</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">notesAndDurationsToStream</span><span class="p">(</span><span class="n">notesList</span><span class="p">,</span> <span class="n">durationList</span><span class="p">,</span> 
+<span class="gp">... </span>                                            <span class="n">scNotes</span><span class="o">=</span><span class="n">scNotes</span><span class="p">,</span> <span class="n">qle</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hop</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tn_recording</span> <span class="o">=</span> <span class="mi">24</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">totScores</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beginningData</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lengthData</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">scNotes</span> <span class="o">=</span> <span class="n">scoreStream</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">hop</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span><span class="n">i</span> <span class="o">*</span> <span class="n">hop</span> <span class="o">+</span> <span class="n">tn_recording</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span>
+<span class="gp">... </span>    <span class="n">beginningData</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">hop</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">lengthData</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tn_recording</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">scNotes</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">name</span>
+<span class="gp">... </span>    <span class="n">totScores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">scNotes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">listOfParts</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">approximateNoteSearch</span><span class="p">(</span><span class="n">transcribedScore</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">stream</span><span class="p">(),</span> <span class="n">totScores</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">notePrediction</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lastNotePosition</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">countdown</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">positionInList</span><span class="p">,</span> <span class="n">countdown</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">decisionProcess</span><span class="p">(</span>
+<span class="gp">... </span>         <span class="n">listOfParts</span><span class="p">,</span> <span class="n">notePrediction</span><span class="p">,</span> <span class="n">beginningData</span><span class="p">,</span> <span class="n">lastNotePosition</span><span class="p">,</span> <span class="n">countdown</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">positionInList</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<p>The countdown result is 1 because the song used is completely different from the score!!</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">countdown</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.detectPitchFrequencies">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">detectPitchFrequencies</code><span class="sig-paren">(</span><em>freqFromAQList</em>, <em>useScale=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.detectPitchFrequencies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detects the pitches of the notes from a list of frequencies, using thresholds which
+depend on the useScale option. If useScale is None, 
+the default value is the Major Scale beginning C4.</p>
+<p>Returns the frequency of each pitch after normalizing them.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">freqFromAQList</span><span class="o">=</span><span class="p">[</span><span class="mf">143.627689055</span><span class="p">,</span> <span class="mf">99.0835452019</span><span class="p">,</span> <span class="mf">211.004784689</span><span class="p">,</span> <span class="mf">4700.31347962</span><span class="p">,</span> <span class="mf">2197.9431119</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cMaj</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">MajorScale</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitchesList</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">detectPitchFrequencies</span><span class="p">(</span><span class="n">freqFromAQList</span><span class="p">,</span> <span class="n">useScale</span><span class="o">=</span><span class="n">cMaj</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">pitchesList</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+<span class="go">147</span>
+<span class="go">98</span>
+<span class="go">220</span>
+<span class="go">4699</span>
+<span class="go">2093</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.getFrequenciesFromAudioFile">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">getFrequenciesFromAudioFile</code><span class="sig-paren">(</span><em>waveFilename='xmas.wav'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.getFrequenciesFromAudioFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>gets a list of frequencies from a complete audio file.</p>
+<p>Each sample is a window of audiosearch.audioChunkLength long.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">audioSearch</span><span class="o">.</span><span class="n">audioChunkLength</span>
+<span class="go">1024</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">readPath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">getSourceFilePath</span><span class="p">(),</span> <span class="s1">&#39;audioSearch&#39;</span><span class="p">,</span> <span class="s1">&#39;test_audio.wav&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freq</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">getFrequenciesFromAudioFile</span><span class="p">(</span><span class="n">waveFilename</span><span class="o">=</span><span class="n">readPath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span>
+<span class="go">[143.627689055..., 99.083545201..., 211.004784688..., 4700.313479623..., ...]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.getFrequenciesFromMicrophone">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">getFrequenciesFromMicrophone</code><span class="sig-paren">(</span><em>length=10.0</em>, <em>storeWaveFilename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.getFrequenciesFromMicrophone" title="Permalink to this definition">¶</a></dt>
+<dd><p>records for length (=seconds) a set of frequencies from the microphone.</p>
+<p>If storeWaveFilename is not None, then it will store the recording on disk
+in a wave file.</p>
+<p>Returns a list of frequencies detected.</p>
+<p>TODO &#8211; find a way to test... or at least demo</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.getFrequenciesFromPartialAudioFile">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">getFrequenciesFromPartialAudioFile</code><span class="sig-paren">(</span><em>waveFilenameOrHandle='temp'</em>, <em>length=10.0</em>, <em>startSample=0</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.getFrequenciesFromPartialAudioFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>It calculates the fundamental frequency at every instant of time of an audio signal
+extracted either from the microphone or from an already recorded song.
+It uses a period of time defined by the variable &#8220;length&#8221; in seconds.</p>
+<p>It returns a list with the frequencies, a variable with the file descriptor, 
+and the end sample position.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">readFile</span> <span class="o">=</span> <span class="s1">&#39;pachelbel.wav&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fTup</span>  <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">getFrequenciesFromPartialAudioFile</span><span class="p">(</span><span class="n">readFile</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frequencyList</span><span class="p">,</span> <span class="n">pachelbelFileHandle</span><span class="p">,</span> <span class="n">currentSample</span> <span class="o">=</span> <span class="n">fTup</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">frequencyList</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="go">143.627689055</span>
+<span class="go">99.0835452019</span>
+<span class="go">211.004784689</span>
+<span class="go">4700.31347962</span>
+<span class="go">767.827403482</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">currentSample</span><span class="p">)</span>  <span class="c1"># should be near 44100, but probably not exact</span>
+<span class="go">44032</span>
+</pre></div>
+</div>
+<p>Now read the next 1 second...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fTup</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">getFrequenciesFromPartialAudioFile</span><span class="p">(</span><span class="n">pachelbelFileHandle</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> 
+<span class="gp">... </span>                                                      <span class="n">startSample</span><span class="o">=</span><span class="n">currentSample</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frequencyList</span><span class="p">,</span> <span class="n">pachelbelFileHandle</span><span class="p">,</span> <span class="n">currentSample</span> <span class="o">=</span> <span class="n">fTup</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">frequencyList</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="go">187.798213268</span>
+<span class="go">238.263483185</span>
+<span class="go">409.700397349</span>
+<span class="go">149.958733396</span>
+<span class="go">101.989786226</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">currentSample</span><span class="p">)</span>  <span class="c1"># should be exactly double the previous</span>
+<span class="go">88064</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.histogram">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">histogram</code><span class="sig-paren">(</span><em>data</em>, <em>bins</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.histogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Partition the list in <cite>data</cite> into a number of bins defined by <cite>bins</cite>
+and return the number of elements in each bins and a set of <cite>bins</cite> + 1
+elements where the first element (0) is the start of the first bin,
+the last element (-1) is the end of the last bin, and every remaining element (i)
+is the dividing point between one bin and another.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">outputData</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">outputData</span><span class="p">)</span>
+<span class="go">[3, 0, 0, 1, 1, 1, 0, 5]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bins</span>
+<span class="go">[0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bins</span><span class="p">])</span>
+<span class="go">[0, 1, 2, 3, 4, 5, 6, 7, 8]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">outputData</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">outputData</span><span class="p">)</span>
+<span class="go">[3, 1, 2, 5]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bins</span><span class="p">])</span>
+<span class="go">[0, 2, 4, 6, 8]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.interpolation">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">interpolation</code><span class="sig-paren">(</span><em>correlation</em>, <em>peak</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.interpolation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolation for estimating the true position of an
+inter-sample maximum when nearby samples are known.</p>
+<p>Correlation is a vector and peak is an index for that vector.</p>
+<p>Returns the x coordinate of the vertex of that parabola.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">peak</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">peak</span>  <span class="c1"># f[3] is 6, which is the max.</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">audioSearch</span><span class="o">.</span><span class="n">interpolation</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">peak</span><span class="p">)</span>
+<span class="go">3.21428571...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.joinConsecutiveIdenticalPitches">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">joinConsecutiveIdenticalPitches</code><span class="sig-paren">(</span><em>detectedPitchObjects</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.joinConsecutiveIdenticalPitches" title="Permalink to this definition">¶</a></dt>
+<dd><p>takes a list of equally-spaced <a class="reference internal" href="modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code></a> objects
+and returns a tuple of two lists, the first a list of
+<a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a>
+or <a class="reference internal" href="moduleNote.html#music21.note.Rest" title="music21.note.Rest"><code class="xref py py-class docutils literal"><span class="pre">Rest</span></code></a> objects (each of quarterLength 1.0)
+and a list of how many were joined together to make that object.</p>
+<p>N.B. the returned list is NOT a <a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">readPath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">getSourceFilePath</span><span class="p">(),</span> <span class="s1">&#39;audioSearch&#39;</span><span class="p">,</span><span class="s1">&#39;test_audio.wav&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freqFromAQList</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">getFrequenciesFromAudioFile</span><span class="p">(</span><span class="n">waveFilename</span><span class="o">=</span><span class="n">readPath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chrome</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">ChromaticScale</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">detectedPitchesFreq</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">detectPitchFrequencies</span><span class="p">(</span><span class="n">freqFromAQList</span><span class="p">,</span> <span class="n">useScale</span><span class="o">=</span><span class="n">chrome</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">detectedPitchesFreq</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">smoothFrequencies</span><span class="p">(</span><span class="n">detectedPitchesFreq</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">detectedPitches</span><span class="p">,</span> <span class="n">listplot</span><span class="p">)</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">pitchFrequenciesToObjects</span><span class="p">(</span>
+<span class="gp">... </span>       <span class="n">detectedPitchesFreq</span><span class="p">,</span> <span class="n">useScale</span><span class="o">=</span><span class="n">chrome</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">detectedPitches</span><span class="p">)</span>
+<span class="go">861</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">notesList</span><span class="p">,</span> <span class="n">durationList</span><span class="p">)</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">joinConsecutiveIdenticalPitches</span><span class="p">(</span><span class="n">detectedPitches</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">notesList</span><span class="p">)</span>
+<span class="go">24</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">notesList</span><span class="p">)</span>
+<span class="go">[&lt;music21.note.Rest rest&gt;, &lt;music21.note.Note C&gt;, &lt;music21.note.Note C&gt;, </span>
+<span class="go"> &lt;music21.note.Note D&gt;, &lt;music21.note.Note E&gt;, &lt;music21.note.Note F&gt;,</span>
+<span class="go"> &lt;music21.note.Note G&gt;, &lt;music21.note.Note A&gt;, &lt;music21.note.Note B&gt;, </span>
+<span class="go"> &lt;music21.note.Note C&gt;, ...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">durationList</span><span class="p">)</span>
+<span class="go">[71, 6, 14, 23, 34, 40, 27, 36, 35, 15, 17, 15, 6, 33, 22, 13, 16, 39, 35, 38, 27, 27, 26, 8]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.normalizeInputFrequency">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">normalizeInputFrequency</code><span class="sig-paren">(</span><em>inputPitchFrequency</em>, <em>thresholds=None</em>, <em>pitches=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.normalizeInputFrequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in an inputFrequency, a set of threshold values, and a set of allowable pitches
+(given by prepareThresholds) and returns a tuple of the normalized frequency and the
+pitch detected (as a <a class="reference internal" href="modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code></a> object)</p>
+<p>It will convert the frequency to be within the range of the default frequencies
+(usually C4 to C5) but the pitch object will have the correct octave.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">audioSearch</span><span class="o">.</span><span class="n">normalizeInputFrequency</span><span class="p">(</span><span class="mf">441.72</span><span class="p">)</span>
+<span class="go">(440.0, &lt;music21.pitch.Pitch A4&gt;)</span>
+</pre></div>
+</div>
+<p>If you will be doing this often, it&#8217;s best to cache your thresholds and
+pitches by running <cite>prepareThresholds</cite> once first:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">thresholds</span><span class="p">,</span> <span class="n">pitches</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">prepareThresholds</span><span class="p">(</span><span class="n">scale</span><span class="o">.</span><span class="n">ChromaticScale</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">fq</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">450</span><span class="p">,</span> <span class="mi">510</span><span class="p">,</span> <span class="mi">550</span><span class="p">,</span> <span class="mi">600</span><span class="p">]:</span>
+<span class="gp">... </span>     <span class="nb">print</span><span class="p">(</span><span class="n">audioSearch</span><span class="o">.</span><span class="n">normalizeInputFrequency</span><span class="p">(</span><span class="n">fq</span><span class="p">,</span> <span class="n">thresholds</span><span class="p">,</span> <span class="n">pitches</span><span class="p">))</span>
+<span class="go">(440.0, &lt;music21.pitch.Pitch A4&gt;)</span>
+<span class="go">(523.25113..., &lt;music21.pitch.Pitch C5&gt;)</span>
+<span class="go">(277.18263..., &lt;music21.pitch.Pitch C#5&gt;)</span>
+<span class="go">(293.66476..., &lt;music21.pitch.Pitch D5&gt;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.notesAndDurationsToStream">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">notesAndDurationsToStream</code><span class="sig-paren">(</span><em>notesList</em>, <em>durationList</em>, <em>scNotes=None</em>, <em>removeRestsAtBeginning=True</em>, <em>qle=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.notesAndDurationsToStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>take a list of <a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a> objects or rests
+and an equally long list of how long
+each ones lasts in terms of samples and returns a
+Stream using the information from quarterLengthEstimation
+and quantizeDurations.</p>
+<p>returns a <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> object, containing
+a metadata object and a single <a class="reference internal" href="moduleStream.html#music21.stream.Part" title="music21.stream.Part"><code class="xref py py-class docutils literal"><span class="pre">Part</span></code></a> object, which in turn
+contains the notes, etc.  Does not run <a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeNotation" title="music21.stream.Stream.makeNotation"><code class="xref py py-meth docutils literal"><span class="pre">makeNotation()</span></code></a>
+on the Score.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">durationList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noteList</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">(</span><span class="s1">&#39;C#4&#39;</span><span class="p">),</span> <span class="n">n</span><span class="p">(</span><span class="s1">&#39;D5&#39;</span><span class="p">),</span> <span class="n">n</span><span class="p">(</span><span class="s1">&#39;B4&#39;</span><span class="p">),</span> <span class="n">n</span><span class="p">(</span><span class="s1">&#39;F#5&#39;</span><span class="p">),</span> <span class="n">n</span><span class="p">(</span><span class="s1">&#39;C5&#39;</span><span class="p">),</span> <span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">()]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">,</span><span class="n">lengthPart</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">notesAndDurationsToStream</span><span class="p">(</span><span class="n">noteList</span><span class="p">,</span> <span class="n">durationList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.metadata.Metadata object at ...&gt;</span>
+<span class="go">{0.0} &lt;music21.stream.Part ...&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C#&gt;</span>
+<span class="go">    {1.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">    {2.0} &lt;music21.note.Note B&gt;</span>
+<span class="go">    {2.5} &lt;music21.note.Note F#&gt;</span>
+<span class="go">    {4.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">    {4.25} &lt;music21.note.Rest rest&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.pitchFrequenciesToObjects">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">pitchFrequenciesToObjects</code><span class="sig-paren">(</span><em>detectedPitchesFreq</em>, <em>useScale=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.pitchFrequenciesToObjects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in a list of detected pitch frequencies and returns a tuple where the first element
+is a list of :class:~`music21.pitch.Pitch` objects that best match these frequencies
+and the second element is a list of the frequencies of those objects that can
+be plotted for matplotlib</p>
+<p>TODO: only return the former.  The latter can be generated in other ways.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sep</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">readPath</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">getSourceFilePath</span><span class="p">()</span> <span class="o">+</span> <span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;audioSearch&#39;</span> <span class="o">+</span> <span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;test_audio.wav&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">freqFromAQList</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">getFrequenciesFromAudioFile</span><span class="p">(</span><span class="n">waveFilename</span><span class="o">=</span><span class="n">readPath</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">detectedPitchesFreq</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">detectPitchFrequencies</span><span class="p">(</span>
+<span class="gp">... </span>  <span class="n">freqFromAQList</span><span class="p">,</span> <span class="n">useScale</span><span class="o">=</span><span class="n">scale</span><span class="o">.</span><span class="n">ChromaticScale</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">detectedPitchesFreq</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">smoothFrequencies</span><span class="p">(</span><span class="n">detectedPitchesFreq</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">detectedPitchObjects</span><span class="p">,</span> <span class="n">listplot</span><span class="p">)</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">pitchFrequenciesToObjects</span><span class="p">(</span>
+<span class="gp">... </span>  <span class="n">detectedPitchesFreq</span><span class="p">,</span> <span class="n">useScale</span><span class="o">=</span><span class="n">scale</span><span class="o">.</span><span class="n">ChromaticScale</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">detectedPitchObjects</span><span class="p">]</span>
+<span class="go">[&#39;A5&#39;, &#39;A5&#39;, &#39;A6&#39;, &#39;D6&#39;, &#39;D4&#39;, &#39;B4&#39;, &#39;A4&#39;, &#39;F4&#39;, &#39;E-4&#39;, &#39;C#3&#39;, &#39;B3&#39;, &#39;B3&#39;, &#39;B3&#39;, &#39;A3&#39;, &#39;G3&#39;,...]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.prepareThresholds">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">prepareThresholds</code><span class="sig-paren">(</span><em>useScale=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.prepareThresholds" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns two elements.  The first is a list of threshold values
+for one octave of a given scale, <cite>useScale</cite>,
+(including the octave repetition) (Default is a ChromaticScale).
+The second is the pitches of the scale.</p>
+<p>A threshold value is the fractional part of the log-base-2 value of the
+frequency.</p>
+<p>For instance if A = 440 and B-flat = 460, then the threshold between
+A and B-flat will be 450.  Notes below 450 should be considered As and those
+above 450 should be considered B-flats.</p>
+<p>Thus the list returned has one less element than the number of notes in the
+scale + octave repetition.  If useScale is a ChromaticScale, <cite>prepareThresholds</cite>
+will return a 12 element list.  If it&#8217;s a diatonic scale, it&#8217;ll have 7 elements.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitchThresholds</span><span class="p">,</span> <span class="n">pitches</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">prepareThresholds</span><span class="p">(</span><span class="n">scale</span><span class="o">.</span><span class="n">MajorScale</span><span class="p">(</span><span class="s1">&#39;A3&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pitchThresholds</span><span class="p">)):</span>
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> &lt; </span><span class="si">%.2f</span><span class="s2"> &lt; </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pitches</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">pitchThresholds</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">pitches</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+<span class="go">A3 &lt; 0.86 &lt; B3</span>
+<span class="go">B3 &lt; 0.53 &lt; C#4</span>
+<span class="go">C#4 &lt; 0.16 &lt; D4</span>
+<span class="go">D4 &lt; 0.28 &lt; E4</span>
+<span class="go">E4 &lt; 0.45 &lt; F#4</span>
+<span class="go">F#4 &lt; 0.61 &lt; G#4</span>
+<span class="go">G#4 &lt; 1.24 &lt; A4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.quantizeDuration">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">quantizeDuration</code><span class="sig-paren">(</span><em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.quantizeDuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>round an approximately transcribed quarterLength to a better one in
+music21.</p>
+<p>Should be replaced by a full-featured routine in midi or stream.</p>
+<p>See <a class="reference internal" href="moduleStream.html#music21.stream.Stream.quantize" title="music21.stream.Stream.quantize"><code class="xref py py-meth docutils literal"><span class="pre">quantize()</span></code></a> for more information
+on the standard music21 methodology.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">audioSearch</span><span class="o">.</span><span class="n">quantizeDuration</span><span class="p">(</span><span class="mf">1.01</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">audioSearch</span><span class="o">.</span><span class="n">quantizeDuration</span><span class="p">(</span><span class="mf">1.70</span><span class="p">)</span>
+<span class="go">1.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.quarterLengthEstimation">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">quarterLengthEstimation</code><span class="sig-paren">(</span><em>durationList</em>, <em>mostRepeatedQuarterLength=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.quarterLengthEstimation" title="Permalink to this definition">¶</a></dt>
+<dd><p>takes a list of lengths of notes (measured in
+audio samples) and tries to estimate what the length of a
+quarter note should be in this list.</p>
+<p>If mostRepeatedQuarterLength is another number, it still returns the
+estimated length of a quarter note, but chooses it so that the most
+common note in durationList will be the other note.  See example 2:</p>
+<p>Returns a float &#8211; and not an int.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">durationList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">audioSearch</span><span class="o">.</span><span class="n">quarterLengthEstimation</span><span class="p">(</span><span class="n">durationList</span><span class="p">)</span>
+<span class="go">20.625</span>
+</pre></div>
+</div>
+<p>Example 2: suppose these are the inputted durations for a
+score where most of the notes are half notes.  Show how long
+a quarter note should be:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">audioSearch</span><span class="o">.</span><span class="n">quarterLengthEstimation</span><span class="p">(</span><span class="n">durationList</span><span class="p">,</span> <span class="n">mostRepeatedQuarterLength</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="go">10.3125</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.audioSearch.smoothFrequencies">
+<code class="descclassname">music21.audioSearch.</code><code class="descname">smoothFrequencies</code><span class="sig-paren">(</span><em>detectedPitchesFreq</em>, <em>smoothLevels=7</em>, <em>inPlace=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.audioSearch.smoothFrequencies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smooths the shape of the signal in order to avoid false detections in the fundamental
+frequency.</p>
+<p>The second pitch below is obviously too low.  It will be smoothed out...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inputPitches</span> <span class="o">=</span> <span class="p">[</span><span class="mi">440</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">442</span><span class="p">,</span> <span class="mi">443</span><span class="p">,</span> <span class="mi">441</span><span class="p">,</span> <span class="mi">470</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">441</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> 
+<span class="gp">... </span>                <span class="mi">442</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">397</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">442</span><span class="p">,</span> <span class="mi">443</span><span class="p">,</span> <span class="mi">441</span><span class="p">,</span> 
+<span class="gp">... </span>                <span class="mi">440</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">442</span><span class="p">,</span> <span class="mi">443</span><span class="p">,</span> <span class="mi">441</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">440</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">audioSearch</span><span class="o">.</span><span class="n">smoothFrequencies</span><span class="p">(</span><span class="n">inputPitches</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">[409, 409, 409, 428, 435, 438, 442, 444, 441, 441, 441, </span>
+<span class="go"> 441, 434, 433, 432, 431, 437, 438, 439, 440, 440, 440, </span>
+<span class="go"> 440, 440, 440, 441, 441, 441, 441, 441, 441, 441]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleAudioSearchRecording.html" title="music21.audioSearch.recording"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleArticulations.html" title="music21.articulations"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

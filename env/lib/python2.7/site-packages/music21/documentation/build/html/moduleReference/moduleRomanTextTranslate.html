@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.romanText.translate &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.scale" href="moduleScale.html" />
+    <link rel="prev" title="music21.romanText.rtObjects" href="moduleRomanTextRtObjects.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleScale.html" title="music21.scale"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleRomanTextRtObjects.html" title="music21.romanText.rtObjects"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleRomanTextRtObjects.html"
+                        title="previous chapter">music21.romanText.rtObjects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleScale.html"
+                        title="next chapter">music21.scale</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.romanText.translate</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#parttranslator">PartTranslator</a></li>
+<li><a class="reference internal" href="#romantextunprocessedtoken">RomanTextUnprocessedToken</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleRomanTextTranslate.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-romantext-translate">
+<span id="moduleromantexttranslate"></span><h1>music21.romanText.translate<a class="headerlink" href="#music21-romantext-translate" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.romanText.translate"></span><p>Translation routines for roman numeral analysis text files, as defined 
+and demonstrated by Dmitri Tymoczko.  Also used for the ClerqTemperley
+format which is similar but a little different.</p>
+<p>This module is really only needed for people extending the parser,
+for others it&#8217;s simple to get Harmony, RomanNumeral, Key (or KeySignature) 
+and other objects out of an rntxt file by running this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">monteverdi</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;monteverdi/madrigal.3.1.rntxt&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">monteverdi</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.metadata.Metadata object at 0x...&gt;</span>
+<span class="go">{0.0} &lt;music21.stream.Part ...&gt;</span>
+<span class="go">    {0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.key.KeySignature of 1 flat&gt;</span>
+<span class="go">        {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">        {0.0} &lt;music21.roman.RomanNumeral vi in F major&gt;</span>
+<span class="go">        {3.0} &lt;music21.roman.RomanNumeral V[no3] in F major&gt;</span>
+<span class="go">    {4.0} &lt;music21.stream.Measure 2 offset=4.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.roman.RomanNumeral I in F major&gt;</span>
+<span class="go">        {3.0} &lt;music21.roman.RomanNumeral IV in F major&gt;</span>
+<span class="go">    ...</span>
+</pre></div>
+</div>
+<p>Then the stream can be analyzed with something like this, storing
+the data to make a histogram of scale degree usage within a key:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">degreeDictionary</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">monteverdi</span><span class="o">.</span><span class="n">recurse</span><span class="p">():</span>
+<span class="gp">... </span>   <span class="k">if</span> <span class="s1">&#39;RomanNumeral&#39;</span> <span class="ow">in</span> <span class="n">el</span><span class="o">.</span><span class="n">classes</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">figure</span><span class="p">,</span> <span class="n">el</span><span class="o">.</span><span class="n">key</span><span class="p">))</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">el</span><span class="o">.</span><span class="n">pitches</span><span class="p">:</span>
+<span class="gp">... </span>             <span class="n">degree</span><span class="p">,</span> <span class="n">accidental</span> <span class="o">=</span> <span class="n">el</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">getScaleDegreeAndAccidentalFromPitch</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="gp">... </span>             <span class="k">if</span> <span class="n">accidental</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="gp">... </span>                  <span class="n">degreeString</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
+<span class="gp">... </span>             <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>                  <span class="n">degreeString</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">accidental</span><span class="o">.</span><span class="n">modifier</span><span class="p">)</span>
+<span class="gp">... </span>             <span class="k">if</span> <span class="n">degreeString</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">degreeDictionary</span><span class="p">:</span>
+<span class="gp">... </span>                  <span class="n">degreeDictionary</span><span class="p">[</span><span class="n">degreeString</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">... </span>             <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>                  <span class="n">degreeDictionary</span><span class="p">[</span><span class="n">degreeString</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">... </span>             <span class="n">degTuple</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">degreeString</span><span class="p">)</span>
+<span class="gp">... </span>             <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">degTuple</span><span class="p">,)</span> <span class="p">)</span>
+<span class="go">    vi F major</span>
+<span class="go">    (&#39;D5&#39;, &#39;6&#39;)</span>
+<span class="go">    (&#39;F5&#39;, &#39;1&#39;)</span>
+<span class="go">    (&#39;A5&#39;, &#39;3&#39;)</span>
+<span class="go">    V[no3] F major</span>
+<span class="go">    (&#39;C5&#39;, &#39;5&#39;)</span>
+<span class="go">    (&#39;G5&#39;, &#39;2&#39;)</span>
+<span class="go">    I F major</span>
+<span class="go">    (&#39;F4&#39;, &#39;1&#39;)</span>
+<span class="go">    (&#39;A4&#39;, &#39;3&#39;)</span>
+<span class="go">    (&#39;C5&#39;, &#39;5&#39;)</span>
+<span class="go">    ...</span>
+<span class="go">    V6 g minor</span>
+<span class="go">    (&#39;F#5&#39;, &#39;7#&#39;)</span>
+<span class="go">    (&#39;A5&#39;, &#39;2&#39;)</span>
+<span class="go">    (&#39;D6&#39;, &#39;5&#39;)</span>
+<span class="go">    i g minor</span>
+<span class="go">    (&#39;G4&#39;, &#39;1&#39;)</span>
+<span class="go">    (&#39;B-4&#39;, &#39;3&#39;)</span>
+<span class="go">    (&#39;D5&#39;, &#39;5&#39;)</span>
+<span class="go">    ...</span>
+</pre></div>
+</div>
+<p>Now if we&#8217;d like we can get a Histogram of the data.
+It&#8217;s a little complex, but worth seeing in full:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">operator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">histo</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">GraphHistogram</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xlabels</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ddList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">degreeDictionary</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">deg</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ddList</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">degreeDictionary</span><span class="p">[</span><span class="n">deg</span><span class="p">]),</span> <span class="p">)</span>
+<span class="gp">... </span>   <span class="n">xlabels</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="o">+.</span><span class="mi">5</span><span class="p">,</span> <span class="n">deg</span><span class="p">),</span> <span class="p">)</span>
+<span class="gp">... </span>   <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">degreeDictionary</span><span class="p">[</span><span class="n">deg</span><span class="p">])</span>
+<span class="gp">... </span>   <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">histo</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>These commands give nice labels for the data; optional:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">histo</span><span class="o">.</span><span class="n">setIntegerTicksFromData</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">histo</span><span class="o">.</span><span class="n">setTicks</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">xlabels</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">histo</span><span class="o">.</span><span class="n">setAxisLabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;ScaleDegree&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now generate the histogram:</p>
+<a class="reference internal image-reference" href="../_images/romanTranslatePitchDistribution.png"><img alt="../_images/romanTranslatePitchDistribution.png" src="../_images/romanTranslatePitchDistribution.png" style="width: 600px;" /></a>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.romanText.translate.appendMeasureToRepeatEndingsDict">
+<code class="descclassname">music21.romanText.translate.</code><code class="descname">appendMeasureToRepeatEndingsDict</code><span class="sig-paren">(</span><em>t</em>, <em>m</em>, <em>repeatEndings</em>, <em>measureNumber=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.translate.appendMeasureToRepeatEndingsDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an RTMeasure object (t), (which might represent one or more
+measures; but currently only one) and a music21 stream.Measure object and
+store it as a tuple in the repeatEndings dictionary to mark where the
+translator should later mark for adding endings.</p>
+<p>If the optional measureNumber is specified, we use that rather than the
+token number to add to the dict.</p>
+<p>This does not yet work for skipped measures.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rtm</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTMeasure</span><span class="p">(</span><span class="s1">&#39;m15a V6 b1.5 V6/5 b2 I b3 viio6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtm</span><span class="o">.</span><span class="n">repeatLetter</span>
+<span class="go">[&#39;a&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtm2</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTMeasure</span><span class="p">(</span><span class="s1">&#39;m15b V6 b1.5 V6/5 b2 I&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtm2</span><span class="o">.</span><span class="n">repeatLetter</span>
+<span class="go">[&#39;b&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">repeatEndings</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">romanText</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">appendMeasureToRepeatEndingsDict</span><span class="p">(</span><span class="n">rtm</span><span class="p">,</span> <span class="n">m1</span><span class="p">,</span> <span class="n">repeatEndings</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">repeatEndings</span>
+<span class="go">{1: [(15, &lt;music21.stream.Measure 0a offset=0.0&gt;)]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">romanText</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">appendMeasureToRepeatEndingsDict</span><span class="p">(</span><span class="n">rtm2</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">repeatEndings</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">repeatEndings</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">repeatEndings</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">([(15, &lt;music21.stream.Measure 0a offset=0.0&gt;)], </span>
+<span class="go"> [(15, &lt;music21.stream.Measure 0b offset=0.0&gt;)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">repeatEndings</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="n">m2</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.romanText.translate.fixPickupMeasure">
+<code class="descclassname">music21.romanText.translate.</code><code class="descname">fixPickupMeasure</code><span class="sig-paren">(</span><em>partObject</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.translate.fixPickupMeasure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fix a pickup measure if any.</p>
+<p>We determine a pickup measure by being measure 0 and not having an RN
+object at the beginning.</p>
+<p>Demonstration: an otherwise incorrect part</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m0</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m0</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k0</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m0</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m0</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;4/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m0</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">roman</span><span class="o">.</span><span class="n">RomanNumeral</span><span class="p">(</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="n">k0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">m1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">m2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After running fixPickupMeasure()</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">romanText</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">fixPickupMeasure</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 0 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.key.Key of G major&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.roman.RomanNumeral V in G major&gt;</span>
+<span class="go">{2.0} &lt;music21.stream.Measure 1 offset=2.0&gt;</span>
+
+<span class="go">{6.0} &lt;music21.stream.Measure 2 offset=6.0&gt;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m0</span><span class="o">.</span><span class="n">paddingLeft</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.romanText.translate.romanTextToStreamOpus">
+<code class="descclassname">music21.romanText.translate.</code><code class="descname">romanTextToStreamOpus</code><span class="sig-paren">(</span><em>rtHandler</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.translate.romanTextToStreamOpus" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main processing routine for RomanText objects that may or may not
+be multi movement.</p>
+<p>Takes in a romanText.rtObjects.RTFile() object, or a string as rtHandler.</p>
+<p>Runs <cite>romanTextToStreamScore()</cite> as its main work.</p>
+<p>If inputM21 is None then it will create a Score or Opus object.</p>
+<p>Return either a Score object, or, if a multi-movement work is defined, an
+Opus object.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.romanText.translate.romanTextToStreamScore">
+<code class="descclassname">music21.romanText.translate.</code><code class="descname">romanTextToStreamScore</code><span class="sig-paren">(</span><em>rtHandler</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.translate.romanTextToStreamScore" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main processing module for single-movement RomanText works.</p>
+<p>Given a romanText handler or string, return or fill a Score Stream.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="parttranslator">
+<h2>PartTranslator<a class="headerlink" href="#parttranslator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.translate.PartTranslator">
+<em class="property">class </em><code class="descclassname">music21.romanText.translate.</code><code class="descname">PartTranslator</code><span class="sig-paren">(</span><em>md=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.translate.PartTranslator" title="Permalink to this definition">¶</a></dt>
+<dd><p>A refactoring of the previously massive romanTextToStreamScore function
+to allow for more fine-grained testing (eventually), and to
+get past the absurdly high number of nested blocks (the previous translator
+was written under severe time constraints).</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.translate.PartTranslator" title="music21.romanText.translate.PartTranslator"><code class="xref py py-class docutils literal"><span class="pre">PartTranslator</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.romanText.translate.PartTranslator.translateOneToken">
+<code class="descclassname">PartTranslator.</code><code class="descname">translateOneToken</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.translate.PartTranslator.translateOneToken" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.translate.PartTranslator.translateSingleMeasure">
+<code class="descclassname">PartTranslator.</code><code class="descname">translateSingleMeasure</code><span class="sig-paren">(</span><em>measureToken</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.translate.PartTranslator.translateSingleMeasure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.translate.PartTranslator.translateSingleMeasureAtom">
+<code class="descclassname">PartTranslator.</code><code class="descname">translateSingleMeasureAtom</code><span class="sig-paren">(</span><em>i</em>, <em>a</em>, <em>m</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.translate.PartTranslator.translateSingleMeasureAtom" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.translate.PartTranslator.translateTokens">
+<code class="descclassname">PartTranslator.</code><code class="descname">translateTokens</code><span class="sig-paren">(</span><em>tokens</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.translate.PartTranslator.translateTokens" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="romantextunprocessedtoken">
+<h2>RomanTextUnprocessedToken<a class="headerlink" href="#romantextunprocessedtoken" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.translate.RomanTextUnprocessedToken">
+<em class="property">class </em><code class="descclassname">music21.romanText.translate.</code><code class="descname">RomanTextUnprocessedToken</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.translate.RomanTextUnprocessedToken" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.translate.RomanTextUnprocessedToken" title="music21.romanText.translate.RomanTextUnprocessedToken"><code class="xref py py-class docutils literal"><span class="pre">RomanTextUnprocessedToken</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.ElementWrapper" title="music21.base.ElementWrapper"><code class="xref py py-class docutils literal"><span class="pre">ElementWrapper</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.translate.RomanTextUnprocessedToken" title="music21.romanText.translate.RomanTextUnprocessedToken"><code class="xref py py-class docutils literal"><span class="pre">RomanTextUnprocessedToken</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.translate.RomanTextUnprocessedToken" title="music21.romanText.translate.RomanTextUnprocessedToken"><code class="xref py py-class docutils literal"><span class="pre">RomanTextUnprocessedToken</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.translate.RomanTextUnprocessedToken" title="music21.romanText.translate.RomanTextUnprocessedToken"><code class="xref py py-class docutils literal"><span class="pre">RomanTextUnprocessedToken</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.ElementWrapper" title="music21.base.ElementWrapper"><code class="xref py py-class docutils literal"><span class="pre">ElementWrapper</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.ElementWrapper.isTwin" title="music21.base.ElementWrapper.isTwin"><code class="xref py py-meth docutils literal"><span class="pre">isTwin()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.translate.RomanTextUnprocessedToken" title="music21.romanText.translate.RomanTextUnprocessedToken"><code class="xref py py-class docutils literal"><span class="pre">RomanTextUnprocessedToken</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.ElementWrapper" title="music21.base.ElementWrapper"><code class="xref py py-class docutils literal"><span class="pre">ElementWrapper</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.ElementWrapper.obj" title="music21.base.ElementWrapper.obj"><code class="xref py py-attr docutils literal"><span class="pre">obj</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleScale.html" title="music21.scale"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleRomanTextRtObjects.html" title="music21.romanText.rtObjects"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.braille.translate &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.capella.fromCapellaXML" href="moduleCapellaFromCapellaXML.html" />
+    <link rel="prev" title="music21.braille.text" href="moduleBrailleText.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleCapellaFromCapellaXML.html" title="music21.capella.fromCapellaXML"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleBrailleText.html" title="music21.braille.text"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleBrailleText.html"
+                        title="previous chapter">music21.braille.text</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleCapellaFromCapellaXML.html"
+                        title="next chapter">music21.capella.fromCapellaXML</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.braille.translate</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleBrailleTranslate.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-braille-translate">
+<span id="modulebrailletranslate"></span><h1>music21.braille.translate<a class="headerlink" href="#music21-braille-translate" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.braille.translate"></span><p>Methods for exporting music21 data as braille.</p>
+<p>This module was made in consultation with the manual &#8220;Introduction to Braille
+Music Transcription, Second Edition&#8221; by Mary Turner De Garmo, 2005. It is
+available from the Library of Congress <a class="reference external" href="http://www.loc.gov/nls/music/">here</a>,
+and will henceforth be referred to as BMTM.</p>
+<p>The most important method, and the only one that is needed to translate music
+into braille, is <a class="reference internal" href="#music21.braille.translate.objectToBraille" title="music21.braille.translate.objectToBraille"><code class="xref py py-meth docutils literal"><span class="pre">objectToBraille()</span></code></a>. This method,
+as well as the others, accept keyword arguments that serve to modify the output.
+If no keyword arguments are needed, then using the method is equivalent to
+calling <a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a> on the music.</p>
+<p>Keywords:</p>
+<ul class="simple">
+<li><strong>inPlace</strong> (False): If False, then <a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeNotation" title="music21.stream.Stream.makeNotation"><code class="xref py py-meth docutils literal"><span class="pre">makeNotation()</span></code></a> is called
+on all <a class="reference internal" href="moduleStream.html#music21.stream.Measure" title="music21.stream.Measure"><code class="xref py py-class docutils literal"><span class="pre">Measure</span></code></a>, <a class="reference internal" href="moduleStream.html#music21.stream.Part" title="music21.stream.Part"><code class="xref py py-class docutils literal"><span class="pre">Part</span></code></a>, and
+<a class="reference internal" href="moduleStream.html#music21.stream.PartStaff" title="music21.stream.PartStaff"><code class="xref py py-class docutils literal"><span class="pre">PartStaff</span></code></a> instances. Copies of those objects are then
+used to transcribe the music. If True, the transcription is done &#8220;as is.&#8221;
+This is useful for strict transcription because 
+sometimes <a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeNotation" title="music21.stream.Stream.makeNotation"><code class="xref py py-meth docutils literal"><span class="pre">makeNotation()</span></code></a>
+introduces some unwanted artifacts in the music. However, the music needs
+to be organized into measures for transcription to work.</li>
+<li><strong>debug</strong> (False): If True, a braille-english representation of the music is returned. Useful
+for knowing how the music was interpreted by the braille transcriber.</li>
+</ul>
+<p>The rest of the keywords are segment keywords. A segment is &#8220;a group of measures occupying
+more than one braille line.&#8221; Music is divided into segments so as to &#8220;present the music to
+the reader in a meaningful manner and to give him convenient reference points to use in
+memorization&#8221; (BMTM, 71). Some of these keywords are changed automatically in context.</p>
+<ul>
+<li><dl class="first docutils">
+<dt><strong>cancelOutgoingKeySig</strong> (True): If True, whenever a key signature change is </dt>
+<dd><p class="first last">encountered, the new signature should be preceded by the old one.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>descendingChords</strong> (True): If True, then chords are spelled around the highest note. </dt>
+<dd><p class="first last">If False, then chords are spelled around the lowest note. This keyword is 
+overriden by any valid clefs present in the music.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>dummyRestLength</strong> (None) For a given positive integer n, adds n &#8220;dummy rests&#8221; </dt>
+<dd><p class="first last">near the beginning of a segment. Designed for test purposes, as the rests 
+are used to demonstrate measure division at the end of braille lines.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>maxLineLength</strong> (40): The maximum amount of braille characters </dt>
+<dd><p class="first last">that should be present in a line of braille.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>segmentBreaks</strong> ([]): A list consisting of (measure number, offset start) </dt>
+<dd><p class="first last">tuples indicating where the music should be broken into segments.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>showClefSigns</strong> (False): If True, then clef signs are displayed. </dt>
+<dd><p class="first last">Since braille does not use clefs or staves to represent music, they would 
+instead be shown for referential or historical purposes.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>showFirstMeasureNumber</strong> (True): If True, then a measure number is shown </dt>
+<dd><p class="first last">following the heading (if applicable) and preceding the music.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>showHand</strong> (None): If set to &#8220;right&#8221; or &#8220;left&#8221;, the corresponding </dt>
+<dd><p class="first last">hand sign is shown before the music. In keyboard music, 
+the hand signs are shown automatically.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>showHeading</strong> (True): If True, then a braille heading is created above </dt>
+<dd><p class="first last">the initial segment. A heading consists 
+of an initial <a class="reference internal" href="moduleKey.html#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a>, <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a>,
+<a class="reference internal" href="moduleTempo.html#music21.tempo.TempoText" title="music21.tempo.TempoText"><code class="xref py py-class docutils literal"><span class="pre">TempoText</span></code></a>, and <a class="reference internal" href="moduleTempo.html#music21.tempo.MetronomeMark" title="music21.tempo.MetronomeMark"><code class="xref py py-class docutils literal"><span class="pre">MetronomeMark</span></code></a>, 
+or any subset thereof. The heading
+is centered above the music automatically.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>showLongSlursAndTiesTogether</strong> (False), <strong>showShortSlursAndTiesTogether</strong> (False): </dt>
+<dd><p class="first last">If False, then the slur on either side of the phrase is reduced by the amount 
+that ties are present. If True, then slurs and ties are shown together 
+(i.e. the note can have both a slur and a tie).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>slurLongPhraseWithBrackets</strong> (True): If True, then the slur of a </dt>
+<dd><p class="first last">long phrase (4+ consecutive notes) is brailled using the bracket slur. 
+If False, the double slur is used instead.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>suppressOctaveMarks</strong> (True): If True, then all octave marks are suppressed. </dt>
+<dd><p class="first last">Designed for test purposes, as octave marks were not presented in BMTM until Chapter 7.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>upperFirstInNoteFingering</strong> (True): If True, then whenever </dt>
+<dd><p class="first last">there is a choice fingering (i.e. 5|4), the upper 
+number is transcribed before the lower number. If False, the reverse is the case.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.braille.translate.objectToBraille">
+<code class="descclassname">music21.braille.translate.</code><code class="descname">objectToBraille</code><span class="sig-paren">(</span><em>music21Obj</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.braille.translate.objectToBraille" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates an arbitrary object to braille.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.braille</span> <span class="k">import</span> <span class="n">translate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">samplePart</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 3/4 C4 D16 E F G# r4 e2.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">samplePart</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/objectToBraille.png"><img alt="../_images/objectToBraille.png" src="../_images/objectToBraille.png" style="width: 700px;" /></a>
+</div></blockquote>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">translate</span><span class="o">.</span><span class="n">objectToBraille</span><span class="p">(</span><span class="n">samplePart</span><span class="p">))</span>
+<span class="go">⠀⠀⠀⠀⠀⠀⠀⠼⠉⠲⠀⠀⠀⠀⠀⠀⠀</span>
+<span class="go">⠼⠁⠀⠸⠹⠵⠋⠛⠩⠓⠧⠀⠐⠏⠄⠣⠅</span>
+</pre></div>
+</div>
+<p>For normal users, you&#8217;ll just call this, which starts a text editor:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">samplePart</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;braille&#39;</span><span class="p">)</span>
+<span class="go">⠀⠀⠀⠀⠀⠀⠀⠼⠉⠲⠀⠀⠀⠀⠀⠀⠀</span>
+<span class="go">⠼⠁⠀⠸⠹⠵⠋⠛⠩⠓⠧⠀⠐⠏⠄⠣⠅</span>
+</pre></div>
+</div>
+<p>Other examples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sampleNote</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C3&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">translate</span><span class="o">.</span><span class="n">objectToBraille</span><span class="p">(</span><span class="n">sampleNote</span><span class="p">))</span>
+<span class="go">⠸⠹</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sampleDynamic</span> <span class="o">=</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">Dynamic</span><span class="p">(</span><span class="s2">&quot;fff&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">translate</span><span class="o">.</span><span class="n">objectToBraille</span><span class="p">(</span><span class="n">sampleDynamic</span><span class="p">))</span>
+<span class="go">⠜⠋⠋⠋</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.braille.translate.keyboardPartsToBraille">
+<code class="descclassname">music21.braille.translate.</code><code class="descname">keyboardPartsToBraille</code><span class="sig-paren">(</span><em>keyboardScore</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.braille.translate.keyboardPartsToBraille" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a Score object containing two <a class="reference internal" href="moduleStream.html#music21.stream.Part" title="music21.stream.Part"><code class="xref py py-class docutils literal"><span class="pre">Part</span></code></a> instances to braille, 
+an upper part and a lower
+part. Assumes that the two parts are aligned and well constructed. Bar over bar format is used.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.braille.translate.measureToBraille">
+<code class="descclassname">music21.braille.translate.</code><code class="descname">measureToBraille</code><span class="sig-paren">(</span><em>music21Measure</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.braille.translate.measureToBraille" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a <a class="reference internal" href="moduleStream.html#music21.stream.Measure" title="music21.stream.Measure"><code class="xref py py-class docutils literal"><span class="pre">Measure</span></code></a> to braille.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;whole&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">(</span><span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">    {4.0} &lt;music21.bar.Barline style=final&gt;    </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">braille</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">objectToBraille</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+<span class="go">⠀⠀⠼⠙⠲⠀⠀</span>
+<span class="go">⠼⠁⠀⠐⠽⠣⠅</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">braille</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">measureToBraille</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+<span class="go">⠼⠙⠲⠀⠐⠽⠣⠅</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.braille.translate.metadataToString">
+<code class="descclassname">music21.braille.translate.</code><code class="descname">metadataToString</code><span class="sig-paren">(</span><em>music21Metadata</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.braille.translate.metadataToString" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.braille</span> <span class="k">import</span> <span class="n">translate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corelli</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;monteverdi/madrigal.3.1.rntxt&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corelli</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Metadata&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">__class__</span>
+<span class="go">&lt;class &#39;music21.metadata.Metadata&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">translate</span><span class="o">.</span><span class="n">metadataToString</span><span class="p">(</span><span class="n">corelli</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Metadata&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="go">Alternative Title: 3.1</span>
+<span class="go">Title: La Giovinetta Pianta</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.braille.translate.opusToBraille">
+<code class="descclassname">music21.braille.translate.</code><code class="descname">opusToBraille</code><span class="sig-paren">(</span><em>music21Opus</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.braille.translate.opusToBraille" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates an <a class="reference internal" href="moduleStream.html#music21.stream.Opus" title="music21.stream.Opus"><code class="xref py py-class docutils literal"><span class="pre">Opus</span></code></a> to braille.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.braille.translate.partToBraille">
+<code class="descclassname">music21.braille.translate.</code><code class="descname">partToBraille</code><span class="sig-paren">(</span><em>music21Part</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.braille.translate.partToBraille" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a <a class="reference internal" href="moduleStream.html#music21.stream.Part" title="music21.stream.Part"><code class="xref py py-class docutils literal"><span class="pre">Part</span></code></a> to braille.</p>
+<p>This is one of two (w/ keyboardPartsToBraille) main routines.  Runs segment.findSegments
+and then for each segment runs transcribe on it.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.braille.translate.scoreToBraille">
+<code class="descclassname">music21.braille.translate.</code><code class="descname">scoreToBraille</code><span class="sig-paren">(</span><em>music21Score</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.braille.translate.scoreToBraille" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> to braille.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.braille.translate.streamToBraille">
+<code class="descclassname">music21.braille.translate.</code><code class="descname">streamToBraille</code><span class="sig-paren">(</span><em>music21Stream</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.braille.translate.streamToBraille" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a <a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a> to braille.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleCapellaFromCapellaXML.html" title="music21.capella.fromCapellaXML"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleBrailleText.html" title="music21.braille.text"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

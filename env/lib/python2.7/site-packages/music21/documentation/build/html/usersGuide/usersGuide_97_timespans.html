@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Timespan Demos &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="Inversion Demo" href="usersGuide_98_inversionDemo.html" />
+    <link rel="prev" title="User’s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite" href="usersGuide_90_musicxmlTest.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_98_inversionDemo.html" title="Inversion Demo"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_90_musicxmlTest.html" title="User’s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_90_musicxmlTest.html"
+                        title="previous chapter">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_98_inversionDemo.html"
+                        title="next chapter">Inversion Demo</a></p>
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_02_notes.html">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_03_pitches.html">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_05_listsOfLists.html">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_07_chords.html">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_08_installingMusicXML.html">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_11_corpusSearching.html">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_12_music21object.html">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_13_music21object2.html">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_15_key.html">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_21_sorting.html">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_25_postTonalTools1.html">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_26_clientWeakref.html">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_28_lyricSearcher.html">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_97_timespans.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-97-timespans"></span><div class="section" id="timespan-demos">
+<h1>Timespan Demos<a class="headerlink" href="#timespan-demos" title="Permalink to this headline">¶</a></h1>
+<p>Work in progress...</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">luca</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;luca/gloria&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">measures</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">tsCol</span> <span class="o">=</span> <span class="n">luca</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">tsCol</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">TimespanTree</span> <span class="p">{</span><span class="mi">189</span><span class="p">}</span> <span class="p">(</span><span class="mf">0.0</span> <span class="n">to</span> <span class="mf">24.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Score</span> <span class="mh">0x10bf37358</span><span class="o">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tsCol</span><span class="o">.</span><span class="n">iterateVerticalities</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">0.0</span> <span class="p">{</span><span class="n">F3</span> <span class="n">F4</span> <span class="n">C5</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">3.0</span> <span class="p">{</span><span class="n">F3</span> <span class="n">F4</span> <span class="n">D5</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">3.5</span> <span class="p">{</span><span class="n">F3</span> <span class="n">C4</span> <span class="n">C5</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">4.5</span> <span class="p">{</span><span class="n">F3</span> <span class="n">C4</span> <span class="n">A4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">5.0</span> <span class="p">{</span><span class="n">F3</span> <span class="n">C4</span> <span class="n">F4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">5.5</span> <span class="p">{</span><span class="n">F3</span> <span class="n">A3</span> <span class="n">F4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">6.0</span> <span class="p">{</span><span class="n">F3</span> <span class="n">F4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">6.5</span> <span class="p">{</span><span class="n">F3</span> <span class="n">F4</span> <span class="n">A4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">7.5</span> <span class="p">{</span><span class="n">F3</span> <span class="n">F4</span> <span class="n">C5</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">8.5</span> <span class="p">{</span><span class="n">F3</span> <span class="n">F4</span> <span class="n">C5</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">9.0</span> <span class="p">{</span><span class="n">C4</span> <span class="n">E4</span> <span class="n">G4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">10.5</span> <span class="p">{</span><span class="n">D4</span> <span class="n">F4</span> <span class="n">A4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">12.0</span> <span class="p">{</span><span class="n">C4</span> <span class="n">E4</span> <span class="n">G4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">15.0</span> <span class="p">{</span><span class="n">G3</span> <span class="n">G4</span> <span class="n">D5</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">16.5</span> <span class="p">{</span><span class="n">A3</span> <span class="n">E4</span> <span class="n">C5</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">17.5</span> <span class="p">{</span><span class="n">A3</span> <span class="n">E4</span> <span class="n">B4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">18.0</span> <span class="p">{</span><span class="n">D4</span> <span class="n">F4</span> <span class="n">A4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">18.5</span> <span class="p">{</span><span class="n">D4</span> <span class="n">F4</span> <span class="n">G4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">19.0</span> <span class="p">{</span><span class="n">D4</span> <span class="n">F4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">19.5</span> <span class="p">{</span><span class="n">C4</span> <span class="n">E4</span> <span class="n">G4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">20.0</span> <span class="p">{</span><span class="n">C4</span> <span class="n">F4</span> <span class="n">G4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">20.5</span> <span class="p">{</span><span class="n">C4</span> <span class="n">D4</span> <span class="n">G4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">21.0</span> <span class="p">{</span><span class="n">C4</span> <span class="n">E4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">21.5</span> <span class="p">{</span><span class="n">A3</span> <span class="n">E4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">22.0</span> <span class="p">{</span><span class="n">A3</span> <span class="n">C4</span> <span class="n">F4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">22.5</span> <span class="p">{</span><span class="n">B</span><span class="o">-</span><span class="mi">3</span> <span class="n">D4</span> <span class="n">F4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">23.0</span> <span class="p">{</span><span class="n">G3</span> <span class="n">B</span><span class="o">-</span><span class="mi">3</span> <span class="n">D4</span><span class="p">}</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">23.5</span> <span class="p">{</span><span class="n">B</span><span class="o">-</span><span class="mi">3</span> <span class="n">D4</span> <span class="n">F4</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v4</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">tsCol</span><span class="o">.</span><span class="n">iterateVerticalities</span><span class="p">())[</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v4</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">5.0</span> <span class="p">{</span><span class="n">F3</span> <span class="n">C4</span> <span class="n">F4</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v4</span><span class="o">.</span><span class="n">pitchSet</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">F3</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">C4</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">F4</span><span class="o">&gt;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">v4</span><span class="o">.</span><span class="n">pitchSet</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">F3</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v4</span><span class="o">.</span><span class="n">startTimespans</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">5.0</span> <span class="n">to</span> <span class="mf">6.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="o">&gt;&gt;</span><span class="p">,)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v4</span><span class="o">.</span><span class="n">stopTimespans</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">4.5</span> <span class="n">to</span> <span class="mf">5.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">A</span><span class="o">&gt;&gt;</span><span class="p">,)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v4</span><span class="o">.</span><span class="n">overlapTimespans</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">3.0</span> <span class="n">to</span> <span class="mf">6.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">4.5</span> <span class="n">to</span> <span class="mf">5.5</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="o">&gt;&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v35</span> <span class="o">=</span> <span class="n">tsCol</span><span class="o">.</span><span class="n">getVerticalityAt</span><span class="p">(</span><span class="mf">3.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v35</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">3.5</span> <span class="p">{</span><span class="n">F3</span> <span class="n">C4</span> <span class="n">C5</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v35</span><span class="o">.</span><span class="n">startTimespans</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">3.5</span> <span class="n">to</span> <span class="mf">4.5</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">3.5</span> <span class="n">to</span> <span class="mf">4.5</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="o">&gt;&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v35</span><span class="o">.</span><span class="n">stopTimespans</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">3.0</span> <span class="n">to</span> <span class="mf">3.5</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">3.0</span> <span class="n">to</span> <span class="mf">3.5</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="o">&gt;&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v35</span><span class="o">.</span><span class="n">overlapTimespans</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">3.0</span> <span class="n">to</span> <span class="mf">6.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="o">&gt;&gt;</span><span class="p">,)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">elTsC</span> <span class="o">=</span> <span class="n">v35</span><span class="o">.</span><span class="n">startTimespans</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">elTsC</span><span class="p">,</span> <span class="n">elTsC</span><span class="o">.</span><span class="n">element</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">3.5</span> <span class="n">to</span> <span class="mf">4.5</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Test previousVerticality with Rest</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v22</span> <span class="o">=</span> <span class="n">tsCol</span><span class="o">.</span><span class="n">getVerticalityAt</span><span class="p">(</span><span class="mf">22.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v22</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">22.0</span> <span class="p">{</span><span class="n">A3</span> <span class="n">C4</span> <span class="n">F4</span><span class="p">}</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v22</span><span class="o">.</span><span class="n">startTimespans</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">22.0</span> <span class="n">to</span> <span class="mf">22.5</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">22.0</span> <span class="n">to</span> <span class="mf">23.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="o">&gt;&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">elTSfollowingRest</span> <span class="o">=</span> <span class="n">v22</span><span class="o">.</span><span class="n">startTimespans</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">elTSfollowingRest</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">22.0</span> <span class="n">to</span> <span class="mf">23.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="o">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v22</span><span class="o">.</span><span class="n">stopTimespans</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">21.0</span> <span class="n">to</span> <span class="mf">22.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">21.5</span> <span class="n">to</span> <span class="mf">22.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span> <span class="n">rest</span><span class="o">&gt;&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">elTSfollowingRest</span><span class="o">.</span><span class="n">part</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Part</span> <span class="n">Cantus</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">makeExampleScore</span><span class="p">()</span>
+<span class="n">score</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_97_timespans_29_0.png" src="../_images/usersGuide_97_timespans_29_0.png" />
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">tsColSmall</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tsColSmall</span><span class="o">.</span><span class="n">iterateVerticalities</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">v</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">getAllVoiceLeadingQuartets</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">0.0</span> <span class="p">{</span><span class="n">C3</span> <span class="n">C</span><span class="c1">#3}&gt;</span>
+ <span class="p">[]</span>
+ <span class="o">&lt;</span><span class="n">Verticality</span> <span class="mf">1.0</span> <span class="p">{</span><span class="n">C</span><span class="c1">#3 D3}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">AttributeError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">30</span><span class="o">-</span><span class="n">f77717ce7edf</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+      <span class="mi">2</span>     <span class="k">if</span> <span class="n">v</span> <span class="o">!=</span> <span class="p">[]:</span>
+      <span class="mi">3</span>         <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="o">----&gt;</span> <span class="mi">4</span>         <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">getAllVoiceLeadingQuartets</span><span class="p">())</span>
+      <span class="mi">5</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="n">verticality</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">getAllVoiceLeadingQuartets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">includeRests</span><span class="p">,</span> <span class="n">includeOblique</span><span class="p">,</span> <span class="n">includeNoMotion</span><span class="p">,</span> <span class="n">returnObjects</span><span class="p">,</span> <span class="n">partPairNumbers</span><span class="p">)</span>
+    <span class="mi">670</span>                             <span class="ow">and</span> <span class="n">n21</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="mi">671</span>                             <span class="ow">and</span> <span class="n">n22</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+<span class="o">--&gt;</span> <span class="mi">672</span>                         <span class="n">vlq</span> <span class="o">=</span> <span class="n">VoiceLeadingQuartet</span><span class="p">(</span><span class="n">n11</span><span class="p">,</span> <span class="n">n12</span><span class="p">,</span> <span class="n">n21</span><span class="p">,</span> <span class="n">n22</span><span class="p">)</span>
+    <span class="mi">673</span>                         <span class="n">filteredList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vlq</span><span class="p">)</span>
+    <span class="mi">674</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">voiceLeading</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v1n1</span><span class="p">,</span> <span class="n">v1n2</span><span class="p">,</span> <span class="n">v2n1</span><span class="p">,</span> <span class="n">v2n2</span><span class="p">,</span> <span class="n">analyticKey</span><span class="p">)</span>
+    <span class="mi">115</span>             <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">analyticKey</span>
+    <span class="mi">116</span>         <span class="k">if</span> <span class="n">v1n1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">v1n2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">v2n1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">v2n2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="o">--&gt;</span> <span class="mi">117</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_findIntervals</span><span class="p">()</span>
+    <span class="mi">118</span>
+    <span class="mi">119</span>     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">voiceLeading</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_findIntervals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="mi">233</span>
+    <span class="mi">234</span>     <span class="k">def</span> <span class="nf">_findIntervals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">--&gt;</span> <span class="mi">235</span>         <span class="bp">self</span><span class="o">.</span><span class="n">vIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">notesToInterval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v1n1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v2n1</span><span class="p">))</span>
+    <span class="mi">236</span>         <span class="bp">self</span><span class="o">.</span><span class="n">vIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">notesToInterval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v1n2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v2n2</span><span class="p">))</span>
+    <span class="mi">237</span>         <span class="bp">self</span><span class="o">.</span><span class="n">hIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">notesToInterval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v1n1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v1n2</span><span class="p">))</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">interval</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">notesToInterval</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+   <span class="mi">2533</span>             <span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+   <span class="mi">2534</span>             <span class="n">n2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">()</span>
+<span class="o">-&gt;</span> <span class="mi">2535</span>     <span class="n">gInt</span> <span class="o">=</span> <span class="n">notesToGeneric</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+   <span class="mi">2536</span>     <span class="n">cInt</span> <span class="o">=</span> <span class="n">notesToChromatic</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+   <span class="mi">2537</span>     <span class="n">intObj</span> <span class="o">=</span> <span class="n">intervalFromGenericAndChromatic</span><span class="p">(</span><span class="n">gInt</span><span class="p">,</span> <span class="n">cInt</span><span class="p">)</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">interval</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">notesToGeneric</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+   <span class="mi">1466</span>
+   <span class="mi">1467</span>     <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">-&gt; 1468     staffDist = n2.diatonicNoteNum - n1.diatonicNoteNum</span>
+<span class="s1">   1469     genDist = convertStaffDistanceToInterval(staffDist)</span>
+<span class="s1">   1470     return GenericInterval(genDist)</span>
+
+
+<span class="s1">AttributeError: &#39;NoneType&#39; object has no attribute &#39;diatonicNoteNum&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">lucaAll</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;luca/gloria&#39;</span><span class="p">)</span>
+<span class="n">tsCol</span> <span class="o">=</span> <span class="n">lucaAll</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tsCol</span><span class="o">.</span><span class="n">iterateVerticalities</span><span class="p">():</span>
+    <span class="n">vlqs</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">getAllVoiceLeadingQuartets</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">AttributeError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">32</span><span class="o">-</span><span class="mi">76</span><span class="n">b643c51e81</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+      <span class="mi">1</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tsCol</span><span class="o">.</span><span class="n">iterateVerticalities</span><span class="p">():</span>
+<span class="o">----&gt;</span> <span class="mi">2</span>     <span class="n">vlqs</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">getAllVoiceLeadingQuartets</span><span class="p">()</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="n">verticality</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">getAllVoiceLeadingQuartets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">includeRests</span><span class="p">,</span> <span class="n">includeOblique</span><span class="p">,</span> <span class="n">includeNoMotion</span><span class="p">,</span> <span class="n">returnObjects</span><span class="p">,</span> <span class="n">partPairNumbers</span><span class="p">)</span>
+    <span class="mi">670</span>                             <span class="ow">and</span> <span class="n">n21</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="mi">671</span>                             <span class="ow">and</span> <span class="n">n22</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+<span class="o">--&gt;</span> <span class="mi">672</span>                         <span class="n">vlq</span> <span class="o">=</span> <span class="n">VoiceLeadingQuartet</span><span class="p">(</span><span class="n">n11</span><span class="p">,</span> <span class="n">n12</span><span class="p">,</span> <span class="n">n21</span><span class="p">,</span> <span class="n">n22</span><span class="p">)</span>
+    <span class="mi">673</span>                         <span class="n">filteredList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vlq</span><span class="p">)</span>
+    <span class="mi">674</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">voiceLeading</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v1n1</span><span class="p">,</span> <span class="n">v1n2</span><span class="p">,</span> <span class="n">v2n1</span><span class="p">,</span> <span class="n">v2n2</span><span class="p">,</span> <span class="n">analyticKey</span><span class="p">)</span>
+    <span class="mi">115</span>             <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">analyticKey</span>
+    <span class="mi">116</span>         <span class="k">if</span> <span class="n">v1n1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">v1n2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">v2n1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">v2n2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="o">--&gt;</span> <span class="mi">117</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_findIntervals</span><span class="p">()</span>
+    <span class="mi">118</span>
+    <span class="mi">119</span>     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">voiceLeading</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_findIntervals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="mi">233</span>
+    <span class="mi">234</span>     <span class="k">def</span> <span class="nf">_findIntervals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">--&gt;</span> <span class="mi">235</span>         <span class="bp">self</span><span class="o">.</span><span class="n">vIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">notesToInterval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v1n1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v2n1</span><span class="p">))</span>
+    <span class="mi">236</span>         <span class="bp">self</span><span class="o">.</span><span class="n">vIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">notesToInterval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v1n2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v2n2</span><span class="p">))</span>
+    <span class="mi">237</span>         <span class="bp">self</span><span class="o">.</span><span class="n">hIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">notesToInterval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v1n1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v1n2</span><span class="p">))</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">interval</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">notesToInterval</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+   <span class="mi">2533</span>             <span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+   <span class="mi">2534</span>             <span class="n">n2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">()</span>
+<span class="o">-&gt;</span> <span class="mi">2535</span>     <span class="n">gInt</span> <span class="o">=</span> <span class="n">notesToGeneric</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+   <span class="mi">2536</span>     <span class="n">cInt</span> <span class="o">=</span> <span class="n">notesToChromatic</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+   <span class="mi">2537</span>     <span class="n">intObj</span> <span class="o">=</span> <span class="n">intervalFromGenericAndChromatic</span><span class="p">(</span><span class="n">gInt</span><span class="p">,</span> <span class="n">cInt</span><span class="p">)</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">interval</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">notesToGeneric</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+   <span class="mi">1466</span>
+   <span class="mi">1467</span>     <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">-&gt; 1468     staffDist = n2.diatonicNoteNum - n1.diatonicNoteNum</span>
+<span class="s1">   1469     genDist = convertStaffDistanceToInterval(staffDist)</span>
+<span class="s1">   1470     return GenericInterval(genDist)</span>
+
+
+<span class="s1">AttributeError: &#39;NoneType&#39; object has no attribute &#39;diatonicNoteNum&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bach</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">dummy</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">theoryAnalysis</span><span class="o">.</span><span class="n">theoryAnalyzer</span><span class="o">.</span><span class="n">getVLQs</span><span class="p">(</span><span class="n">bach</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># two parts only of bach</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">0.13318204879760742</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">tsCol</span> <span class="o">=</span> <span class="n">bach</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tsCol</span><span class="o">.</span><span class="n">iterateVerticalities</span><span class="p">():</span>
+    <span class="n">vlqs</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">getAllVoiceLeadingQuartets</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>  <span class="c1"># all parts == 6 pairs</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">AttributeError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">35</span><span class="o">-</span><span class="n">c7589ac93393</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+      <span class="mi">2</span> <span class="n">tsCol</span> <span class="o">=</span> <span class="n">bach</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+      <span class="mi">3</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tsCol</span><span class="o">.</span><span class="n">iterateVerticalities</span><span class="p">():</span>
+<span class="o">----&gt;</span> <span class="mi">4</span>     <span class="n">vlqs</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">getAllVoiceLeadingQuartets</span><span class="p">()</span>
+      <span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>  <span class="c1"># all parts == 6 pairs</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="n">verticality</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">getAllVoiceLeadingQuartets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">includeRests</span><span class="p">,</span> <span class="n">includeOblique</span><span class="p">,</span> <span class="n">includeNoMotion</span><span class="p">,</span> <span class="n">returnObjects</span><span class="p">,</span> <span class="n">partPairNumbers</span><span class="p">)</span>
+    <span class="mi">670</span>                             <span class="ow">and</span> <span class="n">n21</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="mi">671</span>                             <span class="ow">and</span> <span class="n">n22</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+<span class="o">--&gt;</span> <span class="mi">672</span>                         <span class="n">vlq</span> <span class="o">=</span> <span class="n">VoiceLeadingQuartet</span><span class="p">(</span><span class="n">n11</span><span class="p">,</span> <span class="n">n12</span><span class="p">,</span> <span class="n">n21</span><span class="p">,</span> <span class="n">n22</span><span class="p">)</span>
+    <span class="mi">673</span>                         <span class="n">filteredList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vlq</span><span class="p">)</span>
+    <span class="mi">674</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">voiceLeading</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v1n1</span><span class="p">,</span> <span class="n">v1n2</span><span class="p">,</span> <span class="n">v2n1</span><span class="p">,</span> <span class="n">v2n2</span><span class="p">,</span> <span class="n">analyticKey</span><span class="p">)</span>
+    <span class="mi">115</span>             <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">analyticKey</span>
+    <span class="mi">116</span>         <span class="k">if</span> <span class="n">v1n1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">v1n2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">v2n1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">v2n2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="o">--&gt;</span> <span class="mi">117</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_findIntervals</span><span class="p">()</span>
+    <span class="mi">118</span>
+    <span class="mi">119</span>     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">voiceLeading</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_findIntervals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="mi">233</span>
+    <span class="mi">234</span>     <span class="k">def</span> <span class="nf">_findIntervals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="o">--&gt;</span> <span class="mi">235</span>         <span class="bp">self</span><span class="o">.</span><span class="n">vIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">notesToInterval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v1n1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v2n1</span><span class="p">))</span>
+    <span class="mi">236</span>         <span class="bp">self</span><span class="o">.</span><span class="n">vIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">notesToInterval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v1n2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v2n2</span><span class="p">))</span>
+    <span class="mi">237</span>         <span class="bp">self</span><span class="o">.</span><span class="n">hIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">notesToInterval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v1n1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v1n2</span><span class="p">))</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">interval</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">notesToInterval</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+   <span class="mi">2533</span>             <span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+   <span class="mi">2534</span>             <span class="n">n2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">()</span>
+<span class="o">-&gt;</span> <span class="mi">2535</span>     <span class="n">gInt</span> <span class="o">=</span> <span class="n">notesToGeneric</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+   <span class="mi">2536</span>     <span class="n">cInt</span> <span class="o">=</span> <span class="n">notesToChromatic</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+   <span class="mi">2537</span>     <span class="n">intObj</span> <span class="o">=</span> <span class="n">intervalFromGenericAndChromatic</span><span class="p">(</span><span class="n">gInt</span><span class="p">,</span> <span class="n">cInt</span><span class="p">)</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">interval</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">notesToGeneric</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+   <span class="mi">1466</span>
+   <span class="mi">1467</span>     <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">-&gt; 1468     staffDist = n2.diatonicNoteNum - n1.diatonicNoteNum</span>
+<span class="s1">   1469     genDist = convertStaffDistanceToInterval(staffDist)</span>
+<span class="s1">   1470     return GenericInterval(genDist)</span>
+
+
+<span class="s1">AttributeError: &#39;NoneType&#39; object has no attribute &#39;diatonicNoteNum&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">meterCol</span> <span class="o">=</span> <span class="n">lucaAll</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">(</span><span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">,))</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">meterCol</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">TimespanTree</span> <span class="p">{</span><span class="mi">4</span><span class="p">}</span> <span class="p">(</span><span class="mf">0.0</span> <span class="n">to</span> <span class="mf">275.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Part</span> <span class="n">Cantus</span><span class="o">&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">meterCol</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">TimespanTree</span> <span class="p">{</span><span class="mi">4</span><span class="p">}</span> <span class="p">(</span><span class="mf">0.0</span> <span class="n">to</span> <span class="mf">275.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Part</span> <span class="n">Cantus</span><span class="o">&gt;&gt;</span>
+     <span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">0.0</span> <span class="n">to</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;&gt;</span>
+     <span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">81.0</span> <span class="n">to</span> <span class="mf">81.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">2</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;&gt;</span>
+     <span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">185.0</span> <span class="n">to</span> <span class="mf">185.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;&gt;</span>
+     <span class="o">&lt;</span><span class="n">PitchedTimespan</span> <span class="p">(</span><span class="mf">275.0</span> <span class="n">to</span> <span class="mf">275.0</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;&gt;</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_98_inversionDemo.html" title="Inversion Demo"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_90_musicxmlTest.html" title="User’s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

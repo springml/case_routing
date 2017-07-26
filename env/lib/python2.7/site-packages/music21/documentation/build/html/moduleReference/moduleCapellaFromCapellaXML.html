@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.capella.fromCapellaXML &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.chord" href="moduleChord.html" />
+    <link rel="prev" title="music21.braille.translate" href="moduleBrailleTranslate.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleChord.html" title="music21.chord"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleBrailleTranslate.html" title="music21.braille.translate"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleBrailleTranslate.html"
+                        title="previous chapter">music21.braille.translate</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleChord.html"
+                        title="next chapter">music21.chord</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.capella.fromCapellaXML</a><ul>
+<li><a class="reference internal" href="#capellaimporter">CapellaImporter</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleCapellaFromCapellaXML.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-capella-fromcapellaxml">
+<span id="modulecapellafromcapellaxml"></span><h1>music21.capella.fromCapellaXML<a class="headerlink" href="#music21-capella-fromcapellaxml" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.capella.fromCapellaXML"></span><p>A beta version of a complete .capx to music21 converter.</p>
+<p>Currently only handles one &lt;voice&gt; per &lt;staff&gt; and does not deal with
+Slurs, Dynamics, Ornamentation, etc.</p>
+<p>Does not handle pickup notes, which are defined simply with an early barline
+(same as incomplete bars at the end).</p>
+<div class="section" id="capellaimporter">
+<h2>CapellaImporter<a class="headerlink" href="#capellaimporter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter">
+<em class="property">class </em><code class="descclassname">music21.capella.fromCapellaXML.</code><code class="descname">CapellaImporter</code><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object for importing .capx, CapellaXML files into music21 (from which they can be
+converted to musicxml, MIDI, lilypond, etc.</p>
+<p>Note that Capella stores files closer to their printed versions &#8211; that is to say,
+Systems enclose all the parts for that system and have new clefs etc.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.capella.fromCapellaXML.CapellaImporter" title="music21.capella.fromCapellaXML.CapellaImporter"><code class="xref py py-class docutils literal"><span class="pre">CapellaImporter</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.accidentalFromAlter">
+<code class="descclassname">CapellaImporter.</code><code class="descname">accidentalFromAlter</code><span class="sig-paren">(</span><em>alterElement</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.accidentalFromAlter" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a <a class="reference internal" href="modulePitch.html#music21.pitch.Accidental" title="music21.pitch.Accidental"><code class="xref py py-class docutils literal"><span class="pre">Accidental</span></code></a> object from an &lt;alter&gt; tag.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alter</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;alter step=&quot;-1&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">accidentalFromAlter</span><span class="p">(</span><span class="n">alter</span><span class="p">)</span>
+<span class="go">&lt;accidental flat&gt;</span>
+</pre></div>
+</div>
+<p>The only known display type is &#8220;suppress&#8221;</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">alter</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;alter step=&quot;2&quot; display=&quot;suppress&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acc</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">accidentalFromAlter</span><span class="p">(</span><span class="n">alter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acc</span>
+<span class="go">&lt;accidental double-sharp&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acc</span><span class="o">.</span><span class="n">displayType</span>
+<span class="go">&#39;never&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.barlineListFromBarline">
+<code class="descclassname">CapellaImporter.</code><code class="descname">barlineListFromBarline</code><span class="sig-paren">(</span><em>barlineElement</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.barlineListFromBarline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indication that the barline at this point should be something other than normal.</p>
+<p>Capella does not indicate measure breaks or barline breaks normally, so the only barlines
+that are indicated are unusual ones.</p>
+<p>Returns a LIST of <a class="reference internal" href="moduleBar.html#music21.bar.Barline" title="music21.bar.Barline"><code class="xref py py-class docutils literal"><span class="pre">Barline</span></code></a> or <a class="reference internal" href="moduleBar.html#music21.bar.Repeat" title="music21.bar.Repeat"><code class="xref py py-class docutils literal"><span class="pre">Repeat</span></code></a> objects
+because the <cite>repEndBegin</cite> type requires two <cite>bar.Repeat</cite> objects to encode in <cite>music21</cite>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">barlineTag</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;barline type=&quot;end&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">barlineListFromBarline</span><span class="p">(</span><span class="n">barlineTag</span><span class="p">)</span>    
+<span class="go">[&lt;music21.bar.Barline style=final&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">repeatTag</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;barline type=&quot;repEndBegin&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">barlineListFromBarline</span><span class="p">(</span><span class="n">repeatTag</span><span class="p">)</span>    
+<span class="go">[&lt;music21.bar.Repeat direction=end&gt;, &lt;music21.bar.Repeat direction=start&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.chordOrNoteFromChord">
+<code class="descclassname">CapellaImporter.</code><code class="descname">chordOrNoteFromChord</code><span class="sig-paren">(</span><em>chordElement</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.chordOrNoteFromChord" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a <a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a> or <a class="reference internal" href="moduleChord.html#music21.chord.Chord" title="music21.chord.Chord"><code class="xref py py-class docutils literal"><span class="pre">Chord</span></code></a> 
+from a chordElement &#8211; a <cite>Note</cite>
+is returned if the &lt;chord&gt; has one &lt;head&gt; element, a <cite>Chord</cite> is 
+returned if there are multiple &lt;head&gt; elements.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chordElement</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;&lt;chord&gt;&lt;duration base=&quot;1/1&quot;/&gt;&lt;heads&gt;&lt;head pitch=&quot;G4&quot;/&gt;&lt;/heads&gt;&lt;/chord&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">chordOrNoteFromChord</span><span class="p">(</span><span class="n">chordElement</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">&lt;music21.note.Note G&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span>
+<span class="go">&lt;music21.duration.Duration 4.0&gt;</span>
+</pre></div>
+</div>
+<p>This one is an actual chord</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chordElement</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span>
+<span class="gp">... </span>       <span class="s1">&#39;&lt;chord&gt;&lt;duration base=&quot;1/8&quot;/&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>       <span class="s1">&#39;&lt;heads&gt;&lt;head pitch=&quot;G4&quot;/&gt;&lt;head pitch=&quot;A5&quot;/&gt;&lt;/heads&gt;&lt;/chord&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">chordOrNoteFromChord</span><span class="p">(</span><span class="n">chordElement</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;music21.chord.Chord G3 A4&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">duration</span>
+<span class="go">&lt;music21.duration.Duration 0.5&gt;</span>
+</pre></div>
+</div>
+<p>TODO: test Lyrics</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.clefFromClefSign">
+<code class="descclassname">CapellaImporter.</code><code class="descname">clefFromClefSign</code><span class="sig-paren">(</span><em>clefSign</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.clefFromClefSign" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a <a class="reference internal" href="moduleClef.html#music21.clef.Clef" title="music21.clef.Clef"><code class="xref py py-class docutils literal"><span class="pre">Clef</span></code></a> object or subclass from a &lt;clefSign&gt; tag.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clefSign</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;clefSign clef=&quot;treble&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">clefFromClefSign</span><span class="p">(</span><span class="n">clefSign</span><span class="p">)</span>
+<span class="go">&lt;music21.clef.TrebleClef&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clefSign</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;clefSign clef=&quot;G2-&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">clefFromClefSign</span><span class="p">(</span><span class="n">clefSign</span><span class="p">)</span>
+<span class="go">&lt;music21.clef.Treble8vbClef&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">clefSign</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;clefSign clef=&quot;F1+&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clefObject</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">clefFromClefSign</span><span class="p">(</span><span class="n">clefSign</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clefObject</span>
+<span class="go">&lt;music21.clef.FClef&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clefObject</span><span class="o">.</span><span class="n">sign</span>
+<span class="go">&#39;F&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clefObject</span><span class="o">.</span><span class="n">line</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clefObject</span><span class="o">.</span><span class="n">octaveChange</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.domElementFromText">
+<code class="descclassname">CapellaImporter.</code><code class="descname">domElementFromText</code><span class="sig-paren">(</span><em>xmlText=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.domElementFromText" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility method, especially for the documentation examples/tests, which uses
+<cite>xml.etree.ElementTree</cite> to parse the string and returns its root object.</p>
+<p>Not used by the main parser</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">funnyTag</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span>
+<span class="gp">... </span>   <span class="s1">&#39;&lt;funny yes=&quot;definitely&quot;&gt;&lt;greg/&gt;hi&lt;greg&gt;&lt;ha&gt;ha&lt;/ha&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>   <span class="s1">&#39;&lt;greg type=&quot;embedded&quot;/&gt;&lt;/greg&gt;&lt;/funny&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">funnyTag</span>
+<span class="go">&lt;Element &#39;funny&#39; at 0x...&gt;</span>
+</pre></div>
+</div>
+<p>iter searches recursively</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">funnyTag</span><span class="o">.</span><span class="n">iter</span><span class="p">(</span><span class="s1">&#39;greg&#39;</span><span class="p">)))</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<p>findall does not:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">funnyTag</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;greg&#39;</span><span class="p">))</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.durationFromDuration">
+<code class="descclassname">CapellaImporter.</code><code class="descname">durationFromDuration</code><span class="sig-paren">(</span><em>durationElement</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.durationFromDuration" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">durationTag</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;duration base=&quot;1/32&quot; dots=&quot;1&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">durationFromDuration</span><span class="p">(</span><span class="n">durationTag</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span>
+<span class="go">&lt;music21.duration.Duration 0.1875&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;32nd&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">dots</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">durationTag2</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span>
+<span class="gp">... </span>     <span class="s1">&#39;&lt;duration base=&quot;1/4&quot;&gt;&lt;tuplet count=&quot;3&quot;/&gt;&lt;/duration&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">durationFromDuration</span><span class="p">(</span><span class="n">durationTag2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span>
+<span class="go">&lt;music21.duration.Duration 2/3&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;quarter&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span><span class="o">.</span><span class="n">tuplets</span>
+<span class="go">(&lt;music21.duration.Tuplet 3/2/eighth&gt;,)</span>
+</pre></div>
+</div>
+<p>Does not handle noDuration=&#8217;true&#8217;, display, churchStyle on rest durations</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.keySignatureFromKeySign">
+<code class="descclassname">CapellaImporter.</code><code class="descname">keySignatureFromKeySign</code><span class="sig-paren">(</span><em>keySign</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.keySignatureFromKeySign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference internal" href="moduleKey.html#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a> object from a keySign tag.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">keySign</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;keySign fifths=&quot;-1&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">keySignatureFromKeySign</span><span class="p">(</span><span class="n">keySign</span><span class="p">)</span>
+<span class="go">&lt;music21.key.KeySignature of 1 flat&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.lyricFromVerse">
+<code class="descclassname">CapellaImporter.</code><code class="descname">lyricFromVerse</code><span class="sig-paren">(</span><em>verse</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.lyricFromVerse" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a <a class="reference internal" href="moduleNote.html#music21.note.Lyric" title="music21.note.Lyric"><code class="xref py py-class docutils literal"><span class="pre">Lyric</span></code></a> object from a &lt;verse&gt; tag</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">verse</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;verse i=&quot;0&quot; hyphen=&quot;true&quot;&gt;di&amp;quot;&lt;/verse&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">lyricFromVerse</span><span class="p">(</span><span class="n">verse</span><span class="p">)</span>
+<span class="go">&lt;music21.note.Lyric number=1 syllabic=begin text=&quot;di&quot;&quot;&gt;</span>
+</pre></div>
+</div>
+<p>Does not yet support &#8216;align&#8217; attribute</p>
+<p>if the text is empty, returns None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.lyricListFromLyric">
+<code class="descclassname">CapellaImporter.</code><code class="descname">lyricListFromLyric</code><span class="sig-paren">(</span><em>lyricElement</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.lyricListFromLyric" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a list of <a class="reference internal" href="moduleNote.html#music21.note.Lyric" title="music21.note.Lyric"><code class="xref py py-class docutils literal"><span class="pre">Lyric</span></code></a> objects from a &lt;lyric&gt; tag</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lyricEl</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span>
+<span class="gp">... </span>     <span class="s1">&#39;&lt;lyric&gt;&lt;verse i=&quot;0&quot; hyphen=&quot;true&quot;&gt;di&lt;/verse&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>     <span class="s1">&#39;&lt;verse i=&quot;1&quot;&gt;man,&lt;/verse&gt;&lt;verse i=&quot;2&quot;&gt;frau,&lt;/verse&gt;&lt;/lyric&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">lyricListFromLyric</span><span class="p">(</span><span class="n">lyricEl</span><span class="p">)</span>
+<span class="go">[&lt;music21.note.Lyric number=1 syllabic=begin text=&quot;di&quot;&gt;, </span>
+<span class="go"> &lt;music21.note.Lyric number=2 syllabic=single text=&quot;man,&quot;&gt;, </span>
+<span class="go"> &lt;music21.note.Lyric number=3 syllabic=single text=&quot;frau,&quot;&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.noteFromHead">
+<code class="descclassname">CapellaImporter.</code><code class="descname">noteFromHead</code><span class="sig-paren">(</span><em>headElement</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.noteFromHead" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a <a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a> object from a &lt;head&gt; element.  This will become
+part of Chord._notes if there are multiple, but in any case, it needs to be a Note
+not a Pitch for now, because it could have Tie information</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">headElement</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span>
+<span class="gp">... </span>     <span class="s1">&#39;&lt;head pitch=&quot;B7&quot;&gt;&lt;alter step=&quot;-1&quot;/&gt;&lt;tie end=&quot;true&quot;/&gt;&lt;/head&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">noteFromHead</span><span class="p">(</span><span class="n">headElement</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">&lt;music21.note.Note B-&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">octave</span> <span class="c1"># capella octaves are one higher than written</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">tie</span>
+<span class="go">&lt;music21.tie.Tie stop&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.notesFromHeads">
+<code class="descclassname">CapellaImporter.</code><code class="descname">notesFromHeads</code><span class="sig-paren">(</span><em>headsElement</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.notesFromHeads" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a list of <a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a> elements for each &lt;head&gt; in &lt;heads&gt;</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">headsElement</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span>
+<span class="gp">... </span>   <span class="s1">&#39;&lt;heads&gt;&lt;head pitch=&quot;B7&quot;&gt;&lt;alter step=&quot;-1&quot;/&gt;&lt;/head&gt;&lt;head pitch=&quot;C2&quot;/&gt;&lt;/heads&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">notesFromHeads</span><span class="p">(</span><span class="n">headsElement</span><span class="p">)</span>
+<span class="go">[&lt;music21.note.Note B-&gt;, &lt;music21.note.Note C&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.parseXMLText">
+<code class="descclassname">CapellaImporter.</code><code class="descname">parseXMLText</code><span class="sig-paren">(</span><em>xmlText=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.parseXMLText" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the string (or unicode string) in xmlText and parses it with <cite>xml.dom.minidom</cite>.
+Sets <cite>self.mainDom</cite> to the dom object and returns the dom object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.partScoreFromSystemScore">
+<code class="descclassname">CapellaImporter.</code><code class="descname">partScoreFromSystemScore</code><span class="sig-paren">(</span><em>systemScore</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.partScoreFromSystemScore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> object which is organized
+by Systems and return a new <cite>Score</cite> object which is organized by
+Parts.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.readCapellaXMLFile">
+<code class="descclassname">CapellaImporter.</code><code class="descname">readCapellaXMLFile</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.readCapellaXMLFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in a .capx file at <cite>filename</cite>, stores it as self.zipFilename, unzips it, 
+extracts the score.xml embedded file, sets self.xmlText to the contents.</p>
+<p>Returns self.xmlText</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.restFromRest">
+<code class="descclassname">CapellaImporter.</code><code class="descname">restFromRest</code><span class="sig-paren">(</span><em>restElement</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.restFromRest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <code class="xref py py-class docutils literal"><span class="pre">Rest</span></code> object from a &lt;rest&gt; tag.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">restElement</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;rest&gt;&lt;duration base=&quot;1/2&quot;/&gt;&lt;/rest&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">restFromRest</span><span class="p">(</span><span class="n">restElement</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>
+<span class="go">&lt;music21.note.Rest rest&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;half&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.scoreFromFile">
+<code class="descclassname">CapellaImporter.</code><code class="descname">scoreFromFile</code><span class="sig-paren">(</span><em>filename</em>, <em>systemScore=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.scoreFromFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>main program: opens a file given by filename and returns a complete
+music21 Score from it.</p>
+<p>If systemScore is True then it skips the step of making Parts from Systems
+and Measures within Parts.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.slurFromDrawObjSlur">
+<code class="descclassname">CapellaImporter.</code><code class="descname">slurFromDrawObjSlur</code><span class="sig-paren">(</span><em>drawObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.slurFromDrawObjSlur" title="Permalink to this definition">¶</a></dt>
+<dd><p>not implemented</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.streamFromNoteObjects">
+<code class="descclassname">CapellaImporter.</code><code class="descname">streamFromNoteObjects</code><span class="sig-paren">(</span><em>noteObjectsElement</em>, <em>streamObj=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.streamFromNoteObjects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a &lt;noteObjects&gt; tag into a <a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a> object 
+which is returned.
+A Stream can be given as an optional argument, in which case the objects of this
+Stream are appended to this object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noteObjectsString</span> <span class="o">=</span> <span class="s2">r&quot;&quot;&quot;</span>
+<span class="gp">... </span><span class="s2">          &lt;noteObjects&gt;</span>
+<span class="gp">... </span><span class="s2">               &lt;clefSign clef=&quot;G2-&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">               &lt;keySign fifths=&quot;-1&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">               &lt;chord&gt;</span>
+<span class="gp">... </span><span class="s2">                   &lt;duration base=&quot;1/2&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">                   &lt;lyric&gt;</span>
+<span class="gp">... </span><span class="s2">                       &lt;verse i=&quot;0&quot;&gt;das,&lt;/verse&gt;</span>
+<span class="gp">... </span><span class="s2">                       &lt;verse i=&quot;1&quot;&gt;scherz,&lt;/verse&gt;</span>
+<span class="gp">... </span><span class="s2">                   &lt;/lyric&gt;</span>
+<span class="gp">... </span><span class="s2">                   &lt;heads&gt;</span>
+<span class="gp">... </span><span class="s2">                       &lt;head pitch=&quot;G4&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">                   &lt;/heads&gt;</span>
+<span class="gp">... </span><span class="s2">               &lt;/chord&gt;</span>
+<span class="gp">... </span><span class="s2">               &lt;chord&gt;</span>
+<span class="gp">... </span><span class="s2">                   &lt;duration base=&quot;1/2&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">                   &lt;lyric&gt;</span>
+<span class="gp">... </span><span class="s2">                       &lt;verse i=&quot;0&quot;&gt;so&lt;/verse&gt;</span>
+<span class="gp">... </span><span class="s2">                       &lt;verse i=&quot;1&quot;&gt;der&lt;/verse&gt;</span>
+<span class="gp">... </span><span class="s2">                   &lt;/lyric&gt;</span>
+<span class="gp">... </span><span class="s2">                   &lt;heads&gt;</span>
+<span class="gp">... </span><span class="s2">                       &lt;head pitch=&quot;A4&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">                   &lt;/heads&gt;</span>
+<span class="gp">... </span><span class="s2">               &lt;/chord&gt;</span>
+<span class="gp">... </span><span class="s2">               &lt;barline type=&quot;end&quot;/&gt;</span>
+<span class="gp">... </span><span class="s2">           &lt;/noteObjects&gt;</span>
+<span class="gp">... </span><span class="s2">           &quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noteObjectsElement</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="n">noteObjectsString</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">streamFromNoteObjects</span><span class="p">(</span><span class="n">noteObjectsElement</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.clef.Treble8vbClef&gt;</span>
+<span class="go">{0.0} &lt;music21.key.KeySignature of 1 flat&gt;</span>
+<span class="go">{0.0} &lt;music21.note.Note G&gt;</span>
+<span class="go">{2.0} &lt;music21.note.Note A&gt;</span>
+<span class="go">{4.0} &lt;music21.bar.Barline style=final&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">highestTime</span>
+<span class="go">4.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.systemFromSystem">
+<code class="descclassname">CapellaImporter.</code><code class="descname">systemFromSystem</code><span class="sig-paren">(</span><em>systemElement</em>, <em>systemObj=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.systemFromSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a <a class="reference internal" href="moduleStream.html#music21.stream.System" title="music21.stream.System"><code class="xref py py-class docutils literal"><span class="pre">System</span></code></a> object from a &lt;system&gt; tag.
+The System object will contain <a class="reference internal" href="moduleStream.html#music21.stream.Part" title="music21.stream.Part"><code class="xref py py-class docutils literal"><span class="pre">Part</span></code></a> objects
+which will have the notes, etc. contained in it.</p>
+<p>TODO: Handle multiple &lt;voices&gt;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.systemScoreFromScore">
+<code class="descclassname">CapellaImporter.</code><code class="descname">systemScoreFromScore</code><span class="sig-paren">(</span><em>scoreElement</em>, <em>scoreObj=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.systemScoreFromScore" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns an <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> object from a &lt;score&gt; tag.</p>
+<p>The Score object is not a standard music21 Score object which contains
+parts, then measures, then voices, but instead contains systems which 
+optionally contain voices, which contain parts.  No measures have yet
+been created.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.tieFromTie">
+<code class="descclassname">CapellaImporter.</code><code class="descname">tieFromTie</code><span class="sig-paren">(</span><em>tieElement</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.tieFromTie" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a <a class="reference internal" href="moduleTie.html#music21.tie.Tie" title="music21.tie.Tie"><code class="xref py py-class docutils literal"><span class="pre">Tie</span></code></a> element from a &lt;tie&gt; tag</p>
+<p>if begin == &#8216;true&#8217; then Tie.type = start</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tieEl</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;tie begin=&quot;true&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">tieFromTie</span><span class="p">(</span><span class="n">tieEl</span><span class="p">)</span>
+<span class="go">&lt;music21.tie.Tie start&gt;</span>
+</pre></div>
+</div>
+<p>if end == &#8216;true&#8217; then Tie.type = stop</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tieEl</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;tie end=&quot;true&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">tieFromTie</span><span class="p">(</span><span class="n">tieEl</span><span class="p">)</span>
+<span class="go">&lt;music21.tie.Tie stop&gt;</span>
+</pre></div>
+</div>
+<p>if begin == &#8216;true&#8217; and end == &#8216;true&#8217; then Tie.type = continue (is this right???)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tieEl</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;tie begin=&quot;true&quot; end=&quot;true&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">tieFromTie</span><span class="p">(</span><span class="n">tieEl</span><span class="p">)</span>
+<span class="go">&lt;music21.tie.Tie continue&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.timeSignatureFromTimeSign">
+<code class="descclassname">CapellaImporter.</code><code class="descname">timeSignatureFromTimeSign</code><span class="sig-paren">(</span><em>timeSign</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.timeSignatureFromTimeSign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a> object from a timeSign tag.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timeSign</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;timeSign time=&quot;4/4&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">timeSignatureFromTimeSign</span><span class="p">(</span><span class="n">timeSign</span><span class="p">)</span>
+<span class="go">&lt;music21.meter.TimeSignature 4/4&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">timeSign</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;timeSign time=&quot;infinite&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">timeSignatureFromTimeSign</span><span class="p">(</span><span class="n">timeSign</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.capella.fromCapellaXML.CapellaImporter.tupletFromTuplet">
+<code class="descclassname">CapellaImporter.</code><code class="descname">tupletFromTuplet</code><span class="sig-paren">(</span><em>tupletElement</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.capella.fromCapellaXML.CapellaImporter.tupletFromTuplet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference internal" href="moduleDuration.html#music21.duration.Tuplet" title="music21.duration.Tuplet"><code class="xref py py-class docutils literal"><span class="pre">Tuplet</span></code></a> object from a &lt;tuplet&gt; tag.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capella</span><span class="o">.</span><span class="n">fromCapellaXML</span><span class="o">.</span><span class="n">CapellaImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tupletTag</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">domElementFromText</span><span class="p">(</span><span class="s1">&#39;&lt;tuplet count=&quot;3&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span><span class="o">.</span><span class="n">tupletFromTuplet</span><span class="p">(</span><span class="n">tupletTag</span><span class="p">)</span>    
+<span class="go">&lt;music21.duration.Tuplet 3/2/eighth&gt;</span>
+</pre></div>
+</div>
+<p>does not handle &#8216;tripartite&#8217; = True</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleChord.html" title="music21.chord"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleBrailleTranslate.html" title="music21.braille.translate"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

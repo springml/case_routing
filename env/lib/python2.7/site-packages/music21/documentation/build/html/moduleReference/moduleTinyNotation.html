@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.tinyNotation &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.tree" href="moduleTree.html" />
+    <link rel="prev" title="music21.tie" href="moduleTie.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleTree.html" title="music21.tree"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleTie.html" title="music21.tie"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleTie.html"
+                        title="previous chapter">music21.tie</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleTree.html"
+                        title="next chapter">music21.tree</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.tinyNotation</a><ul>
+<li><a class="reference internal" href="#converter">Converter</a></li>
+<li><a class="reference internal" href="#idmodifier">IdModifier</a></li>
+<li><a class="reference internal" href="#lyricmodifier">LyricModifier</a></li>
+<li><a class="reference internal" href="#modifier">Modifier</a></li>
+<li><a class="reference internal" href="#noteorresttoken">NoteOrRestToken</a></li>
+<li><a class="reference internal" href="#notetoken">NoteToken</a></li>
+<li><a class="reference internal" href="#quadrupletstate">QuadrupletState</a></li>
+<li><a class="reference internal" href="#resttoken">RestToken</a></li>
+<li><a class="reference internal" href="#starmodifier">StarModifier</a></li>
+<li><a class="reference internal" href="#state">State</a></li>
+<li><a class="reference internal" href="#tiestate">TieState</a></li>
+<li><a class="reference internal" href="#timesignaturetoken">TimeSignatureToken</a></li>
+<li><a class="reference internal" href="#token">Token</a></li>
+<li><a class="reference internal" href="#tripletstate">TripletState</a></li>
+<li><a class="reference internal" href="#tupletstate">TupletState</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleTinyNotation.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-tinynotation">
+<span id="moduletinynotation"></span><h1>music21.tinyNotation<a class="headerlink" href="#music21-tinynotation" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.tinyNotation"></span><p>tinyNotation is a simple way of specifying single line melodies
+that uses a notation somewhat similar to Lilypond but with WAY fewer 
+options.  It was originally developed to notate trecento (medieval Italian)
+music, but it is pretty useful for a lot of short examples, so we have
+made it a generally supported music21 format.</p>
+<p>N.B.: TinyNotation is not meant to expand to cover every single case.  Instead
+it is meant to be subclassable to extend to the cases <em>your</em> project needs.
+See for instance the harmony examples in HarmonyStream and HarmonyNote
+or the Trecento specific examples in trecento/cadencebook.py</p>
+<p>Here are the most important rules:</p>
+<ol class="arabic">
+<li><p class="first">Note names are: a,b,c,d,e,f,g and r for rest</p>
+</li>
+<li><p class="first">Flats, sharps, and naturals are notated as #,- (not b), and (if needed) n.  
+If the accidental is above the staff (i.e., editorial), enclose it in 
+parentheses: (#), etc.  Make sure that flats in the key signatures are
+explicitly specified.</p>
+</li>
+<li><p class="first">Note octaves are specified as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">CC</span> <span class="n">to</span> <span class="n">BB</span> <span class="o">=</span> <span class="kn">from</span> <span class="nn">C</span> <span class="n">below</span> <span class="n">bass</span> <span class="n">clef</span> <span class="n">to</span> <span class="n">second</span><span class="o">-</span><span class="n">line</span> <span class="n">B</span> <span class="ow">in</span> <span class="n">bass</span> <span class="n">clef</span>
+<span class="n">C</span> <span class="n">to</span> <span class="n">B</span> <span class="o">=</span> <span class="kn">from</span> <span class="nn">bass</span> <span class="n">clef</span> <span class="n">C</span> <span class="n">to</span> <span class="n">B</span> <span class="n">below</span> <span class="n">middle</span> <span class="n">C</span><span class="o">.</span>
+<span class="n">c</span>  <span class="n">to</span> <span class="n">b</span> <span class="o">=</span> <span class="kn">from</span> <span class="nn">middle</span> <span class="n">C</span> <span class="n">to</span> <span class="n">the</span> <span class="n">middle</span> <span class="n">of</span> <span class="n">treble</span> <span class="n">clef</span>
+<span class="n">c</span><span class="s1">&#39; to b&#39;</span> <span class="o">=</span> <span class="kn">from</span> <span class="nn">C</span> <span class="ow">in</span> <span class="n">treble</span> <span class="n">clef</span> <span class="n">to</span> <span class="n">B</span> <span class="n">above</span> <span class="n">treble</span> <span class="n">clef</span>
+</pre></div>
+</div>
+<p>Octaves below and above these are specified by further doublings of
+letter (CCC) or apostrophes (c&#8217;&#8216;) &#8211; this is one of the note name
+standards found in many music theory books.</p>
+</li>
+<li><p class="first">After the note name, a number may be placed indicating the note 
+length: 1 = whole note, 2 = half, 4 = quarter, 8 = eighth, 16 = sixteenth.  
+etc.  If the number is omitted then it is assumed to be the same 
+as the previous note.  I.e., c8 B c d  is a string of eighth notes.</p>
+</li>
+<li><p class="first">After the number, a ~ can be placed to show a tie to the next note.  
+A &#8221;.&#8221; indicates a dotted note.  (If you are entering
+data via Excel or other spreadsheet, be sure that &#8220;capitalize the 
+first letter of sentences&#8221; is turned off under &#8220;Tools-&gt;AutoCorrect,&#8221;
+otherwise the next letter will be capitalized, and the octave will
+be screwed up.)</p>
+</li>
+<li><p class="first">For triplets use this notation:  <cite>trip{c4 d8}</cite>  indicating that these 
+two notes both have &#8220;3s&#8221; over them.  For 4 in the place of 3, 
+use <cite>quad{c16 d e8}</cite>.  No other tuplets are supported.</p>
+</li>
+</ol>
+<p>Again, see the <code class="xref py py-class docutils literal"><span class="pre">HarmonyStream</span></code> (below) and 
+trecento.cadencebook examples
+to see how to make TinyNotation useful for your own needs.</p>
+<p>(Currently, final notes with fermatas (or any very long final note), 
+take 0 for the note length.  But expect this to disappear from the
+TinyNotation specification soon, as it&#8217;s too Trecento specific.)</p>
+<p>an alpha complete rewrite of tinyNotation.</p>
+<p>tinyNotation was one of the first modules of music21 and one of my first attempts to
+program in Python.  and it shows.</p>
+<p>this is what the module should have been... from mistakes
+learned and insights from ABC etc. parsing.</p>
+<p>keeping both until this becomes stable.</p>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tnc</span> <span class="o">=</span> <span class="n">tinyNotation</span><span class="o">.</span><span class="n">Converter</span><span class="p">(</span><span class="s2">&quot;3/4 E4 r f# g=lastG trip{b-8 a g} c4~ c&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream1</span> <span class="o">=</span> <span class="n">tnc</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span><span class="o">.</span><span class="n">stream</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream1</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 3/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">    {1.0} &lt;music21.note.Rest rest&gt;</span>
+<span class="go">    {2.0} &lt;music21.note.Note F#&gt;</span>
+<span class="go">{3.0} &lt;music21.stream.Measure 2 offset=3.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note G&gt;</span>
+<span class="go">    {1.0} &lt;music21.note.Note B-&gt;</span>
+<span class="go">    {1.3333} &lt;music21.note.Note A&gt;</span>
+<span class="go">    {1.6667} &lt;music21.note.Note G&gt;</span>
+<span class="go">    {2.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{6.0} &lt;music21.stream.Measure 3 offset=6.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">    {1.0} &lt;music21.bar.Barline style=final&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stream1</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s2">&quot;lastG&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">step</span>
+<span class="go">&#39;G&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream1</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notesAndRests</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isRest</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream1</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notesAndRests</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">octave</span>
+<span class="go">3    </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream1</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tie</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;start&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream1</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tie</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;stop&#39;</span>
+</pre></div>
+</div>
+<p>Changing time signatures are supported:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 3/4 C4 D E 2/4 F G A B 1/4 c&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.BassClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 3/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">    {1.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">    {2.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">{3.0} &lt;music21.stream.Measure 2 offset=3.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 2/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note F&gt;</span>
+<span class="go">    {1.0} &lt;music21.note.Note G&gt;</span>
+<span class="go">{5.0} &lt;music21.stream.Measure 3 offset=5.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note A&gt;</span>
+<span class="go">    {1.0} &lt;music21.note.Note B&gt;</span>
+<span class="go">{7.0} &lt;music21.stream.Measure 4 offset=7.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 1/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">    {1.0} &lt;music21.bar.Barline style=final&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="section" id="converter">
+<h2>Converter<a class="headerlink" href="#converter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.Converter">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">Converter</code><span class="sig-paren">(</span><em>stringRep=''</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.Converter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main conversion object for TinyNotation.</p>
+<p>Accepts one keyword: makeNotation=False to get &#8220;classic&#8221; TinyNotation formats.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.Converter" title="music21.tinyNotation.Converter"><code class="xref py py-class docutils literal"><span class="pre">Converter</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tinyNotation.Converter.parse">
+<code class="descclassname">Converter.</code><code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.Converter.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>splitPreTokens, setupRegularExpressions, then run through each preToken, and run postParse.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.Converter.parseOne">
+<code class="descclassname">Converter.</code><code class="descname">parseOne</code><span class="sig-paren">(</span><em>i</em>, <em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.Converter.parseOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>parse a single token at position i, with
+text t.</p>
+<p>Checks for state changes, modifiers, tokens, and end-state brackets.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.Converter.postParse">
+<code class="descclassname">Converter.</code><code class="descname">postParse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.Converter.postParse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call postParse calls on .stream, currently just .makeMeasures.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.Converter.setupRegularExpressions">
+<code class="descclassname">Converter.</code><code class="descname">setupRegularExpressions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.Converter.setupRegularExpressions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Regular expressions get compiled for faster
+usage.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.Converter.splitPreTokens">
+<code class="descclassname">Converter.</code><code class="descname">splitPreTokens</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.Converter.splitPreTokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>splits the string into textual tokens.</p>
+<p>Right now just splits on spaces, but might be smarter to ignore spaces in
+quotes, etc. later.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="idmodifier">
+<h2>IdModifier<a class="headerlink" href="#idmodifier" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.IdModifier">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">IdModifier</code><span class="sig-paren">(</span><em>modifierData</em>, <em>modifierString</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.IdModifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets the .id of the m21Obj, called with =</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.IdModifier" title="music21.tinyNotation.IdModifier"><code class="xref py py-class docutils literal"><span class="pre">IdModifier</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.IdModifier" title="music21.tinyNotation.IdModifier"><code class="xref py py-class docutils literal"><span class="pre">IdModifier</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tinyNotation.IdModifier.postParse">
+<code class="descclassname">IdModifier.</code><code class="descname">postParse</code><span class="sig-paren">(</span><em>m21Obj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.IdModifier.postParse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.Modifier.preParse" title="music21.tinyNotation.Modifier.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="lyricmodifier">
+<h2>LyricModifier<a class="headerlink" href="#lyricmodifier" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.LyricModifier">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">LyricModifier</code><span class="sig-paren">(</span><em>modifierData</em>, <em>modifierString</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.LyricModifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets the .lyric of the m21Obj, called with _</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.LyricModifier" title="music21.tinyNotation.LyricModifier"><code class="xref py py-class docutils literal"><span class="pre">LyricModifier</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.LyricModifier" title="music21.tinyNotation.LyricModifier"><code class="xref py py-class docutils literal"><span class="pre">LyricModifier</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tinyNotation.LyricModifier.postParse">
+<code class="descclassname">LyricModifier.</code><code class="descname">postParse</code><span class="sig-paren">(</span><em>m21Obj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.LyricModifier.postParse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.Modifier.preParse" title="music21.tinyNotation.Modifier.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="modifier">
+<h2>Modifier<a class="headerlink" href="#modifier" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.Modifier">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">Modifier</code><span class="sig-paren">(</span><em>modifierData</em>, <em>modifierString</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.Modifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>a modifier is something that changes the current
+token, like setting the Id or Lyric.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tinyNotation.Modifier.postParse">
+<code class="descclassname">Modifier.</code><code class="descname">postParse</code><span class="sig-paren">(</span><em>m21Obj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.Modifier.postParse" title="Permalink to this definition">¶</a></dt>
+<dd><p>called after the tokenString has been
+truend into an m21Obj.  m21Obj may be None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.Modifier.preParse">
+<code class="descclassname">Modifier.</code><code class="descname">preParse</code><span class="sig-paren">(</span><em>tokenString</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.Modifier.preParse" title="Permalink to this definition">¶</a></dt>
+<dd><p>called before the tokenString has been
+turned into an object</p>
+</dd></dl>
+
+</div>
+<div class="section" id="noteorresttoken">
+<h2>NoteOrRestToken<a class="headerlink" href="#noteorresttoken" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.NoteOrRestToken">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">NoteOrRestToken</code><span class="sig-paren">(</span><em>token=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.NoteOrRestToken" title="Permalink to this definition">¶</a></dt>
+<dd><p>represents a Note or Rest.  Chords are represented by Note objects</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.NoteOrRestToken" title="music21.tinyNotation.NoteOrRestToken"><code class="xref py py-class docutils literal"><span class="pre">NoteOrRestToken</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.Token" title="music21.tinyNotation.Token"><code class="xref py py-class docutils literal"><span class="pre">Token</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.NoteOrRestToken" title="music21.tinyNotation.NoteOrRestToken"><code class="xref py py-class docutils literal"><span class="pre">NoteOrRestToken</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tinyNotation.NoteOrRestToken.applyDuration">
+<code class="descclassname">NoteOrRestToken.</code><code class="descname">applyDuration</code><span class="sig-paren">(</span><em>n</em>, <em>t</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.NoteOrRestToken.applyDuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>takes the information in the string <cite>t</cite> and creates a Duration object for the 
+note or rest <cite>n</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.NoteOrRestToken.dots">
+<code class="descclassname">NoteOrRestToken.</code><code class="descname">dots</code><span class="sig-paren">(</span><em>n</em>, <em>search</em>, <em>pm</em>, <em>t</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.NoteOrRestToken.dots" title="Permalink to this definition">¶</a></dt>
+<dd><p>adds the appropriate number of dots to the right place.</p>
+<p>Subclassed in TrecentoNotation where two dots has a different meaning.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.NoteOrRestToken.durationType">
+<code class="descclassname">NoteOrRestToken.</code><code class="descname">durationType</code><span class="sig-paren">(</span><em>n</em>, <em>search</em>, <em>pm</em>, <em>t</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.NoteOrRestToken.durationType" title="Permalink to this definition">¶</a></dt>
+<dd><p>The result of a successful search for a duration type: puts a Duration in the right place.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.tinyNotation.Token" title="music21.tinyNotation.Token"><code class="xref py py-class docutils literal"><span class="pre">Token</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.Token.parse" title="music21.tinyNotation.Token.parse"><code class="xref py py-meth docutils literal"><span class="pre">parse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="notetoken">
+<h2>NoteToken<a class="headerlink" href="#notetoken" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.NoteToken">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">NoteToken</code><span class="sig-paren">(</span><em>token=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.NoteToken" title="Permalink to this definition">¶</a></dt>
+<dd><p>A NoteToken represents a single Note with pitch</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c3</span> <span class="o">=</span> <span class="n">tinyNotation</span><span class="o">.</span><span class="n">NoteToken</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c3</span>
+<span class="go">&lt;music21.tinyNotation.NoteToken object at 0x10b07bf98&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">c3</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">&lt;music21.note.Note C&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">nameWithOctave</span>
+<span class="go">&#39;C3&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bFlat6</span> <span class="o">=</span> <span class="n">tinyNotation</span><span class="o">.</span><span class="n">NoteToken</span><span class="p">(</span><span class="s2">&quot;b&#39;&#39;-&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bFlat6</span>
+<span class="go">&lt;music21.tinyNotation.NoteToken object at 0x10b07bf98&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">bFlat6</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">&lt;music21.note.Note B-&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">nameWithOctave</span>
+<span class="go">&#39;B-6&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.NoteToken" title="music21.tinyNotation.NoteToken"><code class="xref py py-class docutils literal"><span class="pre">NoteToken</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.NoteOrRestToken" title="music21.tinyNotation.NoteOrRestToken"><code class="xref py py-class docutils literal"><span class="pre">NoteOrRestToken</span></code></a></li>
+<li><a class="reference internal" href="#music21.tinyNotation.Token" title="music21.tinyNotation.Token"><code class="xref py py-class docutils literal"><span class="pre">Token</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.NoteToken" title="music21.tinyNotation.NoteToken"><code class="xref py py-class docutils literal"><span class="pre">NoteToken</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tinyNotation.NoteToken.editorialAccidental">
+<code class="descclassname">NoteToken.</code><code class="descname">editorialAccidental</code><span class="sig-paren">(</span><em>n</em>, <em>search</em>, <em>pm</em>, <em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.NoteToken.editorialAccidental" title="Permalink to this definition">¶</a></dt>
+<dd><p>indicates that the accidental is in parentheses, so set it up to be stored in ficta.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.NoteToken.flats">
+<code class="descclassname">NoteToken.</code><code class="descname">flats</code><span class="sig-paren">(</span><em>n</em>, <em>search</em>, <em>pm</em>, <em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.NoteToken.flats" title="Permalink to this definition">¶</a></dt>
+<dd><p>called when one or more flats have been found.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.NoteToken.getPitch">
+<code class="descclassname">NoteToken.</code><code class="descname">getPitch</code><span class="sig-paren">(</span><em>n</em>, <em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.NoteToken.getPitch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.NoteToken.highOctave">
+<code class="descclassname">NoteToken.</code><code class="descname">highOctave</code><span class="sig-paren">(</span><em>n</em>, <em>search</em>, <em>pm</em>, <em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.NoteToken.highOctave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when a note of octave 4 or higher is encountered.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.NoteToken.lowOctave">
+<code class="descclassname">NoteToken.</code><code class="descname">lowOctave</code><span class="sig-paren">(</span><em>n</em>, <em>search</em>, <em>pm</em>, <em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.NoteToken.lowOctave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when a note of octave 3 or below is encountered.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.NoteToken.natural">
+<code class="descclassname">NoteToken.</code><code class="descname">natural</code><span class="sig-paren">(</span><em>n</em>, <em>search</em>, <em>pm</em>, <em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.NoteToken.natural" title="Permalink to this definition">¶</a></dt>
+<dd><p>called when an explicit natural has been found.  All pitches are natural without
+being specified, so not needed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.NoteToken.parse">
+<code class="descclassname">NoteToken.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.NoteToken.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the pitch from the note.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.NoteToken.sharps">
+<code class="descclassname">NoteToken.</code><code class="descname">sharps</code><span class="sig-paren">(</span><em>n</em>, <em>search</em>, <em>pm</em>, <em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.NoteToken.sharps" title="Permalink to this definition">¶</a></dt>
+<dd><p>called when one or more sharps have been found.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.tinyNotation.NoteOrRestToken" title="music21.tinyNotation.NoteOrRestToken"><code class="xref py py-class docutils literal"><span class="pre">NoteOrRestToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.NoteOrRestToken.applyDuration" title="music21.tinyNotation.NoteOrRestToken.applyDuration"><code class="xref py py-meth docutils literal"><span class="pre">applyDuration()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.NoteOrRestToken.dots" title="music21.tinyNotation.NoteOrRestToken.dots"><code class="xref py py-meth docutils literal"><span class="pre">dots()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.NoteOrRestToken.durationType" title="music21.tinyNotation.NoteOrRestToken.durationType"><code class="xref py py-meth docutils literal"><span class="pre">durationType()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="quadrupletstate">
+<h2>QuadrupletState<a class="headerlink" href="#quadrupletstate" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.QuadrupletState">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">QuadrupletState</code><span class="sig-paren">(</span><em>parent</em>, <em>stateInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.QuadrupletState" title="Permalink to this definition">¶</a></dt>
+<dd><p>a 4:3 tuplet</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.QuadrupletState" title="music21.tinyNotation.QuadrupletState"><code class="xref py py-class docutils literal"><span class="pre">QuadrupletState</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.TupletState" title="music21.tinyNotation.TupletState"><code class="xref py py-class docutils literal"><span class="pre">TupletState</span></code></a></li>
+<li><a class="reference internal" href="#music21.tinyNotation.State" title="music21.tinyNotation.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.QuadrupletState" title="music21.tinyNotation.QuadrupletState"><code class="xref py py-class docutils literal"><span class="pre">QuadrupletState</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.tinyNotation.TupletState" title="music21.tinyNotation.TupletState"><code class="xref py py-class docutils literal"><span class="pre">TupletState</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.TupletState.affectTokenAfterParse" title="music21.tinyNotation.TupletState.affectTokenAfterParse"><code class="xref py py-meth docutils literal"><span class="pre">affectTokenAfterParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.TupletState.end" title="music21.tinyNotation.TupletState.end"><code class="xref py py-meth docutils literal"><span class="pre">end()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.tinyNotation.State" title="music21.tinyNotation.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State.affectTokenAfterParseBeforeModifiers" title="music21.tinyNotation.State.affectTokenAfterParseBeforeModifiers"><code class="xref py py-meth docutils literal"><span class="pre">affectTokenAfterParseBeforeModifiers()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State.affectTokenBeforeParse" title="music21.tinyNotation.State.affectTokenBeforeParse"><code class="xref py py-meth docutils literal"><span class="pre">affectTokenBeforeParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State.start" title="music21.tinyNotation.State.start"><code class="xref py py-meth docutils literal"><span class="pre">start()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="resttoken">
+<h2>RestToken<a class="headerlink" href="#resttoken" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.RestToken">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">RestToken</code><span class="sig-paren">(</span><em>token=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.RestToken" title="Permalink to this definition">¶</a></dt>
+<dd><p>A token starting with &#8216;r&#8217;, representing a rest.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.RestToken" title="music21.tinyNotation.RestToken"><code class="xref py py-class docutils literal"><span class="pre">RestToken</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.NoteOrRestToken" title="music21.tinyNotation.NoteOrRestToken"><code class="xref py py-class docutils literal"><span class="pre">NoteOrRestToken</span></code></a></li>
+<li><a class="reference internal" href="#music21.tinyNotation.Token" title="music21.tinyNotation.Token"><code class="xref py py-class docutils literal"><span class="pre">Token</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.RestToken" title="music21.tinyNotation.RestToken"><code class="xref py py-class docutils literal"><span class="pre">RestToken</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tinyNotation.RestToken.parse">
+<code class="descclassname">RestToken.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.RestToken.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.tinyNotation.NoteOrRestToken" title="music21.tinyNotation.NoteOrRestToken"><code class="xref py py-class docutils literal"><span class="pre">NoteOrRestToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.NoteOrRestToken.applyDuration" title="music21.tinyNotation.NoteOrRestToken.applyDuration"><code class="xref py py-meth docutils literal"><span class="pre">applyDuration()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.NoteOrRestToken.dots" title="music21.tinyNotation.NoteOrRestToken.dots"><code class="xref py py-meth docutils literal"><span class="pre">dots()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.NoteOrRestToken.durationType" title="music21.tinyNotation.NoteOrRestToken.durationType"><code class="xref py py-meth docutils literal"><span class="pre">durationType()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="starmodifier">
+<h2>StarModifier<a class="headerlink" href="#starmodifier" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.StarModifier">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">StarModifier</code><span class="sig-paren">(</span><em>modifierData</em>, <em>modifierString</em>, <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.StarModifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>does nothing, but easily subclassed.  Uses <em>...</em> to make it happen</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.StarModifier" title="music21.tinyNotation.StarModifier"><code class="xref py py-class docutils literal"><span class="pre">StarModifier</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.StarModifier" title="music21.tinyNotation.StarModifier"><code class="xref py py-class docutils literal"><span class="pre">StarModifier</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.tinyNotation.Modifier" title="music21.tinyNotation.Modifier"><code class="xref py py-class docutils literal"><span class="pre">Modifier</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.Modifier.postParse" title="music21.tinyNotation.Modifier.postParse"><code class="xref py py-meth docutils literal"><span class="pre">postParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.Modifier.preParse" title="music21.tinyNotation.Modifier.preParse"><code class="xref py py-meth docutils literal"><span class="pre">preParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="state">
+<h2>State<a class="headerlink" href="#state" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.State">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">State</code><span class="sig-paren">(</span><em>parent</em>, <em>stateInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.State" title="Permalink to this definition">¶</a></dt>
+<dd><p>State tokens apply something to 
+every note found within it.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.State" title="music21.tinyNotation.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tinyNotation.State.affectTokenAfterParse">
+<code class="descclassname">State.</code><code class="descname">affectTokenAfterParse</code><span class="sig-paren">(</span><em>m21Obj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.State.affectTokenAfterParse" title="Permalink to this definition">¶</a></dt>
+<dd><p>called to modify the tokenObj after parsing</p>
+<p>tokenObj may be None if another
+state has deleted it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.State.affectTokenAfterParseBeforeModifiers">
+<code class="descclassname">State.</code><code class="descname">affectTokenAfterParseBeforeModifiers</code><span class="sig-paren">(</span><em>m21Obj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.State.affectTokenAfterParseBeforeModifiers" title="Permalink to this definition">¶</a></dt>
+<dd><p>called after the object has been acquired but before modifiers have been applied.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.State.affectTokenBeforeParse">
+<code class="descclassname">State.</code><code class="descname">affectTokenBeforeParse</code><span class="sig-paren">(</span><em>tokenStr</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.State.affectTokenBeforeParse" title="Permalink to this definition">¶</a></dt>
+<dd><p>called to modify the string of a token.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.State.end">
+<code class="descclassname">State.</code><code class="descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.State.end" title="Permalink to this definition">¶</a></dt>
+<dd><p>called just after removing state</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.State.start">
+<code class="descclassname">State.</code><code class="descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.State.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>called when the state is initiated</p>
+</dd></dl>
+
+</div>
+<div class="section" id="tiestate">
+<h2>TieState<a class="headerlink" href="#tiestate" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.TieState">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">TieState</code><span class="sig-paren">(</span><em>parent</em>, <em>stateInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.TieState" title="Permalink to this definition">¶</a></dt>
+<dd><p>A TieState is an autoexpiring state that applies a tie start to this note and a 
+tie stop to the next note.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.TieState" title="music21.tinyNotation.TieState"><code class="xref py py-class docutils literal"><span class="pre">TieState</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State" title="music21.tinyNotation.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.TieState" title="music21.tinyNotation.TieState"><code class="xref py py-class docutils literal"><span class="pre">TieState</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tinyNotation.TieState.end">
+<code class="descclassname">TieState.</code><code class="descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.TieState.end" title="Permalink to this definition">¶</a></dt>
+<dd><p>end the tie state by applying tie ties to the appropriate notes</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.tinyNotation.State" title="music21.tinyNotation.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State.affectTokenAfterParse" title="music21.tinyNotation.State.affectTokenAfterParse"><code class="xref py py-meth docutils literal"><span class="pre">affectTokenAfterParse()</span></code></a></li>
+<li><a class="reference internal" href="#music21.tinyNotation.State.affectTokenAfterParseBeforeModifiers" title="music21.tinyNotation.State.affectTokenAfterParseBeforeModifiers"><code class="xref py py-meth docutils literal"><span class="pre">affectTokenAfterParseBeforeModifiers()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State.affectTokenBeforeParse" title="music21.tinyNotation.State.affectTokenBeforeParse"><code class="xref py py-meth docutils literal"><span class="pre">affectTokenBeforeParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State.start" title="music21.tinyNotation.State.start"><code class="xref py py-meth docutils literal"><span class="pre">start()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="timesignaturetoken">
+<h2>TimeSignatureToken<a class="headerlink" href="#timesignaturetoken" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.TimeSignatureToken">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">TimeSignatureToken</code><span class="sig-paren">(</span><em>token=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.TimeSignatureToken" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a single time signature, like 1/4</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.TimeSignatureToken" title="music21.tinyNotation.TimeSignatureToken"><code class="xref py py-class docutils literal"><span class="pre">TimeSignatureToken</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.Token" title="music21.tinyNotation.Token"><code class="xref py py-class docutils literal"><span class="pre">Token</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.TimeSignatureToken" title="music21.tinyNotation.TimeSignatureToken"><code class="xref py py-class docutils literal"><span class="pre">TimeSignatureToken</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tinyNotation.TimeSignatureToken.parse">
+<code class="descclassname">TimeSignatureToken.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.TimeSignatureToken.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="token">
+<h2>Token<a class="headerlink" href="#token" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.Token">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">Token</code><span class="sig-paren">(</span><em>token=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.Token" title="Permalink to this definition">¶</a></dt>
+<dd><p>A single token made from the parser.</p>
+<p>Call .parse(parent) to make it work.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.Token" title="music21.tinyNotation.Token"><code class="xref py py-class docutils literal"><span class="pre">Token</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tinyNotation.Token.parse">
+<code class="descclassname">Token.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.Token.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>do NOT store parent &#8211; probably
+too slow</p>
+</dd></dl>
+
+</div>
+<div class="section" id="tripletstate">
+<h2>TripletState<a class="headerlink" href="#tripletstate" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.TripletState">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">TripletState</code><span class="sig-paren">(</span><em>parent</em>, <em>stateInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.TripletState" title="Permalink to this definition">¶</a></dt>
+<dd><p>a 3:2 tuplet</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.TripletState" title="music21.tinyNotation.TripletState"><code class="xref py py-class docutils literal"><span class="pre">TripletState</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.TupletState" title="music21.tinyNotation.TupletState"><code class="xref py py-class docutils literal"><span class="pre">TupletState</span></code></a></li>
+<li><a class="reference internal" href="#music21.tinyNotation.State" title="music21.tinyNotation.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.TripletState" title="music21.tinyNotation.TripletState"><code class="xref py py-class docutils literal"><span class="pre">TripletState</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.tinyNotation.TupletState" title="music21.tinyNotation.TupletState"><code class="xref py py-class docutils literal"><span class="pre">TupletState</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.TupletState.affectTokenAfterParse" title="music21.tinyNotation.TupletState.affectTokenAfterParse"><code class="xref py py-meth docutils literal"><span class="pre">affectTokenAfterParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.TupletState.end" title="music21.tinyNotation.TupletState.end"><code class="xref py py-meth docutils literal"><span class="pre">end()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.tinyNotation.State" title="music21.tinyNotation.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State.affectTokenAfterParseBeforeModifiers" title="music21.tinyNotation.State.affectTokenAfterParseBeforeModifiers"><code class="xref py py-meth docutils literal"><span class="pre">affectTokenAfterParseBeforeModifiers()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State.affectTokenBeforeParse" title="music21.tinyNotation.State.affectTokenBeforeParse"><code class="xref py py-meth docutils literal"><span class="pre">affectTokenBeforeParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State.start" title="music21.tinyNotation.State.start"><code class="xref py py-meth docutils literal"><span class="pre">start()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="tupletstate">
+<h2>TupletState<a class="headerlink" href="#tupletstate" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tinyNotation.TupletState">
+<em class="property">class </em><code class="descclassname">music21.tinyNotation.</code><code class="descname">TupletState</code><span class="sig-paren">(</span><em>parent</em>, <em>stateInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.TupletState" title="Permalink to this definition">¶</a></dt>
+<dd><p>a tuplet state applies tuplets to notes while parsing and sets &#8216;start&#8217; and &#8216;stop&#8217;
+on the first and last note when end is called.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.TupletState" title="music21.tinyNotation.TupletState"><code class="xref py py-class docutils literal"><span class="pre">TupletState</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State" title="music21.tinyNotation.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tinyNotation.TupletState" title="music21.tinyNotation.TupletState"><code class="xref py py-class docutils literal"><span class="pre">TupletState</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tinyNotation.TupletState.affectTokenAfterParse">
+<code class="descclassname">TupletState.</code><code class="descname">affectTokenAfterParse</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.TupletState.affectTokenAfterParse" title="Permalink to this definition">¶</a></dt>
+<dd><p>puts a tuplet on the note</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tinyNotation.TupletState.end">
+<code class="descclassname">TupletState.</code><code class="descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tinyNotation.TupletState.end" title="Permalink to this definition">¶</a></dt>
+<dd><p>end a tuplet by putting start on the first note and stop on the last.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.tinyNotation.State" title="music21.tinyNotation.State"><code class="xref py py-class docutils literal"><span class="pre">State</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State.affectTokenAfterParseBeforeModifiers" title="music21.tinyNotation.State.affectTokenAfterParseBeforeModifiers"><code class="xref py py-meth docutils literal"><span class="pre">affectTokenAfterParseBeforeModifiers()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State.affectTokenBeforeParse" title="music21.tinyNotation.State.affectTokenBeforeParse"><code class="xref py py-meth docutils literal"><span class="pre">affectTokenBeforeParse()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tinyNotation.State.start" title="music21.tinyNotation.State.start"><code class="xref py py-meth docutils literal"><span class="pre">start()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleTree.html" title="music21.tree"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleTie.html" title="music21.tie"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

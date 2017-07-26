@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.converter &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.converter.qmConverter" href="moduleConverterQmConverter.html" />
+    <link rel="prev" title="music21.common.weakrefTools" href="moduleCommonWeakrefTools.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleConverterQmConverter.html" title="music21.converter.qmConverter"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleCommonWeakrefTools.html" title="music21.common.weakrefTools"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleCommonWeakrefTools.html"
+                        title="previous chapter">music21.common.weakrefTools</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleConverterQmConverter.html"
+                        title="next chapter">music21.converter.qmConverter</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.converter</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#converter">Converter</a></li>
+<li><a class="reference internal" href="#archivemanager">ArchiveManager</a></li>
+<li><a class="reference internal" href="#picklefilter">PickleFilter</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleConverter.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-converter">
+<span id="moduleconverter"></span><h1>music21.converter<a class="headerlink" href="#music21-converter" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.converter"></span><p>music21.converter contains tools for loading music from various file formats,
+whether from disk, from the web, or from text, into
+music21.stream.:class:<cite>~music21.stream.Score</cite> objects (or
+other similar stream objects).</p>
+<p>The most powerful and easy to use tool is the <a class="reference internal" href="#music21.converter.parse" title="music21.converter.parse"><code class="xref py py-func docutils literal"><span class="pre">parse()</span></code></a>
+function. Simply provide a filename, URL, or text string and, if the format
+is supported, a <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> will be returned.</p>
+<p>This is the most general public interface for all formats.  Programmers
+adding their own formats to the system should provide an interface here to
+their own parsers (such as humdrum, musicxml, etc.)</p>
+<p>The second and subsequent times that a file is loaded it will likely be much
+faster since we store a parsed version of each file as a &#8220;pickle&#8221; object in
+the temp folder on the disk.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;d:/mydocs/schubert.krn&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span>
+<span class="go">&lt;music21.stream.Score ...&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.converter.parse">
+<code class="descclassname">music21.converter.</code><code class="descname">parse</code><span class="sig-paren">(</span><em>value</em>, <em>*args</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a file path, encoded data in a Python string, or a URL, attempt to
+parse the item into a Stream.  Note: URL downloading will not happen
+automatically unless the user has set their Environment &#8220;autoDownload&#8221;
+preference to &#8220;allow&#8221;.</p>
+<p>Keywords can include <cite>number</cite> which specifies a piece number in a file of
+multipiece file.</p>
+<p><cite>format</cite> specifies the format to parse the line of text or the file as.</p>
+<p>A string of text is first checked to see if it is a filename that exists on
+disk.  If not it is searched to see if it looks like a URL.  If not it is
+processed as data.</p>
+<p>PC File:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">r&#39;c:\users\myke\desktop\myfile.xml&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>Mac File:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;/Users/cuthbert/Desktop/myfile.xml&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>URL:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;http://midirepository.org/file220/file.mid&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>Data is preceded by an identifier such as &#8220;tinynotation:&#8221;</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinyNotation: 3/4 E4 r f# g=lastG trip{b-8 a g} c&quot;</span><span class="p">,</span> <span class="n">makeNotation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&lt;music21.meter.TimeSignature 3/4&gt;</span>
+</pre></div>
+</div>
+<p>or the format can be passed directly:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;2/16 E4 r f# g=lastG trip{b-8 a g} c&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;tinyNotation&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">flat</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&lt;music21.meter.TimeSignature 2/16&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.converter.parseFile">
+<code class="descclassname">music21.converter.</code><code class="descname">parseFile</code><span class="sig-paren">(</span><em>fp</em>, <em>number=None</em>, <em>format=None</em>, <em>forceSource=False</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.parseFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a file path, attempt to parse the file into a Stream.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.converter.parseData">
+<code class="descclassname">music21.converter.</code><code class="descname">parseData</code><span class="sig-paren">(</span><em>dataStr</em>, <em>number=None</em>, <em>format=None</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.parseData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given musical data represented within a Python string, attempt to parse the
+data into a Stream.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.converter.parseURL">
+<code class="descclassname">music21.converter.</code><code class="descname">parseURL</code><span class="sig-paren">(</span><em>url</em>, <em>number=None</em>, <em>format=None</em>, <em>forceSource=False</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.parseURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a URL, attempt to download and parse the file into a Stream. Note:
+URL downloading will not happen automatically unless the user has set their
+Environment &#8220;autoDownload&#8221; preference to &#8220;allow&#8221;.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.converter.freeze">
+<code class="descclassname">music21.converter.</code><code class="descname">freeze</code><span class="sig-paren">(</span><em>streamObj</em>, <em>fmt=None</em>, <em>fp=None</em>, <em>fastButUnsafe=False</em>, <em>zipType='zlib'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.freeze" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a StreamObject and a file path, serialize and store the Stream to a file.</p>
+<p>This function is based on the <code class="xref py py-class docutils literal"><span class="pre">StreamFreezer</span></code> object.</p>
+<p>The serialization format is defined by the <cite>fmt</cite> argument; &#8216;pickle&#8217; (the default) is only one
+presently supported.  &#8216;json&#8217; or &#8216;jsonnative&#8217; will be used once jsonpickle is good enough.</p>
+<p>If no file path is given, a temporary file is used.</p>
+<p>The file path is returned.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 4/4 c4 d e f&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">    {1.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">    {2.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">    {3.0} &lt;music21.note.Note F&gt;</span>
+<span class="go">    {4.0} &lt;music21.bar.Barline style=final&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">freeze</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;pickle&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span>
+<span class="go">&#39;/tmp/music21/sjiwoe.pgz&#39;</span>
+</pre></div>
+</div>
+<p>The file can then be &#8220;thawed&#8221; back into a Stream using the 
+<a class="reference internal" href="#music21.converter.thaw" title="music21.converter.thaw"><code class="xref py py-func docutils literal"><span class="pre">thaw()</span></code></a> method.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">thaw</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">    {1.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">    {2.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">    {3.0} &lt;music21.note.Note F&gt;</span>
+<span class="go">    {4.0} &lt;music21.bar.Barline style=final&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.converter.thaw">
+<code class="descclassname">music21.converter.</code><code class="descname">thaw</code><span class="sig-paren">(</span><em>fp</em>, <em>zipType='zlib'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.thaw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a file path of a serialized Stream, defrost the file into a Stream.</p>
+<p>This function is based on the <code class="xref py py-class docutils literal"><span class="pre">StreamFreezer</span></code> object.</p>
+<p>See the documentation for <a class="reference internal" href="#music21.converter.freeze" title="music21.converter.freeze"><code class="xref py py-meth docutils literal"><span class="pre">freeze()</span></code></a> for demos.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.converter.freezeStr">
+<code class="descclassname">music21.converter.</code><code class="descname">freezeStr</code><span class="sig-paren">(</span><em>streamObj</em>, <em>fmt=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.freezeStr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a StreamObject
+serialize and return a serialization string.</p>
+<p>This function is based on the
+<code class="xref py py-class docutils literal"><span class="pre">StreamFreezer</span></code> object.</p>
+<p>The serialization format is defined by
+the <cite>fmt</cite> argument; &#8216;pickle&#8217; (the default),
+is the only one presently supported.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinyNotation: 4/4 c4 d e f&#39;</span><span class="p">,</span> <span class="n">makeNotation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">{0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{1.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">{2.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">{3.0} &lt;music21.note.Note F&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">freezeStr</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;pickle&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">20</span> <span class="c1"># pickle implementation dependent</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">thawStr</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">{0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{1.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">{2.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">{3.0} &lt;music21.note.Note F&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.converter.thawStr">
+<code class="descclassname">music21.converter.</code><code class="descname">thawStr</code><span class="sig-paren">(</span><em>strData</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.thawStr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a serialization string, defrost into a Stream.</p>
+<p>This function is based on the <code class="xref py py-class docutils literal"><span class="pre">StreamFreezer</span></code> object.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.converter.registerSubconverter">
+<code class="descclassname">music21.converter.</code><code class="descname">registerSubconverter</code><span class="sig-paren">(</span><em>newSubConverter</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.registerSubconverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a Subconverter to the list of registered subconverters.</p>
+<p>Example, register a converter for the obsolete Amiga composition software Sonix (so fun...)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">ConverterSonix</span><span class="p">(</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">SubConverter</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="n">registerFormats</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;sonix&#39;</span><span class="p">,)</span>
+<span class="gp">... </span>   <span class="n">registerInputExtensions</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;mus&#39;</span><span class="p">,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">converter</span><span class="o">.</span><span class="n">registerSubconverter</span><span class="p">(</span><span class="n">ConverterSonix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scf</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">Converter</span><span class="p">()</span><span class="o">.</span><span class="n">getSubConverterFormats</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">scf</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">x</span><span class="p">,</span> <span class="n">scf</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> 
+<span class="go">(&#39;abc&#39;, &lt;class &#39;music21.converter.subConverters.ConverterABC&#39;&gt;)</span>
+<span class="gp">...</span>
+<span class="go">(&#39;sonix&#39;, &lt;class &#39;music21.ConverterSonix&#39;&gt;)   </span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<p>See <cite>converter.qmConverter</cite> for an example of an extended subconverter.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.converter.unregisterSubconverter">
+<code class="descclassname">music21.converter.</code><code class="descname">unregisterSubconverter</code><span class="sig-paren">(</span><em>removeSubconverter</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.unregisterSubconverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a Subconverter from the list of registered subconverters.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxlConverter</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">ConverterMusicXML</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">Converter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxlConverter</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">subconvertersList</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">converter</span><span class="o">.</span><span class="n">unregisterSubconverter</span><span class="p">(</span><span class="n">mxlConverter</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxlConverter</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">subconvertersList</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>if there is no such subConverter registered and it is not a default subconverter, 
+then a converter.ConverterException is raised:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">ConverterSonix</span><span class="p">(</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">SubConverter</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="n">registerFormats</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;sonix&#39;</span><span class="p">,)</span>
+<span class="gp">... </span>   <span class="n">registerInputExtensions</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;mus&#39;</span><span class="p">,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">converter</span><span class="o">.</span><span class="n">unregisterSubconverter</span><span class="p">(</span><span class="n">ConverterSonix</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.converter.ConverterException</span>: <span class="n">Could not remove &lt;class &#39;music21.ConverterSonix&#39;&gt; from </span>
+<span class="go">            registered subconverters</span>
+</pre></div>
+</div>
+<p>The special command &#8220;all&#8221; removes everything including the default converters:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">converter</span><span class="o">.</span><span class="n">unregisterSubconverter</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">subconvertersList</span><span class="p">()</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.converter.resetSubconverters">
+<code class="descclassname">music21.converter.</code><code class="descname">resetSubconverters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.resetSubconverters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset state to default (removing all registered and deregistered subconverters.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="converter">
+<h2>Converter<a class="headerlink" href="#converter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.converter.Converter">
+<em class="property">class </em><code class="descclassname">music21.converter.</code><code class="descname">Converter</code><a class="headerlink" href="#music21.converter.Converter" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class used for converting all supported data formats into music21 objects.</p>
+<p>Not a subclass, but a wrapper for different converter objects based on format.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.converter.Converter" title="music21.converter.Converter"><code class="xref py py-class docutils literal"><span class="pre">Converter</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.converter.Converter.stream">
+<code class="descclassname">Converter.</code><code class="descname">stream</code><a class="headerlink" href="#music21.converter.Converter.stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the .subConverter.stream object.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.converter.Converter" title="music21.converter.Converter"><code class="xref py py-class docutils literal"><span class="pre">Converter</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.converter.Converter.defaultSubconverters">
+<code class="descclassname">Converter.</code><code class="descname">defaultSubconverters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.Converter.defaultSubconverters" title="Permalink to this definition">¶</a></dt>
+<dd><p>return an alphabetical list of the default subconverters: those in converter.subConverters
+with the class Subconverter.</p>
+<p>Do not use generally.  use c.subConvertersList()</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">Converter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">sc</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">defaultSubconverters</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterABC&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterBraille&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterCapella&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterClercqTemperley&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterHumdrum&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterIPython&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterLilypond&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterMEI&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterMidi&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterMuseData&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterMusicXML&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterNoteworthy&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterNoteworthyBinary&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterRomanText&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterScala&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterText&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterTextLine&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterTinyNotation&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterVexflow&#39;&gt;</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.SubConverter&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.converter.Converter.formatFromHeader">
+<code class="descclassname">Converter.</code><code class="descname">formatFromHeader</code><span class="sig-paren">(</span><em>dataStr</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.Converter.formatFromHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>if dataStr begins with a text header such as  &#8220;tinyNotation:&#8221; then
+return that format plus the dataStr with the head removed.</p>
+<p>Else, return (None, dataStr) where dataStr is the original untouched.</p>
+<p>Not case sensitive.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">Converter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">formatFromHeader</span><span class="p">(</span><span class="s1">&#39;tinynotation: C4 E2&#39;</span><span class="p">)</span>
+<span class="go">(&#39;tinynotation&#39;, &#39;C4 E2&#39;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">formatFromHeader</span><span class="p">(</span><span class="s1">&#39;C4 E2&#39;</span><span class="p">)</span>
+<span class="go">(None, &#39;C4 E2&#39;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">formatFromHeader</span><span class="p">(</span><span class="s1">&#39;romanText: m1: a: I b2 V&#39;</span><span class="p">)</span>
+<span class="go">(&#39;romantext&#39;, &#39;m1: a: I b2 V&#39;)</span>
+</pre></div>
+</div>
+<p>New formats can register new headers:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">ConverterSonix</span><span class="p">(</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">SubConverter</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="n">registerFormats</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;sonix&#39;</span><span class="p">,)</span>
+<span class="gp">... </span>   <span class="n">registerInputExtensions</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;mus&#39;</span><span class="p">,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">converter</span><span class="o">.</span><span class="n">registerSubconverter</span><span class="p">(</span><span class="n">ConverterSonix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">formatFromHeader</span><span class="p">(</span><span class="s1">&#39;sonix: AIFF data&#39;</span><span class="p">)</span>
+<span class="go">(&#39;sonix&#39;, &#39;AIFF data&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.converter.Converter.getFormatFromFileExtension">
+<code class="descclassname">Converter.</code><code class="descname">getFormatFromFileExtension</code><span class="sig-paren">(</span><em>fp</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.Converter.getFormatFromFileExtension" title="Permalink to this definition">¶</a></dt>
+<dd><p>gets the format from a file extension.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">getSourceFilePath</span><span class="p">(),</span> <span class="s1">&#39;musedata&#39;</span><span class="p">,</span> <span class="s1">&#39;testZip.zip&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">Converter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">getFormatFromFileExtension</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="go">&#39;musedata&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.converter.Converter.getSubConverterFormats">
+<code class="descclassname">Converter.</code><code class="descname">getSubConverterFormats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.Converter.getSubConverterFormats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a dictionary of subConverters for various formats.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scf</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">Converter</span><span class="p">()</span><span class="o">.</span><span class="n">getSubConverterFormats</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scf</span><span class="p">[</span><span class="s1">&#39;abc&#39;</span><span class="p">]</span>
+<span class="go">&lt;class &#39;music21.converter.subConverters.ConverterABC&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">scf</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">x</span><span class="p">,</span> <span class="n">scf</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+<span class="go">(&#39;abc&#39;, &lt;class &#39;music21.converter.subConverters.ConverterABC&#39;&gt;)</span>
+<span class="go">(&#39;braille&#39;, &lt;class &#39;music21.converter.subConverters.ConverterBraille&#39;&gt;)</span>
+<span class="go">(&#39;capella&#39;, &lt;class &#39;music21.converter.subConverters.ConverterCapella&#39;&gt;)</span>
+<span class="go">(&#39;cttxt&#39;, &lt;class &#39;music21.converter.subConverters.ConverterClercqTemperley&#39;&gt;)</span>
+<span class="go">(&#39;har&#39;, &lt;class &#39;music21.converter.subConverters.ConverterClercqTemperley&#39;&gt;)</span>
+<span class="go">(&#39;humdrum&#39;, &lt;class &#39;music21.converter.subConverters.ConverterHumdrum&#39;&gt;)</span>
+<span class="go">(&#39;ipython&#39;, &lt;class &#39;music21.converter.subConverters.ConverterIPython&#39;&gt;)</span>
+<span class="go">(&#39;lily&#39;, &lt;class &#39;music21.converter.subConverters.ConverterLilypond&#39;&gt;)</span>
+<span class="go">(&#39;lilypond&#39;, &lt;class &#39;music21.converter.subConverters.ConverterLilypond&#39;&gt;)</span>
+<span class="go">(&#39;mei&#39;, &lt;class &#39;music21.converter.subConverters.ConverterMEI&#39;&gt;)</span>
+<span class="go">(&#39;midi&#39;, &lt;class &#39;music21.converter.subConverters.ConverterMidi&#39;&gt;)</span>
+<span class="go">(&#39;musedata&#39;, &lt;class &#39;music21.converter.subConverters.ConverterMuseData&#39;&gt;)</span>
+<span class="go">(&#39;musicxml&#39;, &lt;class &#39;music21.converter.subConverters.ConverterMusicXML&#39;&gt;)</span>
+<span class="go">(&#39;noteworthy&#39;, &lt;class &#39;music21.converter.subConverters.ConverterNoteworthyBinary&#39;&gt;)</span>
+<span class="go">(&#39;noteworthytext&#39;, &lt;class &#39;music21.converter.subConverters.ConverterNoteworthy&#39;&gt;)</span>
+<span class="go">(&#39;rntext&#39;, &lt;class &#39;music21.converter.subConverters.ConverterRomanText&#39;&gt;)</span>
+<span class="go">(&#39;romantext&#39;, &lt;class &#39;music21.converter.subConverters.ConverterRomanText&#39;&gt;)</span>
+<span class="go">(&#39;scala&#39;, &lt;class &#39;music21.converter.subConverters.ConverterScala&#39;&gt;)</span>
+<span class="go">(&#39;t&#39;, &lt;class &#39;music21.converter.subConverters.ConverterText&#39;&gt;)</span>
+<span class="go">(&#39;text&#39;, &lt;class &#39;music21.converter.subConverters.ConverterText&#39;&gt;)</span>
+<span class="go">(&#39;textline&#39;, &lt;class &#39;music21.converter.subConverters.ConverterTextLine&#39;&gt;)</span>
+<span class="go">(&#39;tinynotation&#39;, &lt;class &#39;music21.converter.subConverters.ConverterTinyNotation&#39;&gt;)</span>
+<span class="go">(&#39;txt&#39;, &lt;class &#39;music21.converter.subConverters.ConverterText&#39;&gt;)</span>
+<span class="go">(&#39;vexflow&#39;, &lt;class &#39;music21.converter.subConverters.ConverterVexflow&#39;&gt;)</span>
+<span class="go">(&#39;xml&#39;, &lt;class &#39;music21.converter.subConverters.ConverterMusicXML&#39;&gt;)       </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.converter.Converter.parseData">
+<code class="descclassname">Converter.</code><code class="descname">parseData</code><span class="sig-paren">(</span><em>dataStr</em>, <em>number=None</em>, <em>format=None</em>, <em>forceSource=False</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.Converter.parseData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given raw data, determine format and parse into a music21 Stream.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.converter.Converter.parseFile">
+<code class="descclassname">Converter.</code><code class="descname">parseFile</code><span class="sig-paren">(</span><em>fp</em>, <em>number=None</em>, <em>format=None</em>, <em>forceSource=False</em>, <em>storePickle=True</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.Converter.parseFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a file path, parse and store a music21 Stream.</p>
+<p>If format is None then look up the format from the file
+extension using <cite>common.findFormatFile</cite>.</p>
+<p>Will load from a pickle unless forceSource is True
+Will store as a pickle unless storePickle is False</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.converter.Converter.parseFileNoPickle">
+<code class="descclassname">Converter.</code><code class="descname">parseFileNoPickle</code><span class="sig-paren">(</span><em>fp</em>, <em>number=None</em>, <em>format=None</em>, <em>forceSource=False</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.Converter.parseFileNoPickle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a file path, parse and store a music21 Stream.</p>
+<p>If format is None then look up the format from the file
+extension using <cite>common.findFormatFile</cite>.</p>
+<p>Does not use or store pickles in any circumstance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.converter.Converter.parseURL">
+<code class="descclassname">Converter.</code><code class="descname">parseURL</code><span class="sig-paren">(</span><em>url</em>, <em>format=None</em>, <em>number=None</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.Converter.parseURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a url, download and parse the file
+into a music21 Stream stored in the <cite>stream</cite>
+property of the converter object.</p>
+<p>Note that this checks the user Environment
+<cite>autoDownlaad</cite> setting before downloading.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">jeanieLightBrownURL</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https://github.com/cuthbertLab/music21/raw/master&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>       <span class="s1">&#39;/music21/corpus/leadSheet/fosterBrownHair.mxl&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">Converter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">parseURL</span><span class="p">(</span><span class="n">jeanieLightBrownURL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jeanieStream</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">stream</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.converter.Converter.regularizeFormat">
+<code class="descclassname">Converter.</code><code class="descname">regularizeFormat</code><span class="sig-paren">(</span><em>fmt</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.Converter.regularizeFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take in a string representing a format, a file extension (w/ or without leading dot)
+etc. and find the format string that best represents the format that should be used.</p>
+<p>Searches SubConverter.registerFormats first, then SubConverter.registerInputExtensions,
+then SubConverter.registerOutputExtensions</p>
+<p>Returns None if no format applies:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">Converter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">regularizeFormat</span><span class="p">(</span><span class="s1">&#39;mxl&#39;</span><span class="p">)</span>
+<span class="go">&#39;musicxml&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">regularizeFormat</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="go">&#39;text&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">regularizeFormat</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">)</span>
+<span class="go">&#39;abc&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">regularizeFormat</span><span class="p">(</span><span class="s1">&#39;lily.png&#39;</span><span class="p">)</span>
+<span class="go">&#39;lilypond&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">regularizeFormat</span><span class="p">(</span><span class="s1">&#39;blah&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True              </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.converter.Converter.setSubconverterFromFormat">
+<code class="descclassname">Converter.</code><code class="descname">setSubconverterFromFormat</code><span class="sig-paren">(</span><em>converterFormat</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.Converter.setSubconverterFromFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets the .subConverter according to the format of <cite>converterFormat</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">convObj</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">Converter</span><span class="p">()</span>       
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convObj</span><span class="o">.</span><span class="n">setSubconverterFromFormat</span><span class="p">(</span><span class="s1">&#39;humdrum&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convObj</span><span class="o">.</span><span class="n">subConverter</span>
+<span class="go">&lt;music21.converter.subConverters.ConverterHumdrum object at 0x...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.converter.Converter.subconvertersList">
+<code class="descclassname">Converter.</code><code class="descname">subconvertersList</code><span class="sig-paren">(</span><em>converterType='any'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.Converter.subconvertersList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a list of all the subconverters that are registered.</p>
+<p>If converterType is &#8216;any&#8217; (true), then input or output
+subconverters are listed.</p>
+<p>Otherwise, &#8216;input&#8217;, or &#8216;output&#8217; can be used to filter.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">Converter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scl</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">subconvertersList</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">defaultScl</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">defaultSubconverters</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">tuple</span><span class="p">(</span><span class="n">scl</span><span class="p">)</span> <span class="o">==</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">defaultScl</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sclInput</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">subconvertersList</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sclInput</span>
+<span class="go">[&lt;class &#39;music21.converter.subConverters.ConverterABC&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterCapella&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterClercqTemperley&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterHumdrum&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterMEI&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterMidi&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterMuseData&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterMusicXML&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterNoteworthy&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterNoteworthyBinary&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterRomanText&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterScala&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterTinyNotation&#39;&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sclOutput</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">subconvertersList</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sclOutput</span>
+<span class="go">[&lt;class &#39;music21.converter.subConverters.ConverterBraille&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterLilypond&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterMidi&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterMusicXML&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterScala&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterText&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterTextLine&#39;&gt;, </span>
+<span class="go"> &lt;class &#39;music21.converter.subConverters.ConverterVexflow&#39;&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">ConverterSonix</span><span class="p">(</span><span class="n">converter</span><span class="o">.</span><span class="n">subConverters</span><span class="o">.</span><span class="n">SubConverter</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="n">registerFormats</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;sonix&#39;</span><span class="p">,)</span>
+<span class="gp">... </span>   <span class="n">registerInputExtensions</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;mus&#39;</span><span class="p">,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">converter</span><span class="o">.</span><span class="n">registerSubconverter</span><span class="p">(</span><span class="n">ConverterSonix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ConverterSonix</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">subconvertersList</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.converter.Converter" title="music21.converter.Converter"><code class="xref py py-class docutils literal"><span class="pre">Converter</span></code></a> instance variables</p>
+<dl class="attribute">
+<dt id="music21.converter.Converter.subConverter">
+<code class="descclassname">Converter.</code><code class="descname">subConverter</code><a class="headerlink" href="#music21.converter.Converter.subConverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>a ConverterXXX object that will do the actual converting.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="archivemanager">
+<h2>ArchiveManager<a class="headerlink" href="#archivemanager" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.converter.ArchiveManager">
+<em class="property">class </em><code class="descclassname">music21.converter.</code><code class="descname">ArchiveManager</code><span class="sig-paren">(</span><em>fp</em>, <em>archiveType='zip'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.ArchiveManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Before opening a file path, this class can check if this is an 
+archived file collection, such as a .zip or or .mxl file. This will return the 
+data from the archive.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fnCorpus</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">getWork</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">,</span> <span class="n">fileExtensions</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;.xml&#39;</span><span class="p">,))</span>
+</pre></div>
+</div>
+<p>This is likely a unicode string</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fnCorpus</span>
+<span class="go">&#39;/Users/cuthbert/git/music21base/music21/corpus/bach/bwv66.6.mxl&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">ArchiveManager</span><span class="p">(</span><span class="n">fnCorpus</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">isArchive</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">am</span><span class="o">.</span><span class="n">getNames</span><span class="p">()</span>
+<span class="go">[&#39;bwv66.6.xml&#39;, &#39;META-INF/container.xml&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">am</span><span class="o">.</span><span class="n">getData</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">70</span><span class="p">]</span>
+<span class="go">&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;\r&lt;!DOCTYPE score-partwise PUBLIC&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.converter.ArchiveManager" title="music21.converter.ArchiveManager"><code class="xref py py-class docutils literal"><span class="pre">ArchiveManager</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.converter.ArchiveManager.getData">
+<code class="descclassname">ArchiveManager.</code><code class="descname">getData</code><span class="sig-paren">(</span><em>name=None</em>, <em>dataFormat='musicxml'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.ArchiveManager.getData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return data from the archive by name. If no name is given, 
+a default may be available.</p>
+<p>For &#8216;musedata&#8217; format this will be a list of strings. 
+For &#8216;musicxml&#8217; this will be a single string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.converter.ArchiveManager.getNames">
+<code class="descclassname">ArchiveManager.</code><code class="descname">getNames</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.ArchiveManager.getNames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of all names contained in this archive.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.converter.ArchiveManager.isArchive">
+<code class="descclassname">ArchiveManager.</code><code class="descname">isArchive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.ArchiveManager.isArchive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True or False if the filepath is an 
+archive of the supplied archiveType.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="picklefilter">
+<h2>PickleFilter<a class="headerlink" href="#picklefilter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.converter.PickleFilter">
+<em class="property">class </em><code class="descclassname">music21.converter.</code><code class="descname">PickleFilter</code><span class="sig-paren">(</span><em>fp</em>, <em>forceSource=False</em>, <em>number=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.PickleFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Before opening a file path, this class checks to see if there is an up-to-date
+version of the file pickled and stored in the scratch directory.</p>
+<p>If the user has not specified a scratch directory, or if forceSource is True
+then a pickle path will not be created.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.converter.PickleFilter" title="music21.converter.PickleFilter"><code class="xref py py-class docutils literal"><span class="pre">PickleFilter</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.converter.PickleFilter.status">
+<code class="descclassname">PickleFilter.</code><code class="descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.converter.PickleFilter.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a file path specified with __init__, look for an up to date pickled 
+version of this file path. If it exists, return its fp, otherwise return the 
+original file path.</p>
+<p>Return arguments are file path to load, boolean whether to write a pickle, and 
+the file path of the pickle.</p>
+<p>Does not check that fp exists or create the pickle file.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span> <span class="o">=</span> <span class="s1">&#39;/Users/Cuthbert/Desktop/musicFile.mxl&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pickfilt</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">PickleFilter</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pickfilt</span><span class="o">.</span><span class="n">status</span><span class="p">()</span>
+<span class="go">(&#39;/Users/Cuthbert/Desktop/musicFile.mxl&#39;, True, </span>
+<span class="go">      &#39;/var/folders/music21/m21-18b8c5a5f07826bd67ea0f20462f0b8d.pgz&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleConverterQmConverter.html" title="music21.converter.qmConverter"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleCommonWeakrefTools.html" title="music21.common.weakrefTools"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

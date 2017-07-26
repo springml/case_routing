@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User’s Guide, Chapter 13: More Music21Object Attributes and Properties &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="User’s Guide: Chapter 14: Time Signatures and Beats" href="usersGuide_14_timeSignatures.html" />
+    <link rel="prev" title="User’s Guide, Chapter 12: Getting Back to Basics: The Music21Object" href="usersGuide_12_music21object.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_14_timeSignatures.html" title="User’s Guide: Chapter 14: Time Signatures and Beats"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_12_music21object.html" title="User’s Guide, Chapter 12: Getting Back to Basics: The Music21Object"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_12_music21object.html"
+                        title="previous chapter">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_14_timeSignatures.html"
+                        title="next chapter">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a><ul>
+<li><a class="reference internal" href="#sites-and-the-storing-of-elements">Sites and the storing of elements</a></li>
+<li><a class="reference internal" href="#derivations">Derivations</a></li>
+<li><a class="reference internal" href="#context-attributes">Context attributes</a><ul>
+<li><a class="reference internal" href="#methods-on-music21objects">Methods on <code class="docutils literal"><span class="pre">Music21Objects</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getoffsetbysite-and-setoffsetbysite">.getOffsetBySite and .setOffsetBySite</a></li>
+<li><a class="reference internal" href="#getcontextbyclass">getContextByClass()</a></li>
+<li><a class="reference internal" href="#splitting-methods">Splitting methods</a></li>
+<li><a class="reference internal" href="#showing-and-writing">Showing and Writing</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_02_notes.html">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_03_pitches.html">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_05_listsOfLists.html">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_07_chords.html">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_08_installingMusicXML.html">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_11_corpusSearching.html">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_12_music21object.html">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_15_key.html">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_21_sorting.html">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_25_postTonalTools1.html">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_26_clientWeakref.html">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_28_lyricSearcher.html">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_97_timespans.html">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_13_music21object2.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-13-music21object2"></span><div class="section" id="user-s-guide-chapter-13-more-music21object-attributes-and-properties">
+<h1>User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties<a class="headerlink" href="#user-s-guide-chapter-13-more-music21object-attributes-and-properties" title="Permalink to this headline">¶</a></h1>
+<p>At this point you know how to find a <code class="docutils literal"><span class="pre">Music21Object</span></code>, how to name them
+and group them (with <code class="docutils literal"><span class="pre">.id</span></code> and <code class="docutils literal"><span class="pre">.groups</span></code>) and how to position them
+in Streams (with <code class="docutils literal"><span class="pre">.offset</span></code>, <code class="docutils literal"><span class="pre">.priority</span></code>, <code class="docutils literal"><span class="pre">.classSortOrder</span></code> and the
+<code class="docutils literal"><span class="pre">.activeSite</span></code>). This section gets first into some more advanced things
+that Music21Objects have, then some more fun things.</p>
+<div class="section" id="sites-and-the-storing-of-elements">
+<h2>Sites and the storing of elements<a class="headerlink" href="#sites-and-the-storing-of-elements" title="Permalink to this headline">¶</a></h2>
+<p>All <code class="docutils literal"><span class="pre">Music21Objects</span></code> (i.e., elements) have a <code class="docutils literal"><span class="pre">.sites</span></code> property which
+is a <a class="reference internal" href="../moduleReference/moduleSites.html#music21.sites.Sites" title="music21.sites.Sites"><code class="xref py py-class docutils literal"><span class="pre">Sites</span></code></a> object which holds information
+about all the places the <code class="docutils literal"><span class="pre">Music21Object</span></code> is stored in. At its
+simplest, it&#8217;s something that can be iterated over:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;s1&#39;</span><span class="p">)</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;s2&#39;</span><span class="p">)</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">s2</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">sites</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">elementOffset</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Stream</span> <span class="n">s1</span><span class="o">&gt;</span> <span class="mf">10.0</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Stream</span> <span class="n">s2</span><span class="o">&gt;</span> <span class="mf">20.0</span>
+</pre></div>
+</div>
+<p>Note that the order of the Streams in <code class="docutils literal"><span class="pre">.sites</span></code> is guaranteed to be the
+order in which the note was inserted into the site.</p>
+<p>There&#8217;s a lot more that <code class="docutils literal"><span class="pre">.sites</span></code> can do, but primarily for developers.
+We will get back to sites later.</p>
+</div>
+<div class="section" id="derivations">
+<h2>Derivations<a class="headerlink" href="#derivations" title="Permalink to this headline">¶</a></h2>
+<p>We will talk about derivations more in a future chapter, butwe alluded
+to them in the Example in chapter 10, so let&#8217;s say a few words about
+this advanced feature. A <a class="reference internal" href="../moduleReference/moduleDerivation.html#music21.derivation.Derivation" title="music21.derivation.Derivation"><code class="xref py py-class docutils literal"><span class="pre">Derivation</span></code></a>
+object is a pointer to an object that this object is derived from in
+some way. They&#8217;ve gone their separate ways to an extent, but may want to
+talk to each other later. A <code class="docutils literal"><span class="pre">Music21Object</span></code> starts out with no useful
+Derivation:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C4&quot;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">derivation</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">Derivation</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="o">&gt;</span> <span class="kn">from</span> <span class="nn">None</span> <span class="n">via</span> <span class="s2">&quot;None&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>But we can create new notes from it and they&#8217;re not totally connected,
+but show their connection through <code class="docutils literal"><span class="pre">.derivation</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;P4&#39;</span><span class="p">)</span>
+<span class="n">f</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">derivation</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">Derivation</span> <span class="n">of</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="o">&gt;</span> <span class="kn">from</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="o">&gt;</span> <span class="n">via</span> <span class="s2">&quot;transpose&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Now <code class="docutils literal"><span class="pre">c</span></code> has a life of its own from <code class="docutils literal"><span class="pre">f</span></code>. We can add a sharp to C and
+the transpose relationship of F to C does not affect it:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Accidental</span><span class="p">(</span><span class="s1">&#39;sharp&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt;, &lt;music21.note.Note F&gt;)</span>
+</pre></div>
+</div>
+<p>But if <code class="docutils literal"><span class="pre">f</span></code> wants to do something to <code class="docutils literal"><span class="pre">c</span></code>, it can by changing itself
+and every element of its <code class="docutils literal"><span class="pre">.derivation.chain()</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">notehead</span> <span class="o">=</span> <span class="s1">&#39;diamond&#39;</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">derivation</span><span class="o">.</span><span class="n">chain</span><span class="p">():</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">notehead</span> <span class="o">=</span> <span class="s1">&#39;diamond&#39;</span>
+
+<span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">notehead</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">notehead</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="s1">&#39;diamond&#39;</span><span class="p">,</span> <span class="s1">&#39;diamond&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>While <code class="docutils literal"><span class="pre">f</span></code> can search upwards in its <code class="docutils literal"><span class="pre">.derivation.chain()</span></code> and find
+<code class="docutils literal"><span class="pre">c</span></code>, <code class="docutils literal"><span class="pre">c</span></code> cannot find <code class="docutils literal"><span class="pre">f</span></code> in its derivation; it is a connection
+that is designed to be one-way only.</p>
+<p>Setting derivations can be done manually, but it&#8217;s an advanced enough
+topic that we will get to it later.</p>
+</div>
+<div class="section" id="context-attributes">
+<h2>Context attributes<a class="headerlink" href="#context-attributes" title="Permalink to this headline">¶</a></h2>
+<p>Several attributes of <code class="docutils literal"><span class="pre">Music21Objects</span></code> only work after the object has
+been placed inside a Stream that has certain features of their own.</p>
+<p>An easy one to understand is <code class="docutils literal"><span class="pre">.measureNumber</span></code> which finds the
+<code class="docutils literal"><span class="pre">.number</span></code> value of the measure that an object is placed in:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">measureNumber</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">7</span>
+</pre></div>
+</div>
+<p>This works even if a note is inside a voice inside a measure:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Voice</span><span class="p">()</span>
+<span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="n">v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="n">n2</span><span class="o">.</span><span class="n">measureNumber</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">7</span>
+</pre></div>
+</div>
+<p>Without a context, you&#8217;ll get None</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n3</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="n">n3</span><span class="o">.</span><span class="n">measureNumber</span> <span class="ow">is</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>The second context attribute is, appropriately, called <code class="docutils literal"><span class="pre">.seconds</span></code>. It
+requires a tempo.MetronomeMark() to be placed into the Stream before the
+object and will calculate how many seconds the object (note, etc.) lasts
+at that tempo:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="s1">&#39;Allegro&#39;</span><span class="p">,</span> <span class="mi">120</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">quarterLength</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">seconds</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">1.0</span> <span class="mf">0.5</span>
+</pre></div>
+</div>
+<p>Unlike <code class="docutils literal"><span class="pre">.measureNumber</span></code> and the rest of the attributes we will see
+below, you can change <code class="docutils literal"><span class="pre">.seconds</span></code> to reflect exact timing you might
+have from audio or MIDI data.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">seconds</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="n">n</span><span class="o">.</span><span class="n">seconds</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">0.6</span>
+</pre></div>
+</div>
+<p>An object with no tempo information in its surrounding context returns
+an error for <code class="docutils literal"><span class="pre">.seconds</span></code></p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n3</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">)</span>
+<span class="n">n3</span><span class="o">.</span><span class="n">seconds</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="n">Music21ObjectException</span>                    <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">13</span><span class="o">-</span><span class="mi">0</span><span class="n">a7112d868b7</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+      <span class="mi">1</span> <span class="n">n3</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">)</span>
+<span class="o">----&gt;</span> <span class="mi">2</span> <span class="n">n3</span><span class="o">.</span><span class="n">seconds</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">git</span><span class="o">/</span><span class="n">music21base</span><span class="o">/</span><span class="n">music21</span><span class="o">/</span><span class="n">base</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_getSeconds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+   <span class="mi">3478</span>         <span class="n">ti</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getContextByClass</span><span class="p">(</span><span class="s1">&#39;TempoIndication&#39;</span><span class="p">)</span>
+   <span class="mi">3479</span>         <span class="k">if</span> <span class="n">ti</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="o">-&gt;</span> <span class="mi">3480</span>             <span class="k">raise</span> <span class="n">Music21ObjectException</span><span class="p">(</span><span class="s1">&#39;this object does not have a TempoIndication in Sites&#39;</span><span class="p">)</span>
+   <span class="mi">3481</span>         <span class="n">mm</span> <span class="o">=</span> <span class="n">ti</span><span class="o">.</span><span class="n">getSoundingMetronomeMark</span><span class="p">()</span>
+   <span class="mi">3482</span>         <span class="c1"># once we have mm, simply pass in this duration</span>
+
+
+<span class="n">Music21ObjectException</span><span class="p">:</span> <span class="n">this</span> <span class="nb">object</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">have</span> <span class="n">a</span> <span class="n">TempoIndication</span> <span class="ow">in</span> <span class="n">Sites</span>
+</pre></div>
+</div>
+<p>So use <code class="docutils literal"><span class="pre">try...except...</span></code> to catch this:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">):</span>
+    <span class="n">seconds</span> <span class="o">=</span> <span class="s2">&quot;No information&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">seconds</span> <span class="o">=</span> <span class="n">el</span><span class="o">.</span><span class="n">seconds</span>
+    <span class="k">except</span> <span class="n">exceptions21</span><span class="o">.</span><span class="n">Music21Exception</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">step</span><span class="p">,</span> <span class="n">seconds</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="n">C</span> <span class="mf">0.6</span>
+ <span class="n">D</span> <span class="mf">0.5</span>
+ <span class="n">E</span> <span class="n">No</span> <span class="n">information</span>
+</pre></div>
+</div>
+<p>The last three context attributes, <code class="docutils literal"><span class="pre">.beat</span></code>, <code class="docutils literal"><span class="pre">.beatStr</span></code> (beat
+string), and <code class="docutils literal"><span class="pre">.beatStrength</span></code>, all require
+<a class="reference internal" href="../moduleReference/moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a> contexts. Since they&#8217;re the
+topic of <a class="reference internal" href="usersGuide_14_timeSignatures.html#usersguide-14-timesignatures"><span class="std std-ref">our next chapter</span></a> we&#8217;ll
+put them off until then.</p>
+<p>Most <code class="docutils literal"><span class="pre">Music21Objects</span></code> such as <code class="docutils literal"><span class="pre">Notes</span></code> have many additional
+attributes, but these are all the ones that are common to every object
+that can go in a <code class="docutils literal"><span class="pre">Stream</span></code> (after all, what would <code class="docutils literal"><span class="pre">.step</span></code> mean for a
+<a class="reference internal" href="../moduleReference/moduleTempo.html#music21.tempo.MetronomeMark" title="music21.tempo.MetronomeMark"><code class="xref py py-class docutils literal"><span class="pre">MetronomeMark</span></code></a>?)</p>
+<p>..note:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>You may find other attributes on your base.Music21Object, especially if you are running
+an older version of `music21`. They are all deprecated and most have been removed in
+v.3; programmers are advised to stick to the safe list of attributes described here.
+</pre></div>
+</div>
+<div class="section" id="methods-on-music21objects">
+<h3>Methods on <code class="docutils literal"><span class="pre">Music21Objects</span></code><a class="headerlink" href="#methods-on-music21objects" title="Permalink to this headline">¶</a></h3>
+<p>Attributes and properties are aspects of an object that are lightweight
+and have no configuration options, so they are accessed without <code class="docutils literal"><span class="pre">()</span></code>.
+Methods tend to do more work and have more options, so they will always
+be called with <code class="docutils literal"><span class="pre">()</span></code> signs.</p>
+<p>Unlike attributes, where we have documented all of them, only a subset
+of the methods on <code class="docutils literal"><span class="pre">Music21Objects</span></code> are listed below. All of them can
+be found in the documentation to <a class="reference internal" href="../moduleReference/moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>,
+but many of them have obscure uses and might be moved later to not
+clutter up what is really important! And those are...</p>
+</div>
+</div>
+<div class="section" id="getoffsetbysite-and-setoffsetbysite">
+<h2>.getOffsetBySite and .setOffsetBySite<a class="headerlink" href="#getoffsetbysite-and-setoffsetbysite" title="Permalink to this headline">¶</a></h2>
+<p>These methods work as the <code class="docutils literal"><span class="pre">.offset</span></code> attribute but can work on any site
+where the object is a part of.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;s1&quot;</span><span class="p">)</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;s2&quot;</span><span class="p">)</span>
+<span class="n">s2</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">10.0</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">.</span><span class="n">setOffsetBySite</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">15.0</span>
+</pre></div>
+</div>
+<p>There is one extra possible attribute on <code class="docutils literal"><span class="pre">.getOffsetBySite</span></code>,
+&#8220;stringReturns=True&#8221; which will say whether or not an element has a
+shifting offset. Right barlines have one:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s3</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="n">n3</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;whole&#39;</span><span class="p">)</span>
+<span class="n">s3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
+<span class="n">rb</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">Barline</span><span class="p">()</span>
+<span class="n">s3</span><span class="o">.</span><span class="n">rightBarline</span> <span class="o">=</span> <span class="n">rb</span>
+<span class="n">rb</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">s3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">4.0</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">rb</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="n">stringReturns</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;highestTime&#39;</span>
+</pre></div>
+</div>
+<p>And in fact if we change the duration of <code class="docutils literal"><span class="pre">n3</span></code> the position of the
+barline will shift along with it:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n3</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;half&#39;</span>
+<span class="n">rb</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">s3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getcontextbyclass">
+<h2>getContextByClass()<a class="headerlink" href="#getcontextbyclass" title="Permalink to this headline">¶</a></h2>
+<p>This is an extremely powerful tool &#8211; you might not use it often, but be
+assured that <code class="docutils literal"><span class="pre">music21</span></code> is using it on your behalf all the time when
+sophisticated analysis is involved. It finds the active element matching
+a certain class preceeding the element. Let me demonstrate:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bach</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="n">lastNote</span> <span class="o">=</span> <span class="n">bach</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Note&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">lastNote</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="c1">#&gt;</span>
+</pre></div>
+</div>
+<p>What part is it in?</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">lastNote</span><span class="o">.</span><span class="n">getContextByClass</span><span class="p">(</span><span class="s1">&#39;Part&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Part</span> <span class="n">Bass</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>What was the Key at that moment?</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">lastNote</span><span class="o">.</span><span class="n">getContextByClass</span><span class="p">(</span><span class="s1">&#39;KeySignature&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span> <span class="n">of</span> <span class="n">f</span><span class="c1"># minor&gt;</span>
+</pre></div>
+</div>
+<p>What is the TimeSignature at that moment?</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">lastNote</span><span class="o">.</span><span class="n">getContextByClass</span><span class="p">(</span><span class="s1">&#39;TimeSignature&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">4</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Why is this such a sophisticated method? It knows about the differences
+in different types of Streams. If the key signature changes in a
+different part then it doesn&#8217;t affect the notes of the current part, but
+if it changes in a previous measure in the same part, then that matters.
+Furthermore, the caching mechanism via something called <code class="docutils literal"><span class="pre">Timespans</span></code> is
+amazingly fast, so that running through an entire score getting the
+context for each object doesn&#8217;t take long at all:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">gloria</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;luca/gloria&#39;</span><span class="p">)</span>
+<span class="n">soprano</span> <span class="o">=</span> <span class="n">gloria</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">lastTimeSignature</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">soprano</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Note&#39;</span><span class="p">):</span>
+    <span class="n">thisTimeSignature</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">getContextByClass</span><span class="p">(</span><span class="s1">&#39;TimeSignature&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">thisTimeSignature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">lastTimeSignature</span><span class="p">:</span>
+        <span class="n">lastTimeSignature</span> <span class="o">=</span> <span class="n">thisTimeSignature</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">thisTimeSignature</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">measureNumber</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span> <span class="mi">1</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">2</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span> <span class="mi">28</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span> <span class="mi">80</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span> <span class="mi">110</span>
+</pre></div>
+</div>
+<p>As you might expect, the <code class="docutils literal"><span class="pre">.measureNumber</span></code> routine uses
+<code class="docutils literal"><span class="pre">.getContextByClass('Measure')</span></code> internally. What is also interesting
+is that <code class="docutils literal"><span class="pre">.getContextByClass</span></code> is smart enough to search out derivation
+chains to find what it is looking for. For instance, this flat stream
+has only notes, no time signatures. But it can still find each note&#8217;s
+time signature ane measure number context.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">lastTimeSignature</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">soprano</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+    <span class="n">thisTimeSignature</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">getContextByClass</span><span class="p">(</span><span class="s1">&#39;TimeSignature&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">thisTimeSignature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">lastTimeSignature</span><span class="p">:</span>
+        <span class="n">lastTimeSignature</span> <span class="o">=</span> <span class="n">thisTimeSignature</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">thisTimeSignature</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">measureNumber</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span> <span class="mi">1</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">2</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span> <span class="mi">28</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span> <span class="mi">80</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span> <span class="mi">110</span>
+</pre></div>
+</div>
+<p>Internally <code class="docutils literal"><span class="pre">.getContextByClass</span></code> uses another <code class="docutils literal"><span class="pre">Music21Object</span></code> method
+called <code class="docutils literal"><span class="pre">.contextSites()</span></code> which is a generator that tells the system
+where to search next:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">cs</span> <span class="ow">in</span> <span class="n">lastNote</span><span class="o">.</span><span class="n">contextSites</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="n">ContextTuple</span><span class="p">(</span><span class="n">site</span><span class="o">=&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Measure</span> <span class="mi">9</span> <span class="n">offset</span><span class="o">=</span><span class="mf">33.0</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">recurseType</span><span class="o">=</span><span class="s1">&#39;elementsFirst&#39;</span><span class="p">)</span>
+ <span class="n">ContextTuple</span><span class="p">(</span><span class="n">site</span><span class="o">=&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Part</span> <span class="n">Bass</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">35.0</span><span class="p">,</span> <span class="n">recurseType</span><span class="o">=</span><span class="s1">&#39;flatten&#39;</span><span class="p">)</span>
+ <span class="n">ContextTuple</span><span class="p">(</span><span class="n">site</span><span class="o">=&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">Score</span> <span class="mh">0x10cee7518</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">35.0</span><span class="p">,</span> <span class="n">recurseType</span><span class="o">=</span><span class="s1">&#39;elementsOnly&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">.contextSites</span></code> returns a &#8220;ContextTuple&#8221; which is a lightweight
+namedtuple that has three attributes, <code class="docutils literal"><span class="pre">site</span></code>, <code class="docutils literal"><span class="pre">offset</span></code>, and
+<code class="docutils literal"><span class="pre">recurseType</span></code>.</p>
+<p>The first ContextTuple says that first the elements of <code class="docutils literal"><span class="pre">site</span></code>: Measure
+9 should be searched, beginning at <code class="docutils literal"><span class="pre">offset</span></code> 2.0 and (because
+<code class="docutils literal"><span class="pre">recurseType</span></code> is elementsFirst) working backwards to the beginning of
+the measure, then if the matching context isn&#8217;t found, the measure will
+be flattened (in case there are other voices in the measure) and
+anything from before offset 2.0 of that flattened stream will be
+searched.</p>
+<p>If that fails, then the Bass part as a whole will be searched, with all
+elements flattened, beginning at offset 35 and working backwards. That
+way if the context is in another measure it will be found.</p>
+<p>Then if that fails, it will look at the score as a whole, beginning at
+offset 35 and working backwards, but only looking at things that are at
+the score level, not looking at elements within other parts. There may
+be scores where for instance, expressive markings appear at the Score
+level. This will find them.</p>
+<p>Related to <code class="docutils literal"><span class="pre">.getContextByClass()</span></code> is <code class="docutils literal"><span class="pre">.getAllContextsByClass()</span></code>
+which is a generator that returns each preceeding context.</p>
+<p>..note:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>Prior to v.3, `.getAllContextsByClass()` had a different purpose, so do not use it for
+for this purpose. It was unreliable.
+
+Two known bugs that we hope to get fixed soon: if there are two or more
+contexts at the same offset, `.getAllContextsByClass()` will skip over
+all but one of them. Using `Music21Object` as a class list can create infinite loops.
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">lastGloriaNote</span> <span class="o">=</span> <span class="n">soprano</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">lastGloriaNote</span><span class="o">.</span><span class="n">getAllContextsByClass</span><span class="p">(</span><span class="s1">&#39;TimeSignature&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">measureNumber</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span> <span class="mi">110</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span> <span class="mi">80</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">2</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span> <span class="mi">28</span>
+ <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Similar to <code class="docutils literal"><span class="pre">.getContextByClass()</span></code> are the <code class="docutils literal"><span class="pre">.next(class)</span></code> and
+<code class="docutils literal"><span class="pre">.previous(class)</span></code> methods which move to the next or previous element
+of the same class at the same (or a higher) hierarchical level. They&#8217;re
+designed to be really easy to use, but so far, I&#8217;ve failed at achieving
+that. Hopefully in the next few versions I&#8217;ll be able to demonstrate in
+practice how these commands were designed to work. For now, I&#8217;d suggest
+avoiding them.</p>
+</div>
+<div class="section" id="splitting-methods">
+<h2>Splitting methods<a class="headerlink" href="#splitting-methods" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Music21</span></code> has three methods on <code class="docutils literal"><span class="pre">Music21Object</span></code>s for splitting
+them. Eventually the plan is to unite them into a single <code class="docutils literal"><span class="pre">.split()</span></code>
+method, but we&#8217;re not there yet.</p>
+<p>The three methods are:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">.splitAtQuarterLength</span></code> &#8211; splits an object into two objects at the
+given quarter length</li>
+<li><code class="docutils literal"><span class="pre">.splitByQuarterLengths</span></code> &#8211; splits an object into two or more
+objects according to a list of quarter lengths</li>
+<li><code class="docutils literal"><span class="pre">.splitAtDurations</span></code> &#8211; takes an object with a complex duration
+(such as 5.0 quarters) and splits it into notatable units.</li>
+</ul>
+<p>These all work rather similarly. Behind their seeming simplicity are a
+host of complex musical decisions that are being made. Take this rather
+complex note (we&#8217;re introducing <code class="docutils literal"><span class="pre">expressions</span></code> and <code class="docutils literal"><span class="pre">articulations</span></code>
+softly here):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C#5&#39;</span><span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;whole&#39;</span>
+<span class="n">n</span><span class="o">.</span><span class="n">articulations</span> <span class="o">=</span> <span class="p">[</span><span class="n">articulations</span><span class="o">.</span><span class="n">Staccato</span><span class="p">(),</span> <span class="n">articulations</span><span class="o">.</span><span class="n">Accent</span><span class="p">()]</span>
+<span class="n">n</span><span class="o">.</span><span class="n">lyric</span> <span class="o">=</span> <span class="s1">&#39;hi!&#39;</span>
+<span class="n">n</span><span class="o">.</span><span class="n">expressions</span> <span class="o">=</span> <span class="p">[</span><span class="n">expressions</span><span class="o">.</span><span class="n">Mordent</span><span class="p">(),</span> <span class="n">expressions</span><span class="o">.</span><span class="n">Trill</span><span class="p">(),</span> <span class="n">expressions</span><span class="o">.</span><span class="n">Fermata</span><span class="p">()]</span>
+<span class="n">n</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_13_music21object2_58_0.png" src="../_images/usersGuide_13_music21object2_58_0.png" />
+<p>Now let&#8217;s split this note just before beat 4:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">splitTuple</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">splitAtQuarterLength</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">splitTuple</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_13_music21object2_60_0.png" src="../_images/usersGuide_13_music21object2_60_0.png" />
+<p>Notice the choices that <code class="docutils literal"><span class="pre">music21</span></code> made &#8211; the two notes are tied, the
+lyrics are sung at the beginning, the accent and mordent appear at the
+beginning of the note while the staccato and fermata(!) appear on the
+second note, while trill mark gets put onto the first note only. This is
+part of the &#8220;batteries included&#8221; <code class="docutils literal"><span class="pre">music21</span></code> approach &#8211; try to do
+something musically smart in most cases. In fact, it&#8217;s even a bit
+smarter &#8211; the <code class="docutils literal"><span class="pre">splitTuple</span></code> knows that there&#8217;s something called a
+TrillExtension spanner in it which should be put into the Stream:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">thisSpanner</span> <span class="ow">in</span> <span class="n">splitTuple</span><span class="o">.</span><span class="n">spannerList</span><span class="p">:</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">thisSpanner</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_13_music21object2_62_0.png" src="../_images/usersGuide_13_music21object2_62_0.png" />
+<p>..note:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">SplitTuples</span> <span class="ow">and</span> <span class="n">spannerList</span> <span class="ow">is</span> <span class="n">new</span> <span class="k">as</span> <span class="n">of</span> <span class="n">v3</span><span class="p">,</span> <span class="ow">in</span> <span class="n">v2</span> <span class="ow">and</span> <span class="n">earlier</span><span class="p">,</span> <span class="n">a</span> <span class="n">trill</span> <span class="n">mark</span> <span class="ow">is</span> <span class="n">generated</span>
+<span class="k">for</span> <span class="n">each</span> <span class="n">note</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">placement</span> <span class="n">of</span> <span class="n">the</span> <span class="n">staccato</span> <span class="n">would</span> <span class="n">be</span> <span class="n">on</span> <span class="n">the</span> <span class="n">first</span> <span class="n">note</span> <span class="k">as</span> <span class="n">well</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="showing-and-writing">
+<h2>Showing and Writing<a class="headerlink" href="#showing-and-writing" title="Permalink to this headline">¶</a></h2>
+<p>The two last methods are almost certainly the most important:
+<code class="docutils literal"><span class="pre">.show()</span></code> and <code class="docutils literal"><span class="pre">.write()</span></code>. We&#8217;ve been using <code class="docutils literal"><span class="pre">.show()</span></code> throughout
+the User&#8217;s Guide, so it&#8217;s familiar. It usually takes a single argument
+which is the format (default is <code class="docutils literal"><span class="pre">'musicxml'</span></code> except on IPython where
+it is <code class="docutils literal"><span class="pre">'musicxml.png'</span></code>. <code class="docutils literal"><span class="pre">.write()</span></code> by contrast writes out the file
+to disk. The first argument is again the format. The second argument,
+optional, is the filename with path. If omitted then a temporary file is
+written (and the filename is returned).</p>
+<p>We&#8217;ll see enough about <code class="docutils literal"><span class="pre">.show()</span></code> and <code class="docutils literal"><span class="pre">.write()</span></code> later, so that&#8217;s
+enough for now on this long chapter. Let&#8217;s return to the <code class="docutils literal"><span class="pre">.beat</span></code>
+related function in
+<a class="reference internal" href="usersGuide_14_timeSignatures.html#usersguide-14-timesignatures"><span class="std std-ref">Chapter 14, Time Signatures</span></a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_14_timeSignatures.html" title="User’s Guide: Chapter 14: Time Signatures and Beats"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_12_music21object.html" title="User’s Guide, Chapter 12: Getting Back to Basics: The Music21Object"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

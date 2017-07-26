@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.stream.makeNotation &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.stream.streamStatus" href="moduleStreamStreamStatus.html" />
+    <link rel="prev" title="music21.stream.iterator" href="moduleStreamIterator.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleStreamStreamStatus.html" title="music21.stream.streamStatus"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleStreamIterator.html" title="music21.stream.iterator"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleStreamIterator.html"
+                        title="previous chapter">music21.stream.iterator</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleStreamStreamStatus.html"
+                        title="next chapter">music21.stream.streamStatus</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.stream.makeNotation</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleStreamMakeNotation.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-stream-makenotation">
+<span id="modulestreammakenotation"></span><h1>music21.stream.makeNotation<a class="headerlink" href="#music21-stream-makenotation" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.stream.makeNotation"></span><div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.stream.makeNotation.makeBeams">
+<code class="descclassname">music21.stream.makeNotation.</code><code class="descname">makeBeams</code><span class="sig-paren">(</span><em>s</em>, <em>inPlace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.makeNotation.makeBeams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new Measure, or Stream of Measures, with beams applied to all
+notes. Measures with Voices will process voices independently.</p>
+<p>Note that <cite>makeBeams()</cite> is automatically called in show(&#8216;musicxml&#8217;) and
+other formats if there is no beaming information in the piece (see
+<cite>haveBeamsBeenMade</cite>).</p>
+<p>If <cite>inPlace</cite> is True, this is done in-place; if <cite>inPlace</cite> is False,
+this returns a modified deep copy.</p>
+<p>See <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.getBeams" title="music21.meter.TimeSignature.getBeams"><code class="xref py py-meth docutils literal"><span class="pre">getBeams()</span></code></a> for the algorithm used.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">meter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">stream</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">aMeasure</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aMeasure</span><span class="o">.</span><span class="n">timeSignature</span> <span class="o">=</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;4/4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aNote</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aNote</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="o">.</span><span class="mi">25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aMeasure</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">aNote</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bMeasure</span> <span class="o">=</span> <span class="n">aMeasure</span><span class="o">.</span><span class="n">makeBeams</span><span class="p">(</span><span class="n">inPlace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">bMeasure</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">beams</span><span class="p">))</span>
+<span class="go">0 &lt;music21.beam.Beams &lt;music21.beam.Beam 1/start&gt;/&lt;music21.beam.Beam 2/start&gt;&gt;</span>
+<span class="go">1 &lt;music21.beam.Beams &lt;music21.beam.Beam 1/continue&gt;/&lt;music21.beam.Beam 2/stop&gt;&gt;</span>
+<span class="go">2 &lt;music21.beam.Beams &lt;music21.beam.Beam 1/continue&gt;/&lt;music21.beam.Beam 2/start&gt;&gt;</span>
+<span class="go">3 &lt;music21.beam.Beams &lt;music21.beam.Beam 1/stop&gt;/&lt;music21.beam.Beam 2/stop&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.stream.makeNotation.makeMeasures">
+<code class="descclassname">music21.stream.makeNotation.</code><code class="descname">makeMeasures</code><span class="sig-paren">(</span><em>s</em>, <em>meterStream=None</em>, <em>refStreamOrTimeRange=None</em>, <em>searchContext=False</em>, <em>innerBarline=None</em>, <em>finalBarline='final'</em>, <em>bestClef=False</em>, <em>inPlace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.makeNotation.makeMeasures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a stream and places all of its elements into
+measures (<a class="reference internal" href="moduleStream.html#music21.stream.Measure" title="music21.stream.Measure"><code class="xref py py-class docutils literal"><span class="pre">Measure</span></code></a> objects)
+based on the <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a> objects
+placed within
+the stream. If no TimeSignatures are found in the
+stream, a default of 4/4 is used.</p>
+<p>If <cite>inPlace</cite> is True, the original Stream is modified and lost
+if <cite>inPlace</cite> is False, this returns a modified deep copy.</p>
+<p>Many advanced features are available:</p>
+<p>(1) If a <cite>meterStream</cite> is given, the TimeSignatures in this
+stream are used instead of any found in the Stream.
+Alternatively, a single TimeSignature object
+can be provided in lieu of the stream. This feature lets you
+test out how a group of notes might be interpreted as measures
+in a number of different metrical schemes.</p>
+<p>(2) If <cite>refStreamOrTimeRange</cite> is provided, this Stream or List
+is used to give the span that you want to make measures for
+necessary to fill empty rests at the ends or beginnings of
+Streams, etc.  Say for instance you&#8217;d like to make a complete
+score from a short ossia section, then you might use another
+Part from the Score as a <cite>refStreamOrTimeRange</cite> to make sure
+that the appropriate measures of rests are added at either side.</p>
+<p>(3) If <cite>innerBarline</cite> is not None, the specified Barline object
+or string-specification of Barline style will be used to create
+Barline objects between every created Measure. The default is None.</p>
+<p>(4) If <cite>finalBarline</cite> is not None, the specified Barline object or
+string-specification of Barline style will be used to create a Barline
+objects at the end of the last Measure. The default is &#8216;final&#8217;.</p>
+<p>The <cite>searchContext</cite> parameter determines whether or not context
+searches are used to find Clef and other notation objects.</p>
+<p>Here is a simple example of makeMeasures:</p>
+<p>A single measure of 4/4 is created by from a Stream
+containing only three quarter notes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">articulations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">clef</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">meter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">note</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">stream</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sSrc</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sSrc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;quarter&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sSrc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;quarter&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sSrc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;quarter&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sMeasures</span> <span class="o">=</span> <span class="n">sSrc</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sMeasures</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">    {1.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">    {2.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">    {3.0} &lt;music21.bar.Barline style=final&gt;</span>
+</pre></div>
+</div>
+<p>Notice that the last measure is incomplete &#8211; makeMeasures
+does not fill up incomplete measures.</p>
+<p>We can also check that the measure created has
+the correct TimeSignature:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sMeasures</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">timeSignature</span>
+<span class="go">&lt;music21.meter.TimeSignature 4/4&gt;</span>
+</pre></div>
+</div>
+<p>Now let&#8217;s redo this work in 2/4 by putting a TimeSignature
+of 2/4 at the beginning of the stream and rerunning
+makeMeasures. Now we will have two measures, each with
+correct measure numbers:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sSrc</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;2/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sMeasuresTwoFour</span> <span class="o">=</span> <span class="n">sSrc</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sMeasuresTwoFour</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 2/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">    {1.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">{2.0} &lt;music21.stream.Measure 2 offset=2.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">    {1.0} &lt;music21.bar.Barline style=final&gt;</span>
+</pre></div>
+</div>
+<p>Let us put 10 quarter notes in a Part.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sSrc</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;E-4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sSrc</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After we run makeMeasures, we will have
+3 measures of 4/4 in a new Part object. This experiment
+demonstrates that running makeMeasures does not
+change the type of Stream you are using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sMeasures</span> <span class="o">=</span> <span class="n">sSrc</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">sMeasures</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Measure&#39;</span><span class="p">))</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sMeasures</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+<span class="go">&#39;Part&#39;</span>
+</pre></div>
+</div>
+<p>Demonstrate what makeMeasures will do with inPlace is True:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sScr</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sScr</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sScr</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sScr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sScr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sScr</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">(</span><span class="n">inPlace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sScr</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 3/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{3.0} &lt;music21.stream.Measure 2 offset=3.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">    {3.0} &lt;music21.bar.Barline style=final&gt;</span>
+</pre></div>
+</div>
+<p>If after running makeMeasures you run makeTies, it will also split
+long notes into smaller notes with ties.  Lyrics and articulations
+are attached to the first note.  Expressions (fermatas,
+etc.) will soon be attached to the last note but this is not yet done:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">longNote</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;D#4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">longNote</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">7.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">longNote</span><span class="o">.</span><span class="n">articulations</span> <span class="o">=</span> <span class="p">[</span><span class="n">articulations</span><span class="o">.</span><span class="n">Staccato</span><span class="p">()]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">longNote</span><span class="o">.</span><span class="n">lyric</span> <span class="o">=</span> <span class="s2">&quot;hi&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">longNote</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partWithMeasures</span> <span class="o">=</span> <span class="n">p1</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dummy</span> <span class="o">=</span> <span class="n">partWithMeasures</span><span class="o">.</span><span class="n">makeTies</span><span class="p">(</span><span class="n">inPlace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partWithMeasures</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 3/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note D#&gt;</span>
+<span class="go">{3.0} &lt;music21.stream.Measure 2 offset=3.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note D#&gt;</span>
+<span class="go">{6.0} &lt;music21.stream.Measure 3 offset=6.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note D#&gt;</span>
+<span class="go">    {1.5} &lt;music21.bar.Barline style=final&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">allNotes</span> <span class="o">=</span> <span class="n">partWithMeasures</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allNotes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">articulations</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">allNotes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">articulations</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">allNotes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">articulations</span>
+<span class="go">[&lt;music21.articulations.Staccato&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">allNotes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lyric</span><span class="p">,</span> <span class="n">allNotes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lyric</span><span class="p">,</span> <span class="n">allNotes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">lyric</span><span class="p">]</span>
+<span class="go">[&#39;hi&#39;, None, None]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.stream.makeNotation.makeRests">
+<code class="descclassname">music21.stream.makeNotation.</code><code class="descname">makeRests</code><span class="sig-paren">(</span><em>s</em>, <em>refStreamOrTimeRange=None</em>, <em>fillGaps=False</em>, <em>timeRangeFromBarDuration=False</em>, <em>inPlace=True</em>, <em>hideRests=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.makeNotation.makeRests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a Stream with an offset not equal to zero,
+fill with one Rest preceding this offset.
+This can be called on any Stream,
+a Measure alone, or a Measure that contains
+Voices.</p>
+<p>If <cite>refStreamOrTimeRange</cite> is provided as a Stream, this
+Stream is used to get min and max offsets. If a list is provided,
+the list assumed to provide minimum and maximum offsets. Rests will
+be added to fill all time defined within refStream.</p>
+<p>If <cite>fillGaps</cite> is True, this will create rests in any
+time regions that have no active elements.</p>
+<p>If <cite>timeRangeFromBarDuration</cite> is True, and the calling Stream
+is a Measure with a TimeSignature, the time range will be determined
+based on the .barDuration property.</p>
+<p>If <cite>inPlace</cite> is True, this is done in-place; if <cite>inPlace</cite> is False,
+this returns a modified deepcopy. # TODO: Make inPlace default to False.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">lowestOffset</span>
+<span class="go">20.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{20.0} &lt;music21.note.Note C&gt;        </span>
+</pre></div>
+</div>
+<p>Now make some rests...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">makeRests</span><span class="p">(</span><span class="n">inPlace</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">lowestOffset</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.note.Rest rest&gt;</span>
+<span class="go">{20.0} &lt;music21.note.Note C&gt;        </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">20.0</span>
+</pre></div>
+</div>
+<p>Same thing, but this time, with gaps, and hidden rests...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">lowestOffset</span>
+<span class="go">20.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{20.0} &lt;music21.note.Note C&gt;        </span>
+<span class="go">{30.0} &lt;music21.note.Note D&gt;        </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">makeRests</span><span class="p">(</span><span class="n">fillGaps</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">hideRests</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">lowestOffset</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.note.Rest rest&gt;</span>
+<span class="go">{20.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{21.0} &lt;music21.note.Rest rest&gt;</span>
+<span class="go">{30.0} &lt;music21.note.Note D&gt;        </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hideObjectOnPrint</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Now with measures:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">lowestOffset</span>
+<span class="go">4.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;4/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">(</span><span class="n">inPlace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">{4.0} &lt;music21.stream.Measure 2 offset=4.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{8.0} &lt;music21.stream.Measure 3 offset=8.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">    {1.0} &lt;music21.bar.Barline style=final&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">makeRests</span><span class="p">(</span><span class="n">fillGaps</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">{0.0} &lt;music21.note.Rest rest&gt;</span>
+<span class="go">{4.0} &lt;music21.stream.Measure 2 offset=4.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{5.0} &lt;music21.note.Rest rest&gt;</span>
+<span class="go">{8.0} &lt;music21.stream.Measure 3 offset=8.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">    {1.0} &lt;music21.bar.Barline style=final&gt;        </span>
+</pre></div>
+</div>
+<p>Obviously there are problems TODO: fix them</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.stream.makeNotation.makeTies">
+<code class="descclassname">music21.stream.makeNotation.</code><code class="descname">makeTies</code><span class="sig-paren">(</span><em>s</em>, <em>meterStream=None</em>, <em>inPlace=True</em>, <em>displayTiedAccidentals=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.makeNotation.makeTies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a stream containing measures, examine each element in the
+Stream. If the elements duration extends beyond the measure&#8217;s boundary,
+create a tied entity, placing the split Note in the next Measure.</p>
+<p>Note that this method assumes that there is appropriate space in the
+next Measure: this will not shift Note objects, but instead allocate
+them evenly over barlines. Generally, makeMeasures is called prior to
+calling this method.</p>
+<p>If <cite>inPlace</cite> is True, this is done in-place;
+if <cite>inPlace</cite> is False, this returns a modified deep copy.</p>
+<p>Put a 12-quarter-note-long note into a Stream w/ 4/4 as the duration.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;4/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">{0.0} &lt;music21.note.Note C&gt;</span>
+</pre></div>
+</div>
+<p>After running makeMeasures, we get nice measures, a clef, but only one
+way-too-long note in Measure 1:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{4.0} &lt;music21.stream.Measure 2 offset=4.0&gt;</span>
+
+<span class="go">{8.0} &lt;music21.stream.Measure 3 offset=8.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.bar.Barline style=final&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">12.0    </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="ow">is</span> <span class="n">n</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>But after running makeTies, all is good:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">makeTies</span><span class="p">(</span><span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{4.0} &lt;music21.stream.Measure 2 offset=4.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{8.0} &lt;music21.stream.Measure 3 offset=8.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">    {4.0} &lt;music21.bar.Barline style=final&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">4.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="ow">is</span> <span class="n">n</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">tie</span>
+<span class="go">&lt;music21.tie.Tie start&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tie</span>
+<span class="go">&lt;music21.tie.Tie continue&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tie</span>
+<span class="go">&lt;music21.tie.Tie stop&gt;</span>
+</pre></div>
+</div>
+<p>Same experiment, but with rests:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;4/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">makeTies</span><span class="p">(</span><span class="n">inPlace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Rest rest&gt;</span>
+<span class="go">{4.0} &lt;music21.stream.Measure 2 offset=4.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Rest rest&gt;</span>
+<span class="go">{8.0} &lt;music21.stream.Measure 3 offset=8.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Rest rest&gt;</span>
+<span class="go">    {4.0} &lt;music21.bar.Barline style=final&gt;        </span>
+</pre></div>
+</div>
+<p>Notes: uses base.Music21Object.splitAtQuarterLength() once it has figured out
+what to split.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.stream.makeNotation.makeTupletBrackets">
+<code class="descclassname">music21.stream.makeNotation.</code><code class="descname">makeTupletBrackets</code><span class="sig-paren">(</span><em>s</em>, <em>inPlace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.makeNotation.makeTupletBrackets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a Stream of mixed durations, designates the first and last tuplet of any group
+of tuplets as the start or end of the tuplet, respectively.</p>
+<p>Changed in 1.8:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>* `inPlace` is False by default
+* to incorporate duration.updateTupletType, can take a list of durations
+</pre></div>
+</div>
+<p>TODO: does not handle nested tuplets</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;2/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tupletTypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">tuplets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">notes</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tupletTypes</span>
+<span class="go">[None, None, None, None, None, None]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span><span class="o">.</span><span class="n">makeNotation</span><span class="o">.</span><span class="n">makeTupletBrackets</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tupletTypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">tuplets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">notes</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tupletTypes</span>
+<span class="go">[&#39;start&#39;, None, &#39;stop&#39;, &#39;start&#39;, None, &#39;stop&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.stream.makeNotation.realizeOrnaments">
+<code class="descclassname">music21.stream.makeNotation.</code><code class="descname">realizeOrnaments</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.makeNotation.realizeOrnaments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Realize all ornaments on a stream</p>
+<p>Creates a new stream that contains all realized ornaments in addition
+to other elements in the original stream.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s2">&quot;4/4&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;whole&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span><span class="o">.</span><span class="n">expressions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">expressions</span><span class="o">.</span><span class="n">Mordent</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;D4&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;whole&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s1</span><span class="o">.</span><span class="n">recurse</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">x</span>
+<span class="gp">...</span>
+<span class="go">&lt;music21.stream.Stream ...&gt;</span>
+<span class="go">&lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">&lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">&lt;music21.note.Note C&gt;</span>
+<span class="go">&lt;music21.stream.Measure 2 offset=4.0&gt;</span>
+<span class="go">&lt;music21.note.Note D&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">makeNotation</span><span class="o">.</span><span class="n">realizeOrnaments</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s2</span><span class="o">.</span><span class="n">recurse</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">x</span>
+<span class="gp">...</span>
+<span class="go">&lt;music21.stream.Stream ...&gt;</span>
+<span class="go">&lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">&lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">&lt;music21.note.Note C&gt;</span>
+<span class="go">&lt;music21.note.Note B&gt;</span>
+<span class="go">&lt;music21.note.Note C&gt;</span>
+<span class="go">&lt;music21.stream.Measure 2 offset=4.0&gt;</span>
+<span class="go">&lt;music21.note.Note D&gt;</span>
+</pre></div>
+</div>
+<p>TODO: does not work for Gapful streams because it uses append rather 
+than the offset of the original</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleStreamStreamStatus.html" title="music21.stream.streamStatus"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleStreamIterator.html" title="music21.stream.iterator"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

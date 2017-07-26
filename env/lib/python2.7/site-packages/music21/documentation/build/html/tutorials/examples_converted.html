@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Examples and Demonstrations &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Examples and Demonstrations</a><ul>
+<li><a class="reference internal" href="#creating-a-reduction-and-labeling-intervals">Creating a Reduction and Labeling Intervals</a></li>
+<li><a class="reference internal" href="#searching-a-large-collection-of-works-for-ultimate-chord-quality">Searching a Large Collection of Works for Ultimate Chord Quality</a></li>
+<li><a class="reference internal" href="#searching-the-corpus-by-locale">Searching the Corpus by Locale</a></li>
+<li><a class="reference internal" href="#pitch-and-duration-transformations">Pitch and Duration Transformations</a></li>
+<li><a class="reference internal" href="#basic-counting-of-and-searching-for-musical-elements">Basic Counting of and Searching for Musical Elements</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorials/examples_converted.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="examples-converted"></span><div class="section" id="examples-and-demonstrations">
+<h1>Examples and Demonstrations<a class="headerlink" href="#examples-and-demonstrations" title="Permalink to this headline">¶</a></h1>
+<p>The following examples provide a few samples of some of the
+possibilities available when working with music21.</p>
+<p>We start loading music21 like this:</p>
+<blockquote>
+<div>from music21 import *</div></blockquote>
+<div class="section" id="creating-a-reduction-and-labeling-intervals">
+<h2>Creating a Reduction and Labeling Intervals<a class="headerlink" href="#creating-a-reduction-and-labeling-intervals" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s load up a score that happens to be in a bunch of parts:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">o</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;josquin/laDeplorationDeLaMorteDeJohannesOckeghem&#39;</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">scores</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-python"><div class="highlight"><pre> <span class="mi">5</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">o</span><span class="o">.</span><span class="n">scores</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">measures</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/examples_converted_4_0.png" src="../_images/examples_converted_4_0.png" />
+<p>We can merge the scores into a single Score with <code class="docutils literal"><span class="pre">.mergeScores</span></code></p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">mergedScores</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">mergeScores</span><span class="p">()</span>
+<span class="n">scoreExcerpt</span> <span class="o">=</span> <span class="n">mergedScores</span><span class="o">.</span><span class="n">measures</span><span class="p">(</span><span class="mi">126</span><span class="p">,</span> <span class="mi">134</span><span class="p">)</span>
+<span class="n">scoreExcerpt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/examples_converted_6_0.png" src="../_images/examples_converted_6_0.png" />
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">reduction</span> <span class="o">=</span> <span class="n">scoreExcerpt</span><span class="o">.</span><span class="n">chordify</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Iterate over the Chords and prepare presentation:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">reduction</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s">&#39;Chord&#39;</span><span class="p">):</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">closedPosition</span><span class="p">(</span><span class="n">forceOctave</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">annotateIntervals</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Add the reduction and display the results</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">scoreExcerpt</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">reduction</span><span class="p">)</span>
+<span class="n">scoreExcerpt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/examples_converted_11_0.png" src="../_images/examples_converted_11_0.png" />
+</div>
+<div class="section" id="searching-a-large-collection-of-works-for-ultimate-chord-quality">
+<h2>Searching a Large Collection of Works for Ultimate Chord Quality<a class="headerlink" href="#searching-a-large-collection-of-works-for-ultimate-chord-quality" title="Permalink to this headline">¶</a></h2>
+<p>This example search the entire collection of Bach Chorales stored in the
+corpus for works that, while in a minor key, end on a minor triad (as
+opposed to with the more common raised Picardy third).</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">results</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">clef</span><span class="o">.</span><span class="n">Treble8vbClef</span><span class="p">())</span>
+
+<span class="c"># Get file paths to all Chorales</span>
+<span class="k">for</span> <span class="n">chorale</span> <span class="ow">in</span> <span class="n">corpus</span><span class="o">.</span><span class="n">chorales</span><span class="o">.</span><span class="n">Iterator</span><span class="p">():</span>
+    <span class="n">keyObj</span> <span class="o">=</span> <span class="n">chorale</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="s">&#39;key&#39;</span><span class="p">)</span>
+
+    <span class="c"># Select minor-mode chorales only:</span>
+    <span class="k">if</span> <span class="n">keyObj</span><span class="o">.</span><span class="n">mode</span> <span class="o">!=</span> <span class="s">&#39;minor&#39;</span><span class="p">:</span>
+        <span class="k">continue</span>
+
+    <span class="c"># Gather last pitches from all parts into a Chord</span>
+    <span class="n">lastChordPitches</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">chorale</span><span class="o">.</span><span class="n">parts</span><span class="p">:</span>
+        <span class="n">lastChordPitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">pitches</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">cLast</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="n">lastChordPitches</span><span class="p">)</span>
+
+    <span class="c"># If it&#39;s not a minor triad, skip:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">cLast</span><span class="o">.</span><span class="n">isMinorTriad</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">cLast</span><span class="o">.</span><span class="n">isIncompleteMinorTriad</span><span class="p">():</span>
+        <span class="k">continue</span>
+
+    <span class="c"># otherwise, append it to the results with annotations:</span>
+    <span class="n">cLast</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s">&quot;whole&quot;</span>
+    <span class="n">cLast</span><span class="o">.</span><span class="n">lyric</span> <span class="o">=</span> <span class="n">chorale</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">title</span>
+
+    <span class="c"># put the chord in a measure and put that in the results</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">keySignature</span> <span class="o">=</span> <span class="n">chorale</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s">&#39;KeySignature&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cLast</span><span class="p">)</span>
+
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="c"># accidentals are probably wrong because of the context.</span>
+<span class="n">results</span><span class="o">.</span><span class="n">makeAccidentals</span><span class="p">(</span><span class="n">inPlace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">results</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/examples_converted_13_0.png" src="../_images/examples_converted_13_0.png" />
+</div>
+<div class="section" id="searching-the-corpus-by-locale">
+<h2>Searching the Corpus by Locale<a class="headerlink" href="#searching-the-corpus-by-locale" title="Permalink to this headline">¶</a></h2>
+<p>This example searches all works in the corpus from two regions in China
+for the count and percentage of melodic sevenths. These works come from
+the Essen Folksong database, indexed and stored in the <code class="docutils literal"><span class="pre">music21</span></code>
+corpus.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># Get an analysis tool</span>
+<span class="n">diversityTool</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">MelodicIntervalDiversity</span><span class="p">()</span>
+
+<span class="c"># get a list to store results.</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># Iterate over two regions</span>
+<span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;shanxi&#39;</span><span class="p">,</span> <span class="s">&#39;fujian&#39;</span><span class="p">):</span>
+    <span class="c"># Create storage units</span>
+    <span class="n">intervalDict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">workCount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">intervalCount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">seventhCount</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c"># Perform a location search on the corpus and iterate over</span>
+    <span class="c"># resulting file name and work number</span>
+    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">corpus</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="s">&#39;locale&#39;</span><span class="p">):</span>
+        <span class="n">workCount</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c"># Parse the work and create a dictionary of intervals</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+        <span class="n">intervalDict</span> <span class="o">=</span> <span class="n">diversityTool</span><span class="o">.</span><span class="n">countMelodicIntervals</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">found</span><span class="o">=</span><span class="n">intervalDict</span><span class="p">)</span>
+
+    <span class="c"># Iterate through all intervals, and count totals and sevenths</span>
+    <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">intervalDict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">intervalCount</span> <span class="o">+=</span> <span class="n">intervalDict</span><span class="p">[</span><span class="n">label</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">label</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;m7&#39;</span><span class="p">,</span> <span class="s">&#39;M7&#39;</span><span class="p">]:</span>
+            <span class="n">seventhCount</span> <span class="o">+=</span> <span class="n">intervalDict</span><span class="p">[</span><span class="n">label</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c"># Calculate a percentage and store results</span>
+    <span class="n">pcentSevenths</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">seventhCount</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">intervalCount</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">region</span><span class="p">,</span> <span class="n">pcentSevenths</span><span class="p">,</span> <span class="n">intervalCount</span><span class="p">,</span> <span class="n">workCount</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># print results</span>
+<span class="k">for</span> <span class="n">region</span><span class="p">,</span> <span class="n">pcentSevenths</span><span class="p">,</span> <span class="n">intervalCount</span><span class="p">,</span> <span class="n">workCount</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;locale: {}: found {} percent melodic sevenths, &#39;</span>
+          <span class="s">&#39;out of {} intervals in {} works&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+              <span class="n">region</span><span class="p">,</span> <span class="n">pcentSevenths</span><span class="p">,</span> <span class="n">intervalCount</span><span class="p">,</span> <span class="n">workCount</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-python"><div class="highlight"><pre> locale: shanxi: found 3.1994 percent melodic sevenths, out of 4282 intervals in 77 works
+ locale: fujian: found 0.7654 percent melodic sevenths, out of 2613 intervals in 53 works
+</pre></div>
+</div>
+</div>
+<div class="section" id="pitch-and-duration-transformations">
+<h2>Pitch and Duration Transformations<a class="headerlink" href="#pitch-and-duration-transformations" title="Permalink to this headline">¶</a></h2>
+<p>This example creates a mensural canon from the Soprano part of a Bach
+chorale. The procedure extracts the <a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a>
+objects from the parsed <a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> object, using
+the <a class="reference internal" href="../moduleReference/moduleCorpus.html#music21.corpus.parse" title="music21.corpus.parse"><code class="xref py py-func docutils literal"><span class="pre">parse()</span></code></a> function and the
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Stream.getElementById" title="music21.stream.Stream.getElementById"><code class="xref py py-meth docutils literal"><span class="pre">getElementById()</span></code></a> method. Then, a new part
+Stream is created by first scaling the timing and duration of events
+with the <a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Stream.augmentOrDiminish" title="music21.stream.Stream.augmentOrDiminish"><code class="xref py py-meth docutils literal"><span class="pre">augmentOrDiminish()</span></code></a> method and
+then transposing the pitches with the
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Stream.transpose" title="music21.stream.Stream.transpose"><code class="xref py py-meth docutils literal"><span class="pre">transpose()</span></code></a> method. The modified Stream
+is then inserted into another Stream and displayed with the
+<a class="reference internal" href="../moduleReference/moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a> method.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">src</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bach/bwv323.xml&#39;</span><span class="p">)</span>
+<span class="n">soprano</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s">&#39;Soprano&#39;</span><span class="p">)</span>
+<span class="n">excerpt</span> <span class="o">=</span> <span class="n">soprano</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notesAndRests</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="n">excerpt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/examples_converted_19_0.png" src="../_images/examples_converted_19_0.png" />
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">outputScore</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Score</span><span class="p">()</span>
+
+<span class="n">transformations</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s">&#39;P1&#39;</span><span class="p">),</span>
+                   <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="s">&#39;-P5&#39;</span><span class="p">),</span>
+                   <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s">&#39;-P11&#39;</span><span class="p">),</span>
+                   <span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">24</span><span class="p">),</span> <span class="c"># 24 semitones down</span>
+                  <span class="p">]</span>
+
+<span class="k">for</span> <span class="n">speed</span><span class="p">,</span> <span class="n">transposition</span> <span class="ow">in</span> <span class="n">transformations</span><span class="p">:</span>
+    <span class="n">part</span> <span class="o">=</span> <span class="n">excerpt</span><span class="o">.</span><span class="n">augmentOrDiminish</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+    <span class="n">part</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">transposition</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">outputScore</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">part</span><span class="p">)</span>
+
+<span class="n">outputScore</span><span class="o">.</span><span class="n">measures</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/examples_converted_20_0.png" src="../_images/examples_converted_20_0.png" />
+</div>
+<div class="section" id="basic-counting-of-and-searching-for-musical-elements">
+<h2>Basic Counting of and Searching for Musical Elements<a class="headerlink" href="#basic-counting-of-and-searching-for-musical-elements" title="Permalink to this headline">¶</a></h2>
+<p>Here, we load a file and count the number of G#&#8217;s in it. It features the
+use of the <code class="docutils literal"><span class="pre">pitches</span></code> property which gets all Pitch objects from all
+contained Streams and Stream subclasses recursively:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">s</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;bach/bwv30.6&quot;</span><span class="p">)</span>
+<span class="n">totalGSharps</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">pitches</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&#39;G#&#39;</span><span class="p">:</span>
+        <span class="n">totalGSharps</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">totalGSharps</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-python"><div class="highlight"><pre> <span class="mi">28</span>
+</pre></div>
+</div>
+<p>Now let&#8217;s do something a bit more difficult, we&#8217;ll look for all
+successive four-note segments (excuding repeated notes) within a measure
+to see the measure expresses melodically a dominant seventh chord.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">op133</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;beethoven/opus133.xml&#39;</span><span class="p">)</span>
+<span class="n">violin2</span> <span class="o">=</span> <span class="n">op133</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s">&#39;2nd Violin&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To do this, we&#8217;ll need to know about the <code class="docutils literal"><span class="pre">.findConsecutiveNotes</span></code>
+function. Let&#8217;s find a measure with a lot of notes in it to demonstrate:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">violin2</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s">&#39;Measure&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="k">break</span>
+<span class="n">m</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/examples_converted_26_0.png" src="../_images/examples_converted_26_0.png" />
+<p>The <code class="docutils literal"><span class="pre">findConsecutiveNotes</span></code> function can find just changes in note name
+from the previous.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">foundNotes</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">findConsecutiveNotes</span><span class="p">(</span><span class="n">skipUnisons</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">skipOctaves</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                    <span class="n">skipRests</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">noNone</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">foundNotes</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-python"><div class="highlight"><pre> [&lt;music21.note.Note C&gt;,
+  &lt;music21.note.Note A&gt;,
+  &lt;music21.note.Note C&gt;,
+  &lt;music21.note.Note A&gt;,
+  &lt;music21.note.Note E-&gt;]
+</pre></div>
+</div>
+<p>Okay, I think we have enough information to understand the code now:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">display</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">violin2</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s">&#39;Measure&#39;</span><span class="p">):</span>
+    <span class="n">foundNotes</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">findConsecutiveNotes</span><span class="p">(</span><span class="n">skipUnisons</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">skipOctaves</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                        <span class="n">skipRests</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">noNone</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># From this collection of Notes we gather all Pitches</span>
+    <span class="n">foundPitches</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">(</span><span class="n">foundNotes</span><span class="p">)</span><span class="o">.</span><span class="n">pitches</span>
+
+    <span class="c"># skip ahead if there aren&#39;t the right number of pitches for a dominant seventh</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">foundPitches</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">continue</span>
+
+    <span class="c"># make it into a chord.</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="n">foundPitches</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isDominantSeventh</span><span class="p">()</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="k">continue</span>
+
+    <span class="c"># now lets label the chord:</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">lyric</span> <span class="o">=</span> <span class="s">&quot;m. {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">number</span><span class="p">)</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s">&#39;whole&#39;</span>
+
+
+    <span class="n">cClosed</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">closedPosition</span><span class="p">()</span>
+    <span class="n">measureForChord</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+    <span class="n">measureForChord</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cClosed</span><span class="p">)</span>
+
+    <span class="n">display</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measureForChord</span><span class="p">)</span>
+    <span class="n">display</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Okay, let&#8217;s see what we found!</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">display</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/examples_converted_32_0.png" src="../_images/examples_converted_32_0.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2015, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Apr 03, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.stream.iterator &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.stream.makeNotation" href="moduleStreamMakeNotation.html" />
+    <link rel="prev" title="music21.stream.filters" href="moduleStreamFilters.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleStreamMakeNotation.html" title="music21.stream.makeNotation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleStreamFilters.html" title="music21.stream.filters"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleStreamFilters.html"
+                        title="previous chapter">music21.stream.filters</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleStreamMakeNotation.html"
+                        title="next chapter">music21.stream.makeNotation</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.stream.iterator</a><ul>
+<li><a class="reference internal" href="#recursiveiterator">RecursiveIterator</a></li>
+<li><a class="reference internal" href="#streamiterator">StreamIterator</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleStreamIterator.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-stream-iterator">
+<span id="modulestreamiterator"></span><h1>music21.stream.iterator<a class="headerlink" href="#music21-stream-iterator" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.stream.iterator"></span><p>this class contains iterators and filters for walking through streams</p>
+<p>StreamIterators are explicitly allowed to access private methods on streams.</p>
+<div class="section" id="recursiveiterator">
+<h2>RecursiveIterator<a class="headerlink" href="#recursiveiterator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.stream.iterator.RecursiveIterator">
+<em class="property">class </em><code class="descclassname">music21.stream.iterator.</code><code class="descname">RecursiveIterator</code><span class="sig-paren">(</span><em>srcStream</em>, <em>filterList=None</em>, <em>restoreActiveSites=True</em>, <em>activeInformation=None</em>, <em>streamsOnly=False</em>, <em>includeSelf=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.RecursiveIterator" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ri</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">iterator</span><span class="o">.</span><span class="n">RecursiveIterator</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">streamsOnly</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ri</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">&lt;music21.stream.Part Soprano&gt;</span>
+<span class="go">&lt;music21.stream.Measure 0 offset=0.0&gt;</span>
+<span class="go">&lt;music21.stream.Measure 1 offset=1.0&gt;</span>
+<span class="go">&lt;music21.stream.Measure 2 offset=5.0&gt;</span>
+<span class="gp">...</span>
+<span class="go">&lt;music21.stream.Part Alto&gt;</span>
+<span class="go">&lt;music21.stream.Measure 0 offset=0.0&gt;</span>
+<span class="gp">...</span>
+<span class="go">&lt;music21.stream.Part Tenor&gt;</span>
+<span class="gp">...</span>
+<span class="go">&lt;music21.stream.Part Bass&gt;</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<p>But this is how you&#8217;ll actually use it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">b</span><span class="o">.</span><span class="n">recurse</span><span class="p">(</span><span class="n">streamsOnly</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">&lt;music21.stream.Score 0x10484fd68&gt;</span>
+<span class="go">&lt;music21.stream.Part Soprano&gt;</span>
+<span class="go">&lt;music21.stream.Measure 0 offset=0.0&gt;</span>
+<span class="go">&lt;music21.stream.Measure 1 offset=1.0&gt;</span>
+<span class="go">&lt;music21.stream.Measure 2 offset=5.0&gt;</span>
+<span class="gp">...</span>
+<span class="go">&lt;music21.stream.Part Alto&gt;</span>
+<span class="go">&lt;music21.stream.Measure 0 offset=0.0&gt;</span>
+<span class="gp">...</span>
+<span class="go">&lt;music21.stream.Part Tenor&gt;</span>
+<span class="gp">...</span>
+<span class="go">&lt;music21.stream.Part Bass&gt;</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hasExpressions</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">el</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="kc">True</span> <span class="k">if</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="s1">&#39;expressions&#39;</span><span class="p">)</span> 
+<span class="gp">... </span>      <span class="ow">and</span> <span class="n">el</span><span class="o">.</span><span class="n">expressions</span><span class="p">)</span> <span class="k">else</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expressive</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">addFilter</span><span class="p">(</span><span class="n">hasExpressions</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expressive</span>
+<span class="go">&lt;music21.stream.iterator.RecursiveIterator for Score:0x10487f550 @:0&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">expressive</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">printer</span> <span class="o">=</span> <span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">el</span><span class="o">.</span><span class="n">expressions</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">printer</span><span class="p">)</span>
+<span class="go">(&lt;music21.note.Note C#&gt;, [&lt;music21.expressions.Fermata&gt;])</span>
+<span class="go">(&lt;music21.note.Note A&gt;, [&lt;music21.expressions.Fermata&gt;])</span>
+<span class="go">(&lt;music21.note.Note F#&gt;, [&lt;music21.expressions.Fermata&gt;])</span>
+<span class="go">(&lt;music21.note.Note C#&gt;, [&lt;music21.expressions.Fermata&gt;])</span>
+<span class="go">(&lt;music21.note.Note G#&gt;, [&lt;music21.expressions.Fermata&gt;])</span>
+<span class="go">(&lt;music21.note.Note F#&gt;, [&lt;music21.expressions.Fermata&gt;])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">expressive</span><span class="p">)</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expressive</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">measureNumber</span>
+<span class="go">9</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.stream.iterator.RecursiveIterator" title="music21.stream.iterator.RecursiveIterator"><code class="xref py py-class docutils literal"><span class="pre">RecursiveIterator</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator" title="music21.stream.iterator.StreamIterator"><code class="xref py py-class docutils literal"><span class="pre">StreamIterator</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.stream.iterator.RecursiveIterator" title="music21.stream.iterator.RecursiveIterator"><code class="xref py py-class docutils literal"><span class="pre">RecursiveIterator</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="#music21.stream.iterator.StreamIterator" title="music21.stream.iterator.StreamIterator"><code class="xref py py-class docutils literal"><span class="pre">StreamIterator</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.activeElementList" title="music21.stream.iterator.StreamIterator.activeElementList"><code class="xref py py-attr docutils literal"><span class="pre">activeElementList</span></code></a></li>
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.notes" title="music21.stream.iterator.StreamIterator.notes"><code class="xref py py-attr docutils literal"><span class="pre">notes</span></code></a></li>
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.notesAndRests" title="music21.stream.iterator.StreamIterator.notesAndRests"><code class="xref py py-attr docutils literal"><span class="pre">notesAndRests</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.parts" title="music21.stream.iterator.StreamIterator.parts"><code class="xref py py-attr docutils literal"><span class="pre">parts</span></code></a></li>
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.spanners" title="music21.stream.iterator.StreamIterator.spanners"><code class="xref py py-attr docutils literal"><span class="pre">spanners</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.variants" title="music21.stream.iterator.StreamIterator.variants"><code class="xref py py-attr docutils literal"><span class="pre">variants</span></code></a></li>
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.voices" title="music21.stream.iterator.StreamIterator.voices"><code class="xref py py-attr docutils literal"><span class="pre">voices</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.stream.iterator.RecursiveIterator" title="music21.stream.iterator.RecursiveIterator"><code class="xref py py-class docutils literal"><span class="pre">RecursiveIterator</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.stream.iterator.RecursiveIterator.iteratorStack">
+<code class="descclassname">RecursiveIterator.</code><code class="descname">iteratorStack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.RecursiveIterator.iteratorStack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a stack of Streams at this point in the iteration.  Last is most recent.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bRecurse</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bRecurse</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">break</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bRecurse</span><span class="o">.</span><span class="n">iteratorStack</span><span class="p">()</span>
+<span class="go">[&lt;music21.stream.iterator.RecursiveIterator for Score:0x10475cdd8 @:2&gt;, </span>
+<span class="go"> &lt;music21.stream.iterator.RecursiveIterator for Part:Soprano @:3&gt;, </span>
+<span class="go"> &lt;music21.stream.iterator.RecursiveIterator for Measure:m.1 @:2&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.RecursiveIterator.matchingElements">
+<code class="descclassname">RecursiveIterator.</code><code class="descname">matchingElements</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.RecursiveIterator.matchingElements" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.RecursiveIterator.next">
+<code class="descclassname">RecursiveIterator.</code><code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.RecursiveIterator.next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.RecursiveIterator.reset">
+<code class="descclassname">RecursiveIterator.</code><code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.RecursiveIterator.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>reset prior to iteration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.RecursiveIterator.streamStack">
+<code class="descclassname">RecursiveIterator.</code><code class="descname">streamStack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.RecursiveIterator.streamStack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a stack of Streams at this point.  Last is most recent.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bRecurse</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bRecurse</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">break</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bRecurse</span><span class="o">.</span><span class="n">streamStack</span><span class="p">()</span>
+<span class="go">[&lt;music21.stream.Score 0x1049a0710&gt;, </span>
+<span class="go"> &lt;music21.stream.Part Soprano&gt;, </span>
+<span class="go"> &lt;music21.stream.Measure 1 offset=1.0&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.stream.iterator.StreamIterator" title="music21.stream.iterator.StreamIterator"><code class="xref py py-class docutils literal"><span class="pre">StreamIterator</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.addFilter" title="music21.stream.iterator.StreamIterator.addFilter"><code class="xref py py-meth docutils literal"><span class="pre">addFilter()</span></code></a></li>
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.cleanup" title="music21.stream.iterator.StreamIterator.cleanup"><code class="xref py py-meth docutils literal"><span class="pre">cleanup()</span></code></a></li>
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.getElementsByClass" title="music21.stream.iterator.StreamIterator.getElementsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getElementsByClass()</span></code></a></li>
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.getElementsByGroup" title="music21.stream.iterator.StreamIterator.getElementsByGroup"><code class="xref py py-meth docutils literal"><span class="pre">getElementsByGroup()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.getElementsByOffset" title="music21.stream.iterator.StreamIterator.getElementsByOffset"><code class="xref py py-meth docutils literal"><span class="pre">getElementsByOffset()</span></code></a></li>
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.getElementsNotOfClass" title="music21.stream.iterator.StreamIterator.getElementsNotOfClass"><code class="xref py py-meth docutils literal"><span class="pre">getElementsNotOfClass()</span></code></a></li>
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.matchesFilters" title="music21.stream.iterator.StreamIterator.matchesFilters"><code class="xref py py-meth docutils literal"><span class="pre">matchesFilters()</span></code></a></li>
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.removeFilter" title="music21.stream.iterator.StreamIterator.removeFilter"><code class="xref py py-meth docutils literal"><span class="pre">removeFilter()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.resetCaches" title="music21.stream.iterator.StreamIterator.resetCaches"><code class="xref py py-meth docutils literal"><span class="pre">resetCaches()</span></code></a></li>
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.stream" title="music21.stream.iterator.StreamIterator.stream"><code class="xref py py-meth docutils literal"><span class="pre">stream()</span></code></a></li>
+<li><a class="reference internal" href="#music21.stream.iterator.StreamIterator.updateActiveInformation" title="music21.stream.iterator.StreamIterator.updateActiveInformation"><code class="xref py py-meth docutils literal"><span class="pre">updateActiveInformation()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="streamiterator">
+<h2>StreamIterator<a class="headerlink" href="#streamiterator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.stream.iterator.StreamIterator">
+<em class="property">class </em><code class="descclassname">music21.stream.iterator.</code><code class="descname">StreamIterator</code><span class="sig-paren">(</span><em>srcStream</em>, <em>filterList=None</em>, <em>restoreActiveSites=True</em>, <em>activeInformation=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator" title="Permalink to this definition">¶</a></dt>
+<dd><p>An Iterator object used to handle getting items from Streams.
+The <code class="xref py py-meth docutils literal"><span class="pre">__iter__()</span></code> method
+returns this object, passing a reference to self.</p>
+<p>Note that this iterator automatically sets the active site of
+returned elements to the source Stream.</p>
+<p>There is one property to know about: .overrideDerivation which overrides the set
+derivation of the class when .stream() is called</p>
+<p>Sets:</p>
+<ul class="simple">
+<li>StreamIterator.srcStream &#8211; the Stream iterated over</li>
+<li>StreamIterator.index &#8211; current index item</li>
+<li>StreamIterator.streamLength &#8211; length of elements.</li>
+<li>StreamIterator.srcStreamElements &#8211; srcStream._elements</li>
+<li>StreamIterator.cleanupOnStop &#8211; should the StreamIterator delete the
+reference to srcStream and srcStreamElements when stopping? default
+False</li>
+<li>StreamIterator.activeInformation &#8211; a dict that contains information
+about where we are in the parse.  Especially useful for recursive
+streams. &#8216;stream&#8217; = the stream that is currently active, &#8216;index&#8217;
+where in <cite>.elements</cite> we are, <cite>iterSection</cite> is <cite>_elements</cite> or <cite>_endElements</cite>,
+and <cite>sectionIndex</cite> is where we are in the iterSection, or -1 if
+we have not started. This dict is shared among all sub iterators.</li>
+</ul>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.stream.iterator.StreamIterator" title="music21.stream.iterator.StreamIterator"><code class="xref py py-class docutils literal"><span class="pre">StreamIterator</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.stream.iterator.StreamIterator.activeElementList">
+<code class="descclassname">StreamIterator.</code><code class="descname">activeElementList</code><a class="headerlink" href="#music21.stream.iterator.StreamIterator.activeElementList" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the element list (&#8216;_elements&#8217; or &#8216;_endElements&#8217;)
+for the current activeInformation</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.stream.iterator.StreamIterator.notes">
+<code class="descclassname">StreamIterator.</code><code class="descname">notes</code><a class="headerlink" href="#music21.stream.iterator.StreamIterator.notes" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+<span class="go">&lt;music21.note.Note C&gt;</span>
+<span class="go">&lt;music21.note.Note D&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.stream.iterator.StreamIterator.notesAndRests">
+<code class="descclassname">StreamIterator.</code><code class="descname">notesAndRests</code><a class="headerlink" href="#music21.stream.iterator.StreamIterator.notesAndRests" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;4/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">notesAndRests</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+<span class="go">&lt;music21.note.Note C&gt;</span>
+<span class="go">&lt;music21.note.Rest rest&gt;</span>
+<span class="go">&lt;music21.note.Note D&gt;</span>
+</pre></div>
+</div>
+<p>chained filters... (this makes no sense since notes is a subset of notesAndRests</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">notesAndRests</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+<span class="go">&lt;music21.note.Note C&gt;</span>
+<span class="go">&lt;music21.note.Note D&gt;        </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.stream.iterator.StreamIterator.parts">
+<code class="descclassname">StreamIterator.</code><code class="descname">parts</code><a class="headerlink" href="#music21.stream.iterator.StreamIterator.parts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="music21.stream.iterator.StreamIterator.spanners">
+<code class="descclassname">StreamIterator.</code><code class="descname">spanners</code><a class="headerlink" href="#music21.stream.iterator.StreamIterator.spanners" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="music21.stream.iterator.StreamIterator.variants">
+<code class="descclassname">StreamIterator.</code><code class="descname">variants</code><a class="headerlink" href="#music21.stream.iterator.StreamIterator.variants" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="music21.stream.iterator.StreamIterator.voices">
+<code class="descclassname">StreamIterator.</code><code class="descname">voices</code><a class="headerlink" href="#music21.stream.iterator.StreamIterator.voices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.stream.iterator.StreamIterator" title="music21.stream.iterator.StreamIterator"><code class="xref py py-class docutils literal"><span class="pre">StreamIterator</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.stream.iterator.StreamIterator.addFilter">
+<code class="descclassname">StreamIterator.</code><code class="descname">addFilter</code><span class="sig-paren">(</span><em>newFilter</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator.addFilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>adds a filter to the list.</p>
+<p>resets caches &#8211; do not add filters any other way</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.StreamIterator.cleanup">
+<code class="descclassname">StreamIterator.</code><code class="descname">cleanup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator.cleanup" title="Permalink to this definition">¶</a></dt>
+<dd><p>stop iteration; and cleanup if need be.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.StreamIterator.getElementsByClass">
+<code class="descclassname">StreamIterator.</code><code class="descname">getElementsByClass</code><span class="sig-paren">(</span><em>classFilterList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator.getElementsByClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a filter to the Iterator to remove all elements
+except those that match one
+or more classes in the <cite>classFilterList</cite>. A single class
+can also used for the <cite>classFilterList</cite> parameter instead of a List.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;s1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Rest&#39;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+<span class="go">&lt;music21.note.Rest rest&gt;</span>
+</pre></div>
+</div>
+<p>ActiveSite is restored...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;s2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">activeSite</span><span class="o">.</span><span class="n">id</span>
+<span class="go">&#39;s2&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Rest&#39;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">activeSite</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="go">s1   </span>
+</pre></div>
+</div>
+<p>Classes work in addition to strings...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+<span class="go">&lt;music21.note.Rest rest&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.StreamIterator.getElementsByGroup">
+<code class="descclassname">StreamIterator.</code><code class="descname">getElementsByGroup</code><span class="sig-paren">(</span><em>groupFilterList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator.getElementsByGroup" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;trombone&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;trombone&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;tuba&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;E&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;tuba&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tboneSubStream</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByGroup</span><span class="p">(</span><span class="s2">&quot;trombone&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">thisNote</span> <span class="ow">in</span> <span class="n">tboneSubStream</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">thisNote</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="go">C</span>
+<span class="go">D</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tubaSubStream</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByGroup</span><span class="p">(</span><span class="s2">&quot;tuba&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">thisNote</span> <span class="ow">in</span> <span class="n">tubaSubStream</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">thisNote</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="go">D</span>
+<span class="go">E</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.StreamIterator.getElementsByOffset">
+<code class="descclassname">StreamIterator.</code><code class="descname">getElementsByOffset</code><span class="sig-paren">(</span><em>offsetStart</em>, <em>offsetEnd=None</em>, <em>includeEndBoundary=True</em>, <em>mustFinishInSpan=False</em>, <em>mustBeginInSpan=True</em>, <em>includeElementsThatEndAtStart=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator.getElementsByOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a filter keeping only Music21Objects that
+are found at a certain offset or within a certain
+offset time range (given the start and optional stop values).</p>
+<p>There are several attributes that govern how this range is
+determined:</p>
+<p>If <cite>mustFinishInSpan</cite> is True then an event that begins
+between offsetStart and offsetEnd but which ends after offsetEnd
+will not be included.  The default is False.</p>
+<p>For instance, a half note at offset 2.0 will be found in
+getElementsByOffset(1.5, 2.5) or getElementsByOffset(1.5, 2.5,
+mustFinishInSpan = False) but not by getElementsByOffset(1.5, 2.5,
+mustFinishInSpan = True).</p>
+<p>The <cite>includeEndBoundary</cite> option determines if an element
+begun just at the offsetEnd should be included.  For instance,
+the half note at offset 2.0 above would be found by
+getElementsByOffset(0, 2.0) or by getElementsByOffset(0, 2.0,
+includeEndBoundary = True) but not by getElementsByOffset(0, 2.0,
+includeEndBoundary = False).</p>
+<p>Setting includeEndBoundary to False at the same time as
+mustFinishInSpan is set to True is probably NOT what you want to do
+unless you want to find things like clefs at the end of the region
+to display as courtesy clefs.</p>
+<p>The <cite>mustBeginInSpan</cite> option determines whether notes or other
+objects that do not begin in the region but are still sounding
+at the beginning of the region are excluded.  The default is
+True &#8211; that is, these notes will not be included.
+For instance the half note at offset 2.0 from above would not be found by
+getElementsByOffset(3.0, 3.5) or getElementsByOffset(3.0, 3.5,
+mustBeginInSpan = True) but it would be found by
+getElementsByOffset(3.0, 3.5, mustBeginInSpan = False)</p>
+<p>Setting includeElementsThatEndAtStart to False is useful for zeroLength
+searches that set mustBeginInSpan == False to not catch notes that were
+playing before the search but that end just before the end of the search type.
+See the code for allPlayingWhileSounding for a demonstration.</p>
+<p>This chart, and the examples below, demonstrate the various
+features of getElementsByOffset.  It is one of the most complex
+methods of music21 but also one of the most powerful, so it
+is worth learning at least the basics.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/getElementsByOffset.png"><img alt="../_images/getElementsByOffset.png" src="../_images/getElementsByOffset.png" style="width: 600px;" /></a>
+</div></blockquote>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n0</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n0</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;half&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n0</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">n0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;half&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">st1</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">out1</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">step</span>
+<span class="go">&#39;D&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">st1</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">out2</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">step</span>
+<span class="go">&#39;D&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out3</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">st1</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">mustFinishInSpan</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">out3</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out4</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">st1</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">out4</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out4</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">step</span>
+<span class="go">&#39;D&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out5</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">st1</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">includeEndBoundary</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">out5</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out6</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">st1</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">includeEndBoundary</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                                         <span class="n">mustBeginInSpan</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">out6</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out6</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">step</span>
+<span class="go">&#39;C&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out7</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">st1</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">mustBeginInSpan</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">out7</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">step</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">out7</span><span class="p">]</span>
+<span class="go">[&#39;C&#39;, &#39;D&#39;]</span>
+</pre></div>
+</div>
+<p>Note, that elements that end at the start offset are included if mustBeginInSpan is False</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">out8</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">st1</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">mustBeginInSpan</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">out8</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">step</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">out8</span><span class="p">]</span>
+<span class="go">[&#39;C&#39;, &#39;D&#39;]</span>
+</pre></div>
+</div>
+<p>To change this behavior set includeElementsThatEndAtStart=False</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">out9</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">st1</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">mustBeginInSpan</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+<span class="gp">... </span>                                         <span class="n">includeElementsThatEndAtStart</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">out9</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">step</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">out9</span><span class="p">]</span>
+<span class="go">[&#39;D&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">repeatInsert</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">repeatInsert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">6.9</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">6.9</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+<p>Testing multiple zero-length elements with mustBeginInSpan:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;4/4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">ks</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">mustBeginInSpan</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">mustBeginInSpan</span><span class="o">=</span><span class="kc">False</span><span class="p">)))</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.StreamIterator.getElementsNotOfClass">
+<code class="descclassname">StreamIterator.</code><code class="descname">getElementsNotOfClass</code><span class="sig-paren">(</span><em>classFilterList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator.getElementsNotOfClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a filter, removing all Elements that do not
+match the one or more classes in the <cite>classFilterList</cite>.</p>
+<p>In lieu of a list, a single class can be used as the <cite>classFilterList</cite> parameter.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">repeatInsert</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(),</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;G#&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">n</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="gp">... </span>    <span class="n">a</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">found</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsNotOfClass</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">found</span><span class="p">)</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">repeatInsert</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(),</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># here, it gets elements from within a stream</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># this probably should not do this, as it is one layer lower</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">found</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsNotOfClass</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">found</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">found</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsNotOfClass</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">found</span><span class="p">)</span>
+<span class="go">25</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.StreamIterator.matchesFilters">
+<code class="descclassname">StreamIterator.</code><code class="descname">matchesFilters</code><span class="sig-paren">(</span><em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator.matchesFilters" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns False if any filter returns False, True otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.StreamIterator.matchingElements">
+<code class="descclassname">StreamIterator.</code><code class="descname">matchingElements</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator.matchingElements" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a list of elements that match the filter.</p>
+<p>This sort of defeats the point of using a generator, so only used if 
+it&#8217;s requested by __len__ or __getitem__ etc.</p>
+<p>Subclasses should override to cache anything they need saved (index, 
+recursion objects, etc.)</p>
+<p>activeSite will not be set.</p>
+<p>Cached for speed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 3/4 c4 d e f g a&#39;</span><span class="p">,</span> <span class="n">makeNotation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;tn3/4&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sI</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">iter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sI</span>
+<span class="go">&lt;music21.stream.iterator.StreamIterator for Part:tn3/4 @:0&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sI</span><span class="o">.</span><span class="n">matchingElements</span><span class="p">()</span>
+<span class="go">[&lt;music21.meter.TimeSignature 3/4&gt;, &lt;music21.note.Note C&gt;, &lt;music21.note.Note D&gt;, </span>
+<span class="go"> &lt;music21.note.Note E&gt;, &lt;music21.note.Note F&gt;, &lt;music21.note.Note G&gt;, </span>
+<span class="go"> &lt;music21.note.Note A&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sI</span><span class="o">.</span><span class="n">notes</span>
+<span class="go">&lt;music21.stream.iterator.StreamIterator for Part:tn3/4 @:0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sI</span><span class="o">.</span><span class="n">notes</span> <span class="ow">is</span> <span class="n">sI</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sI</span><span class="o">.</span><span class="n">filters</span>
+<span class="go">[&lt;music21.stream.filters.ClassFilter NotRest&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sI</span><span class="o">.</span><span class="n">matchingElements</span><span class="p">()</span>
+<span class="go">[&lt;music21.note.Note C&gt;, &lt;music21.note.Note D&gt;, </span>
+<span class="go"> &lt;music21.note.Note E&gt;, &lt;music21.note.Note F&gt;, &lt;music21.note.Note G&gt;, </span>
+<span class="go"> &lt;music21.note.Note A&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.StreamIterator.removeFilter">
+<code class="descclassname">StreamIterator.</code><code class="descname">removeFilter</code><span class="sig-paren">(</span><em>oldFilter</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator.removeFilter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.StreamIterator.reset">
+<code class="descclassname">StreamIterator.</code><code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>reset prior to iteration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.StreamIterator.resetCaches">
+<code class="descclassname">StreamIterator.</code><code class="descname">resetCaches</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator.resetCaches" title="Permalink to this definition">¶</a></dt>
+<dd><p>reset any cached data. &#8211; do not use this at
+the start of iteration since we might as well
+save this information. But do call it if 
+the filter changes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.StreamIterator.stream">
+<code class="descclassname">StreamIterator.</code><code class="descname">stream</code><span class="sig-paren">(</span><em>returnStreamSubClass=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator.stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a new stream from this iterator.</p>
+<p>Does nothing except copy if there are no filters, but a drop in
+replacement for the old .getElementsByClass() etc. if it does.</p>
+<p>In other words:</p>
+<p><cite>s.getElementsByClass()</cite> == <cite>s.iter.getElementsByClass().stream()</cite></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">Barline</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">storeAtEnd</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Note&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{2.0} &lt;music21.note.Note D&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">derivation</span><span class="o">.</span><span class="n">method</span>
+<span class="go">&#39;getElementsByClass&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span>
+<span class="go">&lt;music21.stream.Part ...&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s3</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s3</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{1.0} &lt;music21.note.Rest rest&gt;</span>
+<span class="go">{2.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">{3.0} &lt;music21.bar.Barline style=regular&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s3</span><span class="o">.</span><span class="n">elementOffset</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">stringReturns</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&#39;highestTime&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s4</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">iter</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Barline&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s4</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.bar.Barline style=regular&gt;</span>
+</pre></div>
+</div>
+<p>Note that this routine can create Streams that have elements that the original
+stream did not, in the case of recursion:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bach</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bn</span> <span class="o">=</span> <span class="n">bach</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bn</span>
+<span class="go">&lt;music21.note.Note E&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bn</span> <span class="ow">in</span> <span class="n">bach</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bfn</span> <span class="o">=</span> <span class="n">bach</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bn</span> <span class="ow">in</span> <span class="n">bfn</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bn</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">bfn</span><span class="p">)</span>
+<span class="go">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bn</span><span class="o">.</span><span class="n">getOffsetInHierarchy</span><span class="p">(</span><span class="n">bach</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.stream.iterator.StreamIterator.updateActiveInformation">
+<code class="descclassname">StreamIterator.</code><code class="descname">updateActiveInformation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.stream.iterator.StreamIterator.updateActiveInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the (shared) activeInformation dictionary
+with information about
+where we are.</p>
+<p>Call before any element return</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleStreamMakeNotation.html" title="music21.stream.makeNotation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleStreamFilters.html" title="music21.stream.filters"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

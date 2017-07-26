@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.figuredBass.realizer &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.figuredBass.realizerScale" href="moduleFiguredBassRealizerScale.html" />
+    <link rel="prev" title="music21.figuredBass.possibility" href="moduleFiguredBassPossibility.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassRealizerScale.html" title="music21.figuredBass.realizerScale"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassPossibility.html" title="music21.figuredBass.possibility"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleFiguredBassPossibility.html"
+                        title="previous chapter">music21.figuredBass.possibility</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleFiguredBassRealizerScale.html"
+                        title="next chapter">music21.figuredBass.realizerScale</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.figuredBass.realizer</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#figuredbassline">FiguredBassLine</a></li>
+<li><a class="reference internal" href="#realization">Realization</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleFiguredBassRealizer.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-figuredbass-realizer">
+<span id="modulefiguredbassrealizer"></span><h1>music21.figuredBass.realizer<a class="headerlink" href="#music21-figuredbass-realizer" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.figuredBass.realizer"></span><p>This module, the heart of fbRealizer, is all about realizing 
+a bass line of (bassNote, notationString)
+pairs. All it takes to create well-formed realizations of a 
+bass line is a few lines of music21 code, 
+from start to finish. See <a class="reference internal" href="#music21.figuredBass.realizer.FiguredBassLine" title="music21.figuredBass.realizer.FiguredBassLine"><code class="xref py py-class docutils literal"><span class="pre">FiguredBassLine</span></code></a> for more details.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">realizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">note</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span> <span class="o">=</span> <span class="n">realizer</span><span class="o">.</span><span class="n">FiguredBassLine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">addElement</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C3&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">addElement</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D3&#39;</span><span class="p">),</span> <span class="s1">&#39;4,3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">addElement</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C3&#39;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allSols</span> <span class="o">=</span> <span class="n">fbLine</span><span class="o">.</span><span class="n">realize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allSols</span><span class="o">.</span><span class="n">getNumSolutions</span><span class="p">()</span>
+<span class="go">30</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allSols</span><span class="o">.</span><span class="n">generateRandomRealizations</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/fbRealizer_intro.png"><img alt="../_images/fbRealizer_intro.png" src="../_images/fbRealizer_intro.png" style="width: 500px;" /></a>
+</div></blockquote>
+<p>The same can be accomplished by taking the notes and notations 
+from a <a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a>.
+See <a class="reference internal" href="#music21.figuredBass.realizer.figuredBassFromStream" title="music21.figuredBass.realizer.figuredBassFromStream"><code class="xref py py-meth docutils literal"><span class="pre">figuredBassFromStream()</span></code></a> for more details.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: C4 D4_4,3 C2&quot;</span><span class="p">,</span> <span class="n">makeNotation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span> <span class="o">=</span> <span class="n">realizer</span><span class="o">.</span><span class="n">figuredBassFromStream</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allSols2</span> <span class="o">=</span> <span class="n">fbLine</span><span class="o">.</span><span class="n">realize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allSols2</span><span class="o">.</span><span class="n">getNumSolutions</span><span class="p">()</span>
+<span class="go">30</span>
+</pre></div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.figuredBass.realizer.figuredBassFromStream">
+<code class="descclassname">music21.figuredBass.realizer.</code><code class="descname">figuredBassFromStream</code><span class="sig-paren">(</span><em>streamPart</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.figuredBassFromStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a <a class="reference internal" href="moduleStream.html#music21.stream.Part" title="music21.stream.Part"><code class="xref py py-class docutils literal"><span class="pre">Part</span></code></a> (or another <a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a> subclass) 
+and returns a <a class="reference internal" href="#music21.figuredBass.realizer.FiguredBassLine" title="music21.figuredBass.realizer.FiguredBassLine"><code class="xref py py-class docutils literal"><span class="pre">FiguredBassLine</span></code></a> object whose bass notes 
+have notations taken from the lyrics in the source stream. This method along with the
+<a class="reference internal" href="#music21.figuredBass.realizer.FiguredBassLine.realize" title="music21.figuredBass.realizer.FiguredBassLine.realize"><code class="xref py py-meth docutils literal"><span class="pre">realize()</span></code></a> method provide the easiest 
+way of converting from a notated version of a figured bass (such as in a MusicXML file) to 
+a realized version of the same line.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 4/4 C4 D8_6 E8_6 F4 G4_7 c1&#39;</span><span class="p">,</span> <span class="n">makeNotation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fb</span> <span class="o">=</span> <span class="n">figuredBass</span><span class="o">.</span><span class="n">realizer</span><span class="o">.</span><span class="n">figuredBassFromStream</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fb</span>
+<span class="go">&lt;music21.figuredBass.realizer.FiguredBassLine object at 0x...&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fbRules</span> <span class="o">=</span> <span class="n">figuredBass</span><span class="o">.</span><span class="n">rules</span><span class="o">.</span><span class="n">Rules</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbRules</span><span class="o">.</span><span class="n">partMovementLimits</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">12</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbRealization</span> <span class="o">=</span> <span class="n">fb</span><span class="o">.</span><span class="n">realize</span><span class="p">(</span><span class="n">fbRules</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbRealization</span><span class="o">.</span><span class="n">getNumSolutions</span><span class="p">()</span>
+<span class="go">13</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbRealization</span><span class="o">.</span><span class="n">generateRandomRealizations</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbRealizer_fbStreamPart.png"><img alt="../_images/fbRealizer_fbStreamPart.png" src="../_images/fbRealizer_fbStreamPart.png" style="width: 500px;" /></a>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.realizer.addLyricsToBassNote">
+<code class="descclassname">music21.figuredBass.realizer.</code><code class="descname">addLyricsToBassNote</code><span class="sig-paren">(</span><em>bassNote</em>, <em>notationString=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.addLyricsToBassNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in a bassNote and a corresponding notationString as arguments. 
+Adds the parsed notationString as lyrics to the bassNote, which is 
+useful when displaying the figured bass in external software.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">realizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">note</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">realizer</span><span class="o">.</span><span class="n">addLyricsToBassNote</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="s2">&quot;6,4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span><span class="o">.</span><span class="n">lyrics</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+<span class="go">&#39;6&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span><span class="o">.</span><span class="n">lyrics</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+<span class="go">&#39;4&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbRealizer_lyrics.png"><img alt="../_images/fbRealizer_lyrics.png" src="../_images/fbRealizer_lyrics.png" style="width: 100px;" /></a>
+</dd></dl>
+
+</div>
+<div class="section" id="figuredbassline">
+<h2>FiguredBassLine<a class="headerlink" href="#figuredbassline" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.figuredBass.realizer.FiguredBassLine">
+<em class="property">class </em><code class="descclassname">music21.figuredBass.realizer.</code><code class="descname">FiguredBassLine</code><span class="sig-paren">(</span><em>inKey=None</em>, <em>inTime=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.FiguredBassLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>A FiguredBassLine is an interface for realization of a line of (bassNote, notationString) pairs.
+Currently, only 1:1 realization is supported, meaning that every bassNote is realized and the 
+<code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code> or duration of a realization above a bassNote 
+is identical to that of the bassNote.</p>
+<p><cite>inKey</cite> defaults to C major.</p>
+<p><cite>inTime</cite> defaults to 4/4.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">realizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">key</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">meter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span> <span class="o">=</span> <span class="n">realizer</span><span class="o">.</span><span class="n">FiguredBassLine</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">inKey</span>
+<span class="go">&lt;music21.key.Key of B major&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">inTime</span>
+<span class="go">&lt;music21.meter.TimeSignature 3/4&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.figuredBass.realizer.FiguredBassLine" title="music21.figuredBass.realizer.FiguredBassLine"><code class="xref py py-class docutils literal"><span class="pre">FiguredBassLine</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.figuredBass.realizer.FiguredBassLine.addElement">
+<code class="descclassname">FiguredBassLine.</code><code class="descname">addElement</code><span class="sig-paren">(</span><em>bassObject</em>, <em>notationString=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.FiguredBassLine.addElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to add (bassNote, notationString) pairs to the bass line. Elements
+are realized in the order they are added.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">realizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">key</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">meter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">note</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span> <span class="o">=</span> <span class="n">realizer</span><span class="o">.</span><span class="n">FiguredBassLine</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">addElement</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;B2&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">addElement</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C#3&#39;</span><span class="p">),</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">addElement</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D#3&#39;</span><span class="p">),</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">generateBassLine</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbRealizer_bassLine.png"><img alt="../_images/fbRealizer_bassLine.png" src="../_images/fbRealizer_bassLine.png" style="width: 200px;" /></a>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.figuredBass.realizer.FiguredBassLine.generateBassLine">
+<code class="descclassname">FiguredBassLine.</code><code class="descname">generateBassLine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.FiguredBassLine.generateBassLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the bass line as a <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">realizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">key</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">meter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">note</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span> <span class="o">=</span> <span class="n">realizer</span><span class="o">.</span><span class="n">FiguredBassLine</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">addElement</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;B2&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">addElement</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C#3&#39;</span><span class="p">),</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">addElement</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D#3&#39;</span><span class="p">),</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">generateBassLine</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/fbRealizer_bassLine.png"><img alt="../_images/fbRealizer_bassLine.png" src="../_images/fbRealizer_bassLine.png" style="width: 200px;" /></a>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">corpus</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sBach</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv307&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sBach</span><span class="p">[</span><span class="s1">&#39;bass&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.clef.BassClef&gt;</span>
+<span class="go">{0.0} &lt;music21.key.Key of B- major&gt;</span>
+<span class="go">{0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">{0.0} &lt;music21.note.Note B-&gt;</span>
+<span class="go">{0.5} &lt;music21.note.Note C&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span> <span class="o">=</span> <span class="n">realizer</span><span class="o">.</span><span class="n">figuredBassFromStream</span><span class="p">(</span><span class="n">sBach</span><span class="p">[</span><span class="s1">&#39;bass&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">generateBassLine</span><span class="p">()</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.clef.BassClef&gt;</span>
+<span class="go">{0.0} &lt;music21.key.KeySignature of 2 flats&gt;</span>
+<span class="go">{0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">{3.0} &lt;music21.note.Note B-&gt;</span>
+<span class="go">{3.5} &lt;music21.note.Note C&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.figuredBass.realizer.FiguredBassLine.overlayPart">
+<code class="descclassname">FiguredBassLine.</code><code class="descname">overlayPart</code><span class="sig-paren">(</span><em>music21Part</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.FiguredBassLine.overlayPart" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.figuredBass.realizer.FiguredBassLine.realize">
+<code class="descclassname">FiguredBassLine.</code><code class="descname">realize</code><span class="sig-paren">(</span><em>fbRules=None</em>, <em>numParts=4</em>, <em>maxPitch=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.FiguredBassLine.realize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a <a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment" title="music21.figuredBass.segment.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a> 
+for each (bassNote, notationString) pair
+added using <a class="reference internal" href="#music21.figuredBass.realizer.FiguredBassLine.addElement" title="music21.figuredBass.realizer.FiguredBassLine.addElement"><code class="xref py py-meth docutils literal"><span class="pre">addElement()</span></code></a>. 
+Each Segment is associated
+with the <a class="reference internal" href="moduleFiguredBassRules.html#music21.figuredBass.rules.Rules" title="music21.figuredBass.rules.Rules"><code class="xref py py-class docutils literal"><span class="pre">Rules</span></code></a> object provided, meaning that rules are
+universally applied across all Segments. The number of parts in a realization
+(including the bass) can be controlled through numParts, and the maximum pitch can
+likewise be controlled through maxPitch. 
+Returns a <a class="reference internal" href="#music21.figuredBass.realizer.Realization" title="music21.figuredBass.realizer.Realization"><code class="xref py py-class docutils literal"><span class="pre">Realization</span></code></a>.</p>
+<p>If this methods is called without having provided any (bassNote, notationString) pairs,
+a FiguredBassLineException is raised. If only one pair is provided, the Realization will
+contain <a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment.allCorrectConsecutivePossibilities" title="music21.figuredBass.segment.Segment.allCorrectConsecutivePossibilities"><code class="xref py py-meth docutils literal"><span class="pre">allCorrectConsecutivePossibilities()</span></code></a>
+for the one note.</p>
+<p>if <cite>fbRules</cite> is None, creates a new rules.Rules() object</p>
+<p>if <cite>maxPitch</cite> is None, uses pitch.Pitch(&#8216;B5&#8217;)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">realizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">rules</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">key</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">meter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">note</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span> <span class="o">=</span> <span class="n">realizer</span><span class="o">.</span><span class="n">FiguredBassLine</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">),</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">addElement</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;B2&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">addElement</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C#3&#39;</span><span class="p">),</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span><span class="o">.</span><span class="n">addElement</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D#3&#39;</span><span class="p">),</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbRules</span> <span class="o">=</span> <span class="n">rules</span><span class="o">.</span><span class="n">Rules</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r1</span> <span class="o">=</span> <span class="n">fbLine</span><span class="o">.</span><span class="n">realize</span><span class="p">(</span><span class="n">fbRules</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r1</span><span class="o">.</span><span class="n">getNumSolutions</span><span class="p">()</span>
+<span class="go">208</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbRules</span><span class="o">.</span><span class="n">forbidVoiceOverlap</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span> <span class="o">=</span> <span class="n">fbLine</span><span class="o">.</span><span class="n">realize</span><span class="p">(</span><span class="n">fbRules</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span><span class="o">.</span><span class="n">getNumSolutions</span><span class="p">()</span>
+<span class="go">7908</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.figuredBass.realizer.FiguredBassLine.retrieveSegments">
+<code class="descclassname">FiguredBassLine.</code><code class="descname">retrieveSegments</code><span class="sig-paren">(</span><em>fbRules=None</em>, <em>numParts=4</em>, <em>maxPitch=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.FiguredBassLine.retrieveSegments" title="Permalink to this definition">¶</a></dt>
+<dd><p>generates the segmentList from an fbList, including any overlayed Segments</p>
+<p>if fbRules is None, creates a new rules.Rules() object</p>
+<p>if maxPitch is None, uses pitch.Pitch(&#8216;B5&#8217;)</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.figuredBass.realizer.FiguredBassLine" title="music21.figuredBass.realizer.FiguredBassLine"><code class="xref py py-class docutils literal"><span class="pre">FiguredBassLine</span></code></a> instance variables</p>
+<dl class="attribute">
+<dt id="music21.figuredBass.realizer.FiguredBassLine.inKey">
+<code class="descclassname">FiguredBassLine.</code><code class="descname">inKey</code><a class="headerlink" href="#music21.figuredBass.realizer.FiguredBassLine.inKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference internal" href="moduleKey.html#music21.key.Key" title="music21.key.Key"><code class="xref py py-class docutils literal"><span class="pre">Key</span></code></a> which implies a scale value, scale mode, and key signature for a <a class="reference internal" href="moduleFiguredBassRealizerScale.html#music21.figuredBass.realizerScale.FiguredBassScale" title="music21.figuredBass.realizerScale.FiguredBassScale"><code class="xref py py-class docutils literal"><span class="pre">FiguredBassScale</span></code></a>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.figuredBass.realizer.FiguredBassLine.inTime">
+<code class="descclassname">FiguredBassLine.</code><code class="descname">inTime</code><a class="headerlink" href="#music21.figuredBass.realizer.FiguredBassLine.inTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a> which specifies the time signature of realizations outputted to a <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="realization">
+<h2>Realization<a class="headerlink" href="#realization" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.figuredBass.realizer.Realization">
+<em class="property">class </em><code class="descclassname">music21.figuredBass.realizer.</code><code class="descname">Realization</code><span class="sig-paren">(</span><em>**fbLineOutputs</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.Realization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returned by <a class="reference internal" href="#music21.figuredBass.realizer.FiguredBassLine" title="music21.figuredBass.realizer.FiguredBassLine"><code class="xref py py-class docutils literal"><span class="pre">FiguredBassLine</span></code></a> after calling
+<a class="reference internal" href="#music21.figuredBass.realizer.FiguredBassLine.realize" title="music21.figuredBass.realizer.FiguredBassLine.realize"><code class="xref py py-meth docutils literal"><span class="pre">realize()</span></code></a>. Allows for the 
+generation of realizations as a <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a>.</p>
+<ul class="simple">
+<li>See the <a class="reference internal" href="moduleFiguredBassExamples.html#module-music21.figuredBass.examples" title="music21.figuredBass.examples"><code class="xref py py-mod docutils literal"><span class="pre">examples</span></code></a> module for examples on the generation
+of realizations.</li>
+<li>A possibility progression is a valid progression through a string of 
+<a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment" title="music21.figuredBass.segment.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a> instances.
+See <a class="reference internal" href="moduleFiguredBassPossibility.html#module-music21.figuredBass.possibility" title="music21.figuredBass.possibility"><code class="xref py py-mod docutils literal"><span class="pre">possibility</span></code></a> for more details on possibilities.</li>
+</ul>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.figuredBass.realizer.Realization" title="music21.figuredBass.realizer.Realization"><code class="xref py py-class docutils literal"><span class="pre">Realization</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.figuredBass.realizer.Realization.generateAllRealizations">
+<code class="descclassname">Realization.</code><code class="descname">generateAllRealizations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.Realization.generateAllRealizations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates all unique realizations as a <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This method is unoptimized, and may take a prohibitive amount
+of time for a Realization which has more than 100 solutions.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.figuredBass.realizer.Realization.generateRandomRealization">
+<code class="descclassname">Realization.</code><code class="descname">generateRandomRealization</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.Realization.generateRandomRealization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a random unique realization as a <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.figuredBass.realizer.Realization.generateRandomRealizations">
+<code class="descclassname">Realization.</code><code class="descname">generateRandomRealizations</code><span class="sig-paren">(</span><em>amountToGenerate=20</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.Realization.generateRandomRealizations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates <em>amountToGenerate</em> unique realizations as a <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This method is unoptimized, and may take a prohibitive amount
+of time if amountToGenerate is more than 100.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.figuredBass.realizer.Realization.generateRealizationFromPossibilityProgression">
+<code class="descclassname">Realization.</code><code class="descname">generateRealizationFromPossibilityProgression</code><span class="sig-paren">(</span><em>possibilityProgression</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.Realization.generateRealizationFromPossibilityProgression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a realization as a <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> given a possibility progression.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.figuredBass.realizer.Realization.getAllPossibilityProgressions">
+<code class="descclassname">Realization.</code><code class="descname">getAllPossibilityProgressions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.Realization.getAllPossibilityProgressions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compiles each unique possibility progression, adding 
+it to a master list. Returns the master list.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This method is unoptimized, and may take a prohibitive amount
+of time for a Realization which has more than 200,000 solutions.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.figuredBass.realizer.Realization.getNumSolutions">
+<code class="descclassname">Realization.</code><code class="descname">getNumSolutions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.Realization.getNumSolutions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of solutions (unique realizations) to a Realization by calculating
+the total number of paths through a string of <a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment" title="music21.figuredBass.segment.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a>
+movements. This is faster and more efficient than compiling each unique realization into a 
+list, adding it to a master list, and then taking the length of the master list.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">examples</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">exampleB</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbRealization</span> <span class="o">=</span> <span class="n">fbLine</span><span class="o">.</span><span class="n">realize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbRealization</span><span class="o">.</span><span class="n">getNumSolutions</span><span class="p">()</span>
+<span class="go">422</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbLine2</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">exampleC</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbRealization2</span> <span class="o">=</span> <span class="n">fbLine2</span><span class="o">.</span><span class="n">realize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fbRealization2</span><span class="o">.</span><span class="n">getNumSolutions</span><span class="p">()</span>
+<span class="go">833</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.figuredBass.realizer.Realization.getRandomPossibilityProgression">
+<code class="descclassname">Realization.</code><code class="descname">getRandomPossibilityProgression</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.realizer.Realization.getRandomPossibilityProgression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a random unique possibility progression.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.figuredBass.realizer.Realization" title="music21.figuredBass.realizer.Realization"><code class="xref py py-class docutils literal"><span class="pre">Realization</span></code></a> instance variables</p>
+<dl class="attribute">
+<dt id="music21.figuredBass.realizer.Realization.keyboardStyleOutput">
+<code class="descclassname">Realization.</code><code class="descname">keyboardStyleOutput</code><a class="headerlink" href="#music21.figuredBass.realizer.Realization.keyboardStyleOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>True by default. If True, generated realizations
+are represented in keyboard style, with two staves. If False,
+realizations are represented in chorale style with n staves,
+where n is the number of parts. SATB if n = 4.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassRealizerScale.html" title="music21.figuredBass.realizerScale"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassPossibility.html" title="music21.figuredBass.possibility"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User’s Guide, Chapter 2: Notes &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="User’s Guide, Chapter 3: Pitches, Durations, and Notes again" href="usersGuide_03_pitches.html" />
+    <link rel="prev" title="User’s Guide, Chapter 1: Installing and Getting Started with music21" href="usersGuide_01_installing.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_03_pitches.html" title="User’s Guide, Chapter 3: Pitches, Durations, and Notes again"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_01_installing.html" title="User’s Guide, Chapter 1: Installing and Getting Started with music21"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_01_installing.html"
+                        title="previous chapter">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_03_pitches.html"
+                        title="next chapter">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User&#8217;s Guide, Chapter 2: Notes</a><ul>
+<li><a class="reference internal" href="#creating-and-working-with-notes">Creating and working with Notes</a><ul>
+<li><a class="reference internal" href="#advanced-digression">(Advanced digression):</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_03_pitches.html">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_05_listsOfLists.html">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_07_chords.html">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_08_installingMusicXML.html">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_11_corpusSearching.html">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_12_music21object.html">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_13_music21object2.html">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_15_key.html">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_21_sorting.html">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_25_postTonalTools1.html">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_26_clientWeakref.html">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_28_lyricSearcher.html">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_97_timespans.html">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_02_notes.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-02-notes"></span><div class="section" id="user-s-guide-chapter-2-notes">
+<h1>User&#8217;s Guide, Chapter 2: Notes<a class="headerlink" href="#user-s-guide-chapter-2-notes" title="Permalink to this headline">¶</a></h1>
+<p>Notated music, by its very name, consists of a bunch of notes that are
+put one after another or simultaneously on a staff. There are other
+things, clefs, key signatures, slurs, etc. but the heart of music is the
+notes; so to get anywhere in music21 you’ll need to know what the
+toolkit thinks about notes and how to work with them.</p>
+<p>Go ahead and start IDLE or type “python” at the command line (Terminal
+on the Mac or “run: cmd” on Windows) and let’s get started.</p>
+<div class="section" id="creating-and-working-with-notes">
+<h2>Creating and working with Notes<a class="headerlink" href="#creating-and-working-with-notes" title="Permalink to this headline">¶</a></h2>
+<p>The music21 concept of a standard note is contained in the
+<a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a> object, which is found in the <code class="docutils literal"><span class="pre">note</span></code>
+module.</p>
+<p><strong>Read this if you&#8217;re new to Python</strong> <em>(others can skip ahead):</em> Notice
+the difference between object names and module names. Modules, which can
+contain one, many, or even zero objects, always begin with a lowercase
+letter. Music21&#8217;s objects always begin with a captial letter. So the
+<code class="docutils literal"><span class="pre">Note</span></code> object is found in the <code class="docutils literal"><span class="pre">note</span></code> module. The distinction between
+uppercase and lowercase is crucial to Python: if you type the name of an
+object with the wrong case it won&#8217;t know what to do and won&#8217;t give you
+any help in distinguishing between them.</p>
+<p>In the <code class="docutils literal"><span class="pre">note</span></code> module, there are other classes besides <code class="docutils literal"><span class="pre">note.Note</span></code>.
+The most important one is <code class="docutils literal"><span class="pre">note.Rest</span></code>, which as you imagine represents
+a rest. If we load music21 with the command:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>then you&#8217;ll now be able to access the <code class="docutils literal"><span class="pre">note</span></code> module just by typing
+<code class="docutils literal"><span class="pre">note</span></code> at any command line.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">note</span> 
+<span class="go">&lt;module &#39;music21.note&#39; from &#39;D:\music21files\music21\note.pyc&#39;&gt;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">If you get something like this you&#8217;ll have access to the music21
+<code class="docutils literal"><span class="pre">note</span></code> module any time you type <code class="docutils literal"><span class="pre">&quot;note&quot;</span></code>. The filename after &#8220;from
+&#8216;D:\music21files...&#8217;&#8221; will differ for you. It will show you where you
+have music21 installed (if you ever forget where you have music21
+installed, this is an easy way to figure it out).</div>
+</div>
+<div class="line-block">
+<div class="line">As long as it ends in <code class="docutils literal"><span class="pre">note.pyc</span></code> or <code class="docutils literal"><span class="pre">note.py</span></code> or something like
+that you&#8217;re fine.</div>
+</div>
+<p>If you want to know what else the <code class="docutils literal"><span class="pre">note</span></code> module contains besides the
+Note and Rest objects you can type &#8220;<code class="docutils literal"><span class="pre">dir(note)</span></code>&#8221; to find out:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="s1">&#39;GeneralNote&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Lyric&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;LyricException&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;NotRest&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;NotRestException&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Note&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;NoteException&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Rest&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;SlottedObjectMixin&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;SpacerRest&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Test&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;TestExternal&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Unpitched&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;_DOC_ORDER&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;_MOD&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;__builtins__&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;__cached__&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;__file__&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;__loader__&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;__name__&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;__package__&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;__spec__&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;base&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;beam&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;common&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;copy&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;duration&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;editorial&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;environLocal&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;environment&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;exceptions21&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;expressions&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;interval&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;noteheadTypeNames&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;pitch&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;six&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;stemDirectionNames&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;tie&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;unittest&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;volume&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Some of the things in this list are classes of notes &#8211; they are
+capitalized. Other classes are things that we&#8217;ll get to later, like
+<a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.Lyric" title="music21.note.Lyric"><code class="xref py py-class docutils literal"><span class="pre">Lyric</span></code></a> objects. (By the way: I&#8217;m highlighting
+the names of most objects so they become links to the full documentation
+for the object. You can read it later when you&#8217;re curious, frustrated,
+or <em>Mad Men</em> is a re-run; you certainly don&#8217;t need to click them now).</p>
+<div class="section" id="advanced-digression">
+<h3>(Advanced digression):<a class="headerlink" href="#advanced-digression" title="Permalink to this headline">¶</a></h3>
+<p>If you&#8217;re more of a Python guru and you&#8217;re afraid of &#8220;polluting your
+namespace,&#8221; instead of typing &#8220;<code class="docutils literal"><span class="pre">from</span> <span class="pre">music21</span> <span class="pre">import</span> <span class="pre">*</span></code>&#8221; you can
+type:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">music21</span>
+</pre></div>
+</div>
+<p>in which case instead of using the word <code class="docutils literal"><span class="pre">note</span></code>, you&#8217;ll need to call it
+<code class="docutils literal"><span class="pre">music21.note</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">music21</span><span class="o">.</span><span class="n">note</span> 
+<span class="go">&lt;module &#39;music21.note&#39; from &#39;D:\music21files\music21\note.pyc&#39;&gt;</span>
+</pre></div>
+</div>
+<p>If you are a Python guru, you already knew that. Probably if you didn&#8217;t
+already know that, but you&#8217;ve heard about &#8220;polluting your namespace,&#8221;
+you have a Python guru friend who has screamed, &#8220;Never use
+<code class="docutils literal"><span class="pre">import</span> <span class="pre">*</span></code>!&#8221; Trust me for now that this tutorial will be easier if you
+ignore your friend for a bit; by the end of it you&#8217;ll know enough to be
+able to follow whatever advice seems most natural to you.</p>
+<p><em>(Back from the Python digression and especially the digression of the
+digression):</em></p>
+<p>Okay, so now you now enough about modules and objects. Let&#8217;s create a
+<code class="docutils literal"><span class="pre">note.Note</span></code> object. How about the F at the top of the treble clef
+staff:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;F5&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We use the convention where middle-C is C4, the octave above it is C5,
+etc.</p>
+<p>Now you have a Note. Where is it? It&#8217;s stored in the variable <code class="docutils literal"><span class="pre">f</span></code>. You
+can verify this just by typing <code class="docutils literal"><span class="pre">f</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>And you can see that it&#8217;s actually an F and actually in octave 5 by
+requesting the <code class="docutils literal"><span class="pre">.name</span></code> and <code class="docutils literal"><span class="pre">.octave</span></code> attributes on the <code class="docutils literal"><span class="pre">Note</span></code>
+object, <code class="docutils literal"><span class="pre">f</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;F&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">octave</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>And there&#8217;s an attribute called <code class="docutils literal"><span class="pre">.pitch</span></code> which returns another object:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">pitch</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">F5</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Well, that didn&#8217;t tell you anything you didn&#8217;t know already! Let&#8217;s look
+at some other attributes that might tell you something you didn&#8217;t know.
+Some of them are sub-attributes, meaning they take two dots. Here&#8217;s a
+sub-attribute on <code class="docutils literal"><span class="pre">pitch</span></code>, which we just said was itself an object,
+called <code class="docutils literal"><span class="pre">.frequency</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">frequency</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">698.456462866008</span>
+</pre></div>
+</div>
+<p>And another sub-attribute called <code class="docutils literal"><span class="pre">pitch.pitchClassString</span></code></p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">pitchClassString</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;5&#39;</span>
+</pre></div>
+</div>
+<p>That&#8217;s a bit better! So an f is about 698hz (if A4 = 440hz), and it is
+pitch class 5 (where C = 0, C# and Db = 1, etc.).</p>
+<p>A couple of things that you&#8217;ll notice:</p>
+<ol class="arabic simple">
+<li>Your <code class="docutils literal"><span class="pre">frequency</span></code> probably has a bunch more numbers instead of
+ending with &#8221;...&#8221;. Mine gives me &#8220;698.456462866008&#8221;. In the docs,
+we&#8217;ll sometimes write &#8221;...&#8221; instead of putting in all those numbers
+(or long strings); it&#8217;s partly a way of saving space, and also
+because the length of a long number and even the last few digits will
+differ from computer to computer depending on whether it&#8217;s 32-bit or
+64-bit, Mac or PC, number of sunspots last Autumn, etc. Since I don&#8217;t
+know what computer you&#8217;re using, don&#8217;t worry if you get slightly
+different results.</li>
+<li>There are single quotes around some of the output (like the <code class="docutils literal"><span class="pre">'F'</span></code>
+in <code class="docutils literal"><span class="pre">f.name</span></code>) and none around others (like the <code class="docutils literal"><span class="pre">5</span></code> in
+<code class="docutils literal"><span class="pre">f.octave</span></code>). The quotes mean that that attribute is returning a
+String (a bunch of letters or numbers or simple symbols). The lack of
+quotes means that it&#8217;s returning a number (either an integer or if
+there&#8217;s a decimal point, a sneakingly decimal-like thingy called a
+<code class="docutils literal"><span class="pre">float</span></code> (or &#8220;floating-point number&#8221;) which looks and acts just like
+a decimal, except when it doesn&#8217;t, which is never when you&#8217;d expect.</li>
+</ol>
+<p><em>(The history and theory behind</em> <code class="docutils literal"><span class="pre">floats</span></code> <em>will be explained to you at
+length by any computer scientist, usually when he or she is the only
+thing standing between you and the bar at a party. Really, we shouldn&#8217;t
+be using them anymore, except for the fact that for our computers
+they&#8217;re so much faster to work with than decimals.)</em></p>
+<p>The difference between the string <code class="docutils literal"><span class="pre">'5'</span></code> and the number <code class="docutils literal"><span class="pre">5</span></code> is
+essential to keep in mind. In Python (like most modern programming
+languages) we use two equal signs (<code class="docutils literal"><span class="pre">==</span></code>) to ask if two things are
+equal. So:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">octave</span> <span class="o">==</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>That&#8217;s what we&#8217;d expect. But try:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">pitchClassString</span> <span class="o">==</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>That&#8217;s because <code class="docutils literal"><span class="pre">5</span> <span class="pre">==</span> <span class="pre">'5'</span></code> is <code class="docutils literal"><span class="pre">False</span></code>. (There are some lovely
+languages such as JavaScript and Perl where it&#8217;s <code class="docutils literal"><span class="pre">True</span></code>; Python&#8217;s not
+one of them. This has many disadvantages at first, but as you go on, you
+might see this as an advantage). So to see if <code class="docutils literal"><span class="pre">f.pitchClassString</span></code> is
+<code class="docutils literal"><span class="pre">'5'</span></code> we need to make <code class="docutils literal"><span class="pre">'5'</span></code> a string by putting it in quotes:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">pitchClassString</span> <span class="o">==</span> <span class="s2">&quot;5&quot;</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>In Python it doesn&#8217;t matter if you put the <code class="docutils literal"><span class="pre">5</span></code> in single or double
+quotes:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">pitchClassString</span> <span class="o">==</span> <span class="s1">&#39;5&#39;</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">pitchClassString</span></code> tells you that you should expect a string, because
+we&#8217;ve put it in the name. There&#8217;s also a <code class="docutils literal"><span class="pre">.pitch.pitchClass</span></code> which
+returns a number:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">pitchClass</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>These two ways of getting a pitch class are basically the same for the
+note &#8220;F&#8221; (except that one&#8217;s a string and the other is an integer) but
+for a B-flat, which is <code class="docutils literal"><span class="pre">.pitchClass</span></code> 10 and <code class="docutils literal"><span class="pre">.pitchClassString</span></code> &#8220;A&#8221;,
+it makes a difference.</p>
+<p>Let&#8217;s go ahead and make that B-flat note. In <code class="docutils literal"><span class="pre">music21</span></code>, sharps are &#8220;#&#8221;
+as you might expect, but flats are &#8220;-&#8221;. That&#8217;s because it&#8217;s otherwise
+hard to tell the difference between the <code class="docutils literal"><span class="pre">Note</span></code> &#8220;b&#8221; (in this instance,
+you can write it in upper or lower case) and the symbol &#8220;flat&#8221;. So let&#8217;s
+make that B-flat note:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bflat</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;B-2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>I&#8217;ve called the variable &#8220;<code class="docutils literal"><span class="pre">bflat</span></code>&#8221; here. You could call it
+&#8220;<code class="docutils literal"><span class="pre">Bb</span></code>&#8221; if you want or &#8220;<code class="docutils literal"><span class="pre">b_flat</span></code>&#8221;, but not &#8220;<code class="docutils literal"><span class="pre">b-flat</span></code>&#8221; because
+dashes aren&#8217;t allowed in variable names:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">b</span><span class="o">-</span><span class="n">flat</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;B-2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>  <span class="n">File</span> <span class="s2">&quot;&lt;ipython-input-39-d519b3e88921&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="n">b</span><span class="o">-</span><span class="n">flat</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;B-2&quot;</span><span class="p">)</span>
+                             <span class="o">^</span>
+<span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">can</span><span class="s1">&#39;t assign to operator</span>
+</pre></div>
+</div>
+<p>Since this note has an accidental you can get it by using the
+<code class="docutils literal"><span class="pre">.pitch.accidental</span></code> subproperty:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bflat</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">accidental</span> <span class="n">flat</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Here we have something that isn&#8217;t a number and doesn&#8217;t have quotes
+around it. That usually means that what <code class="docutils literal"><span class="pre">.accidental</span></code> returns is
+another object &#8211; in this case an <a class="reference internal" href="../moduleReference/modulePitch.html#music21.pitch.Accidental" title="music21.pitch.Accidental"><code class="xref py py-class docutils literal"><span class="pre">Accidental</span></code></a>
+object. As we saw above, objects have attributes (and other goodies
+we&#8217;ll get to in a second) and the <code class="docutils literal"><span class="pre">Accidental</span></code> object is no exception.
+So let&#8217;s make a new variable that will store <code class="docutils literal"><span class="pre">bflat</span></code>&#8216;s accidental:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">acc</span> <span class="o">=</span> <span class="n">bflat</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span>
+</pre></div>
+</div>
+<p>We&#8217;ll get to all the attributes of <code class="docutils literal"><span class="pre">Accidental</span></code> objects in a bit, but
+here are two of them: <code class="docutils literal"><span class="pre">.alter</span></code> and <code class="docutils literal"><span class="pre">.displayLocation</span></code>. You&#8217;ll use
+the first one quite a bit: it shows how many semitones this
+<code class="docutils literal"><span class="pre">Accidental</span></code> changes the <code class="docutils literal"><span class="pre">Note</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">acc</span><span class="o">.</span><span class="n">alter</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">-</span><span class="mf">1.0</span>
+</pre></div>
+</div>
+<p>Since this <code class="docutils literal"><span class="pre">Accidental</span></code> is a flat, its <code class="docutils literal"><span class="pre">.alter</span></code> is a negative
+number. Notice that it&#8217;s also not an integer, but a float. That might
+indicate that music21 supports things like quarter-tones, and in this
+case you&#8217;d be right.</p>
+<p>Look back at the two lines &#8220;<code class="docutils literal"><span class="pre">acc</span> <span class="pre">=</span> <span class="pre">bflat.pitch.accidental</span></code>&#8221; and
+&#8220;<code class="docutils literal"><span class="pre">acc.alter</span></code>&#8221;. We set <code class="docutils literal"><span class="pre">acc</span></code> to be the value of <code class="docutils literal"><span class="pre">bflat.pitch</span></code>&#8216;s
+<code class="docutils literal"><span class="pre">.accidental</span></code> attribute and then we get the value of that variable&#8217;s
+<code class="docutils literal"><span class="pre">.alter</span></code> attribute. We could have skipped the first step altogether
+and &#8220;chained&#8221; the two attributes together in one step:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bflat</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">alter</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">-</span><span class="mf">1.0</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">acc</span><span class="o">.</span><span class="n">displayLocation</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;normal&#39;</span>
+</pre></div>
+</div>
+<p>Good to know that we&#8217;ve set a sensible default. If you want to have the
+accidental display above the note, you&#8217;ll have to set that yourself:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">acc</span><span class="o">.</span><span class="n">displayLocation</span> <span class="o">=</span> <span class="s1">&#39;above&#39;</span>
+<span class="n">acc</span><span class="o">.</span><span class="n">displayLocation</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;above&#39;</span>
+</pre></div>
+</div>
+<p>Our variable <code class="docutils literal"><span class="pre">&quot;acc&quot;</span></code> is the <strong>exact</strong> accidental that is attached to
+the B-flat Note stored as <code class="docutils literal"><span class="pre">bflat</span></code>. It&#8217;s not a flat that&#8217;s similar to
+B-flat&#8217;s flat, but the same one. (in computer-speak, <code class="docutils literal"><span class="pre">acc</span></code> is a
+<em>reference</em> to <code class="docutils literal"><span class="pre">.accidental</span></code>). So now if we look at the
+<code class="docutils literal"><span class="pre">.displayLocation</span></code> of <code class="docutils literal"><span class="pre">bflat.pitch.accidental</span></code> we see that it too is
+set to the silly &#8220;above&#8221; position:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bflat</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">displayLocation</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;above&#39;</span>
+</pre></div>
+</div>
+<p>Python is one of those cool computer languages where if an object
+doesn&#8217;t have a particular attribute but you think it should, you can add
+it to the object (some people find that this makes objects messy, but I
+don&#8217;t mind it). For what I hope are obvious reasons, the <code class="docutils literal"><span class="pre">Note</span></code> object
+does not have an attribute called &#8220;<code class="docutils literal"><span class="pre">wasWrittenByStockhausen</span></code>&#8221;. So if
+you try to access it, you&#8217;ll get an error:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bflat</span><span class="o">.</span><span class="n">wasWrittenByStockhausen</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">AttributeError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">47</span><span class="o">-</span><span class="mi">3</span><span class="n">e7bfdcb790a</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">bflat</span><span class="o">.</span><span class="n">wasWrittenByStockhausen</span>
+
+
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;Note&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;wasWrittenByStockhausen&#39;</span>
+</pre></div>
+</div>
+<p>But if you set the value of that weird attribute, you can use it later:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bflat</span><span class="o">.</span><span class="n">wasWrittenByStockhausen</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">f</span><span class="o">.</span><span class="n">wasWrittenByStockhausen</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>Then you can write an “if” statement to see if this is True or not:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">bflat</span><span class="o">.</span><span class="n">wasWrittenByStockhausen</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hope you&#39;re enjoying Sirius!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="n">Hope</span> <span class="n">you</span><span class="s1">&#39;re enjoying Sirius!</span>
+</pre></div>
+</div>
+<p>Note that in the last line above you will need to put the spaces before
+the “print” command; Python uses spaces to keep track of what is inside
+of an if statement (or lots of other things) and what isn’t.</p>
+<p>(If you don’t get the Stockhausen joke, see: wikipedia . )</p>
+<p>Nothing will print for the note f since we set .wasWrittenByStockhausen
+to False:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">wasWrittenByStockhausen</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I love Helicopters!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>At this point you might be tired of all this programming and just want
+to see or play your damn note! If you’ve installed a MusicXML reader
+such as MuseScore, Finale, Sibelius, or Finale Notepad, you can type:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_02_notes_77_0.png" src="../_images/usersGuide_02_notes_77_0.png" />
+<p>and see it. We make the default note length a quarter-note. We&#8217;ll get to
+other note lengths in a minute. Notice that we put in a sensible clef
+also, since otherwise you won&#8217;t know that this note really is <code class="docutils literal"><span class="pre">F5</span></code>.</p>
+<p>If you want to hear it instead (and you&#8217;re on Windows or Unix or an
+older-Mac (10.5 or older)) type:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;midi&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div id='midiPlayerDiv162'></div>
+<link rel="stylesheet" href="http://artusi.xyz/music21j/css/m21.css"
+    type="text/css" />
+<script>
+require.config({
+    paths: {'music21': 'http://artusi.xyz/music21j/src/music21'}
+});
+require(['music21'], function() {
+               mp = new music21.miditools.MidiPlayer();
+               mp.addPlayer('#midiPlayerDiv162');
+               mp.base64Load('data:audio/midi;base64,TVRoZAAAAAYAAQABBABNVHJrAAAAFwD/AwAA4ABAiACQTVqIAIBNAIgA/y8A');
+        });
+</script><p>You may need to wait a few seconds when hitting play if you&#8217;re reading
+these docs online since the &#8220;grand piano&#8221; sound has to load and that&#8217;s
+about a megabyte long.</p>
+<p>Maddeningly, Apple removed MIDI support in the version of QuickTime
+(QuickTime X) included in OS X 10.6 (Snow Leopard) and above (including
+Mountain Lion), so you&#8217;ll need to get the older QuickTime 7 from
+appleQuicktime to make that work.</p>
+<p>When we typed <code class="docutils literal"><span class="pre">f.octave</span></code> we didn&#8217;t put any parentheses after it, but
+when we call <code class="docutils literal"><span class="pre">f.show()</span></code> we always need to put parentheses after it,
+even if there&#8217;s nothing in them (in which case, we&#8217;ll use the default
+<code class="docutils literal"><span class="pre">.show</span></code> format, which is usually <code class="docutils literal"><span class="pre">musicxml</span></code>).</p>
+<p><code class="docutils literal"><span class="pre">.show()</span></code> is what’s called a method on the <code class="docutils literal"><span class="pre">Note</span></code> object, while
+<code class="docutils literal"><span class="pre">.octave</span></code> is an attribute. Think of methods as like verbs (“O Note:
+show thyself!”) while attributes are like adjectives that describe the
+object. All methods need to have parentheses after them and inside the
+parentheses you can usually put other things (“parameters”) that control
+how to perform the action. For instance, let’s create a new note, <code class="docutils literal"><span class="pre">D</span></code>
+by transposing our B-flat up a major-third (“M3”):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">bflat</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s2">&quot;M3&quot;</span><span class="p">)</span>
+<span class="n">d</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bflat</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">B</span><span class="o">-&gt;</span>
+</pre></div>
+</div>
+<p>Instead of changing the original note, the <code class="docutils literal"><span class="pre">transpose()</span></code> method
+&#8220;returns&#8221; (that is, spits out) a new <code class="docutils literal"><span class="pre">note.Note</span></code> object that
+represents the operation of transposing it up (or down if you want to
+try &#8220;-M3&#8221;) a certain interval.</p>
+<p>If you want to change <code class="docutils literal"><span class="pre">bflat</span></code> itself, you can add &#8220;inPlace = True&#8221; to
+the parameters of <code class="docutils literal"><span class="pre">.transpose()</span></code> separating it from the interval by a
+comma. Let&#8217;s take it up a perfect fourth:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bflat</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s2">&quot;P4&quot;</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">bflat</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">-&gt;</span>
+</pre></div>
+</div>
+<p>Of course now <code class="docutils literal"><span class="pre">bflat</span></code> is a terrible name for our variable! You could
+type &#8220;<code class="docutils literal"><span class="pre">eflat</span> <span class="pre">=</span> <span class="pre">bflat</span></code>&#8221; and now you can call the note <code class="docutils literal"><span class="pre">eflat</span></code>. But
+you&#8217;ll probably not need to do this too often. By the way, music21
+handles some pretty wacky intervals, so if we go back to our variable
+<code class="docutils literal"><span class="pre">d</span></code> (which is still a <code class="docutils literal"><span class="pre">d</span></code> &#8211; transposing bflat in place didn&#8217;t
+change it; they&#8217;re not connected anymore, barely on speaking terms
+even), let&#8217;s transpose it up a doubly-diminished sixth:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">whatNoteIsThis</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;dd6&#39;</span><span class="p">)</span>
+<span class="n">whatNoteIsThis</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">B</span><span class="o">---&gt;</span>
+</pre></div>
+</div>
+<p>B-triple-flat! Haven&#8217;t seen one of those in a while! Let&#8217;s check that
+note&#8217;s <code class="docutils literal"><span class="pre">.pitch.accidental.alter</span></code> and its <code class="docutils literal"><span class="pre">.pitch.accidental.name</span></code>.
+These are sub-sub-properties, meaning that they have three dots in them:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">whatNoteIsThis</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">alter</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">-</span><span class="mf">3.0</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">whatNoteIsThis</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;triple-flat&#39;</span>
+</pre></div>
+</div>
+<p>One last thing: not every note has an accidental. The <code class="docutils literal"><span class="pre">d</span></code> for instance
+doesn&#8217;t have one, so it returns <code class="docutils literal"><span class="pre">None</span></code>, which is a special value that
+puts nothing on the output.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span>
+</pre></div>
+</div>
+<p>If you want to be sure that it is <code class="docutils literal"><span class="pre">None</span></code>, you can print the value:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>Since <code class="docutils literal"><span class="pre">d.accidental</span></code> is <code class="docutils literal"><span class="pre">None</span></code> does this mean that
+<code class="docutils literal"><span class="pre">d.accidental.name</span></code> is <code class="docutils literal"><span class="pre">None</span></code> too?</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">AttributeError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">61</span><span class="o">-</span><span class="n">e15f6baf8e9d</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">d</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">name</span>
+
+
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;NoneType&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;name&#39;</span>
+</pre></div>
+</div>
+<p>Nope! In fact it creates an error (which we&#8217;ll also call &#8220;raising an
+Exception&#8221; for reasons that will become clear soon). That&#8217;s because
+instead of getting an <code class="docutils literal"><span class="pre">Accidental</span></code> object from <code class="docutils literal"><span class="pre">.accidental</span></code> like we
+did before, we got a <code class="docutils literal"><span class="pre">NoneType</span></code> object (i.e., <code class="docutils literal"><span class="pre">None</span></code>).
+<code class="docutils literal"><span class="pre">Accidental</span></code> objects have an attribute called <code class="docutils literal"><span class="pre">name</span></code>, but the object
+<code class="docutils literal"><span class="pre">None</span></code> doesn&#8217;t (it&#8217;s like trying <code class="docutils literal"><span class="pre">.wasWrittenByStockhausen</span></code> before
+you&#8217;ve defined it as an attribute).</p>
+<p>When you&#8217;re just typing in IDLE or the command line, raising an
+Exception is no big deal, but when you&#8217;re running a program, Exceptions
+will usually cause the program to crash (i.e., stop working). So we try
+to make sure that our <code class="docutils literal"><span class="pre">Notes</span></code> actually have <code class="docutils literal"><span class="pre">Accidentals</span></code> before we
+print the <code class="docutils literal"><span class="pre">.accidental</span></code>&#8216;s name, and we do that by using another <code class="docutils literal"><span class="pre">if</span></code>
+statement:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This way is safer because we will only try to print
+<code class="docutils literal"><span class="pre">d.pitch.accidental.name</span></code> if <code class="docutils literal"><span class="pre">d.pitch.accidental</span></code> is not <code class="docutils literal"><span class="pre">None</span></code>.
+Since it <em>is</em> <code class="docutils literal"><span class="pre">None</span></code> in this case, Python will never try the second
+line (which would otherwise cause it to crash).</p>
+<p>If for some reason <code class="docutils literal"><span class="pre">d</span></code> did not have <code class="docutils literal"><span class="pre">.pitch</span></code>, we would need to test
+to see if that was <code class="docutils literal"><span class="pre">None</span></code> before checking the subproperty to see if it
+had an <code class="docutils literal"><span class="pre">.pitch.accidental</span></code>.</p>
+<p>This might be a good place to take a rest for a second. So make a
+<code class="docutils literal"><span class="pre">Rest</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;whole&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Be sure to put the &#8220;()&#8221; (double parentheses) signs after <code class="docutils literal"><span class="pre">note.Rest</span></code>
+otherwise strange things will happen (technically you get a reference to
+the class <code class="docutils literal"><span class="pre">note.Rest</span></code>, which will come in handy in about 10 chapters,
+but not right now).</p>
+<p>You can <code class="docutils literal"><span class="pre">.show()</span></code> it as a &#8216;<code class="docutils literal"><span class="pre">musicxml</span></code>&#8216; file of course...</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_02_notes_105_0.png" src="../_images/usersGuide_02_notes_105_0.png" />
+<p>...but if you try to hear it as a &#8216;<code class="docutils literal"><span class="pre">midi</span></code>&#8216; file, don&#8217;t expect to be
+overwhelmed.</p>
+<p>A <code class="docutils literal"><span class="pre">Rest</span></code> is an object type that does not have <code class="docutils literal"><span class="pre">.pitch</span></code> on it, so
+naturally it doesn&#8217;t have <code class="docutils literal"><span class="pre">.pitch.accidental</span></code> either:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">pitch</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">AttributeError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">65</span><span class="o">-</span><span class="mi">1</span><span class="n">b757368671c</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">r</span><span class="o">.</span><span class="n">pitch</span>
+
+
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;Rest&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;pitch&#39;</span>
+</pre></div>
+</div>
+<p>One last thing: notice that we never used a variable name called
+&#8220;<code class="docutils literal"><span class="pre">note</span></code>&#8221; to store a <code class="docutils literal"><span class="pre">note.Note</span></code> object. <strong>Don&#8217;t do this</strong>. If you
+type something like this (don&#8217;t type this if you want to continue typing
+along with the user guide):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C#3&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Well now you&#8217;re in a bind. You&#8217;ve got your <code class="docutils literal"><span class="pre">Note</span></code> object stored as
+<code class="docutils literal"><span class="pre">note</span></code>, but we <em>need</em> the <code class="docutils literal"><span class="pre">note</span></code> <em>module</em> in order to create new
+<code class="docutils literal"><span class="pre">Note</span></code> objects and now you have no way of getting it. (this is the
+problem that &#8220;polluting the namespace&#8221; causes that your Python guru
+friend might have warned you about). So unless you&#8217;re <em>Amadeus&#8217;s</em>
+Emperor Joseph who complained that there were &#8220;too many notes,&#8221; you&#8217;re
+probably going to want to make more <code class="docutils literal"><span class="pre">note.Note</span></code> objects in the future,
+so don&#8217;t use <code class="docutils literal"><span class="pre">note</span></code> as a variable name. (The same goes with <code class="docutils literal"><span class="pre">pitch</span></code>,
+<code class="docutils literal"><span class="pre">scale</span></code>, <code class="docutils literal"><span class="pre">key</span></code>, <code class="docutils literal"><span class="pre">clef</span></code>, and so on. You&#8217;ll see me use variable
+names like <code class="docutils literal"><span class="pre">myNote</span></code> and <code class="docutils literal"><span class="pre">myClef</span></code> to avoid the problem).</p>
+<p>Okay, now you have the basics of <code class="docutils literal"><span class="pre">Note</span></code> objects down, let&#8217;s go on to
+<a class="reference internal" href="usersGuide_03_pitches.html#usersguide-03-pitches"><span class="std std-ref">Chapter 3: Pitches and Durations</span></a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_03_pitches.html" title="User’s Guide, Chapter 3: Pitches, Durations, and Notes again"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_01_installing.html" title="User’s Guide, Chapter 1: Installing and Getting Started with music21"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

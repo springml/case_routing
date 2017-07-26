@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.metadata &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.metadata.bundles" href="moduleMetadataBundles.html" />
+    <link rel="prev" title="music21.mei.base" href="moduleMeiBase.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMetadataBundles.html" title="music21.metadata.bundles"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleMeiBase.html" title="music21.mei.base"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleMeiBase.html"
+                        title="previous chapter">music21.mei.base</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleMetadataBundles.html"
+                        title="next chapter">music21.metadata.bundles</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.metadata</a><ul>
+<li><a class="reference internal" href="#metadata">Metadata</a></li>
+<li><a class="reference internal" href="#richmetadata">RichMetadata</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleMetadata.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-metadata">
+<span id="modulemetadata"></span><h1>music21.metadata<a class="headerlink" href="#music21-metadata" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.metadata"></span><p>Classes and functions for creating and processing metadata associated with
+scores, works, and fragments, such as titles, movements, authors, publishers,
+and regions.</p>
+<p>The <a class="reference internal" href="#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a> object is the main public interface to
+metadata components. A Metadata object can be added to a Stream and used to set
+common score attributes, such as title and composer. A Metadata object found at
+offset zero can be accessed through a Stream&#8217;s
+<a class="reference internal" href="moduleStream.html#music21.stream.Stream.metadata" title="music21.stream.Stream.metadata"><code class="xref py py-attr docutils literal"><span class="pre">metadata</span></code></a> property.</p>
+<p>The following example creates a <a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a> object, adds a
+<a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a> object, and configures and adds the
+<a class="reference internal" href="#music21.metadata.Metadata.title" title="music21.metadata.Metadata.title"><code class="xref py py-attr docutils literal"><span class="pre">title</span></code></a> and
+<a class="reference internal" href="#music21.metadata.Metadata.composer" title="music21.metadata.Metadata.composer"><code class="xref py py-attr docutils literal"><span class="pre">composer</span></code></a> properties of a Metadata object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Score</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;title&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">composer</span> <span class="o">=</span> <span class="s1">&#39;composer&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/moduleMetadata-01.png"><img alt="../_images/moduleMetadata-01.png" src="../_images/moduleMetadata-01.png" style="width: 600px;" /></a>
+<div class="section" id="metadata">
+<h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.metadata.Metadata">
+<em class="property">class </em><code class="descclassname">music21.metadata.</code><code class="descname">Metadata</code><span class="sig-paren">(</span><em>*args</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.Metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Metadata represent data for a work or fragment, including title, composer,
+dates, and other relevant information.</p>
+<p>Metadata is a <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a> subclass, meaing that it
+can be positioned on a Stream by offset and have a
+<a class="reference internal" href="moduleDuration.html#music21.duration.Duration" title="music21.duration.Duration"><code class="xref py py-class docutils literal"><span class="pre">Duration</span></code></a>.</p>
+<p>In many cases, each Stream will have a single Metadata object at the zero
+offset position.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Concerto in F&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">title</span>
+<span class="go">&#39;Concerto in F&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">(</span><span class="n">otl</span><span class="o">=</span><span class="s1">&#39;Concerto in F&#39;</span><span class="p">)</span> <span class="c1"># can use abbreviations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">title</span>
+<span class="go">&#39;Concerto in F&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">setWorkId</span><span class="p">(</span><span class="s1">&#39;otl&#39;</span><span class="p">,</span> <span class="s1">&#39;Rhapsody in Blue&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">otl</span>
+<span class="go">&#39;Rhapsody in Blue&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">title</span>
+<span class="go">&#39;Rhapsody in Blue&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">composer</span> <span class="o">=</span> <span class="s1">&#39;Gershwin, George&#39;</span>
+</pre></div>
+</div>
+<p>These are used by .search() methods to determine what attributes are
+made available by default.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">searchAttributes</span>
+<span class="go">(&#39;alternativeTitle&#39;, &#39;composer&#39;, &#39;date&#39;, &#39;localeOfComposition&#39;, </span>
+<span class="go"> &#39;movementName&#39;, &#39;movementNumber&#39;, &#39;number&#39;, &#39;opusNumber&#39;, &#39;title&#39;)</span>
+</pre></div>
+</div>
+<p>All contributors are stored in a .contributors list:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">contributors</span>
+<span class="go">[&lt;music21.metadata.primitives.Contributor composer:Gershwin, George&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.metadata.Metadata.composers">
+<code class="descclassname">Metadata.</code><code class="descname">composers</code><a class="headerlink" href="#music21.metadata.Metadata.composers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of all <code class="xref py py-class docutils literal"><span class="pre">Contributor</span></code> objects
+defined as composer of this work.</p>
+</dd></dl>
+
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.metadata.Metadata.alternativeTitle">
+<code class="descclassname">Metadata.</code><code class="descname">alternativeTitle</code><a class="headerlink" href="#music21.metadata.Metadata.alternativeTitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the alternative title.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">(</span><span class="n">popularTitle</span><span class="o">=</span><span class="s1">&#39;Eroica&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">alternativeTitle</span> <span class="o">=</span> <span class="s1">&#39;Heroic Symphony&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">alternativeTitle</span>
+<span class="go">&#39;Heroic Symphony&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.metadata.Metadata.composer">
+<code class="descclassname">Metadata.</code><code class="descname">composer</code><a class="headerlink" href="#music21.metadata.Metadata.composer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the composer of this work. More than one composer may be
+specified.</p>
+<p>The composer attribute does not live in Metadata, but creates a
+<code class="xref py py-class docutils literal"><span class="pre">Contributor</span></code> object in the .contributors
+object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Third Symphony&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">popularTitle</span><span class="o">=</span><span class="s1">&#39;Eroica&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">composer</span><span class="o">=</span><span class="s1">&#39;Beethoven, Ludwig van&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">composer</span>
+<span class="go">&#39;Beethoven, Ludwig van&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.metadata.Metadata.date">
+<code class="descclassname">Metadata.</code><code class="descname">date</code><a class="headerlink" href="#music21.metadata.Metadata.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the date of this work as one of the following date
+objects:</p>
+<p><code class="xref py py-class docutils literal"><span class="pre">DateSingle</span></code>,
+<code class="xref py py-class docutils literal"><span class="pre">DateRelative</span></code>,
+<code class="xref py py-class docutils literal"><span class="pre">DateBetween</span></code>,
+<code class="xref py py-class docutils literal"><span class="pre">DateSelection</span></code>,</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Third Symphony&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">popularTitle</span><span class="o">=</span><span class="s1">&#39;Eroica&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">composer</span><span class="o">=</span><span class="s1">&#39;Beethoven, Ludwig van&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="s1">&#39;2010&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">date</span>
+<span class="go">&#39;2010/--/--&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">DateBetween</span><span class="p">([</span><span class="s1">&#39;2009/12/31&#39;</span><span class="p">,</span> <span class="s1">&#39;2010/1/28&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">date</span>
+<span class="go">&#39;2009/12/31 to 2010/01/28&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.metadata.Metadata.localeOfComposition">
+<code class="descclassname">Metadata.</code><code class="descname">localeOfComposition</code><a class="headerlink" href="#music21.metadata.Metadata.localeOfComposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the locale of composition, or origin, of the work.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.metadata.Metadata.movementName">
+<code class="descclassname">Metadata.</code><code class="descname">movementName</code><a class="headerlink" href="#music21.metadata.Metadata.movementName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the movement title.</p>
+<p>Note that a number of pieces from various MusicXML datasets have
+the piece title as the movement title. For instance, the Bach
+Chorales, since they are technically movements of larger cantatas.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.metadata.Metadata.movementNumber">
+<code class="descclassname">Metadata.</code><code class="descname">movementNumber</code><a class="headerlink" href="#music21.metadata.Metadata.movementNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the movement number.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.metadata.Metadata.number">
+<code class="descclassname">Metadata.</code><code class="descname">number</code><a class="headerlink" href="#music21.metadata.Metadata.number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the number of the work within a collection of pieces.
+(for instance, the number within a collection of ABC files)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.metadata.Metadata.opusNumber">
+<code class="descclassname">Metadata.</code><code class="descname">opusNumber</code><a class="headerlink" href="#music21.metadata.Metadata.opusNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the opus number.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.metadata.Metadata.title">
+<code class="descclassname">Metadata.</code><code class="descname">title</code><a class="headerlink" href="#music21.metadata.Metadata.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the title of the work, or the next-matched title string
+available from a related parameter fields.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Third Symphony&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">title</span>
+<span class="go">&#39;Third Symphony&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">(</span><span class="n">popularTitle</span><span class="o">=</span><span class="s1">&#39;Eroica&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">title</span>
+<span class="go">&#39;Eroica&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Third Symphony&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">popularTitle</span><span class="o">=</span><span class="s1">&#39;Eroica&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">title</span>
+<span class="go">&#39;Third Symphony&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">popularTitle</span>
+<span class="go">&#39;Eroica&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">otp</span>
+<span class="go">&#39;Eroica&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a> methods</p>
+<dl class="staticmethod">
+<dt id="music21.metadata.Metadata.abbreviationToWorkId">
+<em class="property">static </em><code class="descclassname">Metadata.</code><code class="descname">abbreviationToWorkId</code><span class="sig-paren">(</span><em>abbreviation</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.Metadata.abbreviationToWorkId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get work id abbreviations.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="o">.</span><span class="n">abbreviationToWorkId</span><span class="p">(</span><span class="s1">&#39;otl&#39;</span><span class="p">)</span>
+<span class="go">&#39;title&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="o">.</span><span class="n">workIdAbbreviationDict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="gp">... </span>   <span class="n">result</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="o">.</span><span class="n">abbreviationToWorkId</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.metadata.Metadata.addContributor">
+<code class="descclassname">Metadata.</code><code class="descname">addContributor</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.Metadata.addContributor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign a <code class="xref py py-class docutils literal"><span class="pre">Contributor</span></code> object to this
+Metadata.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Gaelic Symphony&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Contributor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Beach, Amy&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">role</span> <span class="o">=</span> <span class="s1">&#39;composer&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">addContributor</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">composer</span>
+<span class="go">&#39;Beach, Amy&#39;</span>
+</pre></div>
+</div>
+<p>Add maiden name as an alternative composer name:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">composer</span> <span class="o">=</span> <span class="s1">&#39;Cheney, Amy Marcy&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">composers</span>
+<span class="go">[&#39;Beach, Amy&#39;, &#39;Cheney, Amy Marcy&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.metadata.Metadata.all">
+<code class="descclassname">Metadata.</code><code class="descname">all</code><span class="sig-paren">(</span><em>skipContributors=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.Metadata.all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all values (as strings) stored in this metadata as a sorted list of tuples.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;corelli/opus3no1/1grave&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="go">[(&#39;arranger&#39;, &#39;Michael Scott Cuthbert&#39;), </span>
+<span class="go"> (&#39;composer&#39;, &#39;Arcangelo Corelli&#39;), </span>
+<span class="go"> (&#39;movementName&#39;, &#39;Sonata da Chiesa, No. I (opus 3, no. 1)&#39;)]</span>
+</pre></div>
+</div>
+<p>Skip contributors is there to help with musicxml parsing &#8211; there&#8217;s no reason for it
+except that we haven&#8217;t exposed enough functionality yet:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">DateRelative</span><span class="p">(</span><span class="s1">&#39;1689&#39;</span><span class="p">,</span> <span class="s1">&#39;onOrBefore&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">localeOfComposition</span> <span class="o">=</span> <span class="s1">&#39;Rome&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">skipContributors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">[(&#39;date&#39;, &#39;1689/--/-- or earlier&#39;), </span>
+<span class="go"> (&#39;localeOfComposition&#39;, &#39;Rome&#39;), </span>
+<span class="go"> (&#39;movementName&#39;, &#39;Sonata da Chiesa, No. I (opus 3, no. 1)&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.metadata.Metadata.getContributorsByRole">
+<code class="descclassname">Metadata.</code><code class="descname">getContributorsByRole</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.Metadata.getContributorsByRole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a <code class="xref py py-class docutils literal"><span class="pre">Contributor</span></code> if defined for a
+provided role.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Third Symphony&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Contributor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Beethoven, Ludwig van&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">role</span> <span class="o">=</span> <span class="s1">&#39;composer&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">addContributor</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cList</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">getContributorsByRole</span><span class="p">(</span><span class="s1">&#39;composer&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;Beethoven, Ludwig van&#39;</span>
+</pre></div>
+</div>
+<p>Some musicxml files have contributors with no role defined.  To get
+these contributors, search for getContributorsByRole(None).  N.B. upon
+output to MusicXML, music21 gives these contributors the generic role
+of &#8220;creator&#8221;</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Contributor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Beth Hadley&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">addContributor</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noRoleList</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">getContributorsByRole</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">noRoleList</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">noRoleList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">role</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">noRoleList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;Beth Hadley&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.metadata.Metadata.search">
+<code class="descclassname">Metadata.</code><code class="descname">search</code><span class="sig-paren">(</span><em>query</em>, <em>field=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.Metadata.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search one or all fields with a query, given either as a string or a
+regular expression match.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">composer</span> <span class="o">=</span> <span class="s1">&#39;Joplin, Scott&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Maple Leaf Rag&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;joplin&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">field</span><span class="o">=</span><span class="s1">&#39;composer&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="go">(True, &#39;composer&#39;)</span>
+</pre></div>
+</div>
+<p>Note how the incomplete field name in the following example is still
+matched:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;joplin&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">field</span><span class="o">=</span><span class="s1">&#39;compos&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="go">(True, &#39;composer&#39;)</span>
+</pre></div>
+</div>
+<p>These don&#8217;t work (Richard W. didn&#8217;t have the rhythm...)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;Wagner&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">field</span><span class="o">=</span><span class="s1">&#39;composer&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="go">(False, None)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;Wagner&#39;</span><span class="p">)</span>
+<span class="go">(False, None)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;leaf&#39;</span><span class="p">)</span>
+<span class="go">(True, &#39;title&#39;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;leaf&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">field</span><span class="o">=</span><span class="s1">&#39;composer&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="go">(False, None)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="s1">&#39;leaf&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">field</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="go">(True, &#39;title&#39;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;leaf|entertainer&#39;</span><span class="p">)</span>
+<span class="go">(True, &#39;title&#39;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;opl(.*)cott&#39;</span><span class="p">)</span>
+<span class="go">(True, &#39;composer&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.metadata.Metadata.setWorkId">
+<code class="descclassname">Metadata.</code><code class="descname">setWorkId</code><span class="sig-paren">(</span><em>idStr</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.Metadata.setWorkId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directly set a workd id, given either as a full string name or as a
+three character abbreviation. The following work id abbreviations and
+their full id string are given as follows. In many cases the Metadata
+object support properties for convenient access to these work ids.</p>
+<p>Id abbreviations and strings: otl / title, otp / popularTitle, ota /
+alternativeTitle, opr / parentTitle, oac / actNumber, osc /
+sceneNumber, omv / movementNumber, omd / movementName, ops /
+opusNumber, onm / number, ovm / volume, ode / dedication, oco /
+commission, gtl / groupTitle, gaw / associatedWork, gco /
+collectionDesignation, txo / textOriginalLanguage, txl / textLanguage,
+ocy / countryOfComposition, opc / localeOfComposition.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quartet&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">title</span>
+<span class="go">&#39;Quartet&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">setWorkId</span><span class="p">(</span><span class="s1">&#39;otl&#39;</span><span class="p">,</span> <span class="s1">&#39;Trio&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">title</span>
+<span class="go">&#39;Trio&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">setWorkId</span><span class="p">(</span><span class="s1">&#39;sdf&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.exceptions21.MetadataException</span>: <span class="n">no work id available with id: sdf</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="music21.metadata.Metadata.workIdToAbbreviation">
+<em class="property">static </em><code class="descclassname">Metadata.</code><code class="descname">workIdToAbbreviation</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.Metadata.workIdToAbbreviation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a work abbreviation from a string representation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="o">.</span><span class="n">workIdToAbbreviation</span><span class="p">(</span><span class="s1">&#39;localeOfComposition&#39;</span><span class="p">)</span>
+<span class="go">&#39;opc&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="o">.</span><span class="n">workIdAbbreviationDict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">result</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="o">.</span><span class="n">workIdToAbbreviation</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="richmetadata">
+<h2>RichMetadata<a class="headerlink" href="#richmetadata" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.metadata.RichMetadata">
+<em class="property">class </em><code class="descclassname">music21.metadata.</code><code class="descname">RichMetadata</code><span class="sig-paren">(</span><em>*args</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.RichMetadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>RichMetadata adds to Metadata information about the contents of the Score
+it is attached to. TimeSignature, KeySignature and related analytical is
+stored.  RichMetadata are generally only created in the process of creating
+stored JSON metadata.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">richMetadata</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">RichMetadata</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Concerto in F&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">richMetadata</span><span class="o">.</span><span class="n">title</span>
+<span class="go">&#39;Concerto in F&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">richMetadata</span><span class="o">.</span><span class="n">keySignatureFirst</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;keySignatureFirst&#39;</span> <span class="ow">in</span> <span class="n">richMetadata</span><span class="o">.</span><span class="n">searchAttributes</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">richMetadata</span><span class="o">.</span><span class="n">searchAttributes</span>
+<span class="go">(&#39;alternativeTitle&#39;, &#39;ambitus&#39;, &#39;composer&#39;, &#39;date&#39;, </span>
+<span class="go"> &#39;keySignatureFirst&#39;, &#39;keySignatures&#39;, &#39;localeOfComposition&#39;, </span>
+<span class="go"> &#39;movementName&#39;, &#39;movementNumber&#39;, &#39;noteCount&#39;, &#39;number&#39;, </span>
+<span class="go"> &#39;opusNumber&#39;, &#39;pitchHighest&#39;, &#39;pitchLowest&#39;, &#39;quarterLength&#39;, </span>
+<span class="go"> &#39;tempoFirst&#39;, &#39;tempos&#39;, &#39;timeSignatureFirst&#39;, &#39;timeSignatures&#39;, &#39;title&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.metadata.RichMetadata" title="music21.metadata.RichMetadata"><code class="xref py py-class docutils literal"><span class="pre">RichMetadata</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.metadata.RichMetadata" title="music21.metadata.RichMetadata"><code class="xref py py-class docutils literal"><span class="pre">RichMetadata</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.metadata.Metadata.composers" title="music21.metadata.Metadata.composers"><code class="xref py py-attr docutils literal"><span class="pre">composers</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.metadata.RichMetadata" title="music21.metadata.RichMetadata"><code class="xref py py-class docutils literal"><span class="pre">RichMetadata</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.metadata.Metadata.alternativeTitle" title="music21.metadata.Metadata.alternativeTitle"><code class="xref py py-attr docutils literal"><span class="pre">alternativeTitle</span></code></a></li>
+<li><a class="reference internal" href="#music21.metadata.Metadata.composer" title="music21.metadata.Metadata.composer"><code class="xref py py-attr docutils literal"><span class="pre">composer</span></code></a></li>
+<li><a class="reference internal" href="#music21.metadata.Metadata.date" title="music21.metadata.Metadata.date"><code class="xref py py-attr docutils literal"><span class="pre">date</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.metadata.Metadata.localeOfComposition" title="music21.metadata.Metadata.localeOfComposition"><code class="xref py py-attr docutils literal"><span class="pre">localeOfComposition</span></code></a></li>
+<li><a class="reference internal" href="#music21.metadata.Metadata.movementName" title="music21.metadata.Metadata.movementName"><code class="xref py py-attr docutils literal"><span class="pre">movementName</span></code></a></li>
+<li><a class="reference internal" href="#music21.metadata.Metadata.movementNumber" title="music21.metadata.Metadata.movementNumber"><code class="xref py py-attr docutils literal"><span class="pre">movementNumber</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.metadata.Metadata.number" title="music21.metadata.Metadata.number"><code class="xref py py-attr docutils literal"><span class="pre">number</span></code></a></li>
+<li><a class="reference internal" href="#music21.metadata.Metadata.opusNumber" title="music21.metadata.Metadata.opusNumber"><code class="xref py py-attr docutils literal"><span class="pre">opusNumber</span></code></a></li>
+<li><a class="reference internal" href="#music21.metadata.Metadata.title" title="music21.metadata.Metadata.title"><code class="xref py py-attr docutils literal"><span class="pre">title</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.metadata.RichMetadata" title="music21.metadata.RichMetadata"><code class="xref py py-class docutils literal"><span class="pre">RichMetadata</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.metadata.RichMetadata.merge">
+<code class="descclassname">RichMetadata.</code><code class="descname">merge</code><span class="sig-paren">(</span><em>other</em>, <em>favorSelf=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.RichMetadata.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given another Metadata or RichMetadata object, combine
+all attributes and return a new object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Concerto in F&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">title</span>
+<span class="go">&#39;Concerto in F&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">richMetadata</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">RichMetadata</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">richMetadata</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">md</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">richMetadata</span><span class="o">.</span><span class="n">title</span>
+<span class="go">&#39;Concerto in F&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.metadata.RichMetadata.update">
+<code class="descclassname">RichMetadata.</code><code class="descname">update</code><span class="sig-paren">(</span><em>streamObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.metadata.RichMetadata.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a Stream object, update attributes with stored objects.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.metadata.Metadata" title="music21.metadata.Metadata"><code class="xref py py-class docutils literal"><span class="pre">Metadata</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.metadata.Metadata.abbreviationToWorkId" title="music21.metadata.Metadata.abbreviationToWorkId"><code class="xref py py-meth docutils literal"><span class="pre">abbreviationToWorkId()</span></code></a></li>
+<li><a class="reference internal" href="#music21.metadata.Metadata.addContributor" title="music21.metadata.Metadata.addContributor"><code class="xref py py-meth docutils literal"><span class="pre">addContributor()</span></code></a></li>
+<li><a class="reference internal" href="#music21.metadata.Metadata.all" title="music21.metadata.Metadata.all"><code class="xref py py-meth docutils literal"><span class="pre">all()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.metadata.Metadata.getContributorsByRole" title="music21.metadata.Metadata.getContributorsByRole"><code class="xref py py-meth docutils literal"><span class="pre">getContributorsByRole()</span></code></a></li>
+<li><a class="reference internal" href="#music21.metadata.Metadata.search" title="music21.metadata.Metadata.search"><code class="xref py py-meth docutils literal"><span class="pre">search()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.metadata.Metadata.setWorkId" title="music21.metadata.Metadata.setWorkId"><code class="xref py py-meth docutils literal"><span class="pre">setWorkId()</span></code></a></li>
+<li><a class="reference internal" href="#music21.metadata.Metadata.workIdToAbbreviation" title="music21.metadata.Metadata.workIdToAbbreviation"><code class="xref py py-meth docutils literal"><span class="pre">workIdToAbbreviation()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.metadata.RichMetadata" title="music21.metadata.RichMetadata"><code class="xref py py-class docutils literal"><span class="pre">RichMetadata</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMetadataBundles.html" title="music21.metadata.bundles"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleMeiBase.html" title="music21.mei.base"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>
