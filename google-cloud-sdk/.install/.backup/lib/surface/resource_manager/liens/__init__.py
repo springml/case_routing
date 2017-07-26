@@ -17,7 +17,6 @@ from googlecloudsdk.api_lib.resource_manager import liens
 from googlecloudsdk.calliope import base
 
 
-@base.Hidden
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)
 class Liens(base.Group):
   """Manage Cloud Resource Manager Liens.

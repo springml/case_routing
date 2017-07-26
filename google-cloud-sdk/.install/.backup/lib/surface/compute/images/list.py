@@ -17,8 +17,12 @@ import argparse
 from googlecloudsdk.api_lib.compute import base_classes
 from googlecloudsdk.api_lib.compute import constants
 from googlecloudsdk.api_lib.compute import request_helper
+from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.compute.images import policy
+from googlecloudsdk.core import properties
 
 
+@base.ReleaseTracks(base.ReleaseTrack.GA)
 class List(base_classes.BaseLister):
   """List Google Compute Engine images."""
 
@@ -101,6 +105,15 @@ class List(base_classes.BaseLister):
     for image in images:
       if not image.deprecated or args.show_deprecated:
         yield image
+
+
+@base.ReleaseTracks(base.ReleaseTrack.ALPHA, base.ReleaseTrack.BETA)
+class ListBeta(List):
+
+  def ComputeDynamicProperties(self, args, items):
+    del args  # Unused in ComputeDynamicProperties
+    return policy.AugmentImagesStatus(
+        self.resources, properties.VALUES.core.project.GetOrFail(), items)
 
 
 List.detailed_help = base_classes.GetGlobalListerHelp('images')

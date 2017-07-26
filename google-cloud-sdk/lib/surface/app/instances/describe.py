@@ -45,7 +45,7 @@ class Describe(base.Command):
         help='The version ID.')
 
   def Run(self, args):
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     params = {'appsId': properties.VALUES.core.project.GetOrFail,
               'servicesId': args.service,
               'versionsId': args.version}

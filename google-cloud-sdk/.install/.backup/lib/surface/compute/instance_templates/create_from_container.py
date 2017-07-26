@@ -45,7 +45,6 @@ class CreateFromContainer(base.CreateCommand):
     instances_flags.AddServiceAccountAndScopeArgs(parser, False)
     instances_flags.AddTagsArgs(parser)
     instances_flags.AddCustomMachineTypeArgs(parser)
-    instances_flags.AddExtendedMachineTypeArgs(parser)
     instances_flags.AddNetworkArgs(parser)
     instances_flags.AddDockerArgs(parser)
     instances_flags.AddMinCpuPlatformArgs(parser, base.ReleaseTrack.ALPHA)

@@ -15,6 +15,7 @@
 
 from googlecloudsdk.api_lib.spanner import instance_configs
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.spanner import flags
 
 
 class Describe(base.DescribeCommand):
@@ -34,7 +35,7 @@ class Describe(base.DescribeCommand):
     parser.add_argument(
         'config',
         metavar='INSTANCE_CONFIG',
-        completion_resource='spanner.projects.instanceConfigs',
+        completer=flags.InstanceConfigCompleter,
         help='Cloud Spanner instance config.')
 
   def Run(self, args):

@@ -16,6 +16,7 @@
 """
 
 from googlecloudsdk.api_lib.sourcerepo import sourcerepo
+from googlecloudsdk.calliope import actions
 from googlecloudsdk.calliope import base
 from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
@@ -23,8 +24,67 @@ from googlecloudsdk.core import resources
 from googlecloudsdk.core.console import console_io
 
 
-@base.ReleaseTracks(base.ReleaseTrack.GA, base.ReleaseTrack.ALPHA,
-                    base.ReleaseTrack.BETA)
+@base.ReleaseTracks(base.ReleaseTrack.GA)
+class DeleteWithForce(base.DeleteCommand):
+  """Delete a cloud source repository.
+
+  This command deletes a named git repository from the currently
+  active Google Cloud Platform project.
+
+  ## EXAMPLES
+
+  To delete a named repository in the current project issue the
+  following commands:
+
+    $ gcloud init
+    $ {command} REPOSITORY_NAME
+
+  """
+
+  @staticmethod
+  def Args(parser):
+    parser.add_argument('repository_name', help='Name of the repository.')
+    parser.add_argument(
+        '--force',
+        action=actions.DeprecationAction(
+            '--force',
+            warn=('The {flag_name} option is deprecated; use --quiet '
+                  'to suppress prompting.'),
+            removed=False,
+            action='store_true'),
+        help='If provided, skip the delete confirmation prompt.')
+
+  def Run(self, args):
+    """Delete a named GCP repository in the current project.
+
+    Args:
+      args: argparse.Namespace, the arguments this command is run with.
+
+    Returns:
+      The path to the deleted git repository.
+
+    Raises:
+      ToolException: on project initialization errors.
+    """
+    res = resources.REGISTRY.Parse(
+        args.repository_name,
+        params={'projectsId': properties.VALUES.core.project.GetOrFail},
+        collection='sourcerepo.projects.repos')
+    delete_warning = ('If {repo} is deleted, the name cannot be reused for up '
+                      'to seven days.'.format(repo=res.Name()))
+    prompt_string = ('Delete "{repo}" in project "{prj}"'.format(
+        repo=res.Name(), prj=res.projectsId))
+    if args.force or console_io.PromptContinue(
+        message=delete_warning, prompt_string=prompt_string, default=True):
+      sourcerepo_handler = sourcerepo.Source()
+      # This returns an empty proto buffer as a response, so there's
+      # nothing to return.
+      sourcerepo_handler.DeleteRepo(res)
+      log.DeletedResource(res.Name())
+      return res.Name()
+
+
+@base.ReleaseTracks(base.ReleaseTrack.ALPHA, base.ReleaseTrack.BETA)
 class Delete(base.DeleteCommand):
   """Delete a cloud source repository.
 
@@ -43,14 +103,16 @@ class Delete(base.DeleteCommand):
 
   @staticmethod
   def Args(parser):
-    parser.add_argument(
-        'name',
-        metavar='REPOSITORY_NAME',
-        help=('Name of the repository.'))
+    parser.add_argument('repository_name', help='Name of the repository.')
     parser.add_argument(
         '--force',
-        action='store_true',
-        help=('If provided, skip the delete confirmation prompt.'))
+        action=actions.DeprecationAction(
+            '--force',
+            error=('The {flag_name} option has been removed; use --quiet to '
+                   'suppress prompting.'),
+            removed=True,
+            action='store_true'),
+        help='If provided, skip the delete confirmation prompt.')
 
   def Run(self, args):
     """Delete a named GCP repository in the current project.
@@ -65,14 +127,14 @@ class Delete(base.DeleteCommand):
       ToolException: on project initialization errors.
     """
     res = resources.REGISTRY.Parse(
-        args.name,
+        args.repository_name,
         params={'projectsId': properties.VALUES.core.project.GetOrFail},
         collection='sourcerepo.projects.repos')
     delete_warning = ('If {repo} is deleted, the name cannot be reused for up '
                       'to seven days.'.format(repo=res.Name()))
     prompt_string = ('Delete "{repo}" in project "{prj}"'.format(
         repo=res.Name(), prj=res.projectsId))
-    if args.force or console_io.PromptContinue(
+    if console_io.PromptContinue(
         message=delete_warning, prompt_string=prompt_string, default=True):
       sourcerepo_handler = sourcerepo.Source()
       # This returns an empty proto buffer as a response, so there's

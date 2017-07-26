@@ -15,6 +15,7 @@
 
 from apitools.base.py import list_pager
 from googlecloudsdk.api_lib.cloudbuild import cloudbuild_util
+from googlecloudsdk.api_lib.cloudbuild import filter_rewrite
 from googlecloudsdk.calliope import base
 from googlecloudsdk.core import properties
 
@@ -60,16 +61,15 @@ class List(base.ListCommand):
     client = cloudbuild_util.GetClientInstance()
     messages = cloudbuild_util.GetMessagesModule()
 
-    ongoing_filter = None
-    if args.ongoing:
-      ongoing_filter = 'status="WORKING" OR status="QUEUED"'
+    args.filter, server_filter = filter_rewrite.Backend(args.ongoing).Rewrite(
+        args.filter)
 
     return list_pager.YieldFromList(
         client.projects_builds,
         messages.CloudbuildProjectsBuildsListRequest(
             pageSize=args.page_size,
             projectId=properties.VALUES.core.project.GetOrFail(),
-            filter=ongoing_filter),
+            filter=server_filter),
         field='builds',
         batch_size=args.page_size,
         batch_size_attribute='pageSize')

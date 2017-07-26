@@ -15,13 +15,12 @@
 """Common flags for projects commands."""
 
 from googlecloudsdk.calliope import base
-from googlecloudsdk.command_lib.projects import util
+from googlecloudsdk.command_lib.resource_manager import completers
 
 
 def GetProjectFlag(verb):
   return base.Argument(
       'id',
       metavar='PROJECT_ID',
-      completion_resource=util.PROJECTS_COLLECTION,
-      list_command_path='projects list --uri',
+      completer=completers.ProjectCompleter,
       help='ID for the project you want to {0}.'.format(verb))

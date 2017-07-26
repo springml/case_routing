@@ -14,20 +14,8 @@
 """The instances command group for bigtable."""
 
 from googlecloudsdk.calliope import base
-from googlecloudsdk.core import properties
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA)
 class Instances(base.Group):
   """Manage Cloud Bigtable instances."""
-
-  def Filter(self, context, args):
-    """Modify the context that will be given to this group's commands when run.
-
-    Args:
-      context: {str:object}, A set of key-value pairs that can be used for
-          common initialization among commands.
-      args: argparse.Namespace: The same namespace given to the corresponding
-          .Run() invocation.
-    """
-    pass

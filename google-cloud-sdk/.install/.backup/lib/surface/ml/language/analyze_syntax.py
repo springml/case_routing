@@ -13,12 +13,14 @@
 # limitations under the License.
 """Command to analyze syntax."""
 
+from googlecloudsdk.api_lib.ml.language import util
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.ml.language import flags
 from googlecloudsdk.command_lib.ml.language import language_command_util
 
 
-class AnalyzeSyntax(base.Command):
+@base.ReleaseTracks(base.ReleaseTrack.GA)
+class AnalyzeSyntaxGa(base.Command):
   """Use Google Cloud Natural Language API to identify linguistic information.
 
   Syntactic Analysis extracts linguistic information, breaking up the given
@@ -63,4 +65,50 @@ class AnalyzeSyntax(base.Command):
         content=args.content,
         language=args.language,
         content_type=args.content_type,
-        encoding_type=args.encoding_type)
+        encoding_type=args.encoding_type,
+        api_version=util.LANGUAGE_GA_VERSION)
+
+
+@base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
+class AnalyzeSyntaxBeta(AnalyzeSyntaxGa):
+  """Use Google Cloud Natural Language API to identify linguistic information.
+
+  Syntactic Analysis extracts linguistic information, breaking up the given
+  text into a series of sentences and tokens (generally, word boundaries),
+  providing further analysis on those tokens.
+
+  {service_account_help}
+
+  {language_help}
+  """
+
+  detailed_help = {
+      'service_account_help': language_command_util.SERVICE_ACCOUNT_HELP,
+      'language_help': language_command_util.LANGUAGE_HELP_BETA
+  }
+
+  def Run(self, args):
+    """This is what gets called when the user runs this command.
+
+    Args:
+      args: an argparse namespace. All the arguments that were provided to this
+        command invocation.
+
+    Raises:
+      ContentFileError: if content file can't be found and is not a Google
+          Cloud Storage URL.
+      ContentError: if content is given but empty.
+      googlecloudsdk.api_lib.util.exceptions.HttpException: if the API returns
+          an error.
+
+    Returns:
+      the result of the analyze syntax command.
+    """
+    return language_command_util.RunLanguageCommand(
+        'analyzeSyntax',
+        content_file=args.content_file,
+        content=args.content,
+        language=args.language,
+        content_type=args.content_type,
+        encoding_type=args.encoding_type,
+        api_version=util.LANGUAGE_BETA_VERSION)

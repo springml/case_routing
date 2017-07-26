@@ -5,7 +5,6 @@
 # This is script no longer needed as of release 133.0.0
 # It is here so that git repositories set before this version continue to work.
 
-
 # <cloud-sdk-sh-preamble>
 #
 #  CLOUDSDK_ROOT_DIR            (a)  installation root dir
@@ -112,7 +111,6 @@ esac
 export CLOUDSDK_ROOT_DIR CLOUDSDK_PYTHON_ARGS
 
 # </cloud-sdk-sh-preamble>
-
 
 export CLOUDSDK_COMPONENT_MANAGER_DISABLE_UPDATE_CHECK=1
 

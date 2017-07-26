@@ -69,7 +69,7 @@ class DisableDebug(base.Command):
         This affects both interactive and non-interactive selection.""")
 
   def Run(self, args):
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     all_instances = list(api_client.GetAllInstances(
         args.service, args.version,
         version_filter=lambda v: util.Environment.IsFlexible(v.environment)))

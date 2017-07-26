@@ -47,19 +47,10 @@ class List(base.ListCommand):
       Some value that we want to have printed later.
     """
     adapter = self.context['api_adapter']
+    location_get = self.context['location_get']
 
     project_id = properties.VALUES.core.project.GetOrFail()
-
-    if getattr(args, 'region', None):
-      location = adapter.registry.Parse(args.region,
-                                        params={'project': project_id},
-                                        collection='compute.regions').region
-    elif getattr(args, 'zone', None):
-      location = adapter.registry.Parse(args.zone,
-                                        params={'project': project_id},
-                                        collection='compute.zones').zone
-    else:
-      location = None
+    location = location_get(args, ignore_property=True, required=False)
 
     try:
       return adapter.ListOperations(project_id, location).operations

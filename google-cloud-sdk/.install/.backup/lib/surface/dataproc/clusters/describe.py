@@ -15,6 +15,7 @@
 """Describe cluster command."""
 
 from googlecloudsdk.api_lib.dataproc import dataproc as dp
+from googlecloudsdk.api_lib.dataproc import util
 from googlecloudsdk.calliope import base
 
 
@@ -34,9 +35,9 @@ class Describe(base.DescribeCommand):
     parser.add_argument('name', help='The name of the cluster to describe.')
 
   def Run(self, args):
-    dataproc = dp.Dataproc()
+    dataproc = dp.Dataproc(self.ReleaseTrack())
 
-    cluster_ref = dataproc.ParseCluster(args.name)
+    cluster_ref = util.ParseCluster(args.name, dataproc)
     request = dataproc.messages.DataprocProjectsRegionsClustersGetRequest(
         projectId=cluster_ref.projectId,
         region=cluster_ref.region,

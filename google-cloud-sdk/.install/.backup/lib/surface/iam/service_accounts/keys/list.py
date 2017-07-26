@@ -50,6 +50,7 @@ class List(base_classes.BaseIamCommand, base.ListCommand):
 
     parser.add_argument('--iam-account',
                         required=True,
+                        type=iam_util.GetIamAccountFormatValidator(),
                         help='A textual name to display for the account.')
     parser.display_info.AddFormat(iam_util.SERVICE_ACCOUNT_KEY_FORMAT)
 

@@ -31,6 +31,7 @@ from gslib.storage_url import ContainsWildcard
 from gslib.storage_url import StorageUrlFromString
 from gslib.translation_helper import AclTranslation
 from gslib.translation_helper import LabelTranslation
+from gslib.util import InsistAscii
 from gslib.util import ListingStyle
 from gslib.util import MakeHumanReadable
 from gslib.util import NO_MAX
@@ -148,14 +149,15 @@ _DETAILED_HELP_TEXT = ("""
   will print something like:
 
     gs://bucket/obj1:
-            Creation time:      Fri, 21 Oct 2016 19:25:17 GMT
-            Update time:        Fri, 21 Oct 2016 21:17:59 GMT
-            Size:               2276224
-            Cache-Control:      private, max-age=0
-            Content-Type:       application/x-executable
-            ETag:               5ca6796417570a586723b7344afffc81
-            Generation:         1378862725952000
-            Metageneration:     1
+            Creation time:                    Fri, 21 Oct 2016 19:25:17 GMT
+            Update time:                      Fri, 21 Oct 2016 21:17:59 GMT
+            Storage class update time:        Fri, 21 Oct 2016 22:12:32 GMT
+            Size:                             2276224
+            Cache-Control:                    private, max-age=0
+            Content-Type:                     application/x-executable
+            ETag:                             5ca6796417570a586723b7344afffc81
+            Generation:                       1378862725952000
+            Metageneration:                   1
             ACL:
     [
       {
@@ -166,8 +168,11 @@ _DETAILED_HELP_TEXT = ("""
     ]
     TOTAL: 1 objects, 2276224 bytes (2.17 MiB)
 
-  Note that the Update time field above is not available with the (non-default)
-  XML API.
+  Note that some fields above (time updated, storage class update time) are
+  not available with the (non-default) XML API.
+
+  Also note that the Storage class update time field does not display unless it
+  differs from Creation time.
 
   See also "gsutil help acl" for getting a more readable version of the ACL.
 
@@ -191,6 +196,7 @@ _DETAILED_HELP_TEXT = ("""
             Labels:                       None
             Time created:                 Fri, 21 Oct 2016 19:25:17 GMT
             Time updated:                 Fri, 21 Oct 2016 21:17:59 GMT
+            Metageneration:               1
             ACL:
     [
       {
@@ -208,8 +214,8 @@ _DETAILED_HELP_TEXT = ("""
       }
     ]
 
-  Note that the Time created and Time updated fields above are not available
-  with the (non-default) XML API.
+  Note that some fields above (time created, time updated, metageneration) are
+  not available with the (non-default) XML API.
 
 
 <B>OPTIONS</B>
@@ -232,7 +238,12 @@ _DETAILED_HELP_TEXT = ("""
 
   -p proj_id  Specifies the project ID to use for listing buckets.
 
-  -R, -r      Requests a recursive listing.
+  -R, -r      Requests a recursive listing, performing at least one listing
+              operation per subdirectory. If you have a large number of
+              subdirectories and do not require recursive-style output ordering,
+              you may be able to instead use wildcards to perform a flat
+              listing, e.g.  `gsutil ls gs://mybucket/**`, which will generally
+              perform fewer listing operations.
 
   -a          Includes non-current object versions / generations in the listing
               (only useful with a versioning-enabled bucket). If combined with
@@ -308,6 +319,9 @@ class LsCommand(Command):
           bucket.labels, pretty_print=True)
     else:
       fields['labels'] = 'None'
+    # Fields not available in all APIs (e.g. the XML API)
+    if bucket.metageneration:
+      fields['metageneration'] = bucket.metageneration
     if bucket.timeCreated:
       fields['time_created'] = bucket.timeCreated.strftime(
           '%a, %d %b %Y %H:%M:%S GMT')
@@ -327,9 +341,13 @@ class LsCommand(Command):
         new_value = '\n\t  ' + new_value
       fields[key] = new_value
 
-    # Only display time-related properties if the given API returned them.
+    # Only display certain properties if the given API returned them (JSON API
+    # returns many fields that the XML API does not).
+    metageneration_line = ''
     time_created_line = ''
     time_updated_line = ''
+    if 'metageneration' in fields:
+      metageneration_line = '\tMetageneration:\t\t\t{metageneration}\n'
     if 'time_created' in fields:
       time_created_line = '\tTime created:\t\t\t{time_created}\n'
     if 'updated' in fields:
@@ -346,6 +364,7 @@ class LsCommand(Command):
            '\tLabels:\t\t\t\t{labels}\n' +
            time_created_line +
            time_updated_line +
+           metageneration_line +
            '\tACL:\t\t\t\t{acl}\n'
            '\tDefault ACL:\t\t\t{default_acl}').format(**fields))
     if bucket_blr.storage_url.scheme == 's3':
@@ -417,6 +436,8 @@ class LsCommand(Command):
         elif o == '-L':
           listing_style = ListingStyle.LONG_LONG
         elif o == '-p':
+          # Project IDs are sent as header values when using gs and s3 XML APIs.
+          InsistAscii(a, 'Invalid non-ASCII character found in project ID')
           self.project_id = a
         elif o == '-r' or o == '-R':
           self.recursion_requested = True
@@ -452,6 +473,7 @@ class LsCommand(Command):
                          'location',
                          'logging',
                          'lifecycle',
+                         'metageneration',
                          'storageClass',
                          'timeCreated',
                          'updated',

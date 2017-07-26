@@ -19,10 +19,10 @@ from googlecloudsdk.api_lib.resource_manager import folders
 from googlecloudsdk.api_lib.util import http_retry
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iam import iam_util
+from googlecloudsdk.command_lib.resource_manager import completers
 from googlecloudsdk.command_lib.resource_manager import flags
 
 
-@base.Hidden
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)
 class AddIamPolicyBinding(base.Command):
   """Add IAM policy binding for a folder.
@@ -37,13 +37,14 @@ class AddIamPolicyBinding(base.Command):
   @staticmethod
   def Args(parser):
     flags.FolderIdArg('to which you want to add a binding').AddToParser(parser)
-    iam_util.AddArgsForAddIamPolicyBinding(parser, 'id',
-                                           'cloudresourcemanager.folders')
+    iam_util.AddArgsForAddIamPolicyBinding(
+        parser, completer=completers.FoldersIamRolesCompleter)
 
   # Allow for retries due to ETag-based optimistic concurrency control
   @http_retry.RetryOnHttpStatus(httplib.CONFLICT)
   def Run(self, args):
     messages = folders.FoldersMessages()
     policy = folders.GetIamPolicy(args.id)
-    iam_util.AddBindingToIamPolicy(messages, policy, args.member, args.role)
+    iam_util.AddBindingToIamPolicy(
+        messages.Binding, policy, args.member, args.role)
     return folders.SetIamPolicy(args.id, policy)

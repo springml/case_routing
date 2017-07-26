@@ -17,7 +17,6 @@ from googlecloudsdk.api_lib.resource_manager import operations
 from googlecloudsdk.calliope import base
 
 
-@base.Hidden
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)
 class Operations(base.Group):
   """Query Cloud Resource Manager long-running operations.

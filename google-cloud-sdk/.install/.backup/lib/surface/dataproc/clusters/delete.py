@@ -39,9 +39,9 @@ class Delete(base.DeleteCommand):
     util.AddTimeoutFlag(parser)
 
   def Run(self, args):
-    dataproc = dp.Dataproc()
+    dataproc = dp.Dataproc(self.ReleaseTrack())
 
-    cluster_ref = dataproc.ParseCluster(args.name)
+    cluster_ref = util.ParseCluster(args.name, dataproc)
 
     request = dataproc.messages.DataprocProjectsRegionsClustersDeleteRequest(
         clusterName=cluster_ref.clusterName,
@@ -62,7 +62,8 @@ class Delete(base.DeleteCommand):
               cluster_ref, operation.name))
       return operation
 
-    operation = dataproc.WaitForOperation(
+    operation = util.WaitForOperation(
+        dataproc,
         operation,
         message='Waiting for cluster deletion operation',
         timeout_s=args.timeout)

@@ -15,6 +15,7 @@
 
 """The gcloud app deploy command."""
 
+from googlecloudsdk.api_lib.app import appengine_api_client
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.app import deploy_util
 
@@ -56,8 +57,9 @@ class DeployGA(base.SilentCommand):
   def Run(self, args):
     runtime_builder_strategy = deploy_util.GetRuntimeBuilderStrategy(
         base.ReleaseTrack.GA)
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     return deploy_util.RunDeploy(
-        args, runtime_builder_strategy=runtime_builder_strategy)
+        args, api_client, runtime_builder_strategy=runtime_builder_strategy)
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA)
@@ -70,10 +72,15 @@ class DeployBeta(base.SilentCommand):
     deploy_util.ArgsDeploy(parser)
 
   def Run(self, args):
+    # TODO(b/62950391): `app deploy' should use the API client which
+    # corresponds to the release track. For now, this isn't supported by the
+    # mocked API client unit tests.
+    api_client = appengine_api_client.AppengineApiClient.GetApiClient('v1')
     runtime_builder_strategy = deploy_util.GetRuntimeBuilderStrategy(
         base.ReleaseTrack.BETA)
     return deploy_util.RunDeploy(
         args,
+        api_client,
         enable_endpoints=True,
         use_beta_stager=True,
         runtime_builder_strategy=runtime_builder_strategy,

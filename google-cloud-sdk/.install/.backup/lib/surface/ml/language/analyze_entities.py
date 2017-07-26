@@ -13,12 +13,14 @@
 # limitations under the License.
 """Command to analyze entities."""
 
+from googlecloudsdk.api_lib.ml.language import util
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.ml.language import flags
 from googlecloudsdk.command_lib.ml.language import language_command_util
 
 
-class AnalyzeEntities(base.Command):
+@base.ReleaseTracks(base.ReleaseTrack.GA)
+class AnalyzeEntitiesGa(base.Command):
   """Use Google Cloud Natural Language API to identify entities in text.
 
   Entity Analysis inspects the given text for common names or known entities
@@ -64,4 +66,53 @@ class AnalyzeEntities(base.Command):
         content=args.content,
         language=args.language,
         content_type=args.content_type,
-        encoding_type=args.encoding_type)
+        encoding_type=args.encoding_type,
+        api_version=util.LANGUAGE_GA_VERSION
+    )
+
+
+@base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
+class AnalyzeEntitiesBeta(AnalyzeEntitiesGa):
+  """Use Google Cloud Natural Language API to identify entities in text.
+
+  Entity Analysis inspects the given text for common names or known entities
+  (proper nouns such as public figures, landmarks, etc.), and returns
+  information about those entities.
+
+  {service_account_help}
+
+  {language_help}
+  """
+
+  detailed_help = {
+      'service_account_help': language_command_util.SERVICE_ACCOUNT_HELP,
+      'language_help': language_command_util.LANGUAGE_HELP_BETA
+  }
+
+  def Run(self, args):
+    """This is what gets called when the user runs this command.
+
+    Args:
+      args: an argparse namespace. All the arguments that were provided to this
+        command invocation.
+
+    Raises:
+      ContentFileError: if content file can't be found and is not a Google Cloud
+          Storage URL.
+      ContentError: if content is given but empty.
+      googlecloudsdk.api_lib.util.exceptions.HttpException: if the API returns
+          an error.
+
+    Returns:
+      the result of the analyze entities command.
+    """
+    feature = 'analyzeEntities'
+    return language_command_util.RunLanguageCommand(
+        feature,
+        content_file=args.content_file,
+        content=args.content,
+        language=args.language,
+        content_type=args.content_type,
+        encoding_type=args.encoding_type,
+        api_version=util.LANGUAGE_BETA_VERSION
+    )

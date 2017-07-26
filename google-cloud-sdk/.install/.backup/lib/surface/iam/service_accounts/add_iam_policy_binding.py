@@ -32,23 +32,22 @@ class AddIamPolicyBinding(base_classes.BaseIamCommand):
 
   @staticmethod
   def Args(parser):
-    parser.add_argument('account',
-                        metavar='IAM_ACCOUNT',
-                        help='The service account whose policy to '
-                        'add bindings to.')
+    iam_util.AddServiceAccountNameArg(
+        parser,
+        action='whose policy to add bindings to')
     iam_util.AddArgsForAddIamPolicyBinding(parser)
 
   @http_retry.RetryOnHttpStatus(httplib.CONFLICT)
   def Run(self, args):
     policy = self.iam_client.projects_serviceAccounts.GetIamPolicy(
         self.messages.IamProjectsServiceAccountsGetIamPolicyRequest(
-            resource=iam_util.EmailToAccountResourceName(args.account)))
+            resource=iam_util.EmailToAccountResourceName(args.service_account)))
 
-    iam_util.AddBindingToIamPolicy(self.messages, policy, args.member,
+    iam_util.AddBindingToIamPolicy(self.messages.Binding, policy, args.member,
                                    args.role)
 
     return self.iam_client.projects_serviceAccounts.SetIamPolicy(
         self.messages.IamProjectsServiceAccountsSetIamPolicyRequest(
-            resource=iam_util.EmailToAccountResourceName(args.account),
+            resource=iam_util.EmailToAccountResourceName(args.service_account),
             setIamPolicyRequest=self.messages.SetIamPolicyRequest(
                 policy=policy)))

@@ -30,11 +30,11 @@ class Update(base_classes.BaseIamCommand):
                         help='The new textual name to display for the account.')
 
     iam_util.AddServiceAccountNameArg(
-        parser, help_text='The IAM service account to update.')
+        parser, action='to update')
 
   @http_retry.RetryOnHttpStatus(httplib.CONFLICT)
   def Run(self, args):
-    resource_name = iam_util.EmailToAccountResourceName(args.name)
+    resource_name = iam_util.EmailToAccountResourceName(args.service_account)
     current = self.iam_client.projects_serviceAccounts.Get(
         self.messages.IamProjectsServiceAccountsGetRequest(name=resource_name))
 
@@ -43,5 +43,5 @@ class Update(base_classes.BaseIamCommand):
             name=resource_name,
             etag=current.etag,
             displayName=args.display_name))
-    log.UpdatedResource(args.name, kind='service account')
+    log.UpdatedResource(args.service_account, kind='service account')
     return result

@@ -14,9 +14,9 @@
 
 """type-providers update command."""
 
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.api_lib.deployment_manager import dm_labels
 from googlecloudsdk.calliope import base
-from googlecloudsdk.command_lib.deployment_manager import dm_beta_base
 from googlecloudsdk.command_lib.deployment_manager import dm_write
 from googlecloudsdk.command_lib.deployment_manager import flags
 from googlecloudsdk.command_lib.deployment_manager import type_providers
@@ -31,7 +31,8 @@ def LogResource(request, async):
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
-class Update(base.UpdateCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2BETA)
+class Update(base.UpdateCommand, dm_base.DmCommand):
   """Update a type provider.
 
   This command updates a type provider.
@@ -72,34 +73,36 @@ class Update(base.UpdateCommand):
       HttpException: An http error response was received while executing api
           request.
     """
-    messages = dm_beta_base.GetMessages()
     type_provider_ref = type_providers.GetReference(args.provider_name)
     project = type_provider_ref.project
     name = type_provider_ref.typeProvider
-    get_request = messages.DeploymentmanagerTypeProvidersGetRequest(
+    get_request = self.messages.DeploymentmanagerTypeProvidersGetRequest(
         project=project,
         typeProvider=name)
 
-    existing_tp = dm_beta_base.GetClient().typeProviders.Get(get_request)
+    existing_tp = self.client.typeProviders.Get(get_request)
 
     labels = dm_labels.UpdateLabels(
         existing_tp.labels,
-        messages.TypeProviderLabelEntry,
+        self.messages.TypeProviderLabelEntry,
         labels_util.GetUpdateLabelsDictFromArgs(args),
         labels_util.GetRemoveLabelsListFromArgs(args))
-    type_provider = messages.TypeProvider(name=name,
-                                          description=args.description,
-                                          descriptorUrl=(
-                                              args.descriptor_url),
-                                          labels=labels)
+    type_provider = self.messages.TypeProvider(name=name,
+                                               description=args.description,
+                                               descriptorUrl=(args.
+                                                              descriptor_url),
+                                               labels=labels)
     type_providers.AddOptions(args.api_options_file, type_provider)
 
-    update_request = messages.DeploymentmanagerTypeProvidersUpdateRequest(
+    update_request = self.messages.DeploymentmanagerTypeProvidersUpdateRequest(
         project=project,
         typeProvider=args.provider_name,
         typeProviderResource=type_provider)
 
-    dm_write.Execute(update_request,
+    dm_write.Execute(self.client,
+                     self.messages,
+                     self.resources,
+                     update_request,
                      args.async,
-                     dm_beta_base.GetClient().typeProviders.Update,
+                     self.client.typeProviders.Update,
                      LogResource)

@@ -18,6 +18,7 @@ from containerregistry.client.v2_2 import docker_http
 from containerregistry.client.v2_2 import docker_session
 from googlecloudsdk.api_lib.container.images import util
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.container import flags
 from googlecloudsdk.core import exceptions
 from googlecloudsdk.core import http
 from googlecloudsdk.core import log
@@ -48,9 +49,6 @@ class Delete(base.DeleteCommand):
       """,
   }
 
-  def Collection(self):
-    return 'container.images'
-
   @staticmethod
   def Args(parser):
     """Register flags for this command.
@@ -59,12 +57,7 @@ class Delete(base.DeleteCommand):
       parser: An argparse.ArgumentParser-like object. It is mocked out in order
           to capture some information, but behaves like an ArgumentParser.
     """
-    parser.add_argument(
-        'image_names',
-        nargs='+',
-        help=('The IMAGE_NAME or IMAGE_NAMES to delete\n'
-              'Format For Digest: *.gcr.io/repository@sha256:<digest> '
-              'Format For Tag: *.gcr.io/repository:<tag>'))
+    flags.AddTagOrDigestPositional(parser, verb='delete')
 
     parser.add_argument(
         '--force-delete-tags',

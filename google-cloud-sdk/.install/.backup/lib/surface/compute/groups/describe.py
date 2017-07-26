@@ -13,6 +13,8 @@
 # limitations under the License.
 """Command for describing groups."""
 from googlecloudsdk.api_lib.compute import base_classes
+from googlecloudsdk.api_lib.compute import request_helper
+from googlecloudsdk.api_lib.compute import utils
 from googlecloudsdk.calliope import base
 from googlecloudsdk.core import properties
 
@@ -38,7 +40,6 @@ class Describe(base.Command):
 
   def Run(self, args):
     """Issues requests necessary for describing groups."""
-    compute_holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
     holder = base_classes.ComputeUserAccountsApiHolder(self.ReleaseTrack())
     client = holder.client
 
@@ -51,4 +52,13 @@ class Describe(base.Command):
         project=group_ref.project,
         groupName=group_ref.Name())
 
-    return compute_holder.client.MakeRequests([(client.groups, 'Get', request)])
+    errors = []
+    responses = list(request_helper.MakeRequests(
+        requests=[(client.groups, 'Get', request)],
+        http=client.http,
+        batch_url='https://www.googleapis.com/batch/',
+        errors=errors))
+    if errors:
+      utils.RaiseToolException(
+          errors, error_message='Could not fetch resource:')
+    return responses

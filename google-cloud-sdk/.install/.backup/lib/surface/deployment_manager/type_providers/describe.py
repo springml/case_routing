@@ -14,14 +14,16 @@
 
 """'type-providers describe' command."""
 
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.calliope import base
-from googlecloudsdk.command_lib.deployment_manager import dm_beta_base
+from googlecloudsdk.command_lib.deployment_manager import dm_v2beta_base
 from googlecloudsdk.command_lib.deployment_manager import type_providers
 from googlecloudsdk.core import properties
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
-class Describe(base.DescribeCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2BETA)
+class Describe(base.DescribeCommand, dm_base.DmCommand):
   """Describe a type provider entry in Type Registry."""
 
   detailed_help = {
@@ -56,14 +58,12 @@ class Describe(base.DescribeCommand):
           request.
       InvalidArgumentException: The requested type provider could not be found.
     """
-    type_provider_ref = dm_beta_base.GetResources().Parse(
+    type_provider_ref = dm_v2beta_base.GetResources().Parse(
         args.provider_name,
         params={'project': properties.VALUES.core.project.GetOrFail},
         collection='deploymentmanager.typeProviders')
 
-    messages = dm_beta_base.GetMessages()
-    request = messages.DeploymentmanagerTypeProvidersGetRequest(
+    request = self.messages.DeploymentmanagerTypeProvidersGetRequest(
         **type_provider_ref.AsDict())
-    client = dm_beta_base.GetClient()
-    return client.typeProviders.Get(request)
+    return self.client.typeProviders.Get(request)
 

@@ -17,6 +17,7 @@ from containerregistry.client import docker_name
 from containerregistry.client.v2_2 import docker_session
 from googlecloudsdk.api_lib.container.images import util
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.container import flags
 from googlecloudsdk.core import http
 from googlecloudsdk.core import log
 from googlecloudsdk.core.console import console_io
@@ -45,9 +46,6 @@ class Untag(base.DeleteCommand):
       """,
   }
 
-  def Collection(self):
-    return 'container.images'
-
   @staticmethod
   def Args(parser):
     """Register flags for this command.
@@ -56,12 +54,7 @@ class Untag(base.DeleteCommand):
       parser: An argparse.ArgumentParser-like object. It is mocked out in order
           to capture some information, but behaves like an ArgumentParser.
     """
-    parser.add_argument(
-        'image_names',
-        nargs='+',
-        metavar='IMAGE_NAME',
-        help=('The IMAGE_NAME(S) to untag\n\n'
-              'Format: ```*.gcr.io/repository:<tag>```'))
+    flags.AddTagOrDigestPositional(parser, verb='untag', tags_only=True)
 
   def Run(self, args):
     """This is what is called when the user runs this command.

@@ -41,18 +41,14 @@ class Update(base.UpdateCommand):
 
   @staticmethod
   def Args(parser):
-    def Bool(s):
-      return s.lower() in ['true', '1']
-
-    parser.add_argument(
-        '--split-health-checks',
-        required=False, type=Bool, default=None,
-        help='(true/false) Enables split health checks by default on new'
-             ' deployments.')
+    parser.add_argument('--split-health-checks', action='store_true',
+                        default=None,
+                        help='Enables/disables split health checks by default '
+                             'on new deployments.')
 
   def Run(self, args):
-    api_client = (appengine_app_update_api_client.
-                  AppengineAppUpdateApiClient.GetApiClient())
+    api_client = appengine_app_update_api_client.GetApiClientForTrack(
+        self.ReleaseTrack())
 
     if args.split_health_checks is not None:
       with progress_tracker.ProgressTracker(

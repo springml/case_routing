@@ -65,7 +65,7 @@ class Container(base.Group):
     Returns:
       The refined command context.
     """
-    context['api_adapter'] = api_adapter.NewAPIAdapter()
+    context['api_adapter'] = api_adapter.NewAPIAdapter('v1')
     return context
 
 
@@ -78,4 +78,21 @@ class ContainerBeta(Container):
 class ContainerAlpha(Container):
   """Deploy and manage clusters of machines for running containers."""
 
+  def Filter(self, context, args):
+    """Modify the context that will be given to this group's commands when run.
 
+    Args:
+      context: {str:object}, A set of key-value pairs that can be used for
+          common initialization among commands.
+      args: argparse.Namespace: The same namespace given to the corresponding
+          .Run() invocation.
+
+    Returns:
+      The refined command context.
+    """
+    if properties.VALUES.container.use_v1_api_client.GetBool():
+      api_version = 'v1'
+    else:
+      api_version = 'v1alpha1'
+    context['api_adapter'] = api_adapter.NewAPIAdapter(api_version)
+    return context

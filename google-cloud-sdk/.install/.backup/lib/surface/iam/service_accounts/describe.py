@@ -43,10 +43,10 @@ class Describe(base_classes.BaseIamCommand, base.DescribeCommand):
   @staticmethod
   def Args(parser):
     iam_util.AddServiceAccountNameArg(
-        parser, help_text='The service account to describe.')
+        parser, action='to describe')
 
   def Run(self, args):
     # TODO(b/25212870): use resource parsing.
     return self.iam_client.projects_serviceAccounts.Get(
         self.messages.IamProjectsServiceAccountsGetRequest(
-            name=iam_util.EmailToAccountResourceName(args.name)))
+            name=iam_util.EmailToAccountResourceName(args.service_account)))

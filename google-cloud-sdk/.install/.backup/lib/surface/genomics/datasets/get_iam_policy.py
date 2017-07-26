@@ -20,7 +20,7 @@ from googlecloudsdk.calliope import base
 from googlecloudsdk.core import resources
 
 
-class GetIamPolicy(base.Command):
+class GetIamPolicy(base.ListCommand):
   """Get IAM policy for a dataset.
 
   This command gets the IAM policy for a dataset, given a dataset ID.
@@ -30,6 +30,7 @@ class GetIamPolicy(base.Command):
   def Args(parser):
     parser.add_argument('id', type=str,
                         help='The ID of the dataset.')
+    base.URI_FLAG.RemoveFromParser(parser)
 
   def Run(self, args):
     apitools_client = genomics_util.GetGenomicsClient()

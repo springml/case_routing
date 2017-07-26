@@ -14,15 +14,10 @@
 
 """'functions deploy' command."""
 import httplib
-import os
-import random
-import re
-import string
 
 from apitools.base.py import exceptions as apitools_exceptions
 
 from googlecloudsdk.api_lib.compute import utils
-from googlecloudsdk.api_lib.functions import cloud_storage as storage
 from googlecloudsdk.api_lib.functions import exceptions
 from googlecloudsdk.api_lib.functions import operations
 from googlecloudsdk.api_lib.functions import util
@@ -30,10 +25,8 @@ from googlecloudsdk.calliope import arg_parsers
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.functions import flags
 from googlecloudsdk.command_lib.functions.deploy import util as deploy_util
-from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
 from googlecloudsdk.core import resources
-from googlecloudsdk.core.util import archive
 from googlecloudsdk.core.util import files as file_utils
 
 _DEPLOY_WAIT_NOTICE = 'Deploying function (may take a while - up to 2 minutes)'
@@ -67,7 +60,8 @@ def _SourceCodeArgs(parser):
   path_group.add_argument(
       '--local-path',
       help=('Path to local directory with source code. Required with '
-            '--stage-bucket flag.'))
+            '--stage-bucket flag. Size of uncompressed files to deploy must be '
+            'no more than 512MB.'))
   path_group.add_argument(
       '--source-path',
       help=('Path to directory with source code in Cloud Source '
@@ -214,35 +208,6 @@ class Deploy(base.Command):
         return None
       raise
 
-  def _GenerateRemoteZipFileName(self, args):
-    sufix = ''.join(random.choice(string.ascii_lowercase) for _ in range(12))
-    return '{0}-{1}-{2}.zip'.format(
-        properties.VALUES.functions.region.Get(), args.name, sufix)
-
-  def _UploadFile(self, source, target):
-    return storage.Upload(source, target)
-
-  def _CreateZipFile(self, tmp_dir, args):
-    zip_file_name = os.path.join(tmp_dir, 'fun.zip')
-    local_path = deploy_util.GetLocalPath(args)
-    try:
-      if args.include_ignored_files:
-        archive.MakeZipFromDir(zip_file_name, local_path)
-      else:
-        log.info('Not including node_modules in deployed code. To include '
-                 'node_modules in uploaded code use --include-ignored-files '
-                 'flag.')
-        archive.MakeZipFromDir(
-            zip_file_name,
-            local_path,
-            skip_file_regex=r'(node_modules{}.*)|(node_modules)'.format(
-                re.escape(os.sep)))
-    except ValueError as e:
-      raise exceptions.FunctionsError(
-          'Error creating a ZIP archive with the source code '
-          'for directory {0}: {1}'.format(local_path, str(e)))
-    return zip_file_name
-
   def _EventTrigger(self, trigger_provider, trigger_event,
                     trigger_resource):
     messages = util.GetApiMessagesModule()
@@ -313,15 +278,21 @@ class Deploy(base.Command):
     return deploy_method(location, function)
 
   def _PrepareSourcesOnGcs(self, args):
-    remote_zip_file = self._GenerateRemoteZipFileName(args)
-    gcs_url = storage.BuildRemoteDestination(args.stage_bucket, remote_zip_file)
     with file_utils.TemporaryDirectory() as tmp_dir:
-      zip_file = self._CreateZipFile(tmp_dir, args)
-      if self._UploadFile(zip_file, gcs_url) != 0:
-        raise exceptions.FunctionsError(
-            'Failed to upload the function source code to the bucket {0}'
-            .format(args.stage_bucket))
-    return gcs_url
+      local_path = deploy_util.GetLocalPath(args)
+      zip_file = deploy_util.CreateSourcesZipFile(
+          tmp_dir, local_path, args.include_ignored_files)
+      return deploy_util.UploadFile(zip_file, args.name, args.stage_bucket)
+
+  def _ValidateUnpackedSourceSize(self, args):
+    ignore_regex = deploy_util.GetIgnoreFilesRegex(args.include_ignored_files)
+    path = deploy_util.GetLocalPath(args)
+    size_b = file_utils.GetTreeSizeBytes(path, ignore_regex)
+    size_limit_mb = 512
+    size_limit_b = size_limit_mb * 2 ** 20
+    if size_b > size_limit_b:
+      raise exceptions.OversizedDeployment(
+          str(size_b) + 'B', str(size_limit_b) + 'B')
 
   @util.CatchHTTPErrorRaiseHTTPException
   def _CreateFunction(self, location, function):
@@ -354,6 +325,7 @@ class Deploy(base.Command):
     Raises:
       FunctionsError if command line parameters are not valid.
     """
+    self._ValidateUnpackedSourceSize(args)
     trigger_params = deploy_util.DeduceAndCheckArgs(args)
     project = properties.VALUES.core.project.Get(required=True)
     location_ref = resources.REGISTRY.Parse(

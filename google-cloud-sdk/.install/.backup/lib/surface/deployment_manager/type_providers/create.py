@@ -14,9 +14,9 @@
 
 """type-providers create command."""
 
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.api_lib.deployment_manager import dm_labels
 from googlecloudsdk.calliope import base
-from googlecloudsdk.command_lib.deployment_manager import dm_beta_base
 from googlecloudsdk.command_lib.deployment_manager import dm_write
 from googlecloudsdk.command_lib.deployment_manager import flags
 from googlecloudsdk.command_lib.deployment_manager import type_providers
@@ -32,7 +32,8 @@ def LogResource(request, async):
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
-class Create(base.CreateCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2BETA)
+class Create(base.CreateCommand, dm_base.DmCommand):
   """Create a type provider.
 
   This command inserts (creates) a new type provider based on a provided
@@ -74,28 +75,30 @@ class Create(base.CreateCommand):
       HttpException: An http error response was received while executing api
           request.
     """
-    messages = dm_beta_base.GetMessages()
-    type_provider_ref = dm_beta_base.GetResources().Parse(
+    type_provider_ref = self.resources.Parse(
         args.provider_name,
         params={'project': properties.VALUES.core.project.GetOrFail},
         collection='deploymentmanager.typeProviders')
     update_labels_dict = labels_util.GetUpdateLabelsDictFromArgs(args)
     labels = dm_labels.UpdateLabels([],
-                                    messages.TypeProviderLabelEntry,
+                                    self.messages.TypeProviderLabelEntry,
                                     update_labels=update_labels_dict)
 
-    type_provider = messages.TypeProvider(
+    type_provider = self.messages.TypeProvider(
         name=type_provider_ref.typeProvider,
         description=args.description,
         descriptorUrl=args.descriptor_url,
         labels=labels)
 
     type_providers.AddOptions(args.api_options_file, type_provider)
-    request = messages.DeploymentmanagerTypeProvidersInsertRequest(
+    request = self.messages.DeploymentmanagerTypeProvidersInsertRequest(
         project=type_provider_ref.project,
         typeProvider=type_provider)
 
-    dm_write.Execute(request,
+    dm_write.Execute(self.client,
+                     self.messages,
+                     self.resources,
+                     request,
                      args.async,
-                     dm_beta_base.GetClient().typeProviders.Insert,
+                     self.client.typeProviders.Insert,
                      LogResource)

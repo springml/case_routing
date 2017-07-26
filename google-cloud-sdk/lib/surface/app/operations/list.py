@@ -46,7 +46,7 @@ class List(base.ListCommand):
     parser.display_info.AddFormat('table(id, start_time, status)')
 
   def Run(self, args):
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     if args.pending:
       return api_client.ListOperations(op_filter='done:false')
     else:

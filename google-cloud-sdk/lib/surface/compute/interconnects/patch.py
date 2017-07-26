@@ -23,7 +23,7 @@ from googlecloudsdk.command_lib.compute.interconnects import flags
 class Patch(base.UpdateCommand):
   """Patch a Google Compute Engine interconnect.
 
-  *{command}* is used to patch interconnects. A interconnect represents a
+  *{command}* is used to patch interconnects. An interconnect represents a
   single specific connection between Google and the customer
   """
   INTERCONNECT_ARG = None

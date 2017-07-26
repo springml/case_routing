@@ -14,10 +14,10 @@
 
 """types create command."""
 
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.api_lib.deployment_manager import dm_labels
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.deployment_manager import composite_types
-from googlecloudsdk.command_lib.deployment_manager import dm_beta_base
 from googlecloudsdk.command_lib.deployment_manager import dm_write
 from googlecloudsdk.command_lib.deployment_manager import flags
 from googlecloudsdk.command_lib.util import labels_util
@@ -31,7 +31,8 @@ def LogResource(request, async):
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
-class Create(base.CreateCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2BETA)
+class Create(base.CreateCommand, dm_base.DmCommand):
   """Create a type.
 
   This command inserts (creates) a new composite type based on a provided
@@ -73,26 +74,28 @@ class Create(base.CreateCommand):
       HttpException: An http error response was received while executing api
           request.
     """
-    messages = dm_beta_base.GetMessages()
     composite_type_ref = composite_types.GetReference(args.name)
     update_labels_dict = labels_util.GetUpdateLabelsDictFromArgs(args)
     labels = dm_labels.UpdateLabels([],
-                                    messages.CompositeTypeLabelEntry,
+                                    self.messages.CompositeTypeLabelEntry,
                                     update_labels=update_labels_dict)
     template_contents = composite_types.TemplateContentsFor(args.template)
 
-    composite_type = messages.CompositeType(
+    composite_type = self.messages.CompositeType(
         name=args.name,
         description=args.description,
         status=args.status,
         templateContents=template_contents,
         labels=labels)
-    request = messages.DeploymentmanagerCompositeTypesInsertRequest(
+    request = self.messages.DeploymentmanagerCompositeTypesInsertRequest(
         project=composite_type_ref.project,
         compositeType=composite_type)
 
-    dm_write.Execute(request,
+    dm_write.Execute(self.client,
+                     self.messages,
+                     self.resources,
+                     request,
                      args.async,
-                     dm_beta_base.GetClient().compositeTypes.Insert,
+                     self.client.compositeTypes.Insert,
                      LogResource)
 

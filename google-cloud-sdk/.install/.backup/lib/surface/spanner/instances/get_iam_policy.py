@@ -20,7 +20,7 @@ from googlecloudsdk.core import properties
 from googlecloudsdk.core import resources
 
 
-class GetIamPolicy(base.Command):
+class GetIamPolicy(base.ListCommand):
   """Get the IAM policy for a Cloud Spanner instance."""
 
   @staticmethod
@@ -35,6 +35,7 @@ class GetIamPolicy(base.Command):
           allowed.
     """
     flags.Instance().AddToParser(parser)
+    base.URI_FLAG.RemoveFromParser(parser)
 
   def Run(self, args):
     """This is what gets called when the user runs this command.

@@ -82,5 +82,20 @@ class Escaping(base.TopicCommand):
           arguments:
 
               --dict-flag=^:^a=b,c:d=f,g # => {'a': 'b,c', 'd': 'f,g'}
+
+          To reserve ephemeral IP addresses, passed in as a list, which are
+          being used by virtual machine instances in the us-central1 region,
+          run:
+
+              $ gcloud compute addresses create \
+              --addresses ^:^123.456.789.198:22.333.146.189:789.312.645 \
+              --region us-central1
+
+          To create a Google Compute Engine virtual machine instance
+          with metadata as a list ({'key1': '"value1"', 'key2': 'value2',
+          'key3': 'value3Index1,value3Index2', 'key4': 'value4'), run:
+
+              $ gcloud compute instances create example-instance1 \
+              --metadata ^:^key1="value1":key2=value2:key3=value3Index1,value3Index2,valueIndex3:key4=value4
           """,
       }

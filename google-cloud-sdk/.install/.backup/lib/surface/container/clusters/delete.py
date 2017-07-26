@@ -63,8 +63,9 @@ class Delete(base.DeleteCommand):
 
     cluster_refs = []
     for name in args.names:
-      cluster_refs.append(adapter.ParseCluster(name))
-
+      cluster_refs.append(
+          adapter.ParseCluster(name,
+                               getattr(args, 'region', None)))
     console_io.PromptContinue(
         message=util.ConstructList(
             'The following clusters will be deleted.',

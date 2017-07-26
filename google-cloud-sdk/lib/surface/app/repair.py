@@ -36,7 +36,10 @@ class Repair(base.Command):
   }
 
   def Run(self, args):
-    api_client = appengine_api_client.GetApiClient()
+    # TODO(b/62950391): `app repair' should use the API client which
+    # corresponds to the release track. For now, this isn't supported by the
+    # mocked API client unit tests.
+    api_client = appengine_api_client.AppengineApiClient.GetApiClient('v1')
 
     with progress_tracker.ProgressTracker(
         'Repairing the app [{0}]'.format(api_client.project)):

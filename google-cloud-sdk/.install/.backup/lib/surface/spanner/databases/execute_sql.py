@@ -20,6 +20,7 @@ from googlecloudsdk.command_lib.spanner import sql
 from googlecloudsdk.core import log
 
 
+@base.UnicodeIsSupported
 class Query(base.Command):
   """Executes a read-only SQL query against a Cloud Spanner database."""
 

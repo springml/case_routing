@@ -35,6 +35,10 @@ def main():
   if pass_credentials and account not in c_gce.Metadata().Accounts():
     gsutil_path = config.Paths().LegacyCredentialsGSUtilPath(account)
 
+    # Allow gsutil to only check for the '1' string value, as is done
+    # with regard to the 'CLOUDSDK_WRAPPER' environment variable.
+    os.environ['CLOUDSDK_CORE_PASS_CREDENTIALS_TO_GSUTIL'] = '1'
+
     boto_config = os.environ.get('BOTO_CONFIG', '')
     boto_path = os.environ.get('BOTO_PATH', '')
 
@@ -80,7 +84,8 @@ def main():
 
 
 if __name__ == '__main__':
-  bootstrapping.CommandStart('gsutil', component_id='gsutil')
+  version = bootstrapping.GetFileContents('platform/gsutil', 'VERSION')
+  bootstrapping.CommandStart('gsutil', version=version)
 
   blacklist = {
       'update': 'To update, run: gcloud components update',

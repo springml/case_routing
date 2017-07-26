@@ -7,6 +7,7 @@ based applications, powered by the open source Kubernetes technology.
 
 from apitools.base.protorpclite import messages as _messages
 from apitools.base.py import encoding
+from apitools.base.py import extra_types
 
 
 package = 'container'
@@ -16,13 +17,14 @@ class AcceleratorConfig(_messages.Message):
   """AcceleratorConfig represents a Hardware Accelerator request.
 
   Fields:
-    count: The number of the accelerator cards exposed to an instance.
-    type: The accelerator type resource name. List of supported accelerators
-      [here](/compute/docs/gpus/#Introduction)
+    acceleratorCount: The number of the accelerator cards exposed to an
+      instance.
+    acceleratorType: The accelerator type resource name. List of supported
+      accelerators [here](/compute/docs/gpus/#Introduction)
   """
 
-  count = _messages.IntegerField(1)
-  type = _messages.StringField(2)
+  acceleratorCount = _messages.IntegerField(1)
+  acceleratorType = _messages.StringField(2)
 
 
 class AddonsConfig(_messages.Message):
@@ -37,10 +39,173 @@ class AddonsConfig(_messages.Message):
     httpLoadBalancing: Configuration for the HTTP (L7) load balancing
       controller addon, which makes it easy to set up HTTP load balancers for
       services in a cluster.
+    kubernetesDashboard: Configuration for the Kubernetes Dashboard.
   """
 
   horizontalPodAutoscaling = _messages.MessageField('HorizontalPodAutoscaling', 1)
   httpLoadBalancing = _messages.MessageField('HttpLoadBalancing', 2)
+  kubernetesDashboard = _messages.MessageField('KubernetesDashboard', 3)
+
+
+class AuditEvent(_messages.Message):
+  """Event captures all the information that can be included in an API audit
+  log.  Should match Event in https://github.com/kubernetes/kubernetes/blob/ma
+  ster/staging/src/k8s.io/apiserver/pkg/apis/audit/v1alpha1/generated.proto.
+
+  Messages:
+    RequestObjectValue: API object from the request, in JSON format. The
+      RequestObject is recorded as-is in the request (possibly re-encoded as
+      JSON), prior to version conversion, defaulting, admission or merging. It
+      is an external versioned object type, and may not be a valid object on
+      its own.  Omitted for non-resource requests.  Only logged at Request
+      Level and higher. +optional
+    ResponseObjectValue: API object returned in the response, in JSON. The
+      ResponseObject is recorded after conversion to the external type, and
+      serialized as JSON. Omitted for non-resource requests.  Only logged at
+      Response Level and higher. +optional
+
+  Fields:
+    auditID: Unique audit ID, generated for each request.
+    impersonatedUser: Impersonated user information. +optional
+    objectRef: Object reference this request is targeted at.  Does not apply
+      for List-type requests, or non-resource requests. +optional
+    requestObject: API object from the request, in JSON format. The
+      RequestObject is recorded as-is in the request (possibly re-encoded as
+      JSON), prior to version conversion, defaulting, admission or merging. It
+      is an external versioned object type, and may not be a valid object on
+      its own.  Omitted for non-resource requests.  Only logged at Request
+      Level and higher. +optional
+    requestURI: RequestURI is the request URI as sent by the client to a
+      server.
+    responseObject: API object returned in the response, in JSON. The
+      ResponseObject is recorded after conversion to the external type, and
+      serialized as JSON. Omitted for non-resource requests.  Only logged at
+      Response Level and higher. +optional
+    responseStatus: The response status, populated even when the
+      ResponseObject is not a Status type.  For successful responses, this
+      will only include the Code and StatusSuccess.  For non-status type error
+      responses, this will be auto-populated with the error Message. +optional
+    sourceIPs: Source IPs, from where the request originated and intermediate
+      proxies. +optional
+    stage: Stage of the request handling when this event instance was
+      generated.
+    timestamp: Time the request reached the apiserver.
+    user: Authenticated user information.
+    verb: Verb is the kubernetes verb associated with the request.  For non-
+      resource requests, this is identical to HttpMethod.
+  """
+
+  @encoding.MapUnrecognizedFields('additionalProperties')
+  class RequestObjectValue(_messages.Message):
+    """API object from the request, in JSON format. The RequestObject is
+    recorded as-is in the request (possibly re-encoded as JSON), prior to
+    version conversion, defaulting, admission or merging. It is an external
+    versioned object type, and may not be a valid object on its own.  Omitted
+    for non-resource requests.  Only logged at Request Level and higher.
+    +optional
+
+    Messages:
+      AdditionalProperty: An additional property for a RequestObjectValue
+        object.
+
+    Fields:
+      additionalProperties: Properties of the object.
+    """
+
+    class AdditionalProperty(_messages.Message):
+      """An additional property for a RequestObjectValue object.
+
+      Fields:
+        key: Name of the additional property.
+        value: A extra_types.JsonValue attribute.
+      """
+
+      key = _messages.StringField(1)
+      value = _messages.MessageField('extra_types.JsonValue', 2)
+
+    additionalProperties = _messages.MessageField('AdditionalProperty', 1, repeated=True)
+
+  @encoding.MapUnrecognizedFields('additionalProperties')
+  class ResponseObjectValue(_messages.Message):
+    """API object returned in the response, in JSON. The ResponseObject is
+    recorded after conversion to the external type, and serialized as JSON.
+    Omitted for non-resource requests.  Only logged at Response Level and
+    higher. +optional
+
+    Messages:
+      AdditionalProperty: An additional property for a ResponseObjectValue
+        object.
+
+    Fields:
+      additionalProperties: Properties of the object.
+    """
+
+    class AdditionalProperty(_messages.Message):
+      """An additional property for a ResponseObjectValue object.
+
+      Fields:
+        key: Name of the additional property.
+        value: A extra_types.JsonValue attribute.
+      """
+
+      key = _messages.StringField(1)
+      value = _messages.MessageField('extra_types.JsonValue', 2)
+
+    additionalProperties = _messages.MessageField('AdditionalProperty', 1, repeated=True)
+
+  auditID = _messages.StringField(1)
+  impersonatedUser = _messages.MessageField('AuthnV1UserInfo', 2)
+  objectRef = _messages.MessageField('AuditObjectReference', 3)
+  requestObject = _messages.MessageField('RequestObjectValue', 4)
+  requestURI = _messages.StringField(5)
+  responseObject = _messages.MessageField('ResponseObjectValue', 6)
+  responseStatus = _messages.MessageField('MetaV1Status', 7)
+  sourceIPs = _messages.StringField(8, repeated=True)
+  stage = _messages.StringField(9)
+  timestamp = _messages.StringField(10)
+  user = _messages.MessageField('AuthnV1UserInfo', 11)
+  verb = _messages.StringField(12)
+
+
+class AuditEventList(_messages.Message):
+  """A request to audit write audit events (to Cloud Audit Logging and/or
+  Gin). The request contains items to audit.  This should look very close to
+  the EventList struct in https://github.com/kubernetes/kubernetes/blob/master
+  /staging/src/k8s.io/apiserver/pkg/apis/audit/v1alpha1/generated.proto. This
+  message has 4 GKE-specific fields that get mapped from the path, but the
+  other fields (the expected JSON payload) must match EventList.
+
+  Fields:
+    items: The list of events to audit log.
+  """
+
+  items = _messages.MessageField('AuditEvent', 1, repeated=True)
+
+
+class AuditObjectReference(_messages.Message):
+  """AuditObjectReference contains enough information to let you inspect or
+  modify the referred object.  Should match ObjectReference in https://github.
+  com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apiserver/pkg/apis/
+  audit/v1alpha1/generated.proto.
+
+  Fields:
+    apiVersion: +optional  In alpha, this field follows Kubernetes
+      conventions, except there is a leading slash for the core group.  I.e.
+      the core group is represented as "/v1"; other group versions are
+      represented as "fully.qualified.group.name/v1".
+    name: +optional
+    resource: +optional
+    subresource: +optional
+  """
+
+  apiVersion = _messages.StringField(1)
+  name = _messages.StringField(2)
+  resource = _messages.StringField(3)
+  subresource = _messages.StringField(4)
+
+
+class AuditResponse(_messages.Message):
+  """Response sent to audit log requests."""
 
 
 class AuthenticateRequest(_messages.Message):
@@ -54,8 +219,6 @@ class AuthenticateRequest(_messages.Message):
     apiVersion: The api version of the TokenReview object.
     kind: Fields from "pkg/apis/authentication.k8s.io/v1beta1".TokenReview:
       The "kind" of the TokenReview object.
-    metadata: "pkg/api/types".ObjectMeta TODO (b/30563544): Remove these
-      unused fields.
     spec: The information about the request being evaluated. It contains the
       token that the server should authenticate.
     status: The response for the provided request. (this won't be filled in
@@ -65,9 +228,8 @@ class AuthenticateRequest(_messages.Message):
 
   apiVersion = _messages.StringField(1)
   kind = _messages.StringField(2)
-  metadata = _messages.MessageField('ObjectMeta', 3)
-  spec = _messages.MessageField('TokenReviewSpec', 4)
-  status = _messages.MessageField('TokenReviewStatus', 5)
+  spec = _messages.MessageField('TokenReviewSpec', 3)
+  status = _messages.MessageField('TokenReviewStatus', 4)
 
 
 class AuthenticateResponse(_messages.Message):
@@ -92,6 +254,19 @@ class AuthenticateResponse(_messages.Message):
   status = _messages.MessageField('TokenReviewStatus', 4)
 
 
+class AuthnV1UserInfo(_messages.Message):
+  """The attributes of an authenticated user.  Should match UserInfo in
+  https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io
+  /client-go/pkg/apis/authentication/v1/generated.proto
+
+  Fields:
+    username: The name of the user. This should be the email address
+      associated with the GAIA identity of the user.
+  """
+
+  username = _messages.StringField(1)
+
+
 class AuthorizeRequest(_messages.Message):
   """A request to authorize a user action. The request contains the attributes
   of the action the user is attempting. These attributes are mapped to a GKE
@@ -105,8 +280,6 @@ class AuthorizeRequest(_messages.Message):
     apiVersion: The api version of the SubjectAccessReview object.
     kind: Fields from "pkg/apis/authorization/v1beta1".SubjectAccessReview:
       The "kind" of the SubjectAccessReview object.
-    metadata: Fields from "pkg/api/types".ObjectMeta TODO (b/30563544): Remove
-      these unused fields.
     spec: The information about the user action being evaluated.
     status: The response for the provided request (this won't be filled in for
       an AuthorizeRequest, but it is part of the struct, so we need it here to
@@ -115,9 +288,8 @@ class AuthorizeRequest(_messages.Message):
 
   apiVersion = _messages.StringField(1)
   kind = _messages.StringField(2)
-  metadata = _messages.MessageField('ObjectMeta', 3)
-  spec = _messages.MessageField('SubjectAccessReviewSpec', 4)
-  status = _messages.MessageField('SubjectAccessReviewStatus', 5)
+  spec = _messages.MessageField('SubjectAccessReviewSpec', 3)
+  status = _messages.MessageField('SubjectAccessReviewStatus', 4)
 
 
 class AuthorizeResponse(_messages.Message):
@@ -188,7 +360,6 @@ class CertificateSigningRequest(_messages.Message):
     masterProjectId: The hosted master project in which this master resides.
       This can be either a [project ID or project
       number](https://support.google.com/cloud/answer/6158840).
-    metadata: Additional metadata about the Kubernetes object.
     projectNumber: The project number for which the certificate is being
       signed. This is the project in which this master's cluster resides.
       This is an int64, so it must be a project number, not a project ID.
@@ -204,11 +375,10 @@ class CertificateSigningRequest(_messages.Message):
   clusterId = _messages.StringField(2)
   kind = _messages.StringField(3)
   masterProjectId = _messages.StringField(4)
-  metadata = _messages.MessageField('ObjectMeta', 5)
-  projectNumber = _messages.IntegerField(6)
-  spec = _messages.MessageField('CertificateSigningRequestSpec', 7)
-  status = _messages.MessageField('CertificateSigningRequestStatus', 8)
-  zone = _messages.StringField(9)
+  projectNumber = _messages.IntegerField(5)
+  spec = _messages.MessageField('CertificateSigningRequestSpec', 6)
+  status = _messages.MessageField('CertificateSigningRequestStatus', 7)
+  zone = _messages.StringField(8)
 
 
 class CertificateSigningRequestCondition(_messages.Message):
@@ -261,6 +431,19 @@ class CertificateSigningRequestStatus(_messages.Message):
 
   certificate = _messages.BytesField(1)
   conditions = _messages.MessageField('CertificateSigningRequestCondition', 2, repeated=True)
+
+
+class CidrBlock(_messages.Message):
+  """CidrBlock contains an optional name and one CIDR block.
+
+  Fields:
+    cidrBlock: cidr_block must be specified in CIDR notation.
+    displayName: display_name is an optional field for users to identify CIDR
+      blocks.
+  """
+
+  cidrBlock = _messages.StringField(1)
+  displayName = _messages.StringField(2)
 
 
 class ClientCertificateConfig(_messages.Message):
@@ -340,8 +523,11 @@ class Cluster(_messages.Message):
       used.
     masterAuth: The authentication information for accessing the master
       endpoint.
-    masterAuthorizedNetworks: The configuration options for master authorized
-      networks feature.
+    masterAuthorizedNetworks: Deprecated. The configuration options for master
+      authorized networks feature.
+    masterAuthorizedNetworksConfig: Master authorized networks is a Beta
+      feature. The configuration options for master authorized networks
+      feature.
     monitoringService: The monitoring service the cluster should use to write
       metrics. Currently available options:  * `monitoring.googleapis.com` -
       the Google Cloud Monitoring service. * `none` - no metrics will be
@@ -454,20 +640,21 @@ class Cluster(_messages.Message):
   loggingService = _messages.StringField(18)
   masterAuth = _messages.MessageField('MasterAuth', 19)
   masterAuthorizedNetworks = _messages.MessageField('MasterAuthorizedNetworks', 20)
-  monitoringService = _messages.StringField(21)
-  name = _messages.StringField(22)
-  network = _messages.StringField(23)
-  networkPolicy = _messages.MessageField('NetworkPolicy', 24)
-  nodeConfig = _messages.MessageField('NodeConfig', 25)
-  nodeIpv4CidrSize = _messages.IntegerField(26, variant=_messages.Variant.INT32)
-  nodePools = _messages.MessageField('NodePool', 27, repeated=True)
-  resourceLabels = _messages.MessageField('ResourceLabelsValue', 28)
-  selfLink = _messages.StringField(29)
-  servicesIpv4Cidr = _messages.StringField(30)
-  status = _messages.EnumField('StatusValueValuesEnum', 31)
-  statusMessage = _messages.StringField(32)
-  subnetwork = _messages.StringField(33)
-  zone = _messages.StringField(34)
+  masterAuthorizedNetworksConfig = _messages.MessageField('MasterAuthorizedNetworksConfig', 21)
+  monitoringService = _messages.StringField(22)
+  name = _messages.StringField(23)
+  network = _messages.StringField(24)
+  networkPolicy = _messages.MessageField('NetworkPolicy', 25)
+  nodeConfig = _messages.MessageField('NodeConfig', 26)
+  nodeIpv4CidrSize = _messages.IntegerField(27, variant=_messages.Variant.INT32)
+  nodePools = _messages.MessageField('NodePool', 28, repeated=True)
+  resourceLabels = _messages.MessageField('ResourceLabelsValue', 29)
+  selfLink = _messages.StringField(30)
+  servicesIpv4Cidr = _messages.StringField(31)
+  status = _messages.EnumField('StatusValueValuesEnum', 32)
+  statusMessage = _messages.StringField(33)
+  subnetwork = _messages.StringField(34)
+  zone = _messages.StringField(35)
 
 
 class ClusterUpdate(_messages.Message):
@@ -486,8 +673,11 @@ class ClusterUpdate(_messages.Message):
       nodes being either created or removed from the cluster, depending on
       whether locations are being added or removed.  This list must always
       include the cluster's primary zone.
-    desiredMasterAuthorizedNetworks: The desired configuration options for
-      master authorized networks feature.
+    desiredMasterAuthorizedNetworks: Deprecated. The desired configuration
+      options for master authorized networks feature.
+    desiredMasterAuthorizedNetworksConfig: Master authorized networks is a
+      Beta feature. The desired configuration options for master authorized
+      networks feature.
     desiredMasterMachineType: The name of a Google Compute Engine [machine
       type](/compute/docs/machine-types) (e.g. `n1-standard-8`) to change the
       master to.
@@ -515,12 +705,13 @@ class ClusterUpdate(_messages.Message):
   desiredImageType = _messages.StringField(2)
   desiredLocations = _messages.StringField(3, repeated=True)
   desiredMasterAuthorizedNetworks = _messages.MessageField('MasterAuthorizedNetworks', 4)
-  desiredMasterMachineType = _messages.StringField(5)
-  desiredMasterVersion = _messages.StringField(6)
-  desiredMonitoringService = _messages.StringField(7)
-  desiredNodePoolAutoscaling = _messages.MessageField('NodePoolAutoscaling', 8)
-  desiredNodePoolId = _messages.StringField(9)
-  desiredNodeVersion = _messages.StringField(10)
+  desiredMasterAuthorizedNetworksConfig = _messages.MessageField('MasterAuthorizedNetworksConfig', 5)
+  desiredMasterMachineType = _messages.StringField(6)
+  desiredMasterVersion = _messages.StringField(7)
+  desiredMonitoringService = _messages.StringField(8)
+  desiredNodePoolAutoscaling = _messages.MessageField('NodePoolAutoscaling', 9)
+  desiredNodePoolId = _messages.StringField(10)
+  desiredNodeVersion = _messages.StringField(11)
 
 
 class CompleteIPRotationRequest(_messages.Message):
@@ -528,6 +719,29 @@ class CompleteIPRotationRequest(_messages.Message):
   mode.
   """
 
+
+
+class ContainerMasterProjectsZonesAuditRequest(_messages.Message):
+  """A ContainerMasterProjectsZonesAuditRequest object.
+
+  Fields:
+    auditEventList: A AuditEventList resource to be passed as the request
+      body.
+    clusterId: The name of this master's cluster.
+    masterProjectId: The hosted master project in which this master resides.
+      This can be either a [project ID or project
+      number](https://support.google.com/cloud/answer/6158840).
+    projectNumber: The project number for which the request is being
+      authorized.  This is the project in which this master's cluster resides.
+      This is an int64, so it must be a project number, not a project ID.
+    zone: The zone of this master's cluster.
+  """
+
+  auditEventList = _messages.MessageField('AuditEventList', 1)
+  clusterId = _messages.StringField(2, required=True)
+  masterProjectId = _messages.StringField(3, required=True)
+  projectNumber = _messages.IntegerField(4, required=True)
+  zone = _messages.StringField(5, required=True)
 
 
 class ContainerMasterProjectsZonesAuthenticateRequest(_messages.Message):
@@ -1338,8 +1552,6 @@ class ImageReviewRequest(_messages.Message):
     apiVersion: The api version of the SubjectAccessReview object.
     kind: Fields from "pkg/apis/authorization/v1beta1".SubjectAccessReview:
       The "kind" of the SubjectAccessReview object.
-    metadata: Fields from "pkg/api/types".ObjectMeta TODO (b/30563544): Remove
-      these unused fields.
     spec: The information about the user action being evaluated.
     status: The response for the provided request (this won't be filled in for
       an AuthorizeRequest, but it is part of the struct, so we need it here to
@@ -1348,9 +1560,8 @@ class ImageReviewRequest(_messages.Message):
 
   apiVersion = _messages.StringField(1)
   kind = _messages.StringField(2)
-  metadata = _messages.MessageField('ObjectMeta', 3)
-  spec = _messages.MessageField('ImageReviewSpec', 4)
-  status = _messages.MessageField('ImageReviewStatus', 5)
+  spec = _messages.MessageField('ImageReviewSpec', 3)
+  status = _messages.MessageField('ImageReviewStatus', 4)
 
 
 class ImageReviewResponse(_messages.Message):
@@ -1440,6 +1651,16 @@ class ImageReviewStatus(_messages.Message):
   reason = _messages.StringField(2)
 
 
+class KubernetesDashboard(_messages.Message):
+  """Configuration for the Kubernetes Dashboard.
+
+  Fields:
+    disabled: Whether the Kubernetes Dashboard is enabled for this cluster.
+  """
+
+  disabled = _messages.BooleanField(1)
+
+
 class LegacyAbac(_messages.Message):
   """Configuration for the legacy Attribute Based Access Control authorization
   mode.
@@ -1524,10 +1745,10 @@ class MasterAuth(_messages.Message):
 
 
 class MasterAuthorizedNetworks(_messages.Message):
-  """Configuration options for the master authorized networks feature. Enabled
-  master authorized networks will disallow all external traffic to access
-  Kubernetes master through HTTPS except traffic from the given CIDR blocks,
-  Google Compute Engine Public IPs and Google Prod IPs.
+  """Deprecated. Configuration options for the master authorized networks
+  feature. Enabled master authorized networks will disallow all external
+  traffic to access Kubernetes master through HTTPS except traffic from the
+  given CIDR blocks, Google Compute Engine Public IPs and Google Prod IPs.
 
   Fields:
     cidrs: Network CIDRs define up to 10 external networks that could access
@@ -1537,6 +1758,38 @@ class MasterAuthorizedNetworks(_messages.Message):
 
   cidrs = _messages.MessageField('CIDR', 1, repeated=True)
   enabled = _messages.BooleanField(2)
+
+
+class MasterAuthorizedNetworksConfig(_messages.Message):
+  """Master authorized networks is a Beta feature. Configuration options for
+  the master authorized networks feature. Enabled master authorized networks
+  will disallow all external traffic to access Kubernetes master through HTTPS
+  except traffic from the given CIDR blocks, Google Compute Engine Public IPs
+  and Google Prod IPs.
+
+  Fields:
+    cidrBlocks: cidr_blocks define up to 10 external networks that could
+      access Kubernetes master through HTTPS.
+    enabled: Whether or not master authorized networks is enabled.
+  """
+
+  cidrBlocks = _messages.MessageField('CidrBlock', 1, repeated=True)
+  enabled = _messages.BooleanField(2)
+
+
+class MetaV1Status(_messages.Message):
+  """MetaV1Status is a return value for calls that don't return other objects.
+  Should match Status in https://github.com/kubernetes/kubernetes/blob/master/
+  staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/generated.proto.
+
+  Fields:
+    code: Suggested HTTP return code for this status, 0 if not set. +optional
+    message: A human-readable description of the status of this operation.
+      +optional
+  """
+
+  code = _messages.IntegerField(1, variant=_messages.Variant.INT32)
+  message = _messages.StringField(2)
 
 
 class NetworkPolicy(_messages.Message):
@@ -1555,10 +1808,10 @@ class NetworkPolicy(_messages.Message):
     """The selected network policy provider.
 
     Values:
-      UNKNOWN: Not set
+      PROVIDER_UNSPECIFIED: Not set
       CALICO: Tigera (Calico Felix).
     """
-    UNKNOWN = 0
+    PROVIDER_UNSPECIFIED = 0
     CALICO = 1
 
   enabled = _messages.BooleanField(1)
@@ -1596,6 +1849,7 @@ class NodeConfig(_messages.Message):
       size is 100GB.
     diskType: Type of the disk attached to each node (e.g. 'pd-standard' or
       'pd-ssd')  If unspecified, the default disk type is 'pd-standard'
+      Currently restricted because of b/36071127#comment27
     imageType: The image type to use for this node. Note that for a given
       image type, the latest version of it will be used.
     labels: The map of Kubernetes labels (key/value pairs) to be applied to
@@ -1841,99 +2095,6 @@ class NonResourceAttributes(_messages.Message):
 
   path = _messages.StringField(1)
   verb = _messages.StringField(2)
-
-
-class ObjectMeta(_messages.Message):
-  """This maps to the "apimachinery/pkg/apis/meta/v1".ObjectMeta type,
-  although not all fields are populated and represented here. TODO
-  (b/30563544, b/34947157): Remove unused fields.  Currently, if a request
-  includes metadata fields that aren't explicitly modeled here, the caller
-  will receive a 400 response instead of ignoring the unrecognized fields. We
-  should consider following b/28297888 to enable "ignore_unknown_fields" in
-  order to make this less brittle.
-
-  Messages:
-    AnnotationsValue: Unstructured key-value pairs that are not queryable and
-      should be preserved when modifying objects.
-    LabelsValue: Key-value pairs that may be used to scope and select
-      individual resources.
-
-  Fields:
-    annotations: Unstructured key-value pairs that are not queryable and
-      should be preserved when modifying objects.
-    creationTimestamp: Timestamp representing the server time when this object
-      was created.
-    generateName: An optional prefix, used by the server, to generate a unique
-      name ONLY IF the name field has not been provided.
-    labels: Key-value pairs that may be used to scope and select individual
-      resources.
-    name: The name of the resource, unique within a namespace.
-    resourceVersion: An opaque value that represents the internal version of
-      this object that can be used by clients to determine when objects have
-      changed.
-    selfLink: A URL representing this object.
-    uid: A unique identifier in time and space for this object.
-  """
-
-  @encoding.MapUnrecognizedFields('additionalProperties')
-  class AnnotationsValue(_messages.Message):
-    """Unstructured key-value pairs that are not queryable and should be
-    preserved when modifying objects.
-
-    Messages:
-      AdditionalProperty: An additional property for a AnnotationsValue
-        object.
-
-    Fields:
-      additionalProperties: Additional properties of type AnnotationsValue
-    """
-
-    class AdditionalProperty(_messages.Message):
-      """An additional property for a AnnotationsValue object.
-
-      Fields:
-        key: Name of the additional property.
-        value: A string attribute.
-      """
-
-      key = _messages.StringField(1)
-      value = _messages.StringField(2)
-
-    additionalProperties = _messages.MessageField('AdditionalProperty', 1, repeated=True)
-
-  @encoding.MapUnrecognizedFields('additionalProperties')
-  class LabelsValue(_messages.Message):
-    """Key-value pairs that may be used to scope and select individual
-    resources.
-
-    Messages:
-      AdditionalProperty: An additional property for a LabelsValue object.
-
-    Fields:
-      additionalProperties: Additional properties of type LabelsValue
-    """
-
-    class AdditionalProperty(_messages.Message):
-      """An additional property for a LabelsValue object.
-
-      Fields:
-        key: Name of the additional property.
-        value: A string attribute.
-      """
-
-      key = _messages.StringField(1)
-      value = _messages.StringField(2)
-
-    additionalProperties = _messages.MessageField('AdditionalProperty', 1, repeated=True)
-
-  annotations = _messages.MessageField('AnnotationsValue', 1)
-  creationTimestamp = _messages.StringField(2)
-  generateName = _messages.StringField(3)
-  labels = _messages.MessageField('LabelsValue', 4)
-  name = _messages.StringField(5)
-  resourceVersion = _messages.StringField(6)
-  selfLink = _messages.StringField(7)
-  uid = _messages.StringField(8)
 
 
 class Operation(_messages.Message):
@@ -2506,9 +2667,16 @@ class UpdateNodePoolRequest(_messages.Message):
 
 class UserInfo(_messages.Message):
   """The attributes of an authenticated user. This should match the UserInfo
-  struct in pkg/apis/authentication.k8s.io/v1beta1/types.go
+  struct in pkg/apis/authentication.k8s.io/v1beta1/types.go  TODO(b/62143841)
+  Convert token authenticator to use v1 types and use AuthnV1UserInfo.
+
+  Messages:
+    ExtraValue: Any additional information provided by the authenticator to be
+      passed to the authorizer.
 
   Fields:
+    extra: Any additional information provided by the authenticator to be
+      passed to the authorizer.
     groups: Groups that this user is a part of. This is not currently filled
       in for GKE.
     uid: A unique identifier (across time) for the user. This is not currently
@@ -2517,9 +2685,35 @@ class UserInfo(_messages.Message):
       associated with the GAIA identity of the user.
   """
 
-  groups = _messages.StringField(1, repeated=True)
-  uid = _messages.StringField(2)
-  username = _messages.StringField(3)
+  @encoding.MapUnrecognizedFields('additionalProperties')
+  class ExtraValue(_messages.Message):
+    """Any additional information provided by the authenticator to be passed
+    to the authorizer.
+
+    Messages:
+      AdditionalProperty: An additional property for a ExtraValue object.
+
+    Fields:
+      additionalProperties: Additional properties of type ExtraValue
+    """
+
+    class AdditionalProperty(_messages.Message):
+      """An additional property for a ExtraValue object.
+
+      Fields:
+        key: Name of the additional property.
+        value: A ExtraValue attribute.
+      """
+
+      key = _messages.StringField(1)
+      value = _messages.MessageField('ExtraValue', 2)
+
+    additionalProperties = _messages.MessageField('AdditionalProperty', 1, repeated=True)
+
+  extra = _messages.MessageField('ExtraValue', 1)
+  groups = _messages.StringField(2, repeated=True)
+  uid = _messages.StringField(3)
+  username = _messages.StringField(4)
 
 
 encoding.AddCustomJsonFieldMapping(

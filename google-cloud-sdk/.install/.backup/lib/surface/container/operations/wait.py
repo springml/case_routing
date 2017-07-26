@@ -45,7 +45,8 @@ class Wait(base.Command):
     """
     adapter = self.context['api_adapter']
 
-    operation_ref = adapter.ParseOperation(args.operation_id)
+    operation_ref = adapter.ParseOperation(args.operation_id,
+                                           getattr(args, 'region', None))
 
     try:
       # Try fetching it first to ensure we have permissions and the op exists.

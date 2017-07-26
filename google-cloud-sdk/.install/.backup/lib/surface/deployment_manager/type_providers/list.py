@@ -16,14 +16,14 @@
 
 from apitools.base.py import list_pager
 
-from googlecloudsdk.api_lib.deployment_manager import dm_v2_util
+from googlecloudsdk.api_lib.deployment_manager import dm_api_util
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.calliope import base
-from googlecloudsdk.command_lib.deployment_manager import dm_base
-from googlecloudsdk.command_lib.deployment_manager import dm_beta_base
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
-class List(base.ListCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2BETA)
+class List(base.ListCommand, dm_base.DmCommand):
   """List type providers in a project.
 
   Prints a list of the configured type providers.
@@ -58,10 +58,10 @@ class List(base.ListCommand):
     """
     project = dm_base.GetProject()
 
-    request = (dm_beta_base.GetMessages().
+    request = (self.messages.
                DeploymentmanagerTypeProvidersListRequest(project=project))
-    return dm_v2_util.YieldWithHttpExceptions(
-        list_pager.YieldFromList(dm_beta_base.GetClient().typeProviders,
+    return dm_api_util.YieldWithHttpExceptions(
+        list_pager.YieldFromList(self.client.typeProviders,
                                  request,
                                  field='typeProviders',
                                  batch_size=args.page_size,

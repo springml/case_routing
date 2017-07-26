@@ -16,9 +16,10 @@ from googlecloudsdk.api_lib.cloudiot import devices
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iot import flags
 from googlecloudsdk.command_lib.iot import util
+from googlecloudsdk.core import log
 
 
-class Update(base.DescribeCommand):
+class Update(base.UpdateCommand):
   """Update a specific device configuration.
 
   This command updates the current configuration of the device.
@@ -41,4 +42,6 @@ class Update(base.DescribeCommand):
         args.device, registry=args.registry, region=args.region)
     data = util.ReadConfigData(args)
 
-    return client.ModifyConfig(device_ref, data, args.version_to_update)
+    response = client.ModifyConfig(device_ref, data, args.version_to_update)
+    log.UpdatedResource(device_ref.Name(), 'configuration for device')
+    return response

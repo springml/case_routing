@@ -27,8 +27,8 @@ from googlecloudsdk.core import properties
 class List(base.ListCommand):
   """Lists all jobs in a particular project.
 
-  By default, jobs in the current project are listed; this can be overridden
-  with the gcloud --project flag.
+  By default, 100 jobs in the current project are listed; this can be overridden
+  with the gcloud --project flag, and the --limit flag.
 
   ## EXAMPLES
 
@@ -38,13 +38,14 @@ class List(base.ListCommand):
 
   """
 
-  DEFAULT_PAGE_SIZE_ = 1000
-
   @staticmethod
   def Args(parser):
     """Register flags for this command."""
 
     base.ASYNC_FLAG.RemoveFromParser(parser)
+    # Set manageable limits on number of jobs that are listed.
+    base.LIMIT_FLAG.SetDefault(parser, 100)
+    base.PAGE_SIZE_FLAG.SetDefault(parser, 20)
 
     # Flags for filtering jobs.
     parser.add_argument(
@@ -114,7 +115,7 @@ class List(base.ListCommand):
         service=apis.Jobs.GetService(),
         request=request,
         limit=args.limit,
-        batch_size=args.page_size or self.DEFAULT_PAGE_SIZE_,
+        batch_size=args.page_size,
         field='jobs',
         batch_size_attribute='pageSize',
         predicate=filter_predicate)

@@ -14,14 +14,15 @@
 
 """'types describe' command."""
 
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.calliope import base
-from googlecloudsdk.command_lib.deployment_manager import dm_beta_base
 from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
-class Describe(base.DescribeCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2BETA)
+class Describe(base.DescribeCommand, dm_base.DmCommand):
   """Describe a type."""
 
   detailed_help = {
@@ -65,24 +66,23 @@ class Describe(base.DescribeCommand):
       InvalidArgumentException: The requested type provider type could not
           be found.
     """
-    messages = dm_beta_base.GetMessages()
-    client = dm_beta_base.GetClient()
-    type_provider_ref = dm_beta_base.GetResources().Parse(
+    type_provider_ref = self.resources.Parse(
         args.provider,
         params={'project': properties.VALUES.core.project.GetOrFail},
         collection='deploymentmanager.typeProviders')
-    request = messages.DeploymentmanagerTypeProvidersGetTypeRequest(
+    request = self.messages.DeploymentmanagerTypeProvidersGetTypeRequest(
         project=type_provider_ref.project,
         type=args.name,
         typeProvider=type_provider_ref.typeProvider)
-    type_message = client.typeProviders.GetType(request)
+    type_message = self.client.typeProviders.GetType(request)
 
     composite_type_message = 'This is not a composite type.'
     if type_provider_ref.typeProvider == 'composite':
-      composite_request = messages.DeploymentmanagerCompositeTypesGetRequest(
-          project=type_provider_ref.project,
-          compositeType=args.name)
-      composite_type_message = client.compositeTypes.Get(composite_request)
+      composite_request = (self.messages.
+                           DeploymentmanagerCompositeTypesGetRequest(
+                               project=type_provider_ref.project,
+                               compositeType=args.name))
+      composite_type_message = self.client.compositeTypes.Get(composite_request)
 
     log.status.Print('You can reference this type in Deployment Manager with '
                      '[{0}/{1}:{2}]'.format(type_provider_ref.project,

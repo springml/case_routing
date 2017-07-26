@@ -18,6 +18,9 @@ from googlecloudsdk.calliope import base
 
 # This group should remain in BETA only because all commands within it are
 # deprecated.
+@base.Deprecate(is_removed=True,
+                error=('This command group has been removed; '
+                       'please use `gcloud ml-engine versions` instead.'))
 @base.ReleaseTracks(base.ReleaseTrack.BETA)
 class Versions(base.Group):
   """Cloud ML Engine Versions commands."""

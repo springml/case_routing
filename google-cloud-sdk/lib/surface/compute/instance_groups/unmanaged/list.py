@@ -14,14 +14,16 @@
 """Command for listing unmanaged instance groups."""
 from googlecloudsdk.api_lib.compute import base_classes
 from googlecloudsdk.api_lib.compute import instance_groups_utils
+from googlecloudsdk.api_lib.compute import lister
+from googlecloudsdk.api_lib.compute import utils
+from googlecloudsdk.calliope import base
 
 
-class List(base_classes.ZonalLister):
+class List(base.ListCommand):
   """List Google Compute Engine unmanaged instance groups."""
 
   @staticmethod
   def Args(parser):
-    base_classes.ZonalLister.Args(parser)
     parser.display_info.AddFormat("""
           table(
             name,
@@ -32,33 +34,29 @@ class List(base_classes.ZonalLister):
             size:label=INSTANCES
           )
     """)
+    parser.display_info.AddUriFunc(utils.MakeGetUriFunc())
+    lister.AddZonalListerArgs(parser)
 
-  def GetResources(self, args, errors):
-    resources = super(List, self).GetResources(args, errors)
-    return (resource for resource in resources if resource.zone)
+  def Run(self, args):
+    holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
+    client = holder.client
 
-  def ComputeDynamicProperties(self, args, items):
-    mode = (
-        instance_groups_utils.InstanceGroupFilteringMode.ONLY_UNMANAGED_GROUPS)
+    request_data = lister.ParseZonalFlags(args, holder.resources)
+
+    list_implementation = lister.ZonalLister(
+        client, client.apitools_client.instanceGroups)
+
+    results = lister.Invoke(request_data, list_implementation)
+    results = (resource for resource in results if 'zone' in resource)
+
     return instance_groups_utils.ComputeInstanceGroupManagerMembership(
-        compute=self.compute,
-        resources=self.resources,
-        http=self.http,
-        batch_url=self.batch_url,
-        items=items,
-        filter_mode=mode)
-
-  def Collection(self):
-    """Override the default collection from the base class."""
-    return None
-
-  @property
-  def service(self):
-    return self.compute.instanceGroups
-
-  @property
-  def resource_type(self):
-    return 'instanceGroups'
+        compute=client.apitools_client,
+        resources=holder.resources,
+        http=client.apitools_client.http,
+        batch_url=client.batch_url,
+        items=results,
+        filter_mode=instance_groups_utils.InstanceGroupFilteringMode.
+        ONLY_UNMANAGED_GROUPS)
 
 
 List.detailed_help = base_classes.GetZonalListerHelp('unmanaged '

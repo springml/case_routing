@@ -14,10 +14,10 @@
 
 """types delete command."""
 
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.api_lib.deployment_manager import exceptions
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.deployment_manager import composite_types
-from googlecloudsdk.command_lib.deployment_manager import dm_beta_base
 from googlecloudsdk.command_lib.deployment_manager import dm_write
 from googlecloudsdk.command_lib.deployment_manager import flags
 from googlecloudsdk.core import log
@@ -31,7 +31,8 @@ def LogResource(request, async):
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
-class Delete(base.DeleteCommand):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2BETA)
+class Delete(base.DeleteCommand, dm_base.DmCommand):
   """Delete a composite type."""
 
   detailed_help = {
@@ -72,13 +73,16 @@ class Delete(base.DeleteCommand):
       if not console_io.PromptContinue(message=prompt_message, default=False):
         raise exceptions.OperationError('Deletion aborted by user.')
 
-    request = (dm_beta_base.GetMessages().
+    request = (self.messages.
                DeploymentmanagerCompositeTypesDeleteRequest(
                    project=composite_type_ref.project,
                    compositeType=args.name))
 
-    dm_write.Execute(request,
+    dm_write.Execute(self.client,
+                     self.messages,
+                     self.resources,
+                     request,
                      args.async,
-                     dm_beta_base.GetClient().compositeTypes.Delete,
+                     self.client.compositeTypes.Delete,
                      LogResource)
 

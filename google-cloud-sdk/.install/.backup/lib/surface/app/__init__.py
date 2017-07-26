@@ -36,21 +36,30 @@ DETAILED_HELP = {
         found here: https://cloud.google.com/appengine/docs/
         """,
     'EXAMPLES': """\
-        To run your app locally in the development application server, run:
+        To run your app locally in the development application server
+        to simulate your application running in production App Engine with
+        sandbox restrictions and services provided by App Engine SDK libraries,
+        use the `dev_appserver.py` command and your app's `app.yaml`
+        configuration file to run:
 
-          $ dev_appserver.py DEPLOYABLES
+          $ dev_appserver.py ~/my_app/app.yaml
 
-        To create a new deployment of one or more services, run:
+        For an in-depth look into using the local development server, follow
+        this guide : https://cloud.google.com/appengine/docs/standard/python/tools/using-local-server.
 
-          $ {command} deploy DEPLOYABLES
+        To deploy the code and configuration of your app to the App Engine
+        server, run:
 
-        To list your existing deployments, run:
+          $ {command} deploy ~/my_app/app.yaml
+
+        To list all versions of all services of your existing deployments, run:
 
           $ {command} versions list
 
-        To generate config files for your source directory:
+        To generate all relevant config files for `~/my_app` (or emit an error
+        message if the directory contents are not recognized), run:
 
-          $ {command} gen-config
+          $ {command} gen-config ~/my_app
         """
 }
 

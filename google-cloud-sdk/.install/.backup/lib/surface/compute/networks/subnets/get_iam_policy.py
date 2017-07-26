@@ -19,7 +19,7 @@ from googlecloudsdk.command_lib.compute.networks.subnets import flags
 
 
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA, base.ReleaseTrack.BETA)
-class GetIamPolicy(base.DescribeCommand):
+class GetIamPolicy(base.ListCommand):
   """Get the IAM Policy for a Google Compute Engine subnetwork.
 
   *{command}* displays the Iam Policy associated with a Google Compute Engine
@@ -33,6 +33,7 @@ class GetIamPolicy(base.DescribeCommand):
     GetIamPolicy.SUBNETWORK_ARG = flags.SubnetworkArgument()
     GetIamPolicy.SUBNETWORK_ARG.AddArgument(
         parser, operation_type='describe the IAM Policy of')
+    base.URI_FLAG.RemoveFromParser(parser)
 
   def Run(self, args):
     holder = base_classes.ComputeApiHolder(self.ReleaseTrack())

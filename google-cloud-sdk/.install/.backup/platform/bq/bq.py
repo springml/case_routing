@@ -663,7 +663,10 @@ class Client(object):
     # for the case of being loaded as a library.
     _ProcessBigqueryrc()
     bigquery_client.ConfigurePythonLogger(FLAGS.apilog)
-    credentials = _GetCredentialsFromFlags()
+    if 'credentials' in kwds:
+      credentials = kwds.pop('credentials')
+    else:
+      credentials = _GetCredentialsFromFlags()
     assert credentials is not None
     client_args = {}
     global_args = ('credential_file', 'job_property',
@@ -908,7 +911,7 @@ class BigqueryCmd(NewCmd):
       print ' '.join(sorted(set(f for f in cmd_flags if f)))
 
     if self._NeedsInit():
-      appcommands.GetCommandByName('init').Run([])
+      appcommands.GetCommandByName('init').Run(['init'])
     return super(BigqueryCmd, self).Run(argv)
 
   def RunSafely(self, args, kwds):
@@ -1837,7 +1840,8 @@ class _List(BigqueryCmd):  # pylint: disable=missing-docstring
     flags.DEFINE_boolean(
         'all', None,
         'Show all results. For jobs, will show jobs from all users. For '
-        'datasets, will list hidden datasets.',
+        'datasets, will list hidden datasets.'
+        '',
         short_name='a', flag_values=fv)
     flags.DEFINE_boolean(
         'all_jobs', None,
@@ -1863,16 +1867,18 @@ class _List(BigqueryCmd):  # pylint: disable=missing-docstring
         'page_token', None,
         'Start listing from this page token.',
         short_name='k', flag_values=fv)
-    flags.DEFINE_string('filter',
-                        None,
-                        'Show datasets that match the filter expression. '
-                        'Use a space-separated list of label keys and values '
-                        'in the form "labels.key:value". Datasets must match '
-                        'all provided filter expressions. See '
-                        # pylint: disable=g-line-too-long
-                        'https://cloud.google.com/bigquery/docs/labeling-datasets#filtering_datasets_using_labels'
-                        'for details',
-                        flag_values=fv)
+    flags.DEFINE_string(
+        'filter',
+        None,
+        'Show datasets that match the filter expression. '
+        'Use a space-separated list of label keys and values '
+        'in the form "labels.key:value". Datasets must match '
+        'all provided filter expressions. See '
+        'https://cloud.google.com/bigquery/docs/labeling-datasets'
+        '#filtering_datasets_using_labels '
+        'for details'
+        ,
+        flag_values=fv)
     self._ProcessCommandRc(fv)
 
   def RunWithArgs(self, identifier=''):
@@ -1937,11 +1943,10 @@ class _List(BigqueryCmd):  # pylint: disable=missing-docstring
       reference = client.GetProjectReference(identifier)
       _Typecheck(reference, ProjectReference,
                  'Cannot determine job(s) associated with "%s"' % (identifier,))
-      project_reference = client.GetProjectReference(identifier)
       BigqueryClient.ConfigureFormatter(formatter, JobReference)
       results = map(  # pylint: disable=g-long-lambda
           client.FormatJobInfo,
-          client.ListJobs(reference=project_reference,
+          client.ListJobs(reference=reference,
                           max_results=self.max_results,
                           all_users=self.a, page_token=page_token))
     elif self.p or reference is None:
@@ -1970,6 +1975,8 @@ class _List(BigqueryCmd):  # pylint: disable=missing-docstring
     formatter.Print()
 
 
+
+
 class _Delete(BigqueryCmd):
   usage = """rm [-f] [-r] [(-d|-t)] <identifier>"""
 
@@ -1994,7 +2001,7 @@ class _Delete(BigqueryCmd):
     self._ProcessCommandRc(fv)
 
   def RunWithArgs(self, identifier):
-    """Delete the dataset or table described by identifier.
+    """Delete the dataset, table, or transfer config described by identifier.
 
     Always requires an identifier, unlike the show and ls commands.
     By default, also requires confirmation before deleting. Supports
@@ -2033,7 +2040,9 @@ class _Delete(BigqueryCmd):
       if ((isinstance(reference, DatasetReference) and
            client.DatasetExists(reference)) or
           (isinstance(reference, TableReference)
-           and client.TableExists(reference))):
+           and client.TableExists(reference)) or
+          (isinstance(reference, TransferConfigReference)
+           and client.TransferExists(reference))):
         if 'y' != _PromptYN('rm: remove %r? (y/N) ' % (reference,)):
           print 'NOT deleting %r, exiting.' % (reference,)
           return 0
@@ -2233,7 +2242,7 @@ class _Make(BigqueryCmd):
 
   def RunWithArgs(self, identifier='', schema=''):
     # pylint: disable=g-doc-exception
-    """Create a dataset, table or view with this name.
+    """Create a dataset, table, view, or transfer configuration with this name.
 
     See 'bq help load' for more information on specifying the schema.
 
@@ -2245,7 +2254,8 @@ class _Make(BigqueryCmd):
       bq mk --view='select 1 as num' new_dataset.newview
          (--view_udf_resource=path/to/file.js)
       bq mk -d --data_location=EU new_dataset
-
+      bq mk -tr -st={start_time} -et={end_time}
+      projects/{projectId}/transferConfigs/{config_id}
     """
 
     client = Client.Get()
@@ -2255,7 +2265,6 @@ class _Make(BigqueryCmd):
     if ValidateAtMostOneSelected(self.schema, self.view):
       raise app.UsageError('Cannot specify more than one of'
                            ' --schema or --view.')
-
     if self.t:
       reference = client.GetTableReference(identifier)
     elif self.view:
@@ -2429,7 +2438,7 @@ class _Update(BigqueryCmd):
 
   def RunWithArgs(self, identifier='', schema=''):
     # pylint: disable=g-doc-exception
-    """Updates a dataset, table or view with this name.
+    """Updates a dataset, table, view or transfer configuration with this name.
 
     See 'bq help load' for more information on specifying the schema.
 
@@ -2541,6 +2550,8 @@ class _Update(BigqueryCmd):
                          time_partitioning=time_partitioning)
 
       print "%s '%s' successfully updated." % (object_name, reference,)
+
+
 
 
 def _UpdateDataset(
@@ -3195,7 +3206,7 @@ class _Init(BigqueryCmd):
     super(_Init, self).__init__(name, fv)
     self.surface_in_shell = False
     flags.DEFINE_boolean(
-        'delete_credentials', None,
+        'delete_credentials', False,
         'If specified, the credentials file associated with this .bigqueryrc '
         'file is deleted.',
         flag_values=fv)

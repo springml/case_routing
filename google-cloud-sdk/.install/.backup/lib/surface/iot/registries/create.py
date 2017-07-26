@@ -16,6 +16,7 @@ from googlecloudsdk.api_lib.cloudiot import registries
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iot import flags
 from googlecloudsdk.command_lib.iot import util
+from googlecloudsdk.core import log
 
 
 class Create(base.CreateCommand):
@@ -37,7 +38,9 @@ class Create(base.CreateCommand):
                                             client=client)
     pubsub_topic_ref = util.ParsePubsubTopic(args.pubsub_topic)
 
-    return client.Create(
+    response = client.Create(
         location_ref, args.id,
         pubsub_topic=pubsub_topic_ref,
         mqtt_config_state=mqtt_state)
+    log.CreatedResource(args.id, 'registry')
+    return response

@@ -161,8 +161,10 @@ LONG_RETRY_WARN_SEC = 10
 SECONDS_PER_DAY = 86400L
 
 global manager  # pylint: disable=global-at-module-level
-certs_file_lock = threading.Lock()
-configured_certs_files = []
+# Single certs file for use across all processes.
+configured_certs_file = None
+# Temporary certs file for cleanup upon exit.
+temp_certs_file = None
 
 
 def _GenerateSuffixRegex():
@@ -555,8 +557,8 @@ def GetGsutilClientIdAndSecret():
   Returns:
     Tuple of strings (client ID, secret).
   """
-
-  if os.environ.get('CLOUDSDK_WRAPPER') == '1':
+  if (os.environ.get('CLOUDSDK_WRAPPER') == '1' and
+      os.environ.get('CLOUDSDK_CORE_PASS_CREDENTIALS_TO_GSUTIL') == '1'):
     # Cloud SDK installs have a separate client ID / secret.
     return ('32555940559.apps.googleusercontent.com',  # Cloud SDK client ID
             'ZmssLNjJy2998hD4CTg2ejr2')                # Cloud SDK secret
@@ -698,21 +700,18 @@ def GetBotoConfigFileList():
   config_paths = boto.pyami.config.BotoConfigLocations
   if 'AWS_CREDENTIAL_FILE' in os.environ:
     config_paths.append(os.environ['AWS_CREDENTIAL_FILE'])
-  config_files = {}
-  for config_path in config_paths:
-    if os.path.exists(config_path):
-      config_files[config_path] = 1
-  cf_list = []
-  for config_file in config_files:
-    cf_list.append(config_file)
-  return cf_list
+  return [cfg_path for cfg_path in config_paths if os.path.exists(cfg_path)]
 
 
 def GetCertsFile():
+  return configured_certs_file
+
+
+def ConfigureCertsFile():
   """Configures and returns the CA Certificates file.
 
-  If one is already configured, use it. Otherwise, amend the configuration
-  (in boto.config) to use the cert roots distributed with gsutil.
+  If one is already configured, use it. Otherwise, use the cert roots
+  distributed with gsutil.
 
   Returns:
     string filename of the certs file to use.
@@ -725,38 +724,33 @@ def GetCertsFile():
   if certs_file == 'system':
     return None
   if not certs_file:
-    with certs_file_lock:
-      if configured_certs_files:
-        disk_certs_file = configured_certs_files[0]
-      else:
-        disk_certs_file = os.path.abspath(
-            os.path.join(gslib.GSLIB_DIR, 'data', 'cacerts.txt'))
-        if not os.path.exists(disk_certs_file):
-          # If the file is not present on disk, this means the gslib module
-          # doesn't actually exist on disk anywhere. This can happen if it's
-          # being imported from a zip file. Unfortunately, we have to copy the
-          # certs file to a local temp file on disk because the underlying SSL
-          # socket requires it to be a filesystem path.
-          certs_data = pkgutil.get_data('gslib', 'data/cacerts.txt')
-          if not certs_data:
-            raise CommandException('Certificates file not found. Please '
-                                   'reinstall gsutil from scratch')
-          fd, fname = tempfile.mkstemp(suffix='.txt', prefix='gsutil-cacerts')
-          f = os.fdopen(fd, 'w')
-          f.write(certs_data)
-          f.close()
-          configured_certs_files.append(fname)
-          disk_certs_file = fname
-      certs_file = disk_certs_file
+    global configured_certs_file, temp_certs_file
+    if not configured_certs_file:
+      configured_certs_file = os.path.abspath(
+          os.path.join(gslib.GSLIB_DIR, 'data', 'cacerts.txt'))
+      if not os.path.exists(configured_certs_file):
+        # If the file is not present on disk, this means the gslib module
+        # doesn't actually exist on disk anywhere. This can happen if it's
+        # being imported from a zip file. Unfortunately, we have to copy the
+        # certs file to a local temp file on disk because the underlying SSL
+        # socket requires it to be a filesystem path.
+        certs_data = pkgutil.get_data('gslib', 'data/cacerts.txt')
+        if not certs_data:
+          raise CommandException('Certificates file not found. Please '
+                                 'reinstall gsutil from scratch')
+        fd, fname = tempfile.mkstemp(suffix='.txt', prefix='gsutil-cacerts')
+        f = os.fdopen(fd, 'w')
+        f.write(certs_data)
+        f.close()
+        temp_certs_file = fname
+        configured_certs_file = temp_certs_file
+    certs_file = configured_certs_file
   return certs_file
 
 
 def GetCleanupFiles():
   """Returns a list of temp files to delete (if possible) when program exits."""
-  cleanup_files = []
-  if configured_certs_files:
-    cleanup_files += configured_certs_files
-  return cleanup_files
+  return [temp_certs_file] if temp_certs_file else []
 
 
 def ProxyInfoFromEnvironmentVar(proxy_env_var):
@@ -1141,6 +1135,28 @@ def GetValueFromObjectCustomMetadata(obj_metadata, search_key,
     return False, default_value
 
 
+def InsistAscii(string, message):
+  if not all(ord(c) < 128 for c in string):
+    raise CommandException(message)
+
+
+def InsistAsciiHeader(header):
+  InsistAscii(header, 'Invalid non-ASCII header (%s).' % header)
+
+
+def InsistAsciiHeaderValue(header, value):
+  InsistAscii(
+      value,
+      'Invalid non-ASCII value (%s) was provided for header %s.\nOnly ASCII '
+      'characters are allowed in headers other than x-goog-meta- and '
+      'x-amz-meta- headers' % (value, header))
+
+
+def IsCustomMetadataHeader(header):
+  """Returns true if header (which must be lowercase) is a custom header."""
+  return header.startswith('x-goog-meta-') or header.startswith('x-amz-meta-')
+
+
 # pylint: disable=too-many-statements
 def PrintFullInfoAboutObject(bucket_listing_ref, incl_acl=True):
   """Print full info for given object (like what displays for gsutil ls -L).
@@ -1177,6 +1193,11 @@ def PrintFullInfoAboutObject(bucket_listing_ref, incl_acl=True):
   if obj.updated:
     print MakeMetadataLine(
         'Update time', obj.updated.strftime('%a, %d %b %Y %H:%M:%S GMT'))
+  if (obj.timeStorageClassUpdated and
+      obj.timeStorageClassUpdated != obj.timeCreated):
+    print MakeMetadataLine(
+        'Storage class update time',
+        obj.timeStorageClassUpdated.strftime('%a, %d %b %Y %H:%M:%S GMT'))
   if obj.storageClass:
     print MakeMetadataLine('Storage class', obj.storageClass)
   if obj.cacheControl:

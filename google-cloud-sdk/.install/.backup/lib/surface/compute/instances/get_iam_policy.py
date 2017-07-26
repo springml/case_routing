@@ -21,7 +21,7 @@ from googlecloudsdk.command_lib.compute.instances import flags
 
 @base.Hidden
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)
-class GetIamPolicy(base.DescribeCommand):
+class GetIamPolicy(base.ListCommand):
   """Get the IAM Policy for a Google Compute Engine instance.
 
   *{command}* displays the Iam Policy associated with a Google Compute Engine
@@ -32,6 +32,7 @@ class GetIamPolicy(base.DescribeCommand):
   def Args(parser):
     flags.INSTANCE_ARG.AddArgument(
         parser, operation_type='describe the IAM Policy of')
+    base.URI_FLAG.RemoveFromParser(parser)
 
   def Run(self, args):
     holder = base_classes.ComputeApiHolder(self.ReleaseTrack())

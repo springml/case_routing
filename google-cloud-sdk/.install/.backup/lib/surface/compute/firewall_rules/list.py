@@ -36,19 +36,6 @@ class List(base_classes.GlobalLister):
 List.detailed_help = base_classes.GetGlobalListerHelp(RESOURCE_TYPE)
 
 
-@base.ReleaseTracks(base.ReleaseTrack.BETA)
-class BetaList(List):
-  """List Google Compute Engine firewall rules."""
-
-  def Run(self, args):
-    log.status.Print(flags.LIST_NOTICE)
-
-    return super(BetaList, self).Run(args)
-
-  def Collection(self):
-    return 'compute.firewalls.alpha'
-
-
 DETAILED_HELP = {
     'brief':
         'List Google Compute Engine ' + RESOURCE_TYPE,
@@ -72,19 +59,19 @@ EXAMPLE_FORMAT = """\
             $ {{command}} --format="{1}"
     """
 
+
+@base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
+class BetaList(List):
+  """List Google Compute Engine firewall rules."""
+
+  def Run(self, args):
+    log.status.Print(flags.LIST_NOTICE)
+    return super(BetaList, self).Run(args)
+
+  def Collection(self):
+    return 'compute.firewalls.beta'
+
+
 BetaList.detailed_help = DETAILED_HELP.copy()
 BetaList.detailed_help['EXAMPLES'] = EXAMPLE_FORMAT.format(
     RESOURCE_TYPE, flags.LIST_WITH_ALL_FIELDS_FORMAT_BETA)
-
-
-@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
-class AlphaList(BetaList):
-  """List Google Compute Engine firewall rules."""
-
-  def Collection(self):
-    return 'compute.firewalls.alpha'
-
-
-AlphaList.detailed_help = DETAILED_HELP.copy()
-AlphaList.detailed_help['EXAMPLES'] = EXAMPLE_FORMAT.format(
-    RESOURCE_TYPE, flags.LIST_WITH_ALL_FIELDS_FORMAT_ALPHA)

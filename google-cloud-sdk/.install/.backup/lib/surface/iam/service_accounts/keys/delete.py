@@ -26,6 +26,7 @@ class Delete(base_classes.BaseIamCommand):
   def Args(parser):
     parser.add_argument('--iam-account',
                         required=True,
+                        type=iam_util.GetIamAccountFormatValidator(),
                         help='The service account whose key to '
                         'delete.')
 

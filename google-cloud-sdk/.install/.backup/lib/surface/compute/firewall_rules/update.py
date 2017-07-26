@@ -152,17 +152,17 @@ class UpdateFirewall(base.UpdateCommand):
     return new_firewall
 
 
-@base.ReleaseTracks(base.ReleaseTrack.BETA)
+@base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
 class BetaUpdateFirewall(UpdateFirewall):
   """Update a firewall rule.
 
   *{command}* is used to update firewall rules that allow/deny
   incoming/outgoing traffic. The firewall rule will only be updated for
-  arguments that are specifically passed.  Other attributes will remain
+  arguments that are specifically passed. Other attributes will remain
   unaffected.
   """
   with_egress_firewall = True
-  with_service_account = False
+  with_service_account = True
 
   def ValidateArgument(self, messages, args):
     super(BetaUpdateFirewall, self).ValidateArgument(messages, args)
@@ -177,7 +177,9 @@ class BetaUpdateFirewall(UpdateFirewall):
     firewalls_utils.AddCommonArgs(
         parser,
         for_update=True,
-        with_egress_support=cls.with_egress_firewall)
+        with_egress_support=cls.with_egress_firewall,
+        with_service_account=cls.with_service_account)
+    firewalls_utils.AddArgsForServiceAccount(parser, for_update=True)
 
   def Modify(self, client, args, existing, cleared_fields):
     """Returns a modified Firewall message."""
@@ -208,41 +210,6 @@ class BetaUpdateFirewall(UpdateFirewall):
       new_firewall.destinationRanges = []
       cleared_fields.append('destinationRanges')
 
-    return new_firewall
-
-
-@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
-class AlphaUpdateFirewall(BetaUpdateFirewall):
-  """Update a firewall rule.
-
-  *{command}* is used to update firewall rules that allow/deny
-  incoming/outgoing traffic. The firewall rule will only be updated for
-  arguments that are specifically passed. Other attributes will remain
-  unaffected.
-  """
-  with_egress_firewall = True
-  with_service_account = True
-
-  def ValidateArgument(self, messages, args):
-    super(AlphaUpdateFirewall, self).ValidateArgument(messages, args)
-
-  @classmethod
-  def Args(cls, parser):
-    cls.FIREWALL_RULE_ARG = flags.FirewallRuleArgument()
-    cls.FIREWALL_RULE_ARG.AddArgument(parser, operation_type='update')
-    firewalls_utils.AddCommonArgs(
-        parser,
-        for_update=True,
-        with_egress_support=cls.with_egress_firewall,
-        with_service_account=cls.with_service_account)
-    firewalls_utils.AddArgsForServiceAccount(parser, for_update=True)
-
-  def Modify(self, client, args, existing, cleared_fields):
-    """Returns a modified Firewall message."""
-
-    new_firewall = super(AlphaUpdateFirewall, self).Modify(
-        client, args, existing, cleared_fields)
-
     if args.source_service_accounts:
       new_firewall.sourceServiceAccounts = args.source_service_accounts
     elif args.source_service_accounts is None:
@@ -258,5 +225,4 @@ class AlphaUpdateFirewall(BetaUpdateFirewall):
     else:
       new_firewall.targetServiceAccounts = []
       cleared_fields.append('targetServiceAccounts')
-
     return new_firewall

@@ -40,11 +40,8 @@ class List(base.ListCommand):
             billingEnabled
           )
     """)
-
-  @staticmethod
-  def GetUriCacheUpdateOp():
-    """No resource URIs."""
-    return None
+    # No resource URIs.
+    parser.display_info.AddCacheUpdater(None)
 
   def Run(self, args):
     """Run the list command."""

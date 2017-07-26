@@ -117,7 +117,6 @@ class StartUpdate(base.Command):
     for version in versions:
       if not version.name:
         version.name = igm_version_names.get(version.instanceTemplate)
-      version.tag = version.name
     minimal_action = (client.messages.InstanceGroupManagerUpdatePolicy.
                       MinimalActionValueValuesEnum.REPLACE)
 

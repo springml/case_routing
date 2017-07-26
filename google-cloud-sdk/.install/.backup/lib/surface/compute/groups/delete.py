@@ -13,6 +13,7 @@
 # limitations under the License.
 """Command for deleting groups."""
 from googlecloudsdk.api_lib.compute import base_classes
+from googlecloudsdk.api_lib.compute import request_helper
 from googlecloudsdk.api_lib.compute import utils
 from googlecloudsdk.calliope import base
 from googlecloudsdk.core import properties
@@ -42,7 +43,6 @@ class Delete(base.Command):
         help='The names of the groups to delete.')
 
   def Run(self, args):
-    compute_holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
     holder = base_classes.ComputeUserAccountsApiHolder(self.ReleaseTrack())
     client = holder.client
 
@@ -60,4 +60,13 @@ class Delete(base.Command):
           groupName=group_ref.Name())
       requests.append((client.groups, 'Delete', request))
 
-    return compute_holder.client.MakeRequests(requests)
+    errors = []
+    responses = list(request_helper.MakeRequests(
+        requests=requests,
+        http=client.http,
+        batch_url='https://www.googleapis.com/batch/',
+        errors=errors))
+    if errors:
+      utils.RaiseToolException(
+          errors, error_message='Could not fetch resource:')
+    return responses

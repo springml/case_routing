@@ -22,6 +22,7 @@ from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iam import iam_util
 from googlecloudsdk.command_lib.projects import flags
 from googlecloudsdk.command_lib.projects import util as command_lib_util
+from googlecloudsdk.command_lib.resource_manager import completers
 
 
 class RemoveIamPolicyBinding(base.Command):
@@ -38,7 +39,7 @@ class RemoveIamPolicyBinding(base.Command):
   def Args(parser):
     flags.GetProjectFlag('remove IAM policy binding from').AddToParser(parser)
     iam_util.AddArgsForRemoveIamPolicyBinding(
-        parser, 'id', 'cloudresourcemanager.projects')
+        parser, completer=completers.ProjectsIamRolesCompleter)
 
   @http_retry.RetryOnHttpStatus(httplib.CONFLICT)
   def Run(self, args):

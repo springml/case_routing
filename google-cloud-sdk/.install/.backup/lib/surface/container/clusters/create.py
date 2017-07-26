@@ -76,7 +76,9 @@ Multiple locations can be specified, separated by commas. For example:
       help='The name of the Google Compute Engine subnetwork '
       '(https://cloud.google.com/compute/docs/subnetworks) to which the '
       'cluster is connected. If specified, the cluster\'s network must be a '
-      '"custom subnet" network.')
+      '"custom subnet" network.'
+      ''
+      'Can not be used with the "--create-subnetwork" option.')
   parser.add_argument(
       '--disable-addons',
       type=arg_parsers.ArgList(
@@ -122,8 +124,11 @@ Available aliases are:
 Alias,URI
 {aliases}
 |========
+
+{scope_deprecation_msg}
 """.format(
-    aliases=compute_constants.ScopesForHelp()))
+    aliases=compute_constants.ScopesForHelp(),
+    scope_deprecation_msg=compute_constants.DEPRECATED_SCOPES_MESSAGES))
   parser.add_argument(
       '--enable-cloud-endpoints',
       action='store_true',
@@ -177,6 +182,52 @@ for examples.
 """)
   flags.AddClusterVersionFlag(parser)
   flags.AddDiskTypeFlag(parser, suppressed=True)
+  parser.display_info.AddFormat(util.CLUSTERS_FORMAT)
+
+
+def ParseCreateOptionsBase(args):
+  if not args.scopes:
+    args.scopes = []
+  cluster_ipv4_cidr = args.cluster_ipv4_cidr
+  enable_master_authorized_networks = args.enable_master_authorized_networks
+  return api_adapter.CreateClusterOptions(
+      node_machine_type=args.machine_type,
+      scopes=args.scopes,
+      enable_cloud_endpoints=args.enable_cloud_endpoints,
+      num_nodes=args.num_nodes,
+      additional_zones=args.additional_zones,
+      user=args.username,
+      password=args.password,
+      cluster_version=args.cluster_version,
+      network=args.network,
+      subnetwork=args.subnetwork,
+      cluster_ipv4_cidr=cluster_ipv4_cidr,
+      node_disk_size_gb=args.disk_size,
+      enable_cloud_logging=args.enable_cloud_logging,
+      enable_cloud_monitoring=args.enable_cloud_monitoring,
+      enable_kubernetes_alpha=args.enable_kubernetes_alpha,
+      disable_addons=args.disable_addons,
+      local_ssd_count=args.local_ssd_count,
+      tags=args.tags,
+      node_labels=args.node_labels,
+      enable_autoscaling=args.enable_autoscaling,
+      max_nodes=args.max_nodes,
+      min_nodes=args.min_nodes,
+      image_type=args.image_type,
+      max_nodes_per_pool=args.max_nodes_per_pool,
+      preemptible=args.preemptible,
+      enable_autorepair=args.enable_autorepair,
+      enable_autoupgrade=args.enable_autoupgrade,
+      service_account=args.service_account,
+      enable_master_authorized_networks=enable_master_authorized_networks,
+      master_authorized_networks=args.master_authorized_networks,
+      enable_legacy_authorization=args.enable_legacy_authorization,
+      labels=args.labels,
+      disk_type=args.disk_type,
+      enable_network_policy=args.enable_network_policy,
+      services_ipv4_cidr=args.services_ipv4_cidr,
+      enable_ip_alias=args.enable_ip_alias,
+      create_subnetwork=args.create_subnetwork)
 
 
 @base.ReleaseTracks(base.ReleaseTrack.GA)
@@ -197,47 +248,10 @@ class Create(base.CreateCommand):
     flags.AddEnableLegacyAuthorizationFlag(parser, hidden=True)
     flags.AddLabelsFlag(parser, suppressed=True)
     flags.AddNetworkPolicyFlags(parser, hidden=True)
+    flags.AddIPAliasFlags(parser, hidden=True)
 
   def ParseCreateOptions(self, args):
-    if not args.scopes:
-      args.scopes = []
-    cluster_ipv4_cidr = args.cluster_ipv4_cidr
-    enable_master_authorized_networks = args.enable_master_authorized_networks
-    return api_adapter.CreateClusterOptions(
-        node_machine_type=args.machine_type,
-        scopes=args.scopes,
-        enable_cloud_endpoints=args.enable_cloud_endpoints,
-        num_nodes=args.num_nodes,
-        additional_zones=args.additional_zones,
-        user=args.username,
-        password=args.password,
-        cluster_version=args.cluster_version,
-        network=args.network,
-        subnetwork=args.subnetwork,
-        cluster_ipv4_cidr=cluster_ipv4_cidr,
-        node_disk_size_gb=args.disk_size,
-        enable_cloud_logging=args.enable_cloud_logging,
-        enable_cloud_monitoring=args.enable_cloud_monitoring,
-        enable_kubernetes_alpha=args.enable_kubernetes_alpha,
-        disable_addons=args.disable_addons,
-        local_ssd_count=args.local_ssd_count,
-        tags=args.tags,
-        node_labels=args.node_labels,
-        enable_autoscaling=args.enable_autoscaling,
-        max_nodes=args.max_nodes,
-        min_nodes=args.min_nodes,
-        image_type=args.image_type,
-        max_nodes_per_pool=args.max_nodes_per_pool,
-        preemptible=args.preemptible,
-        enable_autorepair=args.enable_autorepair,
-        enable_autoupgrade=args.enable_autoupgrade,
-        service_account=args.service_account,
-        enable_master_authorized_networks=enable_master_authorized_networks,
-        master_authorized_networks=args.master_authorized_networks,
-        enable_legacy_authorization=args.enable_legacy_authorization,
-        labels=args.labels,
-        disk_type=args.disk_type,
-        enable_network_policy=args.enable_network_policy)
+    return ParseCreateOptionsBase(args)
 
   def Collection(self):
     return 'container.projects.zones.clusters'
@@ -258,13 +272,17 @@ class Create(base.CreateCommand):
     Raises:
       util.Error, if creation failed.
     """
+    if args.async and not args.IsSpecified('format'):
+      args.format = util.OPERATIONS_FORMAT
+
     util.CheckKubectlInstalled()
 
     adapter = self.context['api_adapter']
 
     if not args.scopes:
       args.scopes = []
-    cluster_ref = adapter.ParseCluster(args.name)
+    cluster_ref = adapter.ParseCluster(args.name,
+                                       getattr(args, 'region', None))
     options = self.ParseCreateOptions(args)
 
     if options.enable_kubernetes_alpha:
@@ -305,7 +323,7 @@ class Create(base.CreateCommand):
     except kconfig.MissingEnvVarError as error:
       log.warning(error.message)
 
-    return cluster
+    return [cluster]
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA)
@@ -326,6 +344,7 @@ class CreateBeta(Create):
     flags.AddEnableLegacyAuthorizationFlag(parser)
     flags.AddLabelsFlag(parser)
     flags.AddNetworkPolicyFlags(parser, hidden=True)
+    flags.AddIPAliasFlags(parser, hidden=True)
 
 
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)
@@ -346,3 +365,10 @@ class CreateAlpha(Create):
     flags.AddEnableLegacyAuthorizationFlag(parser)
     flags.AddLabelsFlag(parser)
     flags.AddNetworkPolicyFlags(parser, hidden=False)
+    flags.AddIPAliasFlags(parser)
+    flags.AddAcceleratorArgs(parser)
+
+  def ParseCreateOptions(self, args):
+    ops = ParseCreateOptionsBase(args)
+    ops.accelerators = args.accelerator
+    return ops

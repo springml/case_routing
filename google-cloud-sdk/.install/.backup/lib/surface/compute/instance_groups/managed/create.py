@@ -24,8 +24,10 @@ from googlecloudsdk.calliope import arg_parsers
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.compute import flags
 from googlecloudsdk.command_lib.compute import scope as compute_scope
+from googlecloudsdk.command_lib.compute.health_checks import flags as health_checks_flags
 from googlecloudsdk.command_lib.compute.instance_groups import flags as instance_groups_flags
 from googlecloudsdk.command_lib.compute.instance_groups.managed import flags as managed_flags
+from googlecloudsdk.command_lib.compute.managed_instance_groups import auto_healing_utils
 from googlecloudsdk.core import properties
 
 # API allows up to 58 characters but asked us to send only 54 (unless user
@@ -191,17 +193,25 @@ class CreateGA(base.CreateCommand):
 class CreateBeta(CreateGA):
   """Create Google Compute Engine managed instance groups."""
 
-  @staticmethod
-  def Args(parser):
+  HEALTH_CHECK_ARG = health_checks_flags.HealthCheckArgument(
+      '', '--health-check', required=False)
+
+  @classmethod
+  def Args(cls, parser):
+    health_check_group = parser.add_mutually_exclusive_group()
+    cls.HEALTH_CHECK_ARG.AddArgument(health_check_group)
     parser.display_info.AddFormat(managed_flags.DEFAULT_LIST_FORMAT)
     _AddInstanceGroupManagerArgs(parser=parser)
-    managed_instance_groups_utils.AddAutohealingArgs(parser)
+    auto_healing_utils.AddAutohealingArgs(
+        parser=parser, health_check_group=health_check_group)
     instance_groups_flags.MULTISCOPE_INSTANCE_GROUP_MANAGER_ARG.AddArgument(
         parser, operation_type='create')
 
   def _CreateInstanceGroupManager(
       self, args, group_ref, template_ref, client, holder):
     """Create parts of Instance Group Manager shared between tracks."""
+    health_check = managed_instance_groups_utils.GetHealthCheckUri(
+        holder.resources, args, self.HEALTH_CHECK_ARG)
     return client.messages.InstanceGroupManager(
         name=group_ref.Name(),
         description=args.description,
@@ -213,7 +223,7 @@ class CreateBeta(CreateGA):
         targetSize=int(args.size),
         autoHealingPolicies=(
             managed_instance_groups_utils.CreateAutohealingPolicies(
-                holder.resources, client.messages, args)),
+                client.messages, health_check, args.initial_delay)),
     )
 
 
@@ -221,11 +231,17 @@ class CreateBeta(CreateGA):
 class CreateAlpha(CreateGA):
   """Create Google Compute Engine managed instance groups."""
 
-  @staticmethod
-  def Args(parser):
+  HEALTH_CHECK_ARG = health_checks_flags.HealthCheckArgument(
+      '', '--health-check', required=False)
+
+  @classmethod
+  def Args(cls, parser):
+    health_check_group = parser.add_mutually_exclusive_group()
+    cls.HEALTH_CHECK_ARG.AddArgument(health_check_group)
     parser.display_info.AddFormat(managed_flags.DEFAULT_LIST_FORMAT)
     _AddInstanceGroupManagerArgs(parser=parser)
-    managed_instance_groups_utils.AddAutohealingArgs(parser)
+    auto_healing_utils.AddAutohealingArgs(
+        parser=parser, health_check_group=health_check_group)
     instance_groups_flags.MULTISCOPE_INSTANCE_GROUP_MANAGER_ARG.AddArgument(
         parser, operation_type='create')
     instance_groups_flags.AddZonesFlag(parser)
@@ -267,6 +283,8 @@ class CreateAlpha(CreateGA):
     """Create parts of Instance Group Manager shared between tracks."""
     instance_groups_flags.ValidateManagedInstanceGroupScopeArgs(
         args, holder.resources)
+    health_check = managed_instance_groups_utils.GetHealthCheckUri(
+        holder.resources, args, self.HEALTH_CHECK_ARG)
     return client.messages.InstanceGroupManager(
         name=group_ref.Name(),
         description=args.description,
@@ -278,7 +296,7 @@ class CreateAlpha(CreateGA):
         targetSize=int(args.size),
         autoHealingPolicies=(
             managed_instance_groups_utils.CreateAutohealingPolicies(
-                holder.resources, client.messages, args)),
+                client.messages, health_check, args.initial_delay)),
         distributionPolicy=self._CreateDistributionPolicy(
             args.zones, holder.resources, client.messages),
     )

@@ -44,7 +44,7 @@ class Create(base.CreateCommand):
     flags.AddSslCertificateFlags(parser, required=True)
 
   def Run(self, args):
-    client = api_client.GetApiClient(self.ReleaseTrack())
+    client = api_client.GetApiClientForTrack(self.ReleaseTrack())
     cert = client.CreateSslCertificate(
         args.display_name,
         cert_path=args.certificate,

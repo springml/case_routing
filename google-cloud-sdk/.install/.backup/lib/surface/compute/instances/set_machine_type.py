@@ -21,7 +21,7 @@ from googlecloudsdk.calliope import exceptions as calliope_exceptions
 from googlecloudsdk.command_lib.compute.instances import flags
 
 
-def _CommonArgs(parser, release_track):
+def _CommonArgs(parser):
   """Register parser args common to all tracks."""
   flags.INSTANCE_ARG.AddArgument(parser)
   flags.AddMachineTypeArgs(
@@ -30,17 +30,14 @@ def _CommonArgs(parser, release_track):
           ' Either this flag, --custom-cpu, or --custom-memory must be '
           'specified.'))
   flags.AddCustomMachineTypeArgs(parser)
-  if release_track in [base.ReleaseTrack.ALPHA, base.ReleaseTrack.BETA]:
-    flags.AddExtendedMachineTypeArgs(parser)
 
 
-@base.ReleaseTracks(base.ReleaseTrack.GA, base.ReleaseTrack.BETA)
 class SetMachineType(base.SilentCommand):
   """Set machine type for Google Compute Engine virtual machine instances."""
 
   @staticmethod
   def Args(parser):
-    _CommonArgs(parser, release_track=base.ReleaseTrack.GA)
+    _CommonArgs(parser)
 
   def _ValidateMachineTypePresence(self, args):
     if (not args.IsSpecified('custom_cpu') and
@@ -88,15 +85,6 @@ class SetMachineType(base.SilentCommand):
 
     return client.MakeRequests([(client.apitools_client.instances,
                                  'SetMachineType', request)])
-
-
-@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
-class SetMachineTypeAlpha(SetMachineType):
-  """Set machine type for Google Compute Engine virtual machine instances."""
-
-  @classmethod
-  def Args(cls, parser):
-    _CommonArgs(parser, release_track=base.ReleaseTrack.ALPHA)
 
 
 SetMachineType.detailed_help = {

@@ -57,7 +57,6 @@ class Upload(base.CreateCommand):
         """)
     parser.add_argument(
         '--capture-id', metavar='ID',
-        completion_resource='source.captures',
         help="""\
             The ID of the capture to create or modify.
         """)

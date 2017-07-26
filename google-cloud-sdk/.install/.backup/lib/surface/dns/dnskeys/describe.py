@@ -68,11 +68,7 @@ class Describe(base.DescribeCommand):
     flags.GetZoneArg(
         'The name of the managed-zone the DnsKey belongs to'
     ).AddToParser(parser)
-    parser.add_argument(
-        'key_id',
-        metavar='KEY-ID',
-        completion_resource='dns.dnsKeys',
-        help='The identifier of the requested DnsKey.')
+    flags.GetKeyArg().AddToParser(parser)
 
   def Run(self, args):
     dns_client = apis.GetClientInstance('dns', 'v2beta1')

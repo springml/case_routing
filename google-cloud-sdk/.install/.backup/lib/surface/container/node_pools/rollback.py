@@ -64,7 +64,7 @@ class Rollback(base.Command):
     """
     adapter = self.context['api_adapter']
 
-    pool_ref = adapter.ParseNodePool(args.name)
+    pool_ref = adapter.ParseNodePool(args.name, getattr(args, 'region', None))
 
     console_io.PromptContinue(
         message=

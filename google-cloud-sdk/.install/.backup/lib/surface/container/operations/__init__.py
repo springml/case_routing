@@ -18,6 +18,7 @@ from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.container import flags
 
 
+@base.ReleaseTracks(base.ReleaseTrack.GA, base.ReleaseTrack.BETA)
 class Operations(base.Group):
   """Get and list operations for Google Container Engine clusters."""
 
@@ -45,3 +46,20 @@ class Operations(base.Group):
       The refined command context.
     """
     return context
+
+
+@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
+class OperationsAlpha(Operations):
+  """Get and list operations for Google Container Engine clusters."""
+
+  @staticmethod
+  def Args(parser):
+    """Add arguments to the parser.
+
+    Args:
+      parser: argparse.ArgumentParser, This is a standard argparser parser with
+        which you can register arguments.  See the public argparse documentation
+        for its capabilities.
+    """
+    flags.AddZoneAndRegionFlags(parser, region_hidden=True)
+

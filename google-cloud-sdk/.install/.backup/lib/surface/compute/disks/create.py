@@ -104,12 +104,12 @@ def _CommonArgs(parser, source_snapshot_arg):
           lower_bound='1GB',
           suggested_binary_size_scales=['GB', 'GiB', 'TB', 'TiB', 'PiB', 'PB']),
       help="""\
-      Indicates the size of the disks. The value must be a whole
-      number followed by a size unit of ``KB'' for kilobyte, ``MB''
-      for megabyte, ``GB'' for gigabyte, or ``TB'' for terabyte. For
-      example, ``10GB'' will produce 10 gigabyte disks.  Disk size
-      must be a multiple of 10 GB.
-      """)
+        Indicates the size of the disks. The value must be a whole
+        number followed by a size unit of ``GB'' for gigabyte, or ``TB''
+        for terabyte. If no size unit is specified, GB is
+        assumed. For example, ``10GB'' will produce 10 gigabyte
+        disks. Disk size must be a multiple of 1 GB.
+        """)
 
   parser.add_argument(
       '--type',
@@ -257,6 +257,11 @@ class Create(base.Command):
   def Run(self, args):
     compute_holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
     client = compute_holder.client
+
+    self.show_unformated_message = not (args.IsSpecified('image') or
+                                        args.IsSpecified('image_family') or
+                                        args.IsSpecified('source_snapshot'))
+
     disk_refs = self.ValidateAndParseDiskRefs(args, compute_holder)
     from_image = self.GetFromImage(args)
     size_gb = self.GetDiskSizeGb(args, from_image)
@@ -340,7 +345,8 @@ class Create(base.Command):
 
         https://cloud.google.com/compute/docs/disks/add-persistent-disk#formatting
         """
-    log.status.Print(textwrap.dedent(message))
+    if self.show_unformated_message:
+      log.status.Print(textwrap.dedent(message))
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA)

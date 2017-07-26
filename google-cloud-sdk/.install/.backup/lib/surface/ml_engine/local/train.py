@@ -57,7 +57,7 @@ class RunLocal(base.Command):
     flags.MODULE_NAME.AddToParser(parser)
     flags.DISTRIBUTED.AddToParser(parser)
     flags.PARAM_SERVERS.AddToParser(parser)
-    flags.GetJobDirFlag(upload_help=False).AddToParser(parser)
+    flags.GetJobDirFlag(upload_help=False, allow_local=True).AddToParser(parser)
     flags.WORKERS.AddToParser(parser)
     flags.START_PORT.AddToParser(parser)
     flags.GetUserArgs(local=True).AddToParser(parser)
@@ -77,7 +77,7 @@ class RunLocal(base.Command):
     package_root = os.path.dirname(os.path.abspath(package_path))
     user_args = args.user_args or []
     if args.job_dir:
-      user_args.extend(('--job-dir', args.job_dir.ToUrl()))
+      user_args.extend(('--job-dir', args.job_dir))
     if args.distributed:
       retval = local_train.RunDistributed(
           args.module_name,

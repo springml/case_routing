@@ -53,8 +53,8 @@ class Create(base.CreateCommand):
     Returns:
       Some value that we want to have printed later.
     """
-    op = databases.Create(
-        args.instance, args.database, flags.FixDdl(args.ddl or []))
+    op = databases.Create(args.instance, args.database,
+                          flags.SplitDdlIntoStatements(args.ddl or []))
     if args.async:
       return op
     return database_operations.Await(op, 'Creating database')

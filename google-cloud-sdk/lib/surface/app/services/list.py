@@ -43,7 +43,7 @@ class List(base.ListCommand):
     """)
 
   def Run(self, args):
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     services = api_client.ListServices()
     versions = api_client.ListVersions(services)
 

@@ -19,7 +19,6 @@ from googlecloudsdk.command_lib.iam import iam_util
 from googlecloudsdk.command_lib.resource_manager import flags
 
 
-@base.Hidden
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)
 class SetIamPolicy(base.Command):
   """Set IAM policy for a folder.

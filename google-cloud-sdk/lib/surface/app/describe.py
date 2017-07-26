@@ -21,23 +21,41 @@ from googlecloudsdk.command_lib.app import exceptions
 from googlecloudsdk.core import log
 
 
-@base.ReleaseTracks(base.ReleaseTrack.GA, base.ReleaseTrack.BETA)
-class Describe(base.Command):
+_DETAILED_HELP = {
+    'EXAMPLES': """\
+        To show all the data about the current application, run
+
+            $ {command}
+        """,
+}
+
+
+def Describe(api_client):
+  try:
+    return api_client.GetApplication()
+  except api_lib_exceptions.NotFoundError:
+    log.debug('No app found:', exc_info=True)
+    project = api_client.project
+    raise exceptions.MissingApplicationError(project)
+
+
+@base.ReleaseTracks(base.ReleaseTrack.GA)
+class DescribeGA(base.Command):
   """Display all data about an existing service."""
 
-  detailed_help = {
-      'EXAMPLES': """\
-          To show all the data about the current application, run
+  def Run(self, args):
+    return Describe(appengine_api_client.GetApiClientForTrack(
+        self.ReleaseTrack()))
 
-              $ {command}
-          """,
-  }
+
+@base.ReleaseTracks(base.ReleaseTrack.BETA)
+class DescribeBeta(base.Command):
+  """Display all data about an existing service using the beta API."""
 
   def Run(self, args):
-    api_client = appengine_api_client.GetApiClient()
-    try:
-      return api_client.GetApplication()
-    except api_lib_exceptions.NotFoundError:
-      log.debug('No app found:', exc_info=True)
-      project = api_client.project
-      raise exceptions.MissingApplicationError(project)
+    return Describe(appengine_api_client.GetApiClientForTrack(
+        self.ReleaseTrack()))
+
+
+DescribeGA.detailed_help = _DETAILED_HELP
+DescribeBeta.detailed_help = _DETAILED_HELP

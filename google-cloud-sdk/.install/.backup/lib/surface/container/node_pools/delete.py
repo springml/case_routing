@@ -77,11 +77,11 @@ class Delete(base.DeleteCommand):
     """
     adapter = self.context['api_adapter']
 
-    pool_ref = adapter.ParseNodePool(args.name)
+    pool_ref = adapter.ParseNodePool(args.name, getattr(args, 'region', None))
 
     console_io.PromptContinue(
         message=('The following node pool will be deleted.\n'
-                 '[{name}] in cluster [{clusterId}] in zone [{zone}]')
+                 '[{name}] in cluster [{clusterId}] in [{zone}]')
         .format(name=pool_ref.nodePoolId,
                 clusterId=pool_ref.clusterId,
                 zone=adapter.Zone(pool_ref)),

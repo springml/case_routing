@@ -18,6 +18,7 @@ from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.bigtable import arguments
 from googlecloudsdk.core import properties
 from googlecloudsdk.core import resources
+from googlecloudsdk.core.console import console_io
 
 
 class DeleteInstance(base.DeleteCommand):
@@ -41,13 +42,17 @@ class DeleteInstance(base.DeleteCommand):
     cli = util.GetAdminClient()
     msgs = util.GetAdminMessages()
     for instance in args.instance:
-      ref = resources.REGISTRY.Parse(
-          instance,
-          params={
-              'projectsId': properties.VALUES.core.project.GetOrFail,
-          },
-          collection='bigtableadmin.projects.instances')
-      msg = msgs.BigtableadminProjectsInstancesDeleteRequest(
-          name=ref.RelativeName())
-      cli.projects_instances.Delete(msg)
+      should_continue = console_io.PromptContinue(
+          message='Delete instance {}. Are you sure?'.format(instance))
+
+      if should_continue:
+        ref = resources.REGISTRY.Parse(
+            instance,
+            params={
+                'projectsId': properties.VALUES.core.project.GetOrFail,
+            },
+            collection='bigtableadmin.projects.instances')
+        msg = msgs.BigtableadminProjectsInstancesDeleteRequest(
+            name=ref.RelativeName())
+        cli.projects_instances.Delete(msg)
     return None

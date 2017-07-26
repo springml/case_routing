@@ -13,8 +13,6 @@
 # limitations under the License.
 """Command for updating Google Compute Engine routers."""
 
-import copy
-
 from googlecloudsdk.api_lib.compute import base_classes
 from googlecloudsdk.api_lib.compute import routers_utils
 from googlecloudsdk.api_lib.compute.operations import poller
@@ -22,6 +20,7 @@ from googlecloudsdk.api_lib.util import waiter
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.compute.routers import flags
 from googlecloudsdk.command_lib.compute.routers import router_utils
+from googlecloudsdk.core import log
 from googlecloudsdk.core import resources
 
 
@@ -35,6 +34,7 @@ class UpdateAlpha(base.UpdateCommand):
   def Args(cls, parser):
     cls.ROUTER_ARG = flags.RouterArgument()
     cls.ROUTER_ARG.AddArgument(parser, operation_type='update')
+    base.ASYNC_FLAG.AddToParser(parser)
     flags.AddCustomAdvertisementArgs(parser, 'router')
 
   def Run(self, args):
@@ -48,8 +48,8 @@ class UpdateAlpha(base.UpdateCommand):
     router_ref = self.ROUTER_ARG.ResolveAsResource(args, holder.resources)
 
     request_type = messages.ComputeRoutersGetRequest
-    existing = service.Get(request_type(**router_ref.AsDict()))
-    replacement = copy.deepcopy(existing)
+    replacement = service.Get(request_type(**router_ref.AsDict()))
+    existing_mode = replacement.bgp.advertiseMode
 
     if router_utils.HasReplaceAdvertisementFlags(args):
       mode, groups, prefixes = router_utils.ParseAdvertisements(
@@ -58,7 +58,7 @@ class UpdateAlpha(base.UpdateCommand):
       router_utils.PromptIfSwitchToDefaultMode(
           messages=messages,
           resource_class=messages.RouterBgp,
-          existing_mode=existing.bgp.advertiseMode,
+          existing_mode=existing_mode,
           new_mode=mode)
 
       attrs = {
@@ -131,7 +131,14 @@ class UpdateAlpha(base.UpdateCommand):
             'region': router_ref.region,
         })
 
-    # TODO(b/62801777): add support for --async flag.
+    if args.async:
+      log.UpdatedResource(
+          operation_ref,
+          kind='router [{0}]'.format(router_ref.Name()),
+          async=True,
+          details='Run the [gcloud compute operations describe] command '
+          'to check the status of this operation.')
+      return result
 
     target_router_ref = holder.resources.Parse(
         router_ref.Name(),
@@ -142,9 +149,8 @@ class UpdateAlpha(base.UpdateCommand):
         })
 
     operation_poller = poller.Poller(service, target_router_ref)
-    return waiter.WaitFor(
-        operation_poller, operation_ref,
-        'Updating router {0}'.format(router_ref.Name()))
+    return waiter.WaitFor(operation_poller, operation_ref,
+                          'Updating router [{0}]'.format(router_ref.Name()))
 
 
 UpdateAlpha.detailed_help = {

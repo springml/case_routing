@@ -37,7 +37,7 @@ class Wait(base.Command):
     parser.add_argument('operation', help='ID of operation.')
 
   def Run(self, args):
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     operation = api_client.GetOperation(args.operation)
     if operation.done:
       log.status.Print(

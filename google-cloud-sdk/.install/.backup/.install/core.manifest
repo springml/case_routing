@@ -123,6 +123,7 @@ install.sh
 bin/
 bin/endpointscfg.py
 bin/dev_appserver.py
+bin/gcloud
 bin/bootstrapping/
 bin/bootstrapping/__init__.py
 bin/bootstrapping/bootstrapping.py
@@ -132,7 +133,6 @@ RELEASE_NOTES
 LICENSE
 README
 lib/
-lib/__init__.py
 lib/tools/
 lib/tools/regen_apis/
 lib/tools/regen_apis/main.py
@@ -426,10 +426,14 @@ lib/surface/ml_engine/models/versions/describe.py
 lib/surface/ml_engine/models/versions/delete.py
 lib/surface/ml_engine/models/versions/create.py
 lib/surface/ml_engine/models/versions/__init__.py
+lib/surface/ml_engine/models/set_iam_policy.py
+lib/surface/ml_engine/models/remove_iam_policy_binding.py
 lib/surface/ml_engine/models/list.py
+lib/surface/ml_engine/models/get_iam_policy.py
 lib/surface/ml_engine/models/describe.py
 lib/surface/ml_engine/models/delete.py
 lib/surface/ml_engine/models/create.py
+lib/surface/ml_engine/models/add_iam_policy_binding.py
 lib/surface/ml_engine/models/__init__.py
 lib/surface/ml_engine/local/
 lib/surface/ml_engine/local/train.py
@@ -478,6 +482,7 @@ lib/surface/ml/speech/__init__.py
 lib/surface/ml/language/
 lib/surface/ml/language/analyze_syntax.py
 lib/surface/ml/language/analyze_sentiment.py
+lib/surface/ml/language/analyze_entity_sentiment.py
 lib/surface/ml/language/analyze_entities.py
 lib/surface/ml/language/__init__.py
 lib/surface/ml/__init__.py
@@ -1204,6 +1209,7 @@ lib/surface/compute/networks/peerings/list.py
 lib/surface/compute/networks/peerings/delete.py
 lib/surface/compute/networks/peerings/create.py
 lib/surface/compute/networks/peerings/__init__.py
+lib/surface/compute/networks/list_ip_owners.py
 lib/surface/compute/networks/list.py
 lib/surface/compute/networks/describe.py
 lib/surface/compute/networks/delete.py
@@ -1248,6 +1254,9 @@ lib/surface/compute/instances/reset.py
 lib/surface/compute/instances/remove_tags.py
 lib/surface/compute/instances/remove_metadata.py
 lib/surface/compute/instances/remove_labels.py
+lib/surface/compute/instances/network_interfaces/
+lib/surface/compute/instances/network_interfaces/update.py
+lib/surface/compute/instances/network_interfaces/__init__.py
 lib/surface/compute/instances/move.py
 lib/surface/compute/instances/list.py
 lib/surface/compute/instances/get_serial_port_output.py
@@ -1297,7 +1306,6 @@ lib/surface/compute/instance_groups/managed/rolling_action/stop_proactive_update
 lib/surface/compute/instance_groups/managed/rolling_action/start_update.py
 lib/surface/compute/instance_groups/managed/rolling_action/restart.py
 lib/surface/compute/instance_groups/managed/rolling_action/replace.py
-lib/surface/compute/instance_groups/managed/rolling_action/recreate.py
 lib/surface/compute/instance_groups/managed/rolling_action/__init__.py
 lib/surface/compute/instance_groups/managed/resize.py
 lib/surface/compute/instance_groups/managed/recreate_instances.py
@@ -1526,6 +1534,7 @@ lib/surface/app/versions/describe.py
 lib/surface/app/versions/delete.py
 lib/surface/app/versions/browse.py
 lib/surface/app/versions/__init__.py
+lib/surface/app/update.py
 lib/surface/app/ssl_certificates/
 lib/surface/app/ssl_certificates/update.py
 lib/surface/app/ssl_certificates/list.py
@@ -2082,14 +2091,8 @@ lib/googlecloudsdk/third_party/apis/cloudresourcemanager/v1/cloudresourcemanager
 lib/googlecloudsdk/third_party/apis/cloudresourcemanager/v1/cloudresourcemanager_v1_client.py
 lib/googlecloudsdk/third_party/apis/cloudresourcemanager/v1/__init__.py
 lib/googlecloudsdk/third_party/apis/cloudresourcemanager/__init__.py
-lib/googlecloudsdk/third_party/apis/cloudkms_v1beta1.json
 lib/googlecloudsdk/third_party/apis/cloudkms_v1.json
 lib/googlecloudsdk/third_party/apis/cloudkms/
-lib/googlecloudsdk/third_party/apis/cloudkms/v1beta1/
-lib/googlecloudsdk/third_party/apis/cloudkms/v1beta1/resources.py
-lib/googlecloudsdk/third_party/apis/cloudkms/v1beta1/cloudkms_v1beta1_messages.py
-lib/googlecloudsdk/third_party/apis/cloudkms/v1beta1/cloudkms_v1beta1_client.py
-lib/googlecloudsdk/third_party/apis/cloudkms/v1beta1/__init__.py
 lib/googlecloudsdk/third_party/apis/cloudkms/v1/
 lib/googlecloudsdk/third_party/apis/cloudkms/v1/resources.py
 lib/googlecloudsdk/third_party/apis/cloudkms/v1/cloudkms_v1_messages.py
@@ -2271,6 +2274,7 @@ lib/googlecloudsdk/core/resource/__init__.py
 lib/googlecloudsdk/core/remote_completion.py
 lib/googlecloudsdk/core/properties.py
 lib/googlecloudsdk/core/platforms_install.py
+lib/googlecloudsdk/core/module_util.py
 lib/googlecloudsdk/core/metrics_reporter.py
 lib/googlecloudsdk/core/metrics.py
 lib/googlecloudsdk/core/log.py
@@ -2333,6 +2337,7 @@ lib/googlecloudsdk/core/cache/metadata_table.py
 lib/googlecloudsdk/core/cache/file_cache.py
 lib/googlecloudsdk/core/cache/exceptions.py
 lib/googlecloudsdk/core/cache/completion_cache.py
+lib/googlecloudsdk/core/cache/cache_update_ops.py
 lib/googlecloudsdk/core/cache/__init__.py
 lib/googlecloudsdk/core/__init__.py
 lib/googlecloudsdk/command_lib/
@@ -2382,7 +2387,6 @@ lib/googlecloudsdk/command_lib/shell/browser.py
 lib/googlecloudsdk/command_lib/shell/application.py
 lib/googlecloudsdk/command_lib/shell/__init__.py
 lib/googlecloudsdk/command_lib/service_management/
-lib/googlecloudsdk/command_lib/service_management/completion_callbacks.py
 lib/googlecloudsdk/command_lib/service_management/common_flags.py
 lib/googlecloudsdk/command_lib/service_management/arg_parsers.py
 lib/googlecloudsdk/command_lib/service_management/__init__.py
@@ -2459,6 +2463,7 @@ lib/googlecloudsdk/command_lib/logs/stream.py
 lib/googlecloudsdk/command_lib/logs/__init__.py
 lib/googlecloudsdk/command_lib/kms/
 lib/googlecloudsdk/command_lib/kms/flags.py
+lib/googlecloudsdk/command_lib/kms/completers.py
 lib/googlecloudsdk/command_lib/kms/__init__.py
 lib/googlecloudsdk/command_lib/iot/
 lib/googlecloudsdk/command_lib/iot/util.py
@@ -2471,6 +2476,9 @@ lib/googlecloudsdk/command_lib/iam/iam_util.py
 lib/googlecloudsdk/command_lib/iam/completers.py
 lib/googlecloudsdk/command_lib/iam/base_classes.py
 lib/googlecloudsdk/command_lib/iam/__init__.py
+lib/googlecloudsdk/command_lib/genomics/
+lib/googlecloudsdk/command_lib/genomics/completers.py
+lib/googlecloudsdk/command_lib/genomics/__init__.py
 lib/googlecloudsdk/command_lib/functions/
 lib/googlecloudsdk/command_lib/functions/flags.py
 lib/googlecloudsdk/command_lib/functions/deploy/
@@ -2500,9 +2508,10 @@ lib/googlecloudsdk/command_lib/deployment_manager/
 lib/googlecloudsdk/command_lib/deployment_manager/type_providers.py
 lib/googlecloudsdk/command_lib/deployment_manager/flags.py
 lib/googlecloudsdk/command_lib/deployment_manager/dm_write.py
+lib/googlecloudsdk/command_lib/deployment_manager/dm_v2beta_base.py
+lib/googlecloudsdk/command_lib/deployment_manager/dm_v2_base.py
 lib/googlecloudsdk/command_lib/deployment_manager/dm_util.py
-lib/googlecloudsdk/command_lib/deployment_manager/dm_beta_base.py
-lib/googlecloudsdk/command_lib/deployment_manager/dm_base.py
+lib/googlecloudsdk/command_lib/deployment_manager/dm_alpha_base.py
 lib/googlecloudsdk/command_lib/deployment_manager/composite_types.py
 lib/googlecloudsdk/command_lib/deployment_manager/__init__.py
 lib/googlecloudsdk/command_lib/debug/
@@ -2613,6 +2622,7 @@ lib/googlecloudsdk/command_lib/compute/networks/flags.py
 lib/googlecloudsdk/command_lib/compute/networks/__init__.py
 lib/googlecloudsdk/command_lib/compute/managed_instance_groups/
 lib/googlecloudsdk/command_lib/compute/managed_instance_groups/update_instances_utils.py
+lib/googlecloudsdk/command_lib/compute/managed_instance_groups/auto_healing_utils.py
 lib/googlecloudsdk/command_lib/compute/managed_instance_groups/__init__.py
 lib/googlecloudsdk/command_lib/compute/machine_types/
 lib/googlecloudsdk/command_lib/compute/machine_types/flags.py
@@ -2647,6 +2657,7 @@ lib/googlecloudsdk/command_lib/compute/instance_groups/managed/__init__.py
 lib/googlecloudsdk/command_lib/compute/instance_groups/flags.py
 lib/googlecloudsdk/command_lib/compute/instance_groups/__init__.py
 lib/googlecloudsdk/command_lib/compute/images/
+lib/googlecloudsdk/command_lib/compute/images/policy.py
 lib/googlecloudsdk/command_lib/compute/images/flags.py
 lib/googlecloudsdk/command_lib/compute/images/__init__.py
 lib/googlecloudsdk/command_lib/compute/https_health_checks/
@@ -2834,11 +2845,9 @@ lib/googlecloudsdk/api_lib/ml/vision/__init__.py
 lib/googlecloudsdk/api_lib/ml/video/
 lib/googlecloudsdk/api_lib/ml/video/video_client.py
 lib/googlecloudsdk/api_lib/ml/video/util.py
-lib/googlecloudsdk/api_lib/ml/video/operations_poller.py
 lib/googlecloudsdk/api_lib/ml/video/__init__.py
 lib/googlecloudsdk/api_lib/ml/speech/
 lib/googlecloudsdk/api_lib/ml/speech/speech_api_client.py
-lib/googlecloudsdk/api_lib/ml/speech/operations.py
 lib/googlecloudsdk/api_lib/ml/speech/exceptions.py
 lib/googlecloudsdk/api_lib/ml/speech/__init__.py
 lib/googlecloudsdk/api_lib/ml/language/
@@ -2905,8 +2914,9 @@ lib/googlecloudsdk/api_lib/dns/__init__.py
 lib/googlecloudsdk/api_lib/deployment_manager/
 lib/googlecloudsdk/api_lib/deployment_manager/importer.py
 lib/googlecloudsdk/api_lib/deployment_manager/exceptions.py
-lib/googlecloudsdk/api_lib/deployment_manager/dm_v2_util.py
 lib/googlecloudsdk/api_lib/deployment_manager/dm_labels.py
+lib/googlecloudsdk/api_lib/deployment_manager/dm_base.py
+lib/googlecloudsdk/api_lib/deployment_manager/dm_api_util.py
 lib/googlecloudsdk/api_lib/deployment_manager/__init__.py
 lib/googlecloudsdk/api_lib/debug/
 lib/googlecloudsdk/api_lib/debug/transforms.py
@@ -3035,6 +3045,7 @@ lib/googlecloudsdk/api_lib/cloudbuild/
 lib/googlecloudsdk/api_lib/cloudbuild/transforms.py
 lib/googlecloudsdk/api_lib/cloudbuild/snapshot.py
 lib/googlecloudsdk/api_lib/cloudbuild/logs.py
+lib/googlecloudsdk/api_lib/cloudbuild/filter_rewrite.py
 lib/googlecloudsdk/api_lib/cloudbuild/config.py
 lib/googlecloudsdk/api_lib/cloudbuild/cloudbuild_util.py
 lib/googlecloudsdk/api_lib/cloudbuild/build.py
@@ -3054,6 +3065,7 @@ lib/googlecloudsdk/api_lib/auth/
 lib/googlecloudsdk/api_lib/auth/util.py
 lib/googlecloudsdk/api_lib/auth/service_account.py
 lib/googlecloudsdk/api_lib/auth/refresh_token.py
+lib/googlecloudsdk/api_lib/auth/exceptions.py
 lib/googlecloudsdk/api_lib/auth/__init__.py
 lib/googlecloudsdk/api_lib/app/
 lib/googlecloudsdk/api_lib/app/yaml_parsing.py
@@ -3098,13 +3110,13 @@ lib/googlecloudsdk/api_lib/app/api/
 lib/googlecloudsdk/api_lib/app/api/requests.py
 lib/googlecloudsdk/api_lib/app/api/appengine_ssl_api_client.py
 lib/googlecloudsdk/api_lib/app/api/appengine_domains_api_client.py
+lib/googlecloudsdk/api_lib/app/api/appengine_app_update_api_client.py
 lib/googlecloudsdk/api_lib/app/api/appengine_api_client_base.py
 lib/googlecloudsdk/api_lib/app/api/__init__.py
 lib/googlecloudsdk/api_lib/app/__init__.py
 lib/googlecloudsdk/api_lib/__init__.py
 lib/googlecloudsdk/__init__.py
 lib/third_party/
-lib/third_party/__init__.py
 lib/third_party/urllib3/
 lib/third_party/urllib3/LICENSE
 lib/third_party/urllib3/util/
@@ -3472,6 +3484,8 @@ lib/third_party/containerregistry/transform/v1/metadata_.py
 lib/third_party/containerregistry/transform/__init__.py
 lib/third_party/containerregistry/tools/
 lib/third_party/containerregistry/tools/__init__.py
+lib/third_party/containerregistry/tools/fast_pusher_.py
+lib/third_party/containerregistry/tools/fast_puller_.py
 lib/third_party/containerregistry/tools/docker_pusher_.py
 lib/third_party/containerregistry/tools/docker_puller_.py
 lib/third_party/containerregistry/tools/patched_.py
@@ -3481,6 +3495,7 @@ lib/third_party/containerregistry/client/v2_2/__init__.py
 lib/third_party/containerregistry/client/v2_2/save_.py
 lib/third_party/containerregistry/client/v2_2/docker_session_.py
 lib/third_party/containerregistry/client/v2_2/v2_compat_.py
+lib/third_party/containerregistry/client/v2_2/append_.py
 lib/third_party/containerregistry/client/v2_2/docker_image_.py
 lib/third_party/containerregistry/client/v2_2/util_.py
 lib/third_party/containerregistry/client/v2_2/docker_http_.py

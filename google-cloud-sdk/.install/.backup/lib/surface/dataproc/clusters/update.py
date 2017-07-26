@@ -71,9 +71,9 @@ class Update(base.UpdateCommand):
         help='The new number of preemptible worker nodes in the cluster.')
 
   def Run(self, args):
-    dataproc = dp.Dataproc()
+    dataproc = dp.Dataproc(self.ReleaseTrack())
 
-    cluster_ref = dataproc.ParseCluster(args.name)
+    cluster_ref = util.ParseCluster(args.name, dataproc)
 
     cluster_config = dataproc.messages.ClusterConfig()
     changed_fields = []
@@ -143,7 +143,8 @@ class Update(base.UpdateCommand):
               cluster_ref, operation.name))
       return
 
-    dataproc.WaitForOperation(
+    util.WaitForOperation(
+        dataproc,
         operation,
         message='Waiting for cluster update operation',
         timeout_s=args.timeout)

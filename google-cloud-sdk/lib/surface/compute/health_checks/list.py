@@ -107,7 +107,7 @@ class List(base_classes.BaseLister):
 
   def GetResources(self, args, errors):
     """Gets a list of global healthcheck resources."""
-    health_checks = lister.GetGlobalResources(
+    health_checks = lister.GetGlobalResourcesDicts(
         service=self.service,
         project=self.project,
         filter_expr=self.GetFilterExpr(args),
@@ -125,7 +125,8 @@ class List(base_classes.BaseLister):
             'Invalid health check protocol ' + args.protocol + '.')
 
     for health_check in health_checks:
-      if protocol_value is None or health_check.type.number == protocol_value:
+      if (protocol_value is None or
+          health_check['type'] == args.protocol.upper()):
         yield health_check
 
 

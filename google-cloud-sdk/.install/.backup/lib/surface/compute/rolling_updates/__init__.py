@@ -21,6 +21,10 @@ from googlecloudsdk.core import properties
 from googlecloudsdk.core.credentials import store
 
 
+@base.Deprecate(is_removed=False,
+                warning='This command group is deprecated. Use `gcloud alpha '
+                        'compute instance-groups managed rolling-action` '
+                        'command group instead.')
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)
 class Updater(base.Group):
   """Manage updates in a managed instance group."""

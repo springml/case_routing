@@ -23,6 +23,8 @@ from googlecloudsdk.command_lib.compute import flags
 from googlecloudsdk.command_lib.compute import scope as compute_scope
 from googlecloudsdk.command_lib.compute.instance_groups import flags as instance_groups_flags
 from googlecloudsdk.core import properties
+from googlecloudsdk.core.console import progress_tracker
+from googlecloudsdk.core.util import text
 
 
 class Delete(base.DeleteCommand):
@@ -138,16 +140,28 @@ class Delete(base.DeleteCommand):
 
     # Delete autoscalers first.
     errors = []
-    resources = holder.client.MakeRequests(
-        self._GenerateAutoscalerDeleteRequests(
-            holder, project, mig_requests=requests),
-        errors)
+    autoscaler_delete_requests = self._GenerateAutoscalerDeleteRequests(
+        holder, project, mig_requests=requests)
+    with progress_tracker.ProgressTracker(
+        'Deleting ' + text.Pluralize(
+            len(autoscaler_delete_requests), 'autoscaler'),
+        autotick=False,
+    ) as tracker:
+      resources = holder.client.MakeRequests(
+          autoscaler_delete_requests,
+          errors,
+          progress_tracker=tracker)
     if errors:
       utils.RaiseToolException(errors)
 
     # Now delete instance group managers.
     errors = []
-    resources += holder.client.MakeRequests(requests, errors)
+    with progress_tracker.ProgressTracker(
+        'Deleting ' + text.Pluralize(len(requests), 'Managed Instance Group'),
+        autotick=False,
+    ) as tracker:
+      resources += holder.client.MakeRequests(
+          requests, errors, progress_tracker=tracker)
     if errors:
       utils.RaiseToolException(errors)
     return resources

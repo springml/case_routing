@@ -17,6 +17,7 @@ from googlecloudsdk.api_lib.sql import api_util
 from googlecloudsdk.api_lib.sql import operations
 from googlecloudsdk.api_lib.sql import validate
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.sql import flags
 from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
 from googlecloudsdk.core.console import console_io
@@ -38,7 +39,7 @@ class PromoteReplica(base.Command):
     base.ASYNC_FLAG.AddToParser(parser)
     parser.add_argument(
         'replica',
-        completion_resource='sql.instances',
+        completer=flags.InstanceCompleter,
         help='Cloud SQL read replica ID.')
 
   def Run(self, args):

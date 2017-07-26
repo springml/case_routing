@@ -13,6 +13,7 @@
 # limitations under the License.
 """gcloud datastore emulator start command."""
 
+import socket
 from googlecloudsdk.calliope import arg_parsers
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.emulators import datastore_util
@@ -63,7 +64,8 @@ class Start(base.Command):
 
   def Run(self, args):
     if not args.host_port:
-      args.host_port = arg_parsers.HostPort.Parse(datastore_util.GetHostPort())
+      args.host_port = arg_parsers.HostPort.Parse(
+          util.GetHostPort(), ipv6_enabled=socket.has_ipv6)
     args.host_port.host = args.host_port.host or 'localhost'
 
     datastore_util.PrepareGCDDataDir(args)

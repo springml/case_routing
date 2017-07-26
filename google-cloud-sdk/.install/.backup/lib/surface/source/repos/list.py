@@ -39,11 +39,10 @@ class List(base.ListCommand):
     #
     # The resource name looks like projects/<projectid>/repos/reponame
     # We extract the project name as segment 1 and the repo name as segment 3
-    # This will need to be modified when we allow repo names with slashes
-    # to be listed via this interface.
+    # and up.
     parser.display_info.AddFormat("""
           table(
-            name.segment(3):label=REPO_NAME,
+            name.split(/).slice(3:).join(/):label=REPO_NAME,
             name.segment(1):label=PROJECT_ID,
             firstof(mirror_config.url, url):label=URL
           )

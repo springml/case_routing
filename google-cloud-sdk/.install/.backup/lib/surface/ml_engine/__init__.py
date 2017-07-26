@@ -21,10 +21,7 @@ from googlecloudsdk.core import resources
 
 
 class MlEngine(base.Group):
-  """(REMOVED) Manage Cloud ML Engine jobs and models.
-
-  This command group has been deprecated; please use `gcloud ml-engine versions`
-  instead.
+  """Manage Cloud ML Engine jobs and models.
 
   The {command} command group lets you manage Google Cloud ML Engine jobs and
   training models.

@@ -37,15 +37,16 @@ class Delete(base_classes.BaseIamCommand, base.DeleteCommand):
   @staticmethod
   def Args(parser):
     iam_util.AddServiceAccountNameArg(
-        parser, help_text='The service account to delete.')
+        parser, action='to delete')
 
   def Run(self, args):
     console_io.PromptContinue(
         message='You are about to delete service '
-        'account [{0}].'.format(args.name),
+        'account [{0}].'.format(args.service_account),
         cancel_on_no=True)
     self.iam_client.projects_serviceAccounts.Delete(
         self.messages.IamProjectsServiceAccountsDeleteRequest(
-            name=iam_util.EmailToAccountResourceName(args.name)))
+            name=iam_util.EmailToAccountResourceName(args.service_account)))
 
-    log.status.Print('deleted service account [{0}]'.format(args.name))
+    log.status.Print('deleted service account [{0}]'.format(
+        args.service_account))

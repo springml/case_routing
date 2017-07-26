@@ -47,7 +47,8 @@ class Resize(base.Command):
 
     """
     adapter = self.context['api_adapter']
-    cluster_ref = adapter.ParseCluster(args.name)
+    cluster_ref = adapter.ParseCluster(args.name,
+                                       getattr(args, 'region', None))
     cluster = adapter.GetCluster(cluster_ref)
     pool = adapter.FindNodePool(cluster, args.node_pool)
     console_io.PromptContinue(

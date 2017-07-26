@@ -13,12 +13,13 @@
 # limitations under the License.
 """Command for getting IAM policies for device registries."""
 from googlecloudsdk.api_lib.cloudiot import registries
+from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iam import base_classes
 from googlecloudsdk.command_lib.iot import flags
 from googlecloudsdk.command_lib.iot import util
 
 
-class GetIamPolicy(base_classes.BaseIamCommand):
+class GetIamPolicy(base_classes.BaseIamCommand, base.ListCommand):
   """Get the IAM policy for a device registry.
 
   This command gets the IAM policy for a device registry. If formatted as
@@ -42,6 +43,7 @@ class GetIamPolicy(base_classes.BaseIamCommand):
   @staticmethod
   def Args(parser):
     flags.AddRegistryResourceFlags(parser, 'for which to get IAM policy')
+    base.URI_FLAG.RemoveFromParser(parser)
 
   def Run(self, args):
     client = registries.RegistriesClient()

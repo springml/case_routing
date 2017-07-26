@@ -14,12 +14,14 @@
 
 """The command group for cloud container clusters."""
 
+from googlecloudsdk.api_lib.container import transforms
 from googlecloudsdk.calliope import actions
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.container import flags
 from googlecloudsdk.core import properties
 
 
+@base.ReleaseTracks(base.ReleaseTrack.GA, base.ReleaseTrack.BETA)
 class Clusters(base.Group):
   """Deploy and teardown Google Container Engine clusters.
 
@@ -40,6 +42,7 @@ class Clusters(base.Group):
         for its capabilities.
     """
     flags.AddZoneFlag(parser)
+    parser.display_info.AddTransforms(transforms.GetTransforms())
 
   def Filter(self, context, args):
     """Modify the context that will be given to this group's commands when run.
@@ -54,3 +57,27 @@ class Clusters(base.Group):
       The refined command context.
     """
     return context
+
+
+@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
+class ClustersAlpha(Clusters):
+  """Deploy and teardown Google Container Engine clusters.
+
+  The gcloud container clusters command group lets you deploy and teardown
+  Google Container Engine clusters.
+
+  See $ gcloud docker --help for information about deploying docker images
+  to clusters.
+  """
+
+  @staticmethod
+  def Args(parser):
+    """Add arguments to the parser.
+
+    Args:
+      parser: argparse.ArgumentParser, This is a standard argparser parser with
+        which you can register arguments.  See the public argparse documentation
+        for its capabilities.
+    """
+    flags.AddZoneAndRegionFlags(parser, region_hidden=True)
+    parser.display_info.AddTransforms(transforms.GetTransforms())

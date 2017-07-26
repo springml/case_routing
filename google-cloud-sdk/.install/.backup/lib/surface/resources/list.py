@@ -52,12 +52,13 @@ class List(base.ListCommand):
               'By default all indexed resources are listed. Use '
               '`@type`:_COLLECTION_ to select resources for _COLLECTION_. It '
               'is an error to specify a _COLLECTION_ not indexed by the API. '
-              'The supported collections are: {collections}. Collections named '
-              '`resources.`_RESOURCE-TYPE_ may be used for debugging, where '
-              '_RESOURCE-TYPE_ is defined by the CloudResourceSearch API.'
+              'The supported collections are:\n * {collections}\n'
+              'Collections named `resources.`_RESOURCE-TYPE_ may be used for '
+              'debugging, where _RESOURCE-TYPE_ is defined by the '
+              'CloudResourceSearch API.'
               '\n\n'
               'See `$ gcloud topic filters` for filter expression details.'
-              .format(collections=', '.join(sorted(
+              .format(collections='\n * '.join(sorted(
                   resource_search.RESOURCE_TYPES.keys())))),
     )
     base.PAGE_SIZE_FLAG.SetDefault(parser, resource_search.PAGE_SIZE)

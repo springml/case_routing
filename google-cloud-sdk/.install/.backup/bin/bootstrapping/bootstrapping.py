@@ -22,6 +22,7 @@ from googlecloudsdk.core import properties
 from googlecloudsdk.core.credentials import store as c_store
 from googlecloudsdk.core.updater import local_state
 from googlecloudsdk.core.updater import update_manager
+from googlecloudsdk.core.util import files
 
 
 BOOTSTRAPPING_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -123,9 +124,9 @@ def CheckForBlacklistedCommand(args, blacklist, warn=True, die=False):
 
   Args:
     args: the command line arguments, including the 0th argument which is
-        the program name.
+      the program name.
     blacklist: a map of blacklisted commands to the messages that should be
-        printed when they're run.
+      printed when they're run.
     warn: if true, print a warning message.
     die: if true, exit.
 
@@ -175,16 +176,17 @@ def CheckUpdates(command_path):
     pass
 
 
-def CommandStart(command_name, component_id=None):
+def CommandStart(command_name, component_id=None, version=None):
   """Logs that the given command is being executed.
 
   Args:
     command_name: str, The name of the command being executed.
     component_id: str, The component id that this command belongs to.  Used for
-      version information.
+      version information if version was not specified.
+    version: str, Directly use this version instead of deriving it from
+      component.
   """
-  version = None
-  if component_id:
+  if version is None and component_id:
     version = local_state.InstallationState.VersionForInstalledComponent(
         component_id)
   metrics.Executions(command_name, version)
@@ -203,6 +205,11 @@ def GetActiveProjectAndAccount():
   project_name = properties.VALUES.core.project.Get(validate=False)
   account = properties.VALUES.core.account.Get(validate=False)
   return (project_name, account)
+
+
+def GetFileContents(*path_parts):
+  """Returns file content at specified relative path wrt SDK root path."""
+  return files.GetFileContents(os.path.join(SDK_ROOT, *path_parts)).strip()
 
 
 # Register some other sources for credentials and project.

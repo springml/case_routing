@@ -11,7 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Command to list OrgPolicies associated with the specified resource."""
+# pylint: disable=line-too-long
+"""Command to list Organization Policies associated with the specified resource."""
 
 from googlecloudsdk.api_lib.resource_manager import org_policies
 from googlecloudsdk.calliope import base
@@ -19,33 +20,43 @@ from googlecloudsdk.command_lib.resource_manager import org_policies_base
 from googlecloudsdk.command_lib.resource_manager import org_policies_flags as flags
 
 
-@base.Hidden
-@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
+@base.ReleaseTracks(base.ReleaseTrack.ALPHA, base.ReleaseTrack.BETA)
 class List(base.ListCommand):
-  """List OrgPolicies associated with the specified resource.
+  """List Organization Policies associated with the specified resource.
 
   ## EXAMPLES
 
-  The following command lists all set OrgPolicies associated with
+  The following command lists all set Organization Policies associated with
   project `foo-project`:
 
     $ {command} --project=foo-project
 
   The following command lists all available constraints in addition to set
-  OrgPolicies associated with project `foo-project`:
+  Organization Policies associated with project `foo-project`:
 
-    $ {command} --project=foo-project --show_unset
+    $ {command} --project=foo-project --show-unset
   """
 
   @staticmethod
   def Args(parser):
     flags.AddResourceFlagsToParser(parser)
     base.Argument(
-        '--show_unset',
+        '--show-unset',
         action='store_true',
         required=False,
         default=False,
-        help='Show available constraints.').AddToParser(parser)
+        help="""
+        Show available constraints. For more information about constraints, see
+        https://cloud.google.com/resource-manager/docs/organization-policy/understanding-constraints
+        """).AddToParser(parser)
+    parser.display_info.AddFormat("""
+          table(
+            constraint,
+            listPolicy.yesno(no="-", yes="SET"),
+            booleanPolicy.yesno(no="-", yes="SET"),
+            etag
+          )
+        """)
 
   def Run(self, args):
     flags.CheckResourceFlags(args)
@@ -63,7 +74,7 @@ class List(base.ListCommand):
           response.policies.append(
               messages.OrgPolicy(constraint=constraint.name))
 
-    return response
+    return response.policies
 
   @staticmethod
   def ListOrgPoliciesRequest(args):

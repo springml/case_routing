@@ -88,7 +88,7 @@ class Scp(base.Command):
     Returns:
       int, The exit code of the SCP command.
     """
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     env = ssh.Environment.Current()
     env.RequireSSH()
     keys = ssh.Keys.FromFilename()

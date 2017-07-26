@@ -20,7 +20,6 @@ from googlecloudsdk.command_lib.resource_manager import flags
 from googlecloudsdk.core import log
 
 
-@base.Hidden
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)
 class Create(base.CreateCommand):
   """Create a new folder.

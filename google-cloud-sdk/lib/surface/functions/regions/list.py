@@ -21,6 +21,7 @@ from apitools.base.py import list_pager
 from googlecloudsdk.api_lib.functions import util
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions as base_exceptions
+from googlecloudsdk.command_lib.functions import flags
 from googlecloudsdk.core import properties
 
 
@@ -30,6 +31,7 @@ class List(base.ListCommand):
   @staticmethod
   def Args(parser):
     parser.display_info.AddFormat('table(name)')
+    parser.display_info.AddUriFunc(flags.GetLocationsUri)
 
   def Run(self, args):
     client = util.GetApiClientInstance()

@@ -16,10 +16,10 @@
 
 from apitools.base.py import exceptions as apitools_exceptions
 
-from googlecloudsdk.api_lib.deployment_manager import dm_v2_util
+from googlecloudsdk.api_lib.deployment_manager import dm_api_util
+from googlecloudsdk.api_lib.deployment_manager import dm_base
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions
-from googlecloudsdk.command_lib.deployment_manager import dm_base
 from googlecloudsdk.command_lib.deployment_manager import dm_util
 from googlecloudsdk.command_lib.deployment_manager import dm_write
 from googlecloudsdk.command_lib.deployment_manager import flags
@@ -30,7 +30,8 @@ from googlecloudsdk.core import log
 OPERATION_TIMEOUT = 20 * 60  # 20 mins
 
 
-class CancelPreview(base.Command):
+@dm_base.UseDmApi(dm_base.DmApiVersion.V2)
+class CancelPreview(base.Command, dm_base.DmCommand):
   """Cancel a pending or running deployment preview.
 
   This command will cancel a currently running or pending preview operation on
@@ -92,50 +93,52 @@ class CancelPreview(base.Command):
       # If no fingerprint is present, default to an empty fingerprint.
       # TODO(b/34966984): Remove the empty default after cleaning up all
       # deployments that has no fingerprint
-      fingerprint = dm_v2_util.FetchDeploymentFingerprint(
-          dm_base.GetClient(),
-          dm_base.GetMessages(),
+      fingerprint = dm_api_util.FetchDeploymentFingerprint(
+          self.client,
+          self.messages,
           dm_base.GetProject(),
           args.deployment_name,) or ''
 
     try:
-      operation = dm_base.GetClient().deployments.CancelPreview(
-          dm_base.GetMessages().
+      operation = self.client.deployments.CancelPreview(
+          self.messages.
           DeploymentmanagerDeploymentsCancelPreviewRequest(
               project=dm_base.GetProject(),
               deployment=args.deployment_name,
               deploymentsCancelPreviewRequest=
-              dm_base.GetMessages().DeploymentsCancelPreviewRequest(
+              self.messages.DeploymentsCancelPreviewRequest(
                   fingerprint=fingerprint,
               ),
           )
       )
       # Fetch and print the latest fingerprint of the deployment.
-      new_fingerprint = dm_v2_util.FetchDeploymentFingerprint(
-          dm_base.GetClient(),
-          dm_base.GetMessages(),
+      new_fingerprint = dm_api_util.FetchDeploymentFingerprint(
+          self.client,
+          self.messages,
           dm_base.GetProject(),
           args.deployment_name)
       dm_util.PrintFingerprint(new_fingerprint)
     except apitools_exceptions.HttpError as error:
-      raise exceptions.HttpException(error, dm_v2_util.HTTP_ERROR_FORMAT)
+      raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)
     if args.async:
       return operation
     else:
       op_name = operation.name
       try:
-        dm_write.WaitForOperation(op_name,
+        dm_write.WaitForOperation(self.client,
+                                  self.messages,
+                                  op_name,
                                   'cancel-preview',
                                   dm_base.GetProject(),
                                   timeout=OPERATION_TIMEOUT)
         log.status.Print('Cancel preview operation ' + op_name
                          + ' completed successfully.')
       except apitools_exceptions.HttpError as error:
-        raise exceptions.HttpException(error, dm_v2_util.HTTP_ERROR_FORMAT)
+        raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)
       try:
         # Fetch a list of the canceled resources.
-        response = dm_base.GetClient().resources.List(
-            dm_base.GetMessages().DeploymentmanagerResourcesListRequest(
+        response = self.client.resources.List(
+            self.messages.DeploymentmanagerResourcesListRequest(
                 project=dm_base.GetProject(),
                 deployment=args.deployment_name,
             )
@@ -143,4 +146,4 @@ class CancelPreview(base.Command):
         # TODO(b/36052523): Pagination
         return response.resources if response.resources else []
       except apitools_exceptions.HttpError as error:
-        raise exceptions.HttpException(error, dm_v2_util.HTTP_ERROR_FORMAT)
+        raise exceptions.HttpException(error, dm_api_util.HTTP_ERROR_FORMAT)

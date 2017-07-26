@@ -36,7 +36,8 @@ class SetIamPolicy(base_classes.BaseIamCommand):
   @staticmethod
   def Args(parser):
     iam_util.AddServiceAccountNameArg(
-        parser, help_text='The service account whose policy to set.')
+        parser,
+        action='whose policy to set')
     parser.add_argument(
         'policy_file',
         metavar='POLICY_FILE',
@@ -48,8 +49,8 @@ class SetIamPolicy(base_classes.BaseIamCommand):
 
     result = self.iam_client.projects_serviceAccounts.SetIamPolicy(
         self.messages.IamProjectsServiceAccountsSetIamPolicyRequest(
-            resource=iam_util.EmailToAccountResourceName(args.name),
+            resource=iam_util.EmailToAccountResourceName(args.service_account),
             setIamPolicyRequest=self.messages.SetIamPolicyRequest(
                 policy=policy)))
-    iam_util.LogSetIamPolicy(args.name, 'service account')
+    iam_util.LogSetIamPolicy(args.service_account, 'service account')
     return result

@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Update cluster command."""
 
 from apitools.base.py import exceptions as apitools_exceptions
@@ -60,12 +59,8 @@ def _ParseAddonDisabled(val):
 
 def _AddCommonArgs(parser):
   parser.add_argument(
-      'name',
-      metavar='NAME',
-      help='The name of the cluster to update.')
-  parser.add_argument(
-      '--node-pool',
-      help='Node pool to be updated.')
+      'name', metavar='NAME', help='The name of the cluster to update.')
+  parser.add_argument('--node-pool', help='Node pool to be updated.')
   flags.AddAsyncFlag(parser)
 
 
@@ -81,13 +76,17 @@ def _AddMutuallyExclusiveArgs(mutex_group):
       type=arg_parsers.ArgDict(spec={
           api_adapter.INGRESS: _ParseAddonDisabled,
           api_adapter.HPA: _ParseAddonDisabled,
+          api_adapter.DASHBOARD: _ParseAddonDisabled,
       }),
       dest='disable_addons',
       metavar='ADDON=ENABLED|DISABLED',
-      help='''Cluster addons to enable or disable. Options are
+      help="""Cluster addons to enable or disable. Options are
 {hpa}=ENABLED|DISABLED
-{ingress}=ENABLED|DISABLED'''.format(
-    hpa=api_adapter.HPA, ingress=api_adapter.INGRESS))
+{ingress}=ENABLED|DISABLED
+{dashboard}=ENABLED|DISABLED""".format(
+    hpa=api_adapter.HPA,
+    ingress=api_adapter.INGRESS,
+    dashboard=api_adapter.DASHBOARD))
   mutex_group.add_argument(
       '--generate-password',
       action='store_true',
@@ -160,9 +159,9 @@ class Update(base.UpdateCommand):
       Some value that we want to have printed later.
     """
     adapter = self.context['api_adapter']
-
-    cluster_ref = adapter.ParseCluster(args.name,
-                                       getattr(args, 'region', None))
+    location_get = self.context['location_get']
+    location = location_get(args)
+    cluster_ref = adapter.ParseCluster(args.name, location)
     # Make sure it exists (will raise appropriate error if not)
     cluster = adapter.GetCluster(cluster_ref)
 
@@ -219,8 +218,8 @@ class Update(base.UpdateCommand):
           'the current IP address. Container Engine will then recreate all '
           'nodes ({num_nodes} nodes) to point to the new IP address. This '
           'operation is long-running and will block other operations on the '
-          'cluster (including delete) until it has run to completion.'
-          .format(name=cluster.name, num_nodes=cluster.currentNodeCount),
+          'cluster (including delete) until it has run to completion.'.format(
+              name=cluster.name, num_nodes=cluster.currentNodeCount),
           cancel_on_no=True)
       try:
         op_ref = adapter.StartIpRotation(cluster_ref)
@@ -235,9 +234,10 @@ class Update(base.UpdateCommand):
           '(e.g. by running `gcloud container clusters get-credentials '
           '--project {project} --zone {zone} {name}`). This operation is long-'
           'running and will block other operations on the cluster (including '
-          'delete) until it has run to completion.'
-          .format(name=cluster.name, project=cluster_ref.projectId,
-                  zone=cluster.zone),
+          'delete) until it has run to completion.'.format(
+              name=cluster.name,
+              project=cluster_ref.projectId,
+              zone=cluster.zone),
           cancel_on_no=True)
       try:
         op_ref = adapter.CompleteIpRotation(cluster_ref)
@@ -258,8 +258,7 @@ class Update(base.UpdateCommand):
 
       if args.enable_legacy_authorization is not None:
         op_ref = adapter.SetLegacyAuthorization(
-            cluster_ref,
-            args.enable_legacy_authorization)
+            cluster_ref, args.enable_legacy_authorization)
       else:
         options = api_adapter.UpdateClusterOptions(
             monitoring_service=args.monitoring_service,
@@ -269,14 +268,13 @@ class Update(base.UpdateCommand):
             max_nodes=args.max_nodes,
             node_pool=args.node_pool,
             locations=locations,
-            enable_master_authorized_networks=
-            enable_master_authorized_networks,
+            enable_master_authorized_networks=enable_master_authorized_networks,
             master_authorized_networks=args.master_authorized_networks)
         op_ref = adapter.UpdateCluster(cluster_ref, options)
 
     if not args.async:
-      adapter.WaitForOperation(
-          op_ref, 'Updating {0}'.format(cluster_ref.clusterId))
+      adapter.WaitForOperation(op_ref,
+                               'Updating {0}'.format(cluster_ref.clusterId))
 
       log.UpdatedResource(cluster_ref)
 
@@ -299,7 +297,7 @@ class UpdateBeta(Update):
     _AddMutuallyExclusiveArgs(group)
     flags.AddClusterAutoscalingFlags(parser, group, hidden=True)
     _AddAdditionalZonesArg(group)
-    flags.AddMasterAuthorizedNetworksFlags(parser, group, hidden=True)
+    flags.AddMasterAuthorizedNetworksFlags(parser, group)
     flags.AddEnableLegacyAuthorizationFlag(group)
     flags.AddStartIpRotationFlag(group)
     flags.AddCompleteIpRotationFlag(group)
@@ -319,7 +317,7 @@ class UpdateAlpha(Update):
     _AddMutuallyExclusiveArgs(group)
     flags.AddClusterAutoscalingFlags(parser, group)
     _AddAdditionalZonesArg(group)
-    flags.AddMasterAuthorizedNetworksFlags(parser, group, hidden=True)
+    flags.AddMasterAuthorizedNetworksFlags(parser, group)
     flags.AddEnableLegacyAuthorizationFlag(group)
     flags.AddStartIpRotationFlag(group)
     flags.AddCompleteIpRotationFlag(group)

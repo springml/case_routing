@@ -17,7 +17,6 @@ from googlecloudsdk.api_lib.resource_manager import folders
 from googlecloudsdk.calliope import base
 
 
-@base.Hidden
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)
 class Folders(base.Group):
   """Manage Cloud Folders.

@@ -30,12 +30,14 @@ class List(orgs_base.OrganizationCommand, base.ListCommand):
 
   @staticmethod
   def Args(parser):
-    parser.display_info.AddFormat('table({fields})'.format(
-        fields=','.join([
-            'displayName:label=DISPLAY_NAME',
-            'name.segment():label=ID:align=right:sort=1',
-            'owner.directoryCustomerId:label=DIRECTORY_CUSTOMER_ID:align=right'
-        ])))
+    parser.display_info.AddFormat(
+        """
+          table(
+            displayName:label=DISPLAY_NAME,
+            name.segment():label=ID:align=right:sort=1,
+            owner.directoryCustomerId:label=DIRECTORY_CUSTOMER_ID:align=right
+          )""")
+    parser.display_info.AddUriFunc(orgs_base.OrganizationsUriFunc)
 
   def Run(self, args):
     """Run the list command."""

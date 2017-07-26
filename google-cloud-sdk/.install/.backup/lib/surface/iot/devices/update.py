@@ -16,6 +16,7 @@ from googlecloudsdk.api_lib.cloudiot import devices
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iot import flags
 from googlecloudsdk.command_lib.iot import util
+from googlecloudsdk.core import log
 
 
 class Update(base.UpdateCommand):
@@ -34,6 +35,6 @@ class Update(base.UpdateCommand):
                                   region=args.region)
     enabled_state = util.ParseEnableDevice(args.enable_device, client=client)
 
-    return client.Patch(
-        device_ref,
-        enabled_state=enabled_state)
+    device = client.Patch(device_ref, enabled_state=enabled_state)
+    log.UpdatedResource(device_ref.Name(), 'device')
+    return device

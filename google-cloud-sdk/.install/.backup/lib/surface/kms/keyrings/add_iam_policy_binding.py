@@ -16,6 +16,7 @@
 from googlecloudsdk.api_lib.cloudkms import iam
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.iam import iam_util
+from googlecloudsdk.command_lib.kms import completers
 from googlecloudsdk.command_lib.kms import flags
 
 
@@ -40,8 +41,8 @@ class AddIamPolicyBinding(base.Command):
   @staticmethod
   def Args(parser):
     flags.AddKeyRingArgument(parser, 'whose IAM policy to modify')
-    iam_util.AddArgsForAddIamPolicyBinding(parser, 'keyring',
-                                           flags.KEY_RING_COLLECTION)
+    iam_util.AddArgsForAddIamPolicyBinding(
+        parser, completer=completers.KeyRingIamRolesCompleter)
 
   def Run(self, args):
     key_ring_ref = flags.ParseKeyRingName(args)
