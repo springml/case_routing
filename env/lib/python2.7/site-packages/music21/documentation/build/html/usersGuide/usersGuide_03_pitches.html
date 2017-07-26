@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User’s Guide, Chapter 3: Pitches, Durations, and Notes again &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="User’s Guide, Chapter 4: Lists, Streams (I) and Output" href="usersGuide_04_stream1.html" />
+    <link rel="prev" title="User’s Guide, Chapter 2: Notes" href="usersGuide_02_notes.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_04_stream1.html" title="User’s Guide, Chapter 4: Lists, Streams (I) and Output"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_02_notes.html" title="User’s Guide, Chapter 2: Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_02_notes.html"
+                        title="previous chapter">User&#8217;s Guide, Chapter 2: Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_04_stream1.html"
+                        title="next chapter">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a><ul>
+<li><a class="reference internal" href="#the-pitch-object">The Pitch object</a></li>
+<li><a class="reference internal" href="#carving-time-with-duration-objects">Carving time with Duration objects</a></li>
+<li><a class="reference internal" href="#back-to-notes">Back to Notes</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_02_notes.html">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_05_listsOfLists.html">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_07_chords.html">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_08_installingMusicXML.html">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_11_corpusSearching.html">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_12_music21object.html">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_13_music21object2.html">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_15_key.html">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_21_sorting.html">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_25_postTonalTools1.html">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_26_clientWeakref.html">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_28_lyricSearcher.html">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_97_timespans.html">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_03_pitches.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-03-pitches"></span><div class="section" id="user-s-guide-chapter-3-pitches-durations-and-notes-again">
+<h1>User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again<a class="headerlink" href="#user-s-guide-chapter-3-pitches-durations-and-notes-again" title="Permalink to this headline">¶</a></h1>
+<p>Now that you&#8217;ve made a couple of <code class="docutils literal"><span class="pre">Note</span></code> objects, it&#8217;s time to dig a
+little deeper into what makes a <code class="docutils literal"><span class="pre">Note</span></code> really a <code class="docutils literal"><span class="pre">Note</span></code>, namely,
+<a class="reference internal" href="../moduleReference/modulePitch.html#modulepitch"><span class="std std-ref">music21.pitch</span></a>, and <a class="reference internal" href="../moduleReference/moduleDuration.html#moduleduration"><span class="std std-ref">music21.duration</span></a> objects.</p>
+<div class="section" id="the-pitch-object">
+<h2>The Pitch object<a class="headerlink" href="#the-pitch-object" title="Permalink to this headline">¶</a></h2>
+<p>Since we&#8217;ve already covered <code class="docutils literal"><span class="pre">Note</span></code> objects,
+<a class="reference internal" href="../moduleReference/modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code></a> objects will be a breeze. Just like how
+the <code class="docutils literal"><span class="pre">Note</span></code> object is found in the <code class="docutils literal"><span class="pre">note</span></code> module, the <code class="docutils literal"><span class="pre">Pitch</span></code>
+object is found in the <code class="docutils literal"><span class="pre">pitch</span></code> module.</p>
+<p>Let&#8217;s create a <code class="docutils literal"><span class="pre">Pitch</span></code>. Like we did with <code class="docutils literal"><span class="pre">Notes</span></code>, just class the
+class with a note name, such as <code class="docutils literal"><span class="pre">B</span></code> with the optional symbols for
+sharp or flat, (<em>#</em> or <em>-</em> respectively).</p>
+<p>You can put an octave number after the name (4 = low treble clef), but
+you don&#8217;t have to:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;b-4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here we&#8217;ll use a more abstract variable name, <code class="docutils literal"><span class="pre">p1</span></code> for our first
+<code class="docutils literal"><span class="pre">Pitch</span></code>, just in case we change the pitch later (via <code class="docutils literal"><span class="pre">.transpose()</span></code>
+or something else).</p>
+<p>Just like we saw with <code class="docutils literal"><span class="pre">Notes</span></code> there are a lot of attributes (a.k.a.
+properties; we&#8217;ll use the term interchangeably for a bit before we talk
+about the difference) and methods that describe and change pitches. The
+first three will be old hat from <code class="docutils literal"><span class="pre">Note</span></code> objects:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">.</span><span class="n">octave</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">4</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">.</span><span class="n">pitchClass</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">10</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;B-&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">alter</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">-</span><span class="mf">1.0</span>
+</pre></div>
+</div>
+<p>Here are two more that you can use. The first is pretty
+self-explanatory. The second gives the value of the <code class="docutils literal"><span class="pre">Pitch</span></code> in the
+older, &#8220;MIDI&#8221; representation that is still in use today. It&#8217;s a number
+between 0 and 127 where middle C (C4) is 60 and C#4/Db4 is 61, B3 is 59,
+etc.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">.</span><span class="n">nameWithOctave</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;B-4&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">.</span><span class="n">midi</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">70</span>
+</pre></div>
+</div>
+<p>Most of these attributes can be changed (they are &#8220;settable properties&#8221;
+in Python speak).</p>
+<p>When an attribute is set, the <code class="docutils literal"><span class="pre">Pitch</span></code> object changes whatever is
+necessary to reflect the new value:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;d#&#39;</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">octave</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">nameWithOctave</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;D#3&#39;</span>
+</pre></div>
+</div>
+<p>And our familiar <code class="docutils literal"><span class="pre">.transpose()</span></code> method also appears on <code class="docutils literal"><span class="pre">Pitch</span></code> as
+well. Remember that <code class="docutils literal"><span class="pre">p1</span></code> is now a <code class="docutils literal"><span class="pre">D#</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">p2</span> <span class="o">=</span> <span class="n">p1</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;M7&#39;</span><span class="p">)</span>
+<span class="n">p2</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">C</span><span class="c1">##4&gt;</span>
+</pre></div>
+</div>
+<p>Notice that at the command line, just printing the variable name gives
+you the representation <code class="docutils literal"><span class="pre">&lt;music21.pitch.Pitch</span> <span class="pre">C##4&gt;</span></code>. You can also get
+this by typing <code class="docutils literal"><span class="pre">repr(p2)</span></code>.</p>
+<p>So, there&#8217;s really nothing new about <code class="docutils literal"><span class="pre">Pitch</span></code> objects that you didn&#8217;t
+already know from learning about <code class="docutils literal"><span class="pre">Notes</span></code>. So why the two different
+objects? It turns out, they are so similar because actually every
+<code class="docutils literal"><span class="pre">Note</span></code> object has a <code class="docutils literal"><span class="pre">Pitch</span></code> object inside it (like the monster in
+<em>Alien</em> but more benign). Everything that we did with the <code class="docutils literal"><span class="pre">note.Note</span></code>
+object, we could do with the <code class="docutils literal"><span class="pre">note.Note.pitch</span></code> object instead:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">csharp</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C#4&#39;</span><span class="p">)</span>
+<span class="n">csharp</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;C#&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">csharp</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;C#&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">csharp</span><span class="o">.</span><span class="n">octave</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">4</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">csharp</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">octave</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>But pitch objects have a lot more to offer for more technical working,
+for instance, <code class="docutils literal"><span class="pre">Pitch</span></code> objects know their names in Spanish:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">csharp</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">spanish</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;do sostenido&#39;</span>
+</pre></div>
+</div>
+<p>Notes don&#8217;t:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">csharp</span><span class="o">.</span><span class="n">spanish</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">AttributeError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">16</span><span class="o">-</span><span class="mi">8</span><span class="n">c908c31b14e</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">csharp</span><span class="o">.</span><span class="n">spanish</span>
+
+
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;Note&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;spanish&#39;</span>
+</pre></div>
+</div>
+<p>Here are some other things you can do with Pitch objects. Get the sharp
+printed nicely:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">csharp</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">unicodeName</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> C♯
+</pre></div>
+</div>
+<p>Get some enharmonics &#8211; these are methods, so we add <code class="docutils literal"><span class="pre">()</span></code> to them:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">csharp</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">getEnharmonic</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">csharp</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">getLowerEnharmonic</span><span class="p">()</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="n">D</span><span class="o">-</span><span class="mi">4</span>
+ <span class="n">B</span><span class="c1">##3</span>
+</pre></div>
+</div>
+<p><em>By the way, you know how we said that you shouldn&#8217;t have a variable
+named</em> <code class="docutils literal"><span class="pre">pitch</span></code> <em>because there&#8217;s already a module named</em> <code class="docutils literal"><span class="pre">pitch</span></code>.
+<em>You might wonder why</em> <code class="docutils literal"><span class="pre">Note</span></code> <em>objects can have an attribute named</em>
+<code class="docutils literal"><span class="pre">pitch</span></code> <em>without causing any problems. It&#8217;s because the</em> <code class="docutils literal"><span class="pre">.pitch</span></code>
+<em>attribute is always attached to a</em> <code class="docutils literal"><span class="pre">Note</span></code> <em>, so it&#8217;s never used
+without a prefix of some sort (in this case,</em> <code class="docutils literal"><span class="pre">csharp.pitch</span></code> <em>), and
+that&#8217;s enough to prevent any trouble.</em></p>
+<p>So far, it looks like <code class="docutils literal"><span class="pre">Pitch</span></code> objects can do everything <code class="docutils literal"><span class="pre">Note</span></code>
+objects can do and more. So why do we need <code class="docutils literal"><span class="pre">Note</span></code> objects? It&#8217;s
+because they also have <code class="docutils literal"><span class="pre">Duration</span></code> attributes, as we&#8217;ll see in the next
+section. Without a <code class="docutils literal"><span class="pre">Duration</span></code> attribute, you cannot put an object into
+a Measure or show it on your screen.</p>
+</div>
+<div class="section" id="carving-time-with-duration-objects">
+<h2>Carving time with Duration objects<a class="headerlink" href="#carving-time-with-duration-objects" title="Permalink to this headline">¶</a></h2>
+<p>For a <code class="docutils literal"><span class="pre">Note</span></code> to occupy musical space, it has to last a certain amount
+of time. We call that time the <code class="docutils literal"><span class="pre">Note</span></code>&#8216;s
+<a class="reference internal" href="../moduleReference/moduleDuration.html#music21.duration.Duration" title="music21.duration.Duration"><code class="xref py py-class docutils literal"><span class="pre">Duration</span></code></a>. <code class="docutils literal"><span class="pre">Duration</span></code> objects are
+ubiquitous in music21. Nearly all objects have, or can have, a
+<code class="docutils literal"><span class="pre">Duration</span></code>. A <code class="docutils literal"><span class="pre">Duration</span></code> object can represent just about any time
+span.</p>
+<p><code class="docutils literal"><span class="pre">Duration</span></code> objects are best used when they&#8217;re attached to something
+else, like a <code class="docutils literal"><span class="pre">Note</span></code> or a <code class="docutils literal"><span class="pre">Rest</span></code>, but for now, let&#8217;s look at what we
+can do with them on their own.</p>
+<p><code class="docutils literal"><span class="pre">Duration</span></code> objects reside in the <code class="docutils literal"><span class="pre">duration</span></code> module. When you create
+a <code class="docutils literal"><span class="pre">Duration</span></code> object, you can say what type of duration you want it to
+be when you create it.</p>
+<p>Here we&#8217;ll create the duration of a half note:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">halfDuration</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="s1">&#39;half&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The string &#8220;half&#8221; is called the &#8220;type&#8221; of the <code class="docutils literal"><span class="pre">Duration</span></code>. Music21
+<code class="docutils literal"><span class="pre">Durations</span></code> use the common American duration types: &#8220;whole&#8221;, &#8220;half&#8221;,
+&#8220;quarter&#8221;, &#8220;eighth&#8221;, &#8220;16th&#8221;, &#8220;32nd&#8221;, &#8220;64th&#8221;. Note that for durations
+shorter than an eighth note, we use numbers instead of spelling out the
+whole name of the <code class="docutils literal"><span class="pre">Duration</span></code> type. Music21 also supports less commonly
+used types such as &#8220;breve&#8221; (2 whole notes), &#8220;longa&#8221; (4 whole notes), and
+&#8220;maxima&#8221; (8 whole notes) and on the other side, &#8220;128th&#8221;, &#8220;256th&#8221;, etc.
+down to &#8220;2048th&#8221; notes. (Some of these very long and very short notes
+can&#8217;t be displayed in many musical notation systems, but it&#8217;s good to
+know that we&#8217;re ready when they are).</p>
+<p>The other standard way of creating a <code class="docutils literal"><span class="pre">Duration</span></code> is by passing it a
+number when it is created. That number represents how many quarter notes
+long it is. So we could have created our half note <code class="docutils literal"><span class="pre">Duration</span></code> by
+saying <code class="docutils literal"><span class="pre">2</span></code> or <code class="docutils literal"><span class="pre">2.0</span></code>. But we can also create <code class="docutils literal"><span class="pre">Durations</span></code> that
+aren&#8217;t exactly &#8220;whole&#8221;, &#8220;half&#8221;, &#8220;quarter&#8221;, etc. Let&#8217;s create a dotted
+quarter note, which is 1.5 quarter notes long:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dottedQuarter</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As with the <code class="docutils literal"><span class="pre">Pitch</span></code> and <code class="docutils literal"><span class="pre">Note</span></code> objects we&#8217;ve already seen, there are
+a bunch of attributes that <code class="docutils literal"><span class="pre">Duration</span></code> objects have. The most important
+one is <code class="docutils literal"><span class="pre">.quarterLength</span></code>. The
+:attr:<code class="docutils literal"><span class="pre">~music21.duration.Duration.quarterLength</span></code> of our
+<code class="docutils literal"><span class="pre">dottedQuarter</span></code> variable is of course 1.5: we set it to be. But just
+as importantly, the <code class="docutils literal"><span class="pre">halfDuration</span></code> object also has its quarterLength
+set:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dottedQuarter</span><span class="o">.</span><span class="n">quarterLength</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">1.5</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">halfDuration</span><span class="o">.</span><span class="n">quarterLength</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">.type</span></code> attribute tells you what general type of <code class="docutils literal"><span class="pre">Duration</span></code> you
+have:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">halfDuration</span><span class="o">.</span><span class="n">type</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;half&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dottedQuarter</span><span class="o">.</span><span class="n">type</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;quarter&#39;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">type</span></code> attribute cannot be everything that describes the
+<code class="docutils literal"><span class="pre">Duration</span></code>, there has to be some place where music21 keeps track of
+the fact that the <code class="docutils literal"><span class="pre">dottedQuarter</span></code> variable has a dot (otherwise it
+wouldn&#8217;t have a <code class="docutils literal"><span class="pre">quarterLength</span></code> of 1.5). You&#8217;ll find the attribute
+called <code class="docutils literal"><span class="pre">.dots</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">halfDuration</span><span class="o">.</span><span class="n">dots</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dottedQuarter</span><span class="o">.</span><span class="n">dots</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>The attributes of <code class="docutils literal"><span class="pre">dots</span></code>, <code class="docutils literal"><span class="pre">type</span></code>, and <code class="docutils literal"><span class="pre">quarterLength</span></code> are actually
+special attributes called &#8220;properties&#8221;. A property is an attribute that
+is smart in some way. Let&#8217;s change the number of dots on our
+<code class="docutils literal"><span class="pre">dottedQuarter</span></code> object and see what happens to the <code class="docutils literal"><span class="pre">quarterLength</span></code>
+property:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dottedQuarter</span><span class="o">.</span><span class="n">dots</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">dottedQuarter</span><span class="o">.</span><span class="n">quarterLength</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">1.75</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dottedQuarter</span><span class="o">.</span><span class="n">dots</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">dottedQuarter</span><span class="o">.</span><span class="n">quarterLength</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">1.875</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dottedQuarter</span><span class="o">.</span><span class="n">dots</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">dottedQuarter</span><span class="o">.</span><span class="n">quarterLength</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">1.9375</span>
+</pre></div>
+</div>
+<p>Or let&#8217;s change the <code class="docutils literal"><span class="pre">quarterLength</span></code> of the dottedQuarter and see what
+happens to the <code class="docutils literal"><span class="pre">type</span></code> and <code class="docutils literal"><span class="pre">dots</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dottedQuarter</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">dottedQuarter</span><span class="o">.</span><span class="n">type</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;16th&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dottedQuarter</span><span class="o">.</span><span class="n">dots</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>QuarterLengths are so important to music21 that we&#8217;ll sometimes
+abbreviate them as <code class="docutils literal"><span class="pre">qL</span></code> or <code class="docutils literal"><span class="pre">qLs</span></code>. Almost everything that is measured
+in music21 is measured in <code class="docutils literal"><span class="pre">qLs</span></code>.</p>
+<p>There are sometimes <code class="docutils literal"><span class="pre">Durations</span></code> that can&#8217;t be expressed easily as a
+single written <code class="docutils literal"><span class="pre">Note</span></code> on a page. For instance, a <code class="docutils literal"><span class="pre">Note</span></code> lasting a
+half-note plus a sixteenth-note can&#8217;t be written as a single <code class="docutils literal"><span class="pre">Note</span></code>
+graphic, but it&#8217;s perfectly fine to use as a quarterLength</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dottedQuarter</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">2.25</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">type</span></code> for these odd values is called &#8220;complex&#8221;:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dottedQuarter</span><span class="o">.</span><span class="n">type</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;complex&#39;</span>
+</pre></div>
+</div>
+<p>Complex types have multiple &#8220;DurationTuple&#8221; objects in <code class="docutils literal"><span class="pre">.components</span></code>
+that represent the smaller, simple durations that make up the entire
+Duration:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dottedQuarter</span><span class="o">.</span><span class="n">components</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="n">DurationTuple</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;half&#39;</span><span class="p">,</span> <span class="n">dots</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">quarterLength</span><span class="o">=</span><span class="mf">2.0</span><span class="p">),</span>
+  <span class="n">DurationTuple</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;16th&#39;</span><span class="p">,</span> <span class="n">dots</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">quarterLength</span><span class="o">=</span><span class="mf">0.25</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><em>(There&#8217;s one more strange</em> <code class="docutils literal"><span class="pre">type</span></code> <em>called &#8220;zero&#8221; for Durations that
+don&#8217;t have any Duration at all. It&#8217;s used for measuring the conceptual
+length of grace notes, spaceless objects like</em> <code class="docutils literal"><span class="pre">Clefs</span></code>, <em>Kim
+Kardashian&#8217;s marriages, etc. We&#8217;ll get to it later)</em></p>
+<p>The <a class="reference internal" href="../moduleReference/moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a> method will show that
+weird <code class="docutils literal"><span class="pre">2.25</span></code> Duration. We have to first assign it to a note:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="n">n</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">dottedQuarter</span>
+<span class="n">n</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_03_pitches_65_0.png" src="../_images/usersGuide_03_pitches_65_0.png" />
+<p>Music21 can also deal with other <code class="docutils literal"><span class="pre">quarterLengths</span></code> such as 0.8, which
+is 4/5ths of a quarter note, or 1/3 which is an eighth note triplet.</p>
+<p>Just be careful when creating triplets, because of a weird Python 2
+quirk that makes it so that if you divide two integers with &#8220;/&#8221; you
+always get back just the integer part of the number, so 8/3 is 2, since
+8/3 is 2.66666... and the integer part is 2. I will use &#8220;//&#8221; in this
+example, since &#8220;//&#8221; appears in both Python 2 and Python 3 and is
+equivalent to Python 2&#8217;s &#8220;/&#8221;</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="mi">8</span><span class="o">//</span><span class="mi">3</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">2</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">//</span><span class="mi">3</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>To get the number you probably want either use Python 3 or make sure
+that at least one of the numbers you are dividing is a float. So:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="mf">8.0</span><span class="o">/</span><span class="mf">3.0</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">2.6666666666666665</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="mf">1.0</span><span class="o">/</span><span class="mi">3</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">0.3333333333333333</span>
+</pre></div>
+</div>
+<p>You can go ahead and make a Triplet or other
+<a class="reference internal" href="../moduleReference/moduleDuration.html#music21.duration.Tuplet" title="music21.duration.Tuplet"><code class="xref py py-class docutils literal"><span class="pre">Tuplet</span></code></a> now, but we&#8217;ll get to Triplets
+later.</p>
+</div>
+<div class="section" id="back-to-notes">
+<h2>Back to Notes<a class="headerlink" href="#back-to-notes" title="Permalink to this headline">¶</a></h2>
+<p>So now you can see the advantage of working with <code class="docutils literal"><span class="pre">Note</span></code> objects: they
+have both a <code class="docutils literal"><span class="pre">.pitch</span></code> attribute, which contains a <code class="docutils literal"><span class="pre">Pitch</span></code> object, and
+a <code class="docutils literal"><span class="pre">.duration</span></code> attribute, which contains a <code class="docutils literal"><span class="pre">Duration</span></code> object. The
+default <code class="docutils literal"><span class="pre">Pitch</span></code> for a <code class="docutils literal"><span class="pre">Note</span></code> is <code class="docutils literal"><span class="pre">C</span></code> (meaning <code class="docutils literal"><span class="pre">C4</span></code>) and the
+default <code class="docutils literal"><span class="pre">Duration</span></code> is 1.0, or a quarter note.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="n">n1</span><span class="o">.</span><span class="n">pitch</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">C4</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">duration</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">Duration</span> <span class="mf">1.0</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>But we can play around with them:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">nameWithOctave</span> <span class="o">=</span> <span class="s1">&#39;E-5&#39;</span>
+<span class="n">n1</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">3.0</span>
+</pre></div>
+</div>
+<p>and then the other properties change accordingly:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;half&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">dots</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;E-&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">accidental</span> <span class="n">flat</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">octave</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>We already said that some of the attributes of <code class="docutils literal"><span class="pre">Pitch</span></code> can also be
+called on the <code class="docutils literal"><span class="pre">Note</span></code> object itself. The same is true for the most
+important attributes of <code class="docutils literal"><span class="pre">Duration</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">name</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;E-&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">quarterLength</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">3.0</span>
+</pre></div>
+</div>
+<p>Let&#8217;s change the quarterLength back to 1.0 for now:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">1.0</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">Notes</span></code> can do things that neither <code class="docutils literal"><span class="pre">Pitch</span></code> or <code class="docutils literal"><span class="pre">Duration</span></code> objects
+can do. For instance, they can have lyrics. Let&#8217;s add some lyrics to
+<code class="docutils literal"><span class="pre">Notes</span></code>. You can easily set <a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.Lyric" title="music21.note.Lyric"><code class="xref py py-class docutils literal"><span class="pre">Lyric</span></code></a> objects
+just by setting the <a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.GeneralNote.lyric" title="music21.note.GeneralNote.lyric"><code class="xref py py-meth docutils literal"><span class="pre">lyric</span></code></a>
+property. (For reference, the <code class="docutils literal"><span class="pre">lyric</span></code> attribute is actually an
+attribute of <a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.GeneralNote" title="music21.note.GeneralNote"><code class="xref py py-class docutils literal"><span class="pre">GeneralNote</span></code></a>, which is a &#8220;base
+class&#8221; from which the <code class="docutils literal"><span class="pre">Note</span></code> class &#8220;inherits&#8221;. In other words, the
+<code class="docutils literal"><span class="pre">Note</span></code> class gains the <code class="docutils literal"><span class="pre">lyric</span></code> attribute from <code class="docutils literal"><span class="pre">GeneralNote</span></code>. But
+that&#8217;s not too important.)</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">otherNote</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;F6&quot;</span><span class="p">)</span>
+<span class="n">otherNote</span><span class="o">.</span><span class="n">lyric</span> <span class="o">=</span> <span class="s2">&quot;I&#39;m the Queen of the Night!&quot;</span>
+</pre></div>
+</div>
+<p>But let&#8217;s do something more complex. Here I add multiple lyrics to
+<code class="docutils literal"><span class="pre">n1</span></code> using the <code class="docutils literal"><span class="pre">Note's</span></code> <a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.GeneralNote.addLyric" title="music21.note.GeneralNote.addLyric"><code class="xref py py-meth docutils literal"><span class="pre">addLyric()</span></code></a>
+method. And instead of adding a simple String, I&#8217;ll add as a lyric the
+name of the note itself and its <code class="docutils literal"><span class="pre">pitchClassString</span></code>.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">addLyric</span><span class="p">(</span><span class="n">n1</span><span class="o">.</span><span class="n">nameWithOctave</span><span class="p">)</span>
+<span class="n">n1</span><span class="o">.</span><span class="n">addLyric</span><span class="p">(</span><span class="n">n1</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">pitchClassString</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, lets put the <code class="docutils literal"><span class="pre">quarterLength</span></code> of the note as a string with a
+preface &#8220;QL: &#8221;:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">addLyric</span><span class="p">(</span><span class="s1">&#39;QL: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">n1</span><span class="o">.</span><span class="n">quarterLength</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The format &#8216;<code class="docutils literal"><span class="pre">QL:</span> <span class="pre">%s</span></code>&#8216; says to put the first thing outside the quotes
+in place of <code class="docutils literal"><span class="pre">%s</span></code> as a string (the &#8220;s&#8221; in <code class="docutils literal"><span class="pre">%s</span></code> means to make it a
+string. Remember that <code class="docutils literal"><span class="pre">.quarterLength</span></code> is not a string, but a float).</p>
+<p>As it should be becoming clear, we can always check our work with the
+<a class="reference internal" href="../moduleReference/moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a> method.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_03_pitches_98_0.png" src="../_images/usersGuide_03_pitches_98_0.png" />
+<p>If we now edit the
+<a class="reference internal" href="../moduleReference/moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-meth docutils literal"><span class="pre">quarterLength</span></code></a>
+property we can still change the <code class="docutils literal"><span class="pre">Note</span></code>&#8216;s <code class="docutils literal"><span class="pre">Duration</span></code>. But because we
+already set the lyric to show &#8220;<code class="docutils literal"><span class="pre">QL:</span> <span class="pre">1.0</span></code>, it won&#8217;t be changed when we
+<code class="docutils literal"><span class="pre">.show()</span></code> it again in the following example.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">n1</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">6.25</span>
+<span class="n">n1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_03_pitches_100_0.png" src="../_images/usersGuide_03_pitches_100_0.png" />
+<p>There many more things we can do with a <code class="docutils literal"><span class="pre">Note</span></code> object, but I&#8217;m itching
+to look at what happens when we put multiple <code class="docutils literal"><span class="pre">Notes</span></code> together in a
+row. And to do that we&#8217;ll need to learn a bit about the topic of
+<a class="reference internal" href="usersGuide_04_stream1.html#usersguide-04-stream1"><span class="std std-ref">Chapter 4: Streams</span></a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_04_stream1.html" title="User’s Guide, Chapter 4: Lists, Streams (I) and Output"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_02_notes.html" title="User’s Guide, Chapter 2: Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

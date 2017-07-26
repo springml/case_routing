@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.timespans.trees &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.timespans.verticality" href="moduleTimespansVerticality.html" />
+    <link rel="prev" title="music21.timespans.spans" href="moduleTimespansSpans.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleTimespansVerticality.html" title="music21.timespans.verticality"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleTimespansSpans.html" title="music21.timespans.spans"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleTimespansSpans.html"
+                        title="previous chapter">music21.timespans.spans</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleTimespansVerticality.html"
+                        title="next chapter">music21.timespans.verticality</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.timespans.trees</a><ul>
+<li><a class="reference internal" href="#timespantree">TimespanTree</a></li>
+<li><a class="reference internal" href="#avltree">AVLTree</a></li>
+<li><a class="reference internal" href="#elementtree">ElementTree</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleTimespansTrees.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-timespans-trees">
+<span id="moduletimespanstrees"></span><h1>music21.timespans.trees<a class="headerlink" href="#music21-timespans-trees" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.timespans.trees"></span><p>Tools for grouping notes and chords into a searchable tree
+organized by start and stop offsets.</p>
+<div class="section" id="timespantree">
+<h2>TimespanTree<a class="headerlink" href="#timespantree" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.timespans.trees.TimespanTree">
+<em class="property">class </em><code class="descclassname">music21.timespans.trees.</code><code class="descname">TimespanTree</code><span class="sig-paren">(</span><em>elements=None</em>, <em>source=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.TimespanTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>A data structure for efficiently slicing a score.</p>
+<p>While you can construct an TimespanTree by hand, inserting timespans one at
+a time, the common use-case is to construct the offset-tree from an entire
+score at once:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">bach</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">streamToTimespanTree</span><span class="p">(</span><span class="n">bach</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">getVerticalityAt</span><span class="p">(</span><span class="mf">17.0</span><span class="p">))</span>
+<span class="go">&lt;Verticality 17.0 {F#3 C#4 A4}&gt;</span>
+</pre></div>
+</div>
+<p>All offsets are assumed to be relative to the score&#8217;s origin if flatten is True</p>
+<p>Example: How many moments in Bach are consonant and how many are dissonant:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">totalConsonances</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">totalDissonances</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">iterateVerticalities</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">toChord</span><span class="p">()</span><span class="o">.</span><span class="n">isConsonant</span><span class="p">():</span>
+<span class="gp">... </span>       <span class="n">totalConsonances</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>       <span class="n">totalDissonances</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">totalConsonances</span><span class="p">,</span> <span class="n">totalDissonances</span><span class="p">)</span>
+<span class="go">(34, 17)</span>
+</pre></div>
+</div>
+<p>So 1/3 of the vertical moments in Bach are dissonant!  But is this an
+accurate perception? Let&#8217;s sum up the total consonant duration vs.
+dissonant duration.</p>
+<p>Do it again pairwise to figure out the length (actually this won&#8217;t include
+the last element)</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">totalConsonanceDuration</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">totalDissonanceDuration</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iterator</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">iterateVerticalitiesNwise</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">verticality1</span><span class="p">,</span> <span class="n">verticality2</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">offset1</span> <span class="o">=</span> <span class="n">verticality1</span><span class="o">.</span><span class="n">offset</span>
+<span class="gp">... </span>    <span class="n">offset2</span> <span class="o">=</span> <span class="n">verticality2</span><span class="o">.</span><span class="n">offset</span>
+<span class="gp">... </span>    <span class="n">quarterLength</span> <span class="o">=</span> <span class="n">offset2</span> <span class="o">-</span> <span class="n">offset1</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">verticality1</span><span class="o">.</span><span class="n">toChord</span><span class="p">()</span><span class="o">.</span><span class="n">isConsonant</span><span class="p">():</span>
+<span class="gp">... </span>       <span class="n">totalConsonanceDuration</span> <span class="o">+=</span> <span class="n">quarterLength</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>       <span class="n">totalDissonanceDuration</span> <span class="o">+=</span> <span class="n">quarterLength</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">totalConsonanceDuration</span><span class="p">,</span> <span class="n">totalDissonanceDuration</span><span class="p">)</span>
+<span class="go">(25.5, 9.5)</span>
+</pre></div>
+</div>
+<p>Remove neighbor tones from the Bach chorale:</p>
+<p>Here in Alto, measure 7, there&#8217;s a neighbor tone E#.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">bach</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="s">&#39;Alto&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.note.Note F#&gt;</span>
+<span class="go">{0.5} &lt;music21.note.Note E#&gt;</span>
+<span class="go">{1.0} &lt;music21.note.Note F#&gt;</span>
+<span class="go">{1.5} &lt;music21.note.Note F#&gt;</span>
+<span class="go">{2.0} &lt;music21.note.Note C#&gt;</span>
+</pre></div>
+</div>
+<p>We&#8217;ll get rid of it and a lot of other neighbor tones.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">verticalities</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">iterateVerticalitiesNwise</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="n">horizontalities</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">unwrapVerticalities</span><span class="p">(</span><span class="n">verticalities</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="k">for</span> <span class="n">unused_part</span><span class="p">,</span> <span class="n">horizontality</span> <span class="ow">in</span> <span class="n">horizontalities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="gp">... </span>       <span class="k">if</span> <span class="n">horizontality</span><span class="o">.</span><span class="n">hasNeighborTone</span><span class="p">:</span>
+<span class="gp">... </span>           <span class="n">merged</span> <span class="o">=</span> <span class="n">horizontality</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+<span class="gp">... </span>              <span class="n">endTime</span><span class="o">=</span><span class="n">horizontality</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">endTime</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="p">)</span> <span class="c"># merged is a new ElementTimeSpan</span>
+<span class="gp">... </span>           <span class="n">tree</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">horizontality</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">... </span>           <span class="n">tree</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">horizontality</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">... </span>           <span class="n">tree</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">horizontality</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="gp">... </span>           <span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">merged</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newBach</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">timespansToPartwiseStream</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">tree</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">templateStream</span><span class="o">=</span><span class="n">bach</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newBach</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.chord.Chord F#4&gt;</span>
+<span class="go">{1.5} &lt;music21.chord.Chord F#3&gt;</span>
+<span class="go">{2.0} &lt;music21.chord.Chord C#4&gt;</span>
+</pre></div>
+</div>
+<p>The second F# is an octave lower, so it wouldn&#8217;t get merged even if
+adjacent notes were fused together (which they&#8217;re not).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">TimespanTree is an implementation of an extended AVL tree. AVL
+trees are a type of binary tree, like Red-Black trees. AVL trees are
+very efficient at insertion when the objects being inserted are already
+sorted - which is usually the case with data extracted from a score.
+TimespanTree is an extended AVL tree because each node in the
+tree keeps track of not just the start offsets of ElementTimespans
+stored at that node, but also the earliest and latest stop offset of
+all ElementTimespans stores at both that node and all nodes which are
+children of that node. This lets us quickly located ElementTimespans
+which overlap offsets or which are contained within ranges of offsets.
+This also means that the contents of a TimespanTree are always
+sorted.</p>
+</div>
+<p>TODO: newBach.parts[&#8216;Alto&#8217;].measure(7).show(&#8216;text&#8217;) should work.
+KeyError: &#8216;provided key (Alto) does not match any id or group&#8217;</p>
+<p>TODO: Doc examples for all functions, including privates.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.timespans.trees.TimespanTree" title="music21.timespans.trees.TimespanTree"><code class="xref py py-class docutils literal"><span class="pre">TimespanTree</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree" title="music21.timespans.trees.ElementTree"><code class="xref py py-class docutils literal"><span class="pre">ElementTree</span></code></a></li>
+<li><a class="reference internal" href="#music21.timespans.trees.AVLTree" title="music21.timespans.trees.AVLTree"><code class="xref py py-class docutils literal"><span class="pre">AVLTree</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.timespans.trees.TimespanTree" title="music21.timespans.trees.TimespanTree"><code class="xref py py-class docutils literal"><span class="pre">TimespanTree</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.timespans.trees.TimespanTree.allParts">
+<code class="descclassname">TimespanTree.</code><code class="descname">allParts</code><a class="headerlink" href="#music21.timespans.trees.TimespanTree.allParts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="music21.timespans.trees.TimespanTree.maximumOverlap">
+<code class="descclassname">TimespanTree.</code><code class="descname">maximumOverlap</code><a class="headerlink" href="#music21.timespans.trees.TimespanTree.maximumOverlap" title="Permalink to this definition">¶</a></dt>
+<dd><p>The maximum number of timespans overlapping at any given moment in this
+timespan collection.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">maximumOverlap</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>Returns None if there is no verticality here.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.timespans.trees.TimespanTree.minimumOverlap">
+<code class="descclassname">TimespanTree.</code><code class="descname">minimumOverlap</code><a class="headerlink" href="#music21.timespans.trees.TimespanTree.minimumOverlap" title="Permalink to this definition">¶</a></dt>
+<dd><p>The minimum number of timespans overlapping at any given moment in this
+timespan collection.</p>
+<p>In a tree created from a monophonic stream, the minimumOverlap will
+probably be either zero or one.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">streamToTimespanTree</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">score</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">minimumOverlap</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>Returns None if there is no verticality here.</p>
+</dd></dl>
+
+<p>Read-only properties inherited from <a class="reference internal" href="#music21.timespans.trees.ElementTree" title="music21.timespans.trees.ElementTree"><code class="xref py py-class docutils literal"><span class="pre">ElementTree</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.allEndTimes" title="music21.timespans.trees.ElementTree.allEndTimes"><code class="xref py py-attr docutils literal"><span class="pre">allEndTimes</span></code></a></li>
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.allOffsets" title="music21.timespans.trees.ElementTree.allOffsets"><code class="xref py py-attr docutils literal"><span class="pre">allOffsets</span></code></a></li>
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.allTimePoints" title="music21.timespans.trees.ElementTree.allTimePoints"><code class="xref py py-attr docutils literal"><span class="pre">allTimePoints</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.earliestEndTime" title="music21.timespans.trees.ElementTree.earliestEndTime"><code class="xref py py-attr docutils literal"><span class="pre">earliestEndTime</span></code></a></li>
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.endTime" title="music21.timespans.trees.ElementTree.endTime"><code class="xref py py-attr docutils literal"><span class="pre">endTime</span></code></a></li>
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.highestOffset" title="music21.timespans.trees.ElementTree.highestOffset"><code class="xref py py-attr docutils literal"><span class="pre">highestOffset</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.latestEndTime" title="music21.timespans.trees.ElementTree.latestEndTime"><code class="xref py py-attr docutils literal"><span class="pre">latestEndTime</span></code></a></li>
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.lowestOffset" title="music21.timespans.trees.ElementTree.lowestOffset"><code class="xref py py-attr docutils literal"><span class="pre">lowestOffset</span></code></a></li>
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.offset" title="music21.timespans.trees.ElementTree.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.timespans.trees.TimespanTree" title="music21.timespans.trees.TimespanTree"><code class="xref py py-class docutils literal"><span class="pre">TimespanTree</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.timespans.trees.TimespanTree.element">
+<code class="descclassname">TimespanTree.</code><code class="descname">element</code><a class="headerlink" href="#music21.timespans.trees.TimespanTree.element" title="Permalink to this definition">¶</a></dt>
+<dd><p>defined so a TimespanTree can be used like an ElementTimespan</p>
+<p>TODO: Look at subclassing or at least deriving from a common base...</p>
+</dd></dl>
+
+<p>Read/write properties inherited from <a class="reference internal" href="#music21.timespans.trees.ElementTree" title="music21.timespans.trees.ElementTree"><code class="xref py py-class docutils literal"><span class="pre">ElementTree</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.source" title="music21.timespans.trees.ElementTree.source"><code class="xref py py-attr docutils literal"><span class="pre">source</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.timespans.trees.TimespanTree" title="music21.timespans.trees.TimespanTree"><code class="xref py py-class docutils literal"><span class="pre">TimespanTree</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.timespans.trees.TimespanTree.findNextElementTimespanInSameStreamByClass">
+<code class="descclassname">TimespanTree.</code><code class="descname">findNextElementTimespanInSameStreamByClass</code><span class="sig-paren">(</span><em>elementTimespan</em>, <em>classList=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.TimespanTree.findNextElementTimespanInSameStreamByClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds next element timespan in the same stream class as <cite>elementTimespan</cite>.</p>
+<p>Default classList is (stream.Part, )</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span>
+<span class="go">&lt;ElementTimespan (0.0 to 0.5) &lt;music21.note.Note C#&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span><span class="o">.</span><span class="n">part</span>
+<span class="go">&lt;music21.stream.Part Soprano&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">findNextElementTimespanInSameStreamByClass</span><span class="p">(</span><span class="n">timespan</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span>
+<span class="go">&lt;ElementTimespan (0.5 to 1.0) &lt;music21.note.Note B&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span><span class="o">.</span><span class="n">part</span>
+<span class="go">&lt;music21.stream.Part Soprano&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">findNextElementTimespanInSameStreamByClass</span><span class="p">(</span><span class="n">timespan</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span>
+<span class="go">&lt;ElementTimespan (1.0 to 2.0) &lt;music21.note.Note A&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span><span class="o">.</span><span class="n">part</span>
+<span class="go">&lt;music21.stream.Part Soprano&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.TimespanTree.findPreviousElementTimespanInSameStreamByClass">
+<code class="descclassname">TimespanTree.</code><code class="descname">findPreviousElementTimespanInSameStreamByClass</code><span class="sig-paren">(</span><em>elementTimespan</em>, <em>classList=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.TimespanTree.findPreviousElementTimespanInSameStreamByClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds next element timespan in the same Part/Measure, etc. (specify in classList) as 
+the <cite>elementTimespan</cite>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span>
+<span class="go">&lt;ElementTimespan (35.0 to 36.0) &lt;music21.note.Note F#&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span><span class="o">.</span><span class="n">part</span>
+<span class="go">&lt;music21.stream.Part Bass&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">findPreviousElementTimespanInSameStreamByClass</span><span class="p">(</span><span class="n">timespan</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span>
+<span class="go">&lt;ElementTimespan (34.0 to 35.0) &lt;music21.note.Note B&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span><span class="o">.</span><span class="n">part</span>
+<span class="go">&lt;music21.stream.Part Bass&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">findPreviousElementTimespanInSameStreamByClass</span><span class="p">(</span><span class="n">timespan</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span>
+<span class="go">&lt;ElementTimespan (33.0 to 34.0) &lt;music21.note.Note D&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timespan</span><span class="o">.</span><span class="n">part</span>
+<span class="go">&lt;music21.stream.Part Bass&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.TimespanTree.getVerticalityAt">
+<code class="descclassname">TimespanTree.</code><code class="descname">getVerticalityAt</code><span class="sig-paren">(</span><em>offset</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.TimespanTree.getVerticalityAt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the verticality in this offset-tree which starts at <cite>offset</cite>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">bach</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">bach</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">getVerticalityAt</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="go">&lt;Verticality 2.5 {G#3 B3 E4 B4}&gt;</span>
+</pre></div>
+</div>
+<p>Verticalities outside the range still return a Verticality, but it might be empty...</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">getVerticalityAt</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<span class="go">&lt;Verticality 2000 {}&gt;</span>
+</pre></div>
+</div>
+<p>Test that it still works if the tree is empty...</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">bach</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">(</span><span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">instrument</span><span class="o">.</span><span class="n">Tuba</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span>
+<span class="go">&lt;TimespanTree {0} (-inf to inf) &lt;music21.stream.Score ...&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">getVerticalityAt</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="go">&lt;Verticality 5.0 {}&gt;           </span>
+</pre></div>
+</div>
+<p>Returns a verticality.Verticality object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.TimespanTree.getVerticalityAtOrBefore">
+<code class="descclassname">TimespanTree.</code><code class="descname">getVerticalityAtOrBefore</code><span class="sig-paren">(</span><em>offset</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.TimespanTree.getVerticalityAtOrBefore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the verticality in this offset-tree which starts at <cite>offset</cite>.</p>
+<p>If the found verticality has no start timespans, the function returns
+the next previous verticality with start timespans.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">getVerticalityAtOrBefore</span><span class="p">(</span><span class="mf">0.125</span><span class="p">)</span>
+<span class="go">&lt;Verticality 0.0 {A3 E4 C#5}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">getVerticalityAtOrBefore</span><span class="p">(</span><span class="mf">0.</span><span class="p">)</span>
+<span class="go">&lt;Verticality 0.0 {A3 E4 C#5}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.TimespanTree.iterateConsonanceBoundedVerticalities">
+<code class="descclassname">TimespanTree.</code><code class="descname">iterateConsonanceBoundedVerticalities</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.TimespanTree.iterateConsonanceBoundedVerticalities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates consonant-bounded verticality subsequences in this
+offset-tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">subsequence</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">iterateConsonanceBoundedVerticalities</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s">&#39;Subequence:&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">verticality</span> <span class="ow">in</span> <span class="n">subsequence</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\t</span><span class="s">[{}] {}: {} [{}]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">verticality</span><span class="o">.</span><span class="n">measureNumber</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">verticality</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">verticality</span><span class="o">.</span><span class="n">isConsonant</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">verticality</span><span class="o">.</span><span class="n">beatStrength</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="p">))</span>
+<span class="gp">...</span>
+<span class="go">Subequence:</span>
+<span class="go">    [2] &lt;Verticality 6.0 {E3 E4 G#4 B4}&gt;: True [0.25]</span>
+<span class="go">    [2] &lt;Verticality 6.5 {E3 D4 G#4 B4}&gt;: False [0.125]</span>
+<span class="go">    [2] &lt;Verticality 7.0 {A2 C#4 E4 A4}&gt;: True [0.5]</span>
+<span class="go">Subequence:</span>
+<span class="go">    [3] &lt;Verticality 9.0 {F#3 C#4 F#4 A4}&gt;: True [1.0]</span>
+<span class="go">    [3] &lt;Verticality 9.5 {B2 D4 G#4 B4}&gt;: False [0.125]</span>
+<span class="go">    [3] &lt;Verticality 10.0 {C#3 C#4 E#4 G#4}&gt;: True [0.25]</span>
+<span class="go">Subequence:</span>
+<span class="go">    [3] &lt;Verticality 10.0 {C#3 C#4 E#4 G#4}&gt;: True [0.25]</span>
+<span class="go">    [3] &lt;Verticality 10.5 {C#3 B3 E#4 G#4}&gt;: False [0.125]</span>
+<span class="go">    [3] &lt;Verticality 11.0 {F#2 A3 C#4 F#4}&gt;: True [0.5]</span>
+<span class="go">Subequence:</span>
+<span class="go">    [3] &lt;Verticality 12.0 {F#3 C#4 F#4 A4}&gt;: True [0.25]</span>
+<span class="go">    [4] &lt;Verticality 13.0 {G#3 B3 F#4 B4}&gt;: False [1.0]</span>
+<span class="go">    [4] &lt;Verticality 13.5 {F#3 B3 F#4 B4}&gt;: False [0.125]</span>
+<span class="go">    [4] &lt;Verticality 14.0 {G#3 B3 E4 B4}&gt;: True [0.25]</span>
+<span class="go">Subequence:</span>
+<span class="go">    [4] &lt;Verticality 14.0 {G#3 B3 E4 B4}&gt;: True [0.25]</span>
+<span class="go">    [4] &lt;Verticality 14.5 {A3 B3 E4 B4}&gt;: False [0.125]</span>
+<span class="go">    [4] &lt;Verticality 15.0 {B3 D#4 F#4}&gt;: True [0.5]</span>
+<span class="go">Subequence:</span>
+<span class="go">    [4] &lt;Verticality 15.0 {B3 D#4 F#4}&gt;: True [0.5]</span>
+<span class="go">    [4] &lt;Verticality 15.5 {B2 A3 D#4 F#4}&gt;: False [0.125]</span>
+<span class="go">    [4] &lt;Verticality 16.0 {C#3 G#3 C#4 E4}&gt;: True [0.25]</span>
+<span class="go">Subequence:</span>
+<span class="go">    [5] &lt;Verticality 17.5 {F#3 D4 F#4 A4}&gt;: True [0.125]</span>
+<span class="go">    [5] &lt;Verticality 18.0 {G#3 C#4 E4 B4}&gt;: False [0.25]</span>
+<span class="go">    [5] &lt;Verticality 18.5 {G#3 B3 E4 B4}&gt;: True [0.125]</span>
+<span class="go">Subequence:</span>
+<span class="go">    [6] &lt;Verticality 24.0 {F#3 C#4 F#4 A4}&gt;: True [0.25]</span>
+<span class="go">    [7] &lt;Verticality 25.0 {B2 D4 F#4 G#4}&gt;: False [1.0]</span>
+<span class="go">    [7] &lt;Verticality 25.5 {C#3 C#4 E#4 G#4}&gt;: True [0.125]</span>
+<span class="go">Subequence:</span>
+<span class="go">    [7] &lt;Verticality 25.5 {C#3 C#4 E#4 G#4}&gt;: True [0.125]</span>
+<span class="go">    [7] &lt;Verticality 26.0 {D3 C#4 F#4}&gt;: False [0.25]</span>
+<span class="go">    [7] &lt;Verticality 26.5 {D3 F#3 B3 F#4}&gt;: True [0.125]</span>
+<span class="go">Subequence:</span>
+<span class="go">    [8] &lt;Verticality 29.0 {A#2 F#3 C#4 F#4}&gt;: True [1.0]</span>
+<span class="go">    [8] &lt;Verticality 29.5 {A#2 F#3 D4 F#4}&gt;: False [0.125]</span>
+<span class="go">    [8] &lt;Verticality 30.0 {A#2 C#4 E4 F#4}&gt;: False [0.25]</span>
+<span class="go">    [8] &lt;Verticality 31.0 {B2 C#4 E4 F#4}&gt;: False [0.5]</span>
+<span class="go">    [8] &lt;Verticality 32.0 {C#3 B3 D4 F#4}&gt;: False [0.25]</span>
+<span class="go">    [8] &lt;Verticality 32.5 {C#3 A#3 C#4 F#4}&gt;: False [0.125]</span>
+<span class="go">    [9] &lt;Verticality 33.0 {D3 B3 F#4}&gt;: True [1.0]</span>
+<span class="go">Subequence:</span>
+<span class="go">    [9] &lt;Verticality 33.0 {D3 B3 F#4}&gt;: True [1.0]</span>
+<span class="go">    [9] &lt;Verticality 33.5 {D3 B3 C#4 F#4}&gt;: False [0.125]</span>
+<span class="go">    [9] &lt;Verticality 34.0 {B2 B3 D4 F#4}&gt;: True [0.25]</span>
+<span class="go">Subequence:</span>
+<span class="go">    [9] &lt;Verticality 34.0 {B2 B3 D4 F#4}&gt;: True [0.25]</span>
+<span class="go">    [9] &lt;Verticality 34.5 {B2 B3 D4 E#4}&gt;: False [0.125]</span>
+<span class="go">    [9] &lt;Verticality 35.0 {F#3 A#3 C#4 F#4}&gt;: True [0.5]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.TimespanTree.iterateVerticalities">
+<code class="descclassname">TimespanTree.</code><code class="descname">iterateVerticalities</code><span class="sig-paren">(</span><em>reverse=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.TimespanTree.iterateVerticalities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates all vertical moments in this offset-tree.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The offset-tree can be mutated while its verticalities are
+iterated over. Each verticality holds a reference back to the
+offset-tree and will ask for the start-offset after (or before) its
+own start offset in order to determine the next verticality to
+yield. If you mutate the tree by adding or deleting timespans, the
+next verticality will reflect those changes.</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iterator</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">iterateVerticalities</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">next</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">&lt;Verticality 0.0 {A3 E4 C#5}&gt;</span>
+<span class="go">&lt;Verticality 0.5 {G#3 B3 E4 B4}&gt;</span>
+<span class="go">&lt;Verticality 1.0 {F#3 C#4 F#4 A4}&gt;</span>
+<span class="go">&lt;Verticality 2.0 {G#3 B3 E4 B4}&gt;</span>
+<span class="go">&lt;Verticality 3.0 {A3 E4 C#5}&gt;</span>
+<span class="go">&lt;Verticality 4.0 {G#3 B3 E4 E5}&gt;</span>
+<span class="go">&lt;Verticality 5.0 {A3 E4 C#5}&gt;</span>
+<span class="go">&lt;Verticality 5.5 {C#3 E4 A4 C#5}&gt;</span>
+<span class="go">&lt;Verticality 6.0 {E3 E4 G#4 B4}&gt;</span>
+<span class="go">&lt;Verticality 6.5 {E3 D4 G#4 B4}&gt;</span>
+</pre></div>
+</div>
+<p>Verticalities can also be iterated in reverse:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">iterator</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">iterateVerticalities</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">next</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">&lt;Verticality 35.0 {F#3 A#3 C#4 F#4}&gt;</span>
+<span class="go">&lt;Verticality 34.5 {B2 B3 D4 E#4}&gt;</span>
+<span class="go">&lt;Verticality 34.0 {B2 B3 D4 F#4}&gt;</span>
+<span class="go">&lt;Verticality 33.5 {D3 B3 C#4 F#4}&gt;</span>
+<span class="go">&lt;Verticality 33.0 {D3 B3 F#4}&gt;</span>
+<span class="go">&lt;Verticality 32.5 {C#3 A#3 C#4 F#4}&gt;</span>
+<span class="go">&lt;Verticality 32.0 {C#3 B3 D4 F#4}&gt;</span>
+<span class="go">&lt;Verticality 31.0 {B2 C#4 E4 F#4}&gt;</span>
+<span class="go">&lt;Verticality 30.0 {A#2 C#4 E4 F#4}&gt;</span>
+<span class="go">&lt;Verticality 29.5 {A#2 F#3 D4 F#4}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.TimespanTree.iterateVerticalitiesNwise">
+<code class="descclassname">TimespanTree.</code><code class="descname">iterateVerticalitiesNwise</code><span class="sig-paren">(</span><em>n=3</em>, <em>reverse=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.TimespanTree.iterateVerticalitiesNwise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates verticalities in groups of length <cite>n</cite>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The offset-tree can be mutated while its verticalities are
+iterated over. Each verticality holds a reference back to the
+offset-tree and will ask for the start-offset after (or before) its
+own start offset in order to determine the next verticality to
+yield. If you mutate the tree by adding or deleting timespans, the
+next verticality will reflect those changes.</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iterator</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">iterateVerticalitiesNwise</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iterator</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="go">&lt;VerticalitySequence: [</span>
+<span class="go">    &lt;Verticality 0.0 {A3 E4 C#5}&gt;,</span>
+<span class="go">    &lt;Verticality 0.5 {G#3 B3 E4 B4}&gt;</span>
+<span class="go">    ]&gt;</span>
+<span class="go">&lt;VerticalitySequence: [</span>
+<span class="go">    &lt;Verticality 0.5 {G#3 B3 E4 B4}&gt;,</span>
+<span class="go">    &lt;Verticality 1.0 {F#3 C#4 F#4 A4}&gt;</span>
+<span class="go">    ]&gt;</span>
+<span class="go">&lt;VerticalitySequence: [</span>
+<span class="go">    &lt;Verticality 1.0 {F#3 C#4 F#4 A4}&gt;,</span>
+<span class="go">    &lt;Verticality 2.0 {G#3 B3 E4 B4}&gt;</span>
+<span class="go">    ]&gt;</span>
+<span class="go">&lt;VerticalitySequence: [</span>
+<span class="go">    &lt;Verticality 2.0 {G#3 B3 E4 B4}&gt;,</span>
+<span class="go">    &lt;Verticality 3.0 {A3 E4 C#5}&gt;</span>
+<span class="go">    ]&gt;</span>
+</pre></div>
+</div>
+<p>Grouped verticalities can also be iterated in reverse:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">iterator</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">iterateVerticalitiesNwise</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iterator</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="go">&lt;VerticalitySequence: [</span>
+<span class="go">    &lt;Verticality 34.5 {B2 B3 D4 E#4}&gt;,</span>
+<span class="go">    &lt;Verticality 35.0 {F#3 A#3 C#4 F#4}&gt;</span>
+<span class="go">    ]&gt;</span>
+<span class="go">&lt;VerticalitySequence: [</span>
+<span class="go">    &lt;Verticality 34.0 {B2 B3 D4 F#4}&gt;,</span>
+<span class="go">    &lt;Verticality 34.5 {B2 B3 D4 E#4}&gt;</span>
+<span class="go">    ]&gt;</span>
+<span class="go">&lt;VerticalitySequence: [</span>
+<span class="go">    &lt;Verticality 33.5 {D3 B3 C#4 F#4}&gt;,</span>
+<span class="go">    &lt;Verticality 34.0 {B2 B3 D4 F#4}&gt;</span>
+<span class="go">    ]&gt;</span>
+<span class="go">&lt;VerticalitySequence: [</span>
+<span class="go">    &lt;Verticality 33.0 {D3 B3 F#4}&gt;,</span>
+<span class="go">    &lt;Verticality 33.5 {D3 B3 C#4 F#4}&gt;</span>
+<span class="go">    ]&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.TimespanTree.splitAt">
+<code class="descclassname">TimespanTree.</code><code class="descname">splitAt</code><span class="sig-paren">(</span><em>offsets</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.TimespanTree.splitAt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits all timespans in this offset-tree at <cite>offsets</cite>, operating in
+place.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">elementsStartingAt</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="go">()</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">elementTimespan</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">elementsOverlappingOffset</span><span class="p">(</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%r</span><span class="s">, </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">elementTimespan</span><span class="p">,</span> <span class="n">elementTimespan</span><span class="o">.</span><span class="n">part</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="go">&lt;ElementTimespan (0.0 to 0.5) &lt;music21.note.Note C#&gt;&gt;, Soprano</span>
+<span class="go">&lt;ElementTimespan (0.0 to 0.5) &lt;music21.note.Note A&gt;&gt;, Tenor</span>
+<span class="go">&lt;ElementTimespan (0.0 to 0.5) &lt;music21.note.Note A&gt;&gt;, Bass</span>
+<span class="go">&lt;ElementTimespan (0.0 to 1.0) &lt;music21.note.Note E&gt;&gt;, Alto</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">splitAt</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">elementTimespan</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">elementsStartingAt</span><span class="p">(</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%r</span><span class="s">, </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">elementTimespan</span><span class="p">,</span> <span class="n">elementTimespan</span><span class="o">.</span><span class="n">part</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
+<span class="gp">...</span>
+<span class="go">&lt;ElementTimespan (0.1 to 0.5) &lt;music21.note.Note C#&gt;&gt;, Soprano</span>
+<span class="go">&lt;ElementTimespan (0.1 to 1.0) &lt;music21.note.Note E&gt;&gt;, Alto</span>
+<span class="go">&lt;ElementTimespan (0.1 to 0.5) &lt;music21.note.Note A&gt;&gt;, Tenor</span>
+<span class="go">&lt;ElementTimespan (0.1 to 0.5) &lt;music21.note.Note A&gt;&gt;, Bass</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">elementsOverlappingOffset</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="go">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.TimespanTree.toPartwiseTimespanTrees">
+<code class="descclassname">TimespanTree.</code><code class="descname">toPartwiseTimespanTrees</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.TimespanTree.toPartwiseTimespanTrees" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="music21.timespans.trees.TimespanTree.unwrapVerticalities">
+<em class="property">static </em><code class="descclassname">TimespanTree.</code><code class="descname">unwrapVerticalities</code><span class="sig-paren">(</span><em>verticalities</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.TimespanTree.unwrapVerticalities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unwraps a sequence of <cite>Verticality</cite> objects into a dictionary of
+<cite>Part</cite>:<cite>Horizontality</cite> key/value pairs.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iterator</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">iterateVerticalitiesNwise</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">verticalities</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">iterator</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unwrapped</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">unwrapVerticalities</span><span class="p">(</span><span class="n">verticalities</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">unwrapped</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">getInstrument</span><span class="p">()</span><span class="o">.</span><span class="n">partName</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">horizontality</span> <span class="o">=</span> <span class="n">unwrapped</span><span class="p">[</span><span class="n">part</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">timespan</span> <span class="ow">in</span> <span class="n">horizontality</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">print</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\t</span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">timespan</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">&lt;music21.stream.Part Alto&gt;</span>
+<span class="go">    &lt;ElementTimespan (0.0 to 1.0) &lt;music21.note.Note E&gt;&gt;</span>
+<span class="go">    &lt;ElementTimespan (1.0 to 2.0) &lt;music21.note.Note F#&gt;&gt;</span>
+<span class="go">&lt;music21.stream.Part Bass&gt;</span>
+<span class="go">    &lt;ElementTimespan (0.0 to 0.5) &lt;music21.note.Note A&gt;&gt;</span>
+<span class="go">    &lt;ElementTimespan (0.5 to 1.0) &lt;music21.note.Note G#&gt;&gt;</span>
+<span class="go">    &lt;ElementTimespan (1.0 to 2.0) &lt;music21.note.Note F#&gt;&gt;</span>
+<span class="go">&lt;music21.stream.Part Soprano&gt;</span>
+<span class="go">    &lt;ElementTimespan (0.0 to 0.5) &lt;music21.note.Note C#&gt;&gt;</span>
+<span class="go">    &lt;ElementTimespan (0.5 to 1.0) &lt;music21.note.Note B&gt;&gt;</span>
+<span class="go">    &lt;ElementTimespan (1.0 to 2.0) &lt;music21.note.Note A&gt;&gt;</span>
+<span class="go">&lt;music21.stream.Part Tenor&gt;</span>
+<span class="go">    &lt;ElementTimespan (0.0 to 0.5) &lt;music21.note.Note A&gt;&gt;</span>
+<span class="go">    &lt;ElementTimespan (0.5 to 1.0) &lt;music21.note.Note B&gt;&gt;</span>
+<span class="go">    &lt;ElementTimespan (1.0 to 2.0) &lt;music21.note.Note C#&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.timespans.trees.ElementTree" title="music21.timespans.trees.ElementTree"><code class="xref py py-class docutils literal"><span class="pre">ElementTree</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.append" title="music21.timespans.trees.ElementTree.append"><code class="xref py py-meth docutils literal"><span class="pre">append()</span></code></a></li>
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.copy" title="music21.timespans.trees.ElementTree.copy"><code class="xref py py-meth docutils literal"><span class="pre">copy()</span></code></a></li>
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.elementsOverlappingOffset" title="music21.timespans.trees.ElementTree.elementsOverlappingOffset"><code class="xref py py-meth docutils literal"><span class="pre">elementsOverlappingOffset()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.elementsStartingAt" title="music21.timespans.trees.ElementTree.elementsStartingAt"><code class="xref py py-meth docutils literal"><span class="pre">elementsStartingAt()</span></code></a></li>
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.elementsStoppingAt" title="music21.timespans.trees.ElementTree.elementsStoppingAt"><code class="xref py py-meth docutils literal"><span class="pre">elementsStoppingAt()</span></code></a></li>
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.index" title="music21.timespans.trees.ElementTree.index"><code class="xref py py-meth docutils literal"><span class="pre">index()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.insert" title="music21.timespans.trees.ElementTree.insert"><code class="xref py py-meth docutils literal"><span class="pre">insert()</span></code></a></li>
+<li><a class="reference internal" href="#music21.timespans.trees.ElementTree.remove" title="music21.timespans.trees.ElementTree.remove"><code class="xref py py-meth docutils literal"><span class="pre">remove()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.timespans.trees.AVLTree" title="music21.timespans.trees.AVLTree"><code class="xref py py-class docutils literal"><span class="pre">AVLTree</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.AVLTree.debug" title="music21.timespans.trees.AVLTree.debug"><code class="xref py py-meth docutils literal"><span class="pre">debug()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.AVLTree.getOffsetAfter" title="music21.timespans.trees.AVLTree.getOffsetAfter"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetAfter()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.AVLTree.getOffsetBefore" title="music21.timespans.trees.AVLTree.getOffsetBefore"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBefore()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="avltree">
+<h2>AVLTree<a class="headerlink" href="#avltree" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.timespans.trees.AVLTree">
+<em class="property">class </em><code class="descclassname">music21.timespans.trees.</code><code class="descname">AVLTree</code><a class="headerlink" href="#music21.timespans.trees.AVLTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data structure for working with timespans.node.AVLNode objects.</p>
+<p>To be subclassed in order to do anything useful with music21 objects.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.timespans.trees.AVLTree" title="music21.timespans.trees.AVLTree"><code class="xref py py-class docutils literal"><span class="pre">AVLTree</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.timespans.trees.AVLTree.debug">
+<code class="descclassname">AVLTree.</code><code class="descname">debug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.AVLTree.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets string representation of the timespan collection.</p>
+<p>Useful only for debugging its internal node structure.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tsList</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tss</span> <span class="o">=</span> <span class="p">[</span><span class="n">timespans</span><span class="o">.</span><span class="n">Timespan</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">tsList</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">trees</span><span class="o">.</span><span class="n">TimespanTree</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tss</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;Node: Start:3 Indices:(0:4:5:10) Length:{1}&gt;</span>
+<span class="go">    L: &lt;Node: Start:1 Indices:(0:2:3:4) Length:{1}&gt;</span>
+<span class="go">        L: &lt;Node: Start:0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">        R: &lt;Node: Start:2 Indices:(3:3:4:4) Length:{1}&gt;</span>
+<span class="go">    R: &lt;Node: Start:5 Indices:(5:6:8:10) Length:{2}&gt;</span>
+<span class="go">        L: &lt;Node: Start:4 Indices:(5:5:6:6) Length:{1}&gt;</span>
+<span class="go">        R: &lt;Node: Start:6 Indices:(8:8:9:10) Length:{1}&gt;</span>
+<span class="go">            R: &lt;Node: Start:7 Indices:(9:9:10:10) Length:{1}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.AVLTree.getOffsetAfter">
+<code class="descclassname">AVLTree.</code><code class="descname">getOffsetAfter</code><span class="sig-paren">(</span><em>offset</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.AVLTree.getOffsetAfter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets start offset after <cite>offset</cite>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">getOffsetAfter</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>Returns None if no succeeding offset exists.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">getOffsetAfter</span><span class="p">(</span><span class="mi">35</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Generally speaking, negative offsets will usually return 0.0</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">getOffsetAfter</span><span class="p">(</span><span class="o">-</span><span class="mi">999</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.AVLTree.getOffsetBefore">
+<code class="descclassname">AVLTree.</code><code class="descname">getOffsetBefore</code><span class="sig-paren">(</span><em>offset</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.AVLTree.getOffsetBefore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the start offset immediately preceding <cite>offset</cite> in this
+offset-tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">getOffsetBefore</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="go">35.0</span>
+</pre></div>
+</div>
+<p>Return None if no preceding offset exists.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">getOffsetBefore</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="elementtree">
+<h2>ElementTree<a class="headerlink" href="#elementtree" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.timespans.trees.ElementTree">
+<em class="property">class </em><code class="descclassname">music21.timespans.trees.</code><code class="descname">ElementTree</code><span class="sig-paren">(</span><em>elements=None</em>, <em>source=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.ElementTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>A data structure for efficiently storing a score: flat or recursed or normal.</p>
+<p>This data structure stores TimespanNodes: objects which implement both a
+<cite>offset</cite> and <cite>endTime</cite> property. It provides fast lookups of such
+objects and can quickly locate vertical overlaps.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">et</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">trees</span><span class="o">.</span><span class="n">ElementTree</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">et</span>
+<span class="go">&lt;ElementTree {0} (-inf to inf)&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">et</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">et</span>
+<span class="go">&lt;ElementTree {100} (0.0 to 100.0)&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s">&#39;D#&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">et</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">101.0</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>These operations are very fast...</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">et</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">n2</span><span class="p">,</span> <span class="mf">101.0</span><span class="p">)</span>
+<span class="go">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">et</span><span class="o">.</span><span class="n">getOffsetAfter</span><span class="p">(</span><span class="mf">100.5</span><span class="p">)</span>
+<span class="go">101.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.timespans.trees.ElementTree" title="music21.timespans.trees.ElementTree"><code class="xref py py-class docutils literal"><span class="pre">ElementTree</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.AVLTree" title="music21.timespans.trees.AVLTree"><code class="xref py py-class docutils literal"><span class="pre">AVLTree</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.timespans.trees.ElementTree" title="music21.timespans.trees.ElementTree"><code class="xref py py-class docutils literal"><span class="pre">ElementTree</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.timespans.trees.ElementTree.allEndTimes">
+<code class="descclassname">ElementTree.</code><code class="descname">allEndTimes</code><a class="headerlink" href="#music21.timespans.trees.ElementTree.allEndTimes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets all unique stop offsets of all timespans in this offset-tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">allEndTimes</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">offset</span>
+<span class="gp">...</span>
+<span class="go">0.5</span>
+<span class="go">1.0</span>
+<span class="go">2.0</span>
+<span class="go">4.0</span>
+<span class="go">5.5</span>
+<span class="go">6.0</span>
+<span class="go">7.0</span>
+<span class="go">8.0</span>
+<span class="go">9.5</span>
+<span class="go">10.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.timespans.trees.ElementTree.allOffsets">
+<code class="descclassname">ElementTree.</code><code class="descname">allOffsets</code><a class="headerlink" href="#music21.timespans.trees.ElementTree.allOffsets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets all unique offsets of all timespans in this offset-tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">allOffsets</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">offset</span>
+<span class="gp">...</span>
+<span class="go">0.0</span>
+<span class="go">0.5</span>
+<span class="go">1.0</span>
+<span class="go">2.0</span>
+<span class="go">3.0</span>
+<span class="go">4.0</span>
+<span class="go">5.0</span>
+<span class="go">5.5</span>
+<span class="go">6.0</span>
+<span class="go">6.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.timespans.trees.ElementTree.allTimePoints">
+<code class="descclassname">ElementTree.</code><code class="descname">allTimePoints</code><a class="headerlink" href="#music21.timespans.trees.ElementTree.allTimePoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets all unique offsets (both starting and stopping) of all elements/timespans
+in this offset-tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">allTimePoints</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">offset</span>
+<span class="gp">...</span>
+<span class="go">0.0</span>
+<span class="go">0.5</span>
+<span class="go">1.0</span>
+<span class="go">2.0</span>
+<span class="go">3.0</span>
+<span class="go">4.0</span>
+<span class="go">5.0</span>
+<span class="go">5.5</span>
+<span class="go">6.0</span>
+<span class="go">6.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.timespans.trees.ElementTree.earliestEndTime">
+<code class="descclassname">ElementTree.</code><code class="descname">earliestEndTime</code><a class="headerlink" href="#music21.timespans.trees.ElementTree.earliestEndTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the earliest stop offset in this offset-tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">earliestEndTime</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.timespans.trees.ElementTree.endTime">
+<code class="descclassname">ElementTree.</code><code class="descname">endTime</code><a class="headerlink" href="#music21.timespans.trees.ElementTree.endTime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="music21.timespans.trees.ElementTree.highestOffset">
+<code class="descclassname">ElementTree.</code><code class="descname">highestOffset</code><a class="headerlink" href="#music21.timespans.trees.ElementTree.highestOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the latest start offset in this offset-tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">highestOffset</span>
+<span class="go">35.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.timespans.trees.ElementTree.latestEndTime">
+<code class="descclassname">ElementTree.</code><code class="descname">latestEndTime</code><a class="headerlink" href="#music21.timespans.trees.ElementTree.latestEndTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the latest stop offset in this offset-tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">latestEndTime</span>
+<span class="go">36.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.timespans.trees.ElementTree.lowestOffset">
+<code class="descclassname">ElementTree.</code><code class="descname">lowestOffset</code><a class="headerlink" href="#music21.timespans.trees.ElementTree.lowestOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the earliest start offset in this offset-tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">lowestOffset</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.timespans.trees.ElementTree.offset">
+<code class="descclassname">ElementTree.</code><code class="descname">offset</code><a class="headerlink" href="#music21.timespans.trees.ElementTree.offset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.timespans.trees.ElementTree" title="music21.timespans.trees.ElementTree"><code class="xref py py-class docutils literal"><span class="pre">ElementTree</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.timespans.trees.ElementTree.source">
+<code class="descclassname">ElementTree.</code><code class="descname">source</code><a class="headerlink" href="#music21.timespans.trees.ElementTree.source" title="Permalink to this definition">¶</a></dt>
+<dd><p>the original stream.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.timespans.trees.ElementTree" title="music21.timespans.trees.ElementTree"><code class="xref py py-class docutils literal"><span class="pre">ElementTree</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.timespans.trees.ElementTree.append">
+<code class="descclassname">ElementTree.</code><code class="descname">append</code><span class="sig-paren">(</span><em>el</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.ElementTree.append" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.ElementTree.copy">
+<code class="descclassname">ElementTree.</code><code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.ElementTree.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new offset-tree with the same timespans as this offset-tree.</p>
+<p>This is analogous to <cite>dict.copy()</cite>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newTree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.ElementTree.elementsOverlappingOffset">
+<code class="descclassname">ElementTree.</code><code class="descname">elementsOverlappingOffset</code><span class="sig-paren">(</span><em>offset</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.ElementTree.elementsOverlappingOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds elements or timespans in this ElementTree which overlap <cite>offset</cite>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">elementsOverlappingOffset</span><span class="p">(</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">el</span>
+<span class="gp">...</span>
+<span class="go">&lt;ElementTimespan (0.0 to 1.0) &lt;music21.note.Note E&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.ElementTree.elementsStartingAt">
+<code class="descclassname">ElementTree.</code><code class="descname">elementsStartingAt</code><span class="sig-paren">(</span><em>offset</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.ElementTree.elementsStartingAt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds timespans in this offset-tree which start at <cite>offset</cite>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">timespan</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">elementsStartingAt</span><span class="p">(</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">timespan</span>
+<span class="gp">...</span>
+<span class="go">&lt;ElementTimespan (0.5 to 1.0) &lt;music21.note.Note B&gt;&gt;</span>
+<span class="go">&lt;ElementTimespan (0.5 to 1.0) &lt;music21.note.Note B&gt;&gt;</span>
+<span class="go">&lt;ElementTimespan (0.5 to 1.0) &lt;music21.note.Note G#&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.ElementTree.elementsStoppingAt">
+<code class="descclassname">ElementTree.</code><code class="descname">elementsStoppingAt</code><span class="sig-paren">(</span><em>offset</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.ElementTree.elementsStoppingAt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds timespans in this offset-tree which stop at <cite>offset</cite>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">timespan</span> <span class="ow">in</span> <span class="n">tree</span><span class="o">.</span><span class="n">elementsStoppingAt</span><span class="p">(</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">timespan</span>
+<span class="gp">...</span>
+<span class="go">&lt;ElementTimespan (0.0 to 0.5) &lt;music21.note.Note C#&gt;&gt;</span>
+<span class="go">&lt;ElementTimespan (0.0 to 0.5) &lt;music21.note.Note A&gt;&gt;</span>
+<span class="go">&lt;ElementTimespan (0.0 to 0.5) &lt;music21.note.Note A&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.ElementTree.index">
+<code class="descclassname">ElementTree.</code><code class="descname">index</code><span class="sig-paren">(</span><em>element</em>, <em>offset=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.ElementTree.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets index of <cite>timespan</cite> in tree.</p>
+<p>Since timespans do not have .sites, there is only one offset to deal with...</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tsList</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="p">[</span><span class="n">timespans</span><span class="o">.</span><span class="n">Timespan</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">tsList</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">trees</span><span class="o">.</span><span class="n">TimespanTree</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">timespan</span> <span class="ow">in</span> <span class="n">ts</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%r</span><span class="s"> </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">timespan</span><span class="p">,</span> <span class="n">tree</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">timespan</span><span class="p">)))</span>
+<span class="gp">...</span>
+<span class="go">&lt;Timespan 0 2&gt; 0</span>
+<span class="go">&lt;Timespan 0 9&gt; 1</span>
+<span class="go">&lt;Timespan 1 1&gt; 2</span>
+<span class="go">&lt;Timespan 2 3&gt; 3</span>
+<span class="go">&lt;Timespan 3 4&gt; 4</span>
+<span class="go">&lt;Timespan 4 9&gt; 5</span>
+<span class="go">&lt;Timespan 5 6&gt; 6</span>
+<span class="go">&lt;Timespan 5 8&gt; 7</span>
+<span class="go">&lt;Timespan 6 8&gt; 8</span>
+<span class="go">&lt;Timespan 7 7&gt; 9</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">timespans</span><span class="o">.</span><span class="n">Timespan</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">ValueError</span>: <span class="n">&lt;Timespan -100 100&gt; not in Tree at offset -100.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.ElementTree.insert">
+<code class="descclassname">ElementTree.</code><code class="descname">insert</code><span class="sig-paren">(</span><em>offsetsOrElements</em>, <em>elements=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.ElementTree.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts elements or <cite>timespans</cite> into this offset-tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">et</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">trees</span><span class="o">.</span><span class="n">ElementTree</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">et</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">et</span>
+<span class="go">&lt;ElementTree {1} (10.0 to 11.0)&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.timespans.trees.ElementTree.remove">
+<code class="descclassname">ElementTree.</code><code class="descname">remove</code><span class="sig-paren">(</span><em>elements</em>, <em>offsets=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.timespans.trees.ElementTree.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes <cite>elements</cite> or timespans (a single one or a list) from this Tree.</p>
+<p>Much safer (for non-timespans) if a list of offsets is used</p>
+<p>TODO: raise exception if elements length and offsets length differ</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.timespans.trees.AVLTree" title="music21.timespans.trees.AVLTree"><code class="xref py py-class docutils literal"><span class="pre">AVLTree</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.AVLTree.debug" title="music21.timespans.trees.AVLTree.debug"><code class="xref py py-meth docutils literal"><span class="pre">debug()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.AVLTree.getOffsetAfter" title="music21.timespans.trees.AVLTree.getOffsetAfter"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetAfter()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.timespans.trees.AVLTree.getOffsetBefore" title="music21.timespans.trees.AVLTree.getOffsetBefore"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBefore()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleTimespansVerticality.html" title="music21.timespans.verticality"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleTimespansSpans.html" title="music21.timespans.spans"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2015, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Dec 04, 2015.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

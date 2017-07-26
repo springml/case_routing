@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User’s Guide, Chapter 28: Lyric Searching &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="User’s Guide, Chapter 54: Extending Converter with New Formats" href="usersGuide_54_extendingConverter.html" />
+    <link rel="prev" title="User’s Guide, Chapter 27: Grace Notes" href="usersGuide_27_graceNotes.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_54_extendingConverter.html" title="User’s Guide, Chapter 54: Extending Converter with New Formats"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_27_graceNotes.html" title="User’s Guide, Chapter 27: Grace Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_27_graceNotes.html"
+                        title="previous chapter">User&#8217;s Guide, Chapter 27: Grace Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_54_extendingConverter.html"
+                        title="next chapter">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></p>
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_02_notes.html">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_03_pitches.html">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_05_listsOfLists.html">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_07_chords.html">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_08_installingMusicXML.html">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_11_corpusSearching.html">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_12_music21object.html">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_13_music21object2.html">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_15_key.html">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_21_sorting.html">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_25_postTonalTools1.html">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_26_clientWeakref.html">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_97_timespans.html">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_28_lyricSearcher.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-28-lyricsearcher"></span><div class="section" id="user-s-guide-chapter-28-lyric-searching">
+<h1>User&#8217;s Guide, Chapter 28: Lyric Searching<a class="headerlink" href="#user-s-guide-chapter-28-lyric-searching" title="Permalink to this headline">¶</a></h1>
+<p>Lyrics can be difficult to search through for various reasons. Let me
+give an example: you might want to find all instances of, say, the word
+&#8220;Domine&#8221; (latin: Lord) to see if, perhaps, they&#8217;re higher in pitch than
+the average notes in the piece.</p>
+<p>Let&#8217;s start by taking a piece that will be a good example, a <em>Gloria</em> by
+the otherwise unknown 15th-century musician, &#8220;D. Luca,&#8221; found in the
+<code class="docutils literal"><span class="pre">music21</span></code> corpus.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">luca</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;luca/gloria&#39;</span><span class="p">)</span>
+<span class="n">cantus</span> <span class="o">=</span> <span class="n">luca</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">cantus</span><span class="o">.</span><span class="n">measures</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_28_lyricSearcher_3_0.png" src="../_images/usersGuide_28_lyricSearcher_3_0.png" />
+<p>This code is unlikely to work:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dominePS</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">cantus</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Note&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">lyric</span> <span class="o">==</span> <span class="s1">&#39;Domine&#39;</span><span class="p">:</span>
+        <span class="n">dominePS</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">ps</span>
+</pre></div>
+</div>
+<p>Did we get anything?</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dominePS</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>Why? Because &#8220;domine&#8221; is three syllables long. Thus, it is not going to
+be found on a single note. You can check to see if &#8220;Domine&#8221; appears in
+the piece at all using the <a class="reference internal" href="../moduleReference/moduleText.html#music21.text.assembleLyrics" title="music21.text.assembleLyrics"><code class="xref py py-func docutils literal"><span class="pre">music21.text.assembleLyrics()</span></code></a>
+function:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">allText</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">assembleLyrics</span><span class="p">(</span><span class="n">cantus</span><span class="p">)</span>
+<span class="k">if</span> <span class="s1">&#39;Domine&#39;</span> <span class="ow">in</span> <span class="n">allText</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Yup!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> Yup!
+</pre></div>
+</div>
+<p>Well, now we know that the <em>Gloria</em> of the Mass, contains the word
+&#8220;Domine&#8221;. Except we already knew that, and we&#8217;re no close to figuring
+out what pitches are used by &#8220;Domine&#8221;.</p>
+<p><a class="reference internal" href="../moduleReference/moduleSearchLyrics.html#music21.search.lyrics.LyricSearcher" title="music21.search.lyrics.LyricSearcher"><code class="xref py py-class docutils literal"><span class="pre">music21.search.lyrics.LyricSearcher</span></code></a> will come to your rescue.
+We can create a new <code class="docutils literal"><span class="pre">LyricSearcher</span></code> object and attach the Stream to
+it:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">lyrics</span><span class="o">.</span><span class="n">LyricSearcher</span><span class="p">(</span><span class="n">cantus</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now let&#8217;s search for &#8220;Domine&#8221;:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">domineResults</span> <span class="o">=</span> <span class="n">ls</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;Domine&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>How many times did it appear?</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">domineResults</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>Three times. Let&#8217;s look more closely at the results to see where:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">domineResults</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="n">SearchMatch</span><span class="p">(</span><span class="n">mStart</span><span class="o">=</span><span class="mi">28</span><span class="p">,</span> <span class="n">mEnd</span><span class="o">=</span><span class="mi">29</span><span class="p">,</span> <span class="n">matchText</span><span class="o">=</span><span class="s1">&#39;Domine&#39;</span><span class="p">,</span> <span class="n">els</span><span class="o">=</span><span class="p">(</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="o">&gt;</span><span class="p">),</span> <span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="o">...</span><span class="p">]),</span>
+  <span class="n">SearchMatch</span><span class="p">(</span><span class="n">mStart</span><span class="o">=</span><span class="mi">38</span><span class="p">,</span> <span class="n">mEnd</span><span class="o">=</span><span class="mi">39</span><span class="p">,</span> <span class="n">matchText</span><span class="o">=</span><span class="s1">&#39;Domine&#39;</span><span class="p">,</span> <span class="n">els</span><span class="o">=</span><span class="p">(</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">B</span><span class="o">&gt;</span><span class="p">),</span> <span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="o">...</span><span class="p">]),</span>
+  <span class="n">SearchMatch</span><span class="p">(</span><span class="n">mStart</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">mEnd</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">matchText</span><span class="o">=</span><span class="s1">&#39;Domine&#39;</span><span class="p">,</span> <span class="n">els</span><span class="o">=</span><span class="p">(</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">B</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="o">&gt;</span><span class="p">),</span> <span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="o">...</span><span class="p">])]</span>
+</pre></div>
+</div>
+<p>We&#8217;ll get to the meaning of this soon, but we can see that the three
+matches appear (probably coincidentally) ten measures apart, at measures
+28-29, 38-39, and 48. Let&#8217;s check that:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cantus</span><span class="o">.</span><span class="n">measures</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">48</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_28_lyricSearcher_19_0.png" src="../_images/usersGuide_28_lyricSearcher_19_0.png" />
+<p>Yep, there they are. There&#8217;s something interesting in that all three
+times the word follows a double-bar or rest. Clearly it&#8217;s an important
+word at an important place in the sentence. Let&#8217;s look at the first
+<a class="reference internal" href="../moduleReference/moduleSearchLyrics.html#music21.search.lyrics.SearchMatch" title="music21.search.lyrics.SearchMatch"><code class="xref py py-class docutils literal"><span class="pre">SearchMatch</span></code></a> object in some detail. It
+is a kind of namedtuple that knows something about where the match took
+place.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">sm0</span> <span class="o">=</span> <span class="n">domineResults</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">sm0</span><span class="o">.</span><span class="n">mStart</span><span class="p">,</span> <span class="n">sm0</span><span class="o">.</span><span class="n">mEnd</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">29</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It knows which notes contained the syllables making up &#8220;Domine&#8221;:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">sm0</span><span class="o">.</span><span class="n">els</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">A</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice that the second &#8220;A&#8221; (after the tie) is not included in the search
+results. This has nothing to do with the fact that it is tied &#8211;
+melismas do not include all the notes. For instance, take &#8220;[Glo-]riam
+tuam.&#8221; found at the beginning of the excerpt above (measure 25). There
+are three notes on &#8220;ri&#8221; (B-flat, A, G) but only the B-flat will be
+included in this search:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">smGloriam</span> <span class="o">=</span> <span class="n">ls</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;iam tuam.&#39;</span><span class="p">)</span>
+<span class="n">smGloriam</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">els</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">B</span><span class="o">-&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">G</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="c1">#&gt;,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">G</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Future work should make it possible to return the intermediate notes or
+rests in between, etc. For now you could do something like this instead:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">firstNote</span> <span class="o">=</span> <span class="n">smGloriam</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">els</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lastNote</span> <span class="o">=</span> <span class="n">smGloriam</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">els</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">allRelevantNotes</span> <span class="o">=</span> <span class="p">[</span><span class="n">firstNote</span><span class="p">]</span>
+<span class="n">currentNote</span> <span class="o">=</span> <span class="n">firstNote</span>
+
+<span class="k">while</span> <span class="n">currentNote</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">currentNote</span> <span class="o">=</span> <span class="n">currentNote</span><span class="o">.</span><span class="n">next</span><span class="p">(</span><span class="s1">&#39;Note&#39;</span><span class="p">)</span>
+    <span class="n">allRelevantNotes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">currentNote</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">currentNote</span> <span class="ow">is</span> <span class="n">lastNote</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="n">allRelevantNotes</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">B</span><span class="o">-&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">A</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">G</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">G</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="c1">#&gt;,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">G</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Okay, that&#8217;s enough of an aside, let&#8217;s get back to the Domine pitch
+question, and what&#8217;s in a <code class="docutils literal"><span class="pre">SearchMatch</span></code> object. It has a
+<code class="docutils literal"><span class="pre">.matchText</span></code> attribute. It tells you what matched:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">sm0</span><span class="o">.</span><span class="n">matchText</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;Domine&#39;</span>
+</pre></div>
+</div>
+<p>Well, that&#8217;s pretty useless here. We knew that. But what I haven&#8217;t
+mentioned is that you can pass in regular expressions. Let&#8217;s find the
+main-stem&#8217;s vowel combination, o followed by i, with one letter in
+between:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">reSearchVowels</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">r&#39;\w+o\wi\w+&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+<span class="n">foundVowels</span> <span class="o">=</span> <span class="n">ls</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">reSearchVowels</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">foundVowels</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">11</span>
+</pre></div>
+</div>
+<p>Well, that matched 11 times. But who knows WHAT it matched?! Oh, wait,
+<code class="docutils literal"><span class="pre">.matchText</span></code> knows.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">result</span><span class="o">.</span><span class="n">matchText</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">foundVowels</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="s1">&#39;hominibus&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Glorificamus&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;gloriam&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Domine&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Domine&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Domine&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;nobis&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;nobis&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Quoniam&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Dominus&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;gloria&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The last thing that a <code class="docutils literal"><span class="pre">SearchMatch</span></code> has is a <code class="docutils literal"><span class="pre">.indices</span></code> list, which
+is a list of the <a class="reference internal" href="../moduleReference/moduleSearchLyrics.html#music21.search.lyrics.IndexedLyric" title="music21.search.lyrics.IndexedLyric"><code class="xref py py-class docutils literal"><span class="pre">IndexedLyric</span></code></a> objects
+that are the hidden secret-sauce that makes all this work so well. This
+is too low-level to need describing here, but look at the docs to the
+module to see why it might be helpful.</p>
+<p>Darn it, we&#8217;re distracted again from the main problem: is &#8220;Domine&#8221;
+higher than average? Let&#8217;s get back to that. <code class="docutils literal"><span class="pre">domineResults</span></code> is still
+our list of search results containing &#8220;Domine&#8221;. We&#8217;ll look at the
+average <code class="docutils literal"><span class="pre">.ps</span></code> or pitch space (MIDI number) for the pitches:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">dominePitchPSes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">thisMatch</span> <span class="ow">in</span> <span class="n">domineResults</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">thisNote</span> <span class="ow">in</span> <span class="n">thisMatch</span><span class="o">.</span><span class="n">els</span><span class="p">:</span>
+        <span class="n">dominePitchPSes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisNote</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">ps</span><span class="p">)</span>
+
+<span class="n">dominePitchPSes</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mf">72.0</span><span class="p">,</span> <span class="mf">69.0</span><span class="p">,</span> <span class="mf">65.0</span><span class="p">,</span> <span class="mf">72.0</span><span class="p">,</span> <span class="mf">69.0</span><span class="p">,</span> <span class="mf">71.0</span><span class="p">,</span> <span class="mf">69.0</span><span class="p">,</span> <span class="mf">71.0</span><span class="p">,</span> <span class="mf">72.0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Python 3.4 and above FINALLY give us a nice set of functions for the
+mean and median. This won&#8217;t work on Python 2, but you can write your
+own:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statistics</span> <span class="k">import</span> <span class="n">mean</span><span class="p">,</span> <span class="n">median</span>
+
+<span class="n">mean</span><span class="p">(</span><span class="n">dominePitchPSes</span><span class="p">),</span> <span class="n">median</span><span class="p">(</span><span class="n">dominePitchPSes</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="mf">70.0</span><span class="p">,</span> <span class="mf">71.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And for the piece as a whole?</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">allPitchPSes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">thisNote</span> <span class="ow">in</span> <span class="n">cantus</span><span class="o">.</span><span class="n">recurse</span><span class="p">()</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+    <span class="n">allPitchPSes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">thisNote</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">ps</span><span class="p">)</span>
+
+<span class="n">mean</span><span class="p">(</span><span class="n">allPitchPSes</span><span class="p">),</span> <span class="n">median</span><span class="p">(</span><span class="n">allPitchPSes</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="mf">67.41100323624596</span><span class="p">,</span> <span class="mf">67.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is a little bit higher. The mean is 2.6 semitones higher and the
+median is 4 semitones higher. Is this statistically significant? We&#8217;ll
+need to perform more tests to be sure! (My guess is NOT! but hey, it&#8217;s
+worth investigating)</p>
+<p>(Btw &#8211; I should have used <code class="docutils literal"><span class="pre">.getElementsByClass('Note')</span></code> instead of
+<code class="docutils literal"><span class="pre">.notes</span></code> for safety above, since <code class="docutils literal"><span class="pre">.notes</span></code> could also return a
+<code class="docutils literal"><span class="pre">Chord</span></code> object, which does not have a <code class="docutils literal"><span class="pre">.pitch</span></code> object (but rather a
+<code class="docutils literal"><span class="pre">.pitches</span></code> list), but I know this piece very well, and I knew it was
+monophonic.)</p>
+<p>Hope that this was a good introduction to searching through lyrics! I&#8217;ve
+used this technique to find lots of small fragments of music. I&#8217;ll write
+more about that later. For now, let&#8217;s move on to ...</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_54_extendingConverter.html" title="User’s Guide, Chapter 54: Extending Converter with New Formats"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_27_graceNotes.html" title="User’s Guide, Chapter 27: Grace Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

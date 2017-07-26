@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.timespans.core &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.3.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.timespans.core</a><ul>
+<li><a class="reference internal" href="#avlnode">AVLNode</a></li>
+<li><a class="reference internal" href="#avltree">AVLTree</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleTimespansCore.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-timespans-core">
+<span id="moduletimespanscore"></span><h1>music21.timespans.core<a class="headerlink" href="#music21-timespans-core" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="avlnode">
+<h2>AVLNode<a class="headerlink" href="#avlnode" title="Permalink to this headline">¶</a></h2>
+<p class="rubric"><code class="xref py py-class docutils literal"><span class="pre">AVLNode</span></code> bases</p>
+<ul class="simple">
+<li><code class="xref py py-class docutils literal"><span class="pre">SlottedObject</span></code></li>
+</ul>
+<p class="rubric"><code class="xref py py-class docutils literal"><span class="pre">AVLNode</span></code> methods</p>
+<p class="rubric"><code class="xref py py-class docutils literal"><span class="pre">AVLNode</span></code> instance variables</p>
+<dl class="attribute">
+<dt id="AVLNode.balance">
+<code class="descclassname">AVLNode.</code><code class="descname">balance</code><a class="headerlink" href="#AVLNode.balance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current state of the difference in heights of the
+two subtrees rooted on this node.</p>
+<p>This attribute is used to help balance the AVL tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">makeExampleScore</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">streamToTimespanTree</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;Node: Start:3.0 Indices:(0:5:6:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:1.0 Indices:(0:2:3:5) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:2.0 Indices:(3:3:5:5) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:5.0 Indices:(6:8:9:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:4.0 Indices:(6:6:8:8) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<p>This tree has one more depth on the right than on the left</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>The leftChild of the rootNote is perfectly balanced, while the rightChild is off by
+one (acceptable).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>The rightChild&#8217;s children are also (acceptably) unbalanced:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>You should never see a balance other than 1, -1, or 0.  If you do then
+something has gone wrong.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="AVLNode.height">
+<code class="descclassname">AVLNode.</code><code class="descname">height</code><a class="headerlink" href="#AVLNode.height" title="Permalink to this definition">¶</a></dt>
+<dd><p>The height of the subtree rooted on this node.</p>
+<p>This property is used to help balance the AVL tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">makeExampleScore</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">streamToTimespanTree</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;Node: Start:3.0 Indices:(0:5:6:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:1.0 Indices:(0:2:3:5) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:2.0 Indices:(3:3:5:5) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:5.0 Indices:(6:8:9:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:4.0 Indices:(6:6:8:8) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">height</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">height</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">height</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">height</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<p>Once you hit a height of zero, then the next child on either size should be None</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="AVLNode.leftChild">
+<code class="descclassname">AVLNode.</code><code class="descname">leftChild</code><a class="headerlink" href="#AVLNode.leftChild" title="Permalink to this definition">¶</a></dt>
+<dd><p>The left child of this node.</p>
+<p>After setting the left child you need to do a node update. with node.update()</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">makeExampleScore</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">streamToTimespanTree</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;Node: Start:3.0 Indices:(0:5:6:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:1.0 Indices:(0:2:3:5) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:2.0 Indices:(3:3:5:5) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:5.0 Indices:(6:8:9:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:4.0 Indices:(6:6:8:8) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;Node: Start:1.0 Indices:(0:2:3:5) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:2.0 Indices:(3:3:5:5) Length:{2}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="AVLNode.position">
+<code class="descclassname">AVLNode.</code><code class="descname">position</code><a class="headerlink" href="#AVLNode.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The position of this node &#8211; this is often the same as the offset of
+the node in a containing score, but does not need to be.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">makeExampleScore</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">streamToTimespanTree</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;Node: Start:3.0 Indices:(0:5:6:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:1.0 Indices:(0:2:3:5) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:2.0 Indices:(3:3:5:5) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:5.0 Indices:(6:8:9:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:4.0 Indices:(6:6:8:8) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">position</span>
+<span class="go">3.0</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">position</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">position</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="AVLNode.rightChild">
+<code class="descclassname">AVLNode.</code><code class="descname">rightChild</code><a class="headerlink" href="#AVLNode.rightChild" title="Permalink to this definition">¶</a></dt>
+<dd><p>The right child of this node.</p>
+<p>After setting the right child you need to do a node update. with node.update()</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">makeExampleScore</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">timespans</span><span class="o">.</span><span class="n">streamToTimespanTree</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;Node: Start:3.0 Indices:(0:5:6:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:1.0 Indices:(0:2:3:5) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:2.0 Indices:(3:3:5:5) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:5.0 Indices:(6:8:9:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:4.0 Indices:(6:6:8:8) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;Node: Start:5.0 Indices:(6:8:9:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;Node: Start:4.0 Indices:(6:6:8:8) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;Node: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;Node: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;Node: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="avltree">
+<h2>AVLTree<a class="headerlink" href="#avltree" title="Permalink to this headline">¶</a></h2>
+<p class="rubric"><code class="xref py py-class docutils literal"><span class="pre">AVLTree</span></code> methods</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2015, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Dec 04, 2015.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

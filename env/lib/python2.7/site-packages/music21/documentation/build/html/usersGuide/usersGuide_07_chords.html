@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User’s Guide, Chapter 7: Chords &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="User’s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)" href="usersGuide_08_installingMusicXML.html" />
+    <link rel="prev" title="User’s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening" href="usersGuide_06_stream2.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_08_installingMusicXML.html" title="User’s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_06_stream2.html" title="User’s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_06_stream2.html"
+                        title="previous chapter">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_08_installingMusicXML.html"
+                        title="next chapter">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User&#8217;s Guide, Chapter 7: Chords</a><ul>
+<li><a class="reference internal" href="#displaying-chords">Displaying Chords</a></li>
+<li><a class="reference internal" href="#more-ways-of-creating-chords-chords-and-streams">More ways of creating chords; Chords and Streams</a></li>
+<li><a class="reference internal" href="#post-tonal-chords-in-brief">Post-tonal chords (in brief)</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_02_notes.html">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_03_pitches.html">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_05_listsOfLists.html">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_08_installingMusicXML.html">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_11_corpusSearching.html">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_12_music21object.html">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_13_music21object2.html">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_15_key.html">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_21_sorting.html">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_25_postTonalTools1.html">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_26_clientWeakref.html">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_28_lyricSearcher.html">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_97_timespans.html">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_07_chords.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-07-chords"></span><div class="section" id="user-s-guide-chapter-7-chords">
+<h1>User&#8217;s Guide, Chapter 7: Chords<a class="headerlink" href="#user-s-guide-chapter-7-chords" title="Permalink to this headline">¶</a></h1>
+<p>Chords, as the name might suggest, are objects that combine multiple
+<a class="reference internal" href="../moduleReference/modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code></a> objects on a single stem. They can be
+found in the <a class="reference internal" href="../moduleReference/moduleChord.html#modulechord"><span class="std std-ref">music21.chord</span></a> module. The most general way to create
+a <a class="reference internal" href="../moduleReference/moduleChord.html#music21.chord.Chord" title="music21.chord.Chord"><code class="xref py py-class docutils literal"><span class="pre">Chord</span></code></a> object is by passing in a list of
+pitch names you want in the chord:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">cMinor</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s2">&quot;C4&quot;</span><span class="p">,</span><span class="s2">&quot;G4&quot;</span><span class="p">,</span><span class="s2">&quot;E-5&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">Note</span></code> and <code class="docutils literal"><span class="pre">Chord</span></code> objects, since both are subclasses of the
+<a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.GeneralNote" title="music21.note.GeneralNote"><code class="xref py py-class docutils literal"><span class="pre">GeneralNote</span></code></a> object share many features in
+common:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMinor</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;half&#39;</span>
+<span class="n">cMinor</span><span class="o">.</span><span class="n">quarterLength</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+<p>But since a <code class="docutils literal"><span class="pre">Chord</span></code> contains many pitches, it does not have a
+<code class="docutils literal"><span class="pre">.pitch</span></code> attribute:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMinor</span><span class="o">.</span><span class="n">pitch</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">AttributeError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="mi">682233136</span><span class="n">f94</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">cMinor</span><span class="o">.</span><span class="n">pitch</span>
+
+
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;Chord&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;pitch&#39;</span>
+</pre></div>
+</div>
+<p>Instead it has a <a class="reference internal" href="../moduleReference/moduleChord.html#music21.chord.Chord.pitches" title="music21.chord.Chord.pitches"><code class="xref py py-meth docutils literal"><span class="pre">.pitches</span></code></a>
+attribute which returns a Tuple of pitches in the Chord.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMinor</span><span class="o">.</span><span class="n">pitches</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">C4</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">G4</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">E</span><span class="o">-</span><span class="mi">5</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Okay, but you already knew what pitches were in the <code class="docutils literal"><span class="pre">Chord</span></code> since you
+just created it! What else can you do with it?</p>
+<p>How about determining if it is a
+<a class="reference internal" href="../moduleReference/moduleChord.html#music21.chord.Chord.isMajorTriad" title="music21.chord.Chord.isMajorTriad"><code class="xref py py-meth docutils literal"><span class="pre">major</span></code></a> or a
+<a class="reference internal" href="../moduleReference/moduleChord.html#music21.chord.Chord.isMinorTriad" title="music21.chord.Chord.isMinorTriad"><code class="xref py py-meth docutils literal"><span class="pre">minor</span></code></a> triad?</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMinor</span><span class="o">.</span><span class="n">isMajorTriad</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">False</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMinor</span><span class="o">.</span><span class="n">isMinorTriad</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>You can also figure out if it is in inversion or not:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMinor</span><span class="o">.</span><span class="n">inversion</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Chords in root position have inversion of 0. But consider this other
+chord:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMajor</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s2">&quot;E3&quot;</span><span class="p">,</span><span class="s2">&quot;C4&quot;</span><span class="p">,</span><span class="s2">&quot;G4&quot;</span><span class="p">])</span>
+<span class="n">cMajor</span><span class="o">.</span><span class="n">inversion</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>With this chord, two other methods become important:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMajor</span><span class="o">.</span><span class="n">root</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">C4</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMajor</span><span class="o">.</span><span class="n">bass</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">E3</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>You can find the third and fifth of the <code class="docutils literal"><span class="pre">Chord</span></code> with .third and
+.fifth. Note that these properties do not have <code class="docutils literal"><span class="pre">()</span></code> after them. This
+was a mistake in how we created <code class="docutils literal"><span class="pre">music21</span></code> and hopefully this will all
+be fixed and consistent soon:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMajor</span><span class="o">.</span><span class="n">third</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">E3</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMajor</span><span class="o">.</span><span class="n">fifth</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span> <span class="n">G4</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>There is also a .seventh property, but it won&#8217;t do anything here:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMajor</span><span class="o">.</span><span class="n">seventh</span>
+</pre></div>
+</div>
+<p>The result of that is <code class="docutils literal"><span class="pre">None</span></code> which we can test like so...</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMajor</span><span class="o">.</span><span class="n">seventh</span> <span class="ow">is</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<div class="section" id="displaying-chords">
+<h2>Displaying Chords<a class="headerlink" href="#displaying-chords" title="Permalink to this headline">¶</a></h2>
+<p>We can display the <code class="docutils literal"><span class="pre">Chord</span></code> object just like any
+<a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a> (Don&#8217;t worry if this isn&#8217;t working for you
+yet...we&#8217;ll get this set up in Chapter 8)</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMinor</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_29_0.png" src="../_images/usersGuide_07_chords_29_0.png" />
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMajor</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_30_0.png" src="../_images/usersGuide_07_chords_30_0.png" />
+<p>These chords are a bit &#8220;spacey&#8221;, so let&#8217;s get <code class="docutils literal"><span class="pre">c</span></code> in
+<a class="reference internal" href="../moduleReference/moduleChord.html#music21.chord.Chord.closedPosition" title="music21.chord.Chord.closedPosition"><code class="xref py py-meth docutils literal"><span class="pre">closedPosition()</span></code></a>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cClosed</span> <span class="o">=</span> <span class="n">cMinor</span><span class="o">.</span><span class="n">closedPosition</span><span class="p">()</span>
+<span class="n">cClosed</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_32_0.png" src="../_images/usersGuide_07_chords_32_0.png" />
+<p>Notice that <code class="docutils literal"><span class="pre">cMinor</span></code> is unchanged. The closed position chord is only
+<code class="docutils literal"><span class="pre">cClosed</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMinor</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_34_0.png" src="../_images/usersGuide_07_chords_34_0.png" />
+<p>If we wanted to change the Chord object itself, we call
+<code class="docutils literal"><span class="pre">.closedPosition(inPlace</span> <span class="pre">=</span> <span class="pre">True)</span></code> which alters the original. Since the
+original is altered, we don&#8217;t need to put <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">...</span></code> in front of it</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMajor</span><span class="o">.</span><span class="n">closedPosition</span><span class="p">(</span><span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cMajor</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_36_0.png" src="../_images/usersGuide_07_chords_36_0.png" />
+<p>There is also a method,
+<a class="reference internal" href="../moduleReference/moduleChord.html#music21.chord.Chord.semiClosedPosition" title="music21.chord.Chord.semiClosedPosition"><code class="xref py py-meth docutils literal"><span class="pre">semiClosedPosition()</span></code></a> which acts like
+<code class="docutils literal"><span class="pre">.closedPosition</span></code> except that if there is already a pitch at that step
+(i.e., D-flat and D-sharp are both step &#8220;D&#8221;), then the note is moved up
+an octave. This is useful for displaying complex, post tonal chords in
+the most compact form possible:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">c1</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span> <span class="s1">&#39;E5&#39;</span><span class="p">,</span> <span class="s1">&#39;C#6&#39;</span><span class="p">,</span> <span class="s1">&#39;E-7&#39;</span><span class="p">,</span> <span class="s1">&#39;G8&#39;</span><span class="p">,</span> <span class="s1">&#39;C9&#39;</span><span class="p">,</span> <span class="s1">&#39;E#9&#39;</span><span class="p">])</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">c1</span><span class="o">.</span><span class="n">semiClosedPosition</span><span class="p">()</span>
+<span class="n">c2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_38_0.png" src="../_images/usersGuide_07_chords_38_0.png" />
+<p>We can get the <a class="reference internal" href="../moduleReference/moduleChord.html#music21.chord.Chord.commonName" title="music21.chord.Chord.commonName"><code class="xref py py-meth docutils literal"><span class="pre">common</span> <span class="pre">name</span></code></a> of
+each of these Chords:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cn1</span> <span class="o">=</span> <span class="n">cMinor</span><span class="o">.</span><span class="n">commonName</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cn1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="n">minor</span> <span class="n">triad</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cMajor</span><span class="o">.</span><span class="n">commonName</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="n">major</span> <span class="n">triad</span>
+</pre></div>
+</div>
+<p>More complex chords have less common &#8220;commonNames&#8221;. Here&#8217;s one that the
+American composer Elliott Carter liked a lot.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">elliottCarterChord</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span><span class="s1">&#39;D-4&#39;</span><span class="p">,</span><span class="s1">&#39;E4&#39;</span><span class="p">,</span><span class="s1">&#39;F#4&#39;</span><span class="p">])</span>
+<span class="n">elliottCarterChord</span><span class="o">.</span><span class="n">commonName</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;all-interval tetrachord&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">elliottCarterChord</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_44_0.png" src="../_images/usersGuide_07_chords_44_0.png" />
+</div>
+<div class="section" id="more-ways-of-creating-chords-chords-and-streams">
+<h2>More ways of creating chords; Chords and Streams<a class="headerlink" href="#more-ways-of-creating-chords-chords-and-streams" title="Permalink to this headline">¶</a></h2>
+<p>There are other ways of creating a Chord if you&#8217;d like. One way is from
+a bunch of already created <code class="docutils literal"><span class="pre">Note</span></code> objects:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">)</span>
+<span class="n">fSharp</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;F#4&#39;</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;A5&#39;</span><span class="p">)</span>
+<span class="n">dMajor</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="n">d</span><span class="p">,</span> <span class="n">fSharp</span><span class="p">,</span> <span class="n">a</span><span class="p">])</span>
+
+<span class="n">dMajor</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_47_0.png" src="../_images/usersGuide_07_chords_47_0.png" />
+<p>Or we can pass a string with note names separated by spaces:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">e7</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="s2">&quot;E4 G#4 B4 D5&quot;</span><span class="p">)</span>
+<span class="n">e7</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_49_0.png" src="../_images/usersGuide_07_chords_49_0.png" />
+<p>The octaves are optional, especially if everything is within an octave:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">es</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="s2">&quot;E- G B-&quot;</span><span class="p">)</span>
+<span class="n">es</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_51_0.png" src="../_images/usersGuide_07_chords_51_0.png" />
+<p>But you will definitely want them if a chord crosses the boundary of an
+octave (between B and C). Unless you love 6-4 chords, this is probably
+not what you want:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fMajor</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="s2">&quot;F A C&quot;</span><span class="p">)</span>
+<span class="n">fMajor</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_53_0.png" src="../_images/usersGuide_07_chords_53_0.png" />
+<p>Notice that because C sorts before F and A that the chord is in second
+inversion, or 64. We can figure out the inversion of a <code class="docutils literal"><span class="pre">Chord</span></code> like
+so:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fMajor</span><span class="o">.</span><span class="n">inversion</span><span class="p">(),</span> <span class="n">fMajor</span><span class="o">.</span><span class="n">inversionName</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">2</span> <span class="mi">64</span>
+</pre></div>
+</div>
+<p>In addition to .commonName, there are a few other &#8220;name&#8221; properties that
+might be interesting:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fMajor</span><span class="o">.</span><span class="n">fullName</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;Chord {F | A | C} Quarter&#39;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">fMajor</span><span class="o">.</span><span class="n">pitchedCommonName</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;F-major triad&#39;</span>
+</pre></div>
+</div>
+<p>Like <code class="docutils literal"><span class="pre">Note</span></code> objects, we can put <code class="docutils literal"><span class="pre">Chord</span></code> objects inside a
+<code class="xref py py-class docutils literal"><span class="pre">Stream</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">stream1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="n">stream1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cMinor</span><span class="p">)</span>
+<span class="n">stream1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fMajor</span><span class="p">)</span>
+<span class="n">stream1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">es</span><span class="p">)</span>
+<span class="n">stream1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_60_0.png" src="../_images/usersGuide_07_chords_60_0.png" />
+<p>We can mix and match <code class="docutils literal"><span class="pre">Notes</span></code>, <a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.Rest" title="music21.note.Rest"><code class="xref py py-class docutils literal"><span class="pre">Rests</span></code></a>,
+and <code class="docutils literal"><span class="pre">Chords</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">rest1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">()</span>
+<span class="n">rest1</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">noteASharp</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;A#5&#39;</span><span class="p">)</span>
+<span class="n">noteASharp</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">1.5</span>
+
+<span class="n">stream2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="n">stream2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cMinor</span><span class="p">)</span>
+<span class="n">stream2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rest1</span><span class="p">)</span>
+<span class="n">stream2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">noteASharp</span><span class="p">)</span>
+<span class="n">stream2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_62_0.png" src="../_images/usersGuide_07_chords_62_0.png" />
+</div>
+<div class="section" id="post-tonal-chords-in-brief">
+<h2>Post-tonal chords (in brief)<a class="headerlink" href="#post-tonal-chords-in-brief" title="Permalink to this headline">¶</a></h2>
+<p>There are a lot of methods for dealing with post-tonal aspects of
+chords. If you&#8217;re not interested in twentieth century music, go ahead
+and skip to the next chapter, but, here are some fun things.</p>
+<p>The <code class="docutils literal"><span class="pre">intervalVector</span></code> of a chord is a list of the number of
+<code class="docutils literal"><span class="pre">[semitones,</span> <span class="pre">whole-tones,</span> <span class="pre">minor-thirds/augmented-seconds,</span> <span class="pre">major-thirds,</span> <span class="pre">perfect</span> <span class="pre">fourths,</span> <span class="pre">and</span> <span class="pre">tritones]</span></code>
+in the chord or inversion. A minor triad, for instance, has one minor
+third (C to E-flat), one major third (E-flat to G), and one perfect
+fourth (G to C above, since octave does not matter):</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMinor</span><span class="o">.</span><span class="n">intervalVector</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>A major triad has the same interval vector:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cMajor</span><span class="o">.</span><span class="n">intervalVector</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The elliottCarterChord is unique in that it has an <code class="docutils literal"><span class="pre">.intervalVector</span></code>
+of all 1&#8217;s:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">elliottCarterChord</span><span class="o">.</span><span class="n">intervalVector</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Well, it&#8217;s almost unique: there is another chord with the same
+<code class="docutils literal"><span class="pre">.intervalVector</span></code>. That Chord is called its Z-relation or Z-pair.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">elliottCarterChord</span><span class="o">.</span><span class="n">hasZRelation</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">otherECChord</span> <span class="o">=</span> <span class="n">elliottCarterChord</span><span class="o">.</span><span class="n">getZRelation</span><span class="p">()</span>
+<span class="n">otherECChord</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span> <span class="n">C</span> <span class="n">D</span><span class="o">-</span> <span class="n">E</span><span class="o">-</span> <span class="n">G</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We can see it though there&#8217;s a little problem with accidentals still on
+output (we should put a natural on the C or, better, flip the enharmonic
+C# to Db).</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">otherECChord</span><span class="o">.</span><span class="n">pitches</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">getHigherEnharmonic</span><span class="p">(</span><span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">otherECChord</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_74_0.png" src="../_images/usersGuide_07_chords_74_0.png" />
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">otherECChord</span><span class="o">.</span><span class="n">intervalVector</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The other post-tonal tools you might be interested in are given below.
+We&#8217;ll return to them in a later chapter, but here are three important
+ones:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">elliottCarterChord</span><span class="o">.</span><span class="n">primeForm</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">elliottCarterChord</span><span class="o">.</span><span class="n">normalOrder</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">elliottCarterChord</span><span class="o">.</span><span class="n">forteClass</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">4</span><span class="o">-</span><span class="mi">15</span><span class="n">A</span>
+</pre></div>
+</div>
+<p>If you really only care about semitones, you can create a chord just
+with the pitchClasses:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">oddChord</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">oddChord</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_81_0.png" src="../_images/usersGuide_07_chords_81_0.png" />
+<p>Though if you use pitchClasses above 11, then they are treated as MIDI
+numbers, where 60 = MiddleC, 72 = C5, etc. Enharmonic spelling is chosen
+automatically.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">midiChordType</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="mi">60</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">75</span><span class="p">])</span>
+<span class="n">midiChordType</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_07_chords_83_0.png" src="../_images/usersGuide_07_chords_83_0.png" />
+<p>Okay, so now you&#8217;ve learned the basics (and more!) of Notes and Chords.
+If you haven&#8217;t been able to see them on your own,
+<a class="reference internal" href="usersGuide_08_installingMusicXML.html#usersguide-08-installingmusicxml"><span class="std std-ref">Chapter 8: Installing MusicXML Readers</span></a>
+will fix it. It&#8217;s also going to cover the basic file formats of
+<code class="docutils literal"><span class="pre">music21</span></code>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_08_installingMusicXML.html" title="User’s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_06_stream2.html" title="User’s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

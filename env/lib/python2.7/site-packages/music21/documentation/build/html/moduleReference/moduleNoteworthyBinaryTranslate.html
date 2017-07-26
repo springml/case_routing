@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.noteworthy.binaryTranslate &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.noteworthy.translate" href="moduleNoteworthyTranslate.html" />
+    <link rel="prev" title="music21.note" href="moduleNote.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleNoteworthyTranslate.html" title="music21.noteworthy.translate"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleNote.html" title="music21.note"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleNote.html"
+                        title="previous chapter">music21.note</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleNoteworthyTranslate.html"
+                        title="next chapter">music21.noteworthy.translate</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.noteworthy.binaryTranslate</a><ul>
+<li><a class="reference internal" href="#nwcconverter">NWCConverter</a></li>
+<li><a class="reference internal" href="#nwcobject">NWCObject</a></li>
+<li><a class="reference internal" href="#nwcstaff">NWCStaff</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleNoteworthyBinaryTranslate.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-noteworthy-binarytranslate">
+<span id="modulenoteworthybinarytranslate"></span><h1>music21.noteworthy.binaryTranslate<a class="headerlink" href="#music21-noteworthy-binarytranslate" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.noteworthy.binaryTranslate"></span><p>Attempts at reading pure .nwc files in music21</p>
+<p>First will solve uncompressed .nwc then compressed .nwc</p>
+<p>Thanks to Juria90 and the nwc2xml project for solving so many of the documentation problems.
+No part of this code is taken from that project, but this project would have been impossible
+without his work.</p>
+<p>Translates .nwc into .nwctxt and then uses Jordi Guillen&#8217;s .nwctxt translator to go from
+there to music21.</p>
+<p>BETA &#8211; does not work for many file elements and is untested.</p>
+<p>Demo, showing the extent of problems.  The measure numbers are not set.  Lyrics are missing
+and the triplet in the AltoClef part is omitted.  This is very beta.  Much better would be to
+convert the file into .xml or .nwctxt first.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;/Users/cuthbert/desktop/cuthbert_test1.nwc&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Part ...&gt;</span>
+<span class="go">    {0.0} &lt;music21.stream.Measure 0 offset=0.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">        {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note G&gt;</span>
+<span class="go">        {1.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">        {2.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">        {3.0} &lt;music21.note.Note B&gt;</span>
+<span class="go">    {4.0} &lt;music21.stream.Measure 0 offset=4.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{0.0} &lt;music21.stream.Part ...&gt;</span>
+<span class="go">    {0.0} &lt;music21.stream.Measure 0 offset=0.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">        {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note G&gt;</span>
+<span class="go">        {1.0} &lt;music21.note.Note A&gt;</span>
+<span class="go">        {2.0} &lt;music21.note.Note A&gt;</span>
+<span class="go">        {3.5} &lt;music21.note.Note G&gt;</span>
+<span class="go">    {4.0} &lt;music21.stream.Measure 0 offset=4.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note G&gt;</span>
+<span class="go">{0.0} &lt;music21.stream.Part ...&gt;</span>
+<span class="go">    {0.0} &lt;music21.stream.Measure 0 offset=0.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.clef.AltoClef&gt;</span>
+<span class="go">        {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">        {2.0} &lt;music21.note.Note C#&gt;</span>
+<span class="go">        {3.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">        {4.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">    {5.0} &lt;music21.stream.Measure 0 offset=5.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">{0.0} &lt;music21.stream.Part ...&gt;</span>
+<span class="go">    {0.0} &lt;music21.stream.Measure 0 offset=0.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.clef.BassClef&gt;</span>
+<span class="go">        {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note G&gt;</span>
+<span class="go">        {1.0} &lt;music21.note.Note F&gt;</span>
+<span class="go">        {2.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">        {3.0} &lt;music21.note.Note G&gt;</span>
+<span class="go">    {4.0} &lt;music21.stream.Measure 0 offset=4.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note C&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="nwcconverter">
+<h2>NWCConverter<a class="headerlink" href="#nwcconverter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter">
+<em class="property">class </em><code class="descclassname">music21.noteworthy.binaryTranslate.</code><code class="descname">NWCConverter</code><span class="sig-paren">(</span><em>*args</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>A converter object for binary .nwc files.  Do not normally use directly; use converter.parse.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span> <span class="o">=</span> <span class="s1">&#39;/Users/cuthbert/test.nwc&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span> <span class="o">=</span> <span class="n">noteworthy</span><span class="o">.</span><span class="n">binaryTranslate</span><span class="o">.</span><span class="n">NWCConverter</span><span class="p">(</span><span class="n">fp</span><span class="o">=</span><span class="n">fp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span>
+<span class="go">&lt;music21.noteworthy.binaryTranslate.NWCConverter object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">fp</span>
+<span class="go">&#39;/Users/cuthbert/test.nwc&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">fileContents</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">parsePosition</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">version</span> <span class="c1"># version of nwc file to be parsed</span>
+<span class="go">200</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">numberOfStaves</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">staves</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.noteworthy.binaryTranslate.NWCConverter" title="music21.noteworthy.binaryTranslate.NWCConverter"><code class="xref py py-class docutils literal"><span class="pre">NWCConverter</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.advanceToNotNUL">
+<code class="descclassname">NWCConverter.</code><code class="descname">advanceToNotNUL</code><span class="sig-paren">(</span><em>nul=b'\x00'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.advanceToNotNUL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.byteToInt">
+<code class="descclassname">NWCConverter.</code><code class="descname">byteToInt</code><span class="sig-paren">(</span><em>updateParsePosition=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.byteToInt" title="Permalink to this definition">¶</a></dt>
+<dd><p>changes a byte into an unsigned int 
+(i.e., if the byte is &gt; 127 then it&#8217;s subtracted from 256)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.byteToSignedInt">
+<code class="descclassname">NWCConverter.</code><code class="descname">byteToSignedInt</code><span class="sig-paren">(</span><em>updateParsePosition=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.byteToSignedInt" title="Permalink to this definition">¶</a></dt>
+<dd><p>changes a byte into a signed int 
+(i.e., if the byte is &gt; 127 then it&#8217;s subtracted from 256)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.dumpToNWCText">
+<code class="descclassname">NWCConverter.</code><code class="descname">dumpToNWCText</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.dumpToNWCText" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.fileVersion">
+<code class="descclassname">NWCConverter.</code><code class="descname">fileVersion</code><span class="sig-paren">(</span><em>updateParsePosition=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.fileVersion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.isValidNWCFile">
+<code class="descclassname">NWCConverter.</code><code class="descname">isValidNWCFile</code><span class="sig-paren">(</span><em>updateParsePosition=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.isValidNWCFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.parse">
+<code class="descclassname">NWCConverter.</code><code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>the main parse routine called by parseFile() or parseString()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.parseFile">
+<code class="descclassname">NWCConverter.</code><code class="descname">parseFile</code><span class="sig-paren">(</span><em>fp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.parseFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a file (calls .toStream)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span> <span class="o">=</span> <span class="s1">&#39;/Users/cuthbert/desktop/cuthbert_test1.nwc&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span> <span class="o">=</span> <span class="n">noteworthy</span><span class="o">.</span><span class="n">binaryTranslate</span><span class="o">.</span><span class="n">NWCConverter</span><span class="p">(</span><span class="n">fp</span><span class="o">=</span><span class="n">fp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">fileContents</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">streamObj</span> <span class="o">=</span> <span class="n">nwcc</span><span class="o">.</span><span class="n">parseFile</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">nwcc</span><span class="o">.</span><span class="n">fileContents</span><span class="p">)</span> <span class="c1"># binary</span>
+<span class="go">1139</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">fileContents</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">80</span><span class="p">]</span>
+<span class="go">b&#39;[NoteWorthy ArtWare]\x00\x00\x00[NoteWorthy </span>
+<span class="go">         Composer]\x00\x01\x02\x02\x00\x00\x00N/A\x000_JldRQMSKq6M5a3FQqK_g\x00\x00\x00&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">streamObj</span>
+<span class="go">&lt;music21.stream.Score ...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.parseHeader">
+<code class="descclassname">NWCConverter.</code><code class="descname">parseHeader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.parseHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a ton of information from the header, and advances the parse position.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.parseString">
+<code class="descclassname">NWCConverter.</code><code class="descname">parseString</code><span class="sig-paren">(</span><em>bytesIn=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.parseString" title="Permalink to this definition">¶</a></dt>
+<dd><p>same as parseFile but takes a string (in Py3, bytes) of binary data instead.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.readBytes">
+<code class="descclassname">NWCConverter.</code><code class="descname">readBytes</code><span class="sig-paren">(</span><em>bytesToRead=1</em>, <em>updateParsePosition=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.readBytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads the next bytesToRead bytes and then (optionally) updates self.parsePosition</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.readLEShort">
+<code class="descclassname">NWCConverter.</code><code class="descname">readLEShort</code><span class="sig-paren">(</span><em>updateParsePosition=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.readLEShort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper module: read a little-endian short value to an integer</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span> <span class="o">=</span> <span class="n">noteworthy</span><span class="o">.</span><span class="n">binaryTranslate</span><span class="o">.</span><span class="n">NWCConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">fileContents</span> <span class="o">=</span> <span class="n">b</span><span class="s1">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">parsePosition</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">readLEShort</span><span class="p">()</span>
+<span class="go">258</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">parsePosition</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">readLEShort</span><span class="p">()</span>
+<span class="go">259</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nwcc</span><span class="o">.</span><span class="n">parsePosition</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>Or to not update the parsePosition, send False:
+&gt;&gt;&gt; nwcc.parsePosition = 0
+&gt;&gt;&gt; nwcc.readLEShort(False)
+258
+&gt;&gt;&gt; nwcc.readLEShort(False)
+258
+&gt;&gt;&gt; nwcc.parsePosition
+0</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.readToNUL">
+<code class="descclassname">NWCConverter.</code><code class="descname">readToNUL</code><span class="sig-paren">(</span><em>updateParsePosition=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.readToNUL" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads self.fileContents up to, but not including, the next position of x00.</p>
+<p>updates the parsePosition unless updateParsePosition is False</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.skipBytes">
+<code class="descclassname">NWCConverter.</code><code class="descname">skipBytes</code><span class="sig-paren">(</span><em>numBytes=1</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.skipBytes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCConverter.toStream">
+<code class="descclassname">NWCConverter.</code><code class="descname">toStream</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCConverter.toStream" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="nwcobject">
+<h2>NWCObject<a class="headerlink" href="#nwcobject" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject">
+<em class="property">class </em><code class="descclassname">music21.noteworthy.binaryTranslate.</code><code class="descname">NWCObject</code><span class="sig-paren">(</span><em>staffParent=None</em>, <em>parserParent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.noteworthy.binaryTranslate.NWCObject" title="music21.noteworthy.binaryTranslate.NWCObject"><code class="xref py py-class docutils literal"><span class="pre">NWCObject</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.barline">
+<code class="descclassname">NWCObject.</code><code class="descname">barline</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.barline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.clef">
+<code class="descclassname">NWCObject.</code><code class="descname">clef</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.clef" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.dynamic">
+<code class="descclassname">NWCObject.</code><code class="descname">dynamic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.dynamic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.dynamicVariation">
+<code class="descclassname">NWCObject.</code><code class="descname">dynamicVariation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.dynamicVariation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.ending">
+<code class="descclassname">NWCObject.</code><code class="descname">ending</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.ending" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.flowDir">
+<code class="descclassname">NWCObject.</code><code class="descname">flowDir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.flowDir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.instrument">
+<code class="descclassname">NWCObject.</code><code class="descname">instrument</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.instrument" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.keySig">
+<code class="descclassname">NWCObject.</code><code class="descname">keySig</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.keySig" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.mpc">
+<code class="descclassname">NWCObject.</code><code class="descname">mpc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.mpc" title="Permalink to this definition">¶</a></dt>
+<dd><p>what is this?</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.note">
+<code class="descclassname">NWCObject.</code><code class="descname">note</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.note" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.noteChordMember">
+<code class="descclassname">NWCObject.</code><code class="descname">noteChordMember</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.noteChordMember" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.parse">
+<code class="descclassname">NWCObject.</code><code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>determine what type of object I am, and set things accordingly</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.pedal">
+<code class="descclassname">NWCObject.</code><code class="descname">pedal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.pedal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.performance">
+<code class="descclassname">NWCObject.</code><code class="descname">performance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.performance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.rest">
+<code class="descclassname">NWCObject.</code><code class="descname">rest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.rest" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.restChordMember">
+<code class="descclassname">NWCObject.</code><code class="descname">restChordMember</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.restChordMember" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.setDurationForObject">
+<code class="descclassname">NWCObject.</code><code class="descname">setDurationForObject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.setDurationForObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>get duration string for note or rest</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.tempo">
+<code class="descclassname">NWCObject.</code><code class="descname">tempo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.tempo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.tempoVariation">
+<code class="descclassname">NWCObject.</code><code class="descname">tempoVariation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.tempoVariation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.textObj">
+<code class="descclassname">NWCObject.</code><code class="descname">textObj</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.textObj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCObject.timeSig">
+<code class="descclassname">NWCObject.</code><code class="descname">timeSig</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCObject.timeSig" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="nwcstaff">
+<h2>NWCStaff<a class="headerlink" href="#nwcstaff" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.noteworthy.binaryTranslate.NWCStaff">
+<em class="property">class </em><code class="descclassname">music21.noteworthy.binaryTranslate.</code><code class="descname">NWCStaff</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCStaff" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.noteworthy.binaryTranslate.NWCStaff" title="music21.noteworthy.binaryTranslate.NWCStaff"><code class="xref py py-class docutils literal"><span class="pre">NWCStaff</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCStaff.dump">
+<code class="descclassname">NWCStaff.</code><code class="descname">dump</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCStaff.dump" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCStaff.parse">
+<code class="descclassname">NWCStaff.</code><code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCStaff.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCStaff.parseHeader">
+<code class="descclassname">NWCStaff.</code><code class="descname">parseHeader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCStaff.parseHeader" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCStaff.parseLyrics">
+<code class="descclassname">NWCStaff.</code><code class="descname">parseLyrics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCStaff.parseLyrics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.noteworthy.binaryTranslate.NWCStaff.parseObjects">
+<code class="descclassname">NWCStaff.</code><code class="descname">parseObjects</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.noteworthy.binaryTranslate.NWCStaff.parseObjects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleNoteworthyTranslate.html" title="music21.noteworthy.translate"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleNote.html" title="music21.note"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

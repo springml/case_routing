@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.alpha.chant &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.alpha.contour" href="moduleAlphaContour.html" />
+    <link rel="prev" title="music21.alpha.analysis.search" href="moduleAlphaAnalysisSearch.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleAlphaContour.html" title="music21.alpha.contour"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleAlphaAnalysisSearch.html" title="music21.alpha.analysis.search"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleAlphaAnalysisSearch.html"
+                        title="previous chapter">music21.alpha.analysis.search</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleAlphaContour.html"
+                        title="next chapter">music21.alpha.contour</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.alpha.chant</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#basescoreconverter">BaseScoreConverter</a></li>
+<li><a class="reference internal" href="#defaulttexwrapper">DefaultTeXWrapper</a></li>
+<li><a class="reference internal" href="#gregoriannote">GregorianNote</a></li>
+<li><a class="reference internal" href="#gregorianstream">GregorianStream</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleAlphaChant.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-alpha-chant">
+<span id="modulealphachant"></span><h1>music21.alpha.chant<a class="headerlink" href="#music21-alpha-chant" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.alpha.chant"></span><p><code class="docutils literal"><span class="pre">ALPHA</span> <span class="pre">MODULE</span></code>: Not directly supported by cuthbertLab.</p>
+<p>Classes and Tools for converting Music21 Streams to Gregorio .gabc</p>
+<p>Requires the amazing Gregoio library: <a class="reference external" href="http://gregorio-project.github.io">http://gregorio-project.github.io</a> , which itself
+requires LaTeX. (MacTeX, etc.; I suggest Basic TeX instead of the full MacTeX for this,
+since it&#8217;s only 100MB instead of 2.5GB)</p>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.alpha.chant.fromStream">
+<code class="descclassname">music21.alpha.chant.</code><code class="descname">fromStream</code><span class="sig-paren">(</span><em>inputStream</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.chant.fromStream" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="basescoreconverter">
+<h2>BaseScoreConverter<a class="headerlink" href="#basescoreconverter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.chant.BaseScoreConverter">
+<em class="property">class </em><code class="descclassname">music21.alpha.chant.</code><code class="descname">BaseScoreConverter</code><a class="headerlink" href="#music21.alpha.chant.BaseScoreConverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converter for all Score objects.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.chant.BaseScoreConverter" title="music21.alpha.chant.BaseScoreConverter"><code class="xref py py-class docutils literal"><span class="pre">BaseScoreConverter</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.chant.BaseScoreConverter.launchGregorio">
+<code class="descclassname">BaseScoreConverter.</code><code class="descname">launchGregorio</code><span class="sig-paren">(</span><em>fp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.chant.BaseScoreConverter.launchGregorio" title="Permalink to this definition">¶</a></dt>
+<dd><p>converts a .gabc file to LaTeX using the
+gregorio converter.  Returns the filename with .tex substituted for .gabc</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bsc</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">chant</span><span class="o">.</span><span class="n">BaseScoreConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fn</span> <span class="o">=</span> <span class="s1">&#39;~cuthbert/Library/Gregorio/examples/Populas.gabc&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newFp</span> <span class="o">=</span> <span class="n">bsc</span><span class="o">.</span><span class="n">launchGregorio</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bsc</span><span class="o">.</span><span class="n">gregorioCommand</span>
+<span class="go">&#39;open -a&quot;/usr/local/bin/gregorio&quot;  ~cuthbert/Library/Gregorio/examples/Populas.gabc&#39;</span>
+</pre></div>
+</div>
+<p>More often, you&#8217;ll want to write a textfile from writeFile:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.chant.BaseScoreConverter.launchLaTeX">
+<code class="descclassname">BaseScoreConverter.</code><code class="descname">launchLaTeX</code><span class="sig-paren">(</span><em>fp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.chant.BaseScoreConverter.launchLaTeX" title="Permalink to this definition">¶</a></dt>
+<dd><p>converts a .tex file to pdf using lulatex
+Returns the filename with .pdf substituted for .tex</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.chant.BaseScoreConverter.writeFile">
+<code class="descclassname">BaseScoreConverter.</code><code class="descname">writeFile</code><span class="sig-paren">(</span><em>text=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.chant.BaseScoreConverter.writeFile" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bsc</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">chant</span><span class="o">.</span><span class="n">BaseScoreConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filePath</span> <span class="o">=</span> <span class="n">bsc</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filePath</span> 
+<span class="go">&#39;/var/folders/k9/T/music21/tmpekHFCr.gabc&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="defaulttexwrapper">
+<h2>DefaultTeXWrapper<a class="headerlink" href="#defaulttexwrapper" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.chant.DefaultTeXWrapper">
+<em class="property">class </em><code class="descclassname">music21.alpha.chant.</code><code class="descname">DefaultTeXWrapper</code><a class="headerlink" href="#music21.alpha.chant.DefaultTeXWrapper" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.chant.DefaultTeXWrapper" title="music21.alpha.chant.DefaultTeXWrapper"><code class="xref py py-class docutils literal"><span class="pre">DefaultTeXWrapper</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.chant.DefaultTeXWrapper.substituteInfo">
+<code class="descclassname">DefaultTeXWrapper.</code><code class="descname">substituteInfo</code><span class="sig-paren">(</span><em>converter</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.chant.DefaultTeXWrapper.substituteInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Puts the correct information into the TeXWrapper for the document</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wrapper</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">chant</span><span class="o">.</span><span class="n">DefaultTeXWrapper</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Converter</span><span class="p">():</span>
+<span class="gp">... </span>   <span class="n">score</span> <span class="o">=</span> <span class="s1">r&#39;\note</span><span class="si">{C}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s1">r&#39;\endgregorioscore %&#39;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s1">r&#39;\endinput %&#39;</span>
+<span class="gp">... </span>   <span class="n">incipit</span> <span class="o">=</span> <span class="s1">&#39;Gaudeamus Omnes&#39;</span>
+<span class="gp">... </span>   <span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;VII&#39;</span>
+<span class="gp">... </span>   <span class="n">paperType</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">Converter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">wrapper</span><span class="o">.</span><span class="n">substituteInfo</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+<span class="go">% !TEX TS-program = lualatex</span>
+<span class="go">% !TEX encoding = UTF-8</span>
+<span class="gp">...</span>
+<span class="go">\geometry{letterpaper} % a4paper or letterpaper (US) or a5paper or other </span>
+<span class="gp">...</span>
+<span class="go">% The title:</span>
+<span class="go">\begin{center}\begin{huge}\textsc{Gaudeamus Omnes}\end{huge}\end{center}</span>
+<span class="gp">...</span>
+<span class="go">% We set Mode above the initial.</span>
+<span class="go">\gresetfirstlineaboveinitial{\small \textsc{\textbf{VII}}}{\small \textsc{\textbf{VII}}}</span>
+<span class="gp">...</span>
+<span class="go">% and finally we include the score.</span>
+<span class="go">\note{C}</span>
+<span class="go">\endgregorioscore %</span>
+<span class="go">\end{document}</span>
+<span class="go">\endinput %...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="gregoriannote">
+<h2>GregorianNote<a class="headerlink" href="#gregoriannote" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.chant.GregorianNote">
+<em class="property">class </em><code class="descclassname">music21.alpha.chant.</code><code class="descname">GregorianNote</code><span class="sig-paren">(</span><em>*arguments</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.chant.GregorianNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>A GregorianNote is a subclass of <a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a> that
+contains extra attributes which represent the interpretation or
+graphical representation of the note.</p>
+<p>Most of the attributes default to False.  Exceptions are noted below.</p>
+<p>Example: a very special note.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">chant</span><span class="o">.</span><span class="n">GregorianNote</span><span class="p">(</span><span class="s2">&quot;C4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">liquescent</span> <span class="o">=</span> <span class="kc">True</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">quilisma</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">basicShape</span> <span class="o">=</span> <span class="s1">&#39;virga&#39;</span>  <span class="c1"># default: punctus</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">breakNeume</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># don&#39;t connect to the next note in a neume.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">stropha</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">inclinatum</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">debilis</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># small note</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">episema</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">punctumMora</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">fill</span> <span class="o">=</span> <span class="s1">&#39;cavum&#39;</span> <span class="c1"># </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.chant.GregorianNote" title="music21.alpha.chant.GregorianNote"><code class="xref py py-class docutils literal"><span class="pre">GregorianNote</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.NotRest" title="music21.note.NotRest"><code class="xref py py-class docutils literal"><span class="pre">NotRest</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote" title="music21.note.GeneralNote"><code class="xref py py-class docutils literal"><span class="pre">GeneralNote</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.chant.GregorianNote" title="music21.alpha.chant.GregorianNote"><code class="xref py py-class docutils literal"><span class="pre">GregorianNote</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.diatonicNoteNum" title="music21.note.Note.diatonicNoteNum"><code class="xref py py-attr docutils literal"><span class="pre">diatonicNoteNum</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.fullName" title="music21.note.Note.fullName"><code class="xref py py-attr docutils literal"><span class="pre">fullName</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.chant.GregorianNote" title="music21.alpha.chant.GregorianNote"><code class="xref py py-class docutils literal"><span class="pre">GregorianNote</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.alpha.chant.GregorianNote.fill">
+<code class="descclassname">GregorianNote.</code><code class="descname">fill</code><a class="headerlink" href="#music21.alpha.chant.GregorianNote.fill" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the
+fill for the note, for teaching purposes, representing
+polyphony, etc.  Acceptable values are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>solid (default)</li>
+<li>cavum (void)</li>
+<li>linea (lines around it; technically not a fill)</li>
+<li>linea-cavum (both of the previous)</li>
+<li>accentus</li>
+<li>reversed-accentus</li>
+<li>circulus</li>
+<li>semi-circulus</li>
+<li>reversed-semi-circulus</li>
+</ul>
+</div></blockquote>
+<p>See the docs for Gregorio for graphical representations of these figures.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">chant</span><span class="o">.</span><span class="n">GregorianNote</span><span class="p">(</span><span class="s2">&quot;D3&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">fill</span>
+<span class="go">&#39;solid&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">fill</span> <span class="o">=</span> <span class="s1">&#39;cavum&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">fill</span>
+<span class="go">&#39;cavum&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Read/write properties inherited from <a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.accidental" title="music21.note.Note.accidental"><code class="xref py py-attr docutils literal"><span class="pre">accidental</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.frequency" title="music21.note.Note.frequency"><code class="xref py py-attr docutils literal"><span class="pre">frequency</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.microtone" title="music21.note.Note.microtone"><code class="xref py py-attr docutils literal"><span class="pre">microtone</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.midi" title="music21.note.Note.midi"><code class="xref py py-attr docutils literal"><span class="pre">midi</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.name" title="music21.note.Note.name"><code class="xref py py-attr docutils literal"><span class="pre">name</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.nameWithOctave" title="music21.note.Note.nameWithOctave"><code class="xref py py-attr docutils literal"><span class="pre">nameWithOctave</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.octave" title="music21.note.Note.octave"><code class="xref py py-attr docutils literal"><span class="pre">octave</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.pitchClass" title="music21.note.Note.pitchClass"><code class="xref py py-attr docutils literal"><span class="pre">pitchClass</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.pitchClassString" title="music21.note.Note.pitchClassString"><code class="xref py py-attr docutils literal"><span class="pre">pitchClassString</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.pitches" title="music21.note.Note.pitches"><code class="xref py py-attr docutils literal"><span class="pre">pitches</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.ps" title="music21.note.Note.ps"><code class="xref py py-attr docutils literal"><span class="pre">ps</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.step" title="music21.note.Note.step"><code class="xref py py-attr docutils literal"><span class="pre">step</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleNote.html#music21.note.NotRest" title="music21.note.NotRest"><code class="xref py py-class docutils literal"><span class="pre">NotRest</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.NotRest.notehead" title="music21.note.NotRest.notehead"><code class="xref py py-attr docutils literal"><span class="pre">notehead</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.NotRest.noteheadFill" title="music21.note.NotRest.noteheadFill"><code class="xref py py-attr docutils literal"><span class="pre">noteheadFill</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.NotRest.noteheadParenthesis" title="music21.note.NotRest.noteheadParenthesis"><code class="xref py py-attr docutils literal"><span class="pre">noteheadParenthesis</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.NotRest.stemDirection" title="music21.note.NotRest.stemDirection"><code class="xref py py-attr docutils literal"><span class="pre">stemDirection</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.NotRest.volume" title="music21.note.NotRest.volume"><code class="xref py py-attr docutils literal"><span class="pre">volume</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleNote.html#music21.note.GeneralNote" title="music21.note.GeneralNote"><code class="xref py py-class docutils literal"><span class="pre">GeneralNote</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.color" title="music21.note.GeneralNote.color"><code class="xref py py-attr docutils literal"><span class="pre">color</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.editorial" title="music21.note.GeneralNote.editorial"><code class="xref py py-attr docutils literal"><span class="pre">editorial</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.lyric" title="music21.note.GeneralNote.lyric"><code class="xref py py-attr docutils literal"><span class="pre">lyric</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.chant.GregorianNote" title="music21.alpha.chant.GregorianNote"><code class="xref py py-class docutils literal"><span class="pre">GregorianNote</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.chant.GregorianNote.toBasicGABC">
+<code class="descclassname">GregorianNote.</code><code class="descname">toBasicGABC</code><span class="sig-paren">(</span><em>useClef=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.chant.GregorianNote.toBasicGABC" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the character representing inNote in the given clef (default = AltoClef)</p>
+<p>see <a class="reference external" href="http://home.gna.org/gregorio/gabc/">http://home.gna.org/gregorio/gabc/</a> for more details.  &#8216;d&#8217; = lowest line</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">chant</span><span class="o">.</span><span class="n">GregorianNote</span><span class="p">(</span><span class="s2">&quot;C4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">clef</span><span class="o">.</span><span class="n">AltoClef</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">toBasicGABC</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="go">&#39;h&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span> <span class="o">=</span> <span class="n">clef</span><span class="o">.</span><span class="n">SopranoClef</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">toBasicGABC</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
+<span class="go">&#39;d&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.chant.GregorianNote.toGABC">
+<code class="descclassname">GregorianNote.</code><code class="descname">toGABC</code><span class="sig-paren">(</span><em>useClef=None</em>, <em>nextNote=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.chant.GregorianNote.toGABC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.transpose" title="music21.note.Note.transpose"><code class="xref py py-meth docutils literal"><span class="pre">transpose()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleNote.html#music21.note.GeneralNote" title="music21.note.GeneralNote"><code class="xref py py-class docutils literal"><span class="pre">GeneralNote</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.addLyric" title="music21.note.GeneralNote.addLyric"><code class="xref py py-meth docutils literal"><span class="pre">addLyric()</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.augmentOrDiminish" title="music21.note.GeneralNote.augmentOrDiminish"><code class="xref py py-meth docutils literal"><span class="pre">augmentOrDiminish()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.getGrace" title="music21.note.GeneralNote.getGrace"><code class="xref py py-meth docutils literal"><span class="pre">getGrace()</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.hasLyrics" title="music21.note.GeneralNote.hasLyrics"><code class="xref py py-meth docutils literal"><span class="pre">hasLyrics()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.insertLyric" title="music21.note.GeneralNote.insertLyric"><code class="xref py py-meth docutils literal"><span class="pre">insertLyric()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.chant.GregorianNote" title="music21.alpha.chant.GregorianNote"><code class="xref py py-class docutils literal"><span class="pre">GregorianNote</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.isNote" title="music21.note.Note.isNote"><code class="xref py py-attr docutils literal"><span class="pre">isNote</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.isRest" title="music21.note.Note.isRest"><code class="xref py py-attr docutils literal"><span class="pre">isRest</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.Note.pitch" title="music21.note.Note.pitch"><code class="xref py py-attr docutils literal"><span class="pre">pitch</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Instance variables inherited from <a class="reference internal" href="moduleNote.html#music21.note.NotRest" title="music21.note.NotRest"><code class="xref py py-class docutils literal"><span class="pre">NotRest</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.NotRest.beams" title="music21.note.NotRest.beams"><code class="xref py py-attr docutils literal"><span class="pre">beams</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.NotRest.isChord" title="music21.note.NotRest.isChord"><code class="xref py py-attr docutils literal"><span class="pre">isChord</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.NotRest.isNote" title="music21.note.NotRest.isNote"><code class="xref py py-attr docutils literal"><span class="pre">isNote</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.NotRest.isRest" title="music21.note.NotRest.isRest"><code class="xref py py-attr docutils literal"><span class="pre">isRest</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Instance variables inherited from <a class="reference internal" href="moduleNote.html#music21.note.GeneralNote" title="music21.note.GeneralNote"><code class="xref py py-class docutils literal"><span class="pre">GeneralNote</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.articulations" title="music21.note.GeneralNote.articulations"><code class="xref py py-attr docutils literal"><span class="pre">articulations</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.expressions" title="music21.note.GeneralNote.expressions"><code class="xref py py-attr docutils literal"><span class="pre">expressions</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.isChord" title="music21.note.GeneralNote.isChord"><code class="xref py py-attr docutils literal"><span class="pre">isChord</span></code></a></li>
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.lyrics" title="music21.note.GeneralNote.lyrics"><code class="xref py py-attr docutils literal"><span class="pre">lyrics</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleNote.html#music21.note.GeneralNote.tie" title="music21.note.GeneralNote.tie"><code class="xref py py-attr docutils literal"><span class="pre">tie</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="gregorianstream">
+<h2>GregorianStream<a class="headerlink" href="#gregorianstream" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.alpha.chant.GregorianStream">
+<em class="property">class </em><code class="descclassname">music21.alpha.chant.</code><code class="descname">GregorianStream</code><span class="sig-paren">(</span><em>givenElements=None</em>, <em>*args</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.chant.GregorianStream" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">chant</span><span class="o">.</span><span class="n">GregorianStream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clef</span><span class="o">.</span><span class="n">AltoClef</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">chant</span><span class="o">.</span><span class="n">GregorianNote</span><span class="p">(</span><span class="s2">&quot;C4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Lyric</span><span class="p">(</span><span class="s2">&quot;Po&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span><span class="o">.</span><span class="n">syllabic</span> <span class="o">=</span> <span class="s2">&quot;start&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">lyrics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">oriscus</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">toGABCText</span><span class="p">()</span>
+<span class="go">&#39;(c3) Po(ho)\n&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.alpha.chant.GregorianStream" title="music21.alpha.chant.GregorianStream"><code class="xref py py-class docutils literal"><span class="pre">GregorianStream</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a></li>
+<li><a class="reference internal" href="moduleStreamCore.html#music21.stream.core.StreamCoreMixin" title="music21.stream.core.StreamCoreMixin"><code class="xref py py-class docutils literal"><span class="pre">StreamCoreMixin</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.chant.GregorianStream" title="music21.alpha.chant.GregorianStream"><code class="xref py py-class docutils literal"><span class="pre">GregorianStream</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.beat" title="music21.stream.Stream.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.beatDuration" title="music21.stream.Stream.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.beatStr" title="music21.stream.Stream.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.beatStrength" title="music21.stream.Stream.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.flat" title="music21.stream.Stream.flat"><code class="xref py py-attr docutils literal"><span class="pre">flat</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.highestOffset" title="music21.stream.Stream.highestOffset"><code class="xref py py-attr docutils literal"><span class="pre">highestOffset</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.highestTime" title="music21.stream.Stream.highestTime"><code class="xref py py-attr docutils literal"><span class="pre">highestTime</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.isGapless" title="music21.stream.Stream.isGapless"><code class="xref py py-attr docutils literal"><span class="pre">isGapless</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.iter" title="music21.stream.Stream.iter"><code class="xref py py-attr docutils literal"><span class="pre">iter</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.lowestOffset" title="music21.stream.Stream.lowestOffset"><code class="xref py py-attr docutils literal"><span class="pre">lowestOffset</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.notes" title="music21.stream.Stream.notes"><code class="xref py py-attr docutils literal"><span class="pre">notes</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.notesAndRests" title="music21.stream.Stream.notesAndRests"><code class="xref py py-attr docutils literal"><span class="pre">notesAndRests</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.pitches" title="music21.stream.Stream.pitches"><code class="xref py py-attr docutils literal"><span class="pre">pitches</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.secondsMap" title="music21.stream.Stream.secondsMap"><code class="xref py py-attr docutils literal"><span class="pre">secondsMap</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.semiFlat" title="music21.stream.Stream.semiFlat"><code class="xref py py-attr docutils literal"><span class="pre">semiFlat</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.sorted" title="music21.stream.Stream.sorted"><code class="xref py py-attr docutils literal"><span class="pre">sorted</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.spanners" title="music21.stream.Stream.spanners"><code class="xref py py-attr docutils literal"><span class="pre">spanners</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.variants" title="music21.stream.Stream.variants"><code class="xref py py-attr docutils literal"><span class="pre">variants</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.voices" title="music21.stream.Stream.voices"><code class="xref py py-attr docutils literal"><span class="pre">voices</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleStreamCore.html#music21.stream.core.StreamCoreMixin" title="music21.stream.core.StreamCoreMixin"><code class="xref py py-class docutils literal"><span class="pre">StreamCoreMixin</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleStreamCore.html#music21.stream.core.StreamCoreMixin.spannerBundle" title="music21.stream.core.StreamCoreMixin.spannerBundle"><code class="xref py py-attr docutils literal"><span class="pre">spannerBundle</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.chant.GregorianStream" title="music21.alpha.chant.GregorianStream"><code class="xref py py-class docutils literal"><span class="pre">GregorianStream</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.atSoundingPitch" title="music21.stream.Stream.atSoundingPitch"><code class="xref py py-attr docutils literal"><span class="pre">atSoundingPitch</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.clef" title="music21.stream.Stream.clef"><code class="xref py py-attr docutils literal"><span class="pre">clef</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.duration" title="music21.stream.Stream.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.elements" title="music21.stream.Stream.elements"><code class="xref py py-attr docutils literal"><span class="pre">elements</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.finalBarline" title="music21.stream.Stream.finalBarline"><code class="xref py py-attr docutils literal"><span class="pre">finalBarline</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.keySignature" title="music21.stream.Stream.keySignature"><code class="xref py py-attr docutils literal"><span class="pre">keySignature</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.metadata" title="music21.stream.Stream.metadata"><code class="xref py py-attr docutils literal"><span class="pre">metadata</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.seconds" title="music21.stream.Stream.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.timeSignature" title="music21.stream.Stream.timeSignature"><code class="xref py py-attr docutils literal"><span class="pre">timeSignature</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.chant.GregorianStream" title="music21.alpha.chant.GregorianStream"><code class="xref py py-class docutils literal"><span class="pre">GregorianStream</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.alpha.chant.GregorianStream.clefToGABC">
+<code class="descclassname">GregorianStream.</code><code class="descname">clefToGABC</code><span class="sig-paren">(</span><em>clefIn</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.chant.GregorianStream.clefToGABC" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">.</span><span class="n">chant</span><span class="o">.</span><span class="n">GregorianStream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">clef</span><span class="o">.</span><span class="n">AltoClef</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">clefToGABC</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="go">&#39;(c3)&#39;  </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.alpha.chant.GregorianStream.toGABCText">
+<code class="descclassname">GregorianStream.</code><code class="descname">toGABCText</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.alpha.chant.GregorianStream.toGABCText" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.activateVariants" title="music21.stream.Stream.activateVariants"><code class="xref py py-meth docutils literal"><span class="pre">activateVariants()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.addGroupForElements" title="music21.stream.Stream.addGroupForElements"><code class="xref py py-meth docutils literal"><span class="pre">addGroupForElements()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.allPlayingWhileSounding" title="music21.stream.Stream.allPlayingWhileSounding"><code class="xref py py-meth docutils literal"><span class="pre">allPlayingWhileSounding()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.analyze" title="music21.stream.Stream.analyze"><code class="xref py py-meth docutils literal"><span class="pre">analyze()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.append" title="music21.stream.Stream.append"><code class="xref py py-meth docutils literal"><span class="pre">append()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.attachIntervalsBetweenStreams" title="music21.stream.Stream.attachIntervalsBetweenStreams"><code class="xref py py-meth docutils literal"><span class="pre">attachIntervalsBetweenStreams()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.attachMelodicIntervals" title="music21.stream.Stream.attachMelodicIntervals"><code class="xref py py-meth docutils literal"><span class="pre">attachMelodicIntervals()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.attributeCount" title="music21.stream.Stream.attributeCount"><code class="xref py py-meth docutils literal"><span class="pre">attributeCount()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.augmentOrDiminish" title="music21.stream.Stream.augmentOrDiminish"><code class="xref py py-meth docutils literal"><span class="pre">augmentOrDiminish()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.beatAndMeasureFromOffset" title="music21.stream.Stream.beatAndMeasureFromOffset"><code class="xref py py-meth docutils literal"><span class="pre">beatAndMeasureFromOffset()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.bestClef" title="music21.stream.Stream.bestClef"><code class="xref py py-meth docutils literal"><span class="pre">bestClef()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.chordify" title="music21.stream.Stream.chordify"><code class="xref py py-meth docutils literal"><span class="pre">chordify()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.cloneEmpty" title="music21.stream.Stream.cloneEmpty"><code class="xref py py-meth docutils literal"><span class="pre">cloneEmpty()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.elementOffset" title="music21.stream.Stream.elementOffset"><code class="xref py py-meth docutils literal"><span class="pre">elementOffset()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.expandRepeats" title="music21.stream.Stream.expandRepeats"><code class="xref py py-meth docutils literal"><span class="pre">expandRepeats()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.explode" title="music21.stream.Stream.explode"><code class="xref py py-meth docutils literal"><span class="pre">explode()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.extendDuration" title="music21.stream.Stream.extendDuration"><code class="xref py py-meth docutils literal"><span class="pre">extendDuration()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.extendDurationAndGetBoundaries" title="music21.stream.Stream.extendDurationAndGetBoundaries"><code class="xref py py-meth docutils literal"><span class="pre">extendDurationAndGetBoundaries()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.extendTies" title="music21.stream.Stream.extendTies"><code class="xref py py-meth docutils literal"><span class="pre">extendTies()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.extractContext" title="music21.stream.Stream.extractContext"><code class="xref py py-meth docutils literal"><span class="pre">extractContext()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.findConsecutiveNotes" title="music21.stream.Stream.findConsecutiveNotes"><code class="xref py py-meth docutils literal"><span class="pre">findConsecutiveNotes()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.findGaps" title="music21.stream.Stream.findGaps"><code class="xref py py-meth docutils literal"><span class="pre">findGaps()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.flattenUnnecessaryVoices" title="music21.stream.Stream.flattenUnnecessaryVoices"><code class="xref py py-meth docutils literal"><span class="pre">flattenUnnecessaryVoices()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getClefs" title="music21.stream.Stream.getClefs"><code class="xref py py-meth docutils literal"><span class="pre">getClefs()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getElementAfterElement" title="music21.stream.Stream.getElementAfterElement"><code class="xref py py-meth docutils literal"><span class="pre">getElementAfterElement()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getElementAtOrBefore" title="music21.stream.Stream.getElementAtOrBefore"><code class="xref py py-meth docutils literal"><span class="pre">getElementAtOrBefore()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getElementBeforeOffset" title="music21.stream.Stream.getElementBeforeOffset"><code class="xref py py-meth docutils literal"><span class="pre">getElementBeforeOffset()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getElementById" title="music21.stream.Stream.getElementById"><code class="xref py py-meth docutils literal"><span class="pre">getElementById()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getElementsByClass" title="music21.stream.Stream.getElementsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getElementsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getElementsByGroup" title="music21.stream.Stream.getElementsByGroup"><code class="xref py py-meth docutils literal"><span class="pre">getElementsByGroup()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getElementsByOffset" title="music21.stream.Stream.getElementsByOffset"><code class="xref py py-meth docutils literal"><span class="pre">getElementsByOffset()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getElementsNotOfClass" title="music21.stream.Stream.getElementsNotOfClass"><code class="xref py py-meth docutils literal"><span class="pre">getElementsNotOfClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getInstrument" title="music21.stream.Stream.getInstrument"><code class="xref py py-meth docutils literal"><span class="pre">getInstrument()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getInstruments" title="music21.stream.Stream.getInstruments"><code class="xref py py-meth docutils literal"><span class="pre">getInstruments()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getKeySignatures" title="music21.stream.Stream.getKeySignatures"><code class="xref py py-meth docutils literal"><span class="pre">getKeySignatures()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getOffsetByElement" title="music21.stream.Stream.getOffsetByElement"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetByElement()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getOverlaps" title="music21.stream.Stream.getOverlaps"><code class="xref py py-meth docutils literal"><span class="pre">getOverlaps()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.getTimeSignatures" title="music21.stream.Stream.getTimeSignatures"><code class="xref py py-meth docutils literal"><span class="pre">getTimeSignatures()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.groupElementsByOffset" title="music21.stream.Stream.groupElementsByOffset"><code class="xref py py-meth docutils literal"><span class="pre">groupElementsByOffset()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.hasElement" title="music21.stream.Stream.hasElement"><code class="xref py py-meth docutils literal"><span class="pre">hasElement()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.hasElementOfClass" title="music21.stream.Stream.hasElementOfClass"><code class="xref py py-meth docutils literal"><span class="pre">hasElementOfClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.hasMeasures" title="music21.stream.Stream.hasMeasures"><code class="xref py py-meth docutils literal"><span class="pre">hasMeasures()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.hasPartLikeStreams" title="music21.stream.Stream.hasPartLikeStreams"><code class="xref py py-meth docutils literal"><span class="pre">hasPartLikeStreams()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.hasVoices" title="music21.stream.Stream.hasVoices"><code class="xref py py-meth docutils literal"><span class="pre">hasVoices()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.haveAccidentalsBeenMade" title="music21.stream.Stream.haveAccidentalsBeenMade"><code class="xref py py-meth docutils literal"><span class="pre">haveAccidentalsBeenMade()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.haveBeamsBeenMade" title="music21.stream.Stream.haveBeamsBeenMade"><code class="xref py py-meth docutils literal"><span class="pre">haveBeamsBeenMade()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.index" title="music21.stream.Stream.index"><code class="xref py py-meth docutils literal"><span class="pre">index()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.insert" title="music21.stream.Stream.insert"><code class="xref py py-meth docutils literal"><span class="pre">insert()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.insertAndShift" title="music21.stream.Stream.insertAndShift"><code class="xref py py-meth docutils literal"><span class="pre">insertAndShift()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.insertIntoNoteOrChord" title="music21.stream.Stream.insertIntoNoteOrChord"><code class="xref py py-meth docutils literal"><span class="pre">insertIntoNoteOrChord()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.internalize" title="music21.stream.Stream.internalize"><code class="xref py py-meth docutils literal"><span class="pre">internalize()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.invertDiatonic" title="music21.stream.Stream.invertDiatonic"><code class="xref py py-meth docutils literal"><span class="pre">invertDiatonic()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.isSequence" title="music21.stream.Stream.isSequence"><code class="xref py py-meth docutils literal"><span class="pre">isSequence()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.isTwelveTone" title="music21.stream.Stream.isTwelveTone"><code class="xref py py-meth docutils literal"><span class="pre">isTwelveTone()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.isWellFormedNotation" title="music21.stream.Stream.isWellFormedNotation"><code class="xref py py-meth docutils literal"><span class="pre">isWellFormedNotation()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.lyrics" title="music21.stream.Stream.lyrics"><code class="xref py py-meth docutils literal"><span class="pre">lyrics()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeAccidentals" title="music21.stream.Stream.makeAccidentals"><code class="xref py py-meth docutils literal"><span class="pre">makeAccidentals()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeBeams" title="music21.stream.Stream.makeBeams"><code class="xref py py-meth docutils literal"><span class="pre">makeBeams()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeChords" title="music21.stream.Stream.makeChords"><code class="xref py py-meth docutils literal"><span class="pre">makeChords()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeImmutable" title="music21.stream.Stream.makeImmutable"><code class="xref py py-meth docutils literal"><span class="pre">makeImmutable()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeMeasures" title="music21.stream.Stream.makeMeasures"><code class="xref py py-meth docutils literal"><span class="pre">makeMeasures()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeMutable" title="music21.stream.Stream.makeMutable"><code class="xref py py-meth docutils literal"><span class="pre">makeMutable()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeNotation" title="music21.stream.Stream.makeNotation"><code class="xref py py-meth docutils literal"><span class="pre">makeNotation()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeRests" title="music21.stream.Stream.makeRests"><code class="xref py py-meth docutils literal"><span class="pre">makeRests()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeTies" title="music21.stream.Stream.makeTies"><code class="xref py py-meth docutils literal"><span class="pre">makeTies()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeTupletBrackets" title="music21.stream.Stream.makeTupletBrackets"><code class="xref py py-meth docutils literal"><span class="pre">makeTupletBrackets()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeVariantBlocks" title="music21.stream.Stream.makeVariantBlocks"><code class="xref py py-meth docutils literal"><span class="pre">makeVariantBlocks()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeVoices" title="music21.stream.Stream.makeVoices"><code class="xref py py-meth docutils literal"><span class="pre">makeVoices()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.measure" title="music21.stream.Stream.measure"><code class="xref py py-meth docutils literal"><span class="pre">measure()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.measureOffsetMap" title="music21.stream.Stream.measureOffsetMap"><code class="xref py py-meth docutils literal"><span class="pre">measureOffsetMap()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.measureTemplate" title="music21.stream.Stream.measureTemplate"><code class="xref py py-meth docutils literal"><span class="pre">measureTemplate()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.measures" title="music21.stream.Stream.measures"><code class="xref py py-meth docutils literal"><span class="pre">measures()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.melodicIntervals" title="music21.stream.Stream.melodicIntervals"><code class="xref py py-meth docutils literal"><span class="pre">melodicIntervals()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.mergeAttributes" title="music21.stream.Stream.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.mergeElements" title="music21.stream.Stream.mergeElements"><code class="xref py py-meth docutils literal"><span class="pre">mergeElements()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.metronomeMarkBoundaries" title="music21.stream.Stream.metronomeMarkBoundaries"><code class="xref py py-meth docutils literal"><span class="pre">metronomeMarkBoundaries()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.offsetMap" title="music21.stream.Stream.offsetMap"><code class="xref py py-meth docutils literal"><span class="pre">offsetMap()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.pitchAttributeCount" title="music21.stream.Stream.pitchAttributeCount"><code class="xref py py-meth docutils literal"><span class="pre">pitchAttributeCount()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.playingWhenAttacked" title="music21.stream.Stream.playingWhenAttacked"><code class="xref py py-meth docutils literal"><span class="pre">playingWhenAttacked()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.plot" title="music21.stream.Stream.plot"><code class="xref py py-meth docutils literal"><span class="pre">plot()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.pop" title="music21.stream.Stream.pop"><code class="xref py py-meth docutils literal"><span class="pre">pop()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.quantize" title="music21.stream.Stream.quantize"><code class="xref py py-meth docutils literal"><span class="pre">quantize()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.realizeOrnaments" title="music21.stream.Stream.realizeOrnaments"><code class="xref py py-meth docutils literal"><span class="pre">realizeOrnaments()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.recurse" title="music21.stream.Stream.recurse"><code class="xref py py-meth docutils literal"><span class="pre">recurse()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.remove" title="music21.stream.Stream.remove"><code class="xref py py-meth docutils literal"><span class="pre">remove()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.removeByClass" title="music21.stream.Stream.removeByClass"><code class="xref py py-meth docutils literal"><span class="pre">removeByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.removeByNotOfClass" title="music21.stream.Stream.removeByNotOfClass"><code class="xref py py-meth docutils literal"><span class="pre">removeByNotOfClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.repeatAppend" title="music21.stream.Stream.repeatAppend"><code class="xref py py-meth docutils literal"><span class="pre">repeatAppend()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.repeatInsert" title="music21.stream.Stream.repeatInsert"><code class="xref py py-meth docutils literal"><span class="pre">repeatInsert()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.replace" title="music21.stream.Stream.replace"><code class="xref py py-meth docutils literal"><span class="pre">replace()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.restoreActiveSites" title="music21.stream.Stream.restoreActiveSites"><code class="xref py py-meth docutils literal"><span class="pre">restoreActiveSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.scaleDurations" title="music21.stream.Stream.scaleDurations"><code class="xref py py-meth docutils literal"><span class="pre">scaleDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.scaleOffsets" title="music21.stream.Stream.scaleOffsets"><code class="xref py py-meth docutils literal"><span class="pre">scaleOffsets()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.setElementOffset" title="music21.stream.Stream.setElementOffset"><code class="xref py py-meth docutils literal"><span class="pre">setElementOffset()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.shiftElements" title="music21.stream.Stream.shiftElements"><code class="xref py py-meth docutils literal"><span class="pre">shiftElements()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.show" title="music21.stream.Stream.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.showVariantAsOssialikePart" title="music21.stream.Stream.showVariantAsOssialikePart"><code class="xref py py-meth docutils literal"><span class="pre">showVariantAsOssialikePart()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.simultaneousAttacks" title="music21.stream.Stream.simultaneousAttacks"><code class="xref py py-meth docutils literal"><span class="pre">simultaneousAttacks()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.sliceAtOffsets" title="music21.stream.Stream.sliceAtOffsets"><code class="xref py py-meth docutils literal"><span class="pre">sliceAtOffsets()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.sliceByBeat" title="music21.stream.Stream.sliceByBeat"><code class="xref py py-meth docutils literal"><span class="pre">sliceByBeat()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.sliceByGreatestDivisor" title="music21.stream.Stream.sliceByGreatestDivisor"><code class="xref py py-meth docutils literal"><span class="pre">sliceByGreatestDivisor()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.sliceByQuarterLengths" title="music21.stream.Stream.sliceByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">sliceByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.sort" title="music21.stream.Stream.sort"><code class="xref py py-meth docutils literal"><span class="pre">sort()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.splitAtQuarterLength" title="music21.stream.Stream.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.splitByClass" title="music21.stream.Stream.splitByClass"><code class="xref py py-meth docutils literal"><span class="pre">splitByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.storeAtEnd" title="music21.stream.Stream.storeAtEnd"><code class="xref py py-meth docutils literal"><span class="pre">storeAtEnd()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.stream" title="music21.stream.Stream.stream"><code class="xref py py-meth docutils literal"><span class="pre">stream()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.stripTies" title="music21.stream.Stream.stripTies"><code class="xref py py-meth docutils literal"><span class="pre">stripTies()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.toSoundingPitch" title="music21.stream.Stream.toSoundingPitch"><code class="xref py py-meth docutils literal"><span class="pre">toSoundingPitch()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.toWrittenPitch" title="music21.stream.Stream.toWrittenPitch"><code class="xref py py-meth docutils literal"><span class="pre">toWrittenPitch()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.transferOffsetToElements" title="music21.stream.Stream.transferOffsetToElements"><code class="xref py py-meth docutils literal"><span class="pre">transferOffsetToElements()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.transpose" title="music21.stream.Stream.transpose"><code class="xref py py-meth docutils literal"><span class="pre">transpose()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.voicesToParts" title="music21.stream.Stream.voicesToParts"><code class="xref py py-meth docutils literal"><span class="pre">voicesToParts()</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.write" title="music21.stream.Stream.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleStreamCore.html#music21.stream.core.StreamCoreMixin" title="music21.stream.core.StreamCoreMixin"><code class="xref py py-class docutils literal"><span class="pre">StreamCoreMixin</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleStreamCore.html#music21.stream.core.StreamCoreMixin.asTimespans" title="music21.stream.core.StreamCoreMixin.asTimespans"><code class="xref py py-meth docutils literal"><span class="pre">asTimespans()</span></code></a></li>
+<li><a class="reference internal" href="moduleStreamCore.html#music21.stream.core.StreamCoreMixin.asTree" title="music21.stream.core.StreamCoreMixin.asTree"><code class="xref py py-meth docutils literal"><span class="pre">asTree()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleStreamCore.html#music21.stream.core.StreamCoreMixin.coreGatherMissingSpanners" title="music21.stream.core.StreamCoreMixin.coreGatherMissingSpanners"><code class="xref py py-meth docutils literal"><span class="pre">coreGatherMissingSpanners()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleStreamCore.html#music21.stream.core.StreamCoreMixin.elementsChanged" title="music21.stream.core.StreamCoreMixin.elementsChanged"><code class="xref py py-meth docutils literal"><span class="pre">elementsChanged()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.alpha.chant.GregorianStream" title="music21.alpha.chant.GregorianStream"><code class="xref py py-class docutils literal"><span class="pre">GregorianStream</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.autoSort" title="music21.stream.Stream.autoSort"><code class="xref py py-attr docutils literal"><span class="pre">autoSort</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.definesExplicitPageBreaks" title="music21.stream.Stream.definesExplicitPageBreaks"><code class="xref py py-attr docutils literal"><span class="pre">definesExplicitPageBreaks</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.definesExplicitSystemBreaks" title="music21.stream.Stream.definesExplicitSystemBreaks"><code class="xref py py-attr docutils literal"><span class="pre">definesExplicitSystemBreaks</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.isFlat" title="music21.stream.Stream.isFlat"><code class="xref py py-attr docutils literal"><span class="pre">isFlat</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.isSorted" title="music21.stream.Stream.isSorted"><code class="xref py py-attr docutils literal"><span class="pre">isSorted</span></code></a></li>
+<li><a class="reference internal" href="moduleStream.html#music21.stream.Stream.recursionType" title="music21.stream.Stream.recursionType"><code class="xref py py-attr docutils literal"><span class="pre">recursionType</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleAlphaContour.html" title="music21.alpha.contour"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleAlphaAnalysisSearch.html" title="music21.alpha.analysis.search"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

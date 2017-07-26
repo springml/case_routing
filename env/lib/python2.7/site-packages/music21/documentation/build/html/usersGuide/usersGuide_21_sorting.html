@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User’s Guide, Chapter 21: Ordering and Sorting of Stream Elements &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="User’s Guide, Chapter 22: Graphing" href="usersGuide_22_graphing.html" />
+    <link rel="prev" title="User’s Guide: Chapter 17: Derivations" href="usersGuide_17_derivations.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_22_graphing.html" title="User’s Guide, Chapter 22: Graphing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_17_derivations.html" title="User’s Guide: Chapter 17: Derivations"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_17_derivations.html"
+                        title="previous chapter">User&#8217;s Guide: Chapter 17: Derivations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_22_graphing.html"
+                        title="next chapter">User’s Guide, Chapter 22: Graphing</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a><ul>
+<li><a class="reference internal" href="#behind-the-scenes">Behind the scenes:</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_02_notes.html">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_03_pitches.html">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_05_listsOfLists.html">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_07_chords.html">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_08_installingMusicXML.html">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_11_corpusSearching.html">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_12_music21object.html">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_13_music21object2.html">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_15_key.html">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_25_postTonalTools1.html">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_26_clientWeakref.html">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_28_lyricSearcher.html">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_97_timespans.html">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_21_sorting.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-21-sorting"></span><div class="section" id="user-s-guide-chapter-21-ordering-and-sorting-of-stream-elements">
+<h1>User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements<a class="headerlink" href="#user-s-guide-chapter-21-ordering-and-sorting-of-stream-elements" title="Permalink to this headline">¶</a></h1>
+<p>Inside a stream, each object has a position and thus an order in the
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a>. Up until now we&#8217;ve seen two different
+ways to describe the position of an element (such as a
+<a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a>) in a stream. The first is the index of
+the object in the stream (a number in square brackets) and the second is
+the <code class="docutils literal"><span class="pre">offset</span></code>.</p>
+<p>Let&#8217;s take a simple Stream:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="n">ts1</span> <span class="o">=</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ts1</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="p">())</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C#4&#39;</span><span class="p">))</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D#4&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>We have inserted three elements that take up no space (a TimeSignature,
+KeySignature, and a Clef) and two elements that take up 1.0 quarter
+notes (the default length of a Note object). You might notice that the
+signatures and clef were inserted in a strange order. Don&#8217;t worry, we&#8217;ll
+get to that in a bit.</p>
+<p>In addition to inserting elements at particular places in a Stream, we
+can append an element to the end of the Stream:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now we&#8217;re pretty sure that the C# will be the fourth element in the
+Stream, which is referred to as <code class="docutils literal"><span class="pre">[3]</span></code> and the D# will be the fifth, or
+<code class="docutils literal"><span class="pre">[4]</span></code></p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="c1">#&gt;</span>
+</pre></div>
+</div>
+<p>The E will be <code class="docutils literal"><span class="pre">[5]</span></code> but we can also get it by saying it&#8217;s the last
+element, or <code class="docutils literal"><span class="pre">[-1]</span></code></p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The other way to describe the position of an element is by its offset.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">offset</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+<p>You may recall from previous discussions that the <code class="docutils literal"><span class="pre">offset</span></code> of an
+element is its position within the last referenced Stream it was
+attached to. Thus, if you want to know the offset of an element within a
+particular Stream, it is always safer to use one the following methods:
+<code class="docutils literal"><span class="pre">.getOffsetBySite(stream)</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+<p>Or to call <code class="docutils literal"><span class="pre">stream.elementOffset(element)</span></code>. This is a little bit
+faster so it&#8217;s what we use internally. It will always give the same
+result if <code class="docutils literal"><span class="pre">e</span></code> is in <code class="docutils literal"><span class="pre">s</span></code>, but if <code class="docutils literal"><span class="pre">e</span></code> might not be in <code class="docutils literal"><span class="pre">s</span></code> but be
+derived from an element in <code class="docutils literal"><span class="pre">s</span></code> then <code class="docutils literal"><span class="pre">.getOffsetBySite</span></code> will trace
+the <code class="docutils literal"><span class="pre">.derivation.chain()</span></code> to find it.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">elementOffset</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+<p>If you want to find all the elements at a particular offset, call
+<code class="docutils literal"><span class="pre">.getElementsByOffset</span></code> on the Stream. Note that if any elements are
+found it returns a <code class="docutils literal"><span class="pre">StreamIterator</span></code>, so you will need to use the
+square bracket index to reference it:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>This description might seem a bit obnoxious, but it is necessary because
+you can get multiple elements back, such as with an offset range:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
+<span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="c1">#&gt;, &lt;music21.note.Note E&gt;)</span>
+</pre></div>
+</div>
+<p>At this point, you might think that you know everything about how
+elements are positioned in a Stream, but there are a few more points
+that are important and point to the power of <code class="docutils literal"><span class="pre">music21</span></code>. Let&#8217;s show the
+Stream as a text file:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">2</span> <span class="n">sharps</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Something has happened: the <code class="docutils literal"><span class="pre">TrebleClef</span></code> object which was inserted
+third has now become the first element of the Stream. The
+<code class="docutils literal"><span class="pre">KeySignature</span></code> and <code class="docutils literal"><span class="pre">TimeSignature</span></code> objects have also switched
+position. Now all three are in the order we&#8217;d expect to see them in a
+score:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">2</span> <span class="n">sharps</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Even though they have the same <code class="docutils literal"><span class="pre">.offset</span></code>, each of these objects knows
+its place in the Stream, because of something called
+<code class="docutils literal"><span class="pre">.classSortOrder</span></code>. Each Class and each instance of the class has a
+default sort order so that if it is at the same offset as a member of a
+different class, one will sort before the other:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In fact, <code class="docutils literal"><span class="pre">classSortOrder</span></code> is present not just on objects but on
+classes:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">clef</span><span class="o">.</span><span class="n">Clef</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notes have a higher <code class="docutils literal"><span class="pre">classSortOrder</span></code> and thus sort even later, hence
+why the C# appears after the clefs and signatures:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">Music21Object</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There are a few elements that sort even lower than Clefs because they
+usually refer to the area of the composition that precedes the clef:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">Barline</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">instrument</span><span class="o">.</span><span class="n">Instrument</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">,</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="o">.</span><span class="n">classSortOrder</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">25</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The numbers are actually completely arbitrary (it could be -6.432
+instead of -5), only the order of numbers (-25 is less than -5) matters.</p>
+<p>If we put a second TimeSignature into the stream at offset 0 (like some
+pieces do with multiple interpretations for meter), it will have a tie
+for its .offset and .classSortOrder. Which one will come first? It&#8217;s the
+first one inserted:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ts2</span> <span class="o">=</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;6/8&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ts2</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">2</span> <span class="n">sharps</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If we wanted to make sure that the two TimeSignatures appeared in a
+particular order regardless of when they were inserted, there is one way
+to do so: set the <code class="docutils literal"><span class="pre">.priority</span></code> attribute on the TimeSignature. Every
+Music21Object has a <code class="docutils literal"><span class="pre">priority</span></code> attribute, and the default is <code class="docutils literal"><span class="pre">0</span></code>.
+Negative numbers make an element sort before a default element. Positive
+numbers sort after.</p>
+<p>Let us insert two more notes into the stream, at offsets 1 and 2, but
+we&#8217;ll make the note at offset 1 come before the D# and the one at offset
+2 come after the E, so we have a chromatic scale fragment:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="n">d</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>
+<span class="n">eis</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;E#&#39;</span><span class="p">)</span>
+<span class="n">eis</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">eis</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">2</span> <span class="n">sharps</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="c1">#&gt;</span>
+</pre></div>
+</div>
+<p>Some things to note about priority:</p>
+<ol class="arabic simple">
+<li>Priority changes immediately affect the sorting of the Stream (in
+v.3 or above). Before that if you wanted to change the priority of
+an object, you&#8217;d need to remove it and then reinsert it.</li>
+</ol>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">s</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">2</span> <span class="n">sharps</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="c1">#&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Priority is currently a global property that affects all Streams
+that an object is in. This is behavior that may change in later
+versions.</li>
+<li>Priority overrides <code class="docutils literal"><span class="pre">classSortOrder</span></code>. So if we wanted to move the
+6/8 TimeSignature <code class="docutils literal"><span class="pre">(ts2)</span></code> to sort before the 3/4 <code class="docutils literal"><span class="pre">(ts1)</span></code>, it is
+not enough to shift the priority of <code class="docutils literal"><span class="pre">ts2</span></code> and reinsert it:</li>
+</ol>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ts2</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span>
+<span class="n">s</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">ts2</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">ts2</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">2</span> <span class="n">sharps</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="c1">#&gt;</span>
+</pre></div>
+</div>
+<p>Now the 6/8 TimeSignature appears before the clef and key signature. A
+fix for this would involve assigning some priority to each object
+connected to its sort order:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">getElementsByOffset</span><span class="p">(</span><span class="mf">0.0</span><span class="p">):</span>
+    <span class="n">el</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="n">el</span><span class="o">.</span><span class="n">classSortOrder</span>
+
+<span class="n">ts2</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># between KeySignature (priority = 2) and TimeSignature (priority = 4)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">2</span> <span class="n">sharps</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="c1">#&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="behind-the-scenes">
+<h2>Behind the scenes:<a class="headerlink" href="#behind-the-scenes" title="Permalink to this headline">¶</a></h2>
+<p>How does sorting actually work? <code class="docutils literal"><span class="pre">Music21</span></code> uses six attributes to
+determine which elements go before or after each other. The six-element
+tuple that determines sort order can be accessed on any
+<code class="docutils literal"><span class="pre">Music21Object</span></code> by calling the method <code class="docutils literal"><span class="pre">.sortTuple()</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ts1</span><span class="o">.</span><span class="n">sortTuple</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="n">SortTuple</span><span class="p">(</span><span class="n">atEnd</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">classSortOrder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">isNotGrace</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">insertIndex</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ts2</span><span class="o">.</span><span class="n">sortTuple</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="n">SortTuple</span><span class="p">(</span><span class="n">atEnd</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">classSortOrder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">isNotGrace</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">insertIndex</span><span class="o">=</span><span class="mi">148</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A <a class="reference internal" href="../moduleReference/moduleSorting.html#music21.sorting.SortTuple" title="music21.sorting.SortTuple"><code class="xref py py-class docutils literal"><span class="pre">SortTuple</span></code></a> is a lightweight class derived
+from the <code class="docutils literal"><span class="pre">NamedTuple</span></code> object that can be compared using the <code class="docutils literal"><span class="pre">&gt;</span></code> and
+<code class="docutils literal"><span class="pre">&lt;</span></code> operators. Each of the elements is compared from left to right; if
+there is a tie on one attribute then the next one becomes important:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ts1</span><span class="o">.</span><span class="n">sortTuple</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">ts2</span><span class="o">.</span><span class="n">sortTuple</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">SortTuples</span></code> live in their own module <a class="reference internal" href="../moduleReference/moduleSorting.html#modulesorting"><span class="std std-ref">music21.sorting</span></a> and have
+a few cool features. Since the main point of comparison is offset,
+SortTuples can compare against plain integers or floats or Fractions by
+comparing their offsets (and <code class="docutils literal"><span class="pre">atEnd</span></code>, which we&#8217;ll get to in a second).</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">st</span> <span class="o">=</span> <span class="n">sorting</span><span class="o">.</span><span class="n">SortTuple</span><span class="p">(</span><span class="n">atEnd</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">classSortOrder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">isNotGrace</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">insertIndex</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">st</span> <span class="o">&gt;</span> <span class="mf">8.0</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Because they can be unwieldly to display, <code class="docutils literal"><span class="pre">SortTuple</span></code>s have a
+<code class="docutils literal"><span class="pre">.shortRepr()</span></code> call which summarizes the main information in them: the
+offset, the priority, the classSortOrder, and the insertIndex.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">shortRepr</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;10.0 &lt;1.4.5&gt;&#39;</span>
+</pre></div>
+</div>
+<p>In this case, the third element, priority, decides the order. The first
+attribute, atEnd, is 0 for normal elements, and 1 for an element stored
+at the end of a Stream. Let&#8217;s add a courtesy KeySignature change at the
+end of <code class="docutils literal"><span class="pre">s</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">ks2</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">storeAtEnd</span><span class="p">(</span><span class="n">ks2</span><span class="p">)</span>
+<span class="n">ks2</span><span class="o">.</span><span class="n">sortTuple</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="n">SortTuple</span><span class="p">(</span><span class="n">atEnd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">classSortOrder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">isNotGrace</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">insertIndex</span><span class="o">=</span><span class="mi">154</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Putting a rightBarline on a Measure has the same effect:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">rb</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">Barline</span><span class="p">(</span><span class="s1">&#39;double&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">rightBarline</span> <span class="o">=</span> <span class="n">rb</span>
+<span class="n">rb</span><span class="o">.</span><span class="n">sortTuple</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="n">SortTuple</span><span class="p">(</span><span class="n">atEnd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">classSortOrder</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">isNotGrace</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">insertIndex</span><span class="o">=</span><span class="mi">155</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">rb</span><span class="o">.</span><span class="n">sortTuple</span><span class="p">()</span><span class="o">.</span><span class="n">shortRepr</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;End &lt;0.-5.155&gt;&#39;</span>
+</pre></div>
+</div>
+<p>The next three attributes (offset, priority, classSortOrder) have been
+described. <code class="docutils literal"><span class="pre">isNotGrace</span></code> is 0 if the note is a grace note, 1 (default)
+if it is any other note or not a note. Grace notes sort before other
+notes at the same offset and priority. The last attribute is an ever
+increasing index of the number of elements that have had SiteReferences
+added to it.</p>
+<p>(Advanced topic: the order that elements were inserted is used in order
+to make sure that elements do not shift around willy-nilly, but it&#8217;s not
+something to use often or to rely on for complex calculations. For this
+reason, we have not exposed it as something easy to get, but if you need
+to access it, here&#8217;s the formula:)</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">ts1</span><span class="o">.</span><span class="n">sites</span><span class="o">.</span><span class="n">siteDict</span><span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span><span class="o">.</span><span class="n">globalSiteIndex</span><span class="p">,</span> <span class="n">ts2</span><span class="o">.</span><span class="n">sites</span><span class="o">.</span><span class="n">siteDict</span><span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span><span class="o">.</span><span class="n">globalSiteIndex</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">148</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Streams have an attribute to cache whether they have been sorted, so
+that <code class="docutils literal"><span class="pre">.sort()</span></code> only needs to be called when a change has been made
+that alters the sort order.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">isSorted</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>Calling a command that needs a particular order (<code class="docutils literal"><span class="pre">.show()</span></code>,
+<code class="docutils literal"><span class="pre">.getElementsByClass()</span></code>, <code class="docutils literal"><span class="pre">[x]</span></code>, etc.) automatically sorts the
+Stream:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">s</span><span class="o">.</span><span class="n">isSorted</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>There is one more way that elements in a Stream can be returned, for
+advanced uses only. Each Stream has an <code class="docutils literal"><span class="pre">autoSort</span></code> property. By default
+it is On. But if you turn it off, then elements are returned in the
+order they are added regardless of offset, priority, or classSortOrder.
+Here is an example of that:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">autoSort</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">ts1</span><span class="o">.</span><span class="n">setOffsetBySite</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">2</span> <span class="n">sharps</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">20.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">20.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">bar</span><span class="o">.</span><span class="n">Barline</span> <span class="n">style</span><span class="o">=</span><span class="n">double</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">20.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">3</span> <span class="n">flats</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The setting <code class="docutils literal"><span class="pre">autoSort</span> <span class="pre">=</span> <span class="pre">False</span></code> can speed up some operations if you
+already know that all the notes are in order. Inside the stream/core.py
+module you’ll see some even faster operations such as <code class="docutils literal"><span class="pre">_insertCore()</span></code>
+and <code class="docutils literal"><span class="pre">_appendCore()</span></code> which are even faster and which we use when
+translating from one format to another. After running an
+<code class="docutils literal"><span class="pre">_insertCore()</span></code> operation, the Stream is in an unusuable state until
+<code class="docutils literal"><span class="pre">core.elementsChanged()</span></code> is run, which lets the Stream ruminate over
+its new state as if a normal <code class="docutils literal"><span class="pre">insert()</span></code> or <code class="docutils literal"><span class="pre">append()</span></code> operation has
+been done. Mixing <code class="docutils literal"><span class="pre">_insertCore()</span></code> and <code class="docutils literal"><span class="pre">_appendCore()</span></code> commands
+without running <code class="docutils literal"><span class="pre">_elementsChanged()</span></code> is likely to have disasterous
+consequences. Use one or the other.</p>
+<p>If you want to get back to the sorted state, just turn
+<code class="docutils literal"><span class="pre">autoSort</span> <span class="pre">=</span> <span class="pre">True</span></code>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">autoSort</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">s</span><span class="o">.</span><span class="n">isSorted</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">2</span> <span class="n">sharps</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">20.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">20.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">bar</span><span class="o">.</span><span class="n">Barline</span> <span class="n">style</span><span class="o">=</span><span class="n">double</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">20.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">3</span> <span class="n">flats</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Note that this is a destructive operation. Turning <code class="docutils literal"><span class="pre">autoSort</span></code> back to
+<code class="docutils literal"><span class="pre">False</span></code> won’t get you back the earlier order:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">.</span><span class="n">autoSort</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">2</span> <span class="n">sharps</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">20.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">20.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">bar</span><span class="o">.</span><span class="n">Barline</span> <span class="n">style</span><span class="o">=</span><span class="n">double</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">20.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span> <span class="n">of</span> <span class="mi">3</span> <span class="n">flats</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Now that you&#8217;ve gotten everything sorted out, let&#8217;s move on to
+<a class="reference internal" href="usersGuide_22_graphing.html#usersguide-22-graphing"><span class="std std-ref">Chapter 22: Graphing Music21 Streams</span></a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_22_graphing.html" title="User’s Guide, Chapter 22: Graphing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_17_derivations.html" title="User’s Guide: Chapter 17: Derivations"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

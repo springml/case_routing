@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Graphing Utilities &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Tutorials" href="index.html" />
+    <link rel="next" title="Advanced Graphing Topics" href="advancedGraphing.html" />
+    <link rel="prev" title="Configuring Environment Settings" href="environment.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="advancedGraphing.html" title="Advanced Graphing Topics"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="environment.html" title="Configuring Environment Settings"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Tutorials</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="environment.html"
+                        title="previous chapter">Configuring Environment Settings</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="advancedGraphing.html"
+                        title="next chapter">Advanced Graphing Topics</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Graphing Utilities</a><ul>
+<li><a class="reference internal" href="#installing-and-using-matplotlib">Installing and Using matplotlib</a></li>
+<li><a class="reference internal" href="#plotting-streams">Plotting Streams</a><ul>
+<li><a class="reference internal" href="#the-plotstream-utility-function">The plotStream() Utility Function</a></li>
+<li><a class="reference internal" href="#creating-and-calling-plot-objects">Creating and Calling Plot Objects</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analytical-graphing-objects">Analytical Graphing Objects</a><ul>
+<li><a class="reference internal" href="#the-activitymatch-object">The ActivityMatch Object</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#elementary-graphing-classes">Elementary Graphing Classes</a><ul>
+<li><a class="reference internal" href="#two-dimensional-scatter-plot">Two-Dimensional Scatter Plot</a></li>
+<li><a class="reference internal" href="#grouped-bar-graph">Grouped Bar Graph</a></li>
+<li><a class="reference internal" href="#three-dimensional-bar-graphs">Three-Dimensional Bar Graphs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="environment.html">Configuring Environment Settings</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Graphing Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advancedGraphing.html">Advanced Graphing Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorialFinaleMac.html">Tutorial: Setting up Finale on Mac</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html">Examples and Demonstrations</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorials/graphing.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="graphing-utilities">
+<span id="graphing"></span><h1>Graphing Utilities<a class="headerlink" href="#graphing-utilities" title="Permalink to this headline">¶</a></h1>
+<p>Music21 can create graphs and plots of multiple musical attributes
+using high-level analysis tools.</p>
+<p>Graphs are any sort of graphical display.  Plots are displays that
+run on a Stream and report data found in a Stream.</p>
+<p>Users can create their own custom graphing routines by extending or
+reworking existing music21 <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.Graph" title="music21.graph.Graph"><code class="xref py py-class docutils literal"><span class="pre">Graph</span></code></a> and <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotStream" title="music21.graph.PlotStream"><code class="xref py py-class docutils literal"><span class="pre">PlotStream</span></code></a> classes.</p>
+<p>Alternatively, music21 has numerous pre-built Graph and Plot classes
+for quick access to common graphical views such as piano rolls, etc.</p>
+<div class="section" id="installing-and-using-matplotlib">
+<h2>Installing and Using matplotlib<a class="headerlink" href="#installing-and-using-matplotlib" title="Permalink to this headline">¶</a></h2>
+<p>The powerful and flexible graphing routines of music21 use the matplotlib and numpy libraries.
+They can be downloaded from the following URLs:</p>
+<p><a class="reference external" href="http://numpy.scipy.org">http://numpy.scipy.org</a>
+<a class="reference external" href="http://sourceforge.net/projects/matplotlib/files/">http://sourceforge.net/projects/matplotlib/files/</a></p>
+<p>For instructions on getting them installed and running see the following URL:</p>
+<p><a class="reference external" href="http://matplotlib.sourceforge.net/users/installing.html">http://matplotlib.sourceforge.net/users/installing.html</a></p>
+<p>For more information about matplotlib with music21 see <a class="reference internal" href="advancedGraphing.html#advancedgraphing"><span class="std std-ref">Advanced Graphing Topics</span></a>.</p>
+</div>
+<div class="section" id="plotting-streams">
+<h2>Plotting Streams<a class="headerlink" href="#plotting-streams" title="Permalink to this headline">¶</a></h2>
+<p>Music21 features numerous ways to display the data within a Stream.</p>
+<p>Complete documentation for these graphing objects can be found
+with the following classes: <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotHistogramPitchSpace" title="music21.graph.PlotHistogramPitchSpace"><code class="xref py py-class docutils literal"><span class="pre">PlotHistogramPitchSpace</span></code></a>,
+<a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotHistogramPitchClass" title="music21.graph.PlotHistogramPitchClass"><code class="xref py py-class docutils literal"><span class="pre">PlotHistogramPitchClass</span></code></a>, <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotHistogramQuarterLength" title="music21.graph.PlotHistogramQuarterLength"><code class="xref py py-class docutils literal"><span class="pre">PlotHistogramQuarterLength</span></code></a>,
+<a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotScatterPitchSpaceQuarterLength" title="music21.graph.PlotScatterPitchSpaceQuarterLength"><code class="xref py py-class docutils literal"><span class="pre">PlotScatterPitchSpaceQuarterLength</span></code></a>, <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotScatterPitchClassOffset" title="music21.graph.PlotScatterPitchClassOffset"><code class="xref py py-class docutils literal"><span class="pre">PlotScatterPitchClassOffset</span></code></a>,  <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotHorizontalBarPitchClassOffset" title="music21.graph.PlotHorizontalBarPitchClassOffset"><code class="xref py py-class docutils literal"><span class="pre">PlotHorizontalBarPitchClassOffset</span></code></a>,
+<a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotHorizontalBarPitchSpaceOffset" title="music21.graph.PlotHorizontalBarPitchSpaceOffset"><code class="xref py py-class docutils literal"><span class="pre">PlotHorizontalBarPitchSpaceOffset</span></code></a>,
+<a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotScatterWeightedPitchSpaceQuarterLength" title="music21.graph.PlotScatterWeightedPitchSpaceQuarterLength"><code class="xref py py-class docutils literal"><span class="pre">PlotScatterWeightedPitchSpaceQuarterLength</span></code></a>,
+<a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotScatterWeightedPitchClassQuarterLength" title="music21.graph.PlotScatterWeightedPitchClassQuarterLength"><code class="xref py py-class docutils literal"><span class="pre">PlotScatterWeightedPitchClassQuarterLength</span></code></a>, <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.Plot3DBarsPitchSpaceQuarterLength" title="music21.graph.Plot3DBarsPitchSpaceQuarterLength"><code class="xref py py-class docutils literal"><span class="pre">Plot3DBarsPitchSpaceQuarterLength</span></code></a>, <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.Plot3DBarsPitchSpaceQuarterLength" title="music21.graph.Plot3DBarsPitchSpaceQuarterLength"><code class="xref py py-class docutils literal"><span class="pre">Plot3DBarsPitchSpaceQuarterLength</span></code></a>,</p>
+<div class="section" id="the-plotstream-utility-function">
+<h3>The plotStream() Utility Function<a class="headerlink" href="#the-plotstream-utility-function" title="Permalink to this headline">¶</a></h3>
+<p>The graph.py module offers the <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.plotStream" title="music21.graph.plotStream"><code class="xref py py-func docutils literal"><span class="pre">plotStream()</span></code></a> function
+for easy access to graphing music21 Streams. This function requires a Stream
+as an argument and a number of additional arguments to specify the output of one or more plot types.</p>
+<p>Calling <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.plotStream" title="music21.graph.plotStream"><code class="xref py py-func docutils literal"><span class="pre">plotStream()</span></code></a> with no arguments creates a
+default graph, using <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotHorizontalBarPitchSpaceOffset" title="music21.graph.PlotHorizontalBarPitchSpaceOffset"><code class="xref py py-class docutils literal"><span class="pre">PlotHorizontalBarPitchSpaceOffset</span></code></a>, of a flat version of the Stream:</p>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aStream</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv57.8&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">plotStream</span><span class="p">(</span><span class="n">aStream</span><span class="p">)</span>    
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/PlotHorizontalBarPitchSpaceOffset1.png"><img alt="../_images/PlotHorizontalBarPitchSpaceOffset1.png" src="../_images/PlotHorizontalBarPitchSpaceOffset1.png" style="width: 600px;" /></a>
+</div></blockquote>
+<p>Calling <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.plotStream" title="music21.graph.plotStream"><code class="xref py py-func docutils literal"><span class="pre">plotStream()</span></code></a> with a Stream and the name of plot
+class will use that class to create a and display a graph.</p>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">plotStream</span><span class="p">(</span><span class="n">aStream</span><span class="p">,</span> <span class="s1">&#39;PlotHistogramPitchClass&#39;</span><span class="p">)</span>  
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/PlotHistogramPitchClass1.png"><img alt="../_images/PlotHistogramPitchClass1.png" src="../_images/PlotHistogramPitchClass1.png" style="width: 600px;" /></a>
+</div></blockquote>
+<p>Alternatively, the type of desired graph can be given as the <cite>format</cite> keyword argument,
+and list of values desired can be given with the <cite>values</cite> keyword argument. If one or
+more plots are available that match the requested values, these will be displayed</p>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">plotStream</span><span class="p">(</span><span class="n">aStream</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;scatterweighted&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/PlotScatterWeightedPitchSpaceQuarterLength1.png"><img alt="../_images/PlotScatterWeightedPitchSpaceQuarterLength1.png" src="../_images/PlotScatterWeightedPitchSpaceQuarterLength1.png" style="width: 600px;" /></a>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">graph</span><span class="o">.</span><span class="n">plotStream</span><span class="p">(</span><span class="n">aStream</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pitch&#39;</span><span class="p">])</span>  
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/PlotScatterPitchSpaceQuarterLength1.png"><img alt="../_images/PlotScatterPitchSpaceQuarterLength1.png" src="../_images/PlotScatterPitchSpaceQuarterLength1.png" style="width: 600px;" /></a>
+</div></blockquote>
+<p>Note that the exact same functionality of <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.plotStream" title="music21.graph.plotStream"><code class="xref py py-func docutils literal"><span class="pre">plotStream()</span></code></a> is available as the
+Stream <a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Stream.plot" title="music21.stream.Stream.plot"><code class="xref py py-meth docutils literal"><span class="pre">plot()</span></code></a> method.</p>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">aStream</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;scatterweighted&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;pitchclass&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/PlotScatterWeightedPitchClassQuarterLength1.png"><img alt="../_images/PlotScatterWeightedPitchClassQuarterLength1.png" src="../_images/PlotScatterWeightedPitchClassQuarterLength1.png" style="width: 600px;" /></a>
+</div></blockquote>
+</div>
+<div class="section" id="creating-and-calling-plot-objects">
+<h3>Creating and Calling Plot Objects<a class="headerlink" href="#creating-and-calling-plot-objects" title="Permalink to this headline">¶</a></h3>
+<p>Graphs can be created and/or written to a file by creating an instance of a plot class
+with the Stream as an argument. Once created, the object&#8217;s <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.Graph.process" title="music21.graph.Graph.process"><code class="xref py py-meth docutils literal"><span class="pre">process()</span></code></a> method is called
+to obtain a result. The result is determined by the <cite>doneAction</cite> keyword argument.</p>
+<blockquote>
+<div><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aStream</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv57.8&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aPlot</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">PlotHistogramPitchClass</span><span class="p">(</span><span class="n">aStream</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aPlot</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>  
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/PlotHistogramPitchClass1.png"><img alt="../_images/PlotHistogramPitchClass1.png" src="../_images/PlotHistogramPitchClass1.png" style="width: 600px;" /></a>
+</div></blockquote>
+<p>The default <cite>Action</cite> is to call <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.Graph.show" title="music21.graph.Graph.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a> method the graph, which
+will write it as a temporary file and open the graph. To write a graph to
+a file, use the <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.Graph.write" title="music21.graph.Graph.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a> with a file path as the argument.</p>
+</div>
+</div>
+<div class="section" id="analytical-graphing-objects">
+<h2>Analytical Graphing Objects<a class="headerlink" href="#analytical-graphing-objects" title="Permalink to this headline">¶</a></h2>
+<p>Music21 features graphing objects that display the results of analysis.
+Complete documentation for these graphing objects can be found with the
+following classes: <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotWindowedKrumhanslSchmuckler" title="music21.graph.PlotWindowedKrumhanslSchmuckler"><code class="xref py py-class docutils literal"><span class="pre">PlotWindowedKrumhanslSchmuckler</span></code></a>,
+<a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotWindowedKrumhanslKessler" title="music21.graph.PlotWindowedKrumhanslKessler"><code class="xref py py-class docutils literal"><span class="pre">PlotWindowedKrumhanslKessler</span></code></a>, <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotWindowedAardenEssen" title="music21.graph.PlotWindowedAardenEssen"><code class="xref py py-class docutils literal"><span class="pre">PlotWindowedAardenEssen</span></code></a>,
+<a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotWindowedSimpleWeights" title="music21.graph.PlotWindowedSimpleWeights"><code class="xref py py-class docutils literal"><span class="pre">PlotWindowedSimpleWeights</span></code></a>, <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotWindowedBellmanBudge" title="music21.graph.PlotWindowedBellmanBudge"><code class="xref py py-class docutils literal"><span class="pre">PlotWindowedBellmanBudge</span></code></a>,  <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotWindowedTemperleyKostkaPayne" title="music21.graph.PlotWindowedTemperleyKostkaPayne"><code class="xref py py-class docutils literal"><span class="pre">PlotWindowedTemperleyKostkaPayne</span></code></a>,
+<a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotWindowedAmbitus" title="music21.graph.PlotWindowedAmbitus"><code class="xref py py-class docutils literal"><span class="pre">PlotWindowedAmbitus</span></code></a>, <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.PlotDolan" title="music21.graph.PlotDolan"><code class="xref py py-class docutils literal"><span class="pre">PlotDolan</span></code></a></p>
+<p>A basic example follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">haydn</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;haydn/symphony94/02&#39;</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">PlotDolan</span><span class="p">(</span><span class="n">haydn</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span><span class="o">.</span><span class="n">process</span><span class="p">()</span> 
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/graphing-06.png"><img alt="../_images/graphing-06.png" src="../_images/graphing-06.png" style="width: 600px;" /></a>
+<p><a class="reference download internal" href="../_downloads/graphing-bigDolan.png" download=""><code class="xref download docutils literal"><span class="pre">See</span> <span class="pre">a</span> <span class="pre">larger</span> <span class="pre">version</span></code></a></p>
+<div class="section" id="the-activitymatch-object">
+<h3>The ActivityMatch Object<a class="headerlink" href="#the-activitymatch-object" title="Permalink to this headline">¶</a></h3>
+<p>The ActivityMatch object provides a way to examine, for a given parameter,
+what other parameters are active.</p>
+</div>
+</div>
+<div class="section" id="elementary-graphing-classes">
+<h2>Elementary Graphing Classes<a class="headerlink" href="#elementary-graphing-classes" title="Permalink to this headline">¶</a></h2>
+<p>Music21 provides low-level access to basic graphing routines through
+classes for each graphing archetype.</p>
+<p>Complete documentation for these graphing objects can be found with the
+following classes: <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.GraphHorizontalBar" title="music21.graph.GraphHorizontalBar"><code class="xref py py-class docutils literal"><span class="pre">GraphHorizontalBar</span></code></a>, <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.GraphScatterWeighted" title="music21.graph.GraphScatterWeighted"><code class="xref py py-class docutils literal"><span class="pre">GraphScatterWeighted</span></code></a>,
+<a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.GraphScatter" title="music21.graph.GraphScatter"><code class="xref py py-class docutils literal"><span class="pre">GraphScatter</span></code></a>, <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.GraphHistogram" title="music21.graph.GraphHistogram"><code class="xref py py-class docutils literal"><span class="pre">GraphHistogram</span></code></a>, <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.Graph3DPolygonBars" title="music21.graph.Graph3DPolygonBars"><code class="xref py py-class docutils literal"><span class="pre">Graph3DPolygonBars</span></code></a>.</p>
+<div class="section" id="two-dimensional-scatter-plot">
+<h3>Two-Dimensional Scatter Plot<a class="headerlink" href="#two-dimensional-scatter-plot" title="Permalink to this headline">¶</a></h3>
+<p>A two-dimensional scatter graph can be made from any list of <em>x</em>, <em>y</em> data pairs.</p>
+<p>The <cite>doneAction</cite> keyword argument determines what happens after
+the <a class="reference internal" href="../moduleReference/moduleGraph.html#music21.graph.Graph.process" title="music21.graph.Graph.process"><code class="xref py py-meth docutils literal"><span class="pre">process()</span></code></a> method is called. A &#8216;show&#8217; value (the default) will
+immediately open the output format in platform- and backend-specific viewer. A <cite>write</cite>
+value will write the output in backend-specific format using a music21-generated temporary file.</p>
+<p>A basic example follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">GraphScatter</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Chromatic Scale&#39;</span><span class="p">,</span> <span class="n">doneAction</span><span class="o">=</span><span class="s1">&#39;show&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">midiNumber</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span><span class="mi">120</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">n</span><span class="o">.</span><span class="n">midi</span> <span class="o">=</span> <span class="n">midiNumber</span>
+<span class="gp">... </span>    <span class="n">frequency</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">frequency</span>
+<span class="gp">... </span>    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">midiNumber</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">frequency</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>  
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/graphing-01.png"><img alt="../_images/graphing-01.png" src="../_images/graphing-01.png" style="width: 700px;" /></a>
+<p>Numerous parameters can be specified through keyword arguments when creating a scatter plot, and also attached to each point.</p>
+<p>The &#8216;alpha&#8217; keyword argument sets transparency, from 0 (transparent) to 1 (opaque).</p>
+<p>The &#8216;title&#8217; keyword argument sets the title of the graph.</p>
+<p>The &#8216;colors&#8217; keyword argument sets the colors of data points, specified as HTML
+color codes or matplotlib&#8217;s single-letter abbreviations.</p>
+<p>This example provides basic customization to a scatter graph:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">GraphScatter</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Color-coded chromatic scale showing C major&#39;</span><span class="p">,</span> <span class="n">doneAction</span><span class="o">=</span><span class="s1">&#39;show&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">midiNumber</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span><span class="mi">120</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">n</span><span class="o">.</span><span class="n">midi</span> <span class="o">=</span> <span class="n">midiNumber</span>
+<span class="gp">... </span>    <span class="n">frequency</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">frequency</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">pitchClass</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]:</span>
+<span class="gp">... </span>        <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">... </span>        <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span>
+<span class="gp">... </span>        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span>
+<span class="gp">... </span>        <span class="n">markerSize</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">... </span>    <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">... </span>        <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;d&#39;</span>
+<span class="gp">... </span>        <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
+<span class="gp">... </span>        <span class="n">markerSize</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="gp">... </span>    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">midiNumber</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">frequency</span><span class="p">),</span>
+<span class="gp">... </span>                  <span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="n">color</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="n">alpha</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="s1">&#39;marker&#39;</span><span class="p">:</span> <span class="n">marker</span><span class="p">,</span> <span class="s1">&#39;markerSize&#39;</span><span class="p">:</span><span class="n">markerSize</span><span class="p">}</span> <span class="p">)</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setAxisLabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;midi number&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setAxisLabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;frequency&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>  
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/graphing-02.png"><img alt="../_images/graphing-02.png" src="../_images/graphing-02.png" style="width: 700px;" /></a>
+</div>
+<div class="section" id="grouped-bar-graph">
+<h3>Grouped Bar Graph<a class="headerlink" href="#grouped-bar-graph" title="Permalink to this headline">¶</a></h3>
+<p>This graph allows you to plot multiple sets of data in parallel bar graphs. Data for this graph is provided
+in a list of tuples of the form <code class="docutils literal"><span class="pre">(dataLabel,</span> <span class="pre">{plotGroup:</span> <span class="pre">value,</span> <span class="pre">plotGroup2:</span> <span class="pre">value</span> <span class="pre">...</span> <span class="pre">})</span></code>. The example below
+iterates through the Bach Chorale corpus using corpus.chorales.Iterator and stores the frequency at which
+each part exhibits notes of each quarter length present. It displays the normalized frequency of each quarterLength
+as four bars, each corresponding to an SATB part.</p>
+<p>The example follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sopranoDict</span><span class="p">,</span> <span class="n">altoDict</span><span class="p">,</span> <span class="n">tenorDict</span><span class="p">,</span> <span class="n">bassDict</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">noteTotal</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">[],</span> <span class="mf">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">chorale</span> <span class="ow">in</span> <span class="n">corpus</span><span class="o">.</span><span class="n">chorales</span><span class="o">.</span><span class="n">Iterator</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="n">soprano</span><span class="p">,</span> <span class="n">alto</span><span class="p">,</span> <span class="n">tenor</span><span class="p">,</span> <span class="n">bass</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">chorale</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;Soprano&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                                    <span class="n">chorale</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;Alto&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                                    <span class="n">chorale</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;Tenor&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                                    <span class="n">chorale</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;Bass&#39;</span><span class="p">))</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="p">(</span><span class="n">part</span><span class="p">,</span> <span class="n">partDict</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">soprano</span><span class="p">,</span> <span class="n">sopranoDict</span><span class="p">),</span> <span class="p">(</span><span class="n">alto</span><span class="p">,</span> <span class="n">altoDict</span><span class="p">),</span> <span class="p">(</span><span class="n">tenor</span><span class="p">,</span> <span class="n">tenorDict</span><span class="p">),</span> <span class="p">(</span><span class="n">bass</span><span class="p">,</span> <span class="n">bassDict</span><span class="p">)]:</span>
+<span class="gp">... </span>        <span class="k">if</span> <span class="n">part</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="n">part</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span>
+<span class="gp">... </span>            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">part</span><span class="p">:</span>
+<span class="gp">... </span>                <span class="n">noteTotal</span> <span class="o">+=</span> <span class="mf">1.0</span>
+<span class="gp">... </span>                <span class="n">noteLength</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="gp">... </span>                <span class="k">if</span> <span class="n">noteLength</span> <span class="ow">in</span> <span class="n">partDict</span><span class="p">:</span>
+<span class="gp">... </span>                    <span class="n">partDict</span><span class="p">[</span><span class="n">noteLength</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">... </span>                <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>                    <span class="n">partDict</span><span class="p">[</span><span class="n">noteLength</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">quarterLengths</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">sopranoDict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="gp">... </span>                          <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">altoDict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="gp">... </span>                          <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">tenorDict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="gp">... </span>                          <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">bassDict</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ql</span> <span class="ow">in</span> <span class="n">quarterLengths</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">partDict</span> <span class="ow">in</span> <span class="p">[</span><span class="n">sopranoDict</span><span class="p">,</span> <span class="n">altoDict</span><span class="p">,</span> <span class="n">tenorDict</span><span class="p">,</span> <span class="n">bassDict</span><span class="p">]:</span>
+<span class="gp">... </span>        <span class="k">if</span> <span class="n">ql</span> <span class="ow">in</span> <span class="n">partDict</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">partDict</span><span class="p">[</span><span class="n">ql</span><span class="p">]</span><span class="o">/</span><span class="n">noteTotal</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">else</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ql</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;soprano&#39;</span><span class="p">:</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;alto&#39;</span><span class="p">:</span> <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;tenor&#39;</span><span class="p">:</span> <span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;bass&#39;</span><span class="p">:</span> <span class="n">values</span><span class="p">[</span><span class="mi">3</span><span class="p">]}))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">GraphGroupedVerticalBar</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Frequency of note durations in Bach&#39;s Chorales&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">doneAction</span><span class="o">=</span><span class="s1">&#39;show&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">binWidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#605C7F&#39;</span><span class="p">,</span> <span class="s1">&#39;#5c7f60&#39;</span><span class="p">,</span> <span class="s1">&#39;#715c7f&#39;</span><span class="p">,</span> <span class="s1">&#39;#3FEE32&#39;</span><span class="p">,</span> <span class="s1">&#39;#01FFEE&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                                  <span class="n">roundDigits</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">datum</span><span class="p">:</span> <span class="n">datum</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setAxisLabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;Note duration in quarter lengths&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xtickValues</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">quarterLengths</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xtickLabels</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">quarterLengths</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="s1">&#39;ticks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">xtickValues</span><span class="p">,</span> <span class="n">xtickLabels</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">process</span><span class="p">()</span> 
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/graphing-03.png"><img alt="../_images/graphing-03.png" src="../_images/graphing-03.png" style="width: 600px;" /></a>
+<p><a class="reference download internal" href="../_downloads/graphing-03.png" download=""><code class="xref download docutils literal"><span class="pre">See</span> <span class="pre">full-size</span> <span class="pre">graph</span></code></a></p>
+</div>
+<div class="section" id="three-dimensional-bar-graphs">
+<h3>Three-Dimensional Bar Graphs<a class="headerlink" href="#three-dimensional-bar-graphs" title="Permalink to this headline">¶</a></h3>
+<p>A three dimensional graph made of numerous rows of bars can be used to graph
+three-dimensional data. Data for this graph is provided by a dictionary of
+key-value pairs, where values are equal-sized-lists of values.</p>
+<p>In addition to keyword arguments described for other graphs, this graph
+supports the following additional keyword arguments.</p>
+<p>The <cite>barWidth</cite> keyword argument sets the width of bars.
+The <cite>useKeyValues</cite> keyword argument determines whether or not the keys in the
+data dictionary are interpreted as numerical values or labels.
+The <cite>zeroFloor</cite> keyword argument determines whether or not the vertical axis is sized to contain 0 or not.</p>
+<p>A basic example follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">graph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">Graph3DPolygonBars</span><span class="p">(</span><span class="n">doneAction</span><span class="o">=</span><span class="s1">&#39;show&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:[],</span> <span class="mi">2</span><span class="p">:[],</span> <span class="mi">3</span><span class="p">:[]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())):</span>
+<span class="gp">... </span>   <span class="n">q</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)]</span>
+<span class="gp">... </span>   <span class="n">data</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">q</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>  
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/graphing-04.png"><img alt="../_images/graphing-04.png" src="../_images/graphing-04.png" style="width: 600px;" /></a>
+<p>Here is an example from music. This graphs the 12 major scales next to each
+other in terms of frequency showing which notes are present
+and which notes are not:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:[],</span> <span class="mi">1</span><span class="p">:[],</span> <span class="mi">2</span><span class="p">:[],</span> <span class="mi">3</span><span class="p">:[],</span> <span class="mi">4</span><span class="p">:[],</span> <span class="mi">5</span><span class="p">:[],</span> <span class="mi">6</span><span class="p">:[],</span> <span class="mi">7</span><span class="p">:[],</span> <span class="mi">8</span><span class="p">:[],</span> <span class="mi">9</span><span class="p">:[],</span> <span class="mi">10</span><span class="p">:[],</span> <span class="mi">11</span><span class="p">:[]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">majorScale</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">pitchClass</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">n</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">pitchClass</span> <span class="o">=</span> <span class="n">pitchClass</span>
+<span class="gp">... </span>    <span class="n">frequency</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">frequency</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">scale</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="gp">... </span>        <span class="k">if</span> <span class="p">(</span><span class="n">pitchClass</span> <span class="o">-</span> <span class="n">scale</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span> <span class="ow">in</span> <span class="n">majorScale</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="n">data</span><span class="p">[</span><span class="n">scale</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">pitchClass</span><span class="p">,</span> <span class="n">frequency</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">Graph3DPolygonBars</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;The Twelve Major Scales&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">alpha</span><span class="o">=.</span><span class="mi">8</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">barWidth</span><span class="o">=.</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">doneAction</span><span class="o">=</span><span class="s1">&#39;show&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">useKeyValues</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">zeroFloor</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;indigo&#39;</span><span class="p">,</span> <span class="s1">&#39;violet&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="s1">&#39;ticks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;c#&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;d#&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;f#&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;g#&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a#&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">axis</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="s1">&#39;ticks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;c#&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;d#&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;f#&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;g#&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a#&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setAxisLabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;Root Notes&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setAxisLabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;Scale Degrees&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setAxisLabel</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;Frequency in Hz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">process</span><span class="p">()</span>   
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/graphing-05.jpg"><img alt="../_images/graphing-05.jpg" src="../_images/graphing-05.jpg" style="width: 600px;" /></a>
+<p><a class="reference download internal" href="../_downloads/graphing-05.jpg" download=""><code class="xref download docutils literal"><span class="pre">See</span> <span class="pre">full-size</span> <span class="pre">graph</span></code></a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="advancedGraphing.html" title="Advanced Graphing Topics"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="environment.html" title="Configuring Environment Settings"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Tutorials</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

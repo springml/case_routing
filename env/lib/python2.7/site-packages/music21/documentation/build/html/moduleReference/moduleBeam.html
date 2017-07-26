@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.beam &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.braille.basic" href="moduleBrailleBasic.html" />
+    <link rel="prev" title="music21.base" href="moduleBase.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleBrailleBasic.html" title="music21.braille.basic"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleBase.html" title="music21.base"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleBase.html"
+                        title="previous chapter">music21.base</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleBrailleBasic.html"
+                        title="next chapter">music21.braille.basic</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.beam</a><ul>
+<li><a class="reference internal" href="#beams">Beams</a></li>
+<li><a class="reference internal" href="#beam">Beam</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleBeam.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-beam">
+<span id="modulebeam"></span><h1>music21.beam<a class="headerlink" href="#music21-beam" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.beam"></span><p>The module defines Beam and Beams (note plural) objects.</p>
+<p>The Beams object holds multiple Beam objects (e.g., a 32nd note might have
+three Beam objects in its Beam object).</p>
+<p>The Beams object is stored in <a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a> and
+<a class="reference internal" href="moduleChord.html#music21.chord.Chord" title="music21.chord.Chord"><code class="xref py py-class docutils literal"><span class="pre">Chord</span></code></a> objects as their <code class="xref py py-attr docutils literal"><span class="pre">beams</span></code>
+attributes.   Beams objects can largely be treated as a list.</p>
+<p>See <cite>meter.TimeSignature</cite>. <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.getBeams" title="music21.meter.TimeSignature.getBeams"><code class="xref py py-meth docutils literal"><span class="pre">getBeams()</span></code></a> for a
+way of getting beam information for a measure given the meter.  The
+<cite>meter.TimeSignature</cite>. <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature.beamSequence" title="music21.meter.TimeSignature.beamSequence"><code class="xref py py-attr docutils literal"><span class="pre">beamSequence</span></code></a>
+attribute holds information about how to beam given the TimeSignature</p>
+<p>Run <cite>Stream</cite>. <a class="reference internal" href="moduleStream.html#music21.stream.Stream.makeBeams" title="music21.stream.Stream.makeBeams"><code class="xref py py-meth docutils literal"><span class="pre">makeBeams()</span></code></a> to set beaming
+information automatically given the current meter.</p>
+<p>Suppose you had a measure of two eighths and a quarter and wanted to explicitly
+beam the two eighth notes.  You could do this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span><span class="o">.</span><span class="n">beams</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s1">&#39;eighth&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">beams</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s1">&#39;eighth&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;stop&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span><span class="o">.</span><span class="n">beams</span>
+<span class="go">&lt;music21.beam.Beams &lt;music21.beam.Beam 1/start&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">beams</span>
+<span class="go">&lt;music21.beam.Beams &lt;music21.beam.Beam 1/stop&gt;&gt;</span>
+</pre></div>
+</div>
+<p>But suppose you wanted something harder: two 16ths, an 8th, a quarter, with the
+first 3 notes beamed?  The first note and 3rd are easy to do, using the method
+above:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n4</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">n4</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span><span class="o">.</span><span class="n">beams</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s1">&#39;16th&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span><span class="o">.</span><span class="n">beams</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s1">&#39;eighth&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;stop&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>but the second note has an 8th beam that continues and a 16th beam that stops.
+So you will need to set them separately:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">beams</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;continue&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">beams</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">beams</span>
+<span class="go">&lt;music21.beam.Beams &lt;music21.beam.Beam 1/continue&gt;/&lt;music21.beam.Beam 2/stop&gt;&gt;</span>
+</pre></div>
+</div>
+<p>To get rid of beams on a note do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">beams</span><span class="o">.</span><span class="n">beamsList</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<div class="section" id="beams">
+<h2>Beams<a class="headerlink" href="#beams" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.beam.Beams">
+<em class="property">class </em><code class="descclassname">music21.beam.</code><code class="descname">Beams</code><a class="headerlink" href="#music21.beam.Beams" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Beams object stores in it attribute beamsList (a list) all the Beam
+objects defined above.  Thus len(beam.Beams) tells you how many beams the
+note currently has on it, and iterating over a Beams object gives you each
+Beam.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;16th&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">beams</span><span class="p">,</span> <span class="n">beam</span><span class="o">.</span><span class="n">Beams</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">beams</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">beams</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">thisBeam</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">beams</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">thisBeam</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;start&#39;</span>
+<span class="go">&#39;start&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">beams</span><span class="p">)</span>
+<span class="go">&lt;music21.beam.Beams &lt;music21.beam.Beam 1/start&gt;/&lt;music21.beam.Beam 2/start&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.beam.Beams" title="music21.beam.Beams"><code class="xref py py-class docutils literal"><span class="pre">Beams</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleCommonObjects.html#music21.common.objects.SlottedObjectMixin" title="music21.common.objects.SlottedObjectMixin"><code class="xref py py-class docutils literal"><span class="pre">SlottedObjectMixin</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.beam.Beams" title="music21.beam.Beams"><code class="xref py py-class docutils literal"><span class="pre">Beams</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.beam.Beams.append">
+<code class="descclassname">Beams.</code><code class="descname">append</code><span class="sig-paren">(</span><em>type=None</em>, <em>direction=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.beam.Beams.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Append a new Beam object to this Beams, automatically creating the Beam
+object and incrementing the number count.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">beams</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">Beams</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beams</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beams</span><span class="o">.</span><span class="n">beamsList</span>
+<span class="go">[&lt;music21.beam.Beam 1/start&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">beams</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;partial&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beams</span><span class="o">.</span><span class="n">beamsList</span>
+<span class="go">[&lt;music21.beam.Beam 1/start&gt;, &lt;music21.beam.Beam 2/partial/right&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.beam.Beams.fill">
+<code class="descclassname">Beams.</code><code class="descname">fill</code><span class="sig-paren">(</span><em>level=None</em>, <em>type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.beam.Beams.fill" title="Permalink to this definition">¶</a></dt>
+<dd><p>A quick way of setting the beams list for a particular duration, for
+instance, fill(&#8220;16th&#8221;) will clear the current list of beams in the
+Beams object and add two beams.  fill(2) will do the same (though note
+that that is an int, not a string).</p>
+<p>It does not do anything to the direction that the beams are going in,
+or by default.  Either set type here or call setAll() on the Beams
+object afterwards.</p>
+<p>Both &#8220;eighth&#8221; and &#8220;8th&#8221; work.  Adding more than six beams (i.e. things
+like 512th notes) raises an error.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">Beams</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s1">&#39;16th&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s1">&#39;32nd&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">beamsList</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">&lt;music21.beam.Beam 3/start&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">beamsList</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;start&#39;</span>
+</pre></div>
+</div>
+<p>Filling a smaller number wipes larger numbers of beams:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s1">&#39;eighth&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.beam.Beams.getByNumber">
+<code class="descclassname">Beams.</code><code class="descname">getByNumber</code><span class="sig-paren">(</span><em>number</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.beam.Beams.getByNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets an internal beam object by number.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">Beams</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s1">&#39;16th&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setAll</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">getByNumber</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;start&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">getByNumber</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">IndexError</span>: <span class="n">beam number 30 cannot be accessed</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.beam.Beams.getNumbers">
+<code class="descclassname">Beams.</code><code class="descname">getNumbers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.beam.Beams.getNumbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all defined beam numbers; it should normally be a set
+of consecutive integers, but it might not be.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">Beams</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s1">&#39;32nd&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">getNumbers</span><span class="p">()</span>
+<span class="go">[1, 2, 3]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.beam.Beams.getTypeByNumber">
+<code class="descclassname">Beams.</code><code class="descname">getTypeByNumber</code><span class="sig-paren">(</span><em>number</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.beam.Beams.getTypeByNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get beam type, with direction, by number</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">Beams</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s1">&#39;16th&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setAll</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setByNumber</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;partial-right&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">getTypeByNumber</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">&#39;partial-right&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">getTypeByNumber</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;start&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.beam.Beams.getTypes">
+<code class="descclassname">Beams.</code><code class="descname">getTypes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.beam.Beams.getTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all beam types defined for the current beams</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">Beams</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s1">&#39;16th&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setAll</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">getTypes</span><span class="p">()</span>
+<span class="go">[&#39;start&#39;, &#39;start&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.beam.Beams.setAll">
+<code class="descclassname">Beams.</code><code class="descname">setAll</code><span class="sig-paren">(</span><em>type</em>, <em>direction=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.beam.Beams.setAll" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>setAll</cite> is a method of convenience that sets the type
+of each of the beam objects within the beamsList to the specified type.
+It also takes an optional &#8220;direction&#8221; attribute that sets the direction
+for each beam (otherwise the direction of each beam is set to None)
+Acceptable directions (start, stop, continue, etc.) are listed under
+Beam() above.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">Beams</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s1">&#39;16th&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setAll</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">getTypes</span><span class="p">()</span>
+<span class="go">[&#39;start&#39;, &#39;start&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setAll</span><span class="p">(</span><span class="s1">&#39;sexy&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.beam.BeamException</span>: <span class="n">beam type cannot be sexy</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.beam.Beams.setByNumber">
+<code class="descclassname">Beams.</code><code class="descname">setByNumber</code><span class="sig-paren">(</span><em>number</em>, <em>type</em>, <em>direction=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.beam.Beams.setByNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an internal beam object by number, or rhythmic symbol level.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">Beams</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="s1">&#39;16th&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setAll</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setByNumber</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;continue&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">beamsList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;continue&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setByNumber</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">beamsList</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;stop&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setByNumber</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;partial-right&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">beamsList</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;partial&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">beamsList</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">direction</span>
+<span class="go">&#39;right&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setByNumber</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">IndexError</span>: <span class="n">beam number 30 cannot be accessed</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">setByNumber</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;crazy&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.beam.BeamException</span>: <span class="n">beam type cannot be crazy</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.beam.Beams" title="music21.beam.Beams"><code class="xref py py-class docutils literal"><span class="pre">Beams</span></code></a> instance variables</p>
+<dl class="attribute">
+<dt id="music21.beam.Beams.feathered">
+<code class="descclassname">Beams.</code><code class="descname">feathered</code><a class="headerlink" href="#music21.beam.Beams.feathered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boolean determining if this is a feathered beam or not (does nothing for now).</p>
+</dd></dl>
+
+</div>
+<div class="section" id="beam">
+<h2>Beam<a class="headerlink" href="#beam" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.beam.Beam">
+<em class="property">class </em><code class="descclassname">music21.beam.</code><code class="descname">Beam</code><span class="sig-paren">(</span><em>type=None</em>, <em>direction=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.beam.Beam" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Beam is an object representation of one single beam, that is, one
+horizontal line connecting two notes together (or less commonly a note to a
+rest).  Thus it takes two separate Beam objects to represent the beaming of
+a 16th note.</p>
+<p>The Beams object (note the plural) is the object that handles groups of
+Beam objects; it is defined later on.</p>
+<p>Here are two ways to define the start of a beam</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b1</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">Beam</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b2</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">Beam</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here is a partial beam (that is, one that does not connect to any other
+note, such as the second beam of a dotted eighth, sixteenth group)</p>
+<p>Two ways of doing the same thing</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b3</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">Beam</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;partial&#39;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b4</span> <span class="o">=</span> <span class="n">beam</span><span class="o">.</span><span class="n">Beam</span><span class="p">(</span><span class="s1">&#39;partial&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b4</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b4</span>
+<span class="go">&lt;music21.beam.Beam 1/partial/left&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b2</span>
+<span class="go">&lt;music21.beam.Beam None/start&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.beam.Beam" title="music21.beam.Beam"><code class="xref py py-class docutils literal"><span class="pre">Beam</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleCommonObjects.html#music21.common.objects.SlottedObjectMixin" title="music21.common.objects.SlottedObjectMixin"><code class="xref py py-class docutils literal"><span class="pre">SlottedObjectMixin</span></code></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleBrailleBasic.html" title="music21.braille.basic"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleBase.html" title="music21.base"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

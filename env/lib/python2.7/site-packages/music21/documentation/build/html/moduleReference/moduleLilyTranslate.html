@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.lily.translate &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.mei.base" href="moduleMeiBase.html" />
+    <link rel="prev" title="music21.lily.lilyObjects" href="moduleLilyLilyObjects.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMeiBase.html" title="music21.mei.base"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleLilyLilyObjects.html" title="music21.lily.lilyObjects"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleLilyLilyObjects.html"
+                        title="previous chapter">music21.lily.lilyObjects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleMeiBase.html"
+                        title="next chapter">music21.mei.base</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.lily.translate</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#lilypondconverter">LilypondConverter</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleLilyTranslate.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-lily-translate">
+<span id="modulelilytranslate"></span><h1>music21.lily.translate<a class="headerlink" href="#music21-lily-translate" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.lily.translate"></span><p>music21 translates to Lilypond format and if Lilypond is installed on the
+local computer, can automatically generate .pdf, .png, and .svg versions
+of musical files using Lilypond</p>
+<p>this replaces (July 2012) the old LilyString() conversion methods.</p>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.lily.translate.makeLettersOnlyId">
+<code class="descclassname">music21.lily.translate.</code><code class="descname">makeLettersOnlyId</code><span class="sig-paren">(</span><em>inputString</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.makeLettersOnlyId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an id and makes it purely letters by substituting
+letters for all other characters.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">makeLettersOnlyId</span><span class="p">(</span><span class="s1">&#39;rainbow123@@dfas&#39;</span><span class="p">))</span>
+<span class="go">rainbowxyzmmdfas</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="lilypondconverter">
+<h2>LilypondConverter<a class="headerlink" href="#lilypondconverter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.lily.translate.LilypondConverter">
+<em class="property">class </em><code class="descclassname">music21.lily.translate.</code><code class="descname">LilypondConverter</code><a class="headerlink" href="#music21.lily.translate.LilypondConverter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.lily.translate.LilypondConverter" title="music21.lily.translate.LilypondConverter"><code class="xref py py-class docutils literal"><span class="pre">LilypondConverter</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.appendBeamCode">
+<code class="descclassname">LilypondConverter.</code><code class="descname">appendBeamCode</code><span class="sig-paren">(</span><em>noteOrChord</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.appendBeamCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an LyEmbeddedScm object to the context&#8217;s contents if the object&#8217;s has a .beams
+attribute.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpMusicList</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">lilyObjects</span><span class="o">.</span><span class="n">LyMusicList</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">lpMusicList</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span><span class="o">.</span><span class="n">beams</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">beams</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendBeamCode</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
+<span class="go">[&lt;music21.lily.lilyObjects.LyEmbeddedScm object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+<span class="go">\set stemRightBeamCount = #2</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpMusicList</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">lilyObjects</span><span class="o">.</span><span class="n">LyMusicList</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">lpMusicList</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendBeamCode</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
+<span class="go">[&lt;music21.lily.lilyObjects.LyEmbeddedScm object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+<span class="go">\set stemLeftBeamCount = #2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.appendContextFromChord">
+<code class="descclassname">LilypondConverter.</code><code class="descname">appendContextFromChord</code><span class="sig-paren">(</span><em>chord</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.appendContextFromChord" title="Permalink to this definition">¶</a></dt>
+<dd><p>appends lySimpleMusicFromChord to the
+current context.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;E4&quot;</span><span class="p">,</span> <span class="s2">&quot;G4&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpMusicList</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">lilyObjects</span><span class="o">.</span><span class="n">LyMusicList</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">lpMusicList</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendContextFromChord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpMusicList</span><span class="p">)</span>
+<span class="go">&lt; c&#39; e&#39; g&#39;  &gt; 4</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s2">&quot;D4&quot;</span><span class="p">,</span> <span class="s2">&quot;F#4&quot;</span><span class="p">,</span> <span class="s2">&quot;A4&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">tuplets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;start&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c3</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s2">&quot;D4&quot;</span><span class="p">,</span> <span class="s2">&quot;F4&quot;</span><span class="p">,</span> <span class="s2">&quot;G4&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c3</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c4</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;E4&quot;</span><span class="p">,</span> <span class="s2">&quot;G4&quot;</span><span class="p">,</span> <span class="s2">&quot;C5&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c4</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c4</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">tuplets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;stop&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c5</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s2">&quot;C4&quot;</span><span class="p">,</span> <span class="s2">&quot;F4&quot;</span><span class="p">,</span> <span class="s2">&quot;A-4&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendContextFromChord</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendContextFromChord</span><span class="p">(</span><span class="n">c3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendContextFromChord</span><span class="p">(</span><span class="n">c4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendContextFromChord</span><span class="p">(</span><span class="n">c5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+<span class="go">&lt; c&#39;  e&#39;  g&#39;  &gt; 4   </span>
+<span class="go">\times 2/3 { &lt; d&#39;  fis&#39;  a&#39;  &gt; 8   </span>
+<span class="go">   &lt; d&#39;  f&#39;  g&#39;  &gt; 8</span>
+<span class="go">   &lt; c&#39;  e&#39;  g&#39;  c&#39;&#39;  &gt; 8   </span>
+<span class="go">    } </span>
+
+<span class="go">&lt; c&#39;  f&#39;  aes&#39;  &gt; 4   </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.appendContextFromNoteOrRest">
+<code class="descclassname">LilypondConverter.</code><code class="descname">appendContextFromNoteOrRest</code><span class="sig-paren">(</span><em>noteOrRest</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.appendContextFromNoteOrRest" title="Permalink to this definition">¶</a></dt>
+<dd><p>appends lySimpleMusicFromNoteOrRest to the
+current context.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C#4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpMusicList</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">lilyObjects</span><span class="o">.</span><span class="n">LyMusicList</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">lpMusicList</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendContextFromNoteOrRest</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpMusicList</span><span class="p">)</span>
+<span class="go">cis&#39; 4</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;D#4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">tuplets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;start&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;E4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n4</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;F4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n4</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n4</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">tuplets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;stop&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n5</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;F#4&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendContextFromNoteOrRest</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendContextFromNoteOrRest</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendContextFromNoteOrRest</span><span class="p">(</span><span class="n">n4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendContextFromNoteOrRest</span><span class="p">(</span><span class="n">n5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+<span class="go">cis&#39; 4</span>
+<span class="go">\times 2/3 { dis&#39; 8</span>
+<span class="go">   e&#39; 8</span>
+<span class="go">   f&#39; 8</span>
+<span class="go">    }</span>
+
+<span class="go">fis&#39; 4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.appendContextFromVariant">
+<code class="descclassname">LilypondConverter.</code><code class="descname">appendContextFromVariant</code><span class="sig-paren">(</span><em>variantObjectOrList</em>, <em>activeSite=None</em>, <em>coloredVariants=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.appendContextFromVariant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new context from the variant object or a list of variants and append.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.appendM21ObjectToContext">
+<code class="descclassname">LilypondConverter.</code><code class="descname">appendM21ObjectToContext</code><span class="sig-paren">(</span><em>thisObject</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.appendM21ObjectToContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>converts any type of object into a lilyObject of LyMusic (
+LySimpleMusic, LyEmbeddedScm etc.) type</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.appendObjectsToContextFromStream">
+<code class="descclassname">LilypondConverter.</code><code class="descname">appendObjectsToContextFromStream</code><span class="sig-paren">(</span><em>streamObject</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.appendObjectsToContextFromStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>takes a Stream and appends all the elements in it to the current
+context&#8217;s .contents list, and deals with creating Voices in it. It also deals with
+variants in it.</p>
+<p>(should eventually replace the main Score parts finding tools)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpMusicList</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">lilyObjects</span><span class="o">.</span><span class="n">LyMusicList</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">lpMusicList</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 3/4 b4 d- e#&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendObjectsToContextFromStream</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
+<span class="go">[&lt;music21.lily.lilyObjects.LyEmbeddedScm...&gt;, </span>
+<span class="go"> &lt;music21.lily.lilyObjects.LySimpleMusic...&gt;, </span>
+<span class="go"> &lt;music21.lily.lilyObjects.LySimpleMusic...&gt;, </span>
+<span class="go"> &lt;music21.lily.lilyObjects.LySimpleMusic...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+<span class="go">\clef &quot;treble&quot; </span>
+<span class="go">\time 3/4</span>
+<span class="go">b&#39; 4</span>
+<span class="go">des&#39; 4</span>
+<span class="go">eis&#39; 4</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Voice</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C5&quot;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Voice</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C#5&quot;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">v1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpMusicList</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">lilyObjects</span><span class="o">.</span><span class="n">LyMusicList</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">lpMusicList</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendObjectsToContextFromStream</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="p">)</span> <span class="c1"># internal spaces removed...</span>
+<span class="go">  &lt;&lt; \new Voice { c&#39;&#39; 1</span>
+<span class="go">            \bar &quot;|.&quot;  %{ end measure 1 %} </span>
+<span class="go">          }</span>
+<span class="go">   \new Voice { cis&#39;&#39; 1</span>
+<span class="go">          }</span>
+<span class="go">    &gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.appendStemCode">
+<code class="descclassname">LilypondConverter.</code><code class="descname">appendStemCode</code><span class="sig-paren">(</span><em>noteOrChord</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.appendStemCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an LyEmbeddedScm object to the context&#8217;s contents if the object&#8217;s stem direction
+is set (currrently, only &#8220;up&#8221; and &#8220;down&#8221; are supported).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpMusicList</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">lilyObjects</span><span class="o">.</span><span class="n">LyMusicList</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">lpMusicList</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">stemDirection</span> <span class="o">=</span> <span class="s1">&#39;up&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">appendStemCode</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span>
+<span class="go">[&lt;music21.lily.lilyObjects.LyEmbeddedScm object at 0x...&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">\once \override Stem #&#39;direction = #UP</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.baseNameFromPitch">
+<code class="descclassname">LilypondConverter.</code><code class="descname">baseNameFromPitch</code><span class="sig-paren">(</span><em>pitch</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.baseNameFromPitch" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a string of the base name (including accidental)
+for a music21 pitch</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.closeMeasure">
+<code class="descclassname">LilypondConverter.</code><code class="descname">closeMeasure</code><span class="sig-paren">(</span><em>barChecksOnly=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.closeMeasure" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a LyObject or None for the end of the previous Measure</p>
+<p>uses self.currentMeasure</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">rightBarline</span> <span class="o">=</span> <span class="s1">&#39;double&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">currentMeasure</span> <span class="o">=</span> <span class="n">m</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lyObj</span> <span class="o">=</span> <span class="n">lpc</span><span class="o">.</span><span class="n">closeMeasure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">currentMeasure</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lyObj</span><span class="p">)</span>
+<span class="go">\bar &quot;||&quot;  %{ end measure 2 %}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.createPDF">
+<code class="descclassname">LilypondConverter.</code><code class="descname">createPDF</code><span class="sig-paren">(</span><em>fileName=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.createPDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a PDF file from self.topLevelObject and return the filepath of the file.</p>
+<p>most users will just call stream.write(&#8216;lily.pdf&#8217;) on a stream.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.createPNG">
+<code class="descclassname">LilypondConverter.</code><code class="descname">createPNG</code><span class="sig-paren">(</span><em>fileName=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.createPNG" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a PNG file from self.topLevelObject and return the filepath of the file.</p>
+<p>most users will just call stream.write(&#8216;lily.png&#8217;) on a stream.</p>
+<p>if PIL is installed then a small white border is created around the score</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.createSVG">
+<code class="descclassname">LilypondConverter.</code><code class="descname">createSVG</code><span class="sig-paren">(</span><em>fileName=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.createSVG" title="Permalink to this definition">¶</a></dt>
+<dd><p>create an SVG file from self.topLevelObject and return the filepath of the file.</p>
+<p>most users will just call stream.Stream.write(&#8216;lily.svg&#8217;) on a stream.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.findLilyExec">
+<code class="descclassname">LilypondConverter.</code><code class="descname">findLilyExec</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.findLilyExec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.getLySpacersFromStream">
+<code class="descclassname">LilypondConverter.</code><code class="descname">getLySpacersFromStream</code><span class="sig-paren">(</span><em>streamIn</em>, <em>measuresOnly=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.getLySpacersFromStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a series of Spacer objects for the measures in a Stream Part.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">(</span><span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 3/4 a2.&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">(</span><span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 3/4 b2.&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m3</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">(</span><span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 4/4 a1&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m4</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">(</span><span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 4/4 b1&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m5</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">(</span><span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 4/4 c1&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m6</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">(</span><span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 5/4 a4 b1&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">streamIn</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">([</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">m3</span><span class="p">,</span> <span class="n">m4</span><span class="p">,</span> <span class="n">m5</span><span class="p">,</span> <span class="n">m6</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">getLySpacersFromStream</span><span class="p">(</span><span class="n">streamIn</span><span class="p">))</span>
+<span class="go">s2. s2. s1 s1 s1 s1 s4</span>
+</pre></div>
+</div>
+<p>TODO: Low-priority... rare, but possible: tuplet time signatures (3/10)...</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.getSchemeForPadding">
+<code class="descclassname">LilypondConverter.</code><code class="descname">getSchemeForPadding</code><span class="sig-paren">(</span><em>measureObject</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.getSchemeForPadding" title="Permalink to this definition">¶</a></dt>
+<dd><p>lilypond partial durations are very strange and are really of
+type LyMultipliedDuration.  You notate how many
+notes are left in the measure, for a quarter note, write &#8220;4&#8221;
+for an eighth, write &#8220;8&#8221;, but for 3 eighths, write &#8220;8*3&#8221; !
+so we will measure in 32nd notes always... won&#8217;t work for tuplets
+of course.</p>
+<p>returns a scheme object or None if not needed</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">paddingLeft</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">outScheme</span> <span class="o">=</span> <span class="n">lpc</span><span class="o">.</span><span class="n">getSchemeForPadding</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">outScheme</span><span class="p">)</span>
+<span class="go">\partial 32*8</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.loadFromMusic21Object">
+<code class="descclassname">LilypondConverter.</code><code class="descname">loadFromMusic21Object</code><span class="sig-paren">(</span><em>m21ObjectIn</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.loadFromMusic21Object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Lilypond object hierarchy in self.topLevelObject from an
+arbitrary music21 object.</p>
+<p>TODO: make lilypond automatically run makeNotation.makeTupletBrackets(s)
+TODO: Add tests...</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.loadObjectFromOpus">
+<code class="descclassname">LilypondConverter.</code><code class="descname">loadObjectFromOpus</code><span class="sig-paren">(</span><em>opusIn=None</em>, <em>makeNotation=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.loadObjectFromOpus" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates a filled topLevelObject (lily.lilyObjects.LyLilypondTop)
+whose string representation accurately reflects all the Score objects
+in this Opus object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fifeOpus</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;miscFolk/americanfifeopus.abc&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">loadObjectFromOpus</span><span class="p">(</span><span class="n">fifeOpus</span><span class="p">,</span> <span class="n">makeNotation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">showPDF</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.loadObjectFromScore">
+<code class="descclassname">LilypondConverter.</code><code class="descname">loadObjectFromScore</code><span class="sig-paren">(</span><em>scoreIn=None</em>, <em>makeNotation=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.loadObjectFromScore" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates a filled topLevelObject (lily.lilyObjects.LyLilypondTop)
+whose string representation accurately reflects this Score object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">loadObjectFromScore</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#print lpc.topLevelObject</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyEmbeddedScmFromClef">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyEmbeddedScmFromClef</code><span class="sig-paren">(</span><em>clefObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyEmbeddedScmFromClef" title="Permalink to this definition">¶</a></dt>
+<dd><p>converts a Clef object to a
+lilyObjects.LyEmbeddedScm object</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">clef</span><span class="o">.</span><span class="n">TrebleClef</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conv</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpEmbeddedScm</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">lyEmbeddedScmFromClef</span><span class="p">(</span><span class="n">tc</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpEmbeddedScm</span><span class="p">)</span>
+<span class="go">\clef &quot;treble&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t8c</span> <span class="o">=</span> <span class="n">clef</span><span class="o">.</span><span class="n">Treble8vbClef</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpEmbeddedScm</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">lyEmbeddedScmFromClef</span><span class="p">(</span><span class="n">t8c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpEmbeddedScm</span><span class="p">)</span>
+<span class="go">\clef &quot;treble_8&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyEmbeddedScmFromKeySignature">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyEmbeddedScmFromKeySignature</code><span class="sig-paren">(</span><em>keyObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyEmbeddedScmFromKeySignature" title="Permalink to this definition">¶</a></dt>
+<dd><p>converts a Key or KeySignature object
+to a lilyObjects.LyEmbeddedScm object</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conv</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpEmbeddedScm</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">lyEmbeddedScmFromKeySignature</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpEmbeddedScm</span><span class="p">)</span>
+<span class="go">\key d \minor</span>
+</pre></div>
+</div>
+<p>Major is assumed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fsharp</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">conv</span><span class="o">.</span><span class="n">lyEmbeddedScmFromKeySignature</span><span class="p">(</span><span class="n">fsharp</span><span class="p">))</span>
+<span class="go">\key fis \major</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyEmbeddedScmFromTimeSignature">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyEmbeddedScmFromTimeSignature</code><span class="sig-paren">(</span><em>ts</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyEmbeddedScmFromTimeSignature" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert a <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a> object
+to a lilyObjects.LyEmbeddedScm object</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conv</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">conv</span><span class="o">.</span><span class="n">lyEmbeddedScmFromTimeSignature</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
+<span class="go">\time 3/4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyGroupedMusicListFromScoreWithParts">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyGroupedMusicListFromScoreWithParts</code><span class="sig-paren">(</span><em>scoreIn</em>, <em>scoreInit=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyGroupedMusicListFromScoreWithParts" title="Permalink to this definition">¶</a></dt>
+<dd><p>More complex example showing how the score can be set up with ossia parts...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpPartsAndOssiaInit</span> <span class="o">=</span> <span class="n">lpc</span><span class="o">.</span><span class="n">lyPartsAndOssiaInitFromScore</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpGroupedMusicList</span> <span class="o">=</span> <span class="n">lpc</span><span class="o">.</span><span class="n">lyGroupedMusicListFromScoreWithParts</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> 
+<span class="gp">... </span>               <span class="n">scoreInit</span><span class="o">=</span><span class="n">lpPartsAndOssiaInit</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpGroupedMusicList</span><span class="p">)</span>
+
+<span class="go"> &lt;&lt; \new Staff  = Soprano { \stopStaff s4 s1 s1 s1 s1 s1 s1 s1 s1 s2. }</span>
+<span class="go">   \new Staff  = Alto { \stopStaff s4 s1 s1 s1 s1 s1 s1 s1 s1 s2. }</span>
+<span class="go">   \new Staff  = Tenor { \stopStaff s4 s1 s1 s1 s1 s1 s1 s1 s1 s2. }</span>
+<span class="go">   \new Staff  = Bass { \stopStaff s4 s1 s1 s1 s1 s1 s1 s1 s1 s2. }</span>
+
+<span class="go">  \context Staff  = Soprano \with {</span>
+<span class="go">      \autoBeamOff</span>
+<span class="go">  }</span>
+<span class="go">  { \startStaff \partial 32*8</span>
+<span class="go">        \clef &quot;treble&quot;</span>
+<span class="go">        \key fis \minor</span>
+<span class="go">        \time 4/4</span>
+<span class="go">        \set stemRightBeamCount = #1</span>
+<span class="go">        \once \override Stem #&#39;direction = #DOWN</span>
+<span class="go">        cis&#39;&#39; 8 [</span>
+<span class="go">        \set stemLeftBeamCount = #1</span>
+<span class="go">        \once \override Stem #&#39;direction = #DOWN</span>
+<span class="go">        b... 8 ]</span>
+<span class="go">        \bar &quot;|&quot;  %{ end measure 0 %}</span>
+<span class="go">        \once \override Stem #&#39;direction = #UP</span>
+<span class="go">        a&#39; 4</span>
+<span class="go">        \once \override Stem #&#39;direction = #DOWN</span>
+<span class="go">        b... 4</span>
+<span class="go">        \once \override Stem #&#39;direction = #DOWN</span>
+<span class="go">        cis&#39;&#39; 4  \fermata</span>
+<span class="go">        \once \override Stem #&#39;direction = #DOWN</span>
+<span class="go">        e&#39;&#39; 4</span>
+<span class="go">        \bar &quot;|&quot;  %{ end measure 1 %}</span>
+<span class="go">        \once \override Stem #&#39;direction = #DOWN</span>
+<span class="go">        cis&#39;&#39; 4</span>
+<span class="go">        ...</span>
+<span class="go">}</span>
+
+
+<span class="go">\context Staff  = Alto \with  {</span>
+<span class="go">    \autoBeamOff</span>
+<span class="go"> }</span>
+<span class="go"> { \startStaff \partial 32*8</span>
+<span class="go">    \clef &quot;treble&quot;...</span>
+<span class="go">    \once \override Stem #&#39;direction = #UP</span>
+<span class="go">    e&#39; 4</span>
+<span class="go">    \bar &quot;|&quot;  %{ end measure 0 %}</span>
+<span class="go">    \once \override Stem #&#39;direction = #UP</span>
+<span class="go">    fis&#39; 4</span>
+<span class="go">    \once \override Stem #&#39;direction = #UP</span>
+<span class="go">    e&#39; 4</span>
+<span class="gp">...</span>
+<span class="go">}</span>
+
+
+<span class="go">&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyLyricElementFromM21Lyric">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyLyricElementFromM21Lyric</code><span class="sig-paren">(</span><em>m21Lyric</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyLyricElementFromM21Lyric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference internal" href="moduleLilyLilyObjects.html#music21.lily.lilyObjects.LyLyricElement" title="music21.lily.lilyObjects.LyLyricElement"><code class="xref py py-class docutils literal"><span class="pre">LyLyricElement</span></code></a> object
+from a <a class="reference internal" href="moduleNote.html#music21.note.Lyric" title="music21.note.Lyric"><code class="xref py py-class docutils literal"><span class="pre">Lyric</span></code></a> object.</p>
+<p>Uses self.inWord to keep track of whether or not we&#8217;re in the middle of
+a word.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinyNotation: 4/4 c4_hel- d4_-lo r2 e2 f2_world&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">(</span><span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lyrics</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">lyrics</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># get first verse (yes, 1 = first, not 0!)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">lyLyricElementFromM21Lyric</span><span class="p">(</span><span class="n">lyrics</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">&lt;music21.lily.lilyObjects.LyLyricElement object...&#39;&quot;hel&quot; --&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">inWord</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">lyLyricElementFromM21Lyric</span><span class="p">(</span><span class="n">lyrics</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">&lt;music21.lily.lilyObjects.LyLyricElement object...&#39;&quot;lo&quot;__&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">lyLyricElementFromM21Lyric</span><span class="p">(</span><span class="n">lyrics</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">&lt;music21.lily.lilyObjects.LyLyricElement object...&#39; _ &#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">lyLyricElementFromM21Lyric</span><span class="p">(</span><span class="n">lyrics</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="go">&lt;music21.lily.lilyObjects.LyLyricElement object...&#39;&quot;world&quot;&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">inWord</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyMultipliedDurationFromDuration">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyMultipliedDurationFromDuration</code><span class="sig-paren">(</span><em>durationObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyMultipliedDurationFromDuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>take a simple Duration (that is one with one DurationTuple
+object and return a LyMultipliedDuration object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lyMultipliedDuration</span> <span class="o">=</span> <span class="n">lpc</span><span class="o">.</span><span class="n">lyMultipliedDurationFromDuration</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">lyMultipliedDuration</span><span class="p">)</span>
+<span class="go">&#39;2. &#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">lyMultipliedDurationFromDuration</span><span class="p">(</span><span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)))</span>
+<span class="go">&#39;\\breve &#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">lyMultipliedDurationFromDuration</span><span class="p">(</span><span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mf">16.0</span><span class="p">)))</span>
+<span class="go">&#39;\\longa &#39;</span>
+</pre></div>
+</div>
+<p>Does not work with complex durations:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">lyMultipliedDurationFromDuration</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.lily.translate.LilyTranslateException</span>: <span class="n">DurationException for durationObject </span>
+<span class="go">    &lt;music21.duration.Duration 5.0&gt;: Could not determine durationNumber from None</span>
+</pre></div>
+</div>
+<p>Instead split by components:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">components</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">components</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">lyMultipliedDurationFromDuration</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">components</span><span class="p">]</span>
+<span class="go">[&#39;1 &#39;, &#39;4 &#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyNewLyricsFromStream">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyNewLyricsFromStream</code><span class="sig-paren">(</span><em>streamIn</em>, <em>streamId=None</em>, <em>alignment='alignBelowContext'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyNewLyricsFromStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a LyNewLyrics object</p>
+<p>This is a little bit of a hack. This should be switched over to using a
+prefixed context thing with new Lyric = &#8220;id&#8221; with { } {}</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinyNotation: 4/4 c4_hel- d4_-lo r4 e4_world&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">(</span><span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;helloWorld&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lyNewLyrics</span> <span class="o">=</span> <span class="n">lpc</span><span class="o">.</span><span class="n">lyNewLyricsFromStream</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lyNewLyrics</span><span class="p">)</span>
+<span class="go">\addlyrics { \set alignBelowContext = #&quot;helloWorld&quot;</span>
+<span class="go">   &quot;hel&quot; --</span>
+<span class="go">   &quot;lo&quot;__</span>
+<span class="go">   &quot;world&quot;</span>
+<span class="go">    }</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyOssiaMusicFromVariant">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyOssiaMusicFromVariant</code><span class="sig-paren">(</span><em>variantIn</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyOssiaMusicFromVariant" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a LyOssiaMusic object from a stream</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 3/4 C4 D E F2.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">variant</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lySequentialMusicOut</span> <span class="o">=</span> <span class="n">lpc</span><span class="o">.</span><span class="n">lySequentialMusicFromStream</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lySequentialMusicOut</span>
+<span class="go">&lt;music21.lily.lilyObjects.LySequentialMusic object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lySequentialMusicOut</span><span class="p">)</span>
+<span class="go">{ \clef &quot;bass&quot; </span>
+<span class="go"> \time 3/4</span>
+<span class="go"> c 4  </span>
+<span class="go"> d 4  </span>
+<span class="go"> e 4  </span>
+<span class="go"> \bar &quot;|&quot;  %{ end measure 1 %} </span>
+<span class="go"> f 2.  </span>
+<span class="go"> \bar &quot;|.&quot;  %{ end measure 2 %} </span>
+<span class="go">  } </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyPartsAndOssiaInitFromScore">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyPartsAndOssiaInitFromScore</code><span class="sig-paren">(</span><em>scoreIn</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyPartsAndOssiaInitFromScore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in a score and returns a block that starts each part context and variant context
+with an identifier and {stopStaff s1*n} (or s, whatever is needed for the duration)
+where n is the number of measures in the score.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">copy</span>
+</pre></div>
+</div>
+<p>Set up score:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Score</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">(),</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;4/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;4/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variant</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;london&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variant</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;london&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variant</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;rome&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variant</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;rome&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">... </span>   <span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;whole&#39;</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="n">p1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="n">p2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;pa&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;pb&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Run method</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">lyPartsAndOssiaInitFromScore</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+<span class="go">\new Staff  = pa { \stopStaff s1 s1 s1 s1 }</span>
+<span class="go">\new Staff  = londonpa</span>
+<span class="go">            \with {</span>
+<span class="go">                  \remove &quot;Time_signature_engraver&quot;</span>
+<span class="go">                  alignAboveContext = #&quot;pa&quot;</span>
+<span class="go">                  fontSize = #-3</span>
+<span class="go">                  \override StaffSymbol #&#39;staff-space = #(magstep -3)</span>
+<span class="go">                  \override StaffSymbol #&#39;thickness = #(magstep -3)</span>
+<span class="go">                  \override TupletBracket #&#39;bracket-visibility = ##f</span>
+<span class="go">                  \override TupletNumber #&#39;stencil = ##f</span>
+<span class="go">                  \override Clef #&#39;transparent = ##t</span>
+<span class="go">                  \override OctavateEight #&#39;transparent = ##t</span>
+<span class="go">                  \consists &quot;Default_bar_line_engraver&quot;</span>
+<span class="go">                }</span>
+<span class="go">         { \stopStaff s1 s1 s1 s1 }</span>
+<span class="go">\new Staff  = romepa</span>
+<span class="go">            \with {</span>
+<span class="go">                  \remove &quot;Time_signature_engraver&quot;</span>
+<span class="go">                  alignAboveContext = #&quot;pa&quot;</span>
+<span class="go">                  fontSize = #-3</span>
+<span class="go">                  \override StaffSymbol #&#39;staff-space = #(magstep -3)</span>
+<span class="go">                  \override StaffSymbol #&#39;thickness = #(magstep -3)</span>
+<span class="go">                  \override TupletBracket #&#39;bracket-visibility = ##f</span>
+<span class="go">                  \override TupletNumber #&#39;stencil = ##f</span>
+<span class="go">                  \override Clef #&#39;transparent = ##t</span>
+<span class="go">                  \override OctavateEight #&#39;transparent = ##t</span>
+<span class="go">                  \consists &quot;Default_bar_line_engraver&quot;</span>
+<span class="go">                }</span>
+<span class="go">         { \stopStaff s1 s1 s1 s1 }</span>
+<span class="go">\new Staff  = pb { \stopStaff s1 s1 s1 s1 }</span>
+<span class="go">\new Staff  = londonpb</span>
+<span class="go">            \with {</span>
+<span class="go">                  \remove &quot;Time_signature_engraver&quot;</span>
+<span class="go">                  alignAboveContext = #&quot;pb...</span>
+<span class="go">                  fontSize = #-3</span>
+<span class="go">                  \override StaffSymbol #&#39;staff-space = #(magstep -3)</span>
+<span class="go">                  \override StaffSymbol #&#39;thickness = #(magstep -3)</span>
+<span class="go">                  \override TupletBracket #&#39;bracket-visibility = ##f</span>
+<span class="go">                  \override TupletNumber #&#39;stencil = ##f</span>
+<span class="go">                  \override Clef #&#39;transparent = ##t</span>
+<span class="go">                  \override OctavateEight #&#39;transparent = ##t</span>
+<span class="go">                  \consists &quot;Default_bar_line_engraver&quot;</span>
+<span class="go">                }</span>
+<span class="go">         { \stopStaff s1 s1 s1 s1 }</span>
+<span class="go">\new Staff  = romepb</span>
+<span class="go">            \with {</span>
+<span class="go">                  \remove &quot;Time_signature_engraver&quot;</span>
+<span class="go">                  alignAboveContext = #&quot;pb...</span>
+<span class="go">                  fontSize = #-3</span>
+<span class="go">                  \override StaffSymbol #&#39;staff-space = #(magstep -3)</span>
+<span class="go">                  \override StaffSymbol #&#39;thickness = #(magstep -3)</span>
+<span class="go">                  \override TupletBracket #&#39;bracket-visibility = ##f</span>
+<span class="go">                  \override TupletNumber #&#39;stencil = ##f</span>
+<span class="go">                  \override Clef #&#39;transparent = ##t</span>
+<span class="go">                  \override OctavateEight #&#39;transparent = ##t</span>
+<span class="go">                  \consists &quot;Default_bar_line_engraver&quot;</span>
+<span class="go">                }</span>
+<span class="go">         { \stopStaff s1 s1 s1 s1 }</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyPitchFromPitch">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyPitchFromPitch</code><span class="sig-paren">(</span><em>pitch</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyPitchFromPitch" title="Permalink to this definition">¶</a></dt>
+<dd><p>converts a music21.pitch.Pitch object to a lily.lilyObjects.LyPitch
+object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyPrefixCompositeMusicFromRelatedVariants">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyPrefixCompositeMusicFromRelatedVariants</code><span class="sig-paren">(</span><em>variantList</em>, <em>activeSite=None</em>, <em>coloredVariants=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyPrefixCompositeMusicFromRelatedVariants" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 4/4 a4 a a a  a1&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 4/4 b4 b b b&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s3</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 4/4 c4 c c c&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s4</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 4/4 d4 d d d&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s5</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 4/4 e4 e e e  f f f f  g g g g  a a a a  b b b b&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">s3</span><span class="p">,</span> <span class="n">s4</span><span class="p">,</span> <span class="n">s5</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">s</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">(</span><span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">activeSite</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">(</span><span class="n">s5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">variant</span><span class="o">.</span><span class="n">Variant</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">s1</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">v1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span><span class="o">.</span><span class="n">replacementDuration</span> <span class="o">=</span> <span class="mf">4.0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">variant</span><span class="o">.</span><span class="n">Variant</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">SpacerRest</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp2</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">4.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span><span class="o">.</span><span class="n">replacementDuration</span> <span class="o">=</span> <span class="mf">4.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sp2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">s2</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">v2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v3</span> <span class="o">=</span> <span class="n">variant</span><span class="o">.</span><span class="n">Variant</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp3</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">SpacerRest</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp3</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">8.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v3</span><span class="o">.</span><span class="n">replacementDuration</span> <span class="o">=</span> <span class="mf">4.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sp3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">s3</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">v3</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v4</span> <span class="o">=</span> <span class="n">variant</span><span class="o">.</span><span class="n">Variant</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp4</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">SpacerRest</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp4</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">16.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v4</span><span class="o">.</span><span class="n">replacementDuration</span> <span class="o">=</span> <span class="mf">4.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v4</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sp4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">s4</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">v4</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">variantList</span> <span class="o">=</span> <span class="p">[</span><span class="n">v4</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="n">v3</span><span class="p">,</span><span class="n">v2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">variantList</span> <span class="p">:</span>
+<span class="gp">... </span>    <span class="n">v</span><span class="o">.</span><span class="n">groups</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;london&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">activeSite</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">lyPrefixCompositeMusicFromRelatedVariants</span><span class="p">(</span><span class="n">variantList</span><span class="p">,</span> 
+<span class="gp">... </span>               <span class="n">activeSite</span><span class="o">=</span><span class="n">activeSite</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">\new Staff  = london... { { \times 1/2 {\startStaff \clef &quot;treble&quot;</span>
+<span class="go">      a&#39; 4</span>
+<span class="go">      a&#39; 4</span>
+<span class="go">      a&#39; 4</span>
+<span class="go">      a&#39; 4</span>
+<span class="go">      \clef &quot;treble&quot;</span>
+<span class="go">      | %{ end measure 1 %}</span>
+<span class="go">      a&#39; 1</span>
+<span class="go">      | %{ end measure 2 %}</span>
+<span class="go">       \stopStaff}</span>
+<span class="go">       }</span>
+
+<span class="go">  {\startStaff \clef &quot;treble&quot;</span>
+<span class="go">    b... 4</span>
+<span class="go">    b... 4</span>
+<span class="go">    b... 4</span>
+<span class="go">    b... 4</span>
+<span class="go">    | %{ end measure 1 %}</span>
+<span class="go">     \stopStaff}</span>
+
+<span class="go">  {\startStaff \clef &quot;treble&quot;</span>
+<span class="go">    c&#39; 4</span>
+<span class="go">    c&#39; 4</span>
+<span class="go">    c&#39; 4</span>
+<span class="go">    c&#39; 4</span>
+<span class="go">    | %{ end measure 1 %}</span>
+<span class="go">     \stopStaff}</span>
+
+<span class="go">  s 1</span>
+<span class="go">  {\startStaff \clef &quot;treble&quot;</span>
+<span class="go">    d&#39; 4</span>
+<span class="go">    d&#39; 4</span>
+<span class="go">    d&#39; 4</span>
+<span class="go">    d&#39; 4</span>
+<span class="go">    | %{ end measure 1 %}</span>
+<span class="go">     \stopStaff}</span>
+
+<span class="go">   }</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyPrefixCompositeMusicFromStream">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyPrefixCompositeMusicFromStream</code><span class="sig-paren">(</span><em>streamIn</em>, <em>contextType=None</em>, <em>type=None</em>, <em>beforeMatter=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyPrefixCompositeMusicFromStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns an LyPrefixCompositeMusic object from
+a stream (generally a part, but who knows...)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 3/4 C4 D E F2.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">staffLines</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lyPrefixCompositeMusicOut</span> <span class="o">=</span> <span class="n">lpc</span><span class="o">.</span><span class="n">lyPrefixCompositeMusicFromStream</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">contextType</span><span class="o">=</span><span class="s1">&#39;Staff&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lyPrefixCompositeMusicOut</span>
+<span class="go">&lt;music21.lily.lilyObjects.LyPrefixCompositeMusic object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lyPrefixCompositeMusicOut</span><span class="p">)</span>
+<span class="go">\new Staff = ... \with {</span>
+<span class="go"> \override StaffSymbol #&#39;line-count = #4</span>
+<span class="go">}</span>
+<span class="go">{ \clef &quot;bass&quot; </span>
+<span class="go">     \time 3/4</span>
+<span class="go">     c 4  </span>
+<span class="go">     d 4  </span>
+<span class="go">     e 4  </span>
+<span class="go">     \bar &quot;|&quot;  %{ end measure 1 %} </span>
+<span class="go">     f 2.  </span>
+<span class="go">     \bar &quot;|.&quot;  %{ end measure 2 %} </span>
+<span class="go">      } </span>
+
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyPrefixCompositeMusicFromVariant">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyPrefixCompositeMusicFromVariant</code><span class="sig-paren">(</span><em>variantObject</em>, <em>replacedElements</em>, <em>coloredVariants=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyPrefixCompositeMusicFromVariant" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pstream</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 4/4 a4 b c d   e4 f g a&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pstream</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">(</span><span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">(</span><span class="n">pstream</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;p1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vstream</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;tinynotation: 4/4 a4. b8 c4 d&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vstream</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">(</span><span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">variant</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="n">vstream</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">groups</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;london&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">replacedElements</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">replacedElements</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpPrefixCompositeMusicVariant</span> <span class="o">=</span> <span class="n">lpc</span><span class="o">.</span><span class="n">lyPrefixCompositeMusicFromVariant</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> 
+<span class="gp">... </span>                                                           <span class="n">replacedElements</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpPrefixCompositeMusicVariant</span><span class="p">)</span> <span class="c1"># ellipses are for non-byte fixups</span>
+<span class="go">\new Staff  = londonpx { {\startStaff \clef &quot;treble&quot;</span>
+<span class="go">    a&#39; 4.</span>
+<span class="go">    b...</span>
+<span class="go">    c&#39; 4</span>
+<span class="go">    d&#39; 4</span>
+<span class="go">    | %{ end measure 1 %}</span>
+<span class="go">     \stopStaff}</span>
+<span class="go">   }</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">replacedElements</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.clef.TrebleClef&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 4/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note A&gt;</span>
+<span class="go">    {1.0} &lt;music21.note.Note B&gt;</span>
+<span class="go">    {2.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">    {3.0} &lt;music21.note.Note D&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpc</span><span class="o">.</span><span class="n">addedVariants</span><span class="p">)</span>
+<span class="go">[&#39;london&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lyScoreBlockFromScore">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lyScoreBlockFromScore</code><span class="sig-paren">(</span><em>scoreIn</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lyScoreBlockFromScore" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lySequentialMusicFromStream">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lySequentialMusicFromStream</code><span class="sig-paren">(</span><em>streamIn</em>, <em>beforeMatter=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lySequentialMusicFromStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a LySequentialMusic object from a stream</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 3/4 C4 D E F2.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lySequentialMusicOut</span> <span class="o">=</span> <span class="n">lpc</span><span class="o">.</span><span class="n">lySequentialMusicFromStream</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lySequentialMusicOut</span>
+<span class="go">&lt;music21.lily.lilyObjects.LySequentialMusic object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lySequentialMusicOut</span><span class="p">)</span>
+<span class="go">{ \clef &quot;bass&quot; </span>
+<span class="go"> \time 3/4</span>
+<span class="go"> c 4  </span>
+<span class="go"> d 4  </span>
+<span class="go"> e 4  </span>
+<span class="go"> \bar &quot;|&quot;  %{ end measure 1 %} </span>
+<span class="go"> f 2.  </span>
+<span class="go"> \bar &quot;|.&quot;  %{ end measure 2 %} </span>
+<span class="go">  } </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lySimpleMusicFromChord">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lySimpleMusicFromChord</code><span class="sig-paren">(</span><em>chordObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lySimpleMusicFromChord" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conv</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s2">&quot;C#2&quot;</span><span class="p">,</span> <span class="s2">&quot;E4&quot;</span><span class="p">,</span> <span class="s2">&quot;D#5&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">3.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span><span class="o">.</span><span class="n">pitches</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">displayType</span> <span class="o">=</span> <span class="s1">&#39;always&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">conv</span><span class="o">.</span><span class="n">lySimpleMusicFromChord</span><span class="p">(</span><span class="n">c1</span><span class="p">))</span>
+<span class="go"> &lt; cis, e&#39; dis&#39;&#39;  !  &gt; 2..</span>
+</pre></div>
+</div>
+<p>test hidden chord:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span><span class="o">.</span><span class="n">hideObjectOnPrint</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">conv</span><span class="o">.</span><span class="n">lySimpleMusicFromChord</span><span class="p">(</span><span class="n">c1</span><span class="p">))</span>
+<span class="go">s 2..</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.lySimpleMusicFromNoteOrRest">
+<code class="descclassname">LilypondConverter.</code><code class="descname">lySimpleMusicFromNoteOrRest</code><span class="sig-paren">(</span><em>noteOrRest</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.lySimpleMusicFromNoteOrRest" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a lilyObjects.LySimpleMusic object for the generalNote containing...</p>
+<blockquote>
+<div><p>LyEventChord   containing
+LySimpleChordElements containing
+LySimpleElement containing
+LyPitch  AND
+LyMultipliedDuration containing:</p>
+<blockquote>
+<div>LyMultipliedDuration containing
+LyStenoDuration</div></blockquote>
+</div></blockquote>
+<p>does not check for tuplets.  That&#8217;s in
+appendContextFromNoteOrRest</p>
+<p>read-only property that returns a string of the lilypond representation of
+a note (or via subclassing, rest or chord)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conv</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n0</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;D#5&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n0</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">displayType</span> <span class="o">=</span> <span class="s1">&#39;always&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n0</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="o">.</span><span class="n">displayStyle</span> <span class="o">=</span> <span class="s1">&#39;parentheses&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n0</span><span class="o">.</span><span class="n">editorial</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sm</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">lySimpleMusicFromNoteOrRest</span><span class="p">(</span><span class="n">n0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
+<span class="go">\color &quot;blue&quot; dis&#39;&#39; ! ? 4</span>
+</pre></div>
+</div>
+<p>Now make the note disappear...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n0</span><span class="o">.</span><span class="n">hideObjectOnPrint</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sm</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">lySimpleMusicFromNoteOrRest</span><span class="p">(</span><span class="n">n0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
+<span class="go">s 4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.newContext">
+<code class="descclassname">LilypondConverter.</code><code class="descname">newContext</code><span class="sig-paren">(</span><em>newContext</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.newContext" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.octaveCharactersFromPitch">
+<code class="descclassname">LilypondConverter.</code><code class="descname">octaveCharactersFromPitch</code><span class="sig-paren">(</span><em>pitch</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.octaveCharactersFromPitch" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a string of single-quotes or commas or &#8220;&#8221; representing
+the octave of a <a class="reference internal" href="modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code></a> object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.postEventsFromObject">
+<code class="descclassname">LilypondConverter.</code><code class="descname">postEventsFromObject</code><span class="sig-paren">(</span><em>generalNote</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.postEventsFromObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>attaches events that apply to notes and chords (and some other things) equally</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.restoreContext">
+<code class="descclassname">LilypondConverter.</code><code class="descname">restoreContext</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.restoreContext" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.runThroughLily">
+<code class="descclassname">LilypondConverter.</code><code class="descname">runThroughLily</code><span class="sig-paren">(</span><em>format=None</em>, <em>backend=None</em>, <em>fileName=None</em>, <em>skipWriting=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.runThroughLily" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates a .ly file from self.topLevelObject via .writeLyFile
+then runs the file through Lilypond.</p>
+<p>Returns the full path of the file produced by lilypond including the format extension.</p>
+<p>If skipWriting is True and a fileName is given then it will run 
+that file through lilypond instead</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.setContextForTimeFraction">
+<code class="descclassname">LilypondConverter.</code><code class="descname">setContextForTimeFraction</code><span class="sig-paren">(</span><em>numerator</em>, <em>denominator</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.setContextForTimeFraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Explicitly starts a new context for scaled music (tuplets, etc.)
+for the given numerator and denominator (either an int or a string or unicode)</p>
+<p>Returns an lpMusicList object contained in an lpSequentialMusic object
+in an lpPrefixCompositeMusic object which sets the times object to a particular
+fraction.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span>
+<span class="go">&lt;music21.lily.lilyObjects.LyLilypondTop object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lyTop</span> <span class="o">=</span> <span class="n">lpc</span><span class="o">.</span><span class="n">context</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lyoMusicList</span> <span class="o">=</span> <span class="n">lpc</span><span class="o">.</span><span class="n">setContextForTimeFraction</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lyoMusicList</span>
+<span class="go">&lt;music21.lily.lilyObjects.LyMusicList object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span>
+<span class="go">&lt;music21.lily.lilyObjects.LyMusicList object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span> <span class="ow">is</span> <span class="n">lyoMusicList</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">getParent</span><span class="p">()</span>
+<span class="go">&lt;music21.lily.lilyObjects.LySequentialMusic object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">getParent</span><span class="p">()</span><span class="o">.</span><span class="n">getParent</span><span class="p">()</span>
+<span class="go">&lt;music21.lily.lilyObjects.LyPrefixCompositeMusic object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">getParent</span><span class="p">()</span><span class="o">.</span><span class="n">getParent</span><span class="p">()</span><span class="o">.</span><span class="n">fraction</span>
+<span class="go">&#39;5/4&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">getParent</span><span class="p">()</span><span class="o">.</span><span class="n">getParent</span><span class="p">()</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;times&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">getParent</span><span class="p">()</span><span class="o">.</span><span class="n">getParent</span><span class="p">()</span><span class="o">.</span><span class="n">getParent</span><span class="p">()</span>
+<span class="go">&lt;music21.lily.lilyObjects.LyLilypondTop object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">getParent</span><span class="p">()</span><span class="o">.</span><span class="n">getParent</span><span class="p">()</span><span class="o">.</span><span class="n">getParent</span><span class="p">()</span> <span class="ow">is</span> <span class="n">lyTop</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.setContextForTupletStart">
+<code class="descclassname">LilypondConverter.</code><code class="descname">setContextForTupletStart</code><span class="sig-paren">(</span><em>inObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.setContextForTupletStart" title="Permalink to this definition">¶</a></dt>
+<dd><p>if the inObj has tuplets then we set a new context
+for the tuplets and anything up till a tuplet stop.</p>
+<p>Note that a broken tuplet (a la Michael Gordon)
+will not work.</p>
+<p>If there are no tuplets, this routine does
+nothing.  If there are tuplets and they have type start then
+it returns an lpMusicList object, which is the new context</p>
+<p>For now, no nested tuplets.  They&#8217;re an
+easy extension, but there&#8217;s too much
+else missing to do it now...</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.setContextForTupletStop">
+<code class="descclassname">LilypondConverter.</code><code class="descname">setContextForTupletStop</code><span class="sig-paren">(</span><em>inObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.setContextForTupletStop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reverse of setContextForTupletStart</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.setHeaderFromMetadata">
+<code class="descclassname">LilypondConverter.</code><code class="descname">setHeaderFromMetadata</code><span class="sig-paren">(</span><em>metadataObject=None</em>, <em>lpHeader=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.setHeaderFromMetadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a lilypond.lilyObjects.LyLilypondHeader object
+set with data from the metadata object</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">md</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Metadata</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;My Title&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">md</span><span class="o">.</span><span class="n">alternativeTitle</span> <span class="o">=</span> <span class="s1">&#39;My &quot;sub&quot;-title&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lpc</span> <span class="o">=</span> <span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lpHeader</span> <span class="o">=</span> <span class="n">lpc</span><span class="o">.</span><span class="n">setHeaderFromMetadata</span><span class="p">(</span><span class="n">md</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lpHeader</span><span class="p">)</span>
+<span class="go">\header { title = &quot;My Title&quot;</span>
+<span class="go">subtitle = &quot;My \&quot;sub\&quot;-title&quot;</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.setupTools">
+<code class="descclassname">LilypondConverter.</code><code class="descname">setupTools</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.setupTools" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.showPDF">
+<code class="descclassname">LilypondConverter.</code><code class="descname">showPDF</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.showPDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a SVG file from self.topLevelObject, show it with your pdf reader 
+(often Adobe Acrobat/Adobe Reader or Apple Preview)
+and return the filepath of the file.</p>
+<p>most users will just call stream.Stream.show(&#8216;lily.pdf&#8217;) on a stream.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.showPNG">
+<code class="descclassname">LilypondConverter.</code><code class="descname">showPNG</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.showPNG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take the object, run it through LilyPond, and then show it as a PNG file.
+On Windows, the PNG file will not be deleted, so you  will need to clean out
+TEMP every once in a while.</p>
+<p>Most users will just want to call stream.Stream.show(&#8216;lily.png&#8217;) instead.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.showSVG">
+<code class="descclassname">LilypondConverter.</code><code class="descname">showSVG</code><span class="sig-paren">(</span><em>fileName=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.showSVG" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a SVG file from self.topLevelObject, show it with your 
+svg reader (often Internet Explorer on PC)
+and return the filepath of the file.</p>
+<p>most users will just call stream.Stream.show(&#8216;lily.png&#8217;) on a stream.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.textFromMusic21Object">
+<code class="descclassname">LilypondConverter.</code><code class="descname">textFromMusic21Object</code><span class="sig-paren">(</span><em>m21ObjectIn</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.textFromMusic21Object" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a proper lilypond text file for writing from a music21 object</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lily</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">LilypondConverter</span><span class="p">()</span><span class="o">.</span><span class="n">textFromMusic21Object</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="go">\version &quot;2...&quot;</span>
+<span class="go">\include &quot;lilypond-book-preamble.ly&quot;</span>
+<span class="go">color = #(define-music-function (parser location color) (string?) #{</span>
+<span class="go">        \once \override NoteHead #&#39;color = #(x11-color color)</span>
+<span class="go">        \once \override Stem #&#39;color = #(x11-color color)</span>
+<span class="go">        \once \override Rest #&#39;color = #(x11-color color)</span>
+<span class="go">        \once \override Beam #&#39;color = #(x11-color color)</span>
+<span class="go">     #})</span>
+<span class="go">\header { }</span>
+<span class="go">\score  {</span>
+<span class="go">      &lt;&lt; \new Staff  = ... { c&#39; 4</span>
+<span class="go">              }</span>
+<span class="go">        &gt;&gt;</span>
+<span class="go">  }</span>
+<span class="go">\paper { }</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.lily.translate.LilypondConverter.writeLyFile">
+<code class="descclassname">LilypondConverter.</code><code class="descname">writeLyFile</code><span class="sig-paren">(</span><em>ext=''</em>, <em>fp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.lily.translate.LilypondConverter.writeLyFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>writes the contents of the self.topLevelObject to a file.</p>
+<p>The extension should be ly.  If fp is None then a named temporary
+file is created by environment.getTempFile.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMeiBase.html" title="music21.mei.base"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleLilyLilyObjects.html" title="music21.lily.lilyObjects"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

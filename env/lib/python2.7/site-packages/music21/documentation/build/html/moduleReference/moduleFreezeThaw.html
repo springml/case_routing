@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.freezeThaw &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.graph" href="moduleGraph.html" />
+    <link rel="prev" title="music21.figuredBass.segment" href="moduleFiguredBassSegment.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleGraph.html" title="music21.graph"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassSegment.html" title="music21.figuredBass.segment"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleFiguredBassSegment.html"
+                        title="previous chapter">music21.figuredBass.segment</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleGraph.html"
+                        title="next chapter">music21.graph</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.freezeThaw</a><ul>
+<li><a class="reference internal" href="#jsonfreezethawbase">JSONFreezeThawBase</a></li>
+<li><a class="reference internal" href="#jsonfreezer">JSONFreezer</a></li>
+<li><a class="reference internal" href="#jsonthawer">JSONThawer</a></li>
+<li><a class="reference internal" href="#streamfreezethawbase">StreamFreezeThawBase</a></li>
+<li><a class="reference internal" href="#streamfreezer">StreamFreezer</a></li>
+<li><a class="reference internal" href="#streamthawer">StreamThawer</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleFreezeThaw.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-freezethaw">
+<span id="modulefreezethaw"></span><h1>music21.freezeThaw<a class="headerlink" href="#music21-freezethaw" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.freezeThaw"></span><p>This module contains objects for storing complete <cite>Music21Objects</cite>, especially
+<cite>Stream</cite> and <cite>Score</cite> objects on disk.  Freezing (or &#8220;pickling&#8221;) refers to
+writing the object to a file on disk (or to a string).  Thawing (or
+&#8220;unpickling&#8221;) refers to reading in a string or file and returning a Music21
+object.</p>
+<p>This module offers alternatives to writing a <cite>Score</cite> to <cite>MusicXML</cite> with
+<cite>s.write(&#8216;musicxml&#8217;)</cite>.  <cite>FreezeThaw</cite> has some advantages over using <cite>.write()</cite>:
+virtually every aspect of a music21 object is retained when Freezing.  So
+objects like <cite>medRen.Ligature</cite>, which aren&#8217;t supported by most formats, can be
+stored with <cite>FreezeThaw</cite> and then read back again.  Freezing is also much
+faster than most conversion methods.  But there&#8217;s a big downside: only
+<cite>music21</cite> and <cite>Python</cite> can use the <cite>Thaw</cite> side to get back <cite>Music21Objects</cite>
+(though more information can be brought out of the JSONFreeze format through
+any .json reader).  In fact, there&#8217;s not even a guarantee that future versions
+of music21 will be able to read a frozen version of a <cite>Stream</cite>.  So the
+advantages and disadvantages of this model definitely need to be kept in mind.</p>
+<p>There are two formats that <cite>freezeThaw</cite> can produce: &#8220;Pickle&#8221; or JSON (for
+JavaScript Object Notation &#8211; essentially a string representation of the
+JavaScript equivalent of a Python dictionary).</p>
+<p>Pickle is a Python-specific
+idea for storing objects.  The <cite>pickle</cite> module stores objects as a text file
+that can&#8217;t be easily read by non-Python applications; it also isn&#8217;t guaranteed
+to work across Python versions or even computers.  However, it works well, is
+fast, and is a standard part of python.</p>
+<p>JSON was originally created to pass
+JavaScript objects from a web server to a web browser, but its utility
+(combining the power of XML with the ease of use of objects) has made it a
+growing standard for other languages.  (see
+<a class="reference external" href="http://docs.python.org/library/json.html">http://docs.python.org/library/json.html</a>).  
+Music21 has two implementations of JSON (confusing, no?)
+because we weren&#8217;t sure and are still not sure which will be best in the long-run: 
+the first approach
+uses explicit lists of attributes that need to be stored and just saves those. This uses a
+homemade set of methods that are specifically tailored for music21; but it misses some things that
+may be important to you.  The second approach uses the the freely distributable
+<cite>jsonpickle</cite> module found in <cite>music21.ext.jsonpickle</cite> (See that folder&#8217;s
+&#8220;license.txt&#8221; for copyright information). This approach probably stores more data than
+someone not using music21 or python is likely to want, but can be used to get back an entire
+music21 Stream with no conversion.</p>
+<p>Both JSON and Pickle files can be huge, but <cite>freezeThaw</cite> can compress them with
+<cite>gzip</cite> or <cite>ZipFile</cite> and thus they&#8217;re not that large at all.</p>
+<p>Streams need to be run through .setupSerializationScaffold and .teardownSerializationScaffold
+before and after either Pickle or jsonpickle in order to restore all the weakrefs that we use.</p>
+<p>The name freezeThaw comes from Perl&#8217;s implementation of similar methods &#8211; I
+like the idea of thawing something that&#8217;s frozen; &#8220;unpickling&#8221; just doesn&#8217;t
+seem possible.  In any event, I needed a name that wouldn&#8217;t already
+exist in the Python namespace.</p>
+<div class="section" id="jsonfreezethawbase">
+<h2>JSONFreezeThawBase<a class="headerlink" href="#jsonfreezethawbase" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.freezeThaw.JSONFreezeThawBase">
+<em class="property">class </em><code class="descclassname">music21.freezeThaw.</code><code class="descname">JSONFreezeThawBase</code><span class="sig-paren">(</span><em>storedObject=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.JSONFreezeThawBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shared functionality for JSONFreeze and JSONThaw</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.freezeThaw.JSONFreezeThawBase" title="music21.freezeThaw.JSONFreezeThawBase"><code class="xref py py-class docutils literal"><span class="pre">JSONFreezeThawBase</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.freezeThaw.JSONFreezeThawBase.fullyQualifiedClassFromObject">
+<code class="descclassname">JSONFreezeThawBase.</code><code class="descname">fullyQualifiedClassFromObject</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.JSONFreezeThawBase.fullyQualifiedClassFromObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a fullyQualified class name from an object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsbase</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">JSONFreezeThawBase</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsbase</span><span class="o">.</span><span class="n">fullyQualifiedClassFromObject</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="go">&#39;music21.duration.Duration&#39;</span>
+</pre></div>
+</div>
+<p>Works on class objects as well:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dclass</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="n">Duration</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsbase</span><span class="o">.</span><span class="n">fullyQualifiedClassFromObject</span><span class="p">(</span><span class="n">dclass</span><span class="p">)</span>
+<span class="go">&#39;music21.duration.Duration&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.JSONFreezeThawBase.music21ObjectFromString">
+<code class="descclassname">JSONFreezeThawBase.</code><code class="descname">music21ObjectFromString</code><span class="sig-paren">(</span><em>idStr</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.JSONFreezeThawBase.music21ObjectFromString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a stored string during JSON serialization, return an object.
+This method effectively converts a string class specification into
+a vanilla instance ready for specialization via stored data attributes.</p>
+<p>A subclass that overrides this method will have access to all
+modules necessary to create whatever objects necessary.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">jss</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">JSONFreezer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">jss</span><span class="o">.</span><span class="n">music21ObjectFromString</span><span class="p">(</span><span class="s1">&#39;note.Note&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">&lt;music21.note.Note C&gt;</span>
+</pre></div>
+</div>
+<p>One can begin with &#8220;music21.&#8221; if you&#8217;d like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">jss</span><span class="o">.</span><span class="n">music21ObjectFromString</span><span class="p">(</span><span class="s1">&#39;music21.duration.Duration&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span>
+<span class="go">&lt;music21.duration.Duration 0.0&gt;</span>
+</pre></div>
+</div>
+<p>Undefined classes give a JSONFreezerException</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">jss</span><span class="o">.</span><span class="n">music21ObjectFromString</span><span class="p">(</span><span class="s1">&#39;blah.NotAClass&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.freezeThaw.JSONFreezerException</span>: <span class="n">Cannot generate a new object from blah.NotAClass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="jsonfreezer">
+<h2>JSONFreezer<a class="headerlink" href="#jsonfreezer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.freezeThaw.JSONFreezer">
+<em class="property">class </em><code class="descclassname">music21.freezeThaw.</code><code class="descname">JSONFreezer</code><span class="sig-paren">(</span><em>storedObject=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.JSONFreezer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class that provides JSON output from an object (whether
+Music21Object or other).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C#4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsonF</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">JSONFreezer</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsonF</span><span class="o">.</span><span class="n">storedObject</span>
+<span class="go">&lt;music21.note.Note C#&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsonF</span><span class="o">.</span><span class="n">className</span>
+<span class="go">&#39;music21.note.Note&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.freezeThaw.JSONFreezer" title="music21.freezeThaw.JSONFreezer"><code class="xref py py-class docutils literal"><span class="pre">JSONFreezer</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.JSONFreezeThawBase" title="music21.freezeThaw.JSONFreezeThawBase"><code class="xref py py-class docutils literal"><span class="pre">JSONFreezeThawBase</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.freezeThaw.JSONFreezer" title="music21.freezeThaw.JSONFreezer"><code class="xref py py-class docutils literal"><span class="pre">JSONFreezer</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.freezeThaw.JSONFreezer.json">
+<code class="descclassname">JSONFreezer.</code><code class="descname">json</code><a class="headerlink" href="#music21.freezeThaw.JSONFreezer.json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get string JSON data for this object.</p>
+<p>This method is only available if a JSONFreezer subclass object has been
+customized and configured by overriding the following methods:
+<a class="reference internal" href="#music21.freezeThaw.JSONFreezer.jsonAttributes" title="music21.freezeThaw.JSONFreezer.jsonAttributes"><code class="xref py py-meth docutils literal"><span class="pre">jsonAttributes()</span></code></a>,
+<code class="xref py py-meth docutils literal"><span class="pre">music21ObjectFromString()</span></code>.</p>
+<p>Return the dictionary returned by self.getJSONDict() as a JSON string.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.freezeThaw.JSONFreezer.prettyJson">
+<code class="descclassname">JSONFreezer.</code><code class="descname">prettyJson</code><a class="headerlink" href="#music21.freezeThaw.JSONFreezer.prettyJson" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.freezeThaw.JSONFreezer" title="music21.freezeThaw.JSONFreezer"><code class="xref py py-class docutils literal"><span class="pre">JSONFreezer</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.freezeThaw.JSONFreezer.autoGatherAttributes">
+<code class="descclassname">JSONFreezer.</code><code class="descname">autoGatherAttributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.JSONFreezer.autoGatherAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gather just the instance data members that are proceeded by an underscore.</p>
+<p>Returns a list of those data members</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jss</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">JSONFreezer</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">jss</span><span class="o">.</span><span class="n">autoGatherAttributes</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">attr</span>
+<span class="gp">...</span>
+<span class="go">&#39;_activeSite&#39;</span>
+<span class="go">&#39;_activeSiteStoredOffset&#39;</span>
+<span class="go">&#39;_duration&#39;</span>
+<span class="go">&#39;_editorial&#39;</span>
+<span class="go">&#39;_naiveOffset&#39;</span>
+<span class="go">&#39;_notehead&#39;</span>
+<span class="go">&#39;_noteheadFill&#39;</span>
+<span class="go">&#39;_noteheadParenthesis&#39;</span>
+<span class="go">&#39;_priority&#39;</span>
+<span class="go">&#39;_stemDirection&#39;</span>
+<span class="go">&#39;_volume&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.JSONFreezer.canBeFrozen">
+<code class="descclassname">JSONFreezer.</code><code class="descname">canBeFrozen</code><span class="sig-paren">(</span><em>possiblyFreezeable</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.JSONFreezer.canBeFrozen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True or False if this attribute can
+be frozen in a way that
+is stronger than just storing the repr of it.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">JSONFreezer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span><span class="o">.</span><span class="n">canBeFrozen</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">())</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span><span class="o">.</span><span class="n">canBeFrozen</span><span class="p">(</span><span class="mi">345</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span><span class="o">.</span><span class="n">canBeFrozen</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>Lists and Tuples and Dicts return False, but they
+are not just stored as __repr__, don&#8217;t worry...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span><span class="o">.</span><span class="n">canBeFrozen</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span><span class="o">.</span><span class="n">canBeFrozen</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">Microtone</span><span class="p">())</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.JSONFreezer.getJSONDict">
+<code class="descclassname">JSONFreezer.</code><code class="descname">getJSONDict</code><span class="sig-paren">(</span><em>includeVersion=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.JSONFreezer.getJSONDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary representation for JSON processing.
+All component objects are similarly encoded as dictionaries.
+This method is recursively called as needed to store dictionaries
+of component objects that are <a class="reference internal" href="#music21.freezeThaw.JSONFreezer" title="music21.freezeThaw.JSONFreezer"><code class="xref py py-class docutils literal"><span class="pre">JSONFreezer</span></code></a> subclasses.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;my text&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">language</span> <span class="o">=</span> <span class="s1">&#39;en&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">JSONFreezer</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsdict</span> <span class="o">=</span> <span class="n">jsf</span><span class="o">.</span><span class="n">getJSONDict</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsdict</span><span class="p">[</span><span class="s1">&#39;__class__&#39;</span><span class="p">]</span>
+<span class="go">&#39;music21.metadata.primitives.Text&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsdict</span><span class="p">[</span><span class="s1">&#39;__attr__&#39;</span><span class="p">][</span><span class="s1">&#39;_language&#39;</span><span class="p">]</span>
+<span class="go">&#39;en&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.JSONFreezer.jsonAttributes">
+<code class="descclassname">JSONFreezer.</code><code class="descname">jsonAttributes</code><span class="sig-paren">(</span><em>autoGather=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.JSONFreezer.jsonAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define all attributes of this object that should be JSON serialized 
+for storage and re-instantiation. Attributes that name basic
+Python objects or <a class="reference internal" href="#music21.freezeThaw.JSONFreezer" title="music21.freezeThaw.JSONFreezer"><code class="xref py py-class docutils literal"><span class="pre">JSONFreezer</span></code></a> subclasses,
+or dictionaries or lists that contain Python objects or 
+<a class="reference internal" href="#music21.freezeThaw.JSONFreezer" title="music21.freezeThaw.JSONFreezer"><code class="xref py py-class docutils literal"><span class="pre">JSONFreezer</span></code></a> subclasses, can be provided.</p>
+<p>Should be overridden in subclasses.</p>
+<p>For an object which does not define this, just returns all the _underscore attributes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ed</span> <span class="o">=</span> <span class="n">editorial</span><span class="o">.</span><span class="n">NoteEditorial</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">JSONFreezer</span><span class="p">(</span><span class="n">ed</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span><span class="o">.</span><span class="n">jsonAttributes</span><span class="p">()</span>
+<span class="go">[&#39;color&#39;, &#39;misc&#39;, &#39;comment&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Lyric</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">JSONFreezer</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span><span class="o">.</span><span class="n">jsonAttributes</span><span class="p">()</span>
+<span class="go">[&#39;text&#39;, &#39;syllabic&#39;, &#39;number&#39;, &#39;identifier&#39;]</span>
+</pre></div>
+</div>
+<p>Has autoGatherAttributes and others:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gn</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">GeneralNote</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">JSONFreezer</span><span class="p">(</span><span class="n">gn</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span><span class="o">.</span><span class="n">jsonAttributes</span><span class="p">()</span>
+<span class="go">[&#39;_duration&#39;, &#39;_priority&#39;, &#39;offset&#39;, </span>
+<span class="go"> &#39;_editorial&#39;, &#39;lyrics&#39;, &#39;expressions&#39;, &#39;articulations&#39;, &#39;tie&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.JSONFreezer.jsonPrint">
+<code class="descclassname">JSONFreezer.</code><code class="descname">jsonPrint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.JSONFreezer.jsonPrint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints out the json output for a given object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D#5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">JSONFreezer</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jsf</span><span class="o">.</span><span class="n">jsonPrint</span><span class="p">()</span>
+<span class="go">{</span>
+<span class="go">  &quot;__attr__&quot;: {</span>
+<span class="go">    &quot;_duration&quot;: {</span>
+<span class="go">      &quot;__attr__&quot;: {</span>
+<span class="go">        &quot;_components&quot;: [],</span>
+<span class="go">        &quot;_componentsNeedUpdating&quot;: true, </span>
+<span class="go">        &quot;_dotGroups&quot;: [</span>
+<span class="go">          0</span>
+<span class="go">        ],</span>
+<span class="go">        &quot;_linked&quot;: true,</span>
+<span class="go">        &quot;_qtrLength&quot;: 1.0, </span>
+<span class="go">        &quot;_quarterLengthNeedsUpdating&quot;: false, </span>
+<span class="go">        &quot;_tuplets&quot;: [],</span>
+<span class="go">        &quot;_typeNeedsUpdating&quot;: false</span>
+<span class="go">      }, </span>
+<span class="go">      &quot;__class__&quot;: &quot;music21.duration.Duration&quot;</span>
+<span class="go">    }, </span>
+<span class="go">    &quot;_notehead&quot;: &quot;normal&quot;, </span>
+<span class="go">    &quot;_noteheadParenthesis&quot;: false, </span>
+<span class="go">    &quot;_priority&quot;: 0, </span>
+<span class="go">    &quot;_stemDirection&quot;: &quot;unspecified&quot;, </span>
+<span class="go">    &quot;articulations&quot;: [], </span>
+<span class="go">    &quot;beams&quot;: {</span>
+<span class="go">      &quot;__attr__&quot;: {</span>
+<span class="go">        &quot;beamsList&quot;: [], </span>
+<span class="go">        &quot;feathered&quot;: false</span>
+<span class="go">      }, </span>
+<span class="go">      &quot;__class__&quot;: &quot;music21.beam.Beams&quot;</span>
+<span class="go">    }, </span>
+<span class="go">    &quot;expressions&quot;: [], </span>
+<span class="go">    &quot;lyrics&quot;: [], </span>
+<span class="go">    &quot;offset&quot;: 0.0, </span>
+<span class="go">    &quot;pitch&quot;: {</span>
+<span class="go">      &quot;__attr__&quot;: {</span>
+<span class="go">        &quot;_accidental&quot;: {</span>
+<span class="go">          &quot;__attr__&quot;: {</span>
+<span class="go">            &quot;_alter&quot;: 1.0, </span>
+<span class="go">            &quot;_displayType&quot;: &quot;normal&quot;, </span>
+<span class="go">            &quot;_modifier&quot;: &quot;#&quot;, </span>
+<span class="go">            &quot;_name&quot;: &quot;sharp&quot; </span>
+<span class="go">          }, </span>
+<span class="go">          &quot;__class__&quot;: &quot;music21.pitch.Accidental&quot;</span>
+<span class="go">        }, </span>
+<span class="go">        &quot;_microtone&quot;: {</span>
+<span class="go">          &quot;__attr__&quot;: {</span>
+<span class="go">            &quot;_centShift&quot;: 0, </span>
+<span class="go">            &quot;_harmonicShift&quot;: 1</span>
+<span class="go">          }, </span>
+<span class="go">          &quot;__class__&quot;: &quot;music21.pitch.Microtone&quot;</span>
+<span class="go">        }, </span>
+<span class="go">        &quot;_octave&quot;: 5, </span>
+<span class="go">        &quot;_step&quot;: &quot;D&quot;</span>
+<span class="go">      }, </span>
+<span class="go">      &quot;__class__&quot;: &quot;music21.pitch.Pitch&quot;</span>
+<span class="go">    }</span>
+<span class="go">  }, </span>
+<span class="go">  &quot;__class__&quot;: &quot;music21.note.Note&quot;, </span>
+<span class="go">  &quot;__version__&quot;: [</span>
+<span class="go">    3, </span>
+<span class="go">    ..., </span>
+<span class="go">    ...</span>
+<span class="go">  ]</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.JSONFreezer.jsonWrite">
+<code class="descclassname">JSONFreezer.</code><code class="descname">jsonWrite</code><span class="sig-paren">(</span><em>fp</em>, <em>formatOutput=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.JSONFreezer.jsonWrite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a file path, write JSON to a file
+for this object.</p>
+<p>File extension should be .json. File is opened
+and closed within this method call.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.freezeThaw.JSONFreezeThawBase" title="music21.freezeThaw.JSONFreezeThawBase"><code class="xref py py-class docutils literal"><span class="pre">JSONFreezeThawBase</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.JSONFreezeThawBase.fullyQualifiedClassFromObject" title="music21.freezeThaw.JSONFreezeThawBase.fullyQualifiedClassFromObject"><code class="xref py py-meth docutils literal"><span class="pre">fullyQualifiedClassFromObject()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.JSONFreezeThawBase.music21ObjectFromString" title="music21.freezeThaw.JSONFreezeThawBase.music21ObjectFromString"><code class="xref py py-meth docutils literal"><span class="pre">music21ObjectFromString()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="jsonthawer">
+<h2>JSONThawer<a class="headerlink" href="#jsonthawer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.freezeThaw.JSONThawer">
+<em class="property">class </em><code class="descclassname">music21.freezeThaw.</code><code class="descname">JSONThawer</code><span class="sig-paren">(</span><em>storedObject=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.JSONThawer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class that takes JSON input and makes a Music21Object.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.freezeThaw.JSONThawer" title="music21.freezeThaw.JSONThawer"><code class="xref py py-class docutils literal"><span class="pre">JSONThawer</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.JSONFreezeThawBase" title="music21.freezeThaw.JSONFreezeThawBase"><code class="xref py py-class docutils literal"><span class="pre">JSONFreezeThawBase</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.freezeThaw.JSONThawer" title="music21.freezeThaw.JSONThawer"><code class="xref py py-class docutils literal"><span class="pre">JSONThawer</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.freezeThaw.JSONThawer.json">
+<code class="descclassname">JSONThawer.</code><code class="descname">json</code><a class="headerlink" href="#music21.freezeThaw.JSONThawer.json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take string JSON data from <a class="reference internal" href="#music21.freezeThaw.JSONFreezer.json" title="music21.freezeThaw.JSONFreezer.json"><code class="xref py py-meth docutils literal"><span class="pre">json()</span></code></a> and
+produce an object and store it in
+self.storedObject.`.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.freezeThaw.JSONThawer" title="music21.freezeThaw.JSONThawer"><code class="xref py py-class docutils literal"><span class="pre">JSONThawer</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.freezeThaw.JSONThawer.jsonRead">
+<code class="descclassname">JSONThawer.</code><code class="descname">jsonRead</code><span class="sig-paren">(</span><em>fp</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.JSONThawer.jsonRead" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a file path, read JSON from a file to this object.
+Default file extension should be .json. File is opened
+and closed within this method call.</p>
+<p>returns the stored object</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.freezeThaw.JSONFreezeThawBase" title="music21.freezeThaw.JSONFreezeThawBase"><code class="xref py py-class docutils literal"><span class="pre">JSONFreezeThawBase</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.JSONFreezeThawBase.fullyQualifiedClassFromObject" title="music21.freezeThaw.JSONFreezeThawBase.fullyQualifiedClassFromObject"><code class="xref py py-meth docutils literal"><span class="pre">fullyQualifiedClassFromObject()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.JSONFreezeThawBase.music21ObjectFromString" title="music21.freezeThaw.JSONFreezeThawBase.music21ObjectFromString"><code class="xref py py-meth docutils literal"><span class="pre">music21ObjectFromString()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="streamfreezethawbase">
+<h2>StreamFreezeThawBase<a class="headerlink" href="#streamfreezethawbase" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.freezeThaw.StreamFreezeThawBase">
+<em class="property">class </em><code class="descclassname">music21.freezeThaw.</code><code class="descname">StreamFreezeThawBase</code><a class="headerlink" href="#music21.freezeThaw.StreamFreezeThawBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains a few methods that are used for both
+StreamFreezer and StreamThawer</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.freezeThaw.StreamFreezeThawBase" title="music21.freezeThaw.StreamFreezeThawBase"><code class="xref py py-class docutils literal"><span class="pre">StreamFreezeThawBase</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.freezeThaw.StreamFreezeThawBase.findAllM21Objects">
+<code class="descclassname">StreamFreezeThawBase.</code><code class="descname">findAllM21Objects</code><span class="sig-paren">(</span><em>streamObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamFreezeThawBase.findAllM21Objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>find all M21 Objects in _elements and _endElements and in nested streams.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamFreezeThawBase.getJsonFp">
+<code class="descclassname">StreamFreezeThawBase.</code><code class="descname">getJsonFp</code><span class="sig-paren">(</span><em>directory</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamFreezeThawBase.getJsonFp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamFreezeThawBase.getPickleFp">
+<code class="descclassname">StreamFreezeThawBase.</code><code class="descname">getPickleFp</code><span class="sig-paren">(</span><em>directory</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamFreezeThawBase.getPickleFp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="streamfreezer">
+<h2>StreamFreezer<a class="headerlink" href="#streamfreezer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.freezeThaw.StreamFreezer">
+<em class="property">class </em><code class="descclassname">music21.freezeThaw.</code><code class="descname">StreamFreezer</code><span class="sig-paren">(</span><em>streamObj=None</em>, <em>fastButUnsafe=False</em>, <em>topLevel=True</em>, <em>streamIds=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamFreezer" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class is used to freeze a Stream, preparing it for serialization
+and providing conversion routines.</p>
+<p>In general, use <a class="reference internal" href="moduleConverter.html#music21.converter.freeze" title="music21.converter.freeze"><code class="xref py py-func docutils literal"><span class="pre">freeze()</span></code></a>
+for serializing to a file.</p>
+<p>Use the <code class="xref py py-func docutils literal"><span class="pre">unfreeze()</span></code> to read from a
+serialized file</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">freezeThaw</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1"># provide a Stream at init</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">writeStr</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;pickle&#39;</span><span class="p">)</span> <span class="c1"># pickle is default format</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamThawer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">openStr</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">stream</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{1.0} &lt;music21.note.Note C#&gt;</span>
+<span class="go">{2.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">{3.0} &lt;music21.note.Note E-&gt;</span>
+<span class="go">{4.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">{5.0} &lt;music21.note.Note F&gt;</span>
+<span class="go">{6.0} &lt;music21.note.Note F#&gt;</span>
+<span class="go">{7.0} &lt;music21.note.Note G&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sf2</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1"># do not reuse StreamFreezers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data2</span> <span class="o">=</span> <span class="n">sf2</span><span class="o">.</span><span class="n">writeStr</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;jsonpickle&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st2</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamThawer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st2</span><span class="o">.</span><span class="n">openStr</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">st2</span><span class="o">.</span><span class="n">stream</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{1.0} &lt;music21.note.Note C#&gt;</span>
+<span class="go">{2.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">{3.0} &lt;music21.note.Note E-&gt;</span>
+<span class="go">{4.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">{5.0} &lt;music21.note.Note F&gt;</span>
+<span class="go">{6.0} &lt;music21.note.Note F#&gt;</span>
+<span class="go">{7.0} &lt;music21.note.Note G&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;luca/gloria&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">writeStr</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;pickle&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamThawer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">openStr</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">stream</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>JSONPickle is also an acceptable way of Freezing streams.  Especially 
+for going to music21j in Javascript:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sf2</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="c1"># do not reuse StreamFreezers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data2</span> <span class="o">=</span> <span class="n">sf2</span><span class="o">.</span><span class="n">writeStr</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;jsonpickle&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st2</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamThawer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st2</span><span class="o">.</span><span class="n">openStr</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s3</span> <span class="o">=</span> <span class="n">st2</span><span class="o">.</span><span class="n">stream</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">s3</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.freezeThaw.StreamFreezer" title="music21.freezeThaw.StreamFreezer"><code class="xref py py-class docutils literal"><span class="pre">StreamFreezer</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.StreamFreezeThawBase" title="music21.freezeThaw.StreamFreezeThawBase"><code class="xref py py-class docutils literal"><span class="pre">StreamFreezeThawBase</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.freezeThaw.StreamFreezer" title="music21.freezeThaw.StreamFreezer"><code class="xref py py-class docutils literal"><span class="pre">StreamFreezer</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.freezeThaw.StreamFreezer.findActiveStreamIdsInHierarchy">
+<code class="descclassname">StreamFreezer.</code><code class="descname">findActiveStreamIdsInHierarchy</code><span class="sig-paren">(</span><em>hierarchyObject=None</em>, <em>getSpanners=True</em>, <em>getVariants=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamFreezer.findActiveStreamIdsInHierarchy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of all Stream ids anywhere in the hierarchy.</p>
+<p>Stores them in .streamIds.</p>
+<p>if hierarchyObject is None, uses self.stream.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Score</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Voice</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">v1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shouldFindIds</span> <span class="o">=</span> <span class="p">[</span><span class="nb">id</span><span class="p">(</span><span class="n">sc</span><span class="p">),</span> <span class="nb">id</span><span class="p">(</span><span class="n">p1</span><span class="p">),</span> <span class="nb">id</span><span class="p">(</span><span class="n">p2</span><span class="p">),</span> <span class="nb">id</span><span class="p">(</span><span class="n">m1</span><span class="p">),</span> <span class="nb">id</span><span class="p">(</span><span class="n">v1</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>fastButUnsafe is needed because it does not make a deepcopy
+and thus lets you compare ids before and after.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">fastButUnsafe</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">foundIds</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">findActiveStreamIdsInHierarchy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">thisId</span> <span class="ow">in</span> <span class="n">shouldFindIds</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">thisId</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">foundIds</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Missing Id&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">thisId</span> <span class="ow">in</span> <span class="n">foundIds</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">thisId</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">shouldFindIds</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Additional Id Found&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Spanners are included unless getSpanners is False</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staffGroup</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">StaffGroup</span><span class="p">([</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">staffGroup</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="moduleLayout.html#music21.layout.StaffGroup" title="music21.layout.StaffGroup"><code class="xref py py-class docutils literal"><span class="pre">StaffGroup</span></code></a> is a spanner, so
+it should be found</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sf2</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">fastButUnsafe</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">foundIds</span> <span class="o">=</span> <span class="n">sf2</span><span class="o">.</span><span class="n">findActiveStreamIdsInHierarchy</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>But you won&#8217;t find the id of the spanner itself in
+the foundIds:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span><span class="p">(</span><span class="n">staffGroup</span><span class="p">)</span> <span class="ow">in</span> <span class="n">foundIds</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>instead it&#8217;s the id of the storage object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">staffGroup</span><span class="o">.</span><span class="n">getSpannerStorageId</span><span class="p">()</span> <span class="ow">in</span> <span class="n">foundIds</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Variants are treated similarly:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;whole&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;D#4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;whole&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">variant</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">fastButUnsafe</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allIds</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">findActiveStreamIdsInHierarchy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">allIds</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">streamElement</span> <span class="ow">in</span> <span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">_stream</span><span class="p">]:</span>
+<span class="gp">... </span>   <span class="k">if</span> <span class="nb">id</span><span class="p">(</span><span class="n">streamElement</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allIds</span><span class="p">:</span>
+<span class="gp">... </span>       <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this should not happen...&quot;</span><span class="p">,</span> <span class="n">allIds</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">streamElement</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>N.B. with variants:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">id</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">_stream</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>The method also sets self.streamIds to the returned list:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span><span class="o">.</span><span class="n">streamIds</span> <span class="ow">is</span> <span class="n">allIds</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamFreezer.packStream">
+<code class="descclassname">StreamFreezer.</code><code class="descname">packStream</code><span class="sig-paren">(</span><em>streamObj=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamFreezer.packStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare the passed in Stream in place, return storage
+dictionary format.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D#4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">sf</span><span class="o">.</span><span class="n">packStream</span><span class="p">())</span>
+<span class="go">{&#39;m21Version&#39;: (...), &#39;stream&#39;: &lt;music21.stream.Stream 0x1289212&gt;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamFreezer.parseWriteFmt">
+<code class="descclassname">StreamFreezer.</code><code class="descname">parseWriteFmt</code><span class="sig-paren">(</span><em>fmt</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamFreezer.parseWriteFmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a passed-in write format</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">freezeThaw</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span><span class="o">.</span><span class="n">parseWriteFmt</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">&#39;pickle&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span><span class="o">.</span><span class="n">parseWriteFmt</span><span class="p">(</span><span class="s1">&#39;JSON&#39;</span><span class="p">)</span>
+<span class="go">&#39;jsonpickle&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamFreezer.recursiveClearSites">
+<code class="descclassname">StreamFreezer.</code><code class="descname">recursiveClearSites</code><span class="sig-paren">(</span><em>startObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamFreezer.recursiveClearSites" title="Permalink to this definition">¶</a></dt>
+<dd><p>recursively clear all sites, including activeSites, taking into account
+that spanners and variants behave differently.</p>
+<p>Called by setupSerializationScaffold.</p>
+<p>To be run after setupStoredElementOffsetTuples() has been run</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D#4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">sites</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;stream s&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">sites</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;stream t&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">sites</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">10.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="go">20.0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This will remove n from s but leave the rest of the sites intact...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span><span class="o">.</span><span class="n">setupStoredElementOffsetTuples</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">sites</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.sites.SitesException</span>: <span class="n">an entry for this object &lt;music21.note.Note D#&gt; </span>
+<span class="go">       is not stored in stream &lt;music21.stream.Stream stream s&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="go">20.0</span>
+</pre></div>
+</div>
+<p>After recursiveClearSites n will be not know its location anywhere...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span><span class="o">.</span><span class="n">recursiveClearSites</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">sites</span><span class="p">)</span>  <span class="c1"># just the None site</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>This leaves n and t in strange positions, because n is in t.elements still....</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">elements</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>This predicament is why when the standard freezeThaw call is made, what is frozen is a 
+deepcopy of the Stream so that nothing is left in an unusable position</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamFreezer.removeStreamStatusClient">
+<code class="descclassname">StreamFreezer.</code><code class="descname">removeStreamStatusClient</code><span class="sig-paren">(</span><em>streamObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamFreezer.removeStreamStatusClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>if s is a stream then</p>
+<p>s.streamStatus._client is s</p>
+<p>this can be hard to pickle, so this method removes the streamStatus._client from the
+streamObj (not recursive).  Called by setupSerializationScaffold.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamFreezer.setupSerializationScaffold">
+<code class="descclassname">StreamFreezer.</code><code class="descname">setupSerializationScaffold</code><span class="sig-paren">(</span><em>streamObj=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamFreezer.setupSerializationScaffold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare this stream and all of its contents for pickle/pickling, that
+is, serializing and storing an object representation on file or as a string.</p>
+<p>The <cite>topLevel</cite> and <cite>streamIdsFound</cite> arguments are used to keep track of recursive calls.</p>
+<p>Note that this is a destructive process: elements contained within this Stream
+will have their sites cleared of all contents not in the hierarchy
+of the Streams. Thus, when doing a normal .write(&#8216;pickle&#8217;)
+the Stream is deepcopied before this method is called. The
+attribute <cite>fastButUnsafe = True</cite> setting of StreamFreezer ignores the destructive
+effects of these processes and skips the deepcopy.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">freezeThaw</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;whole&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span><span class="o">.</span><span class="n">setupSerializationScaffold</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamFreezer.setupStoredElementOffsetTuples">
+<code class="descclassname">StreamFreezer.</code><code class="descname">setupStoredElementOffsetTuples</code><span class="sig-paren">(</span><em>streamObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamFreezer.setupStoredElementOffsetTuples" title="Permalink to this definition">¶</a></dt>
+<dd><p>move all elements from ._elements and ._endElements
+to a new attribute ._storedElementOffsetTuples
+which contains a list of tuples of the form
+(el, offset or &#8216;end&#8217;).</p>
+<p>Called by setupSerializationScaffold.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C#&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;E-&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bl1</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">Barline</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">n1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">storeAtEnd</span><span class="p">(</span><span class="n">bl1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sfreeze</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sfreeze</span><span class="o">.</span><span class="n">setupStoredElementOffsetTuples</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">_elements</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">_endElements</span>
+<span class="go">([], [])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">_storedElementOffsetTuples</span>
+<span class="go">[(&lt;music21.note.Note C#&gt;, 0.0), </span>
+<span class="go"> (&lt;music21.note.Note E-&gt;, 1.0), </span>
+<span class="go"> (&lt;music21.bar.Barline style=regular&gt;, &#39;end&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.sites.SitesException</span>: <span class="n">an entry for this object &lt;music21.note.Note C#&gt; is </span>
+<span class="go">     not stored in stream &lt;music21.stream.Measure 0 offset=0.0&gt;</span>
+</pre></div>
+</div>
+<p>Trying it again, but now with substreams:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C#&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;E-&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bl1</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">Barline</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Voice</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;F#&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">n3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">n1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">storeAtEnd</span><span class="p">(</span><span class="n">bl1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">v1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sfreeze</span><span class="o">.</span><span class="n">setupStoredElementOffsetTuples</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span><span class="o">.</span><span class="n">_storedElementOffsetTuples</span>
+<span class="go">[(&lt;music21.note.Note F#&gt;, 2.0)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">_storedElementOffsetTuples</span>
+<span class="go">[(&lt;music21.note.Note C#&gt;, 0.0), </span>
+<span class="go"> (&lt;music21.note.Note E-&gt;, 1.0), </span>
+<span class="go"> (&lt;music21.stream.Voice ...&gt;, 2.0), </span>
+<span class="go"> (&lt;music21.bar.Barline style=regular&gt;, &#39;end&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">_storedElementOffsetTuples</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="n">v1</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamFreezer.write">
+<code class="descclassname">StreamFreezer.</code><code class="descname">write</code><span class="sig-paren">(</span><em>fmt='pickle'</em>, <em>fp=None</em>, <em>zipType=None</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamFreezer.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a supplied Stream, write a serialized version to
+disk in either &#8216;pickle&#8217; or &#8216;jsonpickle&#8217; format and
+return the filepath to the file.</p>
+<p>jsonpickle is the better format for transporting from
+one computer to another, but slower and may have some bugs.</p>
+<p>If zipType == &#8216;zlib&#8217; then zlib compression is done after serializing.
+No other compression types are currently supported.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamFreezer.writeStr">
+<code class="descclassname">StreamFreezer.</code><code class="descname">writeStr</code><span class="sig-paren">(</span><em>fmt=None</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamFreezer.writeStr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the object to a pickled/jsonpickled string
+and return the string</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.freezeThaw.StreamFreezeThawBase" title="music21.freezeThaw.StreamFreezeThawBase"><code class="xref py py-class docutils literal"><span class="pre">StreamFreezeThawBase</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.StreamFreezeThawBase.findAllM21Objects" title="music21.freezeThaw.StreamFreezeThawBase.findAllM21Objects"><code class="xref py py-meth docutils literal"><span class="pre">findAllM21Objects()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.StreamFreezeThawBase.getJsonFp" title="music21.freezeThaw.StreamFreezeThawBase.getJsonFp"><code class="xref py py-meth docutils literal"><span class="pre">getJsonFp()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.StreamFreezeThawBase.getPickleFp" title="music21.freezeThaw.StreamFreezeThawBase.getPickleFp"><code class="xref py py-meth docutils literal"><span class="pre">getPickleFp()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="streamthawer">
+<h2>StreamThawer<a class="headerlink" href="#streamthawer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.freezeThaw.StreamThawer">
+<em class="property">class </em><code class="descclassname">music21.freezeThaw.</code><code class="descname">StreamThawer</code><a class="headerlink" href="#music21.freezeThaw.StreamThawer" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>This class is used to thaw a data string into a Stream</p>
+<p>In general user <a class="reference internal" href="moduleConverter.html#music21.converter.parse" title="music21.converter.parse"><code class="xref py py-func docutils literal"><span class="pre">parse()</span></code></a> to read from a
+serialized file.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">freezeThaw</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1"># provide a Stream at init</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">writeStr</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;pickle&#39;</span><span class="p">)</span> <span class="c1"># pickle is default format</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sfOut</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamThawer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sfOut</span><span class="o">.</span><span class="n">openStr</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">sfOut</span><span class="o">.</span><span class="n">stream</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{1.0} &lt;music21.note.Note C#&gt;</span>
+<span class="go">{2.0} &lt;music21.note.Note D&gt;</span>
+<span class="go">{3.0} &lt;music21.note.Note E-&gt;</span>
+<span class="go">{4.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">{5.0} &lt;music21.note.Note F&gt;</span>
+<span class="go">{6.0} &lt;music21.note.Note F#&gt;</span>
+<span class="go">{7.0} &lt;music21.note.Note G&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>#    &gt;&gt;&gt; c = corpus.parse(&#8216;luca/gloria&#8217;)
+#    &gt;&gt;&gt; sf = freezeThaw.StreamFreezer(c)
+#    &gt;&gt;&gt; data = sf.writeStr(fmt=&#8217;jsonpickle&#8217;)
+#
+#    &gt;&gt;&gt; sfOut = freezeThaw.StreamThawer()
+#    &gt;&gt;&gt; sfOut.openStr(data)
+#    &gt;&gt;&gt; s = sfOut.stream
+#    &gt;&gt;&gt; #s.show(&#8216;t&#8217;)</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.freezeThaw.StreamThawer" title="music21.freezeThaw.StreamThawer"><code class="xref py py-class docutils literal"><span class="pre">StreamThawer</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.StreamFreezeThawBase" title="music21.freezeThaw.StreamFreezeThawBase"><code class="xref py py-class docutils literal"><span class="pre">StreamFreezeThawBase</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.freezeThaw.StreamThawer" title="music21.freezeThaw.StreamThawer"><code class="xref py py-class docutils literal"><span class="pre">StreamThawer</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.freezeThaw.StreamThawer.open">
+<code class="descclassname">StreamThawer.</code><code class="descname">open</code><span class="sig-paren">(</span><em>fp</em>, <em>zipType=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamThawer.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a supplied file path to a pickled stream, unpickle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamThawer.openStr">
+<code class="descclassname">StreamThawer.</code><code class="descname">openStr</code><span class="sig-paren">(</span><em>fileData</em>, <em>pickleFormat=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamThawer.openStr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a string representing a Frozen(pickled/jsonpickled)
+Stream and convert it to a normal Stream.</p>
+<p>if format is None then the format is automatically
+determined from the string contents.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamThawer.parseOpenFmt">
+<code class="descclassname">StreamThawer.</code><code class="descname">parseOpenFmt</code><span class="sig-paren">(</span><em>storage</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamThawer.parseOpenFmt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look at the file and determine the format</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamThawer.restoreElementsFromTuples">
+<code class="descclassname">StreamThawer.</code><code class="descname">restoreElementsFromTuples</code><span class="sig-paren">(</span><em>streamObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamThawer.restoreElementsFromTuples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a Stream with elements and offsets stored in
+a list of tuples (element, offset or &#8216;end&#8217;) at
+_storedElementOffsetTuples
+and restore it to the ._elements and ._endElements lists
+in the proper locations:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">_elements</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">_endElements</span>
+<span class="go">([], [])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;C#&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;E-&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bl1</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">Barline</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tupleList</span> <span class="o">=</span> <span class="p">[(</span><span class="n">n1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="n">n2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="n">bl1</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">_storedElementOffsetTuples</span> <span class="o">=</span> <span class="n">tupleList</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sthaw</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamThawer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sthaw</span><span class="o">.</span><span class="n">restoreElementsFromTuples</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.note.Note C#&gt;</span>
+<span class="go">{1.0} &lt;music21.note.Note E-&gt;</span>
+<span class="go">{2.0} &lt;music21.bar.Barline style=regular&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">_endElements</span>
+<span class="go">[&lt;music21.bar.Barline style=regular&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>Trying it again, but now with substreams:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Voice</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;F#&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span><span class="o">.</span><span class="n">_storedElementOffsetTuples</span> <span class="o">=</span> <span class="p">[(</span><span class="n">n3</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tupleList</span> <span class="o">=</span> <span class="p">[(</span><span class="n">n1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span> <span class="p">(</span><span class="n">n2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="n">bl1</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">_storedElementOffsetTuples</span> <span class="o">=</span> <span class="n">tupleList</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sthaw</span><span class="o">.</span><span class="n">restoreElementsFromTuples</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.note.Note C#&gt;</span>
+<span class="go">{1.0} &lt;music21.note.Note E-&gt;</span>
+<span class="go">{2.0} &lt;music21.stream.Voice ...&gt;</span>
+<span class="go">    {2.0} &lt;music21.note.Note F#&gt;</span>
+<span class="go">{5.0} &lt;music21.bar.Barline style=regular&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamThawer.restoreStreamStatusClient">
+<code class="descclassname">StreamThawer.</code><code class="descname">restoreStreamStatusClient</code><span class="sig-paren">(</span><em>streamObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamThawer.restoreStreamStatusClient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamThawer.teardownSerializationScaffold">
+<code class="descclassname">StreamThawer.</code><code class="descname">teardownSerializationScaffold</code><span class="sig-paren">(</span><em>streamObj=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamThawer.teardownSerializationScaffold" title="Permalink to this definition">¶</a></dt>
+<dd><p>After rebuilding this Stream from pickled storage, prepare this as a normal <cite>Stream</cite>.</p>
+<p>If streamObj is None, runs it on the embedded stream</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">freezeThaw</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;whole&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamFreezer</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sf</span><span class="o">.</span><span class="n">setupSerializationScaffold</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span> <span class="o">=</span> <span class="n">freezeThaw</span><span class="o">.</span><span class="n">StreamThawer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span><span class="o">.</span><span class="n">teardownSerializationScaffold</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.freezeThaw.StreamThawer.unpackStream">
+<code class="descclassname">StreamThawer.</code><code class="descname">unpackStream</code><span class="sig-paren">(</span><em>storage</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.freezeThaw.StreamThawer.unpackStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert from storage dictionary to Stream.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.freezeThaw.StreamFreezeThawBase" title="music21.freezeThaw.StreamFreezeThawBase"><code class="xref py py-class docutils literal"><span class="pre">StreamFreezeThawBase</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.StreamFreezeThawBase.findAllM21Objects" title="music21.freezeThaw.StreamFreezeThawBase.findAllM21Objects"><code class="xref py py-meth docutils literal"><span class="pre">findAllM21Objects()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.StreamFreezeThawBase.getJsonFp" title="music21.freezeThaw.StreamFreezeThawBase.getJsonFp"><code class="xref py py-meth docutils literal"><span class="pre">getJsonFp()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.freezeThaw.StreamFreezeThawBase.getPickleFp" title="music21.freezeThaw.StreamFreezeThawBase.getPickleFp"><code class="xref py py-meth docutils literal"><span class="pre">getPickleFp()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleGraph.html" title="music21.graph"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassSegment.html" title="music21.figuredBass.segment"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

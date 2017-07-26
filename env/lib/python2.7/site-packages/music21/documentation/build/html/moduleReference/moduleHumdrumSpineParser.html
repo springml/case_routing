@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.humdrum.spineParser &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.instrument" href="moduleInstrument.html" />
+    <link rel="prev" title="music21.humdrum.instruments" href="moduleHumdrumInstruments.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleInstrument.html" title="music21.instrument"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleHumdrumInstruments.html" title="music21.humdrum.instruments"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleHumdrumInstruments.html"
+                        title="previous chapter">music21.humdrum.instruments</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleInstrument.html"
+                        title="next chapter">music21.instrument</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.humdrum.spineParser</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#dynamspine">DynamSpine</a></li>
+<li><a class="reference internal" href="#eventcollection">EventCollection</a></li>
+<li><a class="reference internal" href="#globalcomment">GlobalComment</a></li>
+<li><a class="reference internal" href="#globalcommentline">GlobalCommentLine</a></li>
+<li><a class="reference internal" href="#globalreference">GlobalReference</a></li>
+<li><a class="reference internal" href="#globalreferenceline">GlobalReferenceLine</a></li>
+<li><a class="reference internal" href="#humdrumdatacollection">HumdrumDataCollection</a></li>
+<li><a class="reference internal" href="#humdrumfile">HumdrumFile</a></li>
+<li><a class="reference internal" href="#humdrumline">HumdrumLine</a></li>
+<li><a class="reference internal" href="#humdrumspine">HumdrumSpine</a></li>
+<li><a class="reference internal" href="#kernspine">KernSpine</a></li>
+<li><a class="reference internal" href="#misctandem">MiscTandem</a></li>
+<li><a class="reference internal" href="#protospine">ProtoSpine</a></li>
+<li><a class="reference internal" href="#spinecollection">SpineCollection</a></li>
+<li><a class="reference internal" href="#spinecomment">SpineComment</a></li>
+<li><a class="reference internal" href="#spineevent">SpineEvent</a></li>
+<li><a class="reference internal" href="#spineline">SpineLine</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleHumdrumSpineParser.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-humdrum-spineparser">
+<span id="modulehumdrumspineparser"></span><h1>music21.humdrum.spineParser<a class="headerlink" href="#music21-humdrum-spineparser" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.humdrum.spineParser"></span><p>music21.humdrum.spineParser is a collection of utilities for changing
+native humdrum code into music21 streams.  Most music21 users will
+simply want to call:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myFile</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;myfile.krn&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myFile</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The methods in here are documented for developers wishing to expand
+music21&#8217;s ability to parse humdrum.</p>
+<p>SpineParsing consists of several steps.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>The data file is read in and all events are sliced horizontally (EventCollections) </dt>
+<dd><p class="first last">and vertically (Protospines)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Protospines are parsed into HumdrumSpines by following Spine Path Indicators </dt>
+<dd><p class="first last">(<code class="samp docutils literal"><span class="pre">*^</span></code> and <code class="samp docutils literal"><span class="pre">*v</span></code> especially)
+Protospines that separate become new Protospines with their parentSpine indicated.  Protospines
+that merge again then followed by the same Protospine as before.  This will cause problems if
+a voice remerges with another staff, but in practice I have not 
+seen a .krn file that does this and
+should be avoided in any case.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>HumdrumSpines are reclassed according to their exclusive definition.  </dt>
+<dd><p class="first last"><code class="samp docutils literal"><span class="pre">**kern</span></code> becomes KernSpines, etc.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>All reclassed HumdrumSpines are filled with music21 objects in their .stream property.</dt>
+<dd><p class="first last">Measures are put into the spine but are empty containers.  The resulting
+HumdrumSpine.stream objects
+look like Stream.semiFlat versions in many ways.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>For HumdrumSpines with parent spines their .stream contents are then </dt>
+<dd><p class="first last">inserted into their parent spines with
+voice tagged as a music21 Group property.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">Lyrics and Dynamics are placed into their corresponding HumdrumSpine.stream objects</p>
+</li>
+<li><p class="first">Stream elements are moved into their measures within a Stream</p>
+</li>
+<li><p class="first">Measures are searched for elements with voice groups and Voice objects are created</p>
+</li>
+</ul>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.humdrum.spineParser.hdStringToMeasure">
+<code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">hdStringToMeasure</code><span class="sig-paren">(</span><em>contents</em>, <em>previousMeasure=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.hdStringToMeasure" title="Permalink to this definition">¶</a></dt>
+<dd><p>kern uses an equals sign followed by processing instructions to
+create new measures.  Here is how...</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.humdrum.spineParser.hdStringToNote">
+<code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">hdStringToNote</code><span class="sig-paren">(</span><em>contents</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.hdStringToNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a <a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a> (or Rest or Unpitched, etc.)
+matching the current SpineEvent.
+Does not check to see that it is sane or part of a <code class="samp docutils literal"><span class="pre">**kern</span></code> spine, etc.</p>
+<p>New rhythmic extensions defined in
+<a class="reference external" href="http://wiki.humdrum.org/index.php/Rational_rhythms">http://wiki.humdrum.org/index.php/Rational_rhythms</a>
+are fully implemented:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">hdStringToNote</span><span class="p">(</span><span class="s2">&quot;CC3%2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">Fraction(8, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">fullName</span>
+<span class="go">&#39;Whole Triplet (2 2/3 QL)&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">hdStringToNote</span><span class="p">(</span><span class="s2">&quot;e-00.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">pitch</span>
+<span class="go">&lt;music21.pitch.Pitch E-4&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">24.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">fullName</span>
+<span class="go">&#39;Perfect Longa&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">hdStringToNote</span><span class="p">(</span><span class="s2">&quot;F#000&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">32.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">fullName</span>
+<span class="go">&#39;Imperfect Maxima&#39;</span>
+</pre></div>
+</div>
+<p>Note that the following example is interpreted as one note in the time of a 
+double-dotted quarter not a double-dotted quarter-note triplet.</p>
+<p>I believe that the latter definition, though used in
+<a class="reference external" href="http://kern.ccarh.org/cgi-bin/ksdata?l=musedata/mozart/quartet&amp;file=k421-01.krn&amp;f=kern">http://kern.ccarh.org/cgi-bin/ksdata?l=musedata/mozart/quartet&amp;file=k421-01.krn&amp;f=kern</a>
+and the Josquin Research Project [JRP] is incorrect, seeing as it 
+contradicts the specification in
+<a class="reference external" href="http://www.music-cog.ohio-state.edu/Humdrum/representations/kern.html#N-Tuplets">http://www.music-cog.ohio-state.edu/Humdrum/representations/kern.html#N-Tuplets</a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">storedFlavors</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">flavors</span><span class="p">[</span><span class="s1">&#39;JRP&#39;</span><span class="p">]</span> <span class="c1"># DOCS_HIDE</span>
+</pre></div>
+</div>
+<p>This is the default:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">flavors</span><span class="p">[</span><span class="s1">&#39;JRP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">hdStringToNote</span><span class="p">(</span><span class="s2">&quot;6..fff&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">Fraction(7, 6)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">dots</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">tuplets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">durationNormal</span><span class="o">.</span><span class="n">dots</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>If you want the JRP definition, set humdrum.spineParser.flavors[&#8216;JRP&#8217;] = True
+before calling converter.parse() or anything like that:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">flavors</span><span class="p">[</span><span class="s1">&#39;JRP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">hdStringToNote</span><span class="p">(</span><span class="s2">&quot;6..fff&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">Fraction(7, 6)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">dots</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">tuplets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">durationNormal</span><span class="o">.</span><span class="n">dots</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">hdStringToNote</span><span class="p">(</span><span class="s2">&quot;gg#q/LL&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span>
+<span class="go">&lt;music21.duration.GraceDuration unlinked type:eighth quarterLength:0.0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">isGrace</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">flavors</span><span class="p">[</span><span class="s1">&#39;JRP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">storedFlavors</span> <span class="c1"># DOCS_HIDE</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.humdrum.spineParser.kernTandemToObject">
+<code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">kernTandemToObject</code><span class="sig-paren">(</span><em>tandem</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.kernTandemToObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kern uses symbols such as <code class="samp docutils literal"><span class="pre">*M5/4</span></code> and <code class="samp docutils literal"><span class="pre">*clefG2</span></code>, etc., to control processing</p>
+<p>This method converts them to music21 objects.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">kernTandemToObject</span><span class="p">(</span><span class="s1">&#39;*M3/1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span>
+<span class="go">&lt;music21.meter.TimeSignature 3/1&gt;</span>
+</pre></div>
+</div>
+<p>Unknown objects are converted to MiscTandem objects:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">kernTandemToObject</span><span class="p">(</span><span class="s1">&#39;*TandyUnk&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span>
+<span class="go">&lt;music21.humdrum.spineParser.MiscTandem *TandyUnk humdrum control&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="dynamspine">
+<h2>DynamSpine<a class="headerlink" href="#dynamspine" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.DynamSpine">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">DynamSpine</code><span class="sig-paren">(</span><em>id=0</em>, <em>eventList=None</em>, <em>streamClass=&lt;class 'music21.stream.Stream'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.DynamSpine" title="Permalink to this definition">¶</a></dt>
+<dd><p>A DynamSpine is a type of humdrum spine with the **dynam
+attribute set and thus events are processed as if they
+are dynamics.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.DynamSpine" title="music21.humdrum.spineParser.DynamSpine"><code class="xref py py-class docutils literal"><span class="pre">DynamSpine</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine" title="music21.humdrum.spineParser.HumdrumSpine"><code class="xref py py-class docutils literal"><span class="pre">HumdrumSpine</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.DynamSpine" title="music21.humdrum.spineParser.DynamSpine"><code class="xref py py-class docutils literal"><span class="pre">DynamSpine</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine" title="music21.humdrum.spineParser.HumdrumSpine"><code class="xref py py-class docutils literal"><span class="pre">HumdrumSpine</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine.spineCollection" title="music21.humdrum.spineParser.HumdrumSpine.spineCollection"><code class="xref py py-attr docutils literal"><span class="pre">spineCollection</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine.spineType" title="music21.humdrum.spineParser.HumdrumSpine.spineType"><code class="xref py py-attr docutils literal"><span class="pre">spineType</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.DynamSpine" title="music21.humdrum.spineParser.DynamSpine"><code class="xref py py-class docutils literal"><span class="pre">DynamSpine</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.humdrum.spineParser.DynamSpine.parse">
+<code class="descclassname">DynamSpine.</code><code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.DynamSpine.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine" title="music21.humdrum.spineParser.HumdrumSpine"><code class="xref py py-class docutils literal"><span class="pre">HumdrumSpine</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine.append" title="music21.humdrum.spineParser.HumdrumSpine.append"><code class="xref py py-meth docutils literal"><span class="pre">append()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine.moveElementsIntoMeasures" title="music21.humdrum.spineParser.HumdrumSpine.moveElementsIntoMeasures"><code class="xref py py-meth docutils literal"><span class="pre">moveElementsIntoMeasures()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine.next" title="music21.humdrum.spineParser.HumdrumSpine.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="eventcollection">
+<h2>EventCollection<a class="headerlink" href="#eventcollection" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.EventCollection">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">EventCollection</code><span class="sig-paren">(</span><em>maxSpines=0</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.EventCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>An EventCollection is a time slice of all events that have
+an onset of a certain time.  If an event does not occur at
+a certain time, then you should check EventCollection[n].lastEvents
+to get the previous event.  (If it is a note, it is the note
+still sounding, etc.).  The happeningEvent method gets either
+currentEvent or lastEvent.</p>
+<p>These objects normally get created by
+<a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection.parseProtoSpinesAndEventCollections" title="music21.humdrum.spineParser.HumdrumDataCollection.parseProtoSpinesAndEventCollections"><code class="xref py py-meth docutils literal"><span class="pre">parseProtoSpinesAndEventCollections()</span></code></a>
+so you won&#8217;t need to do all the setup.</p>
+<dl class="docutils">
+<dt>Assume that ec1 is</dt>
+<dd>C4     pp</dd>
+<dt>and ec2 is:</dt>
+<dd>D4     .</dd>
+</dl>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SE</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">SpineEvent</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList1</span> <span class="o">=</span> <span class="p">[</span><span class="n">SE</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">),</span><span class="n">SE</span><span class="p">(</span><span class="s1">&#39;pp&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList2</span> <span class="o">=</span> <span class="p">[</span><span class="n">SE</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">),</span><span class="n">SE</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ec1</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">EventCollection</span><span class="p">(</span><span class="n">maxSpines</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ec1</span><span class="o">.</span><span class="n">events</span> <span class="o">=</span> <span class="n">eventList1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ec2</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">EventCollection</span><span class="p">(</span><span class="n">maxSpines</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ec2</span><span class="o">.</span><span class="n">events</span> <span class="o">=</span> <span class="n">eventList2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ec2</span><span class="o">.</span><span class="n">lastEvents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">eventList1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ec2</span><span class="o">.</span><span class="n">maxSpines</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ec2</span><span class="o">.</span><span class="n">getAllOccurring</span><span class="p">()</span>
+<span class="go">[&lt;music21.humdrum.spineParser.SpineEvent D4&gt;, &lt;music21.humdrum.spineParser.SpineEvent pp&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.EventCollection" title="music21.humdrum.spineParser.EventCollection"><code class="xref py py-class docutils literal"><span class="pre">EventCollection</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.humdrum.spineParser.EventCollection.addGlobalEvent">
+<code class="descclassname">EventCollection.</code><code class="descname">addGlobalEvent</code><span class="sig-paren">(</span><em>globalEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.EventCollection.addGlobalEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.EventCollection.addLastSpineEvent">
+<code class="descclassname">EventCollection.</code><code class="descname">addLastSpineEvent</code><span class="sig-paren">(</span><em>spineNum</em>, <em>spineEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.EventCollection.addLastSpineEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.EventCollection.addSpineEvent">
+<code class="descclassname">EventCollection.</code><code class="descname">addSpineEvent</code><span class="sig-paren">(</span><em>spineNum</em>, <em>spineEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.EventCollection.addSpineEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.EventCollection.getAllOccurring">
+<code class="descclassname">EventCollection.</code><code class="descname">getAllOccurring</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.EventCollection.getAllOccurring" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.EventCollection.getSpineEvent">
+<code class="descclassname">EventCollection.</code><code class="descname">getSpineEvent</code><span class="sig-paren">(</span><em>spineNum</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.EventCollection.getSpineEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.EventCollection.getSpineOccurring">
+<code class="descclassname">EventCollection.</code><code class="descname">getSpineOccurring</code><span class="sig-paren">(</span><em>spineNum</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.EventCollection.getSpineOccurring" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="globalcomment">
+<h2>GlobalComment<a class="headerlink" href="#globalcomment" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.GlobalComment">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">GlobalComment</code><span class="sig-paren">(</span><em>comment=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.GlobalComment" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Music21Object that represents a comment for the whole score</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">GlobalComment</span><span class="p">(</span><span class="s1">&#39;!! this is a global comment&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span>
+<span class="go">&lt;music21.humdrum.spineParser.GlobalComment &quot;this is a global comment&quot;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">comment</span>
+<span class="go">&#39;this is a global comment&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.GlobalComment" title="music21.humdrum.spineParser.GlobalComment"><code class="xref py py-class docutils literal"><span class="pre">GlobalComment</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.GlobalComment" title="music21.humdrum.spineParser.GlobalComment"><code class="xref py py-class docutils literal"><span class="pre">GlobalComment</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.GlobalComment" title="music21.humdrum.spineParser.GlobalComment"><code class="xref py py-class docutils literal"><span class="pre">GlobalComment</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.GlobalComment" title="music21.humdrum.spineParser.GlobalComment"><code class="xref py py-class docutils literal"><span class="pre">GlobalComment</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.GlobalComment" title="music21.humdrum.spineParser.GlobalComment"><code class="xref py py-class docutils literal"><span class="pre">GlobalComment</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="globalcommentline">
+<h2>GlobalCommentLine<a class="headerlink" href="#globalcommentline" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.GlobalCommentLine">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">GlobalCommentLine</code><span class="sig-paren">(</span><em>position=0</em>, <em>contents=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.GlobalCommentLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>A GlobalCommentLine is a humdrum comment that pertains to all spines
+In humdrum it is represented by two exclamation points (and usually one space)</p>
+<p>The GlobalComment object takes two inputs and stores them as attributes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>position (line number in the humdrum file)
+contents (string of contents)
+value    (contents minus !!)
+</pre></div>
+</div>
+<p>The constructor can be passed (position, contents)
+if contents begins with bangs, they are removed along with up to one space directly afterwards</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">com1</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">GlobalCommentLine</span><span class="p">(</span>
+<span class="gp">... </span>         <span class="n">position</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">contents</span><span class="o">=</span><span class="s1">&#39;!! this comment is global&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">com1</span><span class="o">.</span><span class="n">position</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">com1</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">&#39;!! this comment is global&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">com1</span><span class="o">.</span><span class="n">value</span>
+<span class="go">&#39;this comment is global&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.GlobalCommentLine" title="music21.humdrum.spineParser.GlobalCommentLine"><code class="xref py py-class docutils literal"><span class="pre">GlobalCommentLine</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumLine" title="music21.humdrum.spineParser.HumdrumLine"><code class="xref py py-class docutils literal"><span class="pre">HumdrumLine</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="globalreference">
+<h2>GlobalReference<a class="headerlink" href="#globalreference" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.GlobalReference">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">GlobalReference</code><span class="sig-paren">(</span><em>codeOrAll=''</em>, <em>valueOrNone=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.GlobalReference" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Music21Object that represents a reference in the score</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">GlobalReference</span><span class="p">(</span><span class="s1">&#39;!!!REF:this is a global reference&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span>
+<span class="go">&lt;music21.humdrum.spineParser.GlobalReference REF &quot;this is a global reference&quot;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">code</span>
+<span class="go">&#39;REF&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">value</span>
+<span class="go">&#39;this is a global reference&#39;</span>
+</pre></div>
+</div>
+<p>Alternate form</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">GlobalReference</span><span class="p">(</span><span class="s1">&#39;REF&#39;</span><span class="p">,</span> <span class="s1">&#39;this is a global reference&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span>
+<span class="go">&lt;music21.humdrum.spineParser.GlobalReference REF &quot;this is a global reference&quot;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">code</span>
+<span class="go">&#39;REF&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">value</span>
+<span class="go">&#39;this is a global reference&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.GlobalReference" title="music21.humdrum.spineParser.GlobalReference"><code class="xref py py-class docutils literal"><span class="pre">GlobalReference</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.GlobalReference" title="music21.humdrum.spineParser.GlobalReference"><code class="xref py py-class docutils literal"><span class="pre">GlobalReference</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.GlobalReference" title="music21.humdrum.spineParser.GlobalReference"><code class="xref py py-class docutils literal"><span class="pre">GlobalReference</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.GlobalReference" title="music21.humdrum.spineParser.GlobalReference"><code class="xref py py-class docutils literal"><span class="pre">GlobalReference</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.GlobalReference" title="music21.humdrum.spineParser.GlobalReference"><code class="xref py py-class docutils literal"><span class="pre">GlobalReference</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="globalreferenceline">
+<h2>GlobalReferenceLine<a class="headerlink" href="#globalreferenceline" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.GlobalReferenceLine">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">GlobalReferenceLine</code><span class="sig-paren">(</span><em>position=0</em>, <em>contents='!!! NUL: None'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.GlobalReferenceLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>A GlobalReferenceLine is a type of HumdrumLine that contains
+information about the humdrum document.</p>
+<p>In humdrum it is represented by three exclamation points
+followed by non-whitespace followed by a colon.  Examples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>!!!COM: Stravinsky, Igor Fyodorovich
+!!!CDT: 1882/6/17/-1971/4/6
+!!!ODT: 1911//-1913//; 1947//
+!!!OPT@@RUS: Vesna svyashchennaya
+!!!OPT@FRE: Le sacre du printemps
+</pre></div>
+</div>
+<p>The GlobalReferenceLine object takes two inputs:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">position</span>   <span class="n">line</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">humdrum</span> <span class="n">file</span>
+<span class="n">contents</span>   <span class="n">string</span> <span class="n">of</span> <span class="n">contents</span>
+</pre></div>
+</div>
+<p>And stores them as three attributes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">position</span><span class="p">:</span> <span class="k">as</span> <span class="n">above</span>
+<span class="n">code</span><span class="p">:</span>     <span class="n">non</span><span class="o">-</span><span class="n">whitespace</span> <span class="n">code</span> <span class="p">(</span><span class="n">usually</span> <span class="n">three</span> <span class="n">letters</span><span class="p">)</span>
+<span class="n">value</span><span class="p">:</span>    <span class="n">its</span> <span class="n">value</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gr</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">GlobalReferenceLine</span><span class="p">(</span>
+<span class="gp">... </span>       <span class="n">position</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">contents</span> <span class="o">=</span> <span class="s2">&quot;!!!COM: Stravinsky, Igor Fyodorovich</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gr</span><span class="o">.</span><span class="n">position</span>
+<span class="go">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gr</span><span class="o">.</span><span class="n">code</span>
+<span class="go">&#39;COM&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gr</span><span class="o">.</span><span class="n">value</span>
+<span class="go">&#39;Stravinsky, Igor Fyodorovich&#39;</span>
+</pre></div>
+</div>
+<p>TODO: add parsing of three-digit Kern comment codes into fuller metadata</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.GlobalReferenceLine" title="music21.humdrum.spineParser.GlobalReferenceLine"><code class="xref py py-class docutils literal"><span class="pre">GlobalReferenceLine</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumLine" title="music21.humdrum.spineParser.HumdrumLine"><code class="xref py py-class docutils literal"><span class="pre">HumdrumLine</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="humdrumdatacollection">
+<h2>HumdrumDataCollection<a class="headerlink" href="#humdrumdatacollection" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.HumdrumDataCollection">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">HumdrumDataCollection</code><span class="sig-paren">(</span><em>dataStream=None</em>, <em>parseLines=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumDataCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>A HumdrumDataCollection takes in a mandatory list where each element
+is a line of humdrum data.  Together this list represents a collection
+of spines.  Essentially it&#8217;s the contents of a humdrum file.</p>
+<p>Usually you will probably want to use HumdrumFile which can read
+in a file directly.  This class exists in case you have your Humdrum
+data in another format (database, from the web, etc.) and already
+have it as a string.</p>
+<p>You are probably better off running humdrum.parseFile(&#8220;filename&#8221;)
+which returns a humdrum.SpineCollection directly, or even better,
+converter.parse(&#8220;file.krn&#8221;) which will just give you a stream.Score
+instead.</p>
+<p>LIMITATIONS:
+(1) Spines cannot change definition (**exclusive interpretations) mid-spine.</p>
+<blockquote>
+<div><p>So if you start off with **kern, the rest of the spine needs to be
+**kern (actually, the first exclusive interpretation for a spine is
+used throughout)</p>
+<p>Note that, even though changing exclusive interpretations mid-spine
+seems to be legal by the humdrum definition, it looks like none of the
+conventional humdrum parsing tools allow for changing
+definitions mid-spine, so I don&#8217;t think this limitation is a problem.
+(Craig Stuart Sapp confirmed this to me)</p>
+<p>The Aarden/Miller Palestrina dataset uses <cite>*-</cite> followed by <cite>**kern</cite>
+at the changes of sections thus some parsing of multiple exclusive
+interpretations in a protospine may be necessary.</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Split spines are assumed to be voices in a single spine staff.</li>
+</ol>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection" title="music21.humdrum.spineParser.HumdrumDataCollection"><code class="xref py py-class docutils literal"><span class="pre">HumdrumDataCollection</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.humdrum.spineParser.HumdrumDataCollection.stream">
+<code class="descclassname">HumdrumDataCollection.</code><code class="descname">stream</code><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumDataCollection.stream" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection" title="music21.humdrum.spineParser.HumdrumDataCollection"><code class="xref py py-class docutils literal"><span class="pre">HumdrumDataCollection</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.humdrum.spineParser.HumdrumDataCollection.createHumdrumSpines">
+<code class="descclassname">HumdrumDataCollection.</code><code class="descname">createHumdrumSpines</code><span class="sig-paren">(</span><em>protoSpines=None</em>, <em>eventCollections=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumDataCollection.createHumdrumSpines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the data from the object&#8217;s protoSpines and eventCollections
+and returns a <a class="reference internal" href="#music21.humdrum.spineParser.SpineCollection" title="music21.humdrum.spineParser.SpineCollection"><code class="xref py py-class docutils literal"><span class="pre">SpineCollection</span></code></a>
+object that contains HumdrumSpine() objects.</p>
+<p>A HumdrumSpine object differs from a ProtoSpine in that it follows
+spinePathData &#8211; a ProtoSpine records all data in a given tab
+position, and thus might consist of data from several
+spines that move around.  HumdrumSpines are smart enough not to
+have this limitation.</p>
+<p>When we check for spinePathData we look for the following spine
+path indicators (from HumdrumDoc):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">*+</span>    <span class="n">add</span> <span class="n">a</span> <span class="n">new</span> <span class="n">spine</span> <span class="p">(</span><span class="n">to</span> <span class="n">the</span> <span class="n">right</span> <span class="n">of</span> <span class="n">the</span> <span class="n">current</span> <span class="n">spine</span><span class="p">)</span>
+<span class="o">*-</span>    <span class="n">terminate</span> <span class="n">a</span> <span class="n">current</span> <span class="n">spine</span>
+<span class="o">*^</span>    <span class="n">split</span> <span class="n">a</span> <span class="n">spine</span> <span class="p">(</span><span class="n">into</span> <span class="n">two</span><span class="p">)</span>
+<span class="o">*</span><span class="n">v</span>    <span class="n">join</span> <span class="p">(</span><span class="n">two</span> <span class="ow">or</span> <span class="n">more</span><span class="p">)</span> <span class="n">spines</span> <span class="n">into</span> <span class="n">one</span>
+<span class="o">*</span><span class="n">x</span>    <span class="n">exchange</span> <span class="n">the</span> <span class="n">position</span> <span class="n">of</span> <span class="n">two</span> <span class="n">spines</span>
+<span class="o">*</span>     <span class="n">do</span> <span class="n">nothing</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.HumdrumDataCollection.determineIfDataStreamIsOpus">
+<code class="descclassname">HumdrumDataCollection.</code><code class="descname">determineIfDataStreamIsOpus</code><span class="sig-paren">(</span><em>dataStream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumDataCollection.determineIfDataStreamIsOpus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Some Humdrum files contain multiple pieces in one file
+which are better represented as <a class="reference internal" href="moduleStream.html#music21.stream.Opus" title="music21.stream.Opus"><code class="xref py py-class docutils literal"><span class="pre">Opus</span></code></a>
+file containing multiple scores.</p>
+<p>This method examines that dataStream (or self.dataStream) and
+if it only has a single piece then it returns (False, None).</p>
+<p>If it has multiple pieces, it returns True and a list of dataStreams.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pprint</span> <span class="k">import</span> <span class="n">pprint</span> <span class="k">as</span> <span class="n">pp</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mps</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">testFiles</span><span class="o">.</span><span class="n">multipartSanctus</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hdc</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">HumdrumDataCollection</span><span class="p">(</span><span class="n">mps</span><span class="p">,</span> <span class="n">parseLines</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">hasOpus</span><span class="p">,</span> <span class="n">dataCollections</span><span class="p">)</span> <span class="o">=</span> <span class="n">hdc</span><span class="o">.</span><span class="n">determineIfDataStreamIsOpus</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hasOpus</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="p">(</span><span class="n">dataCollections</span><span class="p">)</span>
+<span class="go">[[&#39;!!!COM: Palestrina, Giovanni Perluigi da&#39;,</span>
+<span class="go">  &#39;**kern\t**kern\t**kern\t**kern&#39;,</span>
+<span class="go">  &#39;*Ibass\t*Itenor\t*Icalto\t*Icant&#39;,</span>
+<span class="go">  &#39;!Bassus\t!Tenor\t!Altus\t!Cantus&#39;,</span>
+<span class="go">  &#39;*clefF4\t*clefGv2\t*clefG2\t*clefG2&#39;,</span>
+<span class="go">  &#39;*M4/2\t*M4/2\t*M4/2\t*M4/2&#39;,</span>
+<span class="go">  &#39;=1\t=1\t=1\t=1&#39;,</span>
+<span class="go">  &#39;0r\t0r\t1g\t1r&#39;,</span>
+<span class="go">  &#39;.\t.\t1a\t1cc&#39;,</span>
+<span class="go">  &#39;=2\t=2\t=2\t=2&#39;,</span>
+<span class="go">  &#39;0r\t0r\t1g\t1dd&#39;,</span>
+<span class="go">  &#39;.\t.\t1r\t1cc&#39;,</span>
+<span class="go">  &#39;*-\t*-\t*-\t*-&#39;],</span>
+<span class="go"> [&#39;!! Pleni&#39;,</span>
+<span class="go">  &#39;**kern\t**kern\t**kern&#39;,</span>
+<span class="go">  &#39;*Ibass\t*Itenor\t*Icalto&#39;,</span>
+<span class="go">  &#39;*clefF4\t*clefGv2\t*clefG2&#39;,</span>
+<span class="go">  &#39;*M4/2\t*M4/2\t*M4/2&#39;,</span>
+<span class="go">  &#39;=3\t=3\t=3&#39;,</span>
+<span class="go">  &#39;1G\t1r\t0r&#39;,</span>
+<span class="go">  &#39;1A\t1c\t.&#39;,</span>
+<span class="go">  &#39;=4\t=4\t=4&#39;,</span>
+<span class="go">  &#39;1B\t1d\t1r&#39;,</span>
+<span class="go">  &#39;1c\t1e\t1g&#39;,</span>
+<span class="go">  &#39;*-\t*-\t*-&#39;],</span>
+<span class="go"> [&#39;!! Hosanna&#39;,</span>
+<span class="go">  &#39;**kern\t**kern\t**kern\t**kern&#39;,</span>
+<span class="go">  &#39;*Ibass\t*Itenor\t*Icalto\t*Icant&#39;,</span>
+<span class="go">  &#39;*clefF4\t*clefGv2\t*clefG2\t*clefG2&#39;,</span>
+<span class="go">  &#39;*M3/2\t*M3/2\t*M3/2\t*M3/2&#39;,</span>
+<span class="go">  &#39;=5\t=5\t=5\t=5&#39;,</span>
+<span class="go">  &#39;1r\t1r\t1g\t1r&#39;,</span>
+<span class="go">  &#39;2r\t2r\t[2a\t[2cc&#39;,</span>
+<span class="go">  &#39;=5\t=5\t=5\t=5&#39;,</span>
+<span class="go">  &#39;1r\t1r\t2a]\t2cc]&#39;,</span>
+<span class="go">  &#39;.\t.\t2f\t1dd&#39;,</span>
+<span class="go">  &#39;2r\t2r\t2g\t.&#39;,</span>
+<span class="go">  &#39;*-\t*-\t*-\t*-&#39;]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.HumdrumDataCollection.insertGlobalEvents">
+<code class="descclassname">HumdrumDataCollection.</code><code class="descname">insertGlobalEvents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumDataCollection.insertGlobalEvents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert the Global Events (GlobalReferenceLines and GlobalCommentLines) into an appropriate
+place in the outer Stream.</p>
+<p>Run after self.spineCollection.createMusic21Streams().  
+Is run automatically by self.parseLines().
+uses self.spineCollection.getOffsetsAndPrioritiesByPosition()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.HumdrumDataCollection.parseEventListFromDataStream">
+<code class="descclassname">HumdrumDataCollection.</code><code class="descname">parseEventListFromDataStream</code><span class="sig-paren">(</span><em>dataStream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumDataCollection.parseEventListFromDataStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets self.eventList from a dataStream (that is, a
+list of lines).  It sets self.maxSpines to the
+largest number of spine events found on any line
+in the file.</p>
+<p>It sets self.fileLength to the number of lines (excluding
+totally blank lines) in the file.</p>
+<p>The difference between the dataStream and self.eventList
+are the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Blank lines are skipped.</li>
+<li>!!! lines become <a class="reference internal" href="#music21.humdrum.spineParser.GlobalReferenceLine" title="music21.humdrum.spineParser.GlobalReferenceLine"><code class="xref py py-class docutils literal"><span class="pre">GlobalReferenceLine</span></code></a> objects</li>
+<li>!! lines become <a class="reference internal" href="#music21.humdrum.spineParser.GlobalCommentLine" title="music21.humdrum.spineParser.GlobalCommentLine"><code class="xref py py-class docutils literal"><span class="pre">GlobalCommentLine</span></code></a> objects</li>
+<li>all other lines become <a class="reference internal" href="#music21.humdrum.spineParser.SpineLine" title="music21.humdrum.spineParser.SpineLine"><code class="xref py py-class docutils literal"><span class="pre">SpineLine</span></code></a> objects</li>
+</ul>
+</div></blockquote>
+<p>Returns eventList in addition to setting it as self.eventList.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eventString</span> <span class="o">=</span> <span class="s2">&quot;!!! COM: Beethoven, Ludwig van</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+<span class="gp">... </span>              <span class="s2">&quot;!! Not really a piece by Beethoven</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+<span class="gp">... </span>              <span class="s2">&quot;**kern</span><span class="se">\t</span><span class="s2">**dynam</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+<span class="gp">... </span>              <span class="s2">&quot;C4</span><span class="se">\t</span><span class="s2">pp</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+<span class="gp">... </span>              <span class="s2">&quot;D8</span><span class="se">\t</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hdc</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">HumdrumDataCollection</span><span class="p">(</span><span class="n">eventString</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eList</span> <span class="o">=</span> <span class="n">hdc</span><span class="o">.</span><span class="n">parseEventListFromDataStream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eList</span> <span class="ow">is</span> <span class="n">hdc</span><span class="o">.</span><span class="n">eventList</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">eList</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="go">&lt;music21.humdrum.spineParser.GlobalReferenceLine object at 0x...&gt;</span>
+<span class="go">&lt;music21.humdrum.spineParser.GlobalCommentLine object at 0x...&gt;</span>
+<span class="go">&lt;music21.humdrum.spineParser.SpineLine object at 0x...&gt;</span>
+<span class="go">&lt;music21.humdrum.spineParser.SpineLine object at 0x...&gt;</span>
+<span class="go">&lt;music21.humdrum.spineParser.SpineLine object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">eList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="go">Beethoven, Ludwig van</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">eList</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">spineData</span><span class="p">)</span>
+<span class="go">[&#39;C4&#39;, &#39;pp&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.HumdrumDataCollection.parseLines">
+<code class="descclassname">HumdrumDataCollection.</code><code class="descname">parseLines</code><span class="sig-paren">(</span><em>dataStream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumDataCollection.parseLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a list (dataStream) of lines into a HumdrumSpineCollection
+(which contains HumdrumSpines)
+and set it in self.spineCollection</p>
+<p>if dataStream is None, look for it in self.dataStream.  If that&#8217;s None too,
+return an exception.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.HumdrumDataCollection.parseOpusDataCollections">
+<code class="descclassname">HumdrumDataCollection.</code><code class="descname">parseOpusDataCollections</code><span class="sig-paren">(</span><em>dataCollections</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumDataCollection.parseOpusDataCollections" title="Permalink to this definition">¶</a></dt>
+<dd><p>take a dataCollection from <cite>determineIfDataStreamIsOpus</cite>
+and set self.stream to be an Opus instead.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mps</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">testFiles</span><span class="o">.</span><span class="n">multipartSanctus</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hdc</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">HumdrumDataCollection</span><span class="p">(</span><span class="n">mps</span><span class="p">,</span> <span class="n">parseLines</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">hasOpus</span><span class="p">,</span> <span class="n">dataCollections</span><span class="p">)</span> <span class="o">=</span> <span class="n">hdc</span><span class="o">.</span><span class="n">determineIfDataStreamIsOpus</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">hasOpus</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">op</span> <span class="o">=</span> <span class="n">hdc</span><span class="o">.</span><span class="n">parseOpusDataCollections</span><span class="p">(</span><span class="n">dataCollections</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">scores</span><span class="p">))</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">sc</span> <span class="ow">in</span> <span class="n">op</span><span class="o">.</span><span class="n">scores</span><span class="p">:</span>
+<span class="gp">... </span>       <span class="nb">print</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="go">&lt;music21.stream.Score section_1&gt;</span>
+<span class="go">&lt;music21.stream.Score section_2&gt;</span>
+<span class="go">&lt;music21.stream.Score section_3&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.HumdrumDataCollection.parseProtoSpinesAndEventCollections">
+<code class="descclassname">HumdrumDataCollection.</code><code class="descname">parseProtoSpinesAndEventCollections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumDataCollection.parseProtoSpinesAndEventCollections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run after 
+<a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection.parseEventListFromDataStream" title="music21.humdrum.spineParser.HumdrumDataCollection.parseEventListFromDataStream"><code class="xref py py-meth docutils literal"><span class="pre">parseEventListFromDataStream()</span></code></a>
+to take self.eventList and slice it horizontally
+to get self.eventCollections, which is a list of
+EventCollection objects, or things that happen simultaneously.</p>
+<p>And, more importantly, this method slices self.eventList
+vertically to get self.protoSpines which is a list
+of ProtoSpines, that is a vertical slice of everything that
+happens in a column, regardless of spine-path indicators.</p>
+<p>EventCollection objects store global events at the position.
+ProtoSpines do not.</p>
+<p>So self.eventCollections and self.protoSpines can each be
+thought of as a two-dimensional sheet of cells, but where
+the first index of the former is the vertical position in
+the dataStream and the first index of the later is the
+horizontal position in the dataStream.  The contents of
+each cell is a SpineEvent object or None (if there&#8217;s no
+data at that point).  Even &#8216;.&#8217; (continuation events) get
+translated into SpineEvent objects.</p>
+<p>Calls <code class="xref py py-meth docutils literal"><span class="pre">parseEventListFromDataStream()</span></code>
+if it hasn&#8217;t already been called.</p>
+<p>returns a tuple of protoSpines and eventCollections in addition to
+setting it in the calling object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eventString</span> <span class="o">=</span> <span class="s2">&quot;!!!COM: Beethoven, Ludwig van</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+<span class="gp">... </span>              <span class="s2">&quot;!! Not really a piece by Beethoven</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+<span class="gp">... </span>              <span class="s2">&quot;**kern</span><span class="se">\t</span><span class="s2">**dynam</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+<span class="gp">... </span>              <span class="s2">&quot;C4</span><span class="se">\t</span><span class="s2">pp</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
+<span class="gp">... </span>              <span class="s2">&quot;D8</span><span class="se">\t</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hdc</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">HumdrumDataCollection</span><span class="p">(</span><span class="n">eventString</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">protoSpines</span><span class="p">,</span> <span class="n">eventCollections</span> <span class="o">=</span> <span class="n">hdc</span><span class="o">.</span><span class="n">parseProtoSpinesAndEventCollections</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">protoSpines</span> <span class="ow">is</span> <span class="n">hdc</span><span class="o">.</span><span class="n">protoSpines</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventCollections</span> <span class="ow">is</span> <span class="n">hdc</span><span class="o">.</span><span class="n">eventCollections</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Looking at individual slices is unlikely to tell you much.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">thisSlice</span> <span class="ow">in</span> <span class="n">eventCollections</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">thisSlice</span><span class="p">)</span>
+<span class="go">&lt;music21.humdrum.spineParser.EventCollection object at 0x...&gt;</span>
+<span class="go">&lt;music21.humdrum.spineParser.EventCollection object at 0x...&gt;</span>
+<span class="go">&lt;music21.humdrum.spineParser.EventCollection object at 0x...&gt;</span>
+<span class="go">&lt;music21.humdrum.spineParser.EventCollection object at 0x...&gt;</span>
+<span class="go">&lt;music21.humdrum.spineParser.EventCollection object at 0x...&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">thisSlice</span> <span class="ow">in</span> <span class="n">protoSpines</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">thisSlice</span><span class="p">)</span>
+<span class="go">&lt;music21.humdrum.spineParser.ProtoSpine object at 0x...&gt;</span>
+<span class="go">&lt;music21.humdrum.spineParser.ProtoSpine object at 0x...&gt;</span>
+</pre></div>
+</div>
+<p>But looking at the individual slices is revealing:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eventCollections</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">getAllOccurring</span><span class="p">()</span>
+<span class="go">[&lt;music21.humdrum.spineParser.SpineEvent D8&gt;, &lt;music21.humdrum.spineParser.SpineEvent pp&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="humdrumfile">
+<h2>HumdrumFile<a class="headerlink" href="#humdrumfile" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.HumdrumFile">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">HumdrumFile</code><span class="sig-paren">(</span><em>filename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>A HumdrumFile is a HumdrumDataCollection which takes
+as a mandatory argument a filename to be opened and read.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumFile" title="music21.humdrum.spineParser.HumdrumFile"><code class="xref py py-class docutils literal"><span class="pre">HumdrumFile</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection" title="music21.humdrum.spineParser.HumdrumDataCollection"><code class="xref py py-class docutils literal"><span class="pre">HumdrumDataCollection</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumFile" title="music21.humdrum.spineParser.HumdrumFile"><code class="xref py py-class docutils literal"><span class="pre">HumdrumFile</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection" title="music21.humdrum.spineParser.HumdrumDataCollection"><code class="xref py py-class docutils literal"><span class="pre">HumdrumDataCollection</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection.stream" title="music21.humdrum.spineParser.HumdrumDataCollection.stream"><code class="xref py py-attr docutils literal"><span class="pre">stream</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumFile" title="music21.humdrum.spineParser.HumdrumFile"><code class="xref py py-class docutils literal"><span class="pre">HumdrumFile</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.humdrum.spineParser.HumdrumFile.parseFH">
+<code class="descclassname">HumdrumFile.</code><code class="descname">parseFH</code><span class="sig-paren">(</span><em>fileHandle</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumFile.parseFH" title="Permalink to this definition">¶</a></dt>
+<dd><p>parseFH takes a fileHandle and returns a HumdrumCollection</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection" title="music21.humdrum.spineParser.HumdrumDataCollection"><code class="xref py py-class docutils literal"><span class="pre">HumdrumDataCollection</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection.createHumdrumSpines" title="music21.humdrum.spineParser.HumdrumDataCollection.createHumdrumSpines"><code class="xref py py-meth docutils literal"><span class="pre">createHumdrumSpines()</span></code></a></li>
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection.determineIfDataStreamIsOpus" title="music21.humdrum.spineParser.HumdrumDataCollection.determineIfDataStreamIsOpus"><code class="xref py py-meth docutils literal"><span class="pre">determineIfDataStreamIsOpus()</span></code></a></li>
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection.insertGlobalEvents" title="music21.humdrum.spineParser.HumdrumDataCollection.insertGlobalEvents"><code class="xref py py-meth docutils literal"><span class="pre">insertGlobalEvents()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection.parseEventListFromDataStream" title="music21.humdrum.spineParser.HumdrumDataCollection.parseEventListFromDataStream"><code class="xref py py-meth docutils literal"><span class="pre">parseEventListFromDataStream()</span></code></a></li>
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection.parseLines" title="music21.humdrum.spineParser.HumdrumDataCollection.parseLines"><code class="xref py py-meth docutils literal"><span class="pre">parseLines()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection.parseOpusDataCollections" title="music21.humdrum.spineParser.HumdrumDataCollection.parseOpusDataCollections"><code class="xref py py-meth docutils literal"><span class="pre">parseOpusDataCollections()</span></code></a></li>
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection.parseProtoSpinesAndEventCollections" title="music21.humdrum.spineParser.HumdrumDataCollection.parseProtoSpinesAndEventCollections"><code class="xref py py-meth docutils literal"><span class="pre">parseProtoSpinesAndEventCollections()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="humdrumline">
+<h2>HumdrumLine<a class="headerlink" href="#humdrumline" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.HumdrumLine">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">HumdrumLine</code><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>HumdrumLine is a dummy class for subclassing
+<a class="reference internal" href="#music21.humdrum.spineParser.SpineLine" title="music21.humdrum.spineParser.SpineLine"><code class="xref py py-class docutils literal"><span class="pre">SpineLine</span></code></a>,
+<a class="reference internal" href="#music21.humdrum.spineParser.GlobalCommentLine" title="music21.humdrum.spineParser.GlobalCommentLine"><code class="xref py py-class docutils literal"><span class="pre">GlobalCommentLine</span></code></a>, and
+<a class="reference internal" href="#music21.humdrum.spineParser.GlobalReferenceLine" title="music21.humdrum.spineParser.GlobalReferenceLine"><code class="xref py py-class docutils literal"><span class="pre">GlobalReferenceLine</span></code></a> classes
+all of which represent one horizontal line of
+text in a <a class="reference internal" href="#music21.humdrum.spineParser.HumdrumDataCollection" title="music21.humdrum.spineParser.HumdrumDataCollection"><code class="xref py py-class docutils literal"><span class="pre">HumdrumDataCollection</span></code></a>
+that is aware of its
+position in the file.</p>
+<p>See the documentation for the specific classes mentioned above
+for more details.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="humdrumspine">
+<h2>HumdrumSpine<a class="headerlink" href="#humdrumspine" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.HumdrumSpine">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">HumdrumSpine</code><span class="sig-paren">(</span><em>id=0</em>, <em>eventList=None</em>, <em>streamClass=&lt;class 'music21.stream.Stream'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumSpine" title="Permalink to this definition">¶</a></dt>
+<dd><p>A HumdrumSpine is a representation of a generic HumdrumSpine
+regardless of **definition after spine path indicators have
+been simplified.</p>
+<p>A HumdrumSpine is a collection of events arranged vertically that have a
+connection to each other.
+Each HumdrumSpine MUST have an id (numeric or string) attached to it.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SE</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">SpineEvent</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spineEvents</span> <span class="o">=</span> <span class="p">[</span><span class="n">SE</span><span class="p">(</span><span class="s1">&#39;**kern&#39;</span><span class="p">),</span><span class="n">SE</span><span class="p">(</span><span class="s1">&#39;c,4&#39;</span><span class="p">),</span> <span class="n">SE</span><span class="p">(</span><span class="s1">&#39;d#8&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spine1Id</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spine1</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">HumdrumSpine</span><span class="p">(</span><span class="n">spine1Id</span><span class="p">,</span> <span class="n">spineEvents</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spine1</span><span class="o">.</span><span class="n">insertPoint</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spine1</span><span class="o">.</span><span class="n">endingPosition</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spine1</span><span class="o">.</span><span class="n">parentSpine</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># spine 3 is the previous spine leading to this one</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spine1</span><span class="o">.</span><span class="n">childSpines</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">]</span> <span class="c1"># the spine ends by being split into spines 7 and 8</span>
+</pre></div>
+</div>
+<p>we keep weak references to the spineCollection so that we
+don&#8217;t have circular references</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spineCollection1</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">SpineCollection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spine1</span><span class="o">.</span><span class="n">spineCollection</span> <span class="o">=</span> <span class="n">spineCollection1</span>
+</pre></div>
+</div>
+<p>The spineType property searches the EventList or parentSpine to
+figure out the spineType</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spine1</span><span class="o">.</span><span class="n">spineType</span>
+<span class="go">&#39;kern&#39;</span>
+</pre></div>
+</div>
+<p>Spines can be iterated through:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">spine1</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="go">**kern</span>
+<span class="go">c,4</span>
+<span class="go">d#8</span>
+</pre></div>
+</div>
+<p>If you&#8217;d eventually like this spine to be converted to a class
+other than <a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a>, pass its classname in
+as the streamClass argument:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spine2</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">HumdrumSpine</span><span class="p">(</span>
+<span class="gp">... </span>             <span class="n">streamClass</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spine2</span><span class="o">.</span><span class="n">stream</span>
+<span class="go">&lt;music21.stream.Part ...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine" title="music21.humdrum.spineParser.HumdrumSpine"><code class="xref py py-class docutils literal"><span class="pre">HumdrumSpine</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.humdrum.spineParser.HumdrumSpine.spineCollection">
+<code class="descclassname">HumdrumSpine.</code><code class="descname">spineCollection</code><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumSpine.spineCollection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="music21.humdrum.spineParser.HumdrumSpine.spineType">
+<code class="descclassname">HumdrumSpine.</code><code class="descname">spineType</code><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumSpine.spineType" title="Permalink to this definition">¶</a></dt>
+<dd><p>searches the current and parent spineType for a search</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine" title="music21.humdrum.spineParser.HumdrumSpine"><code class="xref py py-class docutils literal"><span class="pre">HumdrumSpine</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.humdrum.spineParser.HumdrumSpine.append">
+<code class="descclassname">HumdrumSpine.</code><code class="descname">append</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumSpine.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>add an item to this Spine</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.HumdrumSpine.moveElementsIntoMeasures">
+<code class="descclassname">HumdrumSpine.</code><code class="descname">moveElementsIntoMeasures</code><span class="sig-paren">(</span><em>streamIn</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumSpine.moveElementsIntoMeasures" title="Permalink to this definition">¶</a></dt>
+<dd><p>takes a parsed stream and moves the elements inside the
+measures.  Works with pickup measures, etc. Does not
+automatically create ties, etc...</p>
+<p>Why not just use Stream.makeMeasures()? because
+humdrum measures contain extra information about barlines
+etc. and pickups are explicitly defined.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;2/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;quarter&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;half&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.meter.TimeSignature 2/4&gt;</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+
+<span class="go">{0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{1.0} &lt;music21.stream.Measure 2 offset=1.0&gt;</span>
+
+<span class="go">{1.0} &lt;music21.note.Note D&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hds</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">HumdrumSpine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">hds</span><span class="o">.</span><span class="n">moveElementsIntoMeasures</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.meter.TimeSignature 2/4&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note C&gt;</span>
+<span class="go">{1.0} &lt;music21.stream.Measure 2 offset=1.0&gt;</span>
+<span class="go">    {0.0} &lt;music21.note.Note D&gt;</span>
+</pre></div>
+</div>
+<p>The first measure is correctly identified as a pickup!</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">paddingLeft</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.HumdrumSpine.next">
+<code class="descclassname">HumdrumSpine.</code><code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumSpine.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current event and increments the iteration index.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.HumdrumSpine.parse">
+<code class="descclassname">HumdrumSpine.</code><code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.HumdrumSpine.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dummy method that pushes all these objects to HumdrumSpine.stream
+as ElementWrappers.  Should be overridden in
+specific Spine subclasses.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="kernspine">
+<h2>KernSpine<a class="headerlink" href="#kernspine" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.KernSpine">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">KernSpine</code><span class="sig-paren">(</span><em>id=0</em>, <em>eventList=None</em>, <em>streamClass=&lt;class 'music21.stream.Stream'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.KernSpine" title="Permalink to this definition">¶</a></dt>
+<dd><p>A KernSpine is a type of humdrum spine with the **kern
+attribute set and thus events are processed as if they
+are kern notes</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.KernSpine" title="music21.humdrum.spineParser.KernSpine"><code class="xref py py-class docutils literal"><span class="pre">KernSpine</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine" title="music21.humdrum.spineParser.HumdrumSpine"><code class="xref py py-class docutils literal"><span class="pre">HumdrumSpine</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.KernSpine" title="music21.humdrum.spineParser.KernSpine"><code class="xref py py-class docutils literal"><span class="pre">KernSpine</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine" title="music21.humdrum.spineParser.HumdrumSpine"><code class="xref py py-class docutils literal"><span class="pre">HumdrumSpine</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine.spineCollection" title="music21.humdrum.spineParser.HumdrumSpine.spineCollection"><code class="xref py py-attr docutils literal"><span class="pre">spineCollection</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine.spineType" title="music21.humdrum.spineParser.HumdrumSpine.spineType"><code class="xref py py-attr docutils literal"><span class="pre">spineType</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.KernSpine" title="music21.humdrum.spineParser.KernSpine"><code class="xref py py-class docutils literal"><span class="pre">KernSpine</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.humdrum.spineParser.KernSpine.parse">
+<code class="descclassname">KernSpine.</code><code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.KernSpine.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.KernSpine.processChordEvent">
+<code class="descclassname">KernSpine.</code><code class="descname">processChordEvent</code><span class="sig-paren">(</span><em>eventC</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.KernSpine.processChordEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process a single chord event</p>
+<p>Like processNoteEvent, stores information about current beam and tuplet state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.KernSpine.processNoteEvent">
+<code class="descclassname">KernSpine.</code><code class="descname">processNoteEvent</code><span class="sig-paren">(</span><em>eventC</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.KernSpine.processNoteEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>similar to hdStringToNote, this method processes a string representing a single
+note, but stores information about current beam and tuplet state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.KernSpine.setBeamsForNote">
+<code class="descclassname">KernSpine.</code><code class="descname">setBeamsForNote</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.KernSpine.setBeamsForNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets the beams for a Note (or Chord) given self.currentBeamNumbers
+and updates self.currentBeamNumbers based on stop beams.</p>
+<p>Safe enough to use on elements such as rests that don&#8217;t have beam info.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.KernSpine.setTupletTypeForNote">
+<code class="descclassname">KernSpine.</code><code class="descname">setTupletTypeForNote</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.KernSpine.setTupletTypeForNote" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine" title="music21.humdrum.spineParser.HumdrumSpine"><code class="xref py py-class docutils literal"><span class="pre">HumdrumSpine</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine.append" title="music21.humdrum.spineParser.HumdrumSpine.append"><code class="xref py py-meth docutils literal"><span class="pre">append()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine.moveElementsIntoMeasures" title="music21.humdrum.spineParser.HumdrumSpine.moveElementsIntoMeasures"><code class="xref py py-meth docutils literal"><span class="pre">moveElementsIntoMeasures()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumSpine.next" title="music21.humdrum.spineParser.HumdrumSpine.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="misctandem">
+<h2>MiscTandem<a class="headerlink" href="#misctandem" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.MiscTandem">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">MiscTandem</code><span class="sig-paren">(</span><em>tandem=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.MiscTandem" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.MiscTandem" title="music21.humdrum.spineParser.MiscTandem"><code class="xref py py-class docutils literal"><span class="pre">MiscTandem</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.MiscTandem" title="music21.humdrum.spineParser.MiscTandem"><code class="xref py py-class docutils literal"><span class="pre">MiscTandem</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.MiscTandem" title="music21.humdrum.spineParser.MiscTandem"><code class="xref py py-class docutils literal"><span class="pre">MiscTandem</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.MiscTandem" title="music21.humdrum.spineParser.MiscTandem"><code class="xref py py-class docutils literal"><span class="pre">MiscTandem</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.MiscTandem" title="music21.humdrum.spineParser.MiscTandem"><code class="xref py py-class docutils literal"><span class="pre">MiscTandem</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="protospine">
+<h2>ProtoSpine<a class="headerlink" href="#protospine" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.ProtoSpine">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">ProtoSpine</code><span class="sig-paren">(</span><em>eventList=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.ProtoSpine" title="Permalink to this definition">¶</a></dt>
+<dd><p>A ProtoSpine is a collection of events arranged vertically.
+It differs from a HumdrumSpine in that spine paths are not followed.
+So ProtoSpine(1) would be everything in the 2nd column
+of a Humdrum file regardless of whether the 2nd column
+was at some point an independent Spine
+or if it later became a split from the first spine.</p>
+<p>See <code class="xref py py-meth docutils literal"><span class="pre">parseProtoSpinesAndEventCollections()</span></code>
+for more details on how ProtoSpine objects are created.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="spinecollection">
+<h2>SpineCollection<a class="headerlink" href="#spinecollection" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.SpineCollection">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">SpineCollection</code><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>A SpineCollection is a set of HumdrumSpines with relationships to each
+other and where their position attributes indicate
+simultaneous onsets.</p>
+<p>When you iterate over a SpineCollection, it goes from right to
+left, since that&#8217;s the order that humdrum expects.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.SpineCollection" title="music21.humdrum.spineParser.SpineCollection"><code class="xref py py-class docutils literal"><span class="pre">SpineCollection</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.addSpine">
+<code class="descclassname">SpineCollection.</code><code class="descname">addSpine</code><span class="sig-paren">(</span><em>streamClass=&lt;class 'music21.stream.Part'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.addSpine" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates a new spine in the collection and returns it.</p>
+<p>By default, the underlying music21 class of the spine is
+<a class="reference internal" href="moduleStream.html#music21.stream.Part" title="music21.stream.Part"><code class="xref py py-class docutils literal"><span class="pre">Part</span></code></a>.  This can be overridden
+by passing in a different streamClass.</p>
+<p>Automatically sets the id of the Spine.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hsc</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">SpineCollection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpine</span> <span class="o">=</span> <span class="n">hsc</span><span class="o">.</span><span class="n">addSpine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpine</span><span class="o">.</span><span class="n">id</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpine</span><span class="o">.</span><span class="n">stream</span>
+<span class="go">&lt;music21.stream.Part ...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpine2</span> <span class="o">=</span> <span class="n">hsc</span><span class="o">.</span><span class="n">addSpine</span><span class="p">(</span><span class="n">streamClass</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpine2</span><span class="o">.</span><span class="n">id</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpine2</span>
+<span class="go">Spine: 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpine2</span><span class="o">.</span><span class="n">stream</span>
+<span class="go">&lt;music21.stream.Stream ...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.appendSpine">
+<code class="descclassname">SpineCollection.</code><code class="descname">appendSpine</code><span class="sig-paren">(</span><em>spine</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.appendSpine" title="Permalink to this definition">¶</a></dt>
+<dd><p>appendSpine(spine) &#8211; appends an already existing HumdrumSpine
+to the SpineCollection.  Returns void</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.assignIds">
+<code class="descclassname">SpineCollection.</code><code class="descname">assignIds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.assignIds" title="Permalink to this definition">¶</a></dt>
+<dd><p>assign an ID based on the instrument or just a string of a number if none</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hsc</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">SpineCollection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpineDefault</span> <span class="o">=</span> <span class="n">hsc</span><span class="o">.</span><span class="n">addSpine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpineDefault2</span> <span class="o">=</span> <span class="n">hsc</span><span class="o">.</span><span class="n">addSpine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpineOboe1</span> <span class="o">=</span> <span class="n">hsc</span><span class="o">.</span><span class="n">addSpine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpineOboe2</span> <span class="o">=</span> <span class="n">hsc</span><span class="o">.</span><span class="n">addSpine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpineTrumpet</span> <span class="o">=</span> <span class="n">hsc</span><span class="o">.</span><span class="n">addSpine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpineOboe1</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instrument</span><span class="o">.</span><span class="n">Oboe</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpineOboe2</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instrument</span><span class="o">.</span><span class="n">Oboe</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpineTrumpet</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instrument</span><span class="o">.</span><span class="n">Trumpet</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hsc</span><span class="o">.</span><span class="n">assignIds</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">sp</span> <span class="ow">in</span> <span class="n">hsc</span><span class="o">.</span><span class="n">spines</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="go">2</span>
+<span class="go">Oboe-1</span>
+<span class="go">Oboe-2</span>
+<span class="go">Trumpet</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.createMusic21Streams">
+<code class="descclassname">SpineCollection.</code><code class="descname">createMusic21Streams</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.createMusic21Streams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create Music21 Stream objects from spineCollections by running:</p>
+<blockquote>
+<div>self.reclassSpines()
+self.parseMusic21()
+self.performInsertions()
+self.moveObjectsToMeasures()
+self.moveDynamicsAndLyricsToStreams()
+self.makeVoices()
+self.assignIds()</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.getOffsetsAndPrioritiesByPosition">
+<code class="descclassname">SpineCollection.</code><code class="descname">getOffsetsAndPrioritiesByPosition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.getOffsetsAndPrioritiesByPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>iterates through the spines by location
+and records the offset and priority for each</p>
+<p>Returns a dictionary where each index is humdrumPosition and the value is a
+two-element tuple where the first element is the music21 offset and the
+second element is a list of Music21Objects at that position</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.getSpineById">
+<code class="descclassname">SpineCollection.</code><code class="descname">getSpineById</code><span class="sig-paren">(</span><em>spineId</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.getSpineById" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the HumdrumSpine with the given id.</p>
+<p>raises a HumdrumException if the spine with a given id is not found</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.makeVoices">
+<code class="descclassname">SpineCollection.</code><code class="descname">makeVoices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.makeVoices" title="Permalink to this definition">¶</a></dt>
+<dd><p>make voices for each kernSpine &#8211; why not just run
+stream.makeVoices() ? because we have more information
+here that lets us make voices more intelligently</p>
+<p>Should be done after measures have been made.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.moveDynamicsAndLyricsToStreams">
+<code class="descclassname">SpineCollection.</code><code class="descname">moveDynamicsAndLyricsToStreams</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.moveDynamicsAndLyricsToStreams" title="Permalink to this definition">¶</a></dt>
+<dd><p>move <code class="samp docutils literal"><span class="pre">**dynam</span></code> and <code class="samp docutils literal"><span class="pre">**lyrics/**text</span></code> information to the appropriate staff.</p>
+<p>Assumes that <code class="samp docutils literal"><span class="pre">*staff</span></code> is consistent through the spine.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.moveObjectsToMeasures">
+<code class="descclassname">SpineCollection.</code><code class="descname">moveObjectsToMeasures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.moveObjectsToMeasures" title="Permalink to this definition">¶</a></dt>
+<dd><p>run moveElementsIntoMeasures for each HumdrumSpine
+that is not a subspine.</p>
+<p>Also fixes up the tuplets using duration.TupletFixer</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.next">
+<code class="descclassname">SpineCollection.</code><code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current spine and decrements the iteration index.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.parseMusic21">
+<code class="descclassname">SpineCollection.</code><code class="descname">parseMusic21</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.parseMusic21" title="Permalink to this definition">¶</a></dt>
+<dd><p>runs spine.parse() for each Spine.
+thus populating the spine.stream for each Spine</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.performInsertions">
+<code class="descclassname">SpineCollection.</code><code class="descname">performInsertions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.performInsertions" title="Permalink to this definition">¶</a></dt>
+<dd><p>take a parsed spineCollection as music21 objects and take
+subspines and put them in their proper location</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.performSpineInsertion">
+<code class="descclassname">SpineCollection.</code><code class="descname">performSpineInsertion</code><span class="sig-paren">(</span><em>thisSpine</em>, <em>newStream</em>, <em>insertionPoint</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.performSpineInsertion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Insert all the spines into newStream that should be 
+inserted into thisSpine at insertionPoint.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.reclassSpines">
+<code class="descclassname">SpineCollection.</code><code class="descname">reclassSpines</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.reclassSpines" title="Permalink to this definition">¶</a></dt>
+<dd><p>changes the classes of HumdrumSpines to more specific types
+(KernSpine, DynamicSpine)
+according to their spineType (e.g., **kern, **dynam)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineCollection.removeSpineById">
+<code class="descclassname">SpineCollection.</code><code class="descname">removeSpineById</code><span class="sig-paren">(</span><em>spineId</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineCollection.removeSpineById" title="Permalink to this definition">¶</a></dt>
+<dd><p>deletes a spine from the SpineCollection (after inserting, integrating, etc.)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hsc</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">SpineCollection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpine</span> <span class="o">=</span> <span class="n">hsc</span><span class="o">.</span><span class="n">addSpine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpine</span><span class="o">.</span><span class="n">id</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpine2</span> <span class="o">=</span> <span class="n">hsc</span><span class="o">.</span><span class="n">addSpine</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newSpine2</span><span class="o">.</span><span class="n">id</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hsc</span><span class="o">.</span><span class="n">spines</span>
+<span class="go">[Spine: 0, Spine: 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hsc</span><span class="o">.</span><span class="n">removeSpineById</span><span class="p">(</span><span class="n">newSpine</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hsc</span><span class="o">.</span><span class="n">spines</span>
+<span class="go">[Spine: 1]</span>
+</pre></div>
+</div>
+<p>raises a HumdrumException if the spine with a given id is not found</p>
+</dd></dl>
+
+</div>
+<div class="section" id="spinecomment">
+<h2>SpineComment<a class="headerlink" href="#spinecomment" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.SpineComment">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">SpineComment</code><span class="sig-paren">(</span><em>comment=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineComment" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Music21Object that represents a comment in a single spine.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">SpineComment</span><span class="p">(</span><span class="s1">&#39;! this is a spine comment&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span>
+<span class="go">&lt;music21.humdrum.spineParser.SpineComment &quot;this is a spine comment&quot;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span><span class="o">.</span><span class="n">comment</span>
+<span class="go">&#39;this is a spine comment&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.SpineComment" title="music21.humdrum.spineParser.SpineComment"><code class="xref py py-class docutils literal"><span class="pre">SpineComment</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.SpineComment" title="music21.humdrum.spineParser.SpineComment"><code class="xref py py-class docutils literal"><span class="pre">SpineComment</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.SpineComment" title="music21.humdrum.spineParser.SpineComment"><code class="xref py py-class docutils literal"><span class="pre">SpineComment</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.SpineComment" title="music21.humdrum.spineParser.SpineComment"><code class="xref py py-class docutils literal"><span class="pre">SpineComment</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.SpineComment" title="music21.humdrum.spineParser.SpineComment"><code class="xref py py-class docutils literal"><span class="pre">SpineComment</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="spineevent">
+<h2>SpineEvent<a class="headerlink" href="#spineevent" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.SpineEvent">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">SpineEvent</code><span class="sig-paren">(</span><em>contents=None</em>, <em>position=0</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>A SpineEvent is an event in a HumdrumSpine or ProtoSpine.</p>
+<p>It&#8217;s .contents property contains the contents of the spine or
+it could be &#8216;.&#8217;, in which case it means that a
+particular event appears after the last event in a different spine.
+It could also be &#8220;None&#8221; indicating that there is no event at all
+at this moment in the humdrum file.  Happens if no ProtoSpine exists
+at this point in the file in this tab position.</p>
+<p>Should be initialized with its contents and position in file.</p>
+<p>These attributes are optional but likely to be very helpful:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">position</span> <span class="o">--</span> <span class="n">event</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">file</span>
+<span class="n">protoSpineId</span> <span class="o">--</span> <span class="n">ProtoSpine</span> <span class="nb">id</span> <span class="p">(</span><span class="mi">0</span> <span class="n">to</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">spineId</span> <span class="o">--</span> <span class="nb">id</span> <span class="n">of</span> <span class="n">HumdrumSpine</span> <span class="n">actually</span> <span class="n">attached</span> <span class="n">to</span> <span class="p">(</span><span class="n">after</span> <span class="n">SpinePaths</span> <span class="n">are</span> <span class="n">parsed</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <cite>toNote()</cite> method converts the contents into a music21 note as
+if it&#8217;s kern &#8211; useful to have in all spine types.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">se1</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">SpineEvent</span><span class="p">(</span><span class="s1">&#39;EEE-8&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">se1</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">se1</span><span class="o">.</span><span class="n">contents</span>
+<span class="go">&#39;EEE-8&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">se1</span>
+<span class="go">&lt;music21.humdrum.spineParser.SpineEvent EEE-8&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">se1</span><span class="o">.</span><span class="n">toNote</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">&lt;music21.note.Note E-&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.SpineEvent" title="music21.humdrum.spineParser.SpineEvent"><code class="xref py py-class docutils literal"><span class="pre">SpineEvent</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.humdrum.spineParser.SpineEvent.toNote">
+<code class="descclassname">SpineEvent.</code><code class="descname">toNote</code><span class="sig-paren">(</span><em>convertString=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineEvent.toNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>parse the object as a **kern note and return the a
+<a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a> object (or Rest, or Chord)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">se</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">SpineEvent</span><span class="p">(</span><span class="s1">&#39;DD#4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">se</span><span class="o">.</span><span class="n">toNote</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">&lt;music21.note.Note D#&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">octave</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;quarter&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="spineline">
+<h2>SpineLine<a class="headerlink" href="#spineline" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.humdrum.spineParser.SpineLine">
+<em class="property">class </em><code class="descclassname">music21.humdrum.spineParser.</code><code class="descname">SpineLine</code><span class="sig-paren">(</span><em>position=0</em>, <em>contents=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.humdrum.spineParser.SpineLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>A SpineLine is any horizontal line of a Humdrum file that
+contains one or more spine elements (separated by tabs)
+and not Global elements.</p>
+<p>Takes in a position (line number in file, excluding blank lines)
+and a string of contents.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hsl</span> <span class="o">=</span> <span class="n">humdrum</span><span class="o">.</span><span class="n">spineParser</span><span class="o">.</span><span class="n">SpineLine</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">position</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span> <span class="n">contents</span><span class="o">=</span><span class="s2">&quot;C4</span><span class="se">\t</span><span class="s2">!local comment</span><span class="se">\t</span><span class="s2">*M[4/4]</span><span class="se">\t</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hsl</span><span class="o">.</span><span class="n">position</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hsl</span><span class="o">.</span><span class="n">numSpines</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hsl</span><span class="o">.</span><span class="n">spineData</span>
+<span class="go">[&#39;C4&#39;, &#39;!local comment&#39;, &#39;*M[4/4]&#39;, &#39;.&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.humdrum.spineParser.SpineLine" title="music21.humdrum.spineParser.SpineLine"><code class="xref py py-class docutils literal"><span class="pre">SpineLine</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.humdrum.spineParser.HumdrumLine" title="music21.humdrum.spineParser.HumdrumLine"><code class="xref py py-class docutils literal"><span class="pre">HumdrumLine</span></code></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleInstrument.html" title="music21.instrument"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleHumdrumInstruments.html" title="music21.humdrum.instruments"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

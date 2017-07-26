@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.sieve &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.sites" href="moduleSites.html" />
+    <link rel="prev" title="music21.serial" href="moduleSerial.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleSites.html" title="music21.sites"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleSerial.html" title="music21.serial"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleSerial.html"
+                        title="previous chapter">music21.serial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleSites.html"
+                        title="next chapter">music21.sites</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.sieve</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#compressionsegment">CompressionSegment</a></li>
+<li><a class="reference internal" href="#pitchsieve">PitchSieve</a></li>
+<li><a class="reference internal" href="#primesegment">PrimeSegment</a></li>
+<li><a class="reference internal" href="#residual">Residual</a></li>
+<li><a class="reference internal" href="#sieve">Sieve</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleSieve.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-sieve">
+<span id="modulesieve"></span><h1>music21.sieve<a class="headerlink" href="#music21-sieve" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.sieve"></span><p>A comprehensive, object model of the Xenakis Sieve. <a class="reference internal" href="#music21.sieve.Sieve" title="music21.sieve.Sieve"><code class="xref py py-class docutils literal"><span class="pre">music21.sieve.Sieve</span></code></a> 
+objects can be created from high-level string notations, and used to generate line segments 
+in various representation. Additional functionality is available through associated objects.</p>
+<p>The <a class="reference internal" href="#music21.sieve.Sieve" title="music21.sieve.Sieve"><code class="xref py py-class docutils literal"><span class="pre">music21.sieve.Sieve</span></code></a> class permits generation segments in four formats.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">Sieve</span><span class="p">(</span><span class="s1">&#39;3@2|7@1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">segment</span><span class="p">()</span>
+<span class="go">[1, 2, 5, 8, 11, 14, 15, 17, 20, 22, 23, 26, 29, 32, 35, 36, 38, 41, 43, 44, </span>
+<span class="go"> 47, 50, 53, 56, 57, 59, 62, 64, 65, 68, 71, 74, 77, 78, 80, 83, 85, 86, 89, 92, 95, 98, 99]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">segment</span><span class="p">(</span><span class="n">segmentFormat</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">)</span>
+<span class="go">[0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, </span>
+<span class="go"> 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, </span>
+<span class="go"> 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, </span>
+<span class="go"> 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">segment</span><span class="p">(</span><span class="n">segmentFormat</span><span class="o">=</span><span class="s1">&#39;width&#39;</span><span class="p">)</span>
+<span class="go">[1, 3, 3, 3, 3, 1, 2, 3, 2, 1, 3, 3, 3, 3, 1, 2, 3, 2, 1, 3, 3, 3, 3, 1, 2, 3, 2, </span>
+<span class="go"> 1, 3, 3, 3, 3, 1, 2, 3, 2, 1, 3, 3, 3, 3, 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">segment</span><span class="p">(</span><span class="n">segmentFormat</span><span class="o">=</span><span class="s1">&#39;unit&#39;</span><span class="p">))</span>
+<span class="go">43</span>
+</pre></div>
+</div>
+<p>A <a class="reference internal" href="#music21.sieve.CompressionSegment" title="music21.sieve.CompressionSegment"><code class="xref py py-class docutils literal"><span class="pre">music21.sieve.CompressionSegment</span></code></a> can be used to derive a Sieve from a
+ny sequence of integers.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">CompressionSegment</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">19</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">&#39;6@1|7@6|8@5|9@4|10@3|11@8&#39;</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="#music21.sieve.PitchSieve" title="music21.sieve.PitchSieve"><code class="xref py py-class docutils literal"><span class="pre">music21.sieve.PitchSieve</span></code></a> class provides a quick generation of 
+<a class="reference internal" href="modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">music21.pitch.Pitch</span></code></a> lists from Sieves.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">PitchSieve</span><span class="p">(</span><span class="s1">&#39;13@3|13@6|13@9&#39;</span><span class="p">,</span> <span class="s1">&#39;c1&#39;</span><span class="p">,</span> <span class="s1">&#39;c10&#39;</span><span class="p">,</span> <span class="s1">&#39;f#4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitches</span> <span class="o">=</span> <span class="n">a</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pitches</span><span class="p">])</span>
+<span class="go">&#39;F#1, A1, C2, G2, B-2, C#3, G#3, B3, D4, A4, C5, E-5, B-5, C#6, E6, B6, D7, </span>
+<span class="go"> F7, C8, E-8, F#8, C#9, E9, G9&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.sieve.discreteBinaryPad">
+<code class="descclassname">music21.sieve.</code><code class="descname">discreteBinaryPad</code><span class="sig-paren">(</span><em>series</em>, <em>fixRange=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.discreteBinaryPad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Treat a sequence of integers as defining contiguous binary integers, 
+where provided values are 1&#8217;s and excluded values are zero.</p>
+<p>For instance, running [3,10,12] through this method gives a 1 for 
+the first entry (signifying 3), 0s for the next six entries (signifying 
+4-9), a 1 (for 10), a 0 (for 11), and a 1 (for 12).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sieve</span><span class="o">.</span><span class="n">discreteBinaryPad</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">])</span>
+<span class="go">[1, 0, 0, 0, 0, 0, 0, 1, 0, 1]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sieve</span><span class="o">.</span><span class="n">discreteBinaryPad</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="go">[1, 1, 1]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.sieve.eratosthenes">
+<code class="descclassname">music21.sieve.</code><code class="descname">eratosthenes</code><span class="sig-paren">(</span><em>firstCandidate=2</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.eratosthenes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields the sequence of prime numbers via the Sieve of Eratosthenes.
+rather than creating a fixed list of a range (z) and crossing out
+multiples of sequential candidates, this algorithm stores primes under
+their next possible candidate, thus allowing the generation of primes
+in sequence without storing a complete range (z).</p>
+<p>create a dictionary. each entry in the dictionary is a key:item pair of 
+the largest (key) largest multiple of this prime so far found : (item)
+the prime. the dictionary only has as many entries as found primes.</p>
+<p>if a candidate is not a key in the dictionary, it is not a multiple of 
+any already-found prime; it is thus a prime. a new entry is added to the 
+dictionary, with the square of the prime as the key. the square of the prime
+is the next possible multiple to be found.</p>
+<p>to use this generator, create an instance and then call the .next() method
+on the instance</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">eratosthenes</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<p>We can also specify a starting value for the sequence, skipping over
+initial primes smaller than this number:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">eratosthenes</span><span class="p">(</span><span class="mi">95</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">97</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">101</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.sieve.rabinMiller">
+<code class="descclassname">music21.sieve.</code><code class="descname">rabinMiller</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.rabinMiller" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if an integer is likely prime or false if it is likely composite using the
+Rabin Miller primality test.</p>
+<p>See also here: <a class="reference external" href="http://www.4dsolutions.net/ocn/numeracy2.html">http://www.4dsolutions.net/ocn/numeracy2.html</a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sieve</span><span class="o">.</span><span class="n">rabinMiller</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sieve</span><span class="o">.</span><span class="n">rabinMiller</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sieve</span><span class="o">.</span><span class="n">rabinMiller</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sieve</span><span class="o">.</span><span class="n">rabinMiller</span><span class="p">(</span><span class="mi">123986234193</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.sieve.unitNormEqual">
+<code class="descclassname">music21.sieve.</code><code class="descname">unitNormEqual</code><span class="sig-paren">(</span><em>parts</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.unitNormEqual" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a certain number of parts, return a list unit-interval values 
+between 0 and 1, with as many divisions as parts; 0 and 1 are always inclusive.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sieve</span><span class="o">.</span><span class="n">unitNormEqual</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[0.0, 0.5, 1]</span>
+</pre></div>
+</div>
+<p>If parts is 0 or 1, then a single entry of [0] is given:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sieve</span><span class="o">.</span><span class="n">unitNormEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">[0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.sieve.unitNormRange">
+<code class="descclassname">music21.sieve.</code><code class="descname">unitNormRange</code><span class="sig-paren">(</span><em>series</em>, <em>fixRange=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.unitNormRange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a list of numbers, create a proportional spacing across the unit interval.</p>
+<p>The first entry will always be 0 and the last 1, other entries will be spaced
+according to their distance between these two units.  For instance, for 0, 3, 4
+the middle entry will be 0.75 since 3 is 3/4 of the distance between 0 and 4:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sieve</span><span class="o">.</span><span class="n">unitNormRange</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="go">[0.0, 0.75, 1.0]</span>
+</pre></div>
+</div>
+<p>but for [1, 3, 4], it will be .666... because 3 is 2/3 of the distance between
+1 and 4</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sieve</span><span class="o">.</span><span class="n">unitNormRange</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="go">[0.0, 0.666..., 1.0]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.sieve.unitNormStep">
+<code class="descclassname">music21.sieve.</code><code class="descname">unitNormStep</code><span class="sig-paren">(</span><em>step</em>, <em>a=0</em>, <em>b=1</em>, <em>normalized=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.unitNormStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a step size and an a/b min/max range, calculate number of parts
+to fill step through inclusive a,b, then return a unit interval list of values 
+necessary to cover region.</p>
+<p>Note that returned values are by default normalized within the unit interval.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sieve</span><span class="o">.</span><span class="n">unitNormStep</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">[0.0, 0.5, 1]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sieve</span><span class="o">.</span><span class="n">unitNormStep</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">[0.0, 0.25, 0.5, 0.75, 1]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sieve</span><span class="o">.</span><span class="n">unitNormStep</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">[-1, -0.5, 0.0, 0.5, 1.0]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">post</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">unitNormStep</span><span class="p">(</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+<span class="go">81</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">post</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">unitNormStep</span><span class="p">(</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+<span class="go">81</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="compressionsegment">
+<h2>CompressionSegment<a class="headerlink" href="#compressionsegment" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.sieve.CompressionSegment">
+<em class="property">class </em><code class="descclassname">music21.sieve.</code><code class="descname">CompressionSegment</code><span class="sig-paren">(</span><em>src</em>, <em>z=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.CompressionSegment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility to convert from a point sequence to sieve.</p>
+<p>A z range can be supplied to explicitly provide the complete sieve segment, 
+both positive and negative values. all values in the z range not in the 
+segment are interepreted as negative values. thus, there is an essential 
+dependency on the z range and the realized sieve.</p>
+<p>No matter the size of the z range, there is a modulus at which one point 
+in the segment can be found. As such, any segment can be reduced to, at a 
+mimimum, a residual for each point in the segment, each, for the supplied z, 
+providing a segment with one point.</p>
+<p>The same segment can then have multipled logical string representations,
+depending on the provided z.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="pitchsieve">
+<h2>PitchSieve<a class="headerlink" href="#pitchsieve" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.sieve.PitchSieve">
+<em class="property">class </em><code class="descclassname">music21.sieve.</code><code class="descname">PitchSieve</code><span class="sig-paren">(</span><em>sieveString</em>, <em>pitchLower=None</em>, <em>pitchUpper=None</em>, <em>pitchOrigin=None</em>, <em>eld=1</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.PitchSieve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Quick utility generator of <a class="reference internal" href="modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">music21.pitch.Pitch</span></code></a> lists 
+from <a class="reference internal" href="#music21.sieve.Sieve" title="music21.sieve.Sieve"><code class="xref py py-class docutils literal"><span class="pre">music21.sieve.Sieve</span></code></a> objects.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ps</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">PitchSieve</span><span class="p">(</span><span class="s1">&#39;6@0&#39;</span><span class="p">,</span> <span class="s1">&#39;c4&#39;</span><span class="p">,</span> <span class="s1">&#39;c8&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">()]</span>
+<span class="go">[&#39;C4&#39;, &#39;F#4&#39;, &#39;C5&#39;, &#39;F#5&#39;, &#39;C6&#39;, &#39;F#6&#39;, &#39;C7&#39;, &#39;F#7&#39;, &#39;C8&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.sieve.PitchSieve" title="music21.sieve.PitchSieve"><code class="xref py py-class docutils literal"><span class="pre">PitchSieve</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.sieve.PitchSieve.getIntervalSequence">
+<code class="descclassname">PitchSieve.</code><code class="descname">getIntervalSequence</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.PitchSieve.getIntervalSequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of Interval objects that defines the complete structure 
+of this <a class="reference internal" href="#music21.sieve.Sieve" title="music21.sieve.Sieve"><code class="xref py py-class docutils literal"><span class="pre">music21.sieve.Sieve</span></code></a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">PitchSieve</span><span class="p">(</span><span class="s1">&#39;3@0&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">getIntervalSequence</span><span class="p">()</span>
+<span class="go">[&lt;music21.interval.Interval m3&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">PitchSieve</span><span class="p">(</span><span class="s1">&#39;3@0|7@0&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">sieveObject</span><span class="o">.</span><span class="n">segment</span><span class="p">()</span>
+<span class="go">[0, 3, 6, 7, 9, 12, 14, 15, 18, 21, 24, 27, 28, 30, 33, 35, 36, 39, 42, 45, 48, 49, </span>
+<span class="go"> 51, 54, 56, 57, 60, 63, 66, 69, 70, 72, 75, 77, 78, 81, 84, 87, 90, 91, 93, 96, 98, 99]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">sieveObject</span><span class="o">.</span><span class="n">period</span><span class="p">()</span>
+<span class="go">21</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">getIntervalSequence</span><span class="p">()</span>
+<span class="go">[&lt;music21.interval.Interval m3&gt;, &lt;music21.interval.Interval m3&gt;, </span>
+<span class="go"> &lt;music21.interval.Interval m2&gt;, &lt;music21.interval.Interval M2&gt;, </span>
+<span class="go"> &lt;music21.interval.Interval m3&gt;, &lt;music21.interval.Interval M2&gt;, </span>
+<span class="go"> &lt;music21.interval.Interval m2&gt;, &lt;music21.interval.Interval m3&gt;, </span>
+<span class="go"> &lt;music21.interval.Interval m3&gt;]</span>
+</pre></div>
+</div>
+<p>This is the PitchSieve for a major scale:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">PitchSieve</span><span class="p">(</span><span class="s1">&#39;(-3@2 &amp; 4) | (-3@1 &amp; 4@1) | (3@2 &amp; 4@2) | (-3 &amp; 4@3)&#39;</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">getIntervalSequence</span><span class="p">()</span>
+<span class="go">[&lt;music21.interval.Interval M2&gt;, </span>
+<span class="go"> &lt;music21.interval.Interval M2&gt;, </span>
+<span class="go"> &lt;music21.interval.Interval m2&gt;, </span>
+<span class="go"> &lt;music21.interval.Interval M2&gt;, </span>
+<span class="go"> &lt;music21.interval.Interval M2&gt;, </span>
+<span class="go"> &lt;music21.interval.Interval M2&gt;, </span>
+<span class="go"> &lt;music21.interval.Interval m2&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="primesegment">
+<h2>PrimeSegment<a class="headerlink" href="#primesegment" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.sieve.PrimeSegment">
+<em class="property">class </em><code class="descclassname">music21.sieve.</code><code class="descname">PrimeSegment</code><span class="sig-paren">(</span><em>start</em>, <em>length</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.PrimeSegment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="residual">
+<h2>Residual<a class="headerlink" href="#residual" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.sieve.Residual">
+<em class="property">class </em><code class="descclassname">music21.sieve.</code><code class="descname">Residual</code><span class="sig-paren">(</span><em>m</em>, <em>shift=0</em>, <em>neg=0</em>, <em>z=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Residual" title="Permalink to this definition">¶</a></dt>
+<dd><p>object that represents a modulus and a start point
+each object stores a range of integers (self._z) from which sections are drawn
+this range of integers can be changed whenever the section os drawn</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.sieve.Residual" title="music21.sieve.Residual"><code class="xref py py-class docutils literal"><span class="pre">Residual</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.sieve.Residual.copy">
+<code class="descclassname">Residual.</code><code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Residual.copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Residual.period">
+<code class="descclassname">Residual.</code><code class="descname">period</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Residual.period" title="Permalink to this definition">¶</a></dt>
+<dd><p>period is M; obvious, but nice for completeness</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">Residual</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">period</span><span class="p">()</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Residual.represent">
+<code class="descclassname">Residual.</code><code class="descname">represent</code><span class="sig-paren">(</span><em>style=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Residual.represent" title="Permalink to this definition">¶</a></dt>
+<dd><p>does not show any logical operator but unary negation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Residual.segment">
+<code class="descclassname">Residual.</code><code class="descname">segment</code><span class="sig-paren">(</span><em>n=0</em>, <em>z=None</em>, <em>segmentFormat=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Residual.segment" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a residual subset of this modulus at this n
+within the integer range provided by z
+format can be &#8216;int&#8217; or &#8216;bin&#8217;, for integer or binary</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">Residual</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">segment</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, 53, 56, 59, </span>
+<span class="go"> 62, 65, 68, 71, 74, 77, 80, 83, 86, 89, 92, 95, 98]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">segment</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
+<span class="go">[5, 8, 11, 14]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Residual.setSegmentFormat">
+<code class="descclassname">Residual.</code><code class="descname">setSegmentFormat</code><span class="sig-paren">(</span><em>fmt</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Residual.setSegmentFormat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Residual.setZ">
+<code class="descclassname">Residual.</code><code class="descname">setZ</code><span class="sig-paren">(</span><em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Residual.setZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>z is the range of integers to use when generating a list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Residual.setZRange">
+<code class="descclassname">Residual.</code><code class="descname">setZRange</code><span class="sig-paren">(</span><em>minInt</em>, <em>maxInt</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Residual.setZRange" title="Permalink to this definition">¶</a></dt>
+<dd><p>z is the range of integers to use when generating a list
+convenience functiont that fixes max</p>
+</dd></dl>
+
+</div>
+<div class="section" id="sieve">
+<h2>Sieve<a class="headerlink" href="#sieve" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.sieve.Sieve">
+<em class="property">class </em><code class="descclassname">music21.sieve.</code><code class="descname">Sieve</code><span class="sig-paren">(</span><em>usrStr</em>, <em>z=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Sieve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a sieve segment from a sieve logical string of any complexity.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.sieve.Sieve" title="music21.sieve.Sieve"><code class="xref py py-class docutils literal"><span class="pre">Sieve</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.sieve.Sieve.collect">
+<code class="descclassname">Sieve.</code><code class="descname">collect</code><span class="sig-paren">(</span><em>n</em>, <em>zMinimum</em>, <em>length</em>, <em>segmentFormat</em>, <em>zStep=100</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Sieve.collect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collect sieve segment points for the provided length and format.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">Sieve</span><span class="p">(</span><span class="s1">&#39;3@11&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="go">[102, 105, 108, 111, 114, 117, 120, 123, 126, 129]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Sieve.compress">
+<code class="descclassname">Sieve.</code><code class="descname">compress</code><span class="sig-paren">(</span><em>z=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Sieve.compress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set this sieve to its compressed state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Sieve.expand">
+<code class="descclassname">Sieve.</code><code class="descname">expand</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Sieve.expand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set this Sieve to its expanded state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Sieve.period">
+<code class="descclassname">Sieve.</code><code class="descname">period</code><span class="sig-paren">(</span><em>state=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Sieve.period" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the period of the sieve.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">Sieve</span><span class="p">(</span><span class="s1">&#39;3@11&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">period</span><span class="p">()</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">Sieve</span><span class="p">(</span><span class="s1">&#39;2&amp;4&amp;8|5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">period</span><span class="p">()</span>
+<span class="go">40</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">Sieve</span><span class="p">(</span><span class="s1">&#39;(5|2)&amp;4&amp;8&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">period</span><span class="p">()</span>
+<span class="go">40</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Sieve.represent">
+<code class="descclassname">Sieve.</code><code class="descname">represent</code><span class="sig-paren">(</span><em>state=None</em>, <em>style=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Sieve.represent" title="Permalink to this definition">¶</a></dt>
+<dd><p>style of None is use for users; adds | to singel residuals
+style abs (absolute) does not add | tos single residual class</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Sieve.segment">
+<code class="descclassname">Sieve.</code><code class="descname">segment</code><span class="sig-paren">(</span><em>state=None</em>, <em>n=0</em>, <em>z=None</em>, <em>segmentFormat=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Sieve.segment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a sieve segment in various formats.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">Sieve</span><span class="p">(</span><span class="s1">&#39;3@11&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">segment</span><span class="p">(</span><span class="s1">&#39;exp&#39;</span><span class="p">)</span>
+<span class="go">[2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, </span>
+<span class="go"> 50, 53, 56, 59, 62, 65, 68, 71, 74, 77, 80, 83, 86, 89, 92, 95, 98]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">sieve</span><span class="o">.</span><span class="n">Sieve</span><span class="p">(</span><span class="s1">&#39;(5|2)&amp;4&amp;8&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">segment</span><span class="p">(</span><span class="s1">&#39;cmp&#39;</span><span class="p">,</span> <span class="n">segmentFormat</span><span class="o">=</span><span class="s1">&#39;wid&#39;</span><span class="p">)</span>
+<span class="go">[8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Sieve.setSegmentFormat">
+<code class="descclassname">Sieve.</code><code class="descname">setSegmentFormat</code><span class="sig-paren">(</span><em>fmt</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Sieve.setSegmentFormat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Sieve.setZ">
+<code class="descclassname">Sieve.</code><code class="descname">setZ</code><span class="sig-paren">(</span><em>z</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Sieve.setZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the z as a list. The z is the range of integers to use when 
+generating a sieve segment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.sieve.Sieve.setZRange">
+<code class="descclassname">Sieve.</code><code class="descname">setZRange</code><span class="sig-paren">(</span><em>minInt</em>, <em>maxInt</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.sieve.Sieve.setZRange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the z as a min and max value. The z is the range of 
+integers to use when generating a sieve segment.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleSites.html" title="music21.sites"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleSerial.html" title="music21.serial"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

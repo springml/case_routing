@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.omr.correctors &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.omr.evaluators" href="moduleOmrEvaluators.html" />
+    <link rel="prev" title="music21.noteworthy.translate" href="moduleNoteworthyTranslate.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleOmrEvaluators.html" title="music21.omr.evaluators"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleNoteworthyTranslate.html" title="music21.noteworthy.translate"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleNoteworthyTranslate.html"
+                        title="previous chapter">music21.noteworthy.translate</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleOmrEvaluators.html"
+                        title="next chapter">music21.omr.evaluators</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.omr.correctors</a><ul>
+<li><a class="reference internal" href="#measurehash">MeasureHash</a></li>
+<li><a class="reference internal" href="#measurerelationship">MeasureRelationship</a></li>
+<li><a class="reference internal" href="#measureslice">MeasureSlice</a></li>
+<li><a class="reference internal" href="#priorsintegrationscore">PriorsIntegrationScore</a></li>
+<li><a class="reference internal" href="#scorecorrector">ScoreCorrector</a></li>
+<li><a class="reference internal" href="#singlepart">SinglePart</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleOmrCorrectors.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-omr-correctors">
+<span id="moduleomrcorrectors"></span><h1>music21.omr.correctors<a class="headerlink" href="#music21-omr-correctors" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.omr.correctors"></span><div class="section" id="measurehash">
+<h2>MeasureHash<a class="headerlink" href="#measurehash" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.omr.correctors.MeasureHash">
+<em class="property">class </em><code class="descclassname">music21.omr.correctors.</code><code class="descname">MeasureHash</code><span class="sig-paren">(</span><em>measureObject=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Able to do a number of matching, substitution and hashing operations on
+a given measure object</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.omr.correctors.MeasureHash" title="music21.omr.correctors.MeasureHash"><code class="xref py py-class docutils literal"><span class="pre">MeasureHash</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.differenceProbabilityForOneOpCode">
+<code class="descclassname">MeasureHash.</code><code class="descname">differenceProbabilityForOneOpCode</code><span class="sig-paren">(</span><em>opCodeTuple</em>, <em>source</em>, <em>destination=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.differenceProbabilityForOneOpCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an opCodeTuple and a source, differenceProbabilityForOneOpCode
+returns the difference probability for one type of opcode 
+(replace, insert, delete, or equal).
+Here, the destination is in the set F of flagged measures and the 
+source is in the set C of correcting measures. 
+Source and destination are both hashStrings</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">source</span> <span class="o">=</span> <span class="s2">&quot;PFPFFF&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">destination</span> <span class="o">=</span> <span class="s2">&quot;PFPFGF&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ops</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">differenceProbabilityForOneOpCode</span><span class="p">(</span><span class="n">ops</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+<span class="go">0.8762013031640626</span>
+</pre></div>
+</div>
+<p>Omission</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ops2</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;insert&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mh2</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mh2</span><span class="o">.</span><span class="n">differenceProbabilityForOneOpCode</span><span class="p">(</span><span class="n">ops2</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+<span class="go">0.009</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ops3</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mh3</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mh3</span><span class="o">.</span><span class="n">differenceProbabilityForOneOpCode</span><span class="p">(</span><span class="n">ops3</span><span class="p">,</span> <span class="s2">&quot;PPPPP&quot;</span><span class="p">,</span> <span class="s2">&quot;PPVZP&quot;</span><span class="p">)</span>
+<span class="go">0.0001485</span>
+</pre></div>
+</div>
+<p>Five deletes in a row:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ops4</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mh3</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mh3</span><span class="o">.</span><span class="n">differenceProbabilityForOneOpCode</span><span class="p">(</span><span class="n">ops4</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;GFPGF&#39;</span><span class="p">)</span>
+<span class="go">1.024e-12</span>
+</pre></div>
+</div>
+<p>Example of Violin II vs. Viola in K525 I, m. 17</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vlnII</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 4/4 e4 e8. e8 c4 c8 c8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viola</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 4/4 c4 c8  c8 A4 A8 A8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vlnIIMH</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">(</span><span class="n">vlnII</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">violaMH</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">(</span><span class="n">viola</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vlnIIMH</span><span class="o">.</span><span class="n">hashString</span>
+<span class="go">&#39;PLFPFF&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">violaMH</span><span class="o">.</span><span class="n">hashString</span>
+<span class="go">&#39;PFFPFF&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opCodes</span> <span class="o">=</span> <span class="n">vlnIIMH</span><span class="o">.</span><span class="n">getOpCodes</span><span class="p">(</span><span class="n">violaMH</span><span class="o">.</span><span class="n">hashString</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">oc</span> <span class="ow">in</span> <span class="n">opCodes</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%30r</span><span class="s2"> : </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> 
+<span class="gp">... </span>          <span class="p">(</span><span class="n">oc</span><span class="p">,</span> <span class="n">vlnIIMH</span><span class="o">.</span><span class="n">differenceProbabilityForOneOpCode</span><span class="p">(</span><span class="n">oc</span><span class="p">,</span> <span class="n">violaMH</span><span class="o">.</span><span class="n">hashString</span><span class="p">)))</span>
+<span class="go">         (&#39;equal&#39;, 0, 1, 0, 1) : 0.968</span>
+<span class="go">       (&#39;replace&#39;, 1, 2, 1, 2) : 0.009</span>
+<span class="go">         (&#39;equal&#39;, 2, 6, 2, 6) : 0.876</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.getHashString">
+<code class="descclassname">MeasureHash.</code><code class="descname">getHashString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.getHashString" title="Permalink to this definition">¶</a></dt>
+<dd><p>takes a stream and returns a hashed string for searching on
+and stores it in self.hashString</p>
+<p>If a measure object has multiple voices, use the first  voice.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">quarterLength</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">quarterLength</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="n">quarterLength</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">quarterLength</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span><span class="o">.</span><span class="n">getHashString</span><span class="p">()</span>
+<span class="go">&#39;VFUF&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span><span class="o">.</span><span class="n">hashString</span> <span class="o">==</span> <span class="s1">&#39;VFUF&#39;</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.getMeasureDifference">
+<code class="descclassname">MeasureHash.</code><code class="descname">getMeasureDifference</code><span class="sig-paren">(</span><em>hashString</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.getMeasureDifference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the difference ratio between two measures
+b is the &#8220;correct&#8221; measure that we want to replace the flagged measure with</p>
+<p>Takes a hashString</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">quarterLength</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">quarterLength</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="n">quarterLength</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">quarterLength</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span><span class="o">.</span><span class="n">setSequenceMatcher</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span><span class="o">.</span><span class="n">getMeasureDifference</span><span class="p">(</span><span class="s1">&#39;VGUF&#39;</span><span class="p">)</span>
+<span class="go">0.25</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">quarterLength</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">quarterLength</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="n">quarterLength</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">quarterLength</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span><span class="o">.</span><span class="n">setSequenceMatcher</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span><span class="o">.</span><span class="n">getMeasureDifference</span><span class="p">(</span><span class="s1">&#39;VFUF&#39;</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.getOpCodes">
+<code class="descclassname">MeasureHash.</code><code class="descname">getOpCodes</code><span class="sig-paren">(</span><em>otherHash=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.getOpCodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the opcodes from a simple sequenceMatcher for the current measureHash</p>
+<p>Example of Violin II vs. Viola and Cello in K525 I, m. 17</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vlnII</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 4/4 e4 e8. e8 c4 c8 c8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viola</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 4/4 c4 c8  c8 A4 A8 A8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cello</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 4/4 C4 C4     D4 D4   &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vlnIIMH</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">(</span><span class="n">vlnII</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">violaMH</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">(</span><span class="n">viola</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">celloMH</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">(</span><span class="n">cello</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vlnIIMH</span><span class="o">.</span><span class="n">getOpCodes</span><span class="p">(</span><span class="n">violaMH</span><span class="o">.</span><span class="n">hashString</span><span class="p">)</span>
+<span class="go">[(&#39;equal&#39;, 0, 1, 0, 1), (&#39;replace&#39;, 1, 2, 1, 2), (&#39;equal&#39;, 2, 6, 2, 6)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vlnIIMH</span><span class="o">.</span><span class="n">getOpCodes</span><span class="p">(</span><span class="n">celloMH</span><span class="o">.</span><span class="n">hashString</span><span class="p">)</span>
+<span class="go">[(&#39;equal&#39;, 0, 1, 0, 1), (&#39;delete&#39;, 1, 3, 1, 1), </span>
+<span class="go"> (&#39;equal&#39;, 3, 4, 1, 2), (&#39;replace&#39;, 4, 6, 2, 4)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.getProbabilityBasedOnChanges">
+<code class="descclassname">MeasureHash.</code><code class="descname">getProbabilityBasedOnChanges</code><span class="sig-paren">(</span><em>otherHash</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.getProbabilityBasedOnChanges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a hash string</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">otherHash</span> <span class="o">=</span> <span class="s1">&#39;e&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hashString</span> <span class="o">=</span> <span class="s1">&#39;GFPGF&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">hashString</span> <span class="o">=</span> <span class="n">hashString</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">getProbabilityBasedOnChanges</span><span class="p">(</span><span class="n">otherHash</span><span class="p">)</span>
+<span class="go">2.9472832125e-14</span>
+</pre></div>
+</div>
+<p>Example of Violin II vs. Viola and Cello in K525 I, m. 17</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vlnII</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 4/4 e4 e8. e8 c4 c8 c8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">viola</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 4/4 c4 c8  c8 A4 A8 A8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cello</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinynotation: 4/4 C4 C4     D4 D4   &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vlnIIMH</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">(</span><span class="n">vlnII</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">violaMH</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">(</span><span class="n">viola</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">celloMH</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">(</span><span class="n">cello</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vlnIIMH</span><span class="o">.</span><span class="n">getProbabilityBasedOnChanges</span><span class="p">(</span><span class="n">violaMH</span><span class="o">.</span><span class="n">hashString</span><span class="p">)</span>
+<span class="go">0.0076295...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vlnIIMH</span><span class="o">.</span><span class="n">getProbabilityBasedOnChanges</span><span class="p">(</span><span class="n">celloMH</span><span class="o">.</span><span class="n">hashString</span><span class="p">)</span>
+<span class="go">4.077...e-09</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.getProbabilityFromOneCharSub">
+<code class="descclassname">MeasureHash.</code><code class="descname">getProbabilityFromOneCharSub</code><span class="sig-paren">(</span><em>source</em>, <em>destination</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.getProbabilityFromOneCharSub" title="Permalink to this definition">¶</a></dt>
+<dd><p>Source and destination are strings of one character</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Eighth note to eighth rest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">getProbabilityFromOneCharSub</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">)</span>
+<span class="go">0.003</span>
+</pre></div>
+</div>
+<p>Eighth note to quarter note:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">getProbabilityFromOneCharSub</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
+<span class="go">0.0165</span>
+</pre></div>
+</div>
+<p>Eighth note to half note:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">getProbabilityFromOneCharSub</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
+<span class="go">0.0002722...</span>
+</pre></div>
+</div>
+<p>Quarter note to dotted quarter note:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">getProbabilityFromOneCharSub</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="s1">&#39;V&#39;</span><span class="p">)</span>
+<span class="go">0.009</span>
+</pre></div>
+</div>
+<p>Dotted quarter note to quarter note:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">getProbabilityFromOneCharSub</span><span class="p">(</span><span class="s1">&#39;V&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
+<span class="go">0.004</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">getProbabilityFromOneCharSub</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="go">3.6e-05</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.getProbabilityOnAddition">
+<code class="descclassname">MeasureHash.</code><code class="descname">getProbabilityOnAddition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.getProbabilityOnAddition" title="Permalink to this definition">¶</a></dt>
+<dd><p>In order for the source to be correct,
+the destination added a symbol
+Associated with type &#8216;insert&#8217;</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">()</span><span class="o">.</span><span class="n">getProbabilityOnAddition</span><span class="p">()</span>
+<span class="go">0.004</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.getProbabilityOnEquality">
+<code class="descclassname">MeasureHash.</code><code class="descname">getProbabilityOnEquality</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.getProbabilityOnEquality" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parts or the whole of a string were equal.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">()</span><span class="o">.</span><span class="n">getProbabilityOnEquality</span><span class="p">()</span>
+<span class="go">0.9675</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.getProbabilityOnOmission">
+<code class="descclassname">MeasureHash.</code><code class="descname">getProbabilityOnOmission</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.getProbabilityOnOmission" title="Permalink to this definition">¶</a></dt>
+<dd><p>In order for the source to be correct,
+the destination omitted a symbol.
+Associated with type &#8216;delete&#8217; and in the case of replacement of
+a dotted version of a note with an undotted version (or double dot with dotted, etc.)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">()</span><span class="o">.</span><span class="n">getProbabilityOnOmission</span><span class="p">()</span>
+<span class="go">0.009        </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.getProbabilityOnSubstitute">
+<code class="descclassname">MeasureHash.</code><code class="descname">getProbabilityOnSubstitute</code><span class="sig-paren">(</span><em>source</em>, <em>destination</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.getProbabilityOnSubstitute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Source and destination are measureHash strings
+Source is in set C of correcting measures.
+Destination is in set F of flagged measures.</p>
+<p>(Rossant &amp; Bloch)</p>
+<ul>
+<li><p class="first">value change: 50.77% of all errors (inverse: .0197)</p>
+</li>
+<li><dl class="first docutils">
+<dt>confusions: 9.23% of all errors (inverse: .108)</dt>
+<dd><p class="first last">Note: these get the most probability, because they are the rarest</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">omission: 27.69% of all errors (inverse: .0361)</p>
+</li>
+<li><p class="first">addition: 12.31% of all errors (inverse: .08125)</p>
+</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Replacement of eighth note (F) for quarter note (P) = shift of one value:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">getProbabilityOnSubstitute</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
+<span class="go">0.0165</span>
+</pre></div>
+</div>
+<p>Replacement of eighth note (F) for eighth rest (G) = shift of one type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">getProbabilityOnSubstitute</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">)</span>
+<span class="go">0.003</span>
+</pre></div>
+</div>
+<p>Omission of any symbol, less common so costs more
+The proposed correction assumes that the incorrect measure omitted a symbol</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">getProbabilityOnSubstitute</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
+<span class="go">0.009</span>
+</pre></div>
+</div>
+<p>Addition of any symbol, less common so costs more
+The proposed correction assumes that the incorrect measure added a symbol</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">getProbabilityOnSubstitute</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="go">0.004</span>
+</pre></div>
+</div>
+<p>Combination of value shift and an addition:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mh</span><span class="o">.</span><span class="n">getProbabilityOnSubstitute</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span><span class="s1">&#39;PP&#39;</span><span class="p">)</span>
+<span class="go">0.0001485</span>
+</pre></div>
+</div>
+<p>Take minimum length. Compare index to index. Any additional letters
+in the flagged measure get graded as additions. Any additional letters
+in the comparison measure get graded as omissions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.hashGrace">
+<code class="descclassname">MeasureHash.</code><code class="descname">hashGrace</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.hashGrace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives a Grace Note a duration of a 128th note</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.hashNote">
+<code class="descclassname">MeasureHash.</code><code class="descname">hashNote</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.hashNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encodes a note</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;quarter&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span><span class="o">.</span><span class="n">hashNote</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="go">&#39;P&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;half&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span><span class="o">.</span><span class="n">hashNote</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span>
+<span class="go">&#39;Z&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">quarterLength</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span><span class="o">.</span><span class="n">hashNote</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
+<span class="go">&#39;V&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.hashQuarterLength">
+<code class="descclassname">MeasureHash.</code><code class="descname">hashQuarterLength</code><span class="sig-paren">(</span><em>ql</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.hashQuarterLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns a QuarterLength duration into an integer from 1 to 127</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span><span class="o">.</span><span class="n">hashQuarterLength</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="go">80</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span><span class="o">.</span><span class="n">hashQuarterLength</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="go">90</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.hashRest">
+<code class="descclassname">MeasureHash.</code><code class="descname">hashRest</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.hashRest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encodes a rest</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">MeasureHash</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hasher</span><span class="o">.</span><span class="n">hashRest</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="go">&#39;Q&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureHash.setSequenceMatcher">
+<code class="descclassname">MeasureHash.</code><code class="descname">setSequenceMatcher</code><span class="sig-paren">(</span><em>hashes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureHash.setSequenceMatcher" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="measurerelationship">
+<h2>MeasureRelationship<a class="headerlink" href="#measurerelationship" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.omr.correctors.MeasureRelationship">
+<em class="property">class </em><code class="descclassname">music21.omr.correctors.</code><code class="descname">MeasureRelationship</code><span class="sig-paren">(</span><em>flaggedMeasurePart</em>, <em>flaggedMeasureIndex</em>, <em>correctMeasurePart</em>, <em>correctMeasureIndex</em>, <em>correctionProbability</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureRelationship" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.omr.correctors.MeasureRelationship" title="music21.omr.correctors.MeasureRelationship"><code class="xref py py-class docutils literal"><span class="pre">MeasureRelationship</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.omr.correctors.MeasureRelationship.correctMeasureIndex">
+<code class="descclassname">MeasureRelationship.</code><code class="descname">correctMeasureIndex</code><a class="headerlink" href="#music21.omr.correctors.MeasureRelationship.correctMeasureIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.omr.correctors.MeasureRelationship.correctMeasurePart">
+<code class="descclassname">MeasureRelationship.</code><code class="descname">correctMeasurePart</code><a class="headerlink" href="#music21.omr.correctors.MeasureRelationship.correctMeasurePart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.omr.correctors.MeasureRelationship.correctionProbability">
+<code class="descclassname">MeasureRelationship.</code><code class="descname">correctionProbability</code><a class="headerlink" href="#music21.omr.correctors.MeasureRelationship.correctionProbability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.omr.correctors.MeasureRelationship.flaggedMeasureIndex">
+<code class="descclassname">MeasureRelationship.</code><code class="descname">flaggedMeasureIndex</code><a class="headerlink" href="#music21.omr.correctors.MeasureRelationship.flaggedMeasureIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.omr.correctors.MeasureRelationship.flaggedMeasurePart">
+<code class="descclassname">MeasureRelationship.</code><code class="descname">flaggedMeasurePart</code><a class="headerlink" href="#music21.omr.correctors.MeasureRelationship.flaggedMeasurePart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</div>
+<div class="section" id="measureslice">
+<h2>MeasureSlice<a class="headerlink" href="#measureslice" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.omr.correctors.MeasureSlice">
+<em class="property">class </em><code class="descclassname">music21.omr.correctors.</code><code class="descname">MeasureSlice</code><span class="sig-paren">(</span><em>score</em>, <em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureSlice" title="Permalink to this definition">¶</a></dt>
+<dd><p>represents a single measure from all parts</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.omr.correctors.MeasureSlice" title="music21.omr.correctors.MeasureSlice"><code class="xref py py-class docutils literal"><span class="pre">MeasureSlice</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureSlice.getSliceHashes">
+<code class="descclassname">MeasureSlice.</code><code class="descname">getSliceHashes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureSlice.getSliceHashes" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">omrPath</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">K525omrShortPath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">omrScore</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">omrPath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssOMR</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">ScoreCorrector</span><span class="p">(</span><span class="n">omrScore</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssOMR</span>
+<span class="go">&lt;music21.omr.correctors.ScoreCorrector object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">measureSlice</span> <span class="o">=</span> <span class="n">ssOMR</span><span class="o">.</span><span class="n">getMeasureSlice</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">measureSlice</span>
+<span class="go">&lt;music21.omr.correctors.MeasureSlice object at 0x...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.MeasureSlice.runSliceSearch">
+<code class="descclassname">MeasureSlice.</code><code class="descname">runSliceSearch</code><span class="sig-paren">(</span><em>incorrectPartIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.MeasureSlice.runSliceSearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in an incorrectPartIndex and returns an array
+of the measure indices within the slice that have the
+maximum probability to correct a given flagged measures.</p>
+<p>Returns a namedtuple (MeasureRelationship)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">omrPath</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">K525omrShortPath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">omrScore</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">omrPath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssOMR</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">ScoreCorrector</span><span class="p">(</span><span class="n">omrScore</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">measureSlice</span> <span class="o">=</span> <span class="n">ssOMR</span><span class="o">.</span><span class="n">getMeasureSlice</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">measureSlice</span>
+<span class="go">&lt;music21.omr.correctors.MeasureSlice object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">measureSlice</span><span class="o">.</span><span class="n">runSliceSearch</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">MeasureRelationship(flaggedMeasurePart=1, flaggedMeasureIndex=2, </span>
+<span class="go">    correctMeasurePart=3, correctMeasureIndex=2, correctionProbability=0.0054...)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">measureSlice</span> <span class="o">=</span> <span class="n">ssOMR</span><span class="o">.</span><span class="n">getMeasureSlice</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">measureSlice</span><span class="o">.</span><span class="n">runSliceSearch</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">MeasureRelationship(flaggedMeasurePart=0, </span>
+<span class="go">    flaggedMeasureIndex=3, correctMeasurePart=1, correctMeasureIndex=3, </span>
+<span class="go">    correctionProbability=2.41...e-14)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="priorsintegrationscore">
+<h2>PriorsIntegrationScore<a class="headerlink" href="#priorsintegrationscore" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.omr.correctors.PriorsIntegrationScore">
+<em class="property">class </em><code class="descclassname">music21.omr.correctors.</code><code class="descname">PriorsIntegrationScore</code><span class="sig-paren">(</span><em>total</em>, <em>horizontal</em>, <em>vertical</em>, <em>ignored</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.PriorsIntegrationScore" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.omr.correctors.PriorsIntegrationScore" title="music21.omr.correctors.PriorsIntegrationScore"><code class="xref py py-class docutils literal"><span class="pre">PriorsIntegrationScore</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.omr.correctors.PriorsIntegrationScore.horizontal">
+<code class="descclassname">PriorsIntegrationScore.</code><code class="descname">horizontal</code><a class="headerlink" href="#music21.omr.correctors.PriorsIntegrationScore.horizontal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.omr.correctors.PriorsIntegrationScore.ignored">
+<code class="descclassname">PriorsIntegrationScore.</code><code class="descname">ignored</code><a class="headerlink" href="#music21.omr.correctors.PriorsIntegrationScore.ignored" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.omr.correctors.PriorsIntegrationScore.total">
+<code class="descclassname">PriorsIntegrationScore.</code><code class="descname">total</code><a class="headerlink" href="#music21.omr.correctors.PriorsIntegrationScore.total" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.omr.correctors.PriorsIntegrationScore.vertical">
+<code class="descclassname">PriorsIntegrationScore.</code><code class="descname">vertical</code><a class="headerlink" href="#music21.omr.correctors.PriorsIntegrationScore.vertical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</div>
+<div class="section" id="scorecorrector">
+<h2>ScoreCorrector<a class="headerlink" href="#scorecorrector" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.omr.correctors.ScoreCorrector">
+<em class="property">class </em><code class="descclassname">music21.omr.correctors.</code><code class="descname">ScoreCorrector</code><span class="sig-paren">(</span><em>score=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector" title="Permalink to this definition">¶</a></dt>
+<dd><p>takes in a music21.stream.Score object and runs OMR correction on it.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.omr.correctors.ScoreCorrector" title="music21.omr.correctors.ScoreCorrector"><code class="xref py py-class docutils literal"><span class="pre">ScoreCorrector</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.generateCorrectedScore">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">generateCorrectedScore</code><span class="sig-paren">(</span><em>horizontalArray</em>, <em>verticalArray</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.generateCorrectedScore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given two correcting arrays (one from the horizontal model and one from 
+the vertical model),
+which offer source measures for each flagged measure in each part, 
+this method compares the probabilities of proposed 
+source measures for each flagged measure,
+and replaces the flagged measures contents with the more probable source measure
+using substituteOneMeasureContentsForAnother.
+It then rehashes the score so that a new difference comparison can be run.</p>
+<p>Returns a collections.namedtuple of the total number of flagged measures, the total number
+corrected by the horizontal (Prior based on Distance) and the 
+vertical (Prior based on Parts)
+methods.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.getAllHashes">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">getAllHashes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.getAllHashes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array of arrays, each of which is the hashed notes for a part</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;4/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s1">&#39;half&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;half&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s1">&#39;half&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;half&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">(</span><span class="n">inPlace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;4/4&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s1">&#39;quarter&#39;</span><span class="p">),</span> <span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span><span class="o">.</span><span class="n">makeMeasures</span><span class="p">(</span><span class="n">inPlace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Score</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ss</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">ScoreCorrector</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ss</span><span class="o">.</span><span class="n">getAllHashes</span><span class="p">()</span>
+<span class="go">[[&#39;Z[&#39;, &#39;Z[&#39;], [&#39;PPPP&#39;, &#39;PPPP&#39;]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.getAllIncorrectMeasures">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">getAllIncorrectMeasures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.getAllIncorrectMeasures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array of the incorrect measure indices arrays for each part.
+This is used in the MeasureSlice object to make sure we&#8217;re not comparing a flagged
+measure to other flagged measures in its slice</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">omrPath</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">K525omrShortPath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">omrScore</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">omrPath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssOMR</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">ScoreCorrector</span><span class="p">(</span><span class="n">omrScore</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssOMR</span>
+<span class="go">&lt;music21.omr.correctors.ScoreCorrector object at 0x...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssOMR</span><span class="o">.</span><span class="n">getAllIncorrectMeasures</span><span class="p">()</span>
+<span class="go">[[1, 3, 9, 10, 12, 17, 20], [2, 12, 14, 17], [1, 9], []]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.getMeasureSlice">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">getMeasureSlice</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.getMeasureSlice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an index, i, returns a MeasureSlice object at that index</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">omrPath</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">K525omrShortPath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">omrScore</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">omrPath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssOMR</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">ScoreCorrector</span><span class="p">(</span><span class="n">omrScore</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssOMR</span><span class="o">.</span><span class="n">getMeasureSlice</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">&lt;music21.omr.correctors.MeasureSlice object at 0x...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.getSinglePart">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">getSinglePart</code><span class="sig-paren">(</span><em>pn</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.getSinglePart" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a NEW SinglePart object for part number pn from the score</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.getVerticalProbabilityDistributionSinglePart">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">getVerticalProbabilityDistributionSinglePart</code><span class="sig-paren">(</span><em>pn</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.getVerticalProbabilityDistributionSinglePart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Vertical Probability Distribution (PrP) for a single part.</p>
+<p>Get the Priors for the Violin II part (first 20 measures only)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">omrPath</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">K525omrShortPath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">omrScore</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">omrPath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ssOMR</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">ScoreCorrector</span><span class="p">(</span><span class="n">omrScore</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allDists</span> <span class="o">=</span> <span class="n">ssOMR</span><span class="o">.</span><span class="n">getVerticalProbabilityDistributionSinglePart</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="s2">&quot;</span><span class="si">%0.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">allDists</span><span class="p">]</span>
+<span class="go">[&#39;0.571&#39;, &#39;1.000&#39;, &#39;0.667&#39;, &#39;0.714&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.getVerticalProbabilityDistributionSinglePartSingleMeasure">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">getVerticalProbabilityDistributionSinglePartSingleMeasure</code><span class="sig-paren">(</span><em>pn</em>, <em>measureIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.getVerticalProbabilityDistributionSinglePartSingleMeasure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.run">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run all known models for OMR correction on
+this score</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.runHorizontalCorrectionModel">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">runHorizontalCorrectionModel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.runHorizontalCorrectionModel" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>runs for sp in self.singleParts:</dt>
+<dd>sp.runHorizontalCorrectionModel()</dd>
+</dl>
+<p>returns correctingArrayAllParts</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.runPriorModel">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">runPriorModel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.runPriorModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>run the horizontal and vertical correction models
+on the score.  Returns the new self.score object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.runVerticalCorrectionModel">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">runVerticalCorrectionModel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.runVerticalCorrectionModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a basic vertical correction model on a ScoreCorrector object.
+That is, for each flagged measure, this method replaces the rhythm in that flagged measure
+with the rhythm of a measure with the least difference.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.runVerticalSearch">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">runVerticalSearch</code><span class="sig-paren">(</span><em>i</em>, <em>pn</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.runVerticalSearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array of the minimum distance measure indices
+given a measure (with index i) within a part pn to compare to</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.substituteOneMeasureContentsForAnother">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">substituteOneMeasureContentsForAnother</code><span class="sig-paren">(</span><em>sourceHorizontalIndex</em>, <em>sourceVerticalIndex</em>, <em>destinationHorizontalIndex</em>, <em>destinationVerticalIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.substituteOneMeasureContentsForAnother" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a destination measure, deletes its contents, and replaces them 
+with the contents of a source measure but retains as many pitches as possible</p>
+<p>The destination measure would normally be in the set F of flagged measures 
+(having an incorrect number of beats)
+while the source measure is in the set C of correcting measures.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">measures</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Part Soprano&gt;</span>
+<span class="go">    ...</span>
+<span class="go">    {0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note A&gt;</span>
+<span class="go">        {1.0} &lt;music21.note.Note B&gt;</span>
+<span class="go">        {2.0} &lt;music21.note.Note C#&gt;</span>
+<span class="go">        {3.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">    {4.0} &lt;music21.stream.Measure 2 offset=4.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note C#&gt;</span>
+<span class="go">        {1.0} &lt;music21.note.Note B&gt;</span>
+<span class="go">        {2.0} &lt;music21.note.Note A&gt;</span>
+<span class="go">        {3.0} &lt;music21.note.Note C#&gt;</span>
+<span class="go">{0.0} &lt;music21.stream.Part Alto&gt;</span>
+<span class="go">     ...</span>
+<span class="go">    {0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note F#&gt;</span>
+<span class="go">        {1.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">        {2.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">        {3.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">    {4.0} &lt;music21.stream.Measure 2 offset=4.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">        {0.5} &lt;music21.note.Note A&gt;</span>
+<span class="go">        {1.0} &lt;music21.note.Note G#&gt;</span>
+<span class="go">        {2.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">        {3.0} &lt;music21.note.Note G#&gt;</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<p>Replace part 1, measure 2 (index 1) with part 0, measure 1 (index 0) while retaining
+as many pitches as possible. The eighth-notes will become quarters:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scOMR</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">ScoreCorrector</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scOMR</span><span class="o">.</span><span class="n">substituteOneMeasureContentsForAnother</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">scOMR</span><span class="o">.</span><span class="n">score</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.stream.Part Soprano&gt;</span>
+<span class="go">    ...</span>
+<span class="go">    {0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note A&gt;</span>
+<span class="go">        {1.0} &lt;music21.note.Note B&gt;</span>
+<span class="go">        {2.0} &lt;music21.note.Note C#&gt;</span>
+<span class="go">        {3.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">    {4.0} &lt;music21.stream.Measure 2 offset=4.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note C#&gt;</span>
+<span class="go">        {1.0} &lt;music21.note.Note B&gt;</span>
+<span class="go">        {2.0} &lt;music21.note.Note A&gt;</span>
+<span class="go">        {3.0} &lt;music21.note.Note C#&gt;</span>
+<span class="go">{0.0} &lt;music21.stream.Part Alto&gt;</span>
+<span class="go">     ...</span>
+<span class="go">    {0.0} &lt;music21.stream.Measure 1 offset=0.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note F#&gt;</span>
+<span class="go">        {1.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">        {2.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">        {3.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">    {4.0} &lt;music21.stream.Measure 2 offset=4.0&gt;</span>
+<span class="go">        {0.0} &lt;music21.note.Note E&gt;</span>
+<span class="go">        {1.0} &lt;music21.note.Note A&gt;</span>
+<span class="go">        {2.0} &lt;music21.note.Note G#&gt;</span>
+<span class="go">        {3.0} &lt;music21.note.Note E&gt;</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.ScoreCorrector.verticalProbabilityDist">
+<code class="descclassname">ScoreCorrector.</code><code class="descname">verticalProbabilityDist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.ScoreCorrector.verticalProbabilityDist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses a score and returns an array of probabilities.
+For n in the array, n is the the probability that the nth part</p>
+</dd></dl>
+
+</div>
+<div class="section" id="singlepart">
+<h2>SinglePart<a class="headerlink" href="#singlepart" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.omr.correctors.SinglePart">
+<em class="property">class </em><code class="descclassname">music21.omr.correctors.</code><code class="descname">SinglePart</code><span class="sig-paren">(</span><em>part=None</em>, <em>pn=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.SinglePart" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.omr.correctors.SinglePart" title="music21.omr.correctors.SinglePart"><code class="xref py py-class docutils literal"><span class="pre">SinglePart</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.omr.correctors.SinglePart.getIncorrectMeasureIndices">
+<code class="descclassname">SinglePart.</code><code class="descname">getIncorrectMeasureIndices</code><span class="sig-paren">(</span><em>runFast=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.SinglePart.getIncorrectMeasureIndices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array of all the measures that OMR software would flag - that is, 
+measures that do 
+not have the correct number of beats given the current time signature</p>
+<p>if runFast is True (by default), assumes that the initial TimeSignature 
+is the TimeSignature for the entire piece.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Part</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;6/8&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span> <span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span> <span class="o">=</span> <span class="n">omr</span><span class="o">.</span><span class="n">correctors</span><span class="o">.</span><span class="n">SinglePart</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">pn</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">getIncorrectMeasureIndices</span><span class="p">()</span>
+<span class="go">[1]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&lt;music21.stream.Measure 2 offset=3.0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/8&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span><span class="o">.</span><span class="n">getIncorrectMeasureIndices</span><span class="p">(</span><span class="n">runFast</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.SinglePart.getMeasures">
+<code class="descclassname">SinglePart.</code><code class="descname">getMeasures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.SinglePart.getMeasures" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.SinglePart.getProbabilityDistribution">
+<code class="descclassname">SinglePart.</code><code class="descname">getProbabilityDistribution</code><span class="sig-paren">(</span><em>sourceIndex</em>, <em>destinationIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.SinglePart.getProbabilityDistribution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.SinglePart.getSequenceHashesFromMeasureStream">
+<code class="descclassname">SinglePart.</code><code class="descname">getSequenceHashesFromMeasureStream</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.SinglePart.getSequenceHashesFromMeasureStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>takes in a measure stream of a part
+returns an array of hashed strings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.SinglePart.horizontalProbabilityDist">
+<code class="descclassname">SinglePart.</code><code class="descname">horizontalProbabilityDist</code><span class="sig-paren">(</span><em>regenerate=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.SinglePart.horizontalProbabilityDist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses (takes?) an array of hashed measures and returns an array of probabilities.
+For n in the array, n is the the probability that the measure (n-(length of score)) away
+from a flagged measure will offer a rhythmic solution.</p>
+<p>These are the probabilities that, within a part, a measure offers a solution, given its
+distance from a flagged measure.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.SinglePart.runHorizontalCorrectionModel">
+<code class="descclassname">SinglePart.</code><code class="descname">runHorizontalCorrectionModel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.SinglePart.runHorizontalCorrectionModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a basic horizontal correction model on a score.
+That is, for each flagged measure, this method replaces the rhythm in that flagged measure
+with the rhythm of a measure with the least difference.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.omr.correctors.SinglePart.runHorizontalSearch">
+<code class="descclassname">SinglePart.</code><code class="descname">runHorizontalSearch</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.omr.correctors.SinglePart.runHorizontalSearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array of the indices of the minimum distance measures
+given a measure (with index i) to compare to.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleOmrEvaluators.html" title="music21.omr.evaluators"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleNoteworthyTranslate.html" title="music21.noteworthy.translate"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

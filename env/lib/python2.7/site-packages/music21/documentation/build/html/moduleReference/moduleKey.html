@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.key &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.languageExcerpts.naturalLanguageObjects" href="moduleLanguageExcerptsNaturalLanguageObjects.html" />
+    <link rel="prev" title="music21.ipython21" href="moduleIpython21.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleLanguageExcerptsNaturalLanguageObjects.html" title="music21.languageExcerpts.naturalLanguageObjects"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleIpython21.html" title="music21.ipython21"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleIpython21.html"
+                        title="previous chapter">music21.ipython21</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleLanguageExcerptsNaturalLanguageObjects.html"
+                        title="next chapter">music21.languageExcerpts.naturalLanguageObjects</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.key</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#keysignature">KeySignature</a></li>
+<li><a class="reference internal" href="#key">Key</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleKey.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-key">
+<span id="modulekey"></span><h1>music21.key<a class="headerlink" href="#music21-key" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.key"></span><p>This module defines objects for representing key signatures as well as key 
+areas. The <a class="reference internal" href="#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a> is used in 
+<a class="reference internal" href="moduleStream.html#music21.stream.Measure" title="music21.stream.Measure"><code class="xref py py-class docutils literal"><span class="pre">Measure</span></code></a> objects for defining notated key signatures.</p>
+<p>The <a class="reference internal" href="#music21.key.Key" title="music21.key.Key"><code class="xref py py-class docutils literal"><span class="pre">Key</span></code></a> object is a fuller representation not just of
+a key signature but also of the key of a region.</p>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.key.convertKeyStringToMusic21KeyString">
+<code class="descclassname">music21.key.</code><code class="descname">convertKeyStringToMusic21KeyString</code><span class="sig-paren">(</span><em>textString</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.key.convertKeyStringToMusic21KeyString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function to change strings in the form of &#8220;Eb&#8221; to
+&#8220;E-&#8221; (for E-flat major) and leaves alone proper music21 strings
+(like &#8220;E-&#8221; or &#8220;f#&#8221;).  A little bit complex because of parsing
+bb as B-flat minor and Bb as B-flat major.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">convertKeyStringToMusic21KeyString</span><span class="p">(</span><span class="s1">&#39;Eb&#39;</span><span class="p">)</span>
+<span class="go">&#39;E-&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">convertKeyStringToMusic21KeyString</span><span class="p">(</span><span class="s1">&#39;f#&#39;</span><span class="p">)</span>
+<span class="go">&#39;f#&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">convertKeyStringToMusic21KeyString</span><span class="p">(</span><span class="s1">&#39;bb&#39;</span><span class="p">)</span>
+<span class="go">&#39;b-&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">convertKeyStringToMusic21KeyString</span><span class="p">(</span><span class="s1">&#39;Bb&#39;</span><span class="p">)</span>
+<span class="go">&#39;B-&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">convertKeyStringToMusic21KeyString</span><span class="p">(</span><span class="s1">&#39;b#&#39;</span><span class="p">)</span>
+<span class="go">&#39;b#&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">convertKeyStringToMusic21KeyString</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>    
+<span class="go">&#39;c&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.key.pitchToSharps">
+<code class="descclassname">music21.key.</code><code class="descname">pitchToSharps</code><span class="sig-paren">(</span><em>value</em>, <em>mode=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.key.pitchToSharps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a pitch or <a class="reference internal" href="modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">music21.pitch.Pitch</span></code></a> object, 
+return the number of sharps found in that mode.</p>
+<p>The <cite>mode</cite> parameter can be &#8216;major&#8217;, &#8216;minor&#8217;, or most
+of the common church/jazz modes (&#8216;dorian&#8217;, &#8216;mixolydian&#8217;, etc.)
+including Locrian.</p>
+<p>If <cite>mode</cite> is omitted or not found, the default mode is major.</p>
+<p>(extra points to anyone who can find the earliest reference to
+the Locrian mode in print.  David Cohen and I (MSC) have been
+looking for this for years).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;minor&#39;</span><span class="p">)</span>
+<span class="go">-3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;minor&#39;</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;e-&#39;</span><span class="p">)</span>
+<span class="go">-3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;minor&#39;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;f#&#39;</span><span class="p">,</span> <span class="s1">&#39;major&#39;</span><span class="p">)</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="s1">&#39;major&#39;</span><span class="p">)</span>
+<span class="go">-6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;c#&#39;</span><span class="p">)</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;g#&#39;</span><span class="p">)</span>
+<span class="go">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;dorian&#39;</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;dorian&#39;</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;mixolydian&#39;</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;e-&#39;</span><span class="p">,</span> <span class="s1">&#39;lydian&#39;</span><span class="p">)</span>
+<span class="go">-2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;e-&#39;</span><span class="p">,</span> <span class="s1">&#39;lydian&#39;</span><span class="p">)</span>
+<span class="go">-2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;phrygian&#39;</span><span class="p">)</span>
+<span class="go">-1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;phrygian&#39;</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;f#&#39;</span><span class="p">)</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;f-&#39;</span><span class="p">)</span>
+<span class="go">-8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;f--&#39;</span><span class="p">)</span>
+<span class="go">-15</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;f--&#39;</span><span class="p">,</span> <span class="s1">&#39;locrian&#39;</span><span class="p">)</span>
+<span class="go">-20</span>
+</pre></div>
+</div>
+<p>But quarter tones don&#8217;t work:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">pitchToSharps</span><span class="p">(</span><span class="s1">&#39;C~&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.key.KeyException</span>: <span class="n">Cannot determine sharps for quarter-tone keys! silly!</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.key.sharpsToPitch">
+<code class="descclassname">music21.key.</code><code class="descname">sharpsToPitch</code><span class="sig-paren">(</span><em>sharpCount</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.key.sharpsToPitch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a number a positive/negative number of sharps, return a Pitch 
+object set to the appropriate major key value.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">sharpsToPitch</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch G&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">sharpsToPitch</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch D&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">sharpsToPitch</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch B-&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">sharpsToPitch</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch G-&gt;</span>
+</pre></div>
+</div>
+<p>Note that these are <a class="reference internal" href="modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">music21.pitch.Pitch</span></code></a> objects not just names:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k1</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">sharpsToPitch</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k1</span>
+<span class="go">&lt;music21.pitch.Pitch F#&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k1</span><span class="o">.</span><span class="n">step</span>
+<span class="go">&#39;F&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k1</span><span class="o">.</span><span class="n">accidental</span>
+<span class="go">&lt;accidental sharp&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="keysignature">
+<h2>KeySignature<a class="headerlink" href="#keysignature" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.key.KeySignature">
+<em class="property">class </em><code class="descclassname">music21.key.</code><code class="descname">KeySignature</code><span class="sig-paren">(</span><em>sharps=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.key.KeySignature" title="Permalink to this definition">¶</a></dt>
+<dd><p>A KeySignature object specifies the signature to be used for a piece; it takes
+in zero or one arguments.  The only argument is an int giving the number of sharps,
+or if negative the number of flats.</p>
+<p>If you are starting with the name of a key, see the <a class="reference internal" href="#music21.key.Key" title="music21.key.Key"><code class="xref py py-class docutils literal"><span class="pre">Key</span></code></a> object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
+<span class="go">&lt;music21.key.KeySignature of 3 sharps&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Eflat</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Eflat</span>
+<span class="go">&lt;music21.key.KeySignature of 3 flats&gt;</span>
+</pre></div>
+</div>
+<p>If you want to get a real Key, then use the <a class="reference internal" href="#music21.key.Key" title="music21.key.Key"><code class="xref py py-class docutils literal"><span class="pre">Key</span></code></a> object instead:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">illegal</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="s1">&#39;c#&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.key.KeySignatureException</span>: <span class="n">Cannot get a KeySignature from this </span>
+<span class="go">    &quot;number&quot; of sharps: &quot;c#&quot;; did you mean to use a key.Key() object instead?</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">legal</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;c#&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">legal</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">legal</span>
+<span class="go">&lt;music21.key.Key of c# minor&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.key.KeySignature.alteredPitches">
+<code class="descclassname">KeySignature.</code><code class="descname">alteredPitches</code><a class="headerlink" href="#music21.key.KeySignature.alteredPitches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of music21.pitch.Pitch objects that are altered by this 
+KeySignature. That is, all Pitch objects that will receive an accidental.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">alteredPitches</span>
+<span class="go">[&lt;music21.pitch.Pitch F#&gt;, &lt;music21.pitch.Pitch C#&gt;, &lt;music21.pitch.Pitch G#&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">alteredPitches</span>
+<span class="go">[&lt;music21.pitch.Pitch F#&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">alteredPitches</span><span class="p">]</span>
+<span class="go">[&#39;F#&#39;, &#39;C#&#39;, &#39;G#&#39;, &#39;D#&#39;, &#39;A#&#39;, &#39;E#&#39;, &#39;B#&#39;, &#39;F##&#39;, &#39;C##&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">alteredPitches</span>
+<span class="go">[&lt;music21.pitch.Pitch B-&gt;, &lt;music21.pitch.Pitch E-&gt;, &lt;music21.pitch.Pitch A-&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">alteredPitches</span>
+<span class="go">[&lt;music21.pitch.Pitch B-&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">alteredPitches</span><span class="p">]</span>
+<span class="go">[&#39;B-&#39;, &#39;E-&#39;, &#39;A-&#39;, &#39;D-&#39;, &#39;G-&#39;, &#39;C-&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">alteredPitches</span><span class="p">]</span>
+<span class="go">[&#39;B-&#39;, &#39;E-&#39;, &#39;A-&#39;, &#39;D-&#39;, &#39;G-&#39;, &#39;C-&#39;, &#39;F-&#39;, &#39;B--&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.key.KeySignature.sharps">
+<code class="descclassname">KeySignature.</code><code class="descname">sharps</code><a class="headerlink" href="#music21.key.KeySignature.sharps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the number of sharps.  If the number is negative
+then it sets the number of flats.  Equivalent to musicxml&#8217;s &#8216;fifths&#8217;
+attribute.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ks1</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks1</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks1</span><span class="o">.</span><span class="n">sharps</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks1</span>
+<span class="go">&lt;music21.key.KeySignature of 4 flats&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.key.KeySignature.accidentalByStep">
+<code class="descclassname">KeySignature.</code><code class="descname">accidentalByStep</code><span class="sig-paren">(</span><em>step</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.key.KeySignature.accidentalByStep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a step (C, D, E, F, etc.) return the accidental
+for that note in this key (using the natural minor for minor)
+or None if there is none.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">accidentalByStep</span><span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">)</span>
+<span class="go">&lt;accidental sharp&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">accidentalByStep</span><span class="p">(</span><span class="s2">&quot;G&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bbNote</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;B-5&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">accidentalByStep</span><span class="p">(</span><span class="n">bbNote</span><span class="o">.</span><span class="n">step</span><span class="p">)</span>
+<span class="go">&lt;accidental flat&gt;     </span>
+</pre></div>
+</div>
+<p>Fix a wrong note in F-major:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wrongBNote</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;B#4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">accidentalByStep</span><span class="p">(</span><span class="n">wrongBNote</span><span class="o">.</span><span class="n">step</span><span class="p">)</span> <span class="o">!=</span> <span class="n">wrongBNote</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="n">wrongBNote</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">accidentalByStep</span><span class="p">(</span><span class="n">wrongBNote</span><span class="o">.</span><span class="n">step</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wrongBNote</span>
+<span class="go">&lt;music21.note.Note B-&gt;</span>
+</pre></div>
+</div>
+<p>Set all notes to the correct notes for a key using the 
+note&#8217;s Key Context.  Before:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>  <span class="c1"># E-major or C-sharp-minor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;half&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;E-&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;half&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># A-flat-major or F-minor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;whole&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;F#&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;whole&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/keyAccidentalByStep_Before.png"><img alt="../_images/keyAccidentalByStep_Before.png" src="../_images/keyAccidentalByStep_Before.png" style="width: 400px;" /></a>
+<p>After:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">s1</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="n">n</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">accidental</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">getContextByClass</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">)</span><span class="o">.</span><span class="n">accidentalByStep</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">step</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/keyAccidentalByStep.png"><img alt="../_images/keyAccidentalByStep.png" src="../_images/keyAccidentalByStep.png" style="width: 400px;" /></a>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.key.KeySignature.asKey">
+<code class="descclassname">KeySignature.</code><code class="descname">asKey</code><span class="sig-paren">(</span><em>mode='major'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.key.KeySignature.asKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a <cite>key.Key</cite> object representing this KeySignature object as a key in the
+given mode (default = major)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.key.KeySignature.getScale">
+<code class="descclassname">KeySignature.</code><code class="descname">getScale</code><span class="sig-paren">(</span><em>mode='major'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.key.KeySignature.getScale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a <a class="reference internal" href="moduleScale.html#music21.scale.Scale" title="music21.scale.Scale"><code class="xref py py-class docutils literal"><span class="pre">music21.scale.Scale</span></code></a> object (or, actually, a subclass such as
+<a class="reference internal" href="moduleScale.html#music21.scale.MajorScale" title="music21.scale.MajorScale"><code class="xref py py-class docutils literal"><span class="pre">MajorScale</span></code></a> or <a class="reference internal" href="moduleScale.html#music21.scale.MinorScale" title="music21.scale.MinorScale"><code class="xref py py-class docutils literal"><span class="pre">MinorScale</span></code></a>) that is 
+representative of this key signature and mode.</p>
+<p>Raises KeySignatureException if mode is not in [None, &#8216;major&#8217;, &#8216;minor&#8217;].</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span>
+<span class="go">&lt;music21.key.KeySignature of 3 sharps&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span><span class="o">.</span><span class="n">getScale</span><span class="p">(</span><span class="s1">&#39;major&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.scale.MajorScale A major&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span><span class="o">.</span><span class="n">getScale</span><span class="p">(</span><span class="s1">&#39;minor&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.scale.MinorScale F# minor&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.key.KeySignature.transpose">
+<code class="descclassname">KeySignature.</code><code class="descname">transpose</code><span class="sig-paren">(</span><em>value</em>, <em>inPlace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.key.KeySignature.transpose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transpose the KeySignature by the user-provided value. 
+If the value is an integer, the transposition is treated 
+in half steps. If the value is a string, any Interval string 
+specification can be provided. Alternatively, a 
+<a class="reference internal" href="moduleInterval.html#music21.interval.Interval" title="music21.interval.Interval"><code class="xref py py-class docutils literal"><span class="pre">music21.interval.Interval</span></code></a> object can be supplied.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">&lt;music21.key.KeySignature of 2 sharps&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">asKey</span><span class="p">(</span><span class="s1">&#39;major&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.key.Key of D major&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;p5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">&lt;music21.key.KeySignature of 3 sharps&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">asKey</span><span class="p">(</span><span class="s1">&#39;major&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.key.Key of A major&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;-m2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">asKey</span><span class="p">(</span><span class="s1">&#39;major&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.key.Key of G# major&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">8</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;-a3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">asKey</span><span class="p">(</span><span class="s1">&#39;major&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.key.Key of E- major&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">-3</span>
+</pre></div>
+</div>
+<p>Transposition by semitone (or other chromatic interval)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dflat</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dflat</span>
+<span class="go">&lt;music21.key.KeySignature of 5 flats&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">dflat</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span>
+<span class="go">&lt;music21.key.KeySignature of 2 sharps&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eflat</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eflat</span>
+<span class="go">&lt;music21.key.KeySignature of 3 flats&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="key">
+<h2>Key<a class="headerlink" href="#key" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.key.Key">
+<em class="property">class </em><code class="descclassname">music21.key.</code><code class="descname">Key</code><span class="sig-paren">(</span><em>tonic=None</em>, <em>mode=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.key.Key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note that a key is a sort of hypothetical/conceptual object.
+It probably has a scale (or scales) associated with it and a <a class="reference internal" href="#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a>,
+but not necessarily.</p>
+<p>A Key object has all the attributes of a KeySignature and all the attributes of a
+<a class="reference internal" href="moduleScale.html#music21.scale.DiatonicScale" title="music21.scale.DiatonicScale"><code class="xref py py-class docutils literal"><span class="pre">DiatonicScale</span></code></a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>  <span class="c1"># lowercase = c minor.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span>
+<span class="go">&lt;music21.key.Key of c minor&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span><span class="o">.</span><span class="n">mode</span>
+<span class="go">&#39;minor&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span><span class="o">.</span><span class="n">tonic</span>
+<span class="go">&lt;music21.pitch.Pitch C&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">-3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span><span class="o">.</span><span class="n">pitchFromDegree</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch E-4&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cm</span><span class="o">.</span><span class="n">pitchFromDegree</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch B-4&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Csharpmaj</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;C#&#39;</span><span class="p">)</span> <span class="c1"># uppercase = C# major</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Csharpmaj</span>
+<span class="go">&lt;music21.key.Key of C# major&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Csharpmaj</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">7</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Fflatmaj</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;F-&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fflatmaj</span>
+<span class="go">&lt;music21.key.Key of F- major&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fflatmaj</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">-8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fflatmaj</span><span class="o">.</span><span class="n">accidentalByStep</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+<span class="go">&lt;accidental double-flat&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eDor</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;dorian&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eDor</span>
+<span class="go">&lt;music21.key.Key of E dorian&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eDor</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eDor</span><span class="o">.</span><span class="n">pitches</span>
+<span class="go">[&lt;music21.pitch.Pitch E4&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch F#4&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch G4&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch A4&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch B4&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch C#5&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch D5&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch E5&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.key.Key" title="music21.key.Key"><code class="xref py py-class docutils literal"><span class="pre">Key</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.DiatonicScale" title="music21.scale.DiatonicScale"><code class="xref py py-class docutils literal"><span class="pre">DiatonicScale</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale" title="music21.scale.ConcreteScale"><code class="xref py py-class docutils literal"><span class="pre">ConcreteScale</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.Scale" title="music21.scale.Scale"><code class="xref py py-class docutils literal"><span class="pre">Scale</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.key.Key" title="music21.key.Key"><code class="xref py py-class docutils literal"><span class="pre">Key</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.key.Key.parallel">
+<code class="descclassname">Key.</code><code class="descname">parallel</code><a class="headerlink" href="#music21.key.Key.parallel" title="Permalink to this definition">¶</a></dt>
+<dd><p>if the Key is major or minor, return the parallel minor or major.</p>
+<p>Otherwise, just returns self &#8211; this is the best way to not have random crashes
+in the middle of large datasets.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span>
+<span class="go">&lt;music21.key.Key of D major&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="o">.</span><span class="n">parallel</span>
+<span class="go">&lt;music21.key.Key of d minor&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="o">.</span><span class="n">parallel</span><span class="o">.</span><span class="n">parallel</span>
+<span class="go">&lt;music21.key.Key of D major&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;dorian&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">parallel</span>
+<span class="go">&lt;music21.key.Key of D dorian&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.key.Key.relative">
+<code class="descclassname">Key.</code><code class="descname">relative</code><a class="headerlink" href="#music21.key.Key.relative" title="Permalink to this definition">¶</a></dt>
+<dd><p>if the Key is major or minor, return the relative minor or major.</p>
+<p>Otherwise, just returns self &#8211; this is the best way to not have random crashes
+in the middle of large datasets.</p>
+<p>Note that this uses .sharps as a speedup, so if that has been changed, there
+will be a problem...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;E-&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span>
+<span class="go">&lt;music21.key.Key of E- major&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="o">.</span><span class="n">relative</span>
+<span class="go">&lt;music21.key.Key of c minor&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="o">.</span><span class="n">relative</span><span class="o">.</span><span class="n">relative</span>
+<span class="go">&lt;music21.key.Key of E- major&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;dorian&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">relative</span>
+<span class="go">&lt;music21.key.Key of D dorian&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.key.Key.tonicPitchNameWithCase">
+<code class="descclassname">Key.</code><code class="descname">tonicPitchNameWithCase</code><a class="headerlink" href="#music21.key.Key.tonicPitchNameWithCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the pitch name as a string with the proper case (upper = major; lower = minor)</p>
+<p>Useful, but simple:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s2">&quot;c#&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="o">.</span><span class="n">tonicPitchNameWithCase</span>
+<span class="go">&#39;c#&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="o">.</span><span class="n">tonicPitchNameWithCase</span>
+<span class="go">&#39;B&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;minor&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="o">.</span><span class="n">tonicPitchNameWithCase</span>
+<span class="go">&#39;b&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Read-only properties inherited from <a class="reference internal" href="#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.key.KeySignature.alteredPitches" title="music21.key.KeySignature.alteredPitches"><code class="xref py py-attr docutils literal"><span class="pre">alteredPitches</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale" title="music21.scale.ConcreteScale"><code class="xref py py-class docutils literal"><span class="pre">ConcreteScale</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.abstract" title="music21.scale.ConcreteScale.abstract"><code class="xref py py-attr docutils literal"><span class="pre">abstract</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.chord" title="music21.scale.ConcreteScale.chord"><code class="xref py py-attr docutils literal"><span class="pre">chord</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.isConcrete" title="music21.scale.ConcreteScale.isConcrete"><code class="xref py py-attr docutils literal"><span class="pre">isConcrete</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.name" title="music21.scale.ConcreteScale.name"><code class="xref py py-attr docutils literal"><span class="pre">name</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.pitches" title="music21.scale.ConcreteScale.pitches"><code class="xref py py-attr docutils literal"><span class="pre">pitches</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.key.Key" title="music21.key.Key"><code class="xref py py-class docutils literal"><span class="pre">Key</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.key.KeySignature.sharps" title="music21.key.KeySignature.sharps"><code class="xref py py-attr docutils literal"><span class="pre">sharps</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.key.Key" title="music21.key.Key"><code class="xref py py-class docutils literal"><span class="pre">Key</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.key.Key.tonalCertainty">
+<code class="descclassname">Key.</code><code class="descname">tonalCertainty</code><span class="sig-paren">(</span><em>method='correlationCoefficient'</em>, <em>*args</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.key.Key.tonalCertainty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide a measure of tonal ambiguity for Key determined with one of many methods.</p>
+<p>The <cite>correlationCoefficient</cite> assumes that the alternateInterpretations list has 
+been filled from the use of a KeyWeightKeyAnalysis subclass.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">littlePiece</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;tinyNotation: 4/4 c4 d e f g a b cc ee gg ee cc&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span> <span class="o">=</span> <span class="n">littlePiece</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span>
+<span class="go">&lt;music21.key.Key of C major&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="o">.</span><span class="n">tonalCertainty</span><span class="p">()</span>
+<span class="go">1.1648...</span>
+</pre></div>
+</div>
+<p>Three most likely alternateInterpretations:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="o">.</span><span class="n">alternateInterpretations</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">[&lt;music21.key.Key of a minor&gt;, &lt;music21.key.Key of F major&gt;, &lt;music21.key.Key of d minor&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="o">.</span><span class="n">correlationCoefficient</span>
+<span class="go">0.9068...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="o">.</span><span class="n">alternateInterpretations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">correlationCoefficient</span>
+<span class="go">0.7778...</span>
+</pre></div>
+</div>
+<p>least likely interpretation:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="o">.</span><span class="n">alternateInterpretations</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&lt;music21.key.Key of F# major&gt;</span>
+</pre></div>
+</div>
+<p>Note that this method only exists if the key has come from an analysis method. Otherwise
+it raises a KeySignatureException</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k2</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k2</span><span class="o">.</span><span class="n">tonalCertainty</span><span class="p">()</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.key.KeySignatureException</span>: <span class="n">cannot process ambiguity without a </span>
+<span class="go">    list of .alternateInterpretations</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k2</span><span class="o">.</span><span class="n">alternateInterpretations</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.key.Key.transpose">
+<code class="descclassname">Key.</code><code class="descname">transpose</code><span class="sig-paren">(</span><em>value</em>, <em>inPlace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.key.Key.transpose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transpose the Key by the user-provided value. 
+If the value is an integer, the transposition is treated 
+in half steps. If the value is a string, any Interval string 
+specification can be provided. Alternatively, a 
+<a class="reference internal" href="moduleInterval.html#music21.interval.Interval" title="music21.interval.Interval"><code class="xref py py-class docutils literal"><span class="pre">music21.interval.Interval</span></code></a> object can be supplied.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dMajor</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dMajor</span>
+<span class="go">&lt;music21.key.Key of D major&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">aMaj</span> <span class="o">=</span> <span class="n">dMajor</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;p5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aMaj</span>
+<span class="go">&lt;music21.key.Key of A major&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aMaj</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aMaj</span><span class="o">.</span><span class="n">tonic</span>
+<span class="go">&lt;music21.pitch.Pitch A&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aMaj</span><span class="o">.</span><span class="n">mode</span>
+<span class="go">&#39;major&#39;</span>
+</pre></div>
+</div>
+<p>inPlace works here</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span>
+<span class="go">&lt;music21.key.Key of g minor&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">-2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="s1">&#39;m-3&#39;</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span>
+<span class="go">&lt;music21.key.Key of e minor&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span>
+<span class="go">&lt;music21.key.Key of f minor&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">-4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span>
+<span class="go">&lt;music21.key.Key of f# minor&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span>
+<span class="go">&lt;music21.key.Key of g minor&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inPlace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">changingKey</span>
+<span class="go">&lt;music21.key.Key of g# minor&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.key.KeySignature.accidentalByStep" title="music21.key.KeySignature.accidentalByStep"><code class="xref py py-meth docutils literal"><span class="pre">accidentalByStep()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.key.KeySignature.asKey" title="music21.key.KeySignature.asKey"><code class="xref py py-meth docutils literal"><span class="pre">asKey()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.key.KeySignature.getScale" title="music21.key.KeySignature.getScale"><code class="xref py py-meth docutils literal"><span class="pre">getScale()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleScale.html#music21.scale.DiatonicScale" title="music21.scale.DiatonicScale"><code class="xref py py-class docutils literal"><span class="pre">DiatonicScale</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleScale.html#music21.scale.DiatonicScale.getDominant" title="music21.scale.DiatonicScale.getDominant"><code class="xref py py-meth docutils literal"><span class="pre">getDominant()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.DiatonicScale.getLeadingTone" title="music21.scale.DiatonicScale.getLeadingTone"><code class="xref py py-meth docutils literal"><span class="pre">getLeadingTone()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.DiatonicScale.getParallelMajor" title="music21.scale.DiatonicScale.getParallelMajor"><code class="xref py py-meth docutils literal"><span class="pre">getParallelMajor()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleScale.html#music21.scale.DiatonicScale.getParallelMinor" title="music21.scale.DiatonicScale.getParallelMinor"><code class="xref py py-meth docutils literal"><span class="pre">getParallelMinor()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.DiatonicScale.getRelativeMajor" title="music21.scale.DiatonicScale.getRelativeMajor"><code class="xref py py-meth docutils literal"><span class="pre">getRelativeMajor()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleScale.html#music21.scale.DiatonicScale.getRelativeMinor" title="music21.scale.DiatonicScale.getRelativeMinor"><code class="xref py py-meth docutils literal"><span class="pre">getRelativeMinor()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.DiatonicScale.getTonic" title="music21.scale.DiatonicScale.getTonic"><code class="xref py py-meth docutils literal"><span class="pre">getTonic()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale" title="music21.scale.ConcreteScale"><code class="xref py py-class docutils literal"><span class="pre">ConcreteScale</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.derive" title="music21.scale.ConcreteScale.derive"><code class="xref py py-meth docutils literal"><span class="pre">derive()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.deriveAll" title="music21.scale.ConcreteScale.deriveAll"><code class="xref py py-meth docutils literal"><span class="pre">deriveAll()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.deriveByDegree" title="music21.scale.ConcreteScale.deriveByDegree"><code class="xref py py-meth docutils literal"><span class="pre">deriveByDegree()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.deriveRanked" title="music21.scale.ConcreteScale.deriveRanked"><code class="xref py py-meth docutils literal"><span class="pre">deriveRanked()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.findMissing" title="music21.scale.ConcreteScale.findMissing"><code class="xref py py-meth docutils literal"><span class="pre">findMissing()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.getChord" title="music21.scale.ConcreteScale.getChord"><code class="xref py py-meth docutils literal"><span class="pre">getChord()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.getDegreeMaxUnique" title="music21.scale.ConcreteScale.getDegreeMaxUnique"><code class="xref py py-meth docutils literal"><span class="pre">getDegreeMaxUnique()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.getPitches" title="music21.scale.ConcreteScale.getPitches"><code class="xref py py-meth docutils literal"><span class="pre">getPitches()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.getScalaData" title="music21.scale.ConcreteScale.getScalaData"><code class="xref py py-meth docutils literal"><span class="pre">getScalaData()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.getScaleDegreeAndAccidentalFromPitch" title="music21.scale.ConcreteScale.getScaleDegreeAndAccidentalFromPitch"><code class="xref py py-meth docutils literal"><span class="pre">getScaleDegreeAndAccidentalFromPitch()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.getScaleDegreeFromPitch" title="music21.scale.ConcreteScale.getScaleDegreeFromPitch"><code class="xref py py-meth docutils literal"><span class="pre">getScaleDegreeFromPitch()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.intervalBetweenDegrees" title="music21.scale.ConcreteScale.intervalBetweenDegrees"><code class="xref py py-meth docutils literal"><span class="pre">intervalBetweenDegrees()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.isNext" title="music21.scale.ConcreteScale.isNext"><code class="xref py py-meth docutils literal"><span class="pre">isNext()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.match" title="music21.scale.ConcreteScale.match"><code class="xref py py-meth docutils literal"><span class="pre">match()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.next" title="music21.scale.ConcreteScale.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.pitchFromDegree" title="music21.scale.ConcreteScale.pitchFromDegree"><code class="xref py py-meth docutils literal"><span class="pre">pitchFromDegree()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.pitchesFromScaleDegrees" title="music21.scale.ConcreteScale.pitchesFromScaleDegrees"><code class="xref py py-meth docutils literal"><span class="pre">pitchesFromScaleDegrees()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.romanNumeral" title="music21.scale.ConcreteScale.romanNumeral"><code class="xref py py-meth docutils literal"><span class="pre">romanNumeral()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.show" title="music21.scale.ConcreteScale.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.solfeg" title="music21.scale.ConcreteScale.solfeg"><code class="xref py py-meth docutils literal"><span class="pre">solfeg()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.tune" title="music21.scale.ConcreteScale.tune"><code class="xref py py-meth docutils literal"><span class="pre">tune()</span></code></a></li>
+<li><a class="reference internal" href="moduleScale.html#music21.scale.ConcreteScale.write" title="music21.scale.ConcreteScale.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleScale.html#music21.scale.Scale" title="music21.scale.Scale"><code class="xref py py-class docutils literal"><span class="pre">Scale</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleScale.html#music21.scale.Scale.extractPitchList" title="music21.scale.Scale.extractPitchList"><code class="xref py py-meth docutils literal"><span class="pre">extractPitchList()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.key.Key" title="music21.key.Key"><code class="xref py py-class docutils literal"><span class="pre">Key</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleLanguageExcerptsNaturalLanguageObjects.html" title="music21.languageExcerpts.naturalLanguageObjects"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleIpython21.html" title="music21.ipython21"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

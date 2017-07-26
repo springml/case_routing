@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.midi.translate &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.musedata" href="moduleMusedata.html" />
+    <link rel="prev" title="music21.midi.realtime" href="moduleMidiRealtime.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMusedata.html" title="music21.musedata"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleMidiRealtime.html" title="music21.midi.realtime"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleMidiRealtime.html"
+                        title="previous chapter">music21.midi.realtime</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleMusedata.html"
+                        title="next chapter">music21.musedata</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.midi.translate</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleMidiTranslate.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-midi-translate">
+<span id="modulemiditranslate"></span><h1>music21.midi.translate<a class="headerlink" href="#music21-midi-translate" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.midi.translate"></span><p>Module to translate MIDI data to music21 Streams and voice versa.  Note that quantization of
+notes takes place in the <a class="reference internal" href="moduleStream.html#music21.stream.Stream.quantize" title="music21.stream.Stream.quantize"><code class="xref py py-meth docutils literal"><span class="pre">quantize()</span></code></a> method not here.</p>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.midi.translate.streamToMidiFile">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">streamToMidiFile</code><span class="sig-paren">(</span><em>inputM21</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.streamToMidiFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a Stream hierarchy into a <code class="xref py py-class docutils literal"><span class="pre">MidiFile</span></code> object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;g#&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">streamToMidiFile</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">tracks</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">tracks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">events</span><span class="p">)</span>
+<span class="go">22</span>
+</pre></div>
+</div>
+<p>From here, you can call mf.writestr() to get the actual file info.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sc</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">PhrygianScale</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">pitchFromDegree</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">11</span><span class="p">),</span> <span class="n">quarterLength</span><span class="o">=.</span><span class="mi">25</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">60</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">streamToMidiFile</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/Volumes/xdisc/_scratch/midi.mid&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.midiFileToStream">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">midiFileToStream</code><span class="sig-paren">(</span><em>mf</em>, <em>inputM21=None</em>, <em>quantizePost=True</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.midiFileToStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a <code class="xref py py-class docutils literal"><span class="pre">MidiFile</span></code> object to a 
+<a class="reference internal" href="moduleStream.html#music21.stream.Stream" title="music21.stream.Stream"><code class="xref py py-class docutils literal"><span class="pre">Stream</span></code></a> object.</p>
+<p>The <cite>inputM21</cite> object can specify an existing Stream (or Stream subclass) to fill.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">getSourceFilePath</span><span class="p">(),</span> <span class="s1">&#39;midi&#39;</span><span class="p">,</span> <span class="s1">&#39;testPrimitive&#39;</span><span class="p">,</span>  <span class="s1">&#39;test05.mid&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiFile</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">tracks</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiFileToStream</span><span class="p">(</span><span class="n">mf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span>
+<span class="go">&lt;music21.stream.Score ...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notesAndRests</span><span class="p">)</span>
+<span class="go">11</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.chordToMidiEvents">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">chordToMidiEvents</code><span class="sig-paren">(</span><em>inputM21</em>, <em>includeDeltaTime=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.chordToMidiEvents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a <a class="reference internal" href="moduleChord.html#music21.chord.Chord" title="music21.chord.Chord"><code class="xref py py-class docutils literal"><span class="pre">Chord</span></code></a> object to a 
+list of base.DeltaTime and base.MidiEvents objects.</p>
+<p>See noteToMidiEvents above for more details.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s1">&#39;c3&#39;</span><span class="p">,</span><span class="s1">&#39;g#4&#39;</span><span class="p">,</span> <span class="s1">&#39;b5&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">volume</span><span class="o">.</span><span class="n">Volume</span><span class="p">(</span><span class="n">velocity</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">volume</span><span class="o">.</span><span class="n">velocityIsRelative</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">chordToMidiEvents</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList</span>
+<span class="go">[&lt;MidiEvent DeltaTime, t=0, track=None, channel=None&gt;, </span>
+<span class="go"> &lt;MidiEvent NOTE_ON, t=None, track=None, channel=1, pitch=48, velocity=90&gt;, </span>
+<span class="go"> &lt;MidiEvent DeltaTime, t=0, track=None, channel=None&gt;, </span>
+<span class="go"> &lt;MidiEvent NOTE_ON, t=None, track=None, channel=1, pitch=68, velocity=90&gt;, </span>
+<span class="go"> &lt;MidiEvent DeltaTime, t=0, track=None, channel=None&gt;, </span>
+<span class="go"> &lt;MidiEvent NOTE_ON, t=None, track=None, channel=1, pitch=83, velocity=90&gt;, </span>
+<span class="go"> &lt;MidiEvent DeltaTime, t=1024, track=None, channel=None&gt;, </span>
+<span class="go"> &lt;MidiEvent NOTE_OFF, t=None, track=None, channel=1, pitch=48, velocity=0&gt;, </span>
+<span class="go"> &lt;MidiEvent DeltaTime, t=0, track=None, channel=None&gt;, </span>
+<span class="go"> &lt;MidiEvent NOTE_OFF, t=None, track=None, channel=1, pitch=68, velocity=0&gt;, </span>
+<span class="go"> &lt;MidiEvent DeltaTime, t=0, track=None, channel=None&gt;, </span>
+<span class="go"> &lt;MidiEvent NOTE_OFF, t=None, track=None, channel=1, pitch=83, velocity=0&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.durationToMidi">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">durationToMidi</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.durationToMidi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a <a class="reference internal" href="moduleDuration.html#music21.duration.Duration" title="music21.duration.Duration"><code class="xref py py-class docutils literal"><span class="pre">Duration</span></code></a> object to midi ticks.</p>
+<p>Depends on <em>defaults.ticksPerQuarter</em>, Returns an int.
+Does not use defaults.ticksAtStart</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;half&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">durationToMidi</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+<span class="go">2048</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dReference</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiToDuration</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">inputM21DurationObject</span> <span class="o">=</span> <span class="n">d</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dReference</span> <span class="ow">is</span> <span class="n">d</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;quarter&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;16th&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">0.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">durationToMidi</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="go">256</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.getEndEvents">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">getEndEvents</code><span class="sig-paren">(</span><em>mt=None</em>, <em>channel=1</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.getEndEvents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of midi.MidiEvent objects found at the end of a track.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">getEndEvents</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">[&lt;MidiEvent DeltaTime, t=1024, track=None, channel=2&gt;, </span>
+<span class="go"> &lt;MidiEvent END_OF_TRACK, t=None, track=None, channel=2, data=b&#39;&#39;&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.getStartEvents">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">getStartEvents</code><span class="sig-paren">(</span><em>mt=None</em>, <em>channel=1</em>, <em>instrumentObj=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.getStartEvents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of midi.MidiEvent objects found at the beginning of a track.</p>
+<p>A MidiTrack reference can be provided via the <cite>mt</cite> parameter.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">getStartEvents</span><span class="p">()</span>
+<span class="go">[&lt;MidiEvent DeltaTime, t=0, track=None, channel=1&gt;, </span>
+<span class="go"> &lt;MidiEvent SEQUENCE_TRACK_NAME, t=0, track=None, channel=1, data=b&#39;&#39;&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">getStartEvents</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">instrumentObj</span><span class="o">=</span><span class="n">instrument</span><span class="o">.</span><span class="n">Harpsichord</span><span class="p">())</span>
+<span class="go">[&lt;MidiEvent DeltaTime, t=0, track=None, channel=2&gt;, </span>
+<span class="go"> &lt;MidiEvent SEQUENCE_TRACK_NAME, t=0, track=None, channel=2, data=b&#39;Harpsichord&#39;&gt;, </span>
+<span class="go"> &lt;MidiEvent DeltaTime, t=0, track=None, channel=2&gt;, </span>
+<span class="go"> &lt;MidiEvent PROGRAM_CHANGE, t=0, track=None, channel=2, data=6&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.instrumentToMidiEvents">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">instrumentToMidiEvents</code><span class="sig-paren">(</span><em>inputM21</em>, <em>includeDeltaTime=True</em>, <em>midiTrack=None</em>, <em>channel=1</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.instrumentToMidiEvents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a <a class="reference internal" href="moduleInstrument.html#music21.instrument.Instrument" title="music21.instrument.Instrument"><code class="xref py py-class docutils literal"><span class="pre">Instrument</span></code></a> object to a list of MidiEvents</p>
+<p>TODO: DOCS and TESTS</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.keySignatureToMidiEvents">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">keySignatureToMidiEvents</code><span class="sig-paren">(</span><em>ks</em>, <em>includeDeltaTime=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.keySignatureToMidiEvents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a single <a class="reference internal" href="moduleKey.html#music21.key.Key" title="music21.key.Key"><code class="xref py py-class docutils literal"><span class="pre">Key</span></code></a> or 
+<a class="reference internal" href="moduleKey.html#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a> object to 
+a two-element list of midi events,
+where the first is an empty DeltaTime (unless includeDeltaTime is False) and the second
+is a KEY_SIGNATURE <code class="xref py py-class docutils literal"><span class="pre">MidiEvent</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">KeySignature</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span>
+<span class="go">&lt;music21.key.KeySignature of 2 sharps&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">keySignatureToMidiEvents</span><span class="p">(</span><span class="n">ks</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList</span>
+<span class="go">[&lt;MidiEvent DeltaTime, t=0, track=None, channel=None&gt;, </span>
+<span class="go"> &lt;MidiEvent KEY_SIGNATURE, t=None, track=None, channel=1, data=b&#39;\x02\x00&#39;&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span>
+<span class="go">&lt;music21.key.Key of b- minor&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">keySignatureToMidiEvents</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">includeDeltaTime</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList</span>
+<span class="go">[&lt;MidiEvent KEY_SIGNATURE, t=None, track=None, channel=1, data=b&#39;\xfb\x01&#39;&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.midiAsciiStringToBinaryString">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">midiAsciiStringToBinaryString</code><span class="sig-paren">(</span><em>midiFormat=1</em>, <em>ticksPerQuarterNote=960</em>, <em>tracksEventsList=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.midiAsciiStringToBinaryString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert Ascii midi data to a binary midi string.</p>
+<p>tracksEventsList contains a list of tracks which contain also a list of events.</p>
+<blockquote>
+<div>asciiMidiEventList = [&#8216;0 90 27 66&#8217;, &#8216;0 90 3e 60&#8217;, &#8216;3840 80 27 00&#8217;, &#8216;0 80 3e 00&#8217;]</div></blockquote>
+<p>The format of one event is : &#8216;aa bb cc dd&#8217;:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">aa</span> <span class="o">=</span> <span class="n">delta</span> <span class="n">time</span> <span class="n">to</span> <span class="n">last</span> <span class="n">event</span> <span class="p">(</span><span class="n">integer</span><span class="p">)</span>
+<span class="n">bb</span> <span class="o">=</span> <span class="n">Midi</span> <span class="n">event</span> <span class="nb">type</span>
+<span class="n">cc</span> <span class="o">=</span> <span class="n">Note</span> <span class="n">number</span> <span class="p">(</span><span class="nb">hex</span><span class="p">)</span>
+<span class="n">dd</span> <span class="o">=</span> <span class="n">Velocity</span> <span class="p">(</span><span class="n">integer</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">asciiMidiEventList</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asciiMidiEventList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;0 90 31 15&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midiTrack</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midiTrack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">asciiMidiEventList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midiBinStr</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiAsciiStringToBinaryString</span><span class="p">(</span><span class="n">tracksEventsList</span> <span class="o">=</span> <span class="n">midiTrack</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midiBinStr</span>
+<span class="go">b&#39;MThd\x00\x00\x00\x06\x00\x01\x00\x01\x03\xc0MTrk\x00\x00\x00\x04\x00\x901\x0f&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.midiEventsToChord">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">midiEventsToChord</code><span class="sig-paren">(</span><em>eventList</em>, <em>ticksPerQuarter=None</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.midiEventsToChord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a Chord from a list of <code class="xref py py-class docutils literal"><span class="pre">DeltaTime</span></code> 
+and <code class="xref py py-class docutils literal"><span class="pre">MidiEvent</span></code> objects.  See midiEventsToNote
+for details.</p>
+<p>All DeltaTime objects except the first are ignored.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiTrack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt1</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">DeltaTime</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt1</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;NOTE_ON&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="mi">45</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mi">94</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt2</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">DeltaTime</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt2</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;NOTE_ON&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="mi">46</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mi">94</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt3</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">DeltaTime</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt3</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">2048</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me3</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me3</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;NOTE_OFF&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me3</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="mi">45</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me3</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt4</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">DeltaTime</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt4</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me4</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me4</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;NOTE_OFF&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me4</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="mi">46</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me4</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiEventsToChord</span><span class="p">([</span><span class="n">dt1</span><span class="p">,</span> <span class="n">me1</span><span class="p">,</span> <span class="n">dt2</span><span class="p">,</span> <span class="n">me2</span><span class="p">,</span> <span class="n">dt3</span><span class="p">,</span> <span class="n">me3</span><span class="p">,</span> <span class="n">dt4</span><span class="p">,</span> <span class="n">me4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;music21.chord.Chord A2 B-2&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.midiEventsToInstrument">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">midiEventsToInstrument</code><span class="sig-paren">(</span><em>eventList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.midiEventsToInstrument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a single MIDI event into a music21 Instrument object.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.midiEventsToKey">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">midiEventsToKey</code><span class="sig-paren">(</span><em>eventList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.midiEventsToKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a single MIDI event into a <a class="reference internal" href="moduleKey.html#music21.key.KeySignature" title="music21.key.KeySignature"><code class="xref py py-class docutils literal"><span class="pre">KeySignature</span></code></a> object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiTrack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;KEY_SIGNATURE&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">putNumbersAsList</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span> <span class="c1"># d major</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiEventsToKey</span><span class="p">(</span><span class="n">me1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span>
+<span class="go">&lt;music21.key.Key of D major&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span><span class="o">.</span><span class="n">mode</span>
+<span class="go">&#39;major&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;KEY_SIGNATURE&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">putNumbersAsList</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="c1"># g minor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">data</span>
+<span class="go">b&#39;\xfe\x01&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">getNumbersAsList</span><span class="p">(</span><span class="n">me2</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="go">[254, 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiEventsToKey</span><span class="p">(</span><span class="n">me2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span>
+<span class="go">&lt;music21.key.Key of g minor&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span><span class="o">.</span><span class="n">sharps</span>
+<span class="go">-2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ks</span><span class="o">.</span><span class="n">mode</span>
+<span class="go">&#39;minor&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.midiEventsToNote">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">midiEventsToNote</code><span class="sig-paren">(</span><em>eventList</em>, <em>ticksPerQuarter=None</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.midiEventsToNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert from a list of midi.DeltaTime and midi.MidiEvent objects to a music21 Note.</p>
+<p>The list can be presented in one of two forms:</p>
+<blockquote>
+<div>[deltaTime1, midiEvent1, deltaTime2, midiEvent2]</div></blockquote>
+<p>or</p>
+<blockquote>
+<div>[(deltaTime1, midiEvent1), (deltaTime2, midiEvent2)]</div></blockquote>
+<p>It is assumed, but not checked, that midiEvent2 is an appropriate Note_Off command.  Thus, only
+three elements are really needed.</p>
+<p>The <cite>inputM21</cite> parameter can be a Note or None; in the case of None, a Note object is created.
+In either case it returns a Note (N.B.: this will change soon so that None will be returned
+if <cite>inputM21</cite> is given.  This will match the behavior of other translate objects).</p>
+<p>N.B. this takes in a list of music21 MidiEvent objects so see [...] on how to
+convert raw MIDI data to MidiEvent objects</p>
+<p>In this example, we start a NOTE_ON event at offset 1.0 that lasts 
+for 2.0 quarter notes until we
+send a zero-velocity NOTE_ON (=NOTE_OFF) event for the same pitch.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiTrack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt1</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">DeltaTime</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt1</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">1024</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;NOTE_ON&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="mi">45</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mi">94</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt2</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">DeltaTime</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dt2</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="mi">2048</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;NOTE_ON&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="mi">45</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiEventsToNote</span><span class="p">([</span><span class="n">dt1</span><span class="p">,</span> <span class="n">me1</span><span class="p">,</span> <span class="n">dt2</span><span class="p">,</span> <span class="n">me2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">pitch</span>
+<span class="go">&lt;music21.pitch.Pitch A2&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">volume</span><span class="o">.</span><span class="n">velocity</span>
+<span class="go">94</span>
+</pre></div>
+</div>
+<p>An <cite>inputM21</cite> object can be given in which case it&#8217;s set.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dummy</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiEventsToNote</span><span class="p">([</span><span class="n">dt1</span><span class="p">,</span> <span class="n">me1</span><span class="p">,</span> <span class="n">dt2</span><span class="p">,</span> <span class="n">me2</span><span class="p">],</span> <span class="n">inputM21</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">pitch</span>
+<span class="go">&lt;music21.pitch.Pitch A2&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">volume</span><span class="o">.</span><span class="n">velocity</span>
+<span class="go">94</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.midiEventsToTempo">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">midiEventsToTempo</code><span class="sig-paren">(</span><em>eventList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.midiEventsToTempo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a single MIDI event into a music21 Tempo object.</p>
+<p>TODO: Need Tests</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.midiEventsToTimeSignature">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">midiEventsToTimeSignature</code><span class="sig-paren">(</span><em>eventList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.midiEventsToTimeSignature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a single MIDI event into a music21 TimeSignature object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiTrack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;TIME_SIGNATURE&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me1</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">putNumbersAsList</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span> <span class="c1"># 3/2 time</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiEventsToTimeSignature</span><span class="p">(</span><span class="n">me1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span>
+<span class="go">&lt;music21.meter.TimeSignature 3/2&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiEvent</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s2">&quot;TIME_SIGNATURE&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">me2</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">putNumbersAsList</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span> <span class="c1"># 3/16 time</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiEventsToTimeSignature</span><span class="p">(</span><span class="n">me2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span>
+<span class="go">&lt;music21.meter.TimeSignature 3/16&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.midiFilePathToStream">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">midiFilePathToStream</code><span class="sig-paren">(</span><em>filePath</em>, <em>inputM21=None</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.midiFilePathToStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used by music21.converter:</p>
+<p>Take in a file path (name of a file on disk) and using <cite>midiFileToStream</cite>,</p>
+<p>return a <a class="reference internal" href="moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> object (or if inputM21 is passed in,
+use that object instead).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span> <span class="o">=</span> <span class="s1">&#39;/Users/test/music21/midi/testPrimitive/test05.mid&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">streamScore</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiFilePathToStream</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">streamScore</span>
+<span class="go">&lt;music21.stream.Score ...&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.midiStringToStream">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">midiStringToStream</code><span class="sig-paren">(</span><em>strData</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.midiStringToStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a string of binary midi data to a Music21 stream.Score object.</p>
+<p>TODO: NOT WORKING AS IT SHOULD</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.midiToDuration">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">midiToDuration</code><span class="sig-paren">(</span><em>ticks</em>, <em>ticksPerQuarter=None</em>, <em>inputM21DurationObject=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.midiToDuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a number of MIDI Ticks to a music21 duration.Duration() object.</p>
+<p>Optional parameters include ticksPerQuarter &#8211; in case something other
+than the default.ticksPerQuarter (1024) is used in this file.  And
+it can take a <a class="reference internal" href="moduleDuration.html#music21.duration.Duration" title="music21.duration.Duration"><code class="xref py py-class docutils literal"><span class="pre">Duration</span></code></a> object to modify, specified
+as <em>inputM21DurationObject</em></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiToDuration</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span>
+<span class="go">&lt;music21.duration.Duration 1.0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;quarter&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiToDuration</span><span class="p">(</span><span class="mi">3072</span><span class="p">,</span> <span class="n">inputM21DurationObject</span><span class="o">=</span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+<span class="go">&lt;music21.duration.Duration 3.0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;half&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">dots</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>More complex rhythms can also be set automatically:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2reference</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiToDuration</span><span class="p">(</span><span class="mi">1200</span><span class="p">,</span> <span class="n">inputM21DurationObject</span><span class="o">=</span><span class="n">d2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span> <span class="ow">is</span> <span class="n">d2reference</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">1.171875</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;complex&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span><span class="o">.</span><span class="n">components</span>
+<span class="go">(DurationTuple(type=&#39;quarter&#39;, dots=0, quarterLength=1.0), </span>
+<span class="go"> DurationTuple(type=&#39;32nd&#39;, dots=0, quarterLength=0.125), </span>
+<span class="go"> DurationTuple(type=&#39;128th&#39;, dots=1, quarterLength=0.046875))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;128th&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">dots</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.midiTrackToStream">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">midiTrackToStream</code><span class="sig-paren">(</span><em>mt</em>, <em>ticksPerQuarter=None</em>, <em>quantizePost=True</em>, <em>inputM21=None</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.midiTrackToStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Note that quantization takes place in stream.py since it&#8217;s useful not just for MIDI.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">getSourceFilePath</span><span class="p">(),</span> <span class="s1">&#39;midi&#39;</span><span class="p">,</span> <span class="s1">&#39;testPrimitive&#39;</span><span class="p">,</span>  <span class="s1">&#39;test05.mid&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">MidiFile</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">tracks</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">tracks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiTrackToStream</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span>
+<span class="go">&lt;music21.stream.Stream ...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">notesAndRests</span><span class="p">)</span>
+<span class="go">11</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.midiTracksToStreams">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">midiTracksToStreams</code><span class="sig-paren">(</span><em>midiTracks</em>, <em>ticksPerQuarter=None</em>, <em>quantizePost=True</em>, <em>inputM21=None</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.midiTracksToStreams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a list of midiTracks, populate this Stream with a Part for each track.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.music21ObjectToMidiFile">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">music21ObjectToMidiFile</code><span class="sig-paren">(</span><em>music21Object</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.music21ObjectToMidiFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Either calls streamToMidiFile on the music21Object or
+puts a copy of that object into a Stream (so as
+not to change activeSites, etc.) and calls streamToMidiFile on
+that object.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.noteToMidiEvents">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">noteToMidiEvents</code><span class="sig-paren">(</span><em>inputM21</em>, <em>includeDeltaTime=True</em>, <em>channel=1</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.noteToMidiEvents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate a music21 Note to a list of four MIDI events &#8211; 
+the DeltaTime for the start of the note (0), the NOTE_ON event, the
+DeltaTime to the end of the note, and the NOTE_OFF event.</p>
+<p>If <cite>includeDeltaTime</cite> is not True then the DeltaTime events 
+aren&#8217;t returned, thus only two events are returned.</p>
+<p>The initial deltaTime object is always 0.  It will be changed when
+processing Notes from a Stream.</p>
+<p>The <cite>channel</cite> can be specified, otherwise channel 1 is assumed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C#4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">noteToMidiEvents</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList</span>
+<span class="go">[&lt;MidiEvent DeltaTime, t=0, track=None, channel=1&gt;, </span>
+<span class="go"> &lt;MidiEvent NOTE_ON, t=None, track=None, channel=1, pitch=61, velocity=90&gt;, </span>
+<span class="go"> &lt;MidiEvent DeltaTime, t=1024, track=None, channel=1&gt;, </span>
+<span class="go"> &lt;MidiEvent NOTE_OFF, t=None, track=None, channel=1, pitch=61, velocity=0&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">noteToMidiEvents</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList</span>
+<span class="go">[&lt;MidiEvent DeltaTime, t=0, track=None, channel=1&gt;, </span>
+<span class="go"> &lt;MidiEvent NOTE_ON, t=None, track=None, channel=1, pitch=61, velocity=90&gt;, </span>
+<span class="go"> &lt;MidiEvent DeltaTime, t=2560, track=None, channel=1&gt;, </span>
+<span class="go"> &lt;MidiEvent NOTE_OFF, t=None, track=None, channel=1, pitch=61, velocity=0&gt;]</span>
+</pre></div>
+</div>
+<p>Omitting DeltaTimes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eventList2</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">noteToMidiEvents</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">includeDeltaTime</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList2</span>
+<span class="go">[&lt;MidiEvent NOTE_ON, t=None, track=None, channel=9, pitch=61, velocity=90&gt;, </span>
+<span class="go"> &lt;MidiEvent NOTE_OFF, t=None, track=None, channel=9, pitch=61, velocity=0&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.offsetToMidi">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">offsetToMidi</code><span class="sig-paren">(</span><em>o</em>, <em>addStartDelay=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.offsetToMidi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to convert a music21 offset value to MIDI ticks,
+depends on <em>defaults.ticksPerQuarter</em> and <em>defaults.ticksAtStart</em>.</p>
+<p>Returns an int.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">defaults</span><span class="o">.</span><span class="n">ticksPerQuarter</span>
+<span class="go">1024</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">defaults</span><span class="o">.</span><span class="n">ticksAtStart</span>
+<span class="go">1024</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">offsetToMidi</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">1024</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">offsetToMidi</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">addStartDelay</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">offsetToMidi</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">2048</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">offsetToMidi</span><span class="p">(</span><span class="mf">20.5</span><span class="p">)</span>
+<span class="go">22016</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.packetsToMidiTrack">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">packetsToMidiTrack</code><span class="sig-paren">(</span><em>packets</em>, <em>trackId=1</em>, <em>channels=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.packetsToMidiTrack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given packets already allocated with channel 
+and/or instrument assignments, place these in a MidiTrack.</p>
+<p>Note that all packets can be sent; only those with 
+matching trackIds will be collected into the resulting track</p>
+<p>The <cite>channels</cite> defines a collection of channels available for this Track</p>
+<p>Use _streamToPackets to convert the Stream to the packets</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.streamHierarchyToMidiTracks">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">streamHierarchyToMidiTracks</code><span class="sig-paren">(</span><em>inputM21</em>, <em>acceptableChannelList=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.streamHierarchyToMidiTracks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a Stream, Score, Part, etc., that may have substreams (i.e.,
+a hierarchy), return a list of <code class="xref py py-class docutils literal"><span class="pre">MidiTrack</span></code> objects.</p>
+<p>acceptableChannelList is a list of MIDI Channel numbers that can be used or None.
+If None, then 1-9, 11-16 are used (10 being reserved for percussion).</p>
+<p>Called by streamToMidiFile()</p>
+<p>The process:</p>
+<ol class="arabic simple">
+<li>makes a deepcopy of the Stream (Developer TODO: could this 
+be done with a shallow copy?)</li>
+<li>we make a list of all instruments that are being used in the piece.</li>
+</ol>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.tempoToMidiEvents">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">tempoToMidiEvents</code><span class="sig-paren">(</span><em>tempoIndication</em>, <em>includeDeltaTime=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.tempoToMidiEvents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given any TempoIndication, convert it to a MIDI tempo indication.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">events</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">tempoToMidiEvents</span><span class="p">(</span><span class="n">mm</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">events</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&lt;MidiEvent DeltaTime, t=0, track=None, channel=None&gt;</span>
+</pre></div>
+</div>
+<p>Data is not displayed directly below since it&#8217;s a bytes object in PY3 and str in PY2</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">events</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&lt;MidiEvent SET_TEMPO, t=None, track=None, channel=1, data=...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">events</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>    
+<span class="go">b&#39;\n,+&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">microSecondsPerQuarterNote</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">getNumber</span><span class="p">(</span><span class="n">events</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">events</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">microSecondsPerQuarterNote</span>
+<span class="go">666667</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mf">1000000.0</span> <span class="o">/</span> <span class="n">microSecondsPerQuarterNote</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">90.0</span>
+</pre></div>
+</div>
+<p>Test roundtrip.  Note that for pure tempo numbers, by default
+we create a text name if there&#8217;s an appropriate one:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">midiEventsToTempo</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>
+<span class="go">&lt;music21.tempo.MetronomeMark maestoso Quarter=90.0&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.midi.translate.timeSignatureToMidiEvents">
+<code class="descclassname">music21.midi.translate.</code><code class="descname">timeSignatureToMidiEvents</code><span class="sig-paren">(</span><em>ts</em>, <em>includeDeltaTime=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.midi.translate.timeSignatureToMidiEvents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate a <a class="reference internal" href="moduleMeter.html#music21.meter.TimeSignature" title="music21.meter.TimeSignature"><code class="xref py py-class docutils literal"><span class="pre">TimeSignature</span></code></a> to a pair of events: a DeltaTime and
+a MidiEvent TIME_SIGNATURE.</p>
+<p>Returns a two-element list</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;5/4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">translate</span><span class="o">.</span><span class="n">timeSignatureToMidiEvents</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&lt;MidiEvent DeltaTime, t=0, track=None, channel=None&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eventList</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&lt;MidiEvent TIME_SIGNATURE, t=None, track=None, channel=1, data=b&#39;\x05\x02\x18\x08&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleMusedata.html" title="music21.musedata"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleMidiRealtime.html" title="music21.midi.realtime"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

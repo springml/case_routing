@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.search.segment &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.search.serial" href="moduleSearchSerial.html" />
+    <link rel="prev" title="music21.search.lyrics" href="moduleSearchLyrics.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleSearchSerial.html" title="music21.search.serial"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleSearchLyrics.html" title="music21.search.lyrics"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleSearchLyrics.html"
+                        title="previous chapter">music21.search.lyrics</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleSearchSerial.html"
+                        title="next chapter">music21.search.serial</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.search.segment</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleSearchSegment.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-search-segment">
+<span id="modulesearchsegment"></span><h1>music21.search.segment<a class="headerlink" href="#music21-search-segment" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.search.segment"></span><p>tools for segmenting &#8211; that is, dividing up a score into small, possibly overlapping
+sections &#8211; for searching across pieces for similarity.</p>
+<p>Speed notes:</p>
+<blockquote>
+<div><p>this module is definitely a case where running PyPy rather than cPython will
+give you a 3-5x speedup.</p>
+<p>If you really want to do lots of comparisons, the <cite>scoreSimilarity</cite> method will
+use pyLevenshtein if it is installed from <a class="reference external" href="http://code.google.com/p/pylevenshtein/">http://code.google.com/p/pylevenshtein/</a> .
+You will need to compile it by running <strong>sudo python setup.py install</strong> on Mac or
+Unix (compilation is much more difficult on Windows; sorry). The ratios are very 
+slightly different, but the speedup is between 10 and 100x! (but then PyPy probably won&#8217;t work)</p>
+</div></blockquote>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.search.segment.getDifflibOrPyLev">
+<code class="descclassname">music21.search.segment.</code><code class="descname">getDifflibOrPyLev</code><span class="sig-paren">(</span><em>seq2=None</em>, <em>junk=None</em>, <em>forceDifflib=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.search.segment.getDifflibOrPyLev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns either a difflib.SequenceMatcher or pyLevenshtein
+StringMatcher.StringMatcher object depending on what is installed.</p>
+<p>If forceDifflib is True then use difflib even if pyLevenshtein is installed:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.search.segment.indexOnePath">
+<code class="descclassname">music21.search.segment.</code><code class="descname">indexOnePath</code><span class="sig-paren">(</span><em>filePath</em>, <em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.search.segment.indexOnePath" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="music21.search.segment.indexScoreFilePaths">
+<code class="descclassname">music21.search.segment.</code><code class="descname">indexScoreFilePaths</code><span class="sig-paren">(</span><em>scoreFilePaths</em>, <em>giveUpdates=False</em>, <em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.search.segment.indexScoreFilePaths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of the lists from indexScoreParts for each score in
+scoreFilePaths</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">searchResults</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;bwv19&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpsNamesOnly</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">searchResult</span><span class="o">.</span><span class="n">sourcePath</span> <span class="k">for</span> <span class="n">searchResult</span> <span class="ow">in</span> <span class="n">searchResults</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">fpsNamesOnly</span><span class="p">)</span>
+<span class="go">9</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreDict</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">indexScoreFilePaths</span><span class="p">(</span><span class="n">fpsNamesOnly</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">scoreDict</span><span class="p">[</span><span class="s1">&#39;bwv190.7.mxl&#39;</span><span class="p">])</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreDict</span><span class="p">[</span><span class="s1">&#39;bwv190.7.mxl&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;measureList&#39;</span><span class="p">]</span>
+<span class="go">[(0, 9), (6, 15), (11, 20), (17, 25), (22, 31), (27, 32)]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreDict</span><span class="p">[</span><span class="s1">&#39;bwv190.7.mxl&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;segmentList&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&#39;NNJLNOLLLJJIJLLLLNJJJIJLLJNNJL&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.search.segment.indexScoreParts">
+<code class="descclassname">music21.search.segment.</code><code class="descname">indexScoreParts</code><span class="sig-paren">(</span><em>scoreFile</em>, <em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.search.segment.indexScoreParts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates segment and measure lists for each part of a score
+Returns list of dictionaries of segment and measure lists</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bach</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreList</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">indexScoreParts</span><span class="p">(</span><span class="n">bach</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreList</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;segmentList&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&#39;@B@@@@ED@DBDA=BB@?==B@@EBBDBBA&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreList</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;measureList&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">[(0, 7), (4, 9), (8, 9)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.search.segment.loadScoreDict">
+<code class="descclassname">music21.search.segment.</code><code class="descname">loadScoreDict</code><span class="sig-paren">(</span><em>filePath</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.search.segment.loadScoreDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the scoreDictionary from filePath</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.search.segment.saveScoreDict">
+<code class="descclassname">music21.search.segment.</code><code class="descname">saveScoreDict</code><span class="sig-paren">(</span><em>scoreDict</em>, <em>filePath=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.search.segment.saveScoreDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the score dict from indexScoreFilePaths as a .json file for quickly
+reloading</p>
+<p>Returns the filepath (assumes you&#8217;ll probably be using a temporary file)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.search.segment.scoreSimilarity">
+<code class="descclassname">music21.search.segment.</code><code class="descname">scoreSimilarity</code><span class="sig-paren">(</span><em>scoreDict</em>, <em>minimumLength=20</em>, <em>giveUpdates=False</em>, <em>includeReverse=False</em>, <em>forceDifflib=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.search.segment.scoreSimilarity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the level of similarity between each pair of segments in a scoreDict.</p>
+<p>This takes twice as long as it should because it does not cache the
+pairwise similarity.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">filePaths</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filePaths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">corpus</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;bwv197.5.mxl&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sourcePath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filePaths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">corpus</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;bwv190.7.mxl&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sourcePath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filePaths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">corpus</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;bwv197.10.mxl&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sourcePath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreDict</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">indexScoreFilePaths</span><span class="p">(</span><span class="n">filePaths</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreSim</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">scoreSimilarity</span><span class="p">(</span><span class="n">scoreDict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">scoreSim</span><span class="p">)</span>
+<span class="go">671</span>
+</pre></div>
+</div>
+<p>Returns a list of tuples of first score name, first score voice number, first score
+measure number, second score name, second score voice number, second score
+measure number, and similarity score (0 to 1).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">scoreSim</span><span class="p">[</span><span class="mi">64</span><span class="p">:</span><span class="mi">68</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">result</span>
+<span class="gp">...</span>
+<span class="go">(...&#39;bwv197.5.mxl&#39;, 0, 1, (5, 11), ...&#39;bwv197.10.mxl&#39;, 3, 1, (5, 12), 0.0)</span>
+<span class="go">(...&#39;bwv197.5.mxl&#39;, 0, 1, (5, 11), ...&#39;bwv197.10.mxl&#39;, 3, 2, (9, 14), 0.0)</span>
+<span class="go">(...&#39;bwv197.5.mxl&#39;, 0, 2, (9, 14), ...&#39;bwv190.7.mxl&#39;, 0, 0, (0, 9), 0.07547...)</span>
+<span class="go">(...&#39;bwv197.5.mxl&#39;, 0, 2, (9, 14), ...&#39;bwv190.7.mxl&#39;, 0, 1, (6, 15), 0.07547...)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.search.segment.translateMonophonicPartToSegments">
+<code class="descclassname">music21.search.segment.</code><code class="descname">translateMonophonicPartToSegments</code><span class="sig-paren">(</span><em>inputStream</em>, <em>segmentLengths=30</em>, <em>overlap=12</em>, <em>algorithm=None</em>, <em>jitter=0</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.search.segment.translateMonophonicPartToSegments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates a monophonic part with measures to a set of segments of length
+<cite>segmentLengths</cite> (measured in number of notes) with an overlap of <cite>overlap</cite> notes 
+using a conversion algorithm of <cite>algorithm</cite> (default: search.translateStreamToStringNoRhythm). 
+Returns two lists, a list of segments, and a list of tuples of measure start and end
+numbers that match the segments.</p>
+<p>If algorithm is None then a default algorithm of music21.search.translateStreamToStringNoRhythm
+is used</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">luca</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;luca/gloria&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lucaCantus</span> <span class="o">=</span> <span class="n">luca</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">segments</span><span class="p">,</span> <span class="n">measureLists</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">translateMonophonicPartToSegments</span><span class="p">(</span><span class="n">lucaCantus</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">[&#39;HJHEAAEHHCE@JHGECA@A&gt;@A&gt;&lt;A@AAE&#39;, &#39;@A&gt;@A&gt;&lt;A@AAEEECGHJHGH@CAE@FECA&#39;]</span>
+</pre></div>
+</div>
+<p>Segment zero begins at measure 1 and ends in m. 12.  Segment 1 spans m.7 - m.18:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">measureLists</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">[(1, 12), (7, 18)]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">segments</span><span class="p">,</span> <span class="n">measureLists</span> <span class="o">=</span> <span class="n">search</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">translateMonophonicPartToSegments</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">lucaCantus</span><span class="p">,</span> 
+<span class="gp">... </span>    <span class="n">algorithm</span><span class="o">=</span><span class="n">search</span><span class="o">.</span><span class="n">translateDiatonicStreamToString</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">[&#39;CRJOMTHCQNALRQPAGFEFDLFDCFEMOO&#39;, &#39;EFDLFDCFEMOOONPJDCBJSNTHLBOGFE&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">measureLists</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">[(1, 12), (7, 18)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleSearchSerial.html" title="music21.search.serial"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleSearchLyrics.html" title="music21.search.lyrics"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

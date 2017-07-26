@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.tempo &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.test.commonTest" href="moduleTestCommonTest.html" />
+    <link rel="prev" title="music21.stream.streamStatus" href="moduleStreamStreamStatus.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleTestCommonTest.html" title="music21.test.commonTest"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleStreamStreamStatus.html" title="music21.stream.streamStatus"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleStreamStreamStatus.html"
+                        title="previous chapter">music21.stream.streamStatus</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleTestCommonTest.html"
+                        title="next chapter">music21.test.commonTest</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.tempo</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#metronomemark">MetronomeMark</a></li>
+<li><a class="reference internal" href="#tempotext">TempoText</a></li>
+<li><a class="reference internal" href="#metricmodulation">MetricModulation</a></li>
+<li><a class="reference internal" href="#tempoindication">TempoIndication</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleTempo.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-tempo">
+<span id="moduletempo"></span><h1>music21.tempo<a class="headerlink" href="#music21-tempo" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.tempo"></span><p>This module defines objects for describing tempo and changes in tempo.</p>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.tempo.interpolateElements">
+<code class="descclassname">music21.tempo.</code><code class="descname">interpolateElements</code><span class="sig-paren">(</span><em>element1</em>, <em>element2</em>, <em>sourceStream</em>, <em>destinationStream</em>, <em>autoAdd=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.interpolateElements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assume that element1 and element2 are two elements in sourceStream 
+and destinationStream with other elements (say eA, eB, eC) between 
+them.  For instance, element1 could be the downbeat at offset 10
+in sourceStream (a Stream representing a score) and offset 20.5 
+in destinationStream (which might be a Stream representing the 
+timing of notes in particular recording at approximately but not 
+exactly qtr = 30). Element2 could be the following downbeat in 4/4, 
+at offset 14 in source but offset 25.0 in the recording:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sourceStream</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">destinationStream</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;quarter&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">element2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;G4&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;quarter&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sourceStream</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">element1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">destinationStream</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">20.5</span><span class="p">,</span> <span class="n">element1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sourceStream</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="n">element2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">destinationStream</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">25.0</span><span class="p">,</span> <span class="n">element2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Suppose eA, eB, and eC are three quarter notes that lie
+between element1 and element2 in sourceStream
+and destinationStream, as in:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eA</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;quarter&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eB</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;quarter&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eC</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;quarter&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sourceStream</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="n">eA</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sourceStream</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">eB</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sourceStream</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="n">eC</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">destinationStream</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">eA</span><span class="p">,</span> <span class="n">eB</span><span class="p">,</span> <span class="n">eC</span><span class="p">])</span>  <span class="c1"># not needed if autoAdd were true</span>
+</pre></div>
+</div>
+<p>then running this function will cause eA, eB, and eC
+to have offsets 21.625, 22.75, and 23.875 respectively
+in destinationStream:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tempo</span><span class="o">.</span><span class="n">interpolateElements</span><span class="p">(</span><span class="n">element1</span><span class="p">,</span> <span class="n">element2</span><span class="p">,</span> 
+<span class="gp">... </span>        <span class="n">sourceStream</span><span class="p">,</span> <span class="n">destinationStream</span><span class="p">,</span> <span class="n">autoAdd</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="p">[</span><span class="n">eA</span><span class="p">,</span> <span class="n">eB</span><span class="p">,</span> <span class="n">eC</span><span class="p">]:</span>
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">destinationStream</span><span class="p">))</span>
+<span class="go">21.625</span>
+<span class="go">22.75</span>
+<span class="go">23.875</span>
+</pre></div>
+</div>
+<p>if the elements between element1 and element2 do not yet
+appear in destinationStream, they are automatically added
+unless autoAdd is False.</p>
+<p>(with the default autoAdd, elements are automatically added to new streams):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">destStream2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">destStream2</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">10.1</span><span class="p">,</span> <span class="n">element1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">destStream2</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mf">50.5</span><span class="p">,</span> <span class="n">element2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tempo</span><span class="o">.</span><span class="n">interpolateElements</span><span class="p">(</span><span class="n">element1</span><span class="p">,</span> <span class="n">element2</span><span class="p">,</span> <span class="n">sourceStream</span><span class="p">,</span> <span class="n">destStream2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="p">[</span><span class="n">eA</span><span class="p">,</span> <span class="n">eB</span><span class="p">,</span> <span class="n">eC</span><span class="p">]:</span>
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">getOffsetBySite</span><span class="p">(</span><span class="n">destStream2</span><span class="p">),))</span>
+<span class="go">20.2</span>
+<span class="go">30.3</span>
+<span class="go">40.4</span>
+</pre></div>
+</div>
+<p>(unless autoAdd is set to false, in which case a Tempo Exception arises...)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">destStream3</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">destStream3</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">element1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">destStream3</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">element2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eA</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s2">&quot;blah&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tempo</span><span class="o">.</span><span class="n">interpolateElements</span><span class="p">(</span><span class="n">element1</span><span class="p">,</span> <span class="n">element2</span><span class="p">,</span> <span class="n">sourceStream</span><span class="p">,</span> <span class="n">destStream3</span><span class="p">,</span> <span class="n">autoAdd</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.tempo.TempoException</span>: <span class="n">Could not find element &lt;music21.note.Note D&gt; with id ...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.tempo.convertTempoByReferent">
+<code class="descclassname">music21.tempo.</code><code class="descname">convertTempoByReferent</code><span class="sig-paren">(</span><em>numberSrc</em>, <em>quarterLengthBeatSrc</em>, <em>quarterLengthBeatDst=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.convertTempoByReferent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert between equivalent tempi, where the speed stays the 
+same but the beat referent and number chnage.</p>
+<p>60 bpm at quarter, going to half</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tempo</span><span class="o">.</span><span class="n">convertTempoByReferent</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">30.0</span>
+</pre></div>
+</div>
+<p>60 bpm at quarter, going to 16th</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tempo</span><span class="o">.</span><span class="n">convertTempoByReferent</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">25</span><span class="p">)</span> 
+<span class="go">240.0</span>
+</pre></div>
+</div>
+<p>60 at dotted quarter, get quarter</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tempo</span><span class="o">.</span><span class="n">convertTempoByReferent</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> 
+<span class="go">90.0</span>
+</pre></div>
+</div>
+<p>60 at dotted quarter, get half</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tempo</span><span class="o">.</span><span class="n">convertTempoByReferent</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> 
+<span class="go">45.0</span>
+</pre></div>
+</div>
+<p>60 at dotted quarter, get trip</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tempo</span><span class="o">.</span><span class="n">convertTempoByReferent</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span> 
+<span class="go">270.0</span>
+</pre></div>
+</div>
+<p>A Fraction instance can also be used:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tempo</span><span class="o">.</span><span class="n">convertTempoByReferent</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">common</span><span class="o">.</span><span class="n">opFrac</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mf">3.</span><span class="p">))</span> 
+<span class="go">270.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="metronomemark">
+<h2>MetronomeMark<a class="headerlink" href="#metronomemark" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tempo.MetronomeMark">
+<em class="property">class </em><code class="descclassname">music21.tempo.</code><code class="descname">MetronomeMark</code><span class="sig-paren">(</span><em>text=None</em>, <em>number=None</em>, <em>referent=None</em>, <em>parentheses=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.MetronomeMark" title="Permalink to this definition">¶</a></dt>
+<dd><p>A way of specifying a particular tempo with a text string, 
+a referent (a duration) and a number.</p>
+<p>The <cite>referent</cite> attribute is a Duration object, or a string duration type or 
+a floating-point quarter-length value used to create a Duration.</p>
+<p>MetronomeMarks, as Music21Object subclasses, also have .duration object 
+property independent of the <cite>referent</cite>.</p>
+<p>The <cite>text</cite> attribute will usually return a unicode string.  
+If you use &#8220;from __future__ import unicode_literals&#8221; this
+will not be a problem at all.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="s2">&quot;slow&quot;</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;half&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">number</span>
+<span class="go">40</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">referent</span>
+<span class="go">&lt;music21.duration.Duration 2.0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">referent</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;half&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">slow</span>
+</pre></div>
+</div>
+<p>Some text marks will automatically suggest a number.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="s1">&#39;adagio&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">number</span>
+<span class="go">56</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">numberImplicit</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>For certain numbers, a text value can be set implicitly</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tm2</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">208</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tm2</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">prestissimo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tm2</span><span class="o">.</span><span class="n">referent</span>
+<span class="go">&lt;music21.duration.Duration 1.0&gt;</span>
+</pre></div>
+</div>
+<p>Unicode values sometimes are hard to work with.  Here&#8217;s an example that works...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">marking</span> <span class="o">=</span> <span class="s1">u&#39;très vite&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">marking</span><span class="p">)</span>
+<span class="go">très vite</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tempo</span><span class="o">.</span><span class="n">defaultTempoValues</span><span class="p">[</span><span class="n">marking</span><span class="p">])</span>
+<span class="go">144</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tm2</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">marking</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tm2</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;vite&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tm2</span><span class="o">.</span><span class="n">number</span>
+<span class="go">144</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tempo.MetronomeMark" title="music21.tempo.MetronomeMark"><code class="xref py py-class docutils literal"><span class="pre">MetronomeMark</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tempo.TempoIndication" title="music21.tempo.TempoIndication"><code class="xref py py-class docutils literal"><span class="pre">TempoIndication</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.MetronomeMark" title="music21.tempo.MetronomeMark"><code class="xref py py-class docutils literal"><span class="pre">MetronomeMark</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.MetronomeMark" title="music21.tempo.MetronomeMark"><code class="xref py py-class docutils literal"><span class="pre">MetronomeMark</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.tempo.MetronomeMark.number">
+<code class="descclassname">MetronomeMark.</code><code class="descname">number</code><a class="headerlink" href="#music21.tempo.MetronomeMark.number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get and set the number, or the numerical value of the Metronome.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="s1">&#39;slow&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">number</span>
+<span class="go">56</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">numberImplicit</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mf">52.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">number</span>       
+<span class="go">52.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">numberImplicit</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.tempo.MetronomeMark.numberSounding">
+<code class="descclassname">MetronomeMark.</code><code class="descname">numberSounding</code><a class="headerlink" href="#music21.tempo.MetronomeMark.numberSounding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get and set the numberSounding, or the numerical value of the Metronome that 
+is used for playback independent of display. If numberSounding is None, number is 
+assumed to be numberSounding.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="s1">&#39;slow&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">number</span>
+<span class="go">56</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">numberImplicit</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">numberSounding</span> <span class="o">==</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">numberSounding</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">numberSounding</span>
+<span class="go">120</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.tempo.MetronomeMark.referent">
+<code class="descclassname">MetronomeMark.</code><code class="descname">referent</code><a class="headerlink" href="#music21.tempo.MetronomeMark.referent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the referent, or the Duration object that is the 
+reference for the tempo value in BPM.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.tempo.MetronomeMark.text">
+<code class="descclassname">MetronomeMark.</code><code class="descname">text</code><a class="headerlink" href="#music21.tempo.MetronomeMark.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set a text string for this MetronomeMark. Internally implemented as a
+<a class="reference internal" href="#music21.tempo.TempoText" title="music21.tempo.TempoText"><code class="xref py py-class docutils literal"><span class="pre">TempoText</span></code></a> object, which stores the text in 
+a <code class="xref py py-class docutils literal"><span class="pre">TextExpression</span></code> object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="kc">None</span> 
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;medium fast&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mm</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">medium fast</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.MetronomeMark" title="music21.tempo.MetronomeMark"><code class="xref py py-class docutils literal"><span class="pre">MetronomeMark</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tempo.MetronomeMark.durationToSeconds">
+<code class="descclassname">MetronomeMark.</code><code class="descname">durationToSeconds</code><span class="sig-paren">(</span><em>durationOrQuarterLength</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.MetronomeMark.durationToSeconds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a duration specified as a <a class="reference internal" href="moduleDuration.html#music21.duration.Duration" title="music21.duration.Duration"><code class="xref py py-class docutils literal"><span class="pre">Duration</span></code></a> object or a 
+quarter length, return the resultant time in seconds at the tempo specified by 
+this MetronomeMark.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">tempo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">referent</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mf">60.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span><span class="o">.</span><span class="n">durationToSeconds</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+<span class="go">60.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span><span class="o">.</span><span class="n">durationToSeconds</span><span class="p">(</span><span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="s1">&#39;16th&#39;</span><span class="p">))</span>
+<span class="go">0.25</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.MetronomeMark.getEquivalentByReferent">
+<code class="descclassname">MetronomeMark.</code><code class="descname">getEquivalentByReferent</code><span class="sig-paren">(</span><em>referent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.MetronomeMark.getEquivalentByReferent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new MetronomeMark object that has an equivalent speed but 
+different number and referent values based on a supplied referent 
+(given as a Duration type, quarterLength, or Duration object).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">referent</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span><span class="o">.</span><span class="n">getEquivalentByReferent</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">&lt;music21.tempo.MetronomeMark larghetto Eighth=120.0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span><span class="o">.</span><span class="n">getEquivalentByReferent</span><span class="p">(</span><span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">(</span><span class="s1">&#39;half&#39;</span><span class="p">))</span>
+<span class="go">&lt;music21.tempo.MetronomeMark larghetto Half=30.0&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span><span class="o">.</span><span class="n">getEquivalentByReferent</span><span class="p">(</span><span class="s1">&#39;longa&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.tempo.MetronomeMark larghetto Imperfect Longa=3.75&gt;        </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.MetronomeMark.getMaintainedNumberWithReferent">
+<code class="descclassname">MetronomeMark.</code><code class="descname">getMaintainedNumberWithReferent</code><span class="sig-paren">(</span><em>referent</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.MetronomeMark.getMaintainedNumberWithReferent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new MetronomeMark object that has an equivalent number but a new referent.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.MetronomeMark.getQuarterBPM">
+<code class="descclassname">MetronomeMark.</code><code class="descname">getQuarterBPM</code><span class="sig-paren">(</span><em>useNumberSounding=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.MetronomeMark.getQuarterBPM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a BPM value where the beat is a quarter; must convert from the 
+defined beat to a quarter beat. Will return None if no beat number is defined.</p>
+<p>This mostly used for generating MusicXML &lt;sound&gt; tags when necessary.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">referent</span><span class="o">=</span><span class="s1">&#39;half&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">getQuarterBPM</span><span class="p">()</span>
+<span class="go">120.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">referent</span> <span class="o">=</span> <span class="s1">&#39;quarter&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">getQuarterBPM</span><span class="p">()</span>
+<span class="go">60.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.MetronomeMark.getTextExpression">
+<code class="descclassname">MetronomeMark.</code><code class="descname">getTextExpression</code><span class="sig-paren">(</span><em>returnImplicit=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.MetronomeMark.getTextExpression" title="Permalink to this definition">¶</a></dt>
+<dd><p>If there is a TextExpression available that is not implicit, return it; 
+otherwise, return None.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="s1">&#39;presto&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">number</span>
+<span class="go">184</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">numberImplicit</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">getTextExpression</span><span class="p">()</span>
+<span class="go">&lt;music21.expressions.TextExpression &quot;presto&quot;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">textImplicit</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">numberImplicit</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">textImplicit</span>     
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">getTextExpression</span><span class="p">()</span> <span class="o">==</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">getTextExpression</span><span class="p">(</span><span class="n">returnImplicit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&lt;music21.expressions.TextExpression &quot;maestoso&quot;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.MetronomeMark.secondsPerQuarter">
+<code class="descclassname">MetronomeMark.</code><code class="descname">secondsPerQuarter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.MetronomeMark.secondsPerQuarter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the duration in seconds for each quarter length 
+(not necessarily the referent) of this MetronomeMark.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">tempo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">referent</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mf">60.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span><span class="o">.</span><span class="n">secondsPerQuarter</span><span class="p">()</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">referent</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mf">60.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span><span class="o">.</span><span class="n">secondsPerQuarter</span><span class="p">()</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">referent</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span><span class="o">.</span><span class="n">secondsPerQuarter</span><span class="p">()</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.MetronomeMark.secondsToDuration">
+<code class="descclassname">MetronomeMark.</code><code class="descname">secondsToDuration</code><span class="sig-paren">(</span><em>seconds</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.MetronomeMark.secondsToDuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a duration in seconds, 
+return a <a class="reference internal" href="moduleDuration.html#music21.duration.Duration" title="music21.duration.Duration"><code class="xref py py-class docutils literal"><span class="pre">Duration</span></code></a> object equal to that time.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">tempo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">referent</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mf">60.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span><span class="o">.</span><span class="n">secondsToDuration</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="go">&lt;music21.duration.Duration 0.25&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span><span class="o">.</span><span class="n">secondsToDuration</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;eighth&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span><span class="o">.</span><span class="n">secondsToDuration</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">&lt;music21.duration.Duration 1.0&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.MetronomeMark.setQuarterBPM">
+<code class="descclassname">MetronomeMark.</code><code class="descname">setQuarterBPM</code><span class="sig-paren">(</span><em>value</em>, <em>setNumber=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.MetronomeMark.setQuarterBPM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a value in BPM, use it to set the value of this MetroneMark. 
+BPM values are assumed to be refer only to quarter notes; different beat values, 
+if definded here, will be scaled</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">referent</span><span class="o">=</span><span class="s1">&#39;half&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">setQuarterBPM</span><span class="p">(</span><span class="mi">240</span><span class="p">)</span> <span class="c1"># set to 240 for a quarter</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">number</span>  <span class="c1"># a half is half as fast</span>
+<span class="go">120.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.tempo.TempoIndication" title="music21.tempo.TempoIndication"><code class="xref py py-class docutils literal"><span class="pre">TempoIndication</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tempo.TempoIndication.getPreviousMetronomeMark" title="music21.tempo.TempoIndication.getPreviousMetronomeMark"><code class="xref py py-meth docutils literal"><span class="pre">getPreviousMetronomeMark()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tempo.TempoIndication.getSoundingMetronomeMark" title="music21.tempo.TempoIndication.getSoundingMetronomeMark"><code class="xref py py-meth docutils literal"><span class="pre">getSoundingMetronomeMark()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.MetronomeMark" title="music21.tempo.MetronomeMark"><code class="xref py py-class docutils literal"><span class="pre">MetronomeMark</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="tempotext">
+<h2>TempoText<a class="headerlink" href="#tempotext" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tempo.TempoText">
+<em class="property">class </em><code class="descclassname">music21.tempo.</code><code class="descname">TempoText</code><span class="sig-paren">(</span><em>text=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.TempoText" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">music21</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tm</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">tempo</span><span class="o">.</span><span class="n">TempoText</span><span class="p">(</span><span class="s2">&quot;adagio&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tm</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">adagio</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tempo.TempoText" title="music21.tempo.TempoText"><code class="xref py py-class docutils literal"><span class="pre">TempoText</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tempo.TempoIndication" title="music21.tempo.TempoIndication"><code class="xref py py-class docutils literal"><span class="pre">TempoIndication</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.TempoText" title="music21.tempo.TempoText"><code class="xref py py-class docutils literal"><span class="pre">TempoText</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.TempoText" title="music21.tempo.TempoText"><code class="xref py py-class docutils literal"><span class="pre">TempoText</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.tempo.TempoText.text">
+<code class="descclassname">TempoText.</code><code class="descname">text</code><a class="headerlink" href="#music21.tempo.TempoText.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the text as a string.</p>
+<p>Depending on whether &#8220;from __future__ import unicode_literals&#8221; is turned on, 
+this might give a unicode literal (u&#8217;adagio&#8217;)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">music21</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tm</span> <span class="o">=</span> <span class="n">music21</span><span class="o">.</span><span class="n">tempo</span><span class="o">.</span><span class="n">TempoText</span><span class="p">(</span><span class="s2">&quot;adagio&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tm</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="go">adagio</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tm</span><span class="o">.</span><span class="n">getTextExpression</span><span class="p">()</span>
+<span class="go">&lt;music21.expressions.TextExpression &quot;adagio&quot;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.TempoText" title="music21.tempo.TempoText"><code class="xref py py-class docutils literal"><span class="pre">TempoText</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tempo.TempoText.applyTextFormatting">
+<code class="descclassname">TempoText.</code><code class="descname">applyTextFormatting</code><span class="sig-paren">(</span><em>te=None</em>, <em>numberImplicit=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.TempoText.applyTextFormatting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply the default text formatting to the text expression version of of this repeat</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.TempoText.getMetronomeMark">
+<code class="descclassname">TempoText.</code><code class="descname">getMetronomeMark</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.TempoText.getMetronomeMark" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a MetronomeMark object that is configured from this objects Text.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">TempoText</span><span class="p">(</span><span class="s2">&quot;slow&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">getMetronomeMark</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm</span><span class="o">.</span><span class="n">number</span>
+<span class="go">56</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.TempoText.getTextExpression">
+<code class="descclassname">TempoText.</code><code class="descname">getTextExpression</code><span class="sig-paren">(</span><em>numberImplicit=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.TempoText.getTextExpression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a TextExpression object for this text.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.TempoText.isCommonTempoText">
+<code class="descclassname">TempoText.</code><code class="descname">isCommonTempoText</code><span class="sig-paren">(</span><em>value=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.TempoText.isCommonTempoText" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True or False if the supplied text seems like a 
+plausible Tempo indications be used for this TempoText.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">TempoText</span><span class="p">(</span><span class="s2">&quot;adagio&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="o">.</span><span class="n">isCommonTempoText</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">TempoText</span><span class="p">(</span><span class="s2">&quot;Largo e piano&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="o">.</span><span class="n">isCommonTempoText</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">TempoText</span><span class="p">(</span><span class="s2">&quot;undulating&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="o">.</span><span class="n">isCommonTempoText</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.TempoText.setTextExpression">
+<code class="descclassname">TempoText.</code><code class="descname">setTextExpression</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.TempoText.setTextExpression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a TextExpression, set it in this object.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.tempo.TempoIndication" title="music21.tempo.TempoIndication"><code class="xref py py-class docutils literal"><span class="pre">TempoIndication</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tempo.TempoIndication.getPreviousMetronomeMark" title="music21.tempo.TempoIndication.getPreviousMetronomeMark"><code class="xref py py-meth docutils literal"><span class="pre">getPreviousMetronomeMark()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tempo.TempoIndication.getSoundingMetronomeMark" title="music21.tempo.TempoIndication.getSoundingMetronomeMark"><code class="xref py py-meth docutils literal"><span class="pre">getSoundingMetronomeMark()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.TempoText" title="music21.tempo.TempoText"><code class="xref py py-class docutils literal"><span class="pre">TempoText</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="metricmodulation">
+<h2>MetricModulation<a class="headerlink" href="#metricmodulation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tempo.MetricModulation">
+<em class="property">class </em><code class="descclassname">music21.tempo.</code><code class="descname">MetricModulation</code><a class="headerlink" href="#music21.tempo.MetricModulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for representing the relationship between two MetronomeMarks. 
+Generally this relationship is one of equality, where the number is maintained but 
+the referent that number is applied to changes.</p>
+<p>The basic definition of a MetricModulation is given by supplying two MetronomeMarks, 
+one for the oldMetronome, the other for the newMetronome. High level properties, 
+oldReferent and newReferent, and convenience methods permit only setting the referent.</p>
+<p>The <cite>classicalStyle</cite> attribute determines of the first MetronomeMark describes the 
+new tempo, not the old (the reverse of expected usage).</p>
+<p>The <cite>maintainBeat</cite> attribute determines if, after an equality statement, 
+the beat is maintained. This is relevant for moving from 3/4 to 6/8, for example.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mm1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="n">quarterLength</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="n">quarterLength</span><span class="o">=.</span><span class="mi">5</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetricModulation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">oldReferent</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span> <span class="c1"># can use Duration objects</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">newReferent</span> <span class="o">=</span> <span class="s1">&#39;quarter&#39;</span> <span class="c1"># can use Duration objects</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mmod1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">updateByContext</span><span class="p">()</span> <span class="c1"># get number from last MetronomeMark on Stream</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">newMetronome</span>
+<span class="go">&lt;music21.tempo.MetronomeMark animato Quarter=120.0&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="n">quarterLength</span><span class="o">=</span><span class="mf">1.5</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mmod2</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetricModulation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mmod2</span><span class="p">)</span> <span class="c1"># if the obj is added to Stream, can set referents </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod2</span><span class="o">.</span><span class="n">oldReferent</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="c1"># will get number from previous MetronomeMark</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod2</span><span class="o">.</span><span class="n">newReferent</span> <span class="o">=</span> <span class="s1">&#39;quarter&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod2</span><span class="o">.</span><span class="n">newMetronome</span>
+<span class="go">&lt;music21.tempo.MetronomeMark animato Quarter=80.0&gt;</span>
+</pre></div>
+</div>
+<p>Note that an initial metric modulation can set old and new referents and get None as
+tempo numbers...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mmod3</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetricModulation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod3</span><span class="o">.</span><span class="n">oldReferent</span> <span class="o">=</span> <span class="s1">&#39;half&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod3</span><span class="o">.</span><span class="n">newReferent</span> <span class="o">=</span> <span class="s1">&#39;16th&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod3</span>
+<span class="go">&lt;music21.tempo.MetricModulation </span>
+<span class="go">    &lt;music21.tempo.MetronomeMark </span>
+<span class="go">        Half=None&gt;=&lt;music21.tempo.MetronomeMark 16th=None&gt;&gt;</span>
+</pre></div>
+</div>
+<p>test w/ more sane referents that either the old or the new can change without a tempo number</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mmod3</span><span class="o">.</span><span class="n">oldReferent</span> <span class="o">=</span> <span class="s1">&#39;quarter&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod3</span><span class="o">.</span><span class="n">newReferent</span> <span class="o">=</span> <span class="s1">&#39;eighth&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod3</span>
+<span class="go">&lt;music21.tempo.MetricModulation </span>
+<span class="go">    &lt;music21.tempo.MetronomeMark </span>
+<span class="go">        Quarter=None&gt;=&lt;music21.tempo.MetronomeMark Eighth=None&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod3</span><span class="o">.</span><span class="n">oldMetronome</span>
+<span class="go">&lt;music21.tempo.MetronomeMark Quarter=None&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod3</span><span class="o">.</span><span class="n">oldMetronome</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="mi">60</span>
+</pre></div>
+</div>
+<p>New number automatically updates...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mmod3</span>
+<span class="go">&lt;music21.tempo.MetricModulation </span>
+<span class="go">    &lt;music21.tempo.MetronomeMark larghetto </span>
+<span class="go">        Quarter=60&gt;=&lt;music21.tempo.MetronomeMark larghetto Eighth=60&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tempo.MetricModulation" title="music21.tempo.MetricModulation"><code class="xref py py-class docutils literal"><span class="pre">MetricModulation</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.tempo.TempoIndication" title="music21.tempo.TempoIndication"><code class="xref py py-class docutils literal"><span class="pre">TempoIndication</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.MetricModulation" title="music21.tempo.MetricModulation"><code class="xref py py-class docutils literal"><span class="pre">MetricModulation</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.tempo.MetricModulation.number">
+<code class="descclassname">MetricModulation.</code><code class="descname">number</code><a class="headerlink" href="#music21.tempo.MetricModulation.number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get and the number of the MetricModulation, or the number 
+assigned to the new MetronomeMark.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mm1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="n">quarterLength</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">repeatAppend</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="n">quarterLength</span><span class="o">=.</span><span class="mi">5</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetricModulation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">oldReferent</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span> <span class="c1"># can use Duration objects</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">newReferent</span> <span class="o">=</span> <span class="s1">&#39;quarter&#39;</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mmod1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">updateByContext</span><span class="p">()</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">newMetronome</span>
+<span class="go">&lt;music21.tempo.MetronomeMark animato Quarter=120.0&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">number</span>        
+<span class="go">120.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.MetricModulation" title="music21.tempo.MetricModulation"><code class="xref py py-class docutils literal"><span class="pre">MetricModulation</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.tempo.MetricModulation.newMetronome">
+<code class="descclassname">MetricModulation.</code><code class="descname">newMetronome</code><a class="headerlink" href="#music21.tempo.MetricModulation.newMetronome" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the right <a class="reference internal" href="#music21.tempo.MetronomeMark" title="music21.tempo.MetronomeMark"><code class="xref py py-class docutils literal"><span class="pre">MetronomeMark</span></code></a> 
+object for the new, or following value.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">referent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span>
+<span class="go">&lt;music21.tempo.MetronomeMark larghetto Quarter=60&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetricModulation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">newMetronome</span> <span class="o">=</span> <span class="n">mm1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">newMetronome</span> <span class="o">=</span> <span class="s1">&#39;junk&#39;</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.tempo.MetricModulationException</span>: <span class="n">newMetronome property must be </span>
+<span class="go">    set with a MetronomeMark instance</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.tempo.MetricModulation.newReferent">
+<code class="descclassname">MetricModulation.</code><code class="descname">newReferent</code><a class="headerlink" href="#music21.tempo.MetricModulation.newReferent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the referent of the new MetronomeMark.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">referent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetricModulation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">newMetronome</span> <span class="o">=</span> <span class="n">mm1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">newMetronome</span>
+<span class="go">&lt;music21.tempo.MetronomeMark larghetto Quarter=60&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">newReferent</span> <span class="o">=</span> <span class="o">.</span><span class="mi">25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">newMetronome</span>
+<span class="go">&lt;music21.tempo.MetronomeMark larghetto 16th=240.0&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.tempo.MetricModulation.oldMetronome">
+<code class="descclassname">MetricModulation.</code><code class="descname">oldMetronome</code><a class="headerlink" href="#music21.tempo.MetricModulation.oldMetronome" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the left <a class="reference internal" href="#music21.tempo.MetronomeMark" title="music21.tempo.MetronomeMark"><code class="xref py py-class docutils literal"><span class="pre">MetronomeMark</span></code></a> object 
+for the old, or previous value.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">referent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span>
+<span class="go">&lt;music21.tempo.MetronomeMark larghetto Quarter=60&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetricModulation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">oldMetronome</span> <span class="o">=</span> <span class="n">mm1</span>
+</pre></div>
+</div>
+<p>Note that we do need to have a proper MetronomeMark instance to figure this out:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">oldMetronome</span> <span class="o">=</span> <span class="s1">&#39;junk&#39;</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.tempo.MetricModulationException</span>: <span class="n">oldMetronome property </span>
+<span class="go">    must be set with a MetronomeMark instance</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.tempo.MetricModulation.oldReferent">
+<code class="descclassname">MetricModulation.</code><code class="descname">oldReferent</code><a class="headerlink" href="#music21.tempo.MetricModulation.oldReferent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the referent of the old MetronomeMark.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">referent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetricModulation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">oldMetronome</span> <span class="o">=</span> <span class="n">mm1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">oldMetronome</span>
+<span class="go">&lt;music21.tempo.MetronomeMark larghetto Quarter=60&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">oldReferent</span> <span class="o">=</span> <span class="o">.</span><span class="mi">25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">oldMetronome</span>
+<span class="go">&lt;music21.tempo.MetronomeMark larghetto 16th=240.0&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.MetricModulation" title="music21.tempo.MetricModulation"><code class="xref py py-class docutils literal"><span class="pre">MetricModulation</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tempo.MetricModulation.setEqualityByReferent">
+<code class="descclassname">MetricModulation.</code><code class="descname">setEqualityByReferent</code><span class="sig-paren">(</span><em>side=None</em>, <em>referent=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.MetricModulation.setEqualityByReferent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the other side of the metric modulation to 
+an equality; side can be specified, or if one side 
+is None, that side will be set.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">referent</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetricModulation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">newMetronome</span> <span class="o">=</span> <span class="n">mm1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span><span class="o">.</span><span class="n">setEqualityByReferent</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmod1</span>
+<span class="go">&lt;music21.tempo.MetricModulation </span>
+<span class="go">     &lt;music21.tempo.MetronomeMark larghetto </span>
+<span class="go">           Half=30.0&gt;=&lt;music21.tempo.MetronomeMark larghetto Quarter=60&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.MetricModulation.setOtherByReferent">
+<code class="descclassname">MetricModulation.</code><code class="descname">setOtherByReferent</code><span class="sig-paren">(</span><em>side=None</em>, <em>referent=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.MetricModulation.setOtherByReferent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the other side of the metric modulation not based on equality, 
+but on a direct translation of the tempo value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.MetricModulation.updateByContext">
+<code class="descclassname">MetricModulation.</code><code class="descname">updateByContext</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.MetricModulation.updateByContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update this metric modulation based on the context, 
+or the surrounding MetronomeMarks or MetricModulations. 
+The object needs to reside in a Stream for this to be effective.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.tempo.TempoIndication" title="music21.tempo.TempoIndication"><code class="xref py py-class docutils literal"><span class="pre">TempoIndication</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tempo.TempoIndication.getPreviousMetronomeMark" title="music21.tempo.TempoIndication.getPreviousMetronomeMark"><code class="xref py py-meth docutils literal"><span class="pre">getPreviousMetronomeMark()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.tempo.TempoIndication.getSoundingMetronomeMark" title="music21.tempo.TempoIndication.getSoundingMetronomeMark"><code class="xref py py-meth docutils literal"><span class="pre">getSoundingMetronomeMark()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.MetricModulation" title="music21.tempo.MetricModulation"><code class="xref py py-class docutils literal"><span class="pre">MetricModulation</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="tempoindication">
+<h2>TempoIndication<a class="headerlink" href="#tempoindication" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tempo.TempoIndication">
+<em class="property">class </em><code class="descclassname">music21.tempo.</code><code class="descname">TempoIndication</code><a class="headerlink" href="#music21.tempo.TempoIndication" title="Permalink to this definition">¶</a></dt>
+<dd><p>A generic base class for all tempo indications to inherit. 
+Can be used to filter out all types of tempo indications.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tempo.TempoIndication" title="music21.tempo.TempoIndication"><code class="xref py py-class docutils literal"><span class="pre">TempoIndication</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.TempoIndication" title="music21.tempo.TempoIndication"><code class="xref py py-class docutils literal"><span class="pre">TempoIndication</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beat" title="music21.base.Music21Object.beat"><code class="xref py py-attr docutils literal"><span class="pre">beat</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatDuration" title="music21.base.Music21Object.beatDuration"><code class="xref py py-attr docutils literal"><span class="pre">beatDuration</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStr" title="music21.base.Music21Object.beatStr"><code class="xref py py-attr docutils literal"><span class="pre">beatStr</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.beatStrength" title="music21.base.Music21Object.beatStrength"><code class="xref py py-attr docutils literal"><span class="pre">beatStrength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSet" title="music21.base.Music21Object.classSet"><code class="xref py py-attr docutils literal"><span class="pre">classSet</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classes" title="music21.base.Music21Object.classes"><code class="xref py py-attr docutils literal"><span class="pre">classes</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.measureNumber" title="music21.base.Music21Object.measureNumber"><code class="xref py py-attr docutils literal"><span class="pre">measureNumber</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.TempoIndication" title="music21.tempo.TempoIndication"><code class="xref py py-class docutils literal"><span class="pre">TempoIndication</span></code></a> read/write properties</p>
+<p>Read/write properties inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.activeSite" title="music21.base.Music21Object.activeSite"><code class="xref py py-attr docutils literal"><span class="pre">activeSite</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.derivation" title="music21.base.Music21Object.derivation"><code class="xref py py-attr docutils literal"><span class="pre">derivation</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.duration" title="music21.base.Music21Object.duration"><code class="xref py py-attr docutils literal"><span class="pre">duration</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.offset" title="music21.base.Music21Object.offset"><code class="xref py py-attr docutils literal"><span class="pre">offset</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.priority" title="music21.base.Music21Object.priority"><code class="xref py py-attr docutils literal"><span class="pre">priority</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.quarterLength" title="music21.base.Music21Object.quarterLength"><code class="xref py py-attr docutils literal"><span class="pre">quarterLength</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.seconds" title="music21.base.Music21Object.seconds"><code class="xref py py-attr docutils literal"><span class="pre">seconds</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.TempoIndication" title="music21.tempo.TempoIndication"><code class="xref py py-class docutils literal"><span class="pre">TempoIndication</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tempo.TempoIndication.getPreviousMetronomeMark">
+<code class="descclassname">TempoIndication.</code><code class="descname">getPreviousMetronomeMark</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.TempoIndication.getPreviousMetronomeMark" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do activeSite and context searches to try to find the last relevant 
+MetronomeMark or MetricModulation object. If a MetricModulation mark is found, 
+return the new MetronomeMark, or the last relevant.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">120</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span> <span class="o">=</span> <span class="n">tempo</span><span class="o">.</span><span class="n">MetronomeMark</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">mm1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mm1</span><span class="o">.</span><span class="n">getPreviousMetronomeMark</span><span class="p">()</span>
+<span class="go">&lt;music21.tempo.MetronomeMark animato Quarter=120&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tempo.TempoIndication.getSoundingMetronomeMark">
+<code class="descclassname">TempoIndication.</code><code class="descname">getSoundingMetronomeMark</code><span class="sig-paren">(</span><em>found=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tempo.TempoIndication.getSoundingMetronomeMark" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the appropriate MetronomeMark from any sort of TempoIndication, regardless of class.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.containerHierarchy" title="music21.base.Music21Object.containerHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">containerHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.contextSites" title="music21.base.Music21Object.contextSites"><code class="xref py py-meth docutils literal"><span class="pre">contextSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getAllContextsByClass" title="music21.base.Music21Object.getAllContextsByClass"><code class="xref py py-meth docutils literal"><span class="pre">getAllContextsByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getContextByClass" title="music21.base.Music21Object.getContextByClass"><code class="xref py py-meth docutils literal"><span class="pre">getContextByClass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetBySite" title="music21.base.Music21Object.getOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getOffsetInHierarchy" title="music21.base.Music21Object.getOffsetInHierarchy"><code class="xref py py-meth docutils literal"><span class="pre">getOffsetInHierarchy()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.getSpannerSites" title="music21.base.Music21Object.getSpannerSites"><code class="xref py py-meth docutils literal"><span class="pre">getSpannerSites()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.informSites" title="music21.base.Music21Object.informSites"><code class="xref py py-meth docutils literal"><span class="pre">informSites()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isClassOrSubclass" title="music21.base.Music21Object.isClassOrSubclass"><code class="xref py py-meth docutils literal"><span class="pre">isClassOrSubclass()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.mergeAttributes" title="music21.base.Music21Object.mergeAttributes"><code class="xref py py-meth docutils literal"><span class="pre">mergeAttributes()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.next" title="music21.base.Music21Object.next"><code class="xref py py-meth docutils literal"><span class="pre">next()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.previous" title="music21.base.Music21Object.previous"><code class="xref py py-meth docutils literal"><span class="pre">previous()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeLocations" title="music21.base.Music21Object.purgeLocations"><code class="xref py py-meth docutils literal"><span class="pre">purgeLocations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.purgeOrphans" title="music21.base.Music21Object.purgeOrphans"><code class="xref py py-meth docutils literal"><span class="pre">purgeOrphans()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.setOffsetBySite" title="music21.base.Music21Object.setOffsetBySite"><code class="xref py py-meth docutils literal"><span class="pre">setOffsetBySite()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.sortTuple" title="music21.base.Music21Object.sortTuple"><code class="xref py py-meth docutils literal"><span class="pre">sortTuple()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtDurations" title="music21.base.Music21Object.splitAtDurations"><code class="xref py py-meth docutils literal"><span class="pre">splitAtDurations()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitAtQuarterLength" title="music21.base.Music21Object.splitAtQuarterLength"><code class="xref py py-meth docutils literal"><span class="pre">splitAtQuarterLength()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.splitByQuarterLengths" title="music21.base.Music21Object.splitByQuarterLengths"><code class="xref py py-meth docutils literal"><span class="pre">splitByQuarterLengths()</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.write" title="music21.base.Music21Object.write"><code class="xref py py-meth docutils literal"><span class="pre">write()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.tempo.TempoIndication" title="music21.tempo.TempoIndication"><code class="xref py py-class docutils literal"><span class="pre">TempoIndication</span></code></a> instance variables</p>
+<p>Instance variables inherited from <a class="reference internal" href="moduleBase.html#music21.base.Music21Object" title="music21.base.Music21Object"><code class="xref py py-class docutils literal"><span class="pre">Music21Object</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.classSortOrder" title="music21.base.Music21Object.classSortOrder"><code class="xref py py-attr docutils literal"><span class="pre">classSortOrder</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.groups" title="music21.base.Music21Object.groups"><code class="xref py py-attr docutils literal"><span class="pre">groups</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.hideObjectOnPrint" title="music21.base.Music21Object.hideObjectOnPrint"><code class="xref py py-attr docutils literal"><span class="pre">hideObjectOnPrint</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-attr docutils literal"><span class="pre">id</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.isStream" title="music21.base.Music21Object.isStream"><code class="xref py py-attr docutils literal"><span class="pre">isStream</span></code></a></li>
+<li><a class="reference internal" href="moduleBase.html#music21.base.Music21Object.xPosition" title="music21.base.Music21Object.xPosition"><code class="xref py py-attr docutils literal"><span class="pre">xPosition</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleTestCommonTest.html" title="music21.test.commonTest"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleStreamStreamStatus.html" title="music21.stream.streamStatus"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

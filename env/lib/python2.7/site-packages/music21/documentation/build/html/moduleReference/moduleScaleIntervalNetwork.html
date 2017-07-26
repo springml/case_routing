@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.scale.intervalNetwork &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.scale.scala" href="moduleScaleScala.html" />
+    <link rel="prev" title="music21.scale" href="moduleScale.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleScaleScala.html" title="music21.scale.scala"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleScale.html" title="music21.scale"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleScale.html"
+                        title="previous chapter">music21.scale</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleScaleScala.html"
+                        title="next chapter">music21.scale.scala</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.scale.intervalNetwork</a><ul>
+<li><a class="reference internal" href="#intervalnetwork">IntervalNetwork</a></li>
+<li><a class="reference internal" href="#node">Node</a></li>
+<li><a class="reference internal" href="#edge">Edge</a></li>
+<li><a class="reference internal" href="#boundintervalnetwork">BoundIntervalNetwork</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleScaleIntervalNetwork.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-scale-intervalnetwork">
+<span id="modulescaleintervalnetwork"></span><h1>music21.scale.intervalNetwork<a class="headerlink" href="#music21-scale-intervalnetwork" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.scale.intervalNetwork"></span><p>An IntervalNetwork defines a scale or harmonic unit as a (weighted) 
+digraph, or directed graph, where pitches are nodes and intervals are 
+edges. Nodes, however, are not stored; instead, an ordered list of edges 
+(Intervals) is provided as an archetype of adjacent nodes.</p>
+<p>IntervalNetworks are unlike conventional graphs in that each graph must 
+define a low and high terminus. These points are used to create a cyclic 
+graph and are treated as point of cyclical overlap.</p>
+<p>IntervalNetwork permits the definition of conventional octave repeating 
+scales or harmonies (abstract chords), non-octave repeating scales and 
+chords, and ordered interval sequences that might move in multiple 
+directions.</p>
+<p>A scale or harmony may be composed of one or more IntervalNetwork objects.</p>
+<p>Both nodes and edges can be weighted to suggest tonics, dominants, 
+finals, or other attributes of the network.</p>
+<div class="section" id="intervalnetwork">
+<h2>IntervalNetwork<a class="headerlink" href="#intervalnetwork" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork">
+<em class="property">class </em><code class="descclassname">music21.scale.intervalNetwork.</code><code class="descname">IntervalNetwork</code><span class="sig-paren">(</span><em>edgeList=None</em>, <em>octaveDuplicating=False</em>, <em>deterministic=True</em>, <em>pitchSimplification='maxAccidental'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork" title="Permalink to this definition">¶</a></dt>
+<dd><p>A graph of undefined Pitch nodes connected by a defined, 
+ordered list of <a class="reference internal" href="moduleInterval.html#music21.interval.Interval" title="music21.interval.Interval"><code class="xref py py-class docutils literal"><span class="pre">Interval</span></code></a> objects as edges.</p>
+<p>An <cite>octaveDuplicating</cite> boolean, if defined, can be used 
+to optimize pitch realization routines.</p>
+<p>The <cite>deterministic</cite> boolean, if defined, can be used to declare that there 
+is no probabilistic or multi-pathway segments of this network.</p>
+<p>The <cite>pitchSimplification</cite> method specifies how to simplify the pitches
+if they spiral out into double and triple sharps, etc.  The default is
+&#8216;maxAccidental&#8217; which specifies that each note can have at most one
+accidental; double-flats and sharps are not allowed.  The other choices
+are &#8216;simplifyEnharmonic&#8217; (which also converts C-, F-, B#, and E# to
+B, E, C, and F respectively, see <a class="reference internal" href="modulePitch.html#music21.pitch.Pitch.simplifyEnharmonic" title="music21.pitch.Pitch.simplifyEnharmonic"><code class="xref py py-meth docutils literal"><span class="pre">simplifyEnharmonic()</span></code></a>),
+&#8216;mostCommon&#8217; (which adds to simplifyEnharmonic the requirement that the
+most common accidential forms be used, so A# becomes B-, G- becomes 
+F#, etc. the only ambiguity allowed is that both G# and A- are acceptable),
+and None (or &#8216;none&#8217;) which does not do any simplification.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork" title="music21.scale.intervalNetwork.IntervalNetwork"><code class="xref py py-class docutils literal"><span class="pre">IntervalNetwork</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.degreeMax">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">degreeMax</code><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.degreeMax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the largest degree value.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">degreeMax</span>    <span class="c1"># returns eight, as this is the last node</span>
+<span class="go">8</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.degreeMaxUnique">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">degreeMaxUnique</code><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.degreeMaxUnique" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the largest degree value that represents a pitch level 
+that is not a terminus of the scale.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">degreeMaxUnique</span>
+<span class="go">7</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.degreeMin">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">degreeMin</code><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.degreeMin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the lowest degree value.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">degreeMin</span>    
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.terminusHighNodes">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">terminusHighNodes</code><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.terminusHighNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of last Nodes, or Nodes that contain &#8220;terminusHigh&#8221;.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">terminusHighNodes</span>
+<span class="go">[&lt;music21.scale.intervalNetwork.Node id=&#39;terminusHigh&#39;&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.terminusLowNodes">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">terminusLowNodes</code><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.terminusLowNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of first Nodes, or Nodes that contain &#8220;terminusLow&#8221;.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">terminusLowNodes</span>
+<span class="go">[&lt;music21.scale.intervalNetwork.Node id=&#39;terminusLow&#39;&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork" title="music21.scale.intervalNetwork.IntervalNetwork"><code class="xref py py-class docutils literal"><span class="pre">IntervalNetwork</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.clear">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove and reset all Nodes and Edges.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.fillArbitrary">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">fillArbitrary</code><span class="sig-paren">(</span><em>nodes</em>, <em>edges</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.fillArbitrary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill any arbitrary network given node and edge definitions.</p>
+<p>Nodes must be defined by a dictionary of id and degree values. 
+There must be a terminusLow and terminusHigh id as string:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">nodes</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="s1">&#39;terminusLow&#39;</span><span class="p">,</span> <span class="s1">&#39;degree&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
+         <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;degree&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span>
+         <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="s1">&#39;terminusHigh&#39;</span><span class="p">,</span> <span class="s1">&#39;degree&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">},</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<p>Edges must be defined by a dictionary of <a class="reference internal" href="moduleInterval.html#music21.interval.Interval" title="music21.interval.Interval"><code class="xref py py-class docutils literal"><span class="pre">Interval</span></code></a> 
+strings and connections. Id values will be automatically assigned. 
+Each connection must define direction and pairs of valid node ids:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">edges</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;interval&#39;</span><span class="p">:</span><span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="n">connections</span><span class="p">:(</span>
+                <span class="p">[</span><span class="s1">&#39;terminusLow&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;bi&#39;</span><span class="p">],</span>
+            <span class="p">)},</span>
+        <span class="p">{</span><span class="s1">&#39;interval&#39;</span><span class="p">:</span><span class="s1">&#39;M3&#39;</span><span class="p">,</span> <span class="n">connections</span><span class="p">:(</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;terminusHigh&#39;</span><span class="p">,</span> <span class="s1">&#39;bi&#39;</span><span class="p">],</span>
+            <span class="p">)},</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nodes</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="s1">&#39;terminusLow&#39;</span><span class="p">,</span> <span class="s1">&#39;degree&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span> 
+<span class="gp">... </span>         <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;degree&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">},</span> 
+<span class="gp">... </span>         <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="s1">&#39;terminusHigh&#39;</span><span class="p">,</span> <span class="s1">&#39;degree&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edges</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;interval&#39;</span><span class="p">:</span><span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;connections&#39;</span><span class="p">:([</span><span class="s1">&#39;terminusLow&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;bi&#39;</span><span class="p">],)},</span>
+<span class="gp">... </span>         <span class="p">{</span><span class="s1">&#39;interval&#39;</span><span class="p">:</span><span class="s1">&#39;M3&#39;</span><span class="p">,</span> <span class="s1">&#39;connections&#39;</span><span class="p">:([</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;terminusHigh&#39;</span><span class="p">,</span> <span class="s1">&#39;bi&#39;</span><span class="p">],)},)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillArbitrary</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="s1">&#39;c4&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">[&lt;music21.pitch.Pitch C4&gt;, &lt;music21.pitch.Pitch D-4&gt;, &lt;music21.pitch.Pitch F4&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.fillBiDirectedEdges">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">fillBiDirectedEdges</code><span class="sig-paren">(</span><em>edgeList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.fillBiDirectedEdges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an ordered list of bi-directed edges given as <a class="reference internal" href="moduleInterval.html#music21.interval.Interval" title="music21.interval.Interval"><code class="xref py py-class docutils literal"><span class="pre">Interval</span></code></a> 
+specifications, create and define appropriate Nodes. This 
+assumes that all edges are bidirected and all all edges are in order.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="s1">&#39;g4&#39;</span><span class="p">)]</span>
+<span class="go">[&#39;G4&#39;, &#39;A4&#39;, &#39;B4&#39;, &#39;C5&#39;, &#39;D5&#39;, &#39;E5&#39;, &#39;F#5&#39;, &#39;G5&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">degreeMin</span><span class="p">,</span> <span class="n">net</span><span class="o">.</span><span class="n">degreeMax</span>
+<span class="go">(1, 8)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># using another fill method creates a new network</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">([</span><span class="s1">&#39;M3&#39;</span><span class="p">,</span> <span class="s1">&#39;M3&#39;</span><span class="p">,</span> <span class="s1">&#39;M3&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="s1">&#39;g4&#39;</span><span class="p">)]</span>
+<span class="go">[&#39;G4&#39;, &#39;B4&#39;, &#39;D#5&#39;, &#39;G5&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">degreeMin</span><span class="p">,</span> <span class="n">net</span><span class="o">.</span><span class="n">degreeMax</span>
+<span class="go">(1, 4)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">([</span><span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;M3&#39;</span><span class="p">),</span> 
+<span class="gp">... </span>                         <span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;M3&#39;</span><span class="p">),</span> 
+<span class="gp">... </span>                         <span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;M3&#39;</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="s1">&#39;c2&#39;</span><span class="p">)]</span>
+<span class="go">[&#39;C2&#39;, &#39;E2&#39;, &#39;G#2&#39;, &#39;B#2&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.fillDirectedEdges">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">fillDirectedEdges</code><span class="sig-paren">(</span><em>ascendingEdgeList</em>, <em>descendingEdgeList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.fillDirectedEdges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given two lists of edges, one for ascending <a class="reference internal" href="moduleInterval.html#music21.interval.Interval" title="music21.interval.Interval"><code class="xref py py-class docutils literal"><span class="pre">Interval</span></code></a> 
+objects and 
+another for  descending, construct appropriate Nodes and Edges.</p>
+<p>Note that the descending <a class="reference internal" href="moduleInterval.html#music21.interval.Interval" title="music21.interval.Interval"><code class="xref py py-class docutils literal"><span class="pre">Interval</span></code></a> objects 
+should be given in ascending form.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.fillMelodicMinor">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">fillMelodicMinor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.fillMelodicMinor" title="Permalink to this definition">¶</a></dt>
+<dd><p>A convenience routine for testing a complex, bi-directional scale.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillMelodicMinor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="s1">&#39;c4&#39;</span><span class="p">)]</span>
+<span class="go">[&#39;C4&#39;, &#39;D4&#39;, &#39;E-4&#39;, &#39;F4&#39;, &#39;G4&#39;, &#39;A4&#39;, &#39;B4&#39;, &#39;C5&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.find">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">find</code><span class="sig-paren">(</span><em>pitchTarget</em>, <em>resultsReturned=4</em>, <em>comparisonAttribute='pitchClass'</em>, <em>alteredDegrees=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a collection of pitches, test all transpositions of a realized 
+version of this network, and return the number of matches in each for 
+each pitch assigned to the first node.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># a network built on G or D as </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">find</span><span class="p">([</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;f#&#39;</span><span class="p">])</span>
+<span class="go">[(5, &lt;music21.pitch.Pitch G&gt;), (5, &lt;music21.pitch.Pitch D&gt;), </span>
+<span class="go"> (4, &lt;music21.pitch.Pitch A&gt;), (4, &lt;music21.pitch.Pitch C&gt;)]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">find</span><span class="p">([</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f#&#39;</span><span class="p">])</span>
+<span class="go">[(7, &lt;music21.pitch.Pitch G&gt;), (6, &lt;music21.pitch.Pitch D&gt;), </span>
+<span class="go"> (6, &lt;music21.pitch.Pitch C&gt;), (5, &lt;music21.pitch.Pitch A&gt;)]</span>
+</pre></div>
+</div>
+<p>If resultsReturned is None then return every such scale.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.findMissing">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">findMissing</code><span class="sig-paren">(</span><em>pitchReference</em>, <em>nodeId</em>, <em>pitchTarget</em>, <em>comparisonAttribute='pitchClass'</em>, <em>minPitch=None</em>, <em>maxPitch=None</em>, <em>direction='ascending'</em>, <em>alteredDegrees=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.findMissing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find all pitches in the realized scale that are not in the 
+pitch target network based on the comparison attribute.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">)]</span>
+<span class="go">[&#39;G3&#39;, &#39;A3&#39;, &#39;B3&#39;, &#39;C4&#39;, &#39;D4&#39;, &#39;E4&#39;, &#39;F#4&#39;, &#39;G4&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">findMissing</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;f#&#39;</span><span class="p">])</span>
+<span class="go">[&lt;music21.pitch.Pitch C5&gt;, &lt;music21.pitch.Pitch E5&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.getNeighborNodeIds">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">getNeighborNodeIds</code><span class="sig-paren">(</span><em>pitchReference</em>, <em>nodeName</em>, <em>pitchTarget</em>, <em>direction='ascending'</em>, <em>alteredDegrees=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.getNeighborNodeIds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a reference pitch assigned to a node id, determine the node ids 
+that neighbor this pitch.</p>
+<p>Returns None if an exact match.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getNeighborNodeIds</span><span class="p">(</span><span class="s1">&#39;c4&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+<span class="go">(4, 5)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getNeighborNodeIds</span><span class="p">(</span><span class="s1">&#39;c4&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="go">(5, &#39;terminusHigh&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.getNetworkxGraph">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">getNetworkxGraph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.getNetworkxGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a networx graph from the raw Node representation.</p>
+<p>Return a networks Graph object representing a realized version 
+of this IntervalNetwork if networkx is installed</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.getPitchFromNodeDegree">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">getPitchFromNodeDegree</code><span class="sig-paren">(</span><em>pitchReference</em>, <em>nodeName</em>, <em>nodeDegreeTarget</em>, <em>direction='ascending'</em>, <em>minPitch=None</em>, <em>maxPitch=None</em>, <em>alteredDegrees=None</em>, <em>equateTermini=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.getPitchFromNodeDegree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a reference pitch assigned to node id, 
+determine the pitch for the target node degree.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;e-2&#39;</span><span class="p">))</span> <span class="p">]</span>
+<span class="go">[&#39;E-2&#39;, &#39;F2&#39;, &#39;G2&#39;, &#39;A-2&#39;, &#39;B-2&#39;, &#39;C3&#39;, &#39;D3&#39;, &#39;E-3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getPitchFromNodeDegree</span><span class="p">(</span><span class="s1">&#39;e4&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch E4&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getPitchFromNodeDegree</span><span class="p">(</span><span class="s1">&#39;e4&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="c1"># seventh scale degree</span>
+<span class="go">&lt;music21.pitch.Pitch D#5&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getPitchFromNodeDegree</span><span class="p">(</span><span class="s1">&#39;e4&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> 
+<span class="go">&lt;music21.pitch.Pitch E4&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getPitchFromNodeDegree</span><span class="p">(</span><span class="s1">&#39;e4&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span> 
+<span class="go">&lt;music21.pitch.Pitch F#4&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getPitchFromNodeDegree</span><span class="p">(</span><span class="s1">&#39;e4&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">minPitch</span><span class="o">=</span><span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="n">maxPitch</span><span class="o">=</span><span class="s1">&#39;c3&#39;</span><span class="p">)</span> 
+<span class="go">&lt;music21.pitch.Pitch G#2&gt;</span>
+</pre></div>
+</div>
+<p>This will always get the lowest pitch:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getPitchFromNodeDegree</span><span class="p">(</span><span class="s1">&#39;e4&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">minPitch</span><span class="o">=</span><span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="n">maxPitch</span><span class="o">=</span><span class="s1">&#39;c10&#39;</span><span class="p">)</span> 
+<span class="go">&lt;music21.pitch.Pitch G#2&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillMelodicMinor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getPitchFromNodeDegree</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch G4&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getPitchFromNodeDegree</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;ascending&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch A4&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getPitchFromNodeDegree</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;descending&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch A-4&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.getRelativeNodeDegree">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">getRelativeNodeDegree</code><span class="sig-paren">(</span><em>pitchReference</em>, <em>nodeName</em>, <em>pitchTarget</em>, <em>comparisonAttribute='ps'</em>, <em>direction='ascending'</em>, <em>alteredDegrees=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.getRelativeNodeDegree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a reference pitch assigned to node id, 
+determine the relative node degree of pitchTarget, 
+even if displaced over multiple octaves</p>
+<p>Comparison Attribute determines what will be used to determine
+equality.  Use <cite>ps</cite> (default) for post-tonal uses.  <cite>name</cite> for
+tonal, and <cite>step</cite> for diatonic.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;e-2&#39;</span><span class="p">))</span> <span class="p">]</span>
+<span class="go">[&#39;E-2&#39;, &#39;F2&#39;, &#39;G2&#39;, &#39;A-2&#39;, &#39;B-2&#39;, &#39;C3&#39;, &#39;D3&#39;, &#39;E-3&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e-2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d3&#39;</span><span class="p">)</span> <span class="c1"># if e- is tonic, what is d3</span>
+<span class="go">7</span>
+</pre></div>
+</div>
+<p>For an octave repeating network, the neither pitch&#8217;s octave matters:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e-&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d5&#39;</span><span class="p">)</span> <span class="c1"># if e- is tonic, what is d3</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e-2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">)</span> <span class="c1"># if e- is tonic, what is d3</span>
+<span class="go">7</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e3&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d5&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e3&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d5&#39;</span><span class="p">,</span> <span class="n">comparisonAttribute</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e3&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">comparisonAttribute</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="go">7</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e-3&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b-3&#39;</span><span class="p">)</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e-3&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;e-5&#39;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e-2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;f3&#39;</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e-3&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b6&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e-3&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;e-2&#39;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e-3&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d3&#39;</span><span class="p">)</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e-3&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;e-3&#39;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;e-3&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b-1&#39;</span><span class="p">)</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p4&#39;</span><span class="p">,</span> <span class="s1">&#39;p4&#39;</span><span class="p">,</span> <span class="s1">&#39;p4&#39;</span><span class="p">]</span> <span class="c1"># a non octave-repeating scale</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="s1">&#39;f2&#39;</span><span class="p">)]</span>
+<span class="go">[&#39;F2&#39;, &#39;B-2&#39;, &#39;E-3&#39;, &#39;A-3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="s1">&#39;f6&#39;</span><span class="p">)]</span>
+<span class="go">[&#39;F2&#39;, &#39;B-2&#39;, &#39;E-3&#39;, &#39;A-3&#39;, &#39;D-4&#39;, &#39;G-4&#39;, &#39;C-5&#39;, &#39;F-5&#39;, &#39;A5&#39;, &#39;D6&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;a-3&#39;</span><span class="p">)</span> <span class="c1"># could be 4 or 1</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d-4&#39;</span><span class="p">)</span> <span class="c1"># 2 is correct</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;g-4&#39;</span><span class="p">)</span> <span class="c1"># 3 is correct</span>
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c-5&#39;</span><span class="p">)</span> <span class="c1"># could be 4 or 1</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;e--6&#39;</span><span class="p">)</span> <span class="c1"># could be 4 or 1</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="s1">&#39;f6&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="s1">&#39;f6&#39;</span><span class="p">)]</span>
+<span class="go">[&#39;G#2&#39;, &#39;C#3&#39;, &#39;F#3&#39;, &#39;B3&#39;, &#39;E4&#39;, &#39;A4&#39;, &#39;D5&#39;, &#39;G5&#39;, &#39;C6&#39;, &#39;F6&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;f6&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d5&#39;</span><span class="p">)</span> 
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;f6&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;g5&#39;</span><span class="p">)</span> 
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;f6&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;a4&#39;</span><span class="p">)</span> 
+<span class="go">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;f6&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;e4&#39;</span><span class="p">)</span> 
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeDegree</span><span class="p">(</span><span class="s1">&#39;f6&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b3&#39;</span><span class="p">)</span> 
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.getRelativeNodeId">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">getRelativeNodeId</code><span class="sig-paren">(</span><em>pitchReference</em>, <em>nodeName</em>, <em>pitchTarget</em>, <em>comparisonAttribute='ps'</em>, <em>direction='ascending'</em>, <em>alteredDegrees=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.getRelativeNodeId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a reference pitch assigned to node id, determine the 
+relative node id of pitchTarget, even if displaced over multiple octaves</p>
+<p>The <cite>nodeName</cite> parameter may be 
+a <a class="reference internal" href="#music21.scale.intervalNetwork.Node" title="music21.scale.intervalNetwork.Node"><code class="xref py py-class docutils literal"><span class="pre">Node</span></code></a> object, a node degree, 
+a terminus string, or a None (indicating &#8216;terminusLow&#8217;).</p>
+<p>Returns None if no match.</p>
+<p>If <cite>getNeighbor</cite> is True, or direction, the nearest node will be returned.</p>
+<p>If more than one node defines the same pitch, Node weights are used 
+to select a single node.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeId</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;a4&#39;</span><span class="p">)</span>
+<span class="go">&#39;terminusLow&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeId</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b4&#39;</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeId</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c#4&#39;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeId</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c4&#39;</span><span class="p">,</span> <span class="n">comparisonAttribute</span> <span class="o">=</span> <span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeId</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">comparisonAttribute</span> <span class="o">=</span> <span class="s1">&#39;step&#39;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">getRelativeNodeId</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b-4&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.match">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">match</code><span class="sig-paren">(</span><em>pitchReference</em>, <em>nodeId</em>, <em>pitchTarget</em>, <em>comparisonAttribute='pitchClass'</em>, <em>alteredDegrees=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given one or more pitches in <cite>pitchTarget</cite>, return a 
+tuple of a list of matched pitches, and a list of unmatched pitches.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="s1">&#39;e-2&#39;</span><span class="p">)]</span>
+<span class="go">[&#39;E-2&#39;, &#39;F2&#39;, &#39;G2&#39;, &#39;A-2&#39;, &#39;B-2&#39;, &#39;C3&#39;, &#39;D3&#39;, &#39;E-3&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;e-2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c3&#39;</span><span class="p">)</span> <span class="c1"># if e- is tonic, is &#39;c3&#39; in the scale?</span>
+<span class="go">([&lt;music21.pitch.Pitch C3&gt;], [])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;e-2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d3&#39;</span><span class="p">)</span>
+<span class="go">([&lt;music21.pitch.Pitch D3&gt;], [])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;e-2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;d#3&#39;</span><span class="p">)</span>
+<span class="go">([&lt;music21.pitch.Pitch D#3&gt;], [])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;e-2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;e3&#39;</span><span class="p">)</span>
+<span class="go">([], [&lt;music21.pitch.Pitch E3&gt;])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitchTarget</span> <span class="o">=</span> <span class="p">[</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;b-2&#39;</span><span class="p">),</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;b2&#39;</span><span class="p">),</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;c3&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;e-2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pitchTarget</span><span class="p">)</span>
+<span class="go">([&lt;music21.pitch.Pitch B-2&gt;, &lt;music21.pitch.Pitch C3&gt;], [&lt;music21.pitch.Pitch B2&gt;])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitchTarget</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;b-2&#39;</span><span class="p">,</span> <span class="s1">&#39;b2&#39;</span><span class="p">,</span> <span class="s1">&#39;c3&#39;</span><span class="p">,</span> <span class="s1">&#39;e-3&#39;</span><span class="p">,</span> <span class="s1">&#39;e#3&#39;</span><span class="p">,</span> <span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="s1">&#39;e--2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">matched</span><span class="p">,</span> <span class="n">unmatched</span><span class="p">)</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;e-2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pitchTarget</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">matched</span><span class="p">]</span>
+<span class="go">[&#39;B-2&#39;, &#39;C3&#39;, &#39;E-3&#39;, &#39;E#3&#39;, &#39;F2&#39;, &#39;E--2&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unmatched</span>
+<span class="go">[&lt;music21.pitch.Pitch B2&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.nextPitch">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">nextPitch</code><span class="sig-paren">(</span><em>pitchReference</em>, <em>nodeName</em>, <em>pitchOrigin</em>, <em>direction='ascending'</em>, <em>stepSize=1</em>, <em>alteredDegrees=None</em>, <em>getNeighbor=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.nextPitch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a pitchReference, nodeName, and a pitch origin, return the next pitch.</p>
+<p>The <cite>nodeName</cite> parameter may be a <a class="reference internal" href="#music21.scale.intervalNetwork.Node" title="music21.scale.intervalNetwork.Node"><code class="xref py py-class docutils literal"><span class="pre">Node</span></code></a> object, 
+a node degree, a terminus string, or a None (indicating &#8216;terminusLow&#8217;).</p>
+<p>The <cite>stepSize</cite> parameter can be configured to permit different sized steps 
+in the specified direction.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">nextPitch</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;f#5&#39;</span><span class="p">,</span> <span class="s1">&#39;ascending&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch G5&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">nextPitch</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;f#5&#39;</span><span class="p">,</span> <span class="s1">&#39;descending&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch E5&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">nextPitch</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;f#5&#39;</span><span class="p">,</span> <span class="s1">&#39;ascending&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># two steps</span>
+<span class="go">&lt;music21.pitch.Pitch A5&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alteredDegrees</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">:{</span><span class="s1">&#39;direction&#39;</span><span class="p">:</span><span class="s1">&#39;bi&#39;</span><span class="p">,</span> <span class="s1">&#39;interval&#39;</span><span class="p">:</span><span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;-a1&#39;</span><span class="p">)}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">nextPitch</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;g2&#39;</span><span class="p">,</span> <span class="s1">&#39;ascending&#39;</span><span class="p">,</span> <span class="n">alteredDegrees</span><span class="o">=</span><span class="n">alteredDegrees</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch A-2&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">nextPitch</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;a-2&#39;</span><span class="p">,</span> <span class="s1">&#39;ascending&#39;</span><span class="p">,</span> <span class="n">alteredDegrees</span><span class="o">=</span><span class="n">alteredDegrees</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch B2&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.plot">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">plot</code><span class="sig-paren">(</span><em>pitchObj=None</em>, <em>nodeId=None</em>, <em>minPitch=None</em>, <em>maxPitch=None</em>, <em>*args</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a method and keyword configuration arguments, create and display a plot.</p>
+<p>Requires networkx to be installed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.realize">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">realize</code><span class="sig-paren">(</span><em>pitchReference</em>, <em>nodeId=None</em>, <em>minPitch=None</em>, <em>maxPitch=None</em>, <em>direction='ascending'</em>, <em>alteredDegrees=None</em>, <em>reverse=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.realize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Realize the nodes of this network based on a pitch assigned to a 
+valid <cite>nodeId</cite>, where <cite>nodeId</cite> can be specified by integer 
+(starting from 1) or key (a tuple of origin, destination keys).</p>
+<p>Without a min or max pitch, the given pitch reference is assigned 
+to the designated node, and then both ascends to the terminus and 
+descends to the terminus.</p>
+<p>The <cite>alteredDegrees</cite> dictionary permits creating mappings between 
+node degree and direction and <a class="reference internal" href="moduleInterval.html#music21.interval.Interval" title="music21.interval.Interval"><code class="xref py py-class docutils literal"><span class="pre">Interval</span></code></a> 
+based transpositions.</p>
+<p>Returns two lists, a list of pitches, and a list of Node keys.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">nodeKeys</span><span class="p">)</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">realize</span><span class="p">(</span><span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;c3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pitches</span><span class="p">]</span>
+<span class="go">[&#39;C2&#39;, &#39;D2&#39;, &#39;E2&#39;, &#39;F2&#39;, &#39;G2&#39;, &#39;A2&#39;, &#39;B2&#39;, &#39;C3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nodeKeys</span>
+<span class="go">[&#39;terminusLow&#39;, 0, 1, 2, 3, 4, 5, &#39;terminusHigh&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">alteredDegrees</span> <span class="o">=</span> <span class="p">{</span><span class="mi">7</span><span class="p">:{</span><span class="s1">&#39;direction&#39;</span><span class="p">:</span><span class="s1">&#39;bi&#39;</span><span class="p">,</span> <span class="s1">&#39;interval&#39;</span><span class="p">:</span><span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;-a1&#39;</span><span class="p">)}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">pitches</span><span class="p">,</span> <span class="n">nodeKeys</span><span class="p">)</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">realize</span><span class="p">(</span><span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;c4&#39;</span><span class="p">,</span> <span class="n">alteredDegrees</span><span class="o">=</span><span class="n">alteredDegrees</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pitches</span><span class="p">]</span>
+<span class="go">[&#39;C2&#39;, &#39;D2&#39;, &#39;E2&#39;, &#39;F2&#39;, &#39;G2&#39;, &#39;A2&#39;, &#39;B-2&#39;, &#39;C3&#39;, </span>
+<span class="go"> &#39;D3&#39;, &#39;E3&#39;, &#39;F3&#39;, &#39;G3&#39;, &#39;A3&#39;, &#39;B-3&#39;, &#39;C4&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nodeKeys</span>
+<span class="go">[&#39;terminusLow&#39;, 0, 1, 2, 3, 4, 5, &#39;terminusHigh&#39;, 0, 1, 2, 3, 4, 5, &#39;terminusHigh&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.realizeIntervals">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">realizeIntervals</code><span class="sig-paren">(</span><em>nodeId=None</em>, <em>minPitch=None</em>, <em>maxPitch=None</em>, <em>direction='ascending'</em>, <em>alteredDegrees=None</em>, <em>reverse=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.realizeIntervals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Realize the sequence of intervals between the specified pitches, or the termini.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">realizeIntervals</span><span class="p">()</span>
+<span class="go">[&lt;music21.interval.Interval M2&gt;, &lt;music21.interval.Interval M2&gt;, </span>
+<span class="go"> &lt;music21.interval.Interval m2&gt;, &lt;music21.interval.Interval M2&gt;, </span>
+<span class="go"> &lt;music21.interval.Interval M2&gt;, &lt;music21.interval.Interval M2&gt;, </span>
+<span class="go"> &lt;music21.interval.Interval m2&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.realizeMinMax">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">realizeMinMax</code><span class="sig-paren">(</span><em>pitchReference</em>, <em>nodeId=None</em>, <em>alteredDegrees=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.realizeMinMax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Realize the min and max pitches of the scale, or the min and max values 
+found between two termini.</p>
+<p>This suggests that min and max might be beyond the terminus.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.realizePitch">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">realizePitch</code><span class="sig-paren">(</span><em>pitchReference</em>, <em>nodeId=None</em>, <em>minPitch=None</em>, <em>maxPitch=None</em>, <em>direction='ascending'</em>, <em>alteredDegrees=None</em>, <em>reverse=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.realizePitch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Realize the native nodes of this network based on a pitch 
+assigned to a valid <cite>nodeId</cite>, where <cite>nodeId</cite> can be specified by integer 
+(starting from 1) or key (a tuple of origin, destination keys).</p>
+<p>The nodeId, when a simple, linear network, can be used as a scale degree 
+value starting from one.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">))]</span>
+<span class="go">[&#39;G3&#39;, &#39;A3&#39;, &#39;B3&#39;, &#39;C4&#39;, &#39;D4&#39;, &#39;E4&#39;, &#39;F#4&#39;, &#39;G4&#39;]</span>
+</pre></div>
+</div>
+<p>G3 is the fifth (scale) degree</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">),</span> <span class="mi">5</span><span class="p">)]</span>
+<span class="go">[&#39;C3&#39;, &#39;D3&#39;, &#39;E3&#39;, &#39;F3&#39;, &#39;G3&#39;, &#39;A3&#39;, &#39;B3&#39;, &#39;C4&#39;]</span>
+</pre></div>
+</div>
+<p>G3 is the seventh (scale) degree</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">),</span> <span class="mi">7</span><span class="p">)</span> <span class="p">]</span>
+<span class="go">[&#39;A-2&#39;, &#39;B-2&#39;, &#39;C3&#39;, &#39;D-3&#39;, &#39;E-3&#39;, &#39;F3&#39;, &#39;G3&#39;, &#39;A-3&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;f#3&#39;</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;f2&#39;</span><span class="p">,</span> <span class="s1">&#39;f3&#39;</span><span class="p">)</span> <span class="p">]</span>
+<span class="go">[&#39;E#2&#39;, &#39;F#2&#39;, &#39;G#2&#39;, &#39;A#2&#39;, &#39;B2&#39;, &#39;C#3&#39;, &#39;D#3&#39;, &#39;E#3&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;a#2&#39;</span><span class="p">),</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;c6&#39;</span><span class="p">,</span> <span class="s1">&#39;c7&#39;</span><span class="p">)]</span>
+<span class="go">[&#39;C#6&#39;, &#39;D#6&#39;, &#39;E6&#39;, &#39;F#6&#39;, &#39;G#6&#39;, &#39;A#6&#39;, &#39;B6&#39;]</span>
+</pre></div>
+</div>
+<p>Circle of fifths</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;P5&#39;</span><span class="p">,</span> <span class="s1">&#39;P5&#39;</span><span class="p">,</span> <span class="s1">&#39;P5&#39;</span><span class="p">,</span> <span class="s1">&#39;P5&#39;</span><span class="p">,</span> <span class="s1">&#39;P5&#39;</span><span class="p">,</span> <span class="s1">&#39;P5&#39;</span><span class="p">,</span> <span class="s1">&#39;d6&#39;</span><span class="p">,</span> <span class="s1">&#39;P5&#39;</span><span class="p">,</span> <span class="s1">&#39;P5&#39;</span><span class="p">,</span> <span class="s1">&#39;P5&#39;</span><span class="p">,</span> <span class="s1">&#39;P5&#39;</span><span class="p">,</span> <span class="s1">&#39;P5&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net5ths</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net5ths</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net5ths</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C1&#39;</span><span class="p">))]</span>
+<span class="go">[&#39;C1&#39;, &#39;G1&#39;, &#39;D2&#39;, &#39;A2&#39;, &#39;E3&#39;, &#39;B3&#39;, &#39;F#4&#39;, &#39;D-5&#39;, &#39;A-5&#39;, &#39;E-6&#39;, &#39;B-6&#39;, &#39;F7&#39;, &#39;C8&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net5ths</span><span class="o">.</span><span class="n">realizePitch</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C2&#39;</span><span class="p">))]</span>
+<span class="go">[&#39;C2&#39;, &#39;G2&#39;, &#39;D3&#39;, &#39;A3&#39;, &#39;E4&#39;, &#39;B4&#39;, &#39;F#5&#39;, &#39;D-6&#39;, &#39;A-6&#39;, &#39;E-7&#39;, &#39;B-7&#39;, &#39;F8&#39;, &#39;C9&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.realizePitchByDegree">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">realizePitchByDegree</code><span class="sig-paren">(</span><em>pitchReference</em>, <em>nodeId=None</em>, <em>nodeDegreeTargets=(1</em>, <em>)</em>, <em>minPitch=None</em>, <em>maxPitch=None</em>, <em>direction='ascending'</em>, <em>alteredDegrees=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.realizePitchByDegree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Realize the native nodes of this network based on 
+a pitch assigned to a valid <cite>nodeId</cite>, where <cite>nodeId</cite> can 
+be specified by integer (starting from 1) or key 
+(a tuple of origin, destination keys).</p>
+<p>The <cite>nodeDegreeTargets</cite> specifies the degrees to be 
+included within the specified range.</p>
+<p>Example: build a network of the Major scale:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now for every &#8220;scale&#8221; where G is the 3rd degree, give me the 
+tonic if that note is between C2 and C3.
+(There&#8217;s only one such note: E-2).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">realizePitchByDegree</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;c3&#39;</span><span class="p">)</span>
+<span class="go">[&lt;music21.pitch.Pitch E-2&gt;]</span>
+</pre></div>
+</div>
+<p>But between c2 and f3 there are two, E-2 and E-3 (it doesn&#8217;t matter that the G
+which is scale degree 3 for E-3 is above F3):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">realizePitchByDegree</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;f3&#39;</span><span class="p">)</span>
+<span class="go">[&lt;music21.pitch.Pitch E-2&gt;, &lt;music21.pitch.Pitch E-3&gt;]</span>
+</pre></div>
+</div>
+<p>Give us nodes 1, 2, and 5 for scales where G is node 5 (e.g., C major&#8217;s dominant)
+where any pitch is between C2 and F4</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pitchList</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">realizePitchByDegree</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;f4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pitchList</span><span class="p">]))</span>
+<span class="go">C2 D2 G2 C3 D3 G3 C4 D4</span>
+</pre></div>
+</div>
+<p>There are no networks based on the major scale&#8217;s edge-list where 
+with node 1 (i.e. &#8220;tonic&#8221;) between C2 and F2 where
+G is scale degree 7</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">realizePitchByDegree</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;c2&#39;</span><span class="p">,</span> <span class="s1">&#39;f2&#39;</span><span class="p">)</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.realizeTermini">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">realizeTermini</code><span class="sig-paren">(</span><em>pitchReference</em>, <em>nodeId=None</em>, <em>alteredDegrees=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.realizeTermini" title="Permalink to this definition">¶</a></dt>
+<dd><p>Realize the pitches of the &#8216;natural&#8217; terminus of a network. This (presently) m
+ust be done by ascending, and assumes only one valid terminus for both extremes.</p>
+<p>This suggests that in practice termini should not be affected by directionality.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">edgeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;M2&#39;</span><span class="p">,</span> <span class="s1">&#39;m2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">fillBiDirectedEdges</span><span class="p">(</span><span class="n">edgeList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">realizeTermini</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">))</span>
+<span class="go">(&lt;music21.pitch.Pitch G3&gt;, &lt;music21.pitch.Pitch G4&gt;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span><span class="o">.</span><span class="n">realizeTermini</span><span class="p">(</span><span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;a6&#39;</span><span class="p">))</span>
+<span class="go">(&lt;music21.pitch.Pitch A6&gt;, &lt;music21.pitch.Pitch A7&gt;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.transposePitchAndApplySimplification">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">transposePitchAndApplySimplification</code><span class="sig-paren">(</span><em>intervalObj</em>, <em>pitchObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.transposePitchAndApplySimplification" title="Permalink to this definition">¶</a></dt>
+<dd><p>transposes the pitch according to the given interval object and
+uses the simplification of the <cite>pitchSimplification</cite> property
+to simplify it afterwards.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">pitchSimplification</span> <span class="c1"># default</span>
+<span class="go">&#39;maxAccidental&#39; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;m2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s2">&quot;C4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allPitches</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="n">p</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">transposePitchAndApplySimplification</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="n">allPitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">nameWithOctave</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allPitches</span>
+<span class="go">[&#39;D-4&#39;, &#39;D4&#39;, &#39;E-4&#39;, &#39;F-4&#39;, &#39;F4&#39;, &#39;G-4&#39;, &#39;G4&#39;, &#39;A-4&#39;, &#39;A4&#39;, </span>
+<span class="go"> &#39;B-4&#39;, &#39;C-5&#39;, &#39;C5&#39;, &#39;D-5&#39;, &#39;D5&#39;, &#39;E-5&#39;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">pitchSimplification</span> <span class="o">=</span> <span class="s1">&#39;mostCommon&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s2">&quot;C4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allPitches</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="n">p</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">transposePitchAndApplySimplification</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="n">allPitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">nameWithOctave</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allPitches</span>
+<span class="go">[&#39;C#4&#39;, &#39;D4&#39;, &#39;E-4&#39;, &#39;E4&#39;, &#39;F4&#39;, &#39;F#4&#39;, &#39;G4&#39;, &#39;A-4&#39;, &#39;A4&#39;, &#39;B-4&#39;, </span>
+<span class="go"> &#39;B4&#39;, &#39;C5&#39;, &#39;C#5&#39;, &#39;D5&#39;, &#39;E-5&#39;]</span>
+</pre></div>
+</div>
+<p>PitchSimplifcation can also be specified in the creation of the IntervalNetwork object</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">(</span><span class="n">pitchSimplification</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s2">&quot;C4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allPitches</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="n">p</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">transposePitchAndApplySimplification</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="n">allPitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">nameWithOctave</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allPitches</span>
+<span class="go">[&#39;D-4&#39;, &#39;E--4&#39;, &#39;F--4&#39;, &#39;G---4&#39;, &#39;A----4&#39;]</span>
+</pre></div>
+</div>
+<p>Note that beyond quadruple flats or sharps, pitchSimplification is automatic:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
+<span class="go">&lt;music21.pitch.Pitch A----4&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">transposePitchAndApplySimplification</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="go">&lt;music21.pitch.Pitch F#4&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.IntervalNetwork.weightedSelection">
+<code class="descclassname">IntervalNetwork.</code><code class="descname">weightedSelection</code><span class="sig-paren">(</span><em>edges</em>, <em>nodes</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.IntervalNetwork.weightedSelection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform weighted random selection on a parallel list of 
+edges and corresponding nodes.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1000000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;m3&#39;</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e2</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;m3&#39;</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">IntervalNetwork</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">net</span><span class="o">.</span><span class="n">weightedSelection</span><span class="p">([</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">],</span> <span class="p">[</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">id</span> <span class="c1"># note: this may fail as there is a slight chance to get &#39;b&#39;</span>
+<span class="go">&#39;a&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">id</span>
+<span class="go">&#39;a&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="node">
+<h2>Node<a class="headerlink" href="#node" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.scale.intervalNetwork.Node">
+<em class="property">class </em><code class="descclassname">music21.scale.intervalNetwork.</code><code class="descname">Node</code><span class="sig-paren">(</span><em>id=None</em>, <em>degree=None</em>, <em>weight=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstraction of an unrealized Pitch Node.</p>
+<p>The Node <cite>id</cite> is used to store connections in Edges and has no real meaning.</p>
+<p>Terminal Nodes have special ids: &#8216;terminusLow&#8217;, &#8216;terminusHigh&#8217;</p>
+<p>The Node <cite>degree</cite> is translated to scale degrees in various applications, 
+and is used to request a pitch from the network.</p>
+<p>The <cite>weight</cite> attribute is used to probabilistically select between 
+multiple nodes when multiple nodes satisfy either a branching option in a pathway 
+or a request for a degree.</p>
+<p>TODO: replace w/ NamedTuple; eliminate id, and have a terminus: low, high, None</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.scale.intervalNetwork.Node" title="music21.scale.intervalNetwork.Node"><code class="xref py py-class docutils literal"><span class="pre">Node</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleCommonObjects.html#music21.common.objects.SlottedObjectMixin" title="music21.common.objects.SlottedObjectMixin"><code class="xref py py-class docutils literal"><span class="pre">SlottedObjectMixin</span></code></a></li>
+</ul>
+</div>
+<div class="section" id="edge">
+<h2>Edge<a class="headerlink" href="#edge" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.scale.intervalNetwork.Edge">
+<em class="property">class </em><code class="descclassname">music21.scale.intervalNetwork.</code><code class="descname">Edge</code><span class="sig-paren">(</span><em>intervalData=None</em>, <em>id=None</em>, <em>direction='bi'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.Edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstraction of an Interval as an Edge.</p>
+<p>Edges store an Interval object as well as a pathway direction specification. 
+The pathway is the route through the network from terminus to terminus, 
+and can either by ascending or descending.</p>
+<p>For directed Edges, the direction of the Interval may be used to 
+suggest non-pitch ascending movements (even if the pathway direction is ascending).</p>
+<p>Weight values, as well as other attributes, can be stored.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;M3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">interval</span> <span class="ow">is</span> <span class="n">i</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">direction</span>
+<span class="go">&#39;bi&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.scale.intervalNetwork.Edge" title="music21.scale.intervalNetwork.Edge"><code class="xref py py-class docutils literal"><span class="pre">Edge</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.scale.intervalNetwork.Edge.connections">
+<code class="descclassname">Edge.</code><code class="descname">connections</code><a class="headerlink" href="#music21.scale.intervalNetwork.Edge.connections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callable as a property (.connections) or as a method 
+(.getConnections(direction)):</p>
+<p>Return a list of connections between Nodes, represented as pairs 
+of Node ids. If a direction is specified, and if the Edge is 
+directional, only the desired directed values will be returned.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;M3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;terminusLow&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">addBiDirectedConnections</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">connections</span>
+<span class="go">[(&#39;terminusLow&#39;, 1), (1, &#39;terminusLow&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">getConnections</span><span class="p">(</span><span class="s1">&#39;ascending&#39;</span><span class="p">)</span>
+<span class="go">[(&#39;terminusLow&#39;, 1)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">getConnections</span><span class="p">(</span><span class="s1">&#39;descending&#39;</span><span class="p">)</span>
+<span class="go">[(1, &#39;terminusLow&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.scale.intervalNetwork.Edge.direction">
+<code class="descclassname">Edge.</code><code class="descname">direction</code><a class="headerlink" href="#music21.scale.intervalNetwork.Edge.direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the direction of the Edge.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;M3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">addDirectedConnection</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="s1">&#39;ascending&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">direction</span>
+<span class="go">&#39;ascending&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.scale.intervalNetwork.Edge.interval">
+<code class="descclassname">Edge.</code><code class="descname">interval</code><a class="headerlink" href="#music21.scale.intervalNetwork.Edge.interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the stored Interval object</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;M3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">addDirectedConnection</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="s1">&#39;ascending&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">interval</span>
+<span class="go">&lt;music21.interval.Interval M3&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.scale.intervalNetwork.Edge" title="music21.scale.intervalNetwork.Edge"><code class="xref py py-class docutils literal"><span class="pre">Edge</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.Edge.addBiDirectedConnections">
+<code class="descclassname">Edge.</code><code class="descname">addBiDirectedConnections</code><span class="sig-paren">(</span><em>node1</em>, <em>node2</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.Edge.addBiDirectedConnections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide two Edge objects that pass through 
+this Node, in the direction from the first to the second.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;M3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;terminusLow&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">addBiDirectedConnections</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">connections</span>
+<span class="go">[(&#39;terminusLow&#39;, 1), (1, &#39;terminusLow&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span>
+<span class="go">&lt;music21.scale.intervalNetwork.Edge bi M3 [(&#39;terminusLow&#39;,1),(1,&#39;terminusLow&#39;)]&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.Edge.addDirectedConnection">
+<code class="descclassname">Edge.</code><code class="descname">addDirectedConnection</code><span class="sig-paren">(</span><em>node1</em>, <em>node2</em>, <em>direction=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.Edge.addDirectedConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide two Node objects that are connected by this Edge, 
+in the direction from the first to the second.</p>
+<p>When calling directly, a direction, either 
+ascending or descending, should be set here; 
+this will override whatever the interval is.  
+If None, this will not be set.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;M3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">addDirectedConnection</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="s1">&#39;ascending&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">connections</span>
+<span class="go">[(0, 1)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span>
+<span class="go">&lt;music21.scale.intervalNetwork.Edge ascending M3 [(0,1)]&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.scale.intervalNetwork.Edge.getConnections">
+<code class="descclassname">Edge.</code><code class="descname">getConnections</code><span class="sig-paren">(</span><em>direction=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.Edge.getConnections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callable as a property (.connections) or as a method 
+(.getConnections(direction)):</p>
+<p>Return a list of connections between Nodes, represented as pairs 
+of Node ids. If a direction is specified, and if the Edge is 
+directional, only the desired directed values will be returned.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">interval</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="s1">&#39;M3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;terminusLow&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">intervalNetwork</span><span class="o">.</span><span class="n">Node</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">addBiDirectedConnections</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">connections</span>
+<span class="go">[(&#39;terminusLow&#39;, 1), (1, &#39;terminusLow&#39;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">getConnections</span><span class="p">(</span><span class="s1">&#39;ascending&#39;</span><span class="p">)</span>
+<span class="go">[(&#39;terminusLow&#39;, 1)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e1</span><span class="o">.</span><span class="n">getConnections</span><span class="p">(</span><span class="s1">&#39;descending&#39;</span><span class="p">)</span>
+<span class="go">[(1, &#39;terminusLow&#39;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="boundintervalnetwork">
+<h2>BoundIntervalNetwork<a class="headerlink" href="#boundintervalnetwork" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.scale.intervalNetwork.BoundIntervalNetwork">
+<em class="property">class </em><code class="descclassname">music21.scale.intervalNetwork.</code><code class="descname">BoundIntervalNetwork</code><span class="sig-paren">(</span><em>edgeList=None</em>, <em>octaveDuplicating=False</em>, <em>deterministic=True</em>, <em>pitchSimplification='maxAccidental'</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.scale.intervalNetwork.BoundIntervalNetwork" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class is kept only because of the ICMC Paper.  Just use IntervalNetwork instead.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.scale.intervalNetwork.BoundIntervalNetwork" title="music21.scale.intervalNetwork.BoundIntervalNetwork"><code class="xref py py-class docutils literal"><span class="pre">BoundIntervalNetwork</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork" title="music21.scale.intervalNetwork.IntervalNetwork"><code class="xref py py-class docutils literal"><span class="pre">IntervalNetwork</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.scale.intervalNetwork.BoundIntervalNetwork" title="music21.scale.intervalNetwork.BoundIntervalNetwork"><code class="xref py py-class docutils literal"><span class="pre">BoundIntervalNetwork</span></code></a> read-only properties</p>
+<p>Read-only properties inherited from <a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork" title="music21.scale.intervalNetwork.IntervalNetwork"><code class="xref py py-class docutils literal"><span class="pre">IntervalNetwork</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.degreeMax" title="music21.scale.intervalNetwork.IntervalNetwork.degreeMax"><code class="xref py py-attr docutils literal"><span class="pre">degreeMax</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.degreeMaxUnique" title="music21.scale.intervalNetwork.IntervalNetwork.degreeMaxUnique"><code class="xref py py-attr docutils literal"><span class="pre">degreeMaxUnique</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.degreeMin" title="music21.scale.intervalNetwork.IntervalNetwork.degreeMin"><code class="xref py py-attr docutils literal"><span class="pre">degreeMin</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.terminusHighNodes" title="music21.scale.intervalNetwork.IntervalNetwork.terminusHighNodes"><code class="xref py py-attr docutils literal"><span class="pre">terminusHighNodes</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.terminusLowNodes" title="music21.scale.intervalNetwork.IntervalNetwork.terminusLowNodes"><code class="xref py py-attr docutils literal"><span class="pre">terminusLowNodes</span></code></a></li>
+</ul>
+</td></tr></table>
+<p class="rubric"><a class="reference internal" href="#music21.scale.intervalNetwork.BoundIntervalNetwork" title="music21.scale.intervalNetwork.BoundIntervalNetwork"><code class="xref py py-class docutils literal"><span class="pre">BoundIntervalNetwork</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork" title="music21.scale.intervalNetwork.IntervalNetwork"><code class="xref py py-class docutils literal"><span class="pre">IntervalNetwork</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.clear" title="music21.scale.intervalNetwork.IntervalNetwork.clear"><code class="xref py py-meth docutils literal"><span class="pre">clear()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.fillArbitrary" title="music21.scale.intervalNetwork.IntervalNetwork.fillArbitrary"><code class="xref py py-meth docutils literal"><span class="pre">fillArbitrary()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.fillBiDirectedEdges" title="music21.scale.intervalNetwork.IntervalNetwork.fillBiDirectedEdges"><code class="xref py py-meth docutils literal"><span class="pre">fillBiDirectedEdges()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.fillDirectedEdges" title="music21.scale.intervalNetwork.IntervalNetwork.fillDirectedEdges"><code class="xref py py-meth docutils literal"><span class="pre">fillDirectedEdges()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.fillMelodicMinor" title="music21.scale.intervalNetwork.IntervalNetwork.fillMelodicMinor"><code class="xref py py-meth docutils literal"><span class="pre">fillMelodicMinor()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.find" title="music21.scale.intervalNetwork.IntervalNetwork.find"><code class="xref py py-meth docutils literal"><span class="pre">find()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.findMissing" title="music21.scale.intervalNetwork.IntervalNetwork.findMissing"><code class="xref py py-meth docutils literal"><span class="pre">findMissing()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.getNeighborNodeIds" title="music21.scale.intervalNetwork.IntervalNetwork.getNeighborNodeIds"><code class="xref py py-meth docutils literal"><span class="pre">getNeighborNodeIds()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.getNetworkxGraph" title="music21.scale.intervalNetwork.IntervalNetwork.getNetworkxGraph"><code class="xref py py-meth docutils literal"><span class="pre">getNetworkxGraph()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.getPitchFromNodeDegree" title="music21.scale.intervalNetwork.IntervalNetwork.getPitchFromNodeDegree"><code class="xref py py-meth docutils literal"><span class="pre">getPitchFromNodeDegree()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.getRelativeNodeDegree" title="music21.scale.intervalNetwork.IntervalNetwork.getRelativeNodeDegree"><code class="xref py py-meth docutils literal"><span class="pre">getRelativeNodeDegree()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.getRelativeNodeId" title="music21.scale.intervalNetwork.IntervalNetwork.getRelativeNodeId"><code class="xref py py-meth docutils literal"><span class="pre">getRelativeNodeId()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.match" title="music21.scale.intervalNetwork.IntervalNetwork.match"><code class="xref py py-meth docutils literal"><span class="pre">match()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.nextPitch" title="music21.scale.intervalNetwork.IntervalNetwork.nextPitch"><code class="xref py py-meth docutils literal"><span class="pre">nextPitch()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.plot" title="music21.scale.intervalNetwork.IntervalNetwork.plot"><code class="xref py py-meth docutils literal"><span class="pre">plot()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.realize" title="music21.scale.intervalNetwork.IntervalNetwork.realize"><code class="xref py py-meth docutils literal"><span class="pre">realize()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.realizeIntervals" title="music21.scale.intervalNetwork.IntervalNetwork.realizeIntervals"><code class="xref py py-meth docutils literal"><span class="pre">realizeIntervals()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.realizeMinMax" title="music21.scale.intervalNetwork.IntervalNetwork.realizeMinMax"><code class="xref py py-meth docutils literal"><span class="pre">realizeMinMax()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.realizePitch" title="music21.scale.intervalNetwork.IntervalNetwork.realizePitch"><code class="xref py py-meth docutils literal"><span class="pre">realizePitch()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.realizePitchByDegree" title="music21.scale.intervalNetwork.IntervalNetwork.realizePitchByDegree"><code class="xref py py-meth docutils literal"><span class="pre">realizePitchByDegree()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.realizeTermini" title="music21.scale.intervalNetwork.IntervalNetwork.realizeTermini"><code class="xref py py-meth docutils literal"><span class="pre">realizeTermini()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.transposePitchAndApplySimplification" title="music21.scale.intervalNetwork.IntervalNetwork.transposePitchAndApplySimplification"><code class="xref py py-meth docutils literal"><span class="pre">transposePitchAndApplySimplification()</span></code></a></li>
+<li><a class="reference internal" href="#music21.scale.intervalNetwork.IntervalNetwork.weightedSelection" title="music21.scale.intervalNetwork.IntervalNetwork.weightedSelection"><code class="xref py py-meth docutils literal"><span class="pre">weightedSelection()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleScaleScala.html" title="music21.scale.scala"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleScale.html" title="music21.scale"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

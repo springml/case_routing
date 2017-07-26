@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.figuredBass.possibility &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.figuredBass.realizer" href="moduleFiguredBassRealizer.html" />
+    <link rel="prev" title="music21.figuredBass.notation" href="moduleFiguredBassNotation.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassRealizer.html" title="music21.figuredBass.realizer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassNotation.html" title="music21.figuredBass.notation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleFiguredBassNotation.html"
+                        title="previous chapter">music21.figuredBass.notation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleFiguredBassRealizer.html"
+                        title="next chapter">music21.figuredBass.realizer</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.figuredBass.possibility</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleFiguredBassPossibility.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-figuredbass-possibility">
+<span id="modulefiguredbasspossibility"></span><h1>music21.figuredBass.possibility<a class="headerlink" href="#music21-figuredbass-possibility" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.figuredBass.possibility"></span><p>A possibility is a tuple with pitches, and is intended to encapsulate a possible
+solution to a <a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment" title="music21.figuredBass.segment.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a>. Unlike a <a class="reference internal" href="moduleChord.html#music21.chord.Chord" title="music21.chord.Chord"><code class="xref py py-class docutils literal"><span class="pre">Chord</span></code></a>,
+the ordering of a possibility does matter. The assumption throughout fbRealizer 
+is that a possibility is always in order from highest part to lowest part, and 
+the last element of each possibility is the bass.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">fbRealizer supports voice crossing, so the order of pitches from lowest
+to highest may not correspond to the ordering of parts.</p>
+</div>
+<p>Here, a possibility is created. G5 is in the highest part, and C4 is the bass. The highest
+part contains the highest Pitch, and the lowest part contains the lowest Pitch. No voice
+crossing is present.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="p">(</span><span class="n">G5</span><span class="p">,</span> <span class="n">C5</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, another possibility is created with the same pitches, but this time, 
+with voice crossing present.
+C5 is in the highest part, but the highest Pitch G5 is in the second highest part.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">G5</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C4</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>The methods in this module are applied to possibilities, and fall into three main categories:</p>
+<p>1) Single Possibility Methods. These methods are applied in finding correct possibilities in
+<a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment.allCorrectSinglePossibilities" title="music21.figuredBass.segment.Segment.allCorrectSinglePossibilities"><code class="xref py py-meth docutils literal"><span class="pre">allCorrectSinglePossibilities()</span></code></a>.</p>
+<p>2) Consecutive Possibility Methods. These methods are applied to (possibA, possibB) pairs
+in <a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment.allCorrectConsecutivePossibilities" title="music21.figuredBass.segment.Segment.allCorrectConsecutivePossibilities"><code class="xref py py-meth docutils literal"><span class="pre">allCorrectConsecutivePossibilities()</span></code></a>,
+possibA being any correct possibility in segmentA and possibB being any correct possibility
+in segmentB.</p>
+<p>3) Special Resolution Methods. These methods are applied in 
+<a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment.allCorrectConsecutivePossibilities" title="music21.figuredBass.segment.Segment.allCorrectConsecutivePossibilities"><code class="xref py py-meth docutils literal"><span class="pre">allCorrectConsecutivePossibilities()</span></code></a>
+as applicable if the pitch names of a Segment correctly spell out an augmented sixth, dominant
+seventh, or diminished seventh chord. They are located in <a class="reference internal" href="moduleFiguredBassResolution.html#module-music21.figuredBass.resolution" title="music21.figuredBass.resolution"><code class="xref py py-mod docutils literal"><span class="pre">resolution</span></code></a>.</p>
+<p>The application of these methods is controlled by corresponding instance variables in a 
+<a class="reference internal" href="moduleFiguredBassRules.html#music21.figuredBass.rules.Rules" title="music21.figuredBass.rules.Rules"><code class="xref py py-class docutils literal"><span class="pre">Rules</span></code></a> object provided to a Segment.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The number of parts and maxPitch are universal for a 
+<a class="reference internal" href="moduleFiguredBassRealizer.html#music21.figuredBass.realizer.FiguredBassLine" title="music21.figuredBass.realizer.FiguredBassLine"><code class="xref py py-class docutils literal"><span class="pre">FiguredBassLine</span></code></a>.</p>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.figuredBass.possibility.voiceCrossing">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">voiceCrossing</code><span class="sig-paren">(</span><em>possibA</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.voiceCrossing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if there is voice crossing present between any two parts
+in possibA. The parts from lowest part to highest part (right to left)
+must correspond to increasingly higher pitches in order for there to 
+be no voice crossing. Comparisons between pitches are done using pitch
+comparison methods, which are based on pitch space values 
+(see <a class="reference internal" href="modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code></a>).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">G5</span><span class="p">,</span> <span class="n">E4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">voiceCrossing</span><span class="p">(</span><span class="n">possibA1</span><span class="p">)</span> <span class="c1"># G5 &gt; C5</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA2</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">voiceCrossing</span><span class="p">(</span><span class="n">possibA2</span><span class="p">)</span>
+<span class="go">False </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.isIncomplete">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">isIncomplete</code><span class="sig-paren">(</span><em>possibA</em>, <em>pitchNamesToContain</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.isIncomplete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if possibA is incomplete, if it doesn&#8217;t contain at least
+one of every pitch name in pitchNamesToContain.
+For a Segment, pitchNamesToContain is 
+<a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment.pitchNamesInChord" title="music21.figuredBass.segment.Segment.pitchNamesInChord"><code class="xref py py-attr docutils literal"><span class="pre">pitchNamesInChord</span></code></a>.</p>
+<p>If possibA contains excessive pitch names, a PossibilityException is
+raised, although this is not a concern with the current implementation 
+of fbRealizer.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bb5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitchNamesA1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;B-&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">isIncomplete</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">pitchNamesA1</span><span class="p">)</span> <span class="c1"># Missing B-</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitchNamesA2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">isIncomplete</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">pitchNamesA2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.upperPartsWithinLimit">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">upperPartsWithinLimit</code><span class="sig-paren">(</span><em>possibA</em>, <em>maxSemitoneSeparation=12</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.upperPartsWithinLimit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the pitches in the upper parts of possibA
+are found within maxSemitoneSeparation of each other. The 
+upper parts of possibA are all the pitches except the last.</p>
+<p>The default value of maxSemitoneSeparation is 12 semitones,
+enharmonically equivalent to a perfect octave. If this method
+returns True for this default value, then all the notes in 
+the upper parts can be played by most adult pianists using
+just the right hand.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">upperPartsWithinLimit</span><span class="p">(</span><span class="n">possibA1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Here, C5 and E3 are separated by almost two octaves.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">possibA2</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">E3</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">upperPartsWithinLimit</span><span class="p">(</span><span class="n">possibA2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.pitchesWithinLimit">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">pitchesWithinLimit</code><span class="sig-paren">(</span><em>possibA</em>, <em>maxPitch=&lt;music21.pitch.Pitch B5&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.pitchesWithinLimit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if all pitches in possibA are less than or equal to
+the maxPitch provided. Comparisons between pitches are done using pitch
+comparison methods, which are based on pitch space values 
+(see <a class="reference internal" href="modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code></a>).</p>
+<p>Used in <a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment" title="music21.figuredBass.segment.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a> to filter
+resolutions of special Segments which can have pitches exceeeding
+the universal maxPitch of a <a class="reference internal" href="moduleFiguredBassRealizer.html#music21.figuredBass.realizer.FiguredBassLine" title="music21.figuredBass.realizer.FiguredBassLine"><code class="xref py py-class docutils literal"><span class="pre">FiguredBassLine</span></code></a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">resolution</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">domPossib</span> <span class="o">=</span> <span class="p">(</span><span class="n">B5</span><span class="p">,</span> <span class="n">F5</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">G2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">pitchesWithinLimit</span><span class="p">(</span><span class="n">domPossib</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossib</span> <span class="o">=</span> <span class="n">resolution</span><span class="o">.</span><span class="n">dominantSeventhToMajorTonic</span><span class="p">(</span><span class="n">domPossib</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resPossib</span> <span class="c1"># Contains C6 &gt; B5</span>
+<span class="go">(&lt;music21.pitch.Pitch C6&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch E5&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch C4&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch C3&gt;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">pitchesWithinLimit</span><span class="p">(</span><span class="n">resPossib</span><span class="p">)</span>
+<span class="go">False </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.partPairs">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">partPairs</code><span class="sig-paren">(</span><em>possibA</em>, <em>possibB</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.partPairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Groups together pitches of possibA and possibB which correspond to the same part,
+constituting a shared part.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB1</span> <span class="o">=</span> <span class="p">(</span><span class="n">B4</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">partPairs</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibA1</span><span class="p">)</span>
+<span class="go">[(&lt;music21.pitch.Pitch C5&gt;, &lt;music21.pitch.Pitch C5&gt;), </span>
+<span class="go"> (&lt;music21.pitch.Pitch G4&gt;, &lt;music21.pitch.Pitch G4&gt;), </span>
+<span class="go"> (&lt;music21.pitch.Pitch E4&gt;, &lt;music21.pitch.Pitch E4&gt;), </span>
+<span class="go"> (&lt;music21.pitch.Pitch C4&gt;, &lt;music21.pitch.Pitch C4&gt;)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">partPairs</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB1</span><span class="p">)</span>
+<span class="go">[(&lt;music21.pitch.Pitch C5&gt;, &lt;music21.pitch.Pitch B4&gt;), </span>
+<span class="go"> (&lt;music21.pitch.Pitch G4&gt;, &lt;music21.pitch.Pitch F4&gt;), </span>
+<span class="go"> (&lt;music21.pitch.Pitch E4&gt;, &lt;music21.pitch.Pitch D4&gt;), </span>
+<span class="go"> (&lt;music21.pitch.Pitch C4&gt;, &lt;music21.pitch.Pitch D4&gt;)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.parallelFifths">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">parallelFifths</code><span class="sig-paren">(</span><em>possibA</em>, <em>possibB</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.parallelFifths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if there are parallel fifths between any
+two shared parts of possibA and possibB.</p>
+<p>If pitchA1 and pitchA2 in possibA are separated by
+a simple interval of a perfect fifth, and they move
+to a pitchB1 and pitchB2 in possibB also separated
+by the simple interval of a perfect fifth, then this
+constitutes parallel fifths between these two parts.</p>
+<p>If the method returns False, then no two shared parts
+have parallel fifths. The method returns True as soon
+as two shared parts with parallel fifths are found.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;A3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;A4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, the bass moves from C3 to D3 and the tenor moves 
+from G3 to A3. The interval between C3 and G3, as well 
+as between D3 and A3, is a perfect fifth. These two
+parts, and therefore the two possibilities, have 
+parallel fifths.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">B4</span><span class="p">,</span> <span class="n">G3</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB1</span> <span class="o">=</span> <span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="n">A3</span><span class="p">,</span> <span class="n">D3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">parallelFifths</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Now, the tenor moves instead to F3. The interval between
+D3 and F3 is a minor third. The bass and tenor parts 
+don&#8217;t form parallel fifths. The soprano part forms parallel
+fifths with neither the bass nor tenor parts. The
+two possibilities, therefore, have no parallel fifths.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">F3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA2</span> <span class="o">=</span> <span class="p">(</span><span class="n">B4</span><span class="p">,</span> <span class="n">G3</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB2</span> <span class="o">=</span> <span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="n">F3</span><span class="p">,</span> <span class="n">D3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">parallelFifths</span><span class="p">(</span><span class="n">possibA2</span><span class="p">,</span> <span class="n">possibB2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.parallelOctaves">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">parallelOctaves</code><span class="sig-paren">(</span><em>possibA</em>, <em>possibB</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.parallelOctaves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if there are parallel octaves between any
+two shared parts of possibA and possibB.</p>
+<p>If pitchA1 and pitchA2 in possibA are separated by
+a simple interval of a perfect octave, and they move
+to a pitchB1 and pitchB2 in possibB also separated
+by the simple interval of a perfect octave, then this
+constitutes parallel octaves between these two parts.</p>
+<p>If the method returns False, then no two shared parts
+have parallel octaves. The method returns True as soon
+as two shared parts with parallel octaves are found.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;A3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, the soprano moves from C4 to D4 and the bass moves
+from C3 to D3. The interval between C3 and C4, as well as
+between D3 and D4, is a parallel octave. The two parts,
+and therefore the two possibilities, have parallel octaves.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">C4</span><span class="p">,</span> <span class="n">G3</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB1</span> <span class="o">=</span> <span class="p">(</span><span class="n">D4</span><span class="p">,</span> <span class="n">A3</span><span class="p">,</span> <span class="n">D3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">parallelOctaves</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Now, the soprano moves down to B3. The interval between
+D3 and B3 is a major sixth. The soprano and bass parts 
+no longer have parallel octaves. The tenor part forms
+a parallel octave with neither the bass nor soprano,
+so the two possibilities do not have parallel octaves.
+(Notice, however, the parallel fifth between the bass
+and tenor!)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">B3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA2</span> <span class="o">=</span> <span class="p">(</span><span class="n">C4</span><span class="p">,</span> <span class="n">G3</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB2</span> <span class="o">=</span> <span class="p">(</span><span class="n">B3</span><span class="p">,</span> <span class="n">A3</span><span class="p">,</span> <span class="n">D3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">parallelOctaves</span><span class="p">(</span><span class="n">possibA2</span><span class="p">,</span> <span class="n">possibB2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.hiddenFifth">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">hiddenFifth</code><span class="sig-paren">(</span><em>possibA</em>, <em>possibB</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.hiddenFifth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if there is a hidden fifth between shared outer parts
+of possibA and possibB. The outer parts here are the first and last
+elements of each possibility.</p>
+<p>If sopranoPitchA and bassPitchA in possibA move to a sopranoPitchB
+and bassPitchB in possibB in similar motion, and the simple interval 
+between sopranoPitchB and bassPitchB is that of a perfect fifth, 
+then this constitutes a hidden octave between the two possibilities.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;A5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, the bass part moves up from C3 to D3 and the soprano part moves
+up from E5 to A5. The simple interval between D3 and A5 is a perfect
+fifth. Therefore, there is a hidden fifth between the two possibilities.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">E5</span><span class="p">,</span> <span class="n">E3</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB1</span> <span class="o">=</span> <span class="p">(</span><span class="n">A5</span><span class="p">,</span> <span class="n">F3</span><span class="p">,</span> <span class="n">D3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">hiddenFifth</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Here, the soprano and bass parts also move in similar motion, but the 
+simple interval between D3 and Ab5 is a diminished fifth. Consequently, 
+there is no hidden fifth.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Ab5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;A-5&#39;</span><span class="p">)</span>   
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA2</span> <span class="o">=</span> <span class="p">(</span><span class="n">E5</span><span class="p">,</span> <span class="n">E3</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB2</span> <span class="o">=</span> <span class="p">(</span><span class="n">Ab5</span><span class="p">,</span> <span class="n">F3</span><span class="p">,</span> <span class="n">D3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">hiddenFifth</span><span class="p">(</span><span class="n">possibA2</span><span class="p">,</span> <span class="n">possibB2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>Now, we have the soprano and bass parts again moving to A5 and D3, whose 
+simple interval is a perfect fifth. However, the bass moves up while the 
+soprano moves down. Therefore, there is no hidden fifth.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">E6</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA3</span> <span class="o">=</span> <span class="p">(</span><span class="n">E6</span><span class="p">,</span> <span class="n">E3</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB3</span> <span class="o">=</span> <span class="p">(</span><span class="n">A5</span><span class="p">,</span> <span class="n">F3</span><span class="p">,</span> <span class="n">D3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">hiddenFifth</span><span class="p">(</span><span class="n">possibA3</span><span class="p">,</span> <span class="n">possibB3</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.hiddenOctave">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">hiddenOctave</code><span class="sig-paren">(</span><em>possibA</em>, <em>possibB</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.hiddenOctave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if there is a hidden octave between shared outer parts
+of possibA and possibB. The outer parts here are the first and last
+elements of each possibility.</p>
+<p>If sopranoPitchA and bassPitchA in possibA move to a sopranoPitchB
+and bassPitchB in possibB in similar motion, and the simple interval 
+between sopranoPitchB and bassPitchB is that of a perfect octave, 
+then this constitutes a hidden octave between the two possibilities.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F3</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;A5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D6</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D6&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, the bass part moves up from C3 to D3 and the soprano part moves
+up from A5 to D6. The simple interval between D3 and D6 is a perfect 
+octave. Therefore, there is a hidden octave between the two possibilities.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">A5</span><span class="p">,</span> <span class="n">E3</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB1</span> <span class="o">=</span> <span class="p">(</span><span class="n">D6</span><span class="p">,</span> <span class="n">F3</span><span class="p">,</span> <span class="n">D3</span><span class="p">)</span> <span class="c1">#Perfect octave between soprano and bass.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">hiddenOctave</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB1</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Here, the bass part moves up from C3 to D3 but the soprano part moves
+down from A6 to D6. There is no hidden octave since the parts move in
+contrary motion.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A6</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;A6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA2</span> <span class="o">=</span> <span class="p">(</span><span class="n">A6</span><span class="p">,</span> <span class="n">E3</span><span class="p">,</span> <span class="n">C3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB2</span> <span class="o">=</span> <span class="p">(</span><span class="n">D6</span><span class="p">,</span> <span class="n">F3</span><span class="p">,</span> <span class="n">D3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">hiddenOctave</span><span class="p">(</span><span class="n">possibA2</span><span class="p">,</span> <span class="n">possibB2</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.voiceOverlap">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">voiceOverlap</code><span class="sig-paren">(</span><em>possibA</em>, <em>possibB</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.voiceOverlap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if there is voice overlap between any two shared parts
+of possibA and possibB.</p>
+<p>Voice overlap can occur in two ways:</p>
+<p>1) If a pitch in a lower part in possibB is higher than a pitch in
+a higher part in possibA. This case is demonstrated below.</p>
+<p>2) If a pitch in a higher part in possibB is lower than a pitch in
+a lower part in possibA.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/fbPossib_voiceOverlap.png"><img alt="../_images/fbPossib_voiceOverlap.png" src="../_images/fbPossib_voiceOverlap.png" style="width: 75px;" /></a>
+</div></blockquote>
+<p>In the above example, possibA has G4 in the bass and B4 in the soprano.
+If the bass moves up to C5 in possibB, that would constitute voice overlap
+because the bass in possibB would be higher than the soprano in possibA.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, case #2 is demonstrated. There is overlap between the soprano and 
+alto parts, because F4 in the soprano in possibB1 is lower than the G4
+in the alto in possibA1. Note that neither possibility has to have voice
+crossing for voice overlap to occur, as shown.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB1</span> <span class="o">=</span> <span class="p">(</span><span class="n">F4</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">voiceOverlap</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">voiceCrossing</span><span class="p">(</span><span class="n">possibA1</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">voiceCrossing</span><span class="p">(</span><span class="n">possibB1</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>Here is the same example as above, except the soprano of the second
+possibility is now B4, which does not overlap the G4 of the first.
+Now, there is no voice overlap.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">B4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B4&#39;</span><span class="p">)</span>   
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA2</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB2</span> <span class="o">=</span> <span class="p">(</span><span class="n">B4</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">voiceOverlap</span><span class="p">(</span><span class="n">possibA2</span><span class="p">,</span> <span class="n">possibB2</span><span class="p">)</span>   
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.partMovementsWithinLimits">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">partMovementsWithinLimits</code><span class="sig-paren">(</span><em>possibA</em>, <em>possibB</em>, <em>partMovementLimits=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.partMovementsWithinLimits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if all movements between shared parts of possibA and possibB
+are within limits, as specified by list partMovementLimits, which consists of
+(partNumber, maxSeparation) tuples.</p>
+<ul class="simple">
+<li>partNumber: Specified from 1 to n, where 1 is the soprano or 
+highest part and n is the bass or lowest part.</li>
+<li>maxSeparation: For a given part, the maximum separation to allow 
+between a pitch in possibA and a corresponding pitch in possibB, in semitones.</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;A4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, we limit the soprano part to motion of two semitones, 
+enharmonically equivalent to a major second. 
+Moving from C5 to B4 is allowed because it constitutes stepwise 
+motion, but moving to A4 is not allowed 
+because the distance between A4 and C5 is three semitones.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">partMovementLimits</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB1</span> <span class="o">=</span> <span class="p">(</span><span class="n">B4</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">partMovementsWithinLimits</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB1</span><span class="p">,</span> <span class="n">partMovementLimits</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB2</span> <span class="o">=</span> <span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">partMovementsWithinLimits</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB2</span><span class="p">,</span> <span class="n">partMovementLimits</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.upperPartsSame">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">upperPartsSame</code><span class="sig-paren">(</span><em>possibA</em>, <em>possibB</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.upperPartsSame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the upper parts are the same.
+False otherwise.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">F4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB1</span> <span class="o">=</span> <span class="p">(</span><span class="n">B4</span><span class="p">,</span> <span class="n">F4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB2</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">D4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">upperPartsSame</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB1</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">upperPartsSame</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.couldBeItalianA6Resolution">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">couldBeItalianA6Resolution</code><span class="sig-paren">(</span><em>possibA</em>, <em>possibB</em>, <em>threePartChordInfo=None</em>, <em>restrictDoublings=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.couldBeItalianA6Resolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Speed-enhanced but designed to stand alone. 
+Returns True if possibA is an Italian A6 chord 
+and possibB could possibly be an acceptable resolution. 
+If restrictDoublings is set to True,
+only the tonic can be doubled. Setting restrictDoublings 
+to False opens up the chance
+that the root or the third can be doubled. Controlled 
+in the <a class="reference internal" href="moduleFiguredBassRules.html#music21.figuredBass.rules.Rules" title="music21.figuredBass.rules.Rules"><code class="xref py py-class docutils literal"><span class="pre">Rules</span></code></a>
+object by <a class="reference internal" href="moduleFiguredBassRules.html#music21.figuredBass.rules.Rules.restrictDoublingsInItalianA6Resolution" title="music21.figuredBass.rules.Rules.restrictDoublingsInItalianA6Resolution"><code class="xref py py-attr docutils literal"><span class="pre">restrictDoublingsInItalianA6Resolution</span></code></a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;A2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Bb2</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B-2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Cs4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C#4&#39;</span><span class="p">)</span>    
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;D4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Fs4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;F#4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Gs4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G#4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;A4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB1</span> <span class="o">=</span> <span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="n">Cs4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">A2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB2</span> <span class="o">=</span> <span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">Cs4</span><span class="p">,</span> <span class="n">A2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB3</span> <span class="o">=</span> <span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Fs4</span><span class="p">,</span> <span class="n">A2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">couldBeItalianA6Resolution</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">couldBeItalianA6Resolution</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB1</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">couldBeItalianA6Resolution</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB3</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>A PossibilityException is raised if possibA is not an Italian A6 chord, but this only
+applies only if threePartChordInfo = None, because otherwise the chord information is 
+coming from <a class="reference internal" href="moduleFiguredBassSegment.html#music21.figuredBass.segment.Segment" title="music21.figuredBass.segment.Segment"><code class="xref py py-class docutils literal"><span class="pre">Segment</span></code></a> and the fact that possibA is 
+an It+6 chord is assumed.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">possibA2</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB2</span> <span class="o">=</span> <span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">Cs4</span><span class="p">,</span> <span class="n">A2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">couldBeItalianA6Resolution</span><span class="p">(</span><span class="n">possibA2</span><span class="p">,</span> <span class="n">possibB2</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.figuredBass.possibility.PossibilityException</span>: <span class="n">possibA does not spell out an It+6 chord.</span>
+</pre></div>
+</div>
+<p>The method is called &#8220;couldBeItalianA6Resolution&#8221; as opposed
+to &#8220;isItalianA6Resolution&#8221; because it is designed to work in
+tandem with <a class="reference internal" href="#music21.figuredBass.possibility.parallelOctaves" title="music21.figuredBass.possibility.parallelOctaves"><code class="xref py py-meth docutils literal"><span class="pre">parallelOctaves()</span></code></a>
+and <a class="reference internal" href="#music21.figuredBass.possibility.isIncomplete" title="music21.figuredBass.possibility.isIncomplete"><code class="xref py py-meth docutils literal"><span class="pre">isIncomplete()</span></code></a> in
+a Segment. Consider the following examples with possibA1 above as the
+augmented sixth chord to resolve.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB4</span> <span class="o">=</span> <span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">A2</span><span class="p">)</span> <span class="c1"># No 3rd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB5</span> <span class="o">=</span> <span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="n">Cs4</span><span class="p">,</span> <span class="n">Cs4</span><span class="p">,</span> <span class="n">A2</span><span class="p">)</span> <span class="c1"># No 5th</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">couldBeItalianA6Resolution</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB4</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">couldBeItalianA6Resolution</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB5</span><span class="p">)</span>  <span class="c1"># parallel octaves</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">possibA3</span> <span class="o">=</span> <span class="p">(</span><span class="n">Gs4</span><span class="p">,</span> <span class="n">Gs4</span><span class="p">,</span> <span class="n">D4</span><span class="p">,</span> <span class="n">Bb2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB6</span> <span class="o">=</span> <span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="n">A4</span><span class="p">,</span> <span class="n">Cs4</span><span class="p">,</span> <span class="n">A2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">couldBeItalianA6Resolution</span><span class="p">(</span><span class="n">possibA3</span><span class="p">,</span> <span class="n">possibB6</span><span class="p">,</span> <span class="n">restrictDoublings</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">couldBeItalianA6Resolution</span><span class="p">(</span><span class="n">possibA3</span><span class="p">,</span> <span class="n">possibB6</span><span class="p">,</span> <span class="n">restrictDoublings</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.limitPartToPitch">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">limitPartToPitch</code><span class="sig-paren">(</span><em>possibA</em>, <em>partPitchLimits=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.limitPartToPitch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in a dict, partPitchLimits containing (partNumber, partPitch) pairs, each
+of which limits a part in possibA to a certain <a class="reference internal" href="modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code></a>.
+Returns True if all limits are followed in possibA, False otherwise.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sopranoPitch</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">limitPartToPitch</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">sopranoPitch</span><span class="p">})</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA2</span> <span class="o">=</span> <span class="p">(</span><span class="n">G5</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">limitPartToPitch</span><span class="p">(</span><span class="n">possibA2</span><span class="p">,</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">sopranoPitch</span><span class="p">})</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.figuredBass.possibility.partsSame">
+<code class="descclassname">music21.figuredBass.possibility.</code><code class="descname">partsSame</code><span class="sig-paren">(</span><em>possibA</em>, <em>possibB</em>, <em>partsToCheck=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.figuredBass.possibility.partsSame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in partsToCheck, a list of part numbers. Checks if pitches at those part numbers of
+possibA and possibB are equal, determined by pitch space.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="n">pitch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">music21.figuredBass</span> <span class="k">import</span> <span class="n">possibility</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;E4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">G4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;G4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B4</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;B4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C5</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Pitch</span><span class="p">(</span><span class="s1">&#39;C5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibA1</span> <span class="o">=</span> <span class="p">(</span><span class="n">C5</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibB1</span> <span class="o">=</span> <span class="p">(</span><span class="n">B4</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">E4</span><span class="p">,</span> <span class="n">C4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">possibility</span><span class="o">.</span><span class="n">partsSame</span><span class="p">(</span><span class="n">possibA1</span><span class="p">,</span> <span class="n">possibB1</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassRealizer.html" title="music21.figuredBass.realizer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleFiguredBassNotation.html" title="music21.figuredBass.notation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

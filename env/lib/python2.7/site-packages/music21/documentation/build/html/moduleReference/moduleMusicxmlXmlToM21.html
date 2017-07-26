@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.musicxml.xmlToM21 &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.note" href="moduleNote.html" />
+    <link rel="prev" title="music21.musicxml.xmlSoundParser" href="moduleMusicxmlXmlSoundParser.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleNote.html" title="music21.note"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleMusicxmlXmlSoundParser.html" title="music21.musicxml.xmlSoundParser"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleMusicxmlXmlSoundParser.html"
+                        title="previous chapter">music21.musicxml.xmlSoundParser</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleNote.html"
+                        title="next chapter">music21.note</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.musicxml.xmlToM21</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#measureparser">MeasureParser</a></li>
+<li><a class="reference internal" href="#musicxmlimporter">MusicXMLImporter</a></li>
+<li><a class="reference internal" href="#partgroup">PartGroup</a></li>
+<li><a class="reference internal" href="#partparser">PartParser</a></li>
+<li><a class="reference internal" href="#xmlparserbase">XMLParserBase</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleMusicxmlXmlToM21.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-musicxml-xmltom21">
+<span id="modulemusicxmlxmltom21"></span><h1>music21.musicxml.xmlToM21<a class="headerlink" href="#music21-musicxml-xmltom21" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.musicxml.xmlToM21"></span><div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.musicxml.xmlToM21.musicXMLTypeToType">
+<code class="descclassname">music21.musicxml.xmlToM21.</code><code class="descname">musicXMLTypeToType</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.musicXMLTypeToType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function to convert a MusicXML duration type to an music21 duration type.</p>
+<p>Changes &#8216;long&#8217; to &#8216;longa&#8217; and deals with a Guitar Pro 5.2 bug in MusicXML
+export, that exports a 32nd note with the type &#8216;32th&#8217;.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">musicXMLTypeToType</span><span class="p">(</span><span class="s1">&#39;long&#39;</span><span class="p">)</span>
+<span class="go">&#39;longa&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">musicXMLTypeToType</span><span class="p">(</span><span class="s1">&#39;32th&#39;</span><span class="p">)</span>
+<span class="go">&#39;32nd&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">musicXMLTypeToType</span><span class="p">(</span><span class="s1">&#39;quarter&#39;</span><span class="p">)</span>
+<span class="go">&#39;quarter&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">musicXMLTypeToType</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">music21.musicxml.xmlToM21.MusicXMLImportException</span>: <span class="n">found unknown MusicXML type: None</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="measureparser">
+<h2>MeasureParser<a class="headerlink" href="#measureparser" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.musicxml.xmlToM21.MeasureParser">
+<em class="property">class </em><code class="descclassname">music21.musicxml.xmlToM21.</code><code class="descname">MeasureParser</code><span class="sig-paren">(</span><em>mxMeasure=None</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>parser to work with a single &lt;measure&gt; tag.</p>
+<p>called out for simplicity.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreMeasure</span> <span class="o">=</span> <span class="s1">&#39;&lt;measure&gt;&lt;note&gt;&lt;rest/&gt;&lt;duration&gt;40320&lt;/duration&gt;&lt;/note&gt;&lt;/measure&gt;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxMeasure</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="n">scoreMeasure</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mp</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">(</span><span class="n">mxMeasure</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mp</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mp</span><span class="o">.</span><span class="n">restAndNoteCount</span><span class="p">[</span><span class="s1">&#39;rest&#39;</span><span class="p">]</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mp</span><span class="o">.</span><span class="n">restAndNoteCount</span><span class="p">[</span><span class="s1">&#39;note&#39;</span><span class="p">]</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mp</span><span class="o">.</span><span class="n">fullMeasureRest</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.musicxml.xmlToM21.MeasureParser" title="music21.musicxml.xmlToM21.MeasureParser"><code class="xref py py-class docutils literal"><span class="pre">MeasureParser</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase" title="music21.musicxml.xmlToM21.XMLParserBase"><code class="xref py py-class docutils literal"><span class="pre">XMLParserBase</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.musicxml.xmlToM21.MeasureParser" title="music21.musicxml.xmlToM21.MeasureParser"><code class="xref py py-class docutils literal"><span class="pre">MeasureParser</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.addNoteToMeasureOrVoice">
+<code class="descclassname">MeasureParser.</code><code class="descname">addNoteToMeasureOrVoice</code><span class="sig-paren">(</span><em>mxNote</em>, <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.addNoteToMeasureOrVoice" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.addToStaffReference">
+<code class="descclassname">MeasureParser.</code><code class="descname">addToStaffReference</code><span class="sig-paren">(</span><em>mxObjectOrNumber</em>, <em>m21Object</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.addToStaffReference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility routine for importing musicXML objects; 
+here, we store a reference to the music21 object in a dictionary, 
+where keys are the staff values. Staff values may be None, 1, 2, etc.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.getStaffNumberStr">
+<em class="property">static </em><code class="descclassname">MeasureParser.</code><code class="descname">getStaffNumberStr</code><span class="sig-paren">(</span><em>mxObjectOrNumber</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.getStaffNumberStr" title="Permalink to this definition">¶</a></dt>
+<dd><p>gets a string representing a staff number, or None
+from an mxObject or a number...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mp</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gsn</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">getStaffNumberStr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gsn</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">&#39;1&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gsn</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
+<span class="go">&#39;2&#39;</span>
+</pre></div>
+</div>
+<p>&lt;note&gt; tags store their staff numbers in a &lt;staff&gt; tag&#8217;s text...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gsn</span><span class="p">(</span><span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;note&gt;&lt;staff&gt;2&lt;/staff&gt;&lt;/note&gt;&#39;</span><span class="p">))</span>
+<span class="go">&#39;2&#39;</span>
+</pre></div>
+</div>
+<p>...or not at all.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gsn</span><span class="p">(</span><span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;note&gt;&lt;pitch&gt;&lt;step&gt;C&lt;/step&gt;&lt;octave&gt;4&lt;/octave&gt;&lt;/pitch&gt;&lt;/note&gt;&#39;</span><span class="p">))</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Clefs, however, store theirs in a <cite>number</cite> attribute.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gsn</span><span class="p">(</span><span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;clef number=&quot;2&quot;/&gt;&#39;</span><span class="p">))</span>
+<span class="go">&#39;2&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">gsn</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.handleClef">
+<code class="descclassname">MeasureParser.</code><code class="descname">handleClef</code><span class="sig-paren">(</span><em>mxClef</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.handleClef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles a clef object, appending it to the core, and
+setting self.lastClefs for the staff number.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxClef</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;clef&gt;&lt;sign&gt;G&lt;/sign&gt;&lt;line&gt;2&lt;/line&gt;&lt;/clef&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">handleClef</span><span class="p">(</span><span class="n">mxClef</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">lastClefs</span>
+<span class="go">{None: &lt;music21.clef.TrebleClef&gt;}</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxClefBC</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;clef number=&quot;2&quot;&gt;&lt;sign&gt;F&lt;/sign&gt;&lt;line&gt;4&lt;/line&gt;&lt;/clef&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">handleClef</span><span class="p">(</span><span class="n">mxClefBC</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">lastClefs</span><span class="p">[</span><span class="s1">&#39;2&#39;</span><span class="p">]</span>
+<span class="go">&lt;music21.clef.BassClef&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">lastClefs</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+<span class="go">&lt;music21.clef.TrebleClef&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.handleFingering">
+<code class="descclassname">MeasureParser.</code><code class="descname">handleFingering</code><span class="sig-paren">(</span><em>tech</em>, <em>mxObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.handleFingering" title="Permalink to this definition">¶</a></dt>
+<dd><p>A few specialized functions for dealing with fingering objects</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.handleKeySignature">
+<code class="descclassname">MeasureParser.</code><code class="descname">handleKeySignature</code><span class="sig-paren">(</span><em>mxKey</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.handleKeySignature" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert mxKey to a Key or KeySignature and run insertCoreAndRef on it</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.handleMeasureStyle">
+<code class="descclassname">MeasureParser.</code><code class="descname">handleMeasureStyle</code><span class="sig-paren">(</span><em>mxMeasureStyle</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.handleMeasureStyle" title="Permalink to this definition">¶</a></dt>
+<dd><p>measure + multimeasure repeats, slashed repeats, etc.</p>
+<p>But currently only multiMeasure rests are supported.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.handleStaffDetails">
+<code class="descclassname">MeasureParser.</code><code class="descname">handleStaffDetails</code><span class="sig-paren">(</span><em>mxDetails</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.handleStaffDetails" title="Permalink to this definition">¶</a></dt>
+<dd><p>StaffDetails (staff-details) handles attributes about
+the staff itself &#8211; its size, number of lines, tuning,
+frets, etc.</p>
+<p>It is different from StaffLayout (staff-layout) which
+only handles relationship of one staff to another (the
+distance)</p>
+<p>Rather than returning a StaffLayout object,
+it adds it to self.staffLayoutObjects checking
+to see if there is already an incomplete
+StaffLayout object for this staff.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.handleTimeSignature">
+<code class="descclassname">MeasureParser.</code><code class="descname">handleTimeSignature</code><span class="sig-paren">(</span><em>mxTime</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.handleTimeSignature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.insertCoreAndRef">
+<code class="descclassname">MeasureParser.</code><code class="descname">insertCoreAndRef</code><span class="sig-paren">(</span><em>offset</em>, <em>mxObjectOrNumber</em>, <em>m21Object</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.insertCoreAndRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>runs addToStaffReference and then insertCore.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.parse">
+<code class="descclassname">MeasureParser.</code><code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.parseAttributesTag">
+<code class="descclassname">MeasureParser.</code><code class="descname">parseAttributesTag</code><span class="sig-paren">(</span><em>mxAttributes</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.parseAttributesTag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.parseMeasureAttributes">
+<code class="descclassname">MeasureParser.</code><code class="descname">parseMeasureAttributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.parseMeasureAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>parses the attributes of the &lt;measure&gt; tag.  Not the
+&lt;attributes&gt; tag inside the measure tag.</p>
+<p>calls parseMeasureNumbers(), and gets the width from the width tag.</p>
+<p># TODO: implicit
+# TODO: non-controlling 
+# may need to do a format/unit conversion?</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.parseMeasureNumbers">
+<code class="descclassname">MeasureParser.</code><code class="descname">parseMeasureNumbers</code><span class="sig-paren">(</span><em>mNumRaw=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.parseMeasureNumbers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the measure number from the &#8216;number&#8217; attribute of the
+&lt;measure&gt; tag.  (Or, for testing, from the mNumRaw
+argument).  Sets MeasureParser.stream.number and possibly
+MeasureParser.stream.numberSuffix</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">parseMeasureNumbers</span><span class="p">(</span><span class="s1">&#39;5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">number</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<p>Sets not only stream.number, but also MeasureParser.measureNumber and
+MeasureParser.numberSuffix</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">parseMeasureNumbers</span><span class="p">(</span><span class="s1">&#39;44b&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">number</span>
+<span class="go">44</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">numberSuffix</span>
+<span class="go">&#39;b&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">measureNumber</span>
+<span class="go">44</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">numberSuffix</span>
+<span class="go">&#39;b&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">parseMeasureNumbers</span><span class="p">(</span><span class="s1">&#39;X1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">number</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">numberSuffix</span>
+<span class="go">&#39;X&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.updateLyricsFromList">
+<code class="descclassname">MeasureParser.</code><code class="descname">updateLyricsFromList</code><span class="sig-paren">(</span><em>n</em>, <em>lyricList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.updateLyricsFromList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a list of &lt;lyric&gt; elements and update the
+note&#8217;s lyrics from that list.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxLyric1</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;lyric&gt;&lt;text&gt;Hi&lt;/text&gt;&lt;/lyric&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxLyric2</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;lyric&gt;&lt;text&gt;Hi&lt;/text&gt;&lt;/lyric&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">updateLyricsFromList</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="p">[</span><span class="n">mxLyric1</span><span class="p">,</span> <span class="n">mxLyric2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">lyrics</span>
+<span class="go">[&lt;music21.note.Lyric number=1 syllabic=single text=&quot;Hi&quot;&gt;, </span>
+<span class="go"> &lt;music21.note.Lyric number=2 syllabic=single text=&quot;Hi&quot;&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.updateVoiceInformation">
+<code class="descclassname">MeasureParser.</code><code class="descname">updateVoiceInformation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.updateVoiceInformation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlBackup">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlBackup</code><span class="sig-paren">(</span><em>mxObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlBackup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlBarline">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlBarline</code><span class="sig-paren">(</span><em>mxBarline</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlBarline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles everything for putting a barline into a Stream
+and updating repeat characteristics.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlDirection">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlDirection</code><span class="sig-paren">(</span><em>mxDirection</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlDirection" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert a &lt;direction&gt; tag to an expression, metronome mark, etc.
+and add it to the core and staff direction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlDirectionTypeToSpanners">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlDirectionTypeToSpanners</code><span class="sig-paren">(</span><em>mxObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlDirectionTypeToSpanners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Some spanners, such as MusicXML wedge, bracket, and dashes, 
+are encoded as MusicXML directions.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">(</span><span class="s2">&quot;D4&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">nLast</span> <span class="o">=</span> <span class="n">n1</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">MP</span><span class="o">.</span><span class="n">spannerBundle</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxDirectionType</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;wedge type=&quot;crescendo&quot; number=&quot;2&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlDirectionTypeToSpanners</span><span class="p">(</span><span class="n">mxDirectionType</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">MP</span><span class="o">.</span><span class="n">spannerBundle</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">spannerBundle</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span>
+<span class="go">&lt;music21.spanner.Crescendo &gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxDirectionType2</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;wedge type=&quot;stop&quot; number=&quot;2&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlDirectionTypeToSpanners</span><span class="p">(</span><span class="n">mxDirectionType2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">MP</span><span class="o">.</span><span class="n">spannerBundle</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">spannerBundle</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span>
+<span class="go">&lt;music21.spanner.Crescendo &lt;music21.note.Note D&gt;&gt;        </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlForward">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlForward</code><span class="sig-paren">(</span><em>mxObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlForward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlGraceToGrace">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlGraceToGrace</code><span class="sig-paren">(</span><em>mxGrace</em>, <em>noteOrChord</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlGraceToGrace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a completely formed, non-grace Note or Chord that should become one
+create and return a m21 grace version of the same.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlHarmony">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlHarmony</code><span class="sig-paren">(</span><em>mxHarmony</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlHarmony" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlNotations">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlNotations</code><span class="sig-paren">(</span><em>mxNotations</em>, <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlNotations" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxNotations</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;notations&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="s1">&#39;&lt;fermata type=&quot;upright&quot;&gt;angled&lt;/fermata&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>    <span class="s1">&#39;&lt;/notations&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlNotations</span><span class="p">(</span><span class="n">mxNotations</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">expressions</span>
+<span class="go">[&lt;music21.expressions.Fermata&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">expressions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;upright&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">expressions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">&#39;angled&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlNotationsToSpanners">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlNotationsToSpanners</code><span class="sig-paren">(</span><em>mxNotations</em>, <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlNotationsToSpanners" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlNoteToGeneralNoteHelper">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlNoteToGeneralNoteHelper</code><span class="sig-paren">(</span><em>n</em>, <em>mxNote</em>, <em>freeSpanners=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlNoteToGeneralNoteHelper" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlNotehead">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlNotehead</code><span class="sig-paren">(</span><em>n</em>, <em>mxNotehead</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlNotehead" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set notehead information from the mxNotehead object</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nh</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;notehead color=&quot;#FF0000&quot; filled=&quot;no&quot; parentheses=&quot;yes&quot;&gt;diamond&lt;/notehead&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlNotehead</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">nh</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">notehead</span>
+<span class="go">&#39;diamond&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">noteheadFill</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">noteheadParenthesis</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">color</span>
+<span class="go">&#39;#FF0000&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlOneSpanner">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlOneSpanner</code><span class="sig-paren">(</span><em>mxObj</em>, <em>target</em>, <em>spannerClass</em>, <em>allowDuplicateIds=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlOneSpanner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Some spanner types do not have an id necessarily, we allow duplicates of them
+if allowDuplicateIds is True. Wedges are one.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlOrnamentToExpression">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlOrnamentToExpression</code><span class="sig-paren">(</span><em>mxObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlOrnamentToExpression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert mxOrnament into a music21 ornament.</p>
+<p>This only processes non-spanner ornaments. 
+Many mxOrnaments are spanners: these are handled elsewhere.</p>
+<p>Returns None if cannot be converted or not defined.</p>
+<p>Return an articulation from an mxObj, setting placement</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxOrn</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;inverted-turn placement=&quot;above&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlOrnamentToExpression</span><span class="p">(</span><span class="n">mxOrn</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">&lt;music21.expressions.InvertedTurn&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">placement</span>
+<span class="go">&#39;above&#39;</span>
+</pre></div>
+</div>
+<p>If it can&#8217;t be converted, return None</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxOrn</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;crazy-slide placement=&quot;above&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlOrnamentToExpression</span><span class="p">(</span><span class="n">mxOrn</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Not supported currently: &#8216;accidental-mark&#8217;, &#8216;vertical-turn&#8217;, 
+&#8216;delayed-turn&#8217;, &#8216;delayed-inverted-turn&#8217;</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlPrint">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlPrint</code><span class="sig-paren">(</span><em>mxPrint</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlPrint" title="Permalink to this definition">¶</a></dt>
+<dd><p>&lt;print&gt; handles changes in pages, numbering, layout,
+etc. so can generate PageLayout, SystemLayout, or StaffLayout
+objects.</p>
+<p>Should also be able to set measure attributes on self.stream</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlStaffLayoutFromStaffDetails">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlStaffLayoutFromStaffDetails</code><span class="sig-paren">(</span><em>mxDetails</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlStaffLayoutFromStaffDetails" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new StaffLayout object from staff-details.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlTechnicalToArticulation">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlTechnicalToArticulation</code><span class="sig-paren">(</span><em>mxObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlTechnicalToArticulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an mxArticulationMark to a music21.articulations.Articulation
+object or one of its subclasses.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxTech</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;down-bow placement=&quot;below&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlTechnicalToArticulation</span><span class="p">(</span><span class="n">mxTech</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">&lt;music21.articulations.DownBow&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">placement</span>
+<span class="go">&#39;below&#39;</span>
+</pre></div>
+</div>
+<p>Fingering might have substitution or alternate</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxTech</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;fingering substitution=&quot;yes&quot;&gt;5&lt;/fingering&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlTechnicalToArticulation</span><span class="p">(</span><span class="n">mxTech</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span>
+<span class="go">&lt;music21.articulations.Fingering 5&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">substitution</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">alternate</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>FingerNumbers get converted to ints if possible</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">fingerNumber</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxTech</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;fingering alternate=&quot;yes&quot;&gt;4-3&lt;/fingering&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlTechnicalToArticulation</span><span class="p">(</span><span class="n">mxTech</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="go">&lt;music21.articulations.Fingering 4-3&gt;        </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">alternate</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">fingerNumber</span>
+<span class="go">&#39;4-3&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToAccidental">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToAccidental</code><span class="sig-paren">(</span><em>mxAccidental</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToAccidental" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;accidental&gt;half-flat&lt;/accidental&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">Accidental</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToAccidental</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;half-flat&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">alter</span>
+<span class="go">-0.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToArticulation">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToArticulation</code><span class="sig-paren">(</span><em>mxObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToArticulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an articulation from an mxObj, setting placement</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxArt</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;spiccato placement=&quot;above&quot;/&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToArticulation</span><span class="p">(</span><span class="n">mxArt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">&lt;music21.articulations.Spiccato&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">placement</span>
+<span class="go">&#39;above&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToBarline">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToBarline</code><span class="sig-paren">(</span><em>mxBarline</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToBarline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an mxBarline, fill the necessary parameters</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxBarline</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span>
+<span class="gp">... </span>              <span class="s1">&#39;&lt;barline location=&quot;right&quot;&gt;&lt;bar-style&gt;light-light&lt;/bar-style&gt;&lt;/barline&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToBarline</span><span class="p">(</span><span class="n">mxBarline</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">&lt;music21.bar.Barline style=double&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">style</span>  <span class="c1"># different in music21 than musicxml</span>
+<span class="go">&#39;double&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">location</span>
+<span class="go">&#39;right&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToBeam">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToBeam</code><span class="sig-paren">(</span><em>mxBeam</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToBeam" title="Permalink to this definition">¶</a></dt>
+<dd><p>given an mxBeam object return a <a class="reference internal" href="moduleBeam.html#music21.beam.Beam" title="music21.beam.Beam"><code class="xref py py-class docutils literal"><span class="pre">Beam</span></code></a> object</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxBeam</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;beam&gt;begin&lt;/beam&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToBeam</span><span class="p">(</span><span class="n">mxBeam</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;start&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxBeam</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;beam&gt;continue&lt;/beam&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToBeam</span><span class="p">(</span><span class="n">mxBeam</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;continue&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxBeam</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;beam&gt;end&lt;/beam&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToBeam</span><span class="p">(</span><span class="n">mxBeam</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;stop&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxBeam</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;beam&gt;forward hook    &lt;/beam&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToBeam</span><span class="p">(</span><span class="n">mxBeam</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;partial&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">direction</span>
+<span class="go">&#39;right&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxBeam</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;beam&gt;backward hook&lt;/beam&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToBeam</span><span class="p">(</span><span class="n">mxBeam</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;partial&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">direction</span>
+<span class="go">&#39;left&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxBeam</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;beam&gt;crazy&lt;/beam&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToBeam</span><span class="p">(</span><span class="n">mxBeam</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">MusicXMLImportException</span>: <span class="n">unexpected beam type encountered (crazy)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToBeams">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToBeams</code><span class="sig-paren">(</span><em>mxBeamList</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToBeams" title="Permalink to this definition">¶</a></dt>
+<dd><p>given a list of mxBeam objects, sets the beamsList</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxBeam1</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;beam&gt;begin&lt;/beam&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxBeam2</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;beam&gt;begin&lt;/beam&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxBeamList</span> <span class="o">=</span> <span class="p">[</span><span class="n">mxBeam1</span><span class="p">,</span> <span class="n">mxBeam2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToBeams</span><span class="p">(</span><span class="n">mxBeamList</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">&lt;music21.beam.Beams &lt;music21.beam.Beam 1/start&gt;/&lt;music21.beam.Beam 2/start&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToChord">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToChord</code><span class="sig-paren">(</span><em>mxNoteList</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToChord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an a list of mxNotes, fill the necessary parameters</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">divisions</span> <span class="o">=</span> <span class="mi">10080</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qnDuration</span> <span class="o">=</span> <span class="s1">r&#39;&lt;duration&gt;7560&lt;/duration&gt;&lt;type&gt;quarter&lt;/type&gt;&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">r&#39;&lt;note&gt;&lt;pitch&gt;&lt;step&gt;A&lt;/step&gt;&lt;octave&gt;3&lt;/octave&gt;&lt;/pitch&gt;&#39;</span>
+<span class="gp">... </span>         <span class="o">+</span> <span class="n">qnDuration</span> <span class="o">+</span> <span class="s1">&#39;&lt;/note&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">r&#39;&lt;note&gt;&lt;chord/&gt;&lt;pitch&gt;&lt;step&gt;B&lt;/step&gt;&lt;octave&gt;3&lt;/octave&gt;&lt;/pitch&gt;&#39;</span> 
+<span class="gp">... </span>         <span class="o">+</span> <span class="n">qnDuration</span> <span class="o">+</span> <span class="s1">&#39;&lt;/note&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToChord</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">pitches</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">pitches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&lt;music21.pitch.Pitch A3&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">pitches</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">&lt;music21.pitch.Pitch B3&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">r&#39;&lt;note&gt;&lt;pitch&gt;&lt;step&gt;A&lt;/step&gt;&lt;octave&gt;3&lt;/octave&gt;&lt;/pitch&gt;&#39;</span> <span class="o">+</span> <span class="n">qnDuration</span> <span class="o">+</span> 
+<span class="gp">... </span>        <span class="s1">&#39;&lt;notehead&gt;diamond&lt;/notehead&gt;&lt;/note&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToChord</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">getNotehead</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">pitches</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">&#39;diamond&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToChordSymbol">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToChordSymbol</code><span class="sig-paren">(</span><em>mxHarmony</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToChordSymbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a &lt;harmony&gt; tag to a harmony.ChordSymbol object:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">elStr</span> <span class="o">=</span> <span class="s1">&#39;&lt;harmony&gt;&lt;root&gt;&lt;root-step&gt;D&lt;/root-step&gt;&lt;root-alter&gt;-1&lt;/root-alter&gt;&#39;</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">elStr</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/root&gt;&lt;kind&gt;major-seventh&lt;/kind&gt;&lt;/harmony&gt;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxHarmony</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="n">elStr</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToChordSymbol</span><span class="p">(</span><span class="n">mxHarmony</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span>
+<span class="go">&lt;music21.harmony.ChordSymbol D-maj7&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span><span class="o">.</span><span class="n">figure</span>
+<span class="go">&#39;D-maj7&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span><span class="o">.</span><span class="n">pitches</span>
+<span class="go">(&lt;music21.pitch.Pitch D-3&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch F3&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch A-3&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch C4&gt;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span><span class="o">.</span><span class="n">root</span><span class="p">()</span>
+<span class="go">&lt;music21.pitch.Pitch D-3&gt;</span>
+</pre></div>
+</div>
+<p>TODO: this is very classically-oriented.  Make more Jazz/Rock like possible/default?.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxHarmony</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;kind&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;major-sixth&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToChordSymbol</span><span class="p">(</span><span class="n">mxHarmony</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span>
+<span class="go">&lt;music21.harmony.ChordSymbol D-6&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span><span class="o">.</span><span class="n">figure</span>
+<span class="go">&#39;D-6&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span><span class="o">.</span><span class="n">pitches</span>
+<span class="go">(&lt;music21.pitch.Pitch D-3&gt;, &lt;music21.pitch.Pitch F3&gt;, </span>
+<span class="go"> &lt;music21.pitch.Pitch A-3&gt;, &lt;music21.pitch.Pitch B-3&gt;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span><span class="o">.</span><span class="n">root</span><span class="p">()</span>
+<span class="go">&lt;music21.pitch.Pitch D-3&gt;  </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToClef">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToClef</code><span class="sig-paren">(</span><em>mxClef</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToClef" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxClef</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;clef&gt;&lt;sign&gt;G&lt;/sign&gt;&lt;line&gt;2&lt;/line&gt;&lt;/clef&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToClef</span><span class="p">(</span><span class="n">mxClef</span><span class="p">)</span>
+<span class="go">&lt;music21.clef.TrebleClef&gt;        </span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxClef</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;clef&gt;&lt;sign&gt;TAB&lt;/sign&gt;&lt;/clef&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToClef</span><span class="p">(</span><span class="n">mxClef</span><span class="p">)</span>
+<span class="go">&lt;music21.clef.TabClef&gt;        </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToDuration">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToDuration</code><span class="sig-paren">(</span><em>mxNote</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToDuration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate a <cite>MusicXML</cite> &lt;note&gt; object&#8217;s
+&lt;duration&gt;, &lt;type&gt;, &lt;dot&gt;, tuplets, etc. 
+to a music21 <a class="reference internal" href="moduleDuration.html#music21.duration.Duration" title="music21.duration.Duration"><code class="xref py py-class docutils literal"><span class="pre">Duration</span></code></a> object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">divisions</span> <span class="o">=</span> <span class="mi">10080</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxNote</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;note&gt;&lt;pitch&gt;&lt;step&gt;D&lt;/step&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="s1">&#39;&lt;alter&gt;-1&lt;/alter&gt;&lt;octave&gt;6&lt;/octave&gt;&lt;/pitch&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>    <span class="s1">&#39;&lt;duration&gt;7560&lt;/duration&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="s1">&#39;&lt;type&gt;eighth&lt;/type&gt;&lt;dot/&gt;&lt;/note&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">duration</span><span class="o">.</span><span class="n">Duration</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToDuration</span><span class="p">(</span><span class="n">mxNote</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;music21.duration.Duration 0.75&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">0.75</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">type</span>
+<span class="go">&#39;eighth&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">dots</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToKeySignature">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToKeySignature</code><span class="sig-paren">(</span><em>mxKey</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToKeySignature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns either a KeySignature or a Key object based on whether mode is present.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxKey</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;key&gt;&lt;fifths&gt;-4&lt;/fifths&gt;&lt;/key&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToKeySignature</span><span class="p">(</span><span class="n">mxKey</span><span class="p">)</span>
+<span class="go">&lt;music21.key.KeySignature of 4 flats&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxKey</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;key&gt;&lt;fifths&gt;-4&lt;/fifths&gt;&lt;mode&gt;minor&lt;/mode&gt;&lt;/key&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToKeySignature</span><span class="p">(</span><span class="n">mxKey</span><span class="p">)</span>
+<span class="go">&lt;music21.key.Key of f minor&gt;</span>
+</pre></div>
+</div>
+<p>Invalid modes get ignored and returned as KeySignatures</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxKey</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;key&gt;&lt;fifths&gt;-4&lt;/fifths&gt;&lt;mode&gt;crazy&lt;/mode&gt;&lt;/key&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToKeySignature</span><span class="p">(</span><span class="n">mxKey</span><span class="p">)</span>
+<span class="go">&lt;music21.key.KeySignature of 4 flats&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToLyric">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToLyric</code><span class="sig-paren">(</span><em>mxLyric</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToLyric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate a MusicXML &lt;lyric&gt; tag to a 
+music21 <a class="reference internal" href="moduleNote.html#music21.note.Lyric" title="music21.note.Lyric"><code class="xref py py-class docutils literal"><span class="pre">Lyric</span></code></a> object or return None if no Lyric object
+should be created (empty lyric tags, for instance)</p>
+<p>If inputM21 is a <a class="reference internal" href="moduleNote.html#music21.note.Lyric" title="music21.note.Lyric"><code class="xref py py-class docutils literal"><span class="pre">Lyric</span></code></a> object, then the values of the 
+mxLyric are transfered there and nothing returned.</p>
+<p>Otherwise, a new <cite>Lyric</cite> object is created and returned.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxLyric</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;lyric number=&quot;4&quot;&gt;&lt;syllabic&gt;single&lt;/syllabic&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>                        <span class="s1">&#39;&lt;text&gt;word&lt;/text&gt;&lt;/lyric&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lyricObj</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Lyric</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToLyric</span><span class="p">(</span><span class="n">mxLyric</span><span class="p">,</span> <span class="n">lyricObj</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lyricObj</span>
+<span class="go">&lt;music21.note.Lyric number=4 syllabic=single text=&quot;word&quot;&gt;</span>
+</pre></div>
+</div>
+<p>Non-numeric MusicXML lyric &#8220;number&#8221;s are converted to identifiers:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxLyric</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;part2verse1&#39;</span><span class="p">)</span>    
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l2</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToLyric</span><span class="p">(</span><span class="n">mxLyric</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l2</span>
+<span class="go">&lt;music21.note.Lyric number=0 identifier=&quot;part2verse1&quot; syllabic=single text=&quot;word&quot;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToNote">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToNote</code><span class="sig-paren">(</span><em>mxNote</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>handles everything for creating a Note or Rest or Chord</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToOffset">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToOffset</code><span class="sig-paren">(</span><em>mxObj</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds an &lt;offset&gt; inside the mxObj and returns it as 
+a music21 offset (in quarterLengths)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">divisions</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">off</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">r&#39;&lt;direction&gt;&lt;offset&gt;100&lt;/offset&gt;&lt;/direction&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToOffset</span><span class="p">(</span><span class="n">off</span><span class="p">)</span>
+<span class="go">2.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToPitch">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToPitch</code><span class="sig-paren">(</span><em>mxNote</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToPitch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a MusicXML Note object, set this Pitch object to its values.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;note&gt;&lt;pitch&gt;&lt;step&gt;E&lt;/step&gt;&lt;alter&gt;-1&lt;/alter&gt;&lt;octave&gt;3&lt;/octave&gt;&lt;/pitch&gt;&lt;/note&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToPitch</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">E-3</span>
+</pre></div>
+</div>
+<p>Conflicting alter and accidental &#8211; accidental wins:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;note&gt;&lt;pitch&gt;&lt;step&gt;E&lt;/step&gt;&lt;alter&gt;-1&lt;/alter&gt;&lt;octave&gt;3&lt;/octave&gt;&lt;/pitch&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>             <span class="s1">&#39;&lt;accidental&gt;sharp&lt;/accidental&gt;&lt;/note&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToPitch</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">E#3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToRepeat">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToRepeat</code><span class="sig-paren">(</span><em>mxBarline</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToRepeat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an mxBarline (not an mxRepeat object) with repeatObj as a parameter, 
+file the necessary parameters and return a bar.Repeat() object</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxBarline</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;barline&gt;&lt;bar-style&gt;light-heavy&lt;/bar-style&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>      <span class="s1">&#39;&lt;repeat direction=&quot;backward&quot;/&gt;&lt;/barline&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToRepeat</span><span class="p">(</span><span class="n">mxBarline</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>
+<span class="go">&lt;music21.bar.Repeat direction=end&gt;</span>
+</pre></div>
+</div>
+<p>Test that the music21 style for a backwards repeat is called &#8220;final&#8221;
+(because it resembles a final barline) but that the musicxml style
+is called light-heavy.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">style</span>
+<span class="go">&#39;final&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">direction</span>
+<span class="go">&#39;end&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToRest">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToRest</code><span class="sig-paren">(</span><em>mxRest</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToRest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a &lt;note&gt; tag that has been shown to have a &lt;rest&gt; tag in it
+and return a rest.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxr</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;note&gt;&lt;rest/&gt;&lt;duration&gt;5040&lt;/duration&gt;&lt;type&gt;eighth&lt;/type&gt;&lt;/note&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToRest</span><span class="p">(</span><span class="n">mxr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>
+<span class="go">&lt;music21.note.Rest rest&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">0.5</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxr</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;note&gt;&lt;rest&gt;&lt;display-step&gt;G&lt;/display-step&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>             <span class="s1">&#39;&lt;display-octave&gt;4&lt;/display-octave&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>             <span class="s1">&#39;&lt;/rest&gt;&lt;duration&gt;5040&lt;/duration&gt;&lt;type&gt;eighth&lt;/type&gt;&lt;/note&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToRest</span><span class="p">(</span><span class="n">mxr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>
+<span class="go">&lt;music21.note.Rest rest&gt;</span>
+</pre></div>
+</div>
+<p>A rest normally lies at B4 in treble clef, but here we have put it at
+G4, so we&#8217;ll shift it down two steps.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">stepShift</span>
+<span class="go">-2</span>
+</pre></div>
+</div>
+<p>Clef context matters, here we will set it for notes that don&#8217;t specify a staff:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">lastClefs</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">clef</span><span class="o">.</span><span class="n">BassClef</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToRest</span><span class="p">(</span><span class="n">mxr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now this is a high rest:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">stepShift</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+<p>Test full measure rest.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxr</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;note&gt;&lt;rest measure=&quot;yes&quot;/&gt;&lt;duration&gt;40320&lt;/duration&gt;&lt;/note&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToRest</span><span class="p">(</span><span class="n">mxr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">fullMeasureRest</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Note that we do NOT set <cite>r</cite>&#8216;s <cite>.fullMeasure</cite> to True or always, but keep it as
+&#8220;auto&#8221; so that changes in time signature, etc. will affect output.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToSimpleNote">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToSimpleNote</code><span class="sig-paren">(</span><em>mxNote</em>, <em>freeSpanners=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToSimpleNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate a MusicXML &lt;note&gt; (without &lt;chord/&gt;) 
+to a <a class="reference internal" href="moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a>.</p>
+<p>The <cite>spannerBundle</cite> parameter can be a list or a Stream 
+for storing and processing Spanner objects.</p>
+<p>If inputM21 is not <cite>None</cite> then that object is used
+for translating. Otherwise a new Note is created.</p>
+<p>if freeSpanners is False then pending spanners will not be freed</p>
+<p>Returns a <cite>note.Note</cite> object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">divisions</span> <span class="o">=</span> <span class="mi">10080</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxNote</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;note&gt;&lt;pitch&gt;&lt;step&gt;D&lt;/step&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="s1">&#39;&lt;alter&gt;-1&lt;/alter&gt;&lt;octave&gt;6&lt;/octave&gt;&lt;/pitch&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>    <span class="s1">&#39;&lt;duration&gt;7560&lt;/duration&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="s1">&#39;&lt;type&gt;eighth&lt;/type&gt;&lt;dot/&gt;&lt;/note&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToSimpleNote</span><span class="p">(</span><span class="n">mxNote</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">&lt;music21.note.Note D-&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">octave</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">duration</span>
+<span class="go">&lt;music21.duration.Duration 0.75&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">beams</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;beam&gt;begin&lt;/beam&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxNote</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">beams</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToSimpleNote</span><span class="p">(</span><span class="n">mxNote</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">beams</span>
+<span class="go">&lt;music21.beam.Beams &lt;music21.beam.Beam 1/start&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stem</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">&#39;&lt;stem&gt;up&lt;/stem&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxNote</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stem</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToSimpleNote</span><span class="p">(</span><span class="n">mxNote</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">stemDirection</span>
+<span class="go">&#39;up&#39;</span>
+</pre></div>
+</div>
+<p># TODO: beams over rests?</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToTempoIndication">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToTempoIndication</code><span class="sig-paren">(</span><em>mxMetronome</em>, <em>mxWords=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToTempoIndication" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an mxMetronome, convert to either a TempoIndication subclass, 
+either a tempo.MetronomeMark or tempo.MetricModulation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">r&#39;&lt;metronome&gt;&lt;per-minute&gt;125&lt;/per-minute&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>        <span class="s1">&#39;&lt;beat-unit&gt;half&lt;/beat-unit&gt;&lt;/metronome&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToTempoIndication</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="go">&lt;music21.tempo.MetronomeMark Half=125.0&gt;</span>
+</pre></div>
+</div>
+<p>Metric modulation:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="s1">r&#39;&lt;metronome&gt;&lt;beat-unit&gt;long&lt;/beat-unit&gt;&lt;beat-unit&gt;32nd&lt;/beat-unit&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>        <span class="s1">&#39;&lt;beat-unit-dot/&gt;&lt;/metronome&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToTempoIndication</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="go">&lt;music21.tempo.MetricModulation </span>
+<span class="go"> &lt;music21.tempo.MetronomeMark Imperfect Longa=None&gt;=&lt;music21.tempo.MetronomeMark </span>
+<span class="go">           Dotted 32nd=None&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToTextExpression">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToTextExpression</code><span class="sig-paren">(</span><em>mxWords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToTextExpression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an mxDirection, create a textExpression</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToTie">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToTie</code><span class="sig-paren">(</span><em>mxNote</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToTie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate a MusicXML &lt;note&gt; with &lt;tie&gt; subelements
+<a class="reference internal" href="moduleTie.html#music21.tie.Tie" title="music21.tie.Tie"><code class="xref py py-class docutils literal"><span class="pre">Tie</span></code></a> object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToTimeSignature">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToTimeSignature</code><span class="sig-paren">(</span><em>mxTime</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToTimeSignature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a TimeSignature or SenzaMisuraTimeSignature (for senza-misura) 
+from a &lt;time&gt; block.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxTime</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;time&gt;&lt;beats&gt;3&lt;/beats&gt;&lt;beat-type&gt;8&lt;/beat-type&gt;&lt;/time&gt;&#39;</span><span class="p">)</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToTimeSignature</span><span class="p">(</span><span class="n">mxTime</span><span class="p">)</span>
+<span class="go">&lt;music21.meter.TimeSignature 3/8&gt;      </span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxTime</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;time symbol=&quot;common&quot;&gt;&lt;beats&gt;4&lt;/beats&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>                                             <span class="s1">&#39;&lt;beat-type&gt;4&lt;/beat-type&gt;&lt;/time&gt;&#39;</span><span class="p">)</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToTimeSignature</span><span class="p">(</span><span class="n">mxTime</span><span class="p">)</span><span class="o">.</span><span class="n">symbol</span>
+<span class="go">&#39;common&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxTime</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;time&gt;&lt;beats&gt;3&lt;/beats&gt;&lt;beat-type&gt;8&lt;/beat-type&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>                             <span class="s1">&#39;&lt;beats&gt;4&lt;/beats&gt;&lt;beat-type&gt;4&lt;/beat-type&gt;&lt;/time&gt;&#39;</span><span class="p">)</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToTimeSignature</span><span class="p">(</span><span class="n">mxTime</span><span class="p">)</span>
+<span class="go">&lt;music21.meter.TimeSignature 3/8+4/4&gt;    </span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxSenza</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;time&gt;&lt;senza-misura&gt;0&lt;/senza-misura&gt;&lt;/time&gt;&#39;</span><span class="p">)</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToTimeSignature</span><span class="p">(</span><span class="n">mxSenza</span><span class="p">)</span>
+<span class="go">&lt;music21.meter.SenzaMisuraTimeSignature 0 &gt;</span>
+</pre></div>
+</div>
+<p>Small Time Signatures</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxTime</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;time&gt;&lt;beats&gt;3&lt;/beats&gt;&lt;beat-type&gt;32&lt;/beat-type&gt;&lt;/time&gt;&#39;</span><span class="p">)</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToTimeSignature</span><span class="p">(</span><span class="n">mxTime</span><span class="p">)</span>
+<span class="go">&lt;music21.meter.TimeSignature 3/32&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxTime</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;time&gt;&lt;beats&gt;3&lt;/beats&gt;&lt;beat-type&gt;64&lt;/beat-type&gt;&lt;/time&gt;&#39;</span><span class="p">)</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToTimeSignature</span><span class="p">(</span><span class="n">mxTime</span><span class="p">)</span>
+<span class="go">&lt;music21.meter.TimeSignature 3/64&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxTime</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;time&gt;&lt;beats&gt;3&lt;/beats&gt;&lt;beat-type&gt;128&lt;/beat-type&gt;&lt;/time&gt;&#39;</span><span class="p">)</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlToTimeSignature</span><span class="p">(</span><span class="n">mxTime</span><span class="p">)</span>
+<span class="go">&lt;music21.meter.TimeSignature 3/128&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToTremolo">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToTremolo</code><span class="sig-paren">(</span><em>mxTremolo</em>, <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToTremolo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlToTuplet">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlToTuplet</code><span class="sig-paren">(</span><em>mxNote</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlToTuplet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an mxNote, based on mxTimeModification 
+and mxTuplet objects, return a Tuplet object
+(or alter the input object and then return it)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxNote</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;note&gt;&lt;type&gt;16th&lt;/type&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>   <span class="s1">&#39;&lt;time-modification&gt;&lt;actual-notes&gt;5&lt;/actual-notes&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>   <span class="s1">&#39;&lt;normal-notes&gt;4&lt;/normal-notes&gt;&lt;/time-modification&gt;&lt;/note&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlToTuplet</span><span class="p">(</span><span class="n">mxNote</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">&lt;music21.duration.Tuplet 5/4/16th&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MeasureParser.xmlTransposeToInterval">
+<code class="descclassname">MeasureParser.</code><code class="descname">xmlTransposeToInterval</code><span class="sig-paren">(</span><em>mxTranspose</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MeasureParser.xmlTransposeToInterval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a MusicXML Transpose object to a music21 Interval object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;transpose&gt;&lt;diatonic&gt;-1&lt;/diatonic&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>                  <span class="s1">&#39;&lt;chromatic&gt;-2&lt;/chromatic&gt;&lt;/transpose&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlTransposeToInterval</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="go">&lt;music21.interval.Interval M-2&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;transpose&gt;&lt;diatonic&gt;-5&lt;/diatonic&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>                  <span class="s1">&#39;&lt;chromatic&gt;-9&lt;/chromatic&gt;&lt;/transpose&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlTransposeToInterval</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="go">&lt;music21.interval.Interval M-6&gt;</span>
+</pre></div>
+</div>
+<p>It should be like this &#8211; where the diatonic includes the complete octave information:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;transpose&gt;&lt;diatonic&gt;-8&lt;/diatonic&gt;&lt;chromatic&gt;-2&lt;/chromatic&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>        <span class="s1">&#39;&lt;octave-change&gt;-1&lt;/octave-change&gt;&lt;/transpose&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlTransposeToInterval</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="go">&lt;music21.interval.Interval M-9&gt;</span>
+</pre></div>
+</div>
+<p>but it is sometimes encoded this way (Finale; MuseScore) where octave-change
+refers to both diatonic and chromatic, so we will deal...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;transpose&gt;&lt;diatonic&gt;-1&lt;/diatonic&gt;&lt;chromatic&gt;-2&lt;/chromatic&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>        <span class="s1">&#39;&lt;octave-change&gt;-1&lt;/octave-change&gt;&lt;/transpose&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span><span class="o">.</span><span class="n">xmlTransposeToInterval</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="go">&lt;music21.interval.Interval M-9&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase" title="music21.musicxml.xmlToM21.XMLParserBase"><code class="xref py py-class docutils literal"><span class="pre">XMLParserBase</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.setPosition" title="music21.musicxml.xmlToM21.XMLParserBase.setPosition"><code class="xref py py-meth docutils literal"><span class="pre">setPosition()</span></code></a></li>
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlPageLayoutToPageLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlPageLayoutToPageLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlPageLayoutToPageLayout()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToPageLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToPageLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlPrintToPageLayout()</span></code></a></li>
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToSystemLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToSystemLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlPrintToSystemLayout()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlStaffLayoutToStaffLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlStaffLayoutToStaffLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlStaffLayoutToStaffLayout()</span></code></a></li>
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlSystemLayoutToSystemLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlSystemLayoutToSystemLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlSystemLayoutToSystemLayout()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="musicxmlimporter">
+<h2>MusicXMLImporter<a class="headerlink" href="#musicxmlimporter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.musicxml.xmlToM21.MusicXMLImporter">
+<em class="property">class </em><code class="descclassname">music21.musicxml.xmlToM21.</code><code class="descname">MusicXMLImporter</code><a class="headerlink" href="#music21.musicxml.xmlToM21.MusicXMLImporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object for importing .xml, .mxl, .musicxml, MusicXML files into music21.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.musicxml.xmlToM21.MusicXMLImporter" title="music21.musicxml.xmlToM21.MusicXMLImporter"><code class="xref py py-class docutils literal"><span class="pre">MusicXMLImporter</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase" title="music21.musicxml.xmlToM21.XMLParserBase"><code class="xref py py-class docutils literal"><span class="pre">XMLParserBase</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.musicxml.xmlToM21.MusicXMLImporter" title="music21.musicxml.xmlToM21.MusicXMLImporter"><code class="xref py py-class docutils literal"><span class="pre">MusicXMLImporter</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MusicXMLImporter.creatorToContributor">
+<code class="descclassname">MusicXMLImporter.</code><code class="descname">creatorToContributor</code><span class="sig-paren">(</span><em>creator</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MusicXMLImporter.creatorToContributor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an &lt;creator&gt; tag, fill the necessary parameters of a Contributor.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">creator</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s1">&#39;&lt;creator type=&quot;composer&quot;&gt;Beethoven, Ludwig van&lt;/creator&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MI</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MusicXMLImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">MI</span><span class="o">.</span><span class="n">creatorToContributor</span><span class="p">(</span><span class="n">creator</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;music21.metadata.primitives.Contributor composer:Beethoven, Ludwig van&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">role</span>
+<span class="go">&#39;composer&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;Beethoven, Ludwig van&#39;</span>
+</pre></div>
+</div>
+<p>Pass in a Contributor object and set it...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">Contributor</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MI</span><span class="o">.</span><span class="n">creatorToContributor</span><span class="p">(</span><span class="n">creator</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span><span class="o">.</span><span class="n">role</span>
+<span class="go">&#39;composer&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MusicXMLImporter.identificationToMetadata">
+<code class="descclassname">MusicXMLImporter.</code><code class="descname">identificationToMetadata</code><span class="sig-paren">(</span><em>identification</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MusicXMLImporter.identificationToMetadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converters an &lt;identification&gt; tag, containing &lt;creator&gt; tags and
+&lt;miscellaneous&gt; tag.</p>
+<p>Not supported: rights, source, relation</p>
+<p>Encoding only parses &#8220;supports&#8221; and that only has 
+new-system (definesExplicitSystemBreaks) and
+new-page (definesExplicitPageBreaks)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MusicXMLImporter.parsePartList">
+<code class="descclassname">MusicXMLImporter.</code><code class="descname">parsePartList</code><span class="sig-paren">(</span><em>mxScore</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MusicXMLImporter.parsePartList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the &lt;part-list&gt; tag and adds
+&lt;score-part&gt; entries into self.partIdDict[partId]
+and adds them to any open &lt;part-group&gt; entries,
+stored as PartGroup objects in self.partGroupList</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MusicXMLImporter.parseXMLText">
+<code class="descclassname">MusicXMLImporter.</code><code class="descname">parseXMLText</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MusicXMLImporter.parseXMLText" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MusicXMLImporter.partGroups">
+<code class="descclassname">MusicXMLImporter.</code><code class="descname">partGroups</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MusicXMLImporter.partGroups" title="Permalink to this definition">¶</a></dt>
+<dd><p>set StaffGroup objects from the &lt;part-group&gt; tags.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MusicXMLImporter.readFile">
+<code class="descclassname">MusicXMLImporter.</code><code class="descname">readFile</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MusicXMLImporter.readFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MusicXMLImporter.scoreFromFile">
+<code class="descclassname">MusicXMLImporter.</code><code class="descname">scoreFromFile</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MusicXMLImporter.scoreFromFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>main program: opens a file given by filename and returns a complete
+music21 Score from it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MusicXMLImporter.xmlCreditToTextBox">
+<code class="descclassname">MusicXMLImporter.</code><code class="descname">xmlCreditToTextBox</code><span class="sig-paren">(</span><em>mxCredit</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MusicXMLImporter.xmlCreditToTextBox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a MusicXML credit to a music21 TextBox</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">credit</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span>
+<span class="gp">... </span>              <span class="s1">&#39;&lt;credit page=&quot;2&quot;&gt;&lt;credit-words&gt;Testing&lt;/credit-words&gt;&lt;/credit&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MI</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MusicXMLImporter</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tb</span> <span class="o">=</span> <span class="n">MI</span><span class="o">.</span><span class="n">xmlCreditToTextBox</span><span class="p">(</span><span class="n">credit</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tb</span><span class="o">.</span><span class="n">page</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tb</span><span class="o">.</span><span class="n">content</span>
+<span class="go">&#39;Testing&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MusicXMLImporter.xmlDefaultsToScoreLayout">
+<code class="descclassname">MusicXMLImporter.</code><code class="descname">xmlDefaultsToScoreLayout</code><span class="sig-paren">(</span><em>mxDefaults</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MusicXMLImporter.xmlDefaultsToScoreLayout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a &lt;defaults&gt; tag to a <a class="reference internal" href="moduleLayout.html#music21.layout.ScoreLayout" title="music21.layout.ScoreLayout"><code class="xref py py-class docutils literal"><span class="pre">ScoreLayout</span></code></a> 
+object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MusicXMLImporter.xmlMetadata">
+<code class="descclassname">MusicXMLImporter.</code><code class="descname">xmlMetadata</code><span class="sig-paren">(</span><em>el=None</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MusicXMLImporter.xmlMetadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts part of the root element into a metadata object</p>
+<p>Supported: work-title, work-number, opus, movement-number,
+movement-title, identification</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MusicXMLImporter.xmlPartToPart">
+<code class="descclassname">MusicXMLImporter.</code><code class="descname">xmlPartToPart</code><span class="sig-paren">(</span><em>mxPart</em>, <em>partIdDict</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MusicXMLImporter.xmlPartToPart" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.MusicXMLImporter.xmlRootToScore">
+<code class="descclassname">MusicXMLImporter.</code><code class="descname">xmlRootToScore</code><span class="sig-paren">(</span><em>mxScore</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.MusicXMLImporter.xmlRootToScore" title="Permalink to this definition">¶</a></dt>
+<dd><p>parse an xml file into a Score() object.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase" title="music21.musicxml.xmlToM21.XMLParserBase"><code class="xref py py-class docutils literal"><span class="pre">XMLParserBase</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.setPosition" title="music21.musicxml.xmlToM21.XMLParserBase.setPosition"><code class="xref py py-meth docutils literal"><span class="pre">setPosition()</span></code></a></li>
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlPageLayoutToPageLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlPageLayoutToPageLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlPageLayoutToPageLayout()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToPageLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToPageLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlPrintToPageLayout()</span></code></a></li>
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToSystemLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToSystemLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlPrintToSystemLayout()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlStaffLayoutToStaffLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlStaffLayoutToStaffLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlStaffLayoutToStaffLayout()</span></code></a></li>
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlSystemLayoutToSystemLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlSystemLayoutToSystemLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlSystemLayoutToSystemLayout()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="partgroup">
+<h2>PartGroup<a class="headerlink" href="#partgroup" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.musicxml.xmlToM21.PartGroup">
+<em class="property">class </em><code class="descclassname">music21.musicxml.xmlToM21.</code><code class="descname">PartGroup</code><span class="sig-paren">(</span><em>mxPartGroup</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Small helper class for keeping track of part-groups from XML since they
+are converted to StaffGroup spanners much later.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.musicxml.xmlToM21.PartGroup" title="music21.musicxml.xmlToM21.PartGroup"><code class="xref py py-class docutils literal"><span class="pre">PartGroup</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.PartGroup.add">
+<code class="descclassname">PartGroup.</code><code class="descname">add</code><span class="sig-paren">(</span><em>partGroupId</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartGroup.add" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="partparser">
+<h2>PartParser<a class="headerlink" href="#partparser" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.musicxml.xmlToM21.PartParser">
+<em class="property">class </em><code class="descclassname">music21.musicxml.xmlToM21.</code><code class="descname">PartParser</code><span class="sig-paren">(</span><em>mxPart=None</em>, <em>mxPartInfo=None</em>, <em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>parser to work with a single &lt;part&gt; tag.</p>
+<p>called out for multiprocessing potential in future</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.musicxml.xmlToM21.PartParser" title="music21.musicxml.xmlToM21.PartParser"><code class="xref py py-class docutils literal"><span class="pre">PartParser</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase" title="music21.musicxml.xmlToM21.XMLParserBase"><code class="xref py py-class docutils literal"><span class="pre">XMLParserBase</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.musicxml.xmlToM21.PartParser" title="music21.musicxml.xmlToM21.PartParser"><code class="xref py py-class docutils literal"><span class="pre">PartParser</span></code></a> read-only properties</p>
+<dl class="attribute">
+<dt id="music21.musicxml.xmlToM21.PartParser.parent">
+<code class="descclassname">PartParser.</code><code class="descname">parent</code><a class="headerlink" href="#music21.musicxml.xmlToM21.PartParser.parent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.musicxml.xmlToM21.PartParser" title="music21.musicxml.xmlToM21.PartParser"><code class="xref py py-class docutils literal"><span class="pre">PartParser</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.PartParser.adjustTimeAttributesFromMeasure">
+<code class="descclassname">PartParser.</code><code class="descname">adjustTimeAttributesFromMeasure</code><span class="sig-paren">(</span><em>m</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartParser.adjustTimeAttributesFromMeasure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.PartParser.applyMultiMeasureRest">
+<code class="descclassname">PartParser.</code><code class="descname">applyMultiMeasureRest</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartParser.applyMultiMeasureRest" title="Permalink to this definition">¶</a></dt>
+<dd><p>If there is an active MultiMeasureRestSpanner, add the Rest, r, to it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">PartParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmrSpanner</span> <span class="o">=</span> <span class="n">spanner</span><span class="o">.</span><span class="n">MultiMeasureRest</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mmrSpanner</span>
+<span class="go">&lt;music21.spanner.MultiMeasureRest 0 measures&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">activeMultiMeasureRestSpanner</span> <span class="o">=</span> <span class="n">mmrSpanner</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">multiMeasureRestsToCapture</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r1</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;whole&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;r1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">applyMultiMeasureRest</span><span class="p">(</span><span class="n">r1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">multiMeasureRestsToCapture</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">activeMultiMeasureRestSpanner</span>
+<span class="go">&lt;music21.spanner.MultiMeasureRest 1 measure&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">activeMultiMeasureRestSpanner</span> <span class="ow">is</span> <span class="n">mmrSpanner</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>  <span class="c1"># Nothing...</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;whole&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;r2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">applyMultiMeasureRest</span><span class="p">(</span><span class="n">r2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">multiMeasureRestsToCapture</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">activeMultiMeasureRestSpanner</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p># spanner added to stream</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.spanner.MultiMeasureRest 2 measures&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r3</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">Rest</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;whole&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;r3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">applyMultiMeasureRest</span><span class="p">(</span><span class="n">r3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+<span class="go">{0.0} &lt;music21.spanner.MultiMeasureRest 2 measures&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.PartParser.getDefaultInstrument">
+<code class="descclassname">PartParser.</code><code class="descname">getDefaultInstrument</code><span class="sig-paren">(</span><em>mxPartInfo=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartParser.getDefaultInstrument" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scorePart</span> <span class="o">=</span> <span class="p">(</span><span class="s1">r&#39;&lt;score-part id=&quot;P4&quot;&gt;&lt;part-name&gt;Bass&lt;/part-name&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>    <span class="s1">&#39;&lt;part-abbreviation&gt;B.&lt;/part-abbreviation&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="s1">&#39;&lt;score-instrument id=&quot;P4-I4&quot;&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="s1">&#39;    &lt;instrument-name&gt;Instrument 4&lt;/instrument-name&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="s1">&#39;&lt;/score-instrument&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="s1">&#39;&lt;midi-instrument id=&quot;P4-I4&quot;&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="s1">&#39;   &lt;midi-channel&gt;4&lt;/midi-channel&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="s1">&#39;&lt;midi-program&gt;1&lt;/midi-program&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="s1">&#39;&lt;/midi-instrument&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="s1">&#39;&lt;/score-part&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">PartParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxPartInfo</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="n">scorePart</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">PP</span><span class="o">.</span><span class="n">getDefaultInstrument</span><span class="p">(</span><span class="n">mxPartInfo</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="o">.</span><span class="n">partName</span>
+<span class="go">&#39;Bass&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="o">.</span><span class="n">partAbbreviation</span>
+<span class="go">&#39;B.&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.PartParser.measureParsingError">
+<code class="descclassname">PartParser.</code><code class="descname">measureParsingError</code><span class="sig-paren">(</span><em>mxMeasure</em>, <em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartParser.measureParsingError" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.PartParser.parse">
+<code class="descclassname">PartParser.</code><code class="descname">parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartParser.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.PartParser.parseMeasures">
+<code class="descclassname">PartParser.</code><code class="descname">parseMeasures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartParser.parseMeasures" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.PartParser.parsePartInfo">
+<code class="descclassname">PartParser.</code><code class="descname">parsePartInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartParser.parsePartInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.PartParser.separateOutPartStaves">
+<code class="descclassname">PartParser.</code><code class="descname">separateOutPartStaves</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartParser.separateOutPartStaves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a Part with multiple staves and make them a set of PartStaff objects.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.PartParser.setLastMeasureInfo">
+<code class="descclassname">PartParser.</code><code class="descname">setLastMeasureInfo</code><span class="sig-paren">(</span><em>m</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartParser.setLastMeasureInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets self.lastMeasureNumber and self.lastMeasureSuffix from the measure,
+which is used in fixing Finale unnumbered measure issues.</p>
+<p>Also sets self.lastTimeSignature from the timeSignature found in
+the measure, if any.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">PartParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Here are the defaults:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">lastMeasureNumber</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">lastNumberSuffix</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">lastTimeSignature</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>After setLastMeasureInfo:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">numberSuffix</span> <span class="o">=</span> <span class="s1">&#39;b&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts38</span> <span class="o">=</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/8&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">timeSignature</span> <span class="o">=</span> <span class="n">ts38</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">setLastMeasureInfo</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">lastMeasureNumber</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">lastNumberSuffix</span>
+<span class="go">&#39;b&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">lastTimeSignature</span>
+<span class="go">&lt;music21.meter.TimeSignature 3/8&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP</span><span class="o">.</span><span class="n">lastTimeSignature</span> <span class="ow">is</span> <span class="n">ts38</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Note that if there was no timeSignature defined in m,
+and no lastTimeSignature exists, 
+the PartParser gets a default of 4/4, because
+after the first measure there&#8217;s going to be routines
+that need some sort of time signature:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PP2</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">PartParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP2</span><span class="o">.</span><span class="n">setLastMeasureInfo</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP2</span><span class="o">.</span><span class="n">lastTimeSignature</span>
+<span class="go">&lt;music21.meter.TimeSignature 4/4&gt;</span>
+</pre></div>
+</div>
+<p>For obscure reasons relating to how Finale gives suffixes
+to unnumbered measures, if a measure has the same number
+as lastMeasureNumber, the lastNumberSuffix is not updated:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PP3</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">PartParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP3</span><span class="o">.</span><span class="n">lastMeasureNumber</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP3</span><span class="o">.</span><span class="n">lastNumberSuffix</span> <span class="o">=</span> <span class="s1">&#39;X1&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m10</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Measure</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m10</span><span class="o">.</span><span class="n">numberSuffix</span> <span class="o">=</span> <span class="s1">&#39;X2&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP3</span><span class="o">.</span><span class="n">setLastMeasureInfo</span><span class="p">(</span><span class="n">m10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PP3</span><span class="o">.</span><span class="n">lastNumberSuffix</span>
+<span class="go">&#39;X1&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.PartParser.updateTransposition">
+<code class="descclassname">PartParser.</code><code class="descname">updateTransposition</code><span class="sig-paren">(</span><em>newTransposition</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartParser.updateTransposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>As you might expect, a measureParser that reveals a change
+in transposition is going to have an effect on the
+Part&#8217;s instrument list.  This (totally undocumented) method
+deals with it.</p>
+<p>If measureParser.transposition is None, does nothing.
+If measureParser.transposition is not None, but</p>
+<p>NOTE: Need to test a change of instrument w/o a change of
+transposition such as: Bb clarinet to Bb Soprano Sax to Eb clarinet?</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.PartParser.xmlMeasureToMeasure">
+<code class="descclassname">PartParser.</code><code class="descname">xmlMeasureToMeasure</code><span class="sig-paren">(</span><em>mxMeasure</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.PartParser.xmlMeasureToMeasure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a measure element to a Measure, using
+<a class="reference internal" href="#music21.musicxml.xmlToM21.MeasureParser" title="music21.musicxml.xmlToM21.MeasureParser"><code class="xref py py-class docutils literal"><span class="pre">MeasureParser</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">EL</span>
+</pre></div>
+</div>
+<p>Testing full measure rest parsing:</p>
+<p>Here is a measure with a rest that lasts 4 beats but we will put it in a 3/4 context.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreMeasure</span> <span class="o">=</span> <span class="s1">&#39;&lt;measure&gt;&lt;note&gt;&lt;rest/&gt;&lt;duration&gt;40320&lt;/duration&gt;&lt;/note&gt;&lt;/measure&gt;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mxMeasure</span> <span class="o">=</span> <span class="n">EL</span><span class="p">(</span><span class="n">scoreMeasure</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">PartParser</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">lastDivisions</span>
+<span class="go">10080</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">40320</span> <span class="o">/</span> <span class="mi">10080</span>
+<span class="go">4.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pp</span><span class="o">.</span><span class="n">lastTimeSignature</span> <span class="o">=</span> <span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">xmlMeasureToMeasure</span><span class="p">(</span><span class="n">mxMeasure</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Test that the rest lasts three, not four beats:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">notesAndRests</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&lt;music21.note.Rest rest&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">notesAndRests</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">duration</span><span class="o">.</span><span class="n">quarterLength</span>
+<span class="go">3.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase" title="music21.musicxml.xmlToM21.XMLParserBase"><code class="xref py py-class docutils literal"><span class="pre">XMLParserBase</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.setPosition" title="music21.musicxml.xmlToM21.XMLParserBase.setPosition"><code class="xref py py-meth docutils literal"><span class="pre">setPosition()</span></code></a></li>
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlPageLayoutToPageLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlPageLayoutToPageLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlPageLayoutToPageLayout()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToPageLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToPageLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlPrintToPageLayout()</span></code></a></li>
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToSystemLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToSystemLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlPrintToSystemLayout()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlStaffLayoutToStaffLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlStaffLayoutToStaffLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlStaffLayoutToStaffLayout()</span></code></a></li>
+<li><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlSystemLayoutToSystemLayout" title="music21.musicxml.xmlToM21.XMLParserBase.xmlSystemLayoutToSystemLayout"><code class="xref py py-meth docutils literal"><span class="pre">xmlSystemLayoutToSystemLayout()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="xmlparserbase">
+<h2>XMLParserBase<a class="headerlink" href="#xmlparserbase" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.musicxml.xmlToM21.XMLParserBase">
+<em class="property">class </em><code class="descclassname">music21.musicxml.xmlToM21.</code><code class="descname">XMLParserBase</code><a class="headerlink" href="#music21.musicxml.xmlToM21.XMLParserBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>contains functions that could be called
+at multiple levels of parsing (Score, Part, Measure).</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.musicxml.xmlToM21.XMLParserBase" title="music21.musicxml.xmlToM21.XMLParserBase"><code class="xref py py-class docutils literal"><span class="pre">XMLParserBase</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.XMLParserBase.setPosition">
+<code class="descclassname">XMLParserBase.</code><code class="descname">setPosition</code><span class="sig-paren">(</span><em>mxObject</em>, <em>m21Object</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.XMLParserBase.setPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>get positioning information for an object from
+default-x, default-y</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.XMLParserBase.xmlPageLayoutToPageLayout">
+<code class="descclassname">XMLParserBase.</code><code class="descname">xmlPageLayoutToPageLayout</code><span class="sig-paren">(</span><em>mxPageLayout</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlPageLayoutToPageLayout" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a PageLayout object from an mxPageLayout</p>
+<p>Called out from mxPrintToPageLayout because it
+is also used in the &lt;defaults&gt; tag</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToPageLayout">
+<code class="descclassname">XMLParserBase.</code><code class="descname">xmlPrintToPageLayout</code><span class="sig-paren">(</span><em>mxPrint</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToPageLayout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an mxPrint object, set object data for 
+the print section of a layout.PageLayout object</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">El</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxPrint</span> <span class="o">=</span> <span class="n">El</span><span class="p">(</span><span class="s1">&#39;&lt;print new-page=&quot;yes&quot; page-number=&quot;5&quot;&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>   <span class="s1">&#39;    &lt;page-layout&gt;&lt;page-height&gt;4000&lt;/page-height&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>   <span class="s1">&#39;        &lt;page-margins&gt;&lt;left-margin&gt;20&lt;/left-margin&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>   <span class="s1">&#39;                 &lt;right-margin&gt;30.25&lt;/right-margin&gt;&lt;/page-margins&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>   <span class="s1">&#39;&lt;/page-layout&gt;&lt;/print&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pl</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlPrintToPageLayout</span><span class="p">(</span><span class="n">mxPrint</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pl</span><span class="o">.</span><span class="n">isNew</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pl</span><span class="o">.</span><span class="n">rightMargin</span>
+<span class="go">30.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pl</span><span class="o">.</span><span class="n">leftMargin</span>
+<span class="go">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pl</span><span class="o">.</span><span class="n">pageNumber</span>
+<span class="go">5    </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pl</span><span class="o">.</span><span class="n">pageHeight</span>
+<span class="go">4000</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToSystemLayout">
+<code class="descclassname">XMLParserBase.</code><code class="descname">xmlPrintToSystemLayout</code><span class="sig-paren">(</span><em>mxPrint</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlPrintToSystemLayout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an mxPrint object, set object data</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">fromstring</span> <span class="k">as</span> <span class="n">El</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span> <span class="o">=</span> <span class="n">musicxml</span><span class="o">.</span><span class="n">xmlToM21</span><span class="o">.</span><span class="n">MeasureParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mxPrint</span> <span class="o">=</span> <span class="n">El</span><span class="p">(</span><span class="s1">&#39;&lt;print new-system=&quot;yes&quot;&gt;&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>   <span class="s1">&#39;    &lt;system-layout&gt;&lt;system-distance&gt;55&lt;/system-distance&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>   <span class="s1">&#39;        &lt;system-margins&gt;&lt;left-margin&gt;20&lt;/left-margin&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>   <span class="s1">&#39;                 &lt;right-margin&gt;30.25&lt;/right-margin&gt;&lt;/system-margins&gt;&#39;</span> <span class="o">+</span> 
+<span class="gp">... </span>   <span class="s1">&#39;&lt;/system-layout&gt;&lt;/print&gt;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span> <span class="o">=</span> <span class="n">MP</span><span class="o">.</span><span class="n">xmlPrintToSystemLayout</span><span class="p">(</span><span class="n">mxPrint</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">isNew</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">rightMargin</span>
+<span class="go">30.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">leftMargin</span>
+<span class="go">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">distance</span>
+<span class="go">55</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.XMLParserBase.xmlStaffLayoutToStaffLayout">
+<code class="descclassname">XMLParserBase.</code><code class="descname">xmlStaffLayoutToStaffLayout</code><span class="sig-paren">(</span><em>mxStaffLayout</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlStaffLayoutToStaffLayout" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a StaffLayout object from an &lt;staff-layout&gt; tag</p>
+<p>In music21, the &lt;staff-layout&gt; and &lt;staff-details&gt; are
+intertwined in a StaffLayout object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.musicxml.xmlToM21.XMLParserBase.xmlSystemLayoutToSystemLayout">
+<code class="descclassname">XMLParserBase.</code><code class="descname">xmlSystemLayoutToSystemLayout</code><span class="sig-paren">(</span><em>mxSystemLayout</em>, <em>inputM21=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.musicxml.xmlToM21.XMLParserBase.xmlSystemLayoutToSystemLayout" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a SystemLayout object from an &lt;system-layout&gt; element</p>
+<p>Called out from xmlPrintToSystemLayout because it
+is also used in the &lt;defaults&gt; tag</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleNote.html" title="music21.note"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleMusicxmlXmlSoundParser.html" title="music21.musicxml.xmlSoundParser"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

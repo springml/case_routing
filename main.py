@@ -56,7 +56,7 @@ def get_cat_data():
 @app.route('/getCaseDetailsVSAssignee', methods=['POST'])
 def get_assignee_data():
 	data = {}
-	dimensions, measures  = run_query("SELECT Assignee, count(*) FROM CaseDetails Group By Assignee;")
+	dimensions, measures  = run_query("SELECT Assignee, count(*) FROM CaseDetails WHERE Assignee != \"\" Group By Assignee;")
 	data["assignees"] = [dimensions, measures]
 	return jsonify(data)
 

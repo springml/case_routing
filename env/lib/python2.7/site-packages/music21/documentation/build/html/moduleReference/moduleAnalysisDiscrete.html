@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.analysis.discrete &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.analysis.floatingKey" href="moduleAnalysisFloatingKey.html" />
+    <link rel="prev" title="music21.analysis.correlate" href="moduleAnalysisCorrelate.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleAnalysisFloatingKey.html" title="music21.analysis.floatingKey"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleAnalysisCorrelate.html" title="music21.analysis.correlate"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleAnalysisCorrelate.html"
+                        title="previous chapter">music21.analysis.correlate</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleAnalysisFloatingKey.html"
+                        title="next chapter">music21.analysis.floatingKey</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.analysis.discrete</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#discreteanalysis">DiscreteAnalysis</a></li>
+<li><a class="reference internal" href="#ambitus">Ambitus</a></li>
+<li><a class="reference internal" href="#melodicintervaldiversity">MelodicIntervalDiversity</a></li>
+<li><a class="reference internal" href="#keyweightkeyanalysis">KeyWeightKeyAnalysis</a></li>
+<li><a class="reference internal" href="#simpleweights">SimpleWeights</a></li>
+<li><a class="reference internal" href="#aardenessen">AardenEssen</a></li>
+<li><a class="reference internal" href="#bellmanbudge">BellmanBudge</a></li>
+<li><a class="reference internal" href="#krumhanslschmuckler">KrumhanslSchmuckler</a></li>
+<li><a class="reference internal" href="#krumhanslkessler">KrumhanslKessler</a></li>
+<li><a class="reference internal" href="#temperleykostkapayne">TemperleyKostkaPayne</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleAnalysisDiscrete.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-analysis-discrete">
+<span id="moduleanalysisdiscrete"></span><h1>music21.analysis.discrete<a class="headerlink" href="#music21-analysis-discrete" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.analysis.discrete"></span><p>Modular analysis procedures for use alone or 
+applied with <a class="reference internal" href="moduleAnalysisWindowed.html#music21.analysis.windowed.WindowedAnalysis" title="music21.analysis.windowed.WindowedAnalysis"><code class="xref py py-class docutils literal"><span class="pre">music21.analysis.windowed.WindowedAnalysis</span></code></a> class.</p>
+<p>All procedures should inherit from 
+<a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">music21.analysis.discrete.DiscreteAnalysis</span></code></a>, 
+or provide a similar interface.</p>
+<p>The <a class="reference internal" href="#music21.analysis.discrete.KrumhanslSchmuckler" title="music21.analysis.discrete.KrumhanslSchmuckler"><code class="xref py py-class docutils literal"><span class="pre">music21.analysis.discrete.KrumhanslSchmuckler</span></code></a> 
+(for algorithmic key detection) and 
+<a class="reference internal" href="#music21.analysis.discrete.Ambitus" title="music21.analysis.discrete.Ambitus"><code class="xref py py-class docutils literal"><span class="pre">music21.analysis.discrete.Ambitus</span></code></a> (for pitch range analysis) provide examples.</p>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="music21.analysis.discrete.analyzeStream">
+<code class="descclassname">music21.analysis.discrete.</code><code class="descname">analyzeStream</code><span class="sig-paren">(</span><em>streamObj</em>, <em>*args</em>, <em>**keywords</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.analyzeStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Public interface to discrete analysis methods to be applied 
+to a Stream given as an argument. Methods return process-specific data format. 
+See subclasses for details.</p>
+<p>Analysis methods can be specified as arguments or by use of a <cite>method</cite> 
+keyword argument. If <cite>method</cite> is the class name, that class is returned. 
+Otherwise, the <code class="xref py py-attr docutils literal"><span class="pre">indentifiers</span></code> 
+list of all <a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a> subclass objects 
+will be searched for matches. The first match that is found is returned.</p>
+<p><a class="reference internal" href="#music21.analysis.discrete.Ambitus" title="music21.analysis.discrete.Ambitus"><code class="xref py py-class docutils literal"><span class="pre">Ambitus</span></code></a>
+<a class="reference internal" href="#music21.analysis.discrete.KrumhanslSchmuckler" title="music21.analysis.discrete.KrumhanslSchmuckler"><code class="xref py py-class docutils literal"><span class="pre">KrumhanslSchmuckler</span></code></a></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">analyzeStream</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s1">&#39;Krumhansl&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.key.Key of f# minor&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">analyzeStream</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s1">&#39;ambitus&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.interval.Interval m21&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">analyzeStream</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.key.Key of f# minor&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">analyzeStream</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s1">&#39;range&#39;</span><span class="p">)</span>
+<span class="go">&lt;music21.interval.Interval m21&gt;</span>
+</pre></div>
+</div>
+<p>Note that the same results can be obtained by calling &#8220;analyze&#8221; directly on the stream object:
+&gt;&gt;&gt; s.analyze(&#8216;key&#8217;)
+&lt;music21.key.Key of f# minor&gt;
+&gt;&gt;&gt; s.analyze(&#8216;range&#8217;)
+&lt;music21.interval.Interval m21&gt;</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="music21.analysis.discrete.analysisClassFromMethodName">
+<code class="descclassname">music21.analysis.discrete.</code><code class="descname">analysisClassFromMethodName</code><span class="sig-paren">(</span><em>method</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.analysisClassFromMethodName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an analysis class given a method name, or None if none can be found</p>
+<p>Searches first the class name, then the .identifiers array for each class,
+then a subset of any identifier.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">acfmn</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">analysisClassFromMethodName</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acfmn</span><span class="p">(</span><span class="s1">&#39;aarden&#39;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;music21.analysis.discrete.AardenEssen&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">acfmn</span><span class="p">(</span><span class="s1">&#39;range&#39;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;music21.analysis.discrete.Ambitus&#39;&gt;</span>
+</pre></div>
+</div>
+<p>This one is fundamentally important...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">acfmn</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;music21.analysis.discrete.AardenEssen&#39;&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">acfmn</span><span class="p">(</span><span class="s1">&#39;asdfadsfasdf&#39;</span><span class="p">)))</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="discreteanalysis">
+<h2>DiscreteAnalysis<a class="headerlink" href="#discreteanalysis" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.analysis.discrete.DiscreteAnalysis">
+<em class="property">class </em><code class="descclassname">music21.analysis.discrete.</code><code class="descname">DiscreteAnalysis</code><span class="sig-paren">(</span><em>referenceStream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.DiscreteAnalysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parent class for analytical methods.</p>
+<p>Each analytical method returns a discrete numerical (or other) results as well as a color. 
+Colors can be used in mapping output.</p>
+<p>Analytical methods may make use of a <cite>referenceStream</cite> to 
+configure the processor on initialization.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound">
+<code class="descclassname">DiscreteAnalysis.</code><code class="descname">clearSolutionsFound</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear all stored solutions</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.DiscreteAnalysis.getColorsUsed">
+<code class="descclassname">DiscreteAnalysis.</code><code class="descname">getColorsUsed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.DiscreteAnalysis.getColorsUsed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Based on solutions found so far with with this processor, 
+return the colors that have been used.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.DiscreteAnalysis.getSolution">
+<code class="descclassname">DiscreteAnalysis.</code><code class="descname">getSolution</code><span class="sig-paren">(</span><em>subStream</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.DiscreteAnalysis.getSolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a given Stream, apply the analysis and return the best solution.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed">
+<code class="descclassname">DiscreteAnalysis.</code><code class="descname">getSolutionsUsed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Based on solutions found so far with with this processor, 
+return the solutions that have been used.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.DiscreteAnalysis.process">
+<code class="descclassname">DiscreteAnalysis.</code><code class="descname">process</code><span class="sig-paren">(</span><em>subStream</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.DiscreteAnalysis.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a Stream, apply the analysis to all components of this Stream. 
+Expected return is a solution (method specific) and a color value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.DiscreteAnalysis.solutionLegend">
+<code class="descclassname">DiscreteAnalysis.</code><code class="descname">solutionLegend</code><span class="sig-paren">(</span><em>compress=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.DiscreteAnalysis.solutionLegend" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of pairs showing all discrete results and the assigned color.
+Data should be organized to be passed to 
+<a class="reference internal" href="moduleGraph.html#music21.graph.GraphColorGridLegend" title="music21.graph.GraphColorGridLegend"><code class="xref py py-class docutils literal"><span class="pre">music21.graph.GraphColorGridLegend</span></code></a>.</p>
+<p>If <cite>compress</cite> is True, the legend will only show values for solutions
+that have been encountered.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.DiscreteAnalysis.solutionToColor">
+<code class="descclassname">DiscreteAnalysis.</code><code class="descname">solutionToColor</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.DiscreteAnalysis.solutionToColor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a analysis specific result, return the appropriate color. 
+Must be able to handle None in the case that there is no result.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.DiscreteAnalysis.solutionUnitString">
+<code class="descclassname">DiscreteAnalysis.</code><code class="descname">solutionUnitString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.DiscreteAnalysis.solutionUnitString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string describing the solution values. Used in Legend formation.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ambitus">
+<h2>Ambitus<a class="headerlink" href="#ambitus" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.analysis.discrete.Ambitus">
+<em class="property">class </em><code class="descclassname">music21.analysis.discrete.</code><code class="descname">Ambitus</code><span class="sig-paren">(</span><em>referenceStream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.Ambitus" title="Permalink to this definition">¶</a></dt>
+<dd><p>An basic analysis method for measuring register.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.Ambitus" title="music21.analysis.discrete.Ambitus"><code class="xref py py-class docutils literal"><span class="pre">Ambitus</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.Ambitus" title="music21.analysis.discrete.Ambitus"><code class="xref py py-class docutils literal"><span class="pre">Ambitus</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.analysis.discrete.Ambitus.getPitchRanges">
+<code class="descclassname">Ambitus.</code><code class="descname">getPitchRanges</code><span class="sig-paren">(</span><em>subStream</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.Ambitus.getPitchRanges" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a given subStream, return the smallest .ps difference 
+between any two pitches and the largest difference 
+between any two pitches. This is used to get the 
+smallest and largest ambitus possible in a given work.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">Ambitus</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span> <span class="s1">&#39;b4&#39;</span><span class="p">,</span> <span class="s1">&#39;c8&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">thisPitch</span><span class="o">.</span><span class="n">ps</span><span class="p">)</span> <span class="k">for</span> <span class="n">thisPitch</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">getPitchSpan</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
+<span class="go">[45, 108]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">getPitchRanges</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">(26, 63)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">getPitchRanges</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">(0, 34)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">getPitchRanges</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">(0, 0)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.Ambitus.getPitchSpan">
+<code class="descclassname">Ambitus.</code><code class="descname">getPitchSpan</code><span class="sig-paren">(</span><em>subStream</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.Ambitus.getPitchSpan" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a given subStream, return the pitch with the minimum and 
+maximum pitch space value found.</p>
+<p>This public method may be used by other classes.</p>
+<p>ignores ChordSymbol objects...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">Ambitus</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitchMin</span><span class="p">,</span> <span class="n">pitchMax</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">getPitchSpan</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Measure&#39;</span><span class="p">)[</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pitchMin</span><span class="o">.</span><span class="n">ps</span><span class="p">,</span> <span class="n">pitchMax</span><span class="o">.</span><span class="n">ps</span>
+<span class="go">(66.0, 71.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">getPitchSpan</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getElementsByClass</span><span class="p">(</span><span class="s1">&#39;Measure&#39;</span><span class="p">)[</span><span class="mi">6</span><span class="p">])</span>
+<span class="go">(&lt;music21.pitch.Pitch A4&gt;, &lt;music21.pitch.Pitch C#5&gt;)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span> <span class="s1">&#39;b4&#39;</span><span class="p">,</span> <span class="s1">&#39;c8&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">getPitchSpan</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">(&lt;music21.pitch.Pitch A2&gt;, &lt;music21.pitch.Pitch C8&gt;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.Ambitus.getSolution">
+<code class="descclassname">Ambitus.</code><code class="descname">getSolution</code><span class="sig-paren">(</span><em>sStream</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.Ambitus.getSolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Procedure to only return an Inteval object.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">Ambitus</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">getSolution</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">&lt;music21.interval.Interval m21&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.Ambitus.process">
+<code class="descclassname">Ambitus.</code><code class="descname">process</code><span class="sig-paren">(</span><em>sStream</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.Ambitus.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a Stream, return a solution (as an interval) and a color string.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">Ambitus</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span> <span class="s1">&#39;b4&#39;</span><span class="p">,</span> <span class="s1">&#39;c8&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">(&lt;music21.interval.Interval m38&gt;, &#39;#665288&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.Ambitus.solutionLegend">
+<code class="descclassname">Ambitus.</code><code class="descname">solutionLegend</code><span class="sig-paren">(</span><em>compress=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.Ambitus.solutionLegend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return legend data.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">Ambitus</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">#provide ref stream</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">solutionLegend</span><span class="p">())</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">solutionLegend</span><span class="p">()]</span>
+<span class="go">[2, 2]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">solutionLegend</span><span class="p">()]]</span>
+<span class="go">[2, 2]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">Ambitus</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">solutionLegend</span><span class="p">(</span><span class="n">compress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># empty if nothing processed</span>
+<span class="go">[[&#39;&#39;, []], [&#39;&#39;, []]]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">solutionLegend</span><span class="p">(</span><span class="n">compress</span><span class="o">=</span><span class="kc">True</span><span class="p">)]]</span>
+<span class="go">[2, 2]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">solutionLegend</span><span class="p">(</span><span class="n">compress</span><span class="o">=</span><span class="kc">True</span><span class="p">)]]</span>
+<span class="go">[2, 2]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.Ambitus.solutionToColor">
+<code class="descclassname">Ambitus.</code><code class="descname">solutionToColor</code><span class="sig-paren">(</span><em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.Ambitus.solutionToColor" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">Ambitus</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span> <span class="s1">&#39;b4&#39;</span><span class="p">,</span> <span class="s1">&#39;c8&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">min</span><span class="p">,</span> <span class="nb">max</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">getPitchSpan</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">solutionToColor</span><span class="p">(</span><span class="nb">max</span><span class="o">.</span><span class="n">ps</span> <span class="o">-</span> <span class="nb">min</span><span class="o">.</span><span class="n">ps</span><span class="p">)</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.Ambitus.solutionUnitString">
+<code class="descclassname">Ambitus.</code><code class="descname">solutionUnitString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.Ambitus.solutionUnitString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string describing the solution values. Used in Legend formation.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound" title="music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound"><code class="xref py py-meth docutils literal"><span class="pre">clearSolutionsFound()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getColorsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getColorsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getColorsUsed()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getSolutionsUsed()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="melodicintervaldiversity">
+<h2>MelodicIntervalDiversity<a class="headerlink" href="#melodicintervaldiversity" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.analysis.discrete.MelodicIntervalDiversity">
+<em class="property">class </em><code class="descclassname">music21.analysis.discrete.</code><code class="descname">MelodicIntervalDiversity</code><span class="sig-paren">(</span><em>referenceStream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.MelodicIntervalDiversity" title="Permalink to this definition">¶</a></dt>
+<dd><p>An analysis method to determine the diversity of intervals used in a Stream.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.MelodicIntervalDiversity" title="music21.analysis.discrete.MelodicIntervalDiversity"><code class="xref py py-class docutils literal"><span class="pre">MelodicIntervalDiversity</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.MelodicIntervalDiversity" title="music21.analysis.discrete.MelodicIntervalDiversity"><code class="xref py py-class docutils literal"><span class="pre">MelodicIntervalDiversity</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.analysis.discrete.MelodicIntervalDiversity.countMelodicIntervals">
+<code class="descclassname">MelodicIntervalDiversity.</code><code class="descname">countMelodicIntervals</code><span class="sig-paren">(</span><em>sStream</em>, <em>found=None</em>, <em>ignoreDirection=True</em>, <em>ignoreUnison=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.MelodicIntervalDiversity.countMelodicIntervals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find all unique melodic intervals in this Stream.</p>
+<p>If <cite>found</cite> is provided as a dictionary, this dictionary will be used to store Intervals, 
+and counts of Intervals already found will be incremented.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.MelodicIntervalDiversity.getSolution">
+<code class="descclassname">MelodicIntervalDiversity.</code><code class="descname">getSolution</code><span class="sig-paren">(</span><em>sStream</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.MelodicIntervalDiversity.getSolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solution is the number of unique intervals.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.MelodicIntervalDiversity.process">
+<code class="descclassname">MelodicIntervalDiversity.</code><code class="descname">process</code><span class="sig-paren">(</span><em>sStream</em>, <em>ignoreDirection=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.MelodicIntervalDiversity.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find how many unique intervals are used in this Stream</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.MelodicIntervalDiversity.solutionToColor">
+<code class="descclassname">MelodicIntervalDiversity.</code><code class="descname">solutionToColor</code><span class="sig-paren">(</span><em>solution</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.MelodicIntervalDiversity.solutionToColor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound" title="music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound"><code class="xref py py-meth docutils literal"><span class="pre">clearSolutionsFound()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getColorsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getColorsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getColorsUsed()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getSolutionsUsed()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.solutionLegend" title="music21.analysis.discrete.DiscreteAnalysis.solutionLegend"><code class="xref py py-meth docutils literal"><span class="pre">solutionLegend()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.solutionUnitString" title="music21.analysis.discrete.DiscreteAnalysis.solutionUnitString"><code class="xref py py-meth docutils literal"><span class="pre">solutionUnitString()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="keyweightkeyanalysis">
+<h2>KeyWeightKeyAnalysis<a class="headerlink" href="#keyweightkeyanalysis" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.analysis.discrete.KeyWeightKeyAnalysis">
+<em class="property">class </em><code class="descclassname">music21.analysis.discrete.</code><code class="descname">KeyWeightKeyAnalysis</code><span class="sig-paren">(</span><em>referenceStream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for all key-weight key analysis subclasses.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution">
+<code class="descclassname">KeyWeightKeyAnalysis.</code><code class="descname">getSolution</code><span class="sig-paren">(</span><em>sStream</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a music21 Key object defining the results of the analysis. 
+Do not call process before calling this method, as this method calls process.</p>
+<p>Note that all alternative solutions are returned as Key objects and stored 
+on a list found at Key.alternateInterpretations.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">KrumhanslSchmuckler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">getSolution</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1"># this seems correct</span>
+<span class="go">&lt;music21.key.Key of f# minor&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv57.8&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">KrumhanslSchmuckler</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">getSolution</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> 
+<span class="go">&lt;music21.key.Key of B- major&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.KeyWeightKeyAnalysis.process">
+<code class="descclassname">KeyWeightKeyAnalysis.</code><code class="descname">process</code><span class="sig-paren">(</span><em>sStream</em>, <em>storeAlternatives=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in a Stream or sub-Stream and performs analysis 
+on all contents of the Stream. The 
+<a class="reference internal" href="moduleAnalysisWindowed.html#music21.analysis.windowed.WindowedAnalysis" title="music21.analysis.windowed.WindowedAnalysis"><code class="xref py py-class docutils literal"><span class="pre">WindowedAnalysis</span></code></a> 
+windowing system can be used to get numerous results 
+by calling this method.</p>
+<p>Returns two values, a solution data list and a color string.</p>
+<p>The data list contains a key (as a string), a mode 
+(as a string), and a correlation value (degree of certainty)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend">
+<code class="descclassname">KeyWeightKeyAnalysis.</code><code class="descname">solutionLegend</code><span class="sig-paren">(</span><em>compress=False</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of lists of possible results for the creation of a legend.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">discrete</span><span class="o">.</span><span class="n">KrumhanslSchmuckler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">post</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">solutionLegend</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor">
+<code class="descclassname">KeyWeightKeyAnalysis.</code><code class="descname">solutionToColor</code><span class="sig-paren">(</span><em>solution</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString">
+<code class="descclassname">KeyWeightKeyAnalysis.</code><code class="descname">solutionUnitString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string describing the solution values. Used in Legend formation.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound" title="music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound"><code class="xref py py-meth docutils literal"><span class="pre">clearSolutionsFound()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getColorsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getColorsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getColorsUsed()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getSolutionsUsed()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="simpleweights">
+<h2>SimpleWeights<a class="headerlink" href="#simpleweights" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.analysis.discrete.SimpleWeights">
+<em class="property">class </em><code class="descclassname">music21.analysis.discrete.</code><code class="descname">SimpleWeights</code><span class="sig-paren">(</span><em>referenceStream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.SimpleWeights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of Craig Sapp&#8217;s simple weights for Krumhansl-Schmuckler 
+key determination algorithm.</p>
+<p>Values from from <a class="reference external" href="http://extra.humdrum.org/man/keycor/">http://extra.humdrum.org/man/keycor/</a>, which describes 
+these weightings as &#8220;Performs most consistently with large regions of music, 
+becomes noisier with smaller regions of music.&#8221;</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.SimpleWeights" title="music21.analysis.discrete.SimpleWeights"><code class="xref py py-class docutils literal"><span class="pre">SimpleWeights</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.SimpleWeights" title="music21.analysis.discrete.SimpleWeights"><code class="xref py py-class docutils literal"><span class="pre">SimpleWeights</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution" title="music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution"><code class="xref py py-meth docutils literal"><span class="pre">getSolution()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.process" title="music21.analysis.discrete.KeyWeightKeyAnalysis.process"><code class="xref py py-meth docutils literal"><span class="pre">process()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend"><code class="xref py py-meth docutils literal"><span class="pre">solutionLegend()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor"><code class="xref py py-meth docutils literal"><span class="pre">solutionToColor()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString"><code class="xref py py-meth docutils literal"><span class="pre">solutionUnitString()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound" title="music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound"><code class="xref py py-meth docutils literal"><span class="pre">clearSolutionsFound()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getColorsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getColorsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getColorsUsed()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getSolutionsUsed()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="aardenessen">
+<h2>AardenEssen<a class="headerlink" href="#aardenessen" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.analysis.discrete.AardenEssen">
+<em class="property">class </em><code class="descclassname">music21.analysis.discrete.</code><code class="descname">AardenEssen</code><span class="sig-paren">(</span><em>referenceStream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.AardenEssen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of Aarden-Essen weightings for Krumhansl-Schmuckler key determination algorithm.</p>
+<p>Values from from <a class="reference external" href="http://extra.humdrum.org/man/keycor/">http://extra.humdrum.org/man/keycor/</a>, which 
+describes these weightings as &#8220;Weak tendency to identify the subdominant key as the tonic.&#8221;</p>
+<p>(N.B. &#8211; we are not sure exactly where the minor weightings come from, and recommend
+only using these weights for major).</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.AardenEssen" title="music21.analysis.discrete.AardenEssen"><code class="xref py py-class docutils literal"><span class="pre">AardenEssen</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.AardenEssen" title="music21.analysis.discrete.AardenEssen"><code class="xref py py-class docutils literal"><span class="pre">AardenEssen</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution" title="music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution"><code class="xref py py-meth docutils literal"><span class="pre">getSolution()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.process" title="music21.analysis.discrete.KeyWeightKeyAnalysis.process"><code class="xref py py-meth docutils literal"><span class="pre">process()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend"><code class="xref py py-meth docutils literal"><span class="pre">solutionLegend()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor"><code class="xref py py-meth docutils literal"><span class="pre">solutionToColor()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString"><code class="xref py py-meth docutils literal"><span class="pre">solutionUnitString()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound" title="music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound"><code class="xref py py-meth docutils literal"><span class="pre">clearSolutionsFound()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getColorsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getColorsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getColorsUsed()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getSolutionsUsed()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="bellmanbudge">
+<h2>BellmanBudge<a class="headerlink" href="#bellmanbudge" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.analysis.discrete.BellmanBudge">
+<em class="property">class </em><code class="descclassname">music21.analysis.discrete.</code><code class="descname">BellmanBudge</code><span class="sig-paren">(</span><em>referenceStream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.BellmanBudge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of Bellman-Budge weightings for Krumhansl-Schmuckler key determination algorithm.</p>
+<p>Values from from <a class="reference external" href="http://extra.humdrum.org/man/keycor/">http://extra.humdrum.org/man/keycor/</a>, which describes these 
+weightings as &#8220;No particular tendencies for confusions with neighboring keys.&#8221;</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.BellmanBudge" title="music21.analysis.discrete.BellmanBudge"><code class="xref py py-class docutils literal"><span class="pre">BellmanBudge</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.BellmanBudge" title="music21.analysis.discrete.BellmanBudge"><code class="xref py py-class docutils literal"><span class="pre">BellmanBudge</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution" title="music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution"><code class="xref py py-meth docutils literal"><span class="pre">getSolution()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.process" title="music21.analysis.discrete.KeyWeightKeyAnalysis.process"><code class="xref py py-meth docutils literal"><span class="pre">process()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend"><code class="xref py py-meth docutils literal"><span class="pre">solutionLegend()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor"><code class="xref py py-meth docutils literal"><span class="pre">solutionToColor()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString"><code class="xref py py-meth docutils literal"><span class="pre">solutionUnitString()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound" title="music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound"><code class="xref py py-meth docutils literal"><span class="pre">clearSolutionsFound()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getColorsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getColorsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getColorsUsed()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getSolutionsUsed()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="krumhanslschmuckler">
+<h2>KrumhanslSchmuckler<a class="headerlink" href="#krumhanslschmuckler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.analysis.discrete.KrumhanslSchmuckler">
+<em class="property">class </em><code class="descclassname">music21.analysis.discrete.</code><code class="descname">KrumhanslSchmuckler</code><span class="sig-paren">(</span><em>referenceStream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.KrumhanslSchmuckler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of Krumhansl-Schmuckler weightings for 
+Krumhansl-Schmuckler key determination algorithm.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.KrumhanslSchmuckler" title="music21.analysis.discrete.KrumhanslSchmuckler"><code class="xref py py-class docutils literal"><span class="pre">KrumhanslSchmuckler</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.KrumhanslSchmuckler" title="music21.analysis.discrete.KrumhanslSchmuckler"><code class="xref py py-class docutils literal"><span class="pre">KrumhanslSchmuckler</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution" title="music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution"><code class="xref py py-meth docutils literal"><span class="pre">getSolution()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.process" title="music21.analysis.discrete.KeyWeightKeyAnalysis.process"><code class="xref py py-meth docutils literal"><span class="pre">process()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend"><code class="xref py py-meth docutils literal"><span class="pre">solutionLegend()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor"><code class="xref py py-meth docutils literal"><span class="pre">solutionToColor()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString"><code class="xref py py-meth docutils literal"><span class="pre">solutionUnitString()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound" title="music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound"><code class="xref py py-meth docutils literal"><span class="pre">clearSolutionsFound()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getColorsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getColorsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getColorsUsed()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getSolutionsUsed()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="krumhanslkessler">
+<h2>KrumhanslKessler<a class="headerlink" href="#krumhanslkessler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.analysis.discrete.KrumhanslKessler">
+<em class="property">class </em><code class="descclassname">music21.analysis.discrete.</code><code class="descname">KrumhanslKessler</code><span class="sig-paren">(</span><em>referenceStream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.KrumhanslKessler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of Krumhansl-Kessler weightings for Krumhansl-Schmuckler 
+key determination algorithm.</p>
+<p>Values from from <a class="reference external" href="http://extra.humdrum.org/man/keycor/">http://extra.humdrum.org/man/keycor/</a>, which describes these 
+weightings as &#8220;Strong tendency to identify the dominant key as the tonic.&#8221;</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.KrumhanslKessler" title="music21.analysis.discrete.KrumhanslKessler"><code class="xref py py-class docutils literal"><span class="pre">KrumhanslKessler</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.KrumhanslKessler" title="music21.analysis.discrete.KrumhanslKessler"><code class="xref py py-class docutils literal"><span class="pre">KrumhanslKessler</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution" title="music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution"><code class="xref py py-meth docutils literal"><span class="pre">getSolution()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.process" title="music21.analysis.discrete.KeyWeightKeyAnalysis.process"><code class="xref py py-meth docutils literal"><span class="pre">process()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend"><code class="xref py py-meth docutils literal"><span class="pre">solutionLegend()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor"><code class="xref py py-meth docutils literal"><span class="pre">solutionToColor()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString"><code class="xref py py-meth docutils literal"><span class="pre">solutionUnitString()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound" title="music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound"><code class="xref py py-meth docutils literal"><span class="pre">clearSolutionsFound()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getColorsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getColorsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getColorsUsed()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getSolutionsUsed()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="temperleykostkapayne">
+<h2>TemperleyKostkaPayne<a class="headerlink" href="#temperleykostkapayne" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.analysis.discrete.TemperleyKostkaPayne">
+<em class="property">class </em><code class="descclassname">music21.analysis.discrete.</code><code class="descname">TemperleyKostkaPayne</code><span class="sig-paren">(</span><em>referenceStream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.analysis.discrete.TemperleyKostkaPayne" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of Temperley-Kostka-Payne weightings for Krumhansl-Schmuckler 
+key determination algorithm.</p>
+<p>Values from from <a class="reference external" href="http://extra.humdrum.org/man/keycor/">http://extra.humdrum.org/man/keycor/</a>, which describes 
+these weightings as &#8220;Strong tendency to identify the relative major as the tonic 
+in minor keys. Well-balanced for major keys.&#8221;</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.TemperleyKostkaPayne" title="music21.analysis.discrete.TemperleyKostkaPayne"><code class="xref py py-class docutils literal"><span class="pre">TemperleyKostkaPayne</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.analysis.discrete.TemperleyKostkaPayne" title="music21.analysis.discrete.TemperleyKostkaPayne"><code class="xref py py-class docutils literal"><span class="pre">TemperleyKostkaPayne</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis" title="music21.analysis.discrete.KeyWeightKeyAnalysis"><code class="xref py py-class docutils literal"><span class="pre">KeyWeightKeyAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution" title="music21.analysis.discrete.KeyWeightKeyAnalysis.getSolution"><code class="xref py py-meth docutils literal"><span class="pre">getSolution()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.process" title="music21.analysis.discrete.KeyWeightKeyAnalysis.process"><code class="xref py py-meth docutils literal"><span class="pre">process()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionLegend"><code class="xref py py-meth docutils literal"><span class="pre">solutionLegend()</span></code></a></li>
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionToColor"><code class="xref py py-meth docutils literal"><span class="pre">solutionToColor()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString" title="music21.analysis.discrete.KeyWeightKeyAnalysis.solutionUnitString"><code class="xref py py-meth docutils literal"><span class="pre">solutionUnitString()</span></code></a></li>
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis" title="music21.analysis.discrete.DiscreteAnalysis"><code class="xref py py-class docutils literal"><span class="pre">DiscreteAnalysis</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound" title="music21.analysis.discrete.DiscreteAnalysis.clearSolutionsFound"><code class="xref py py-meth docutils literal"><span class="pre">clearSolutionsFound()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getColorsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getColorsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getColorsUsed()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed" title="music21.analysis.discrete.DiscreteAnalysis.getSolutionsUsed"><code class="xref py py-meth docutils literal"><span class="pre">getSolutionsUsed()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleAnalysisFloatingKey.html" title="music21.analysis.floatingKey"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleAnalysisCorrelate.html" title="music21.analysis.correlate"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

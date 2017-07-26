@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.tree.core &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.tree.fromStream" href="moduleTreeFromStream.html" />
+    <link rel="prev" title="music21.tree.analysis" href="moduleTreeAnalysis.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleTreeFromStream.html" title="music21.tree.fromStream"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleTreeAnalysis.html" title="music21.tree.analysis"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleTreeAnalysis.html"
+                        title="previous chapter">music21.tree.analysis</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleTreeFromStream.html"
+                        title="next chapter">music21.tree.fromStream</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.tree.core</a><ul>
+<li><a class="reference internal" href="#avlnode">AVLNode</a></li>
+<li><a class="reference internal" href="#avltree">AVLTree</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleTreeCore.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-tree-core">
+<span id="moduletreecore"></span><h1>music21.tree.core<a class="headerlink" href="#music21-tree-core" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.tree.core"></span><p>These are the lowest level tools for working with self-balancing AVL trees.</p>
+<p>There&#8217;s an overhead to creating an AVL tree, but for a large score it is
+absolutely balanced by having O(log n) search times.</p>
+<div class="section" id="avlnode">
+<h2>AVLNode<a class="headerlink" href="#avlnode" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tree.core.AVLNode">
+<em class="property">class </em><code class="descclassname">music21.tree.core.</code><code class="descname">AVLNode</code><span class="sig-paren">(</span><em>position</em>, <em>payload=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>An AVL Tree Node, not specialized in any way, just contains positions.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">position</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">AVLNode</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node</span>
+<span class="go">&lt;AVLNode: Start:1.0 Height:0 L:None R:None&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">AVLNode</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">n2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node</span>
+<span class="go">&lt;AVLNode: Start:1.0 Height:1 L:None R:0&gt;</span>
+</pre></div>
+</div>
+<p>Nodes can rebalance themselves, but they work best in a Tree...</p>
+<p>Please consult the Wikipedia entry on AVL trees
+(<a class="reference external" href="https://en.wikipedia.org/wiki/AVL_tree">https://en.wikipedia.org/wiki/AVL_tree</a>) for a very detailed
+description of how this datastructure works.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tree.core.AVLNode" title="music21.tree.core.AVLNode"><code class="xref py py-class docutils literal"><span class="pre">AVLNode</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="moduleCommonObjects.html#music21.common.objects.SlottedObjectMixin" title="music21.common.objects.SlottedObjectMixin"><code class="xref py py-class docutils literal"><span class="pre">SlottedObjectMixin</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.tree.core.AVLNode" title="music21.tree.core.AVLNode"><code class="xref py py-class docutils literal"><span class="pre">AVLNode</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tree.core.AVLNode.debug">
+<code class="descclassname">AVLNode.</code><code class="descname">debug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLNode.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a debug of the Node:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">makeExampleScore</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">fromStream</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+<span class="gp">... </span>             <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rn</span> <span class="o">=</span> <span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span>        
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;OffsetNode: Start:3.0 Indices:(0:5:6:12) Length:{1}&gt;</span>
+<span class="go">    L: &lt;OffsetNode: Start:1.0 Indices:(0:2:3:5) Length:{1}&gt;</span>
+<span class="go">        L: &lt;OffsetNode: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">        R: &lt;OffsetNode: Start:2.0 Indices:(3:3:5:5) Length:{2}&gt;</span>
+<span class="go">    R: &lt;OffsetNode: Start:5.0 Indices:(6:8:9:12) Length:{1}&gt;</span>
+<span class="go">        L: &lt;OffsetNode: Start:4.0 Indices:(6:6:8:8) Length:{2}&gt;</span>
+<span class="go">        R: &lt;OffsetNode: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">            R: &lt;OffsetNode: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLNode.moveAttributes">
+<code class="descclassname">AVLNode.</code><code class="descname">moveAttributes</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLNode.moveAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>move attributes from this node to another in case &#8220;removal&#8221; actually
+means substituting one node for another in the tree.</p>
+<p>Subclass this in derived classes</p>
+<p>Do not copy anything about height, balance, left or right
+children, etc.  By default just moves position and payload.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLNode.rebalance">
+<code class="descclassname">AVLNode.</code><code class="descname">rebalance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLNode.rebalance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rebalances the subtree rooted on this node.</p>
+<p>Returns the new central node.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLNode.rotateLeftLeft">
+<code class="descclassname">AVLNode.</code><code class="descname">rotateLeftLeft</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLNode.rotateLeftLeft" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates a node left twice.</p>
+<p>Makes this node the rightChild of
+the former leftChild and makes the former leftChild&#8217;s rightChild
+be the leftChild of this node.</p>
+<p>Used during tree rebalancing.</p>
+<p>Returns the prior leftChild node as the new central node.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLNode.rotateLeftRight">
+<code class="descclassname">AVLNode.</code><code class="descname">rotateLeftRight</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLNode.rotateLeftRight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates a node left, then right.</p>
+<p>Makes this note the rightChild of the former rightChild of the former leftChild node</p>
+<p>Used during tree rebalancing.</p>
+<p>Returns the former rightChild of the former leftChild node as the new central node.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLNode.rotateRightLeft">
+<code class="descclassname">AVLNode.</code><code class="descname">rotateRightLeft</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLNode.rotateRightLeft" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates a node right, then left.</p>
+<p>Makes this note the leftChild of the former leftChild of the former rightChild node</p>
+<p>Used during tree rebalancing.</p>
+<p>Returns the former leftChild of the former rightChild node as the new central node.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLNode.rotateRightRight">
+<code class="descclassname">AVLNode.</code><code class="descname">rotateRightRight</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLNode.rotateRightRight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates a node right twice.</p>
+<p>Makes this node the leftChild of
+the former rightChild and makes the former rightChild&#8217;s leftChild
+be the rightChild of this node.</p>
+<p>Used during tree rebalancing.</p>
+<p>Returns the prior rightChild node as the new central node.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLNode.update">
+<code class="descclassname">AVLNode.</code><code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLNode.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the height and balance attributes of the nodes.</p>
+<p>Must be called whenever .leftChild or .rightChild are changed.</p>
+<p>Used for the next balancing operation &#8211; does not rebalance itself.</p>
+<p>Note that it only looks at its children&#8217;s height and balance attributes
+not their children&#8217;s. So if they are wrong, this will be too.</p>
+<p>Returns None</p>
+<p>We create a score with everything correct.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">makeExampleScore</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">fromStream</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+<span class="gp">... </span>            <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>
+<span class="go">&lt;OffsetNode: Start:3.0 Indices:(0:5:6:12) Length:{1}&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">(3, 1)</span>
+</pre></div>
+</div>
+<p>Now let&#8217;s screw up the height and balance</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">(100, -2)</span>
+</pre></div>
+</div>
+<p>But we can fix it with <cite>.update()</cite></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">(3, 1)</span>
+</pre></div>
+</div>
+<p>Note that if we were to screw up the balance/height of one of the
+child notes of <cite>n</cite> then this would not fix that node&#8217;s balance/height.
+This method assumes that children have the correct information and only
+updates the information for this node.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tree.core.AVLNode" title="music21.tree.core.AVLNode"><code class="xref py py-class docutils literal"><span class="pre">AVLNode</span></code></a> instance variables</p>
+<dl class="attribute">
+<dt id="music21.tree.core.AVLNode.balance">
+<code class="descclassname">AVLNode.</code><code class="descname">balance</code><a class="headerlink" href="#music21.tree.core.AVLNode.balance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the current state of the difference in heights of the
+two subtrees rooted on this node.</p>
+<p>This attribute is used to help balance the AVL tree.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">makeExampleScore</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">fromStream</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scoreTree</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;OffsetNode: Start:3.0 Indices:(0:5:6:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:1.0 Indices:(0:2:3:5) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:2.0 Indices:(3:3:5:5) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:5.0 Indices:(6:8:9:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:4.0 Indices:(6:6:8:8) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<p>This tree has one more depth on the right than on the left</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>The leftChild of the rootNote is perfectly balanced, while the rightChild is off by
+one (acceptable).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>The rightChild&#8217;s children are also (acceptably) unbalanced:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">balance</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>You should never see a balance other than 1, -1, or 0.  If you do then
+something has gone wrong.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.tree.core.AVLNode.height">
+<code class="descclassname">AVLNode.</code><code class="descname">height</code><a class="headerlink" href="#music21.tree.core.AVLNode.height" title="Permalink to this definition">¶</a></dt>
+<dd><p>The height of the subtree rooted on this node.</p>
+<p>This property is used to help balance the AVL tree.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">makeExampleScore</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">fromStream</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scoreTree</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;OffsetNode: Start:3.0 Indices:(0:5:6:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:1.0 Indices:(0:2:3:5) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:2.0 Indices:(3:3:5:5) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:5.0 Indices:(6:8:9:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:4.0 Indices:(6:6:8:8) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">height</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">height</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">height</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">height</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<p>Once you hit a height of zero, then the next child on either size should be None</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+<span class="go">None</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.tree.core.AVLNode.leftChild">
+<code class="descclassname">AVLNode.</code><code class="descname">leftChild</code><a class="headerlink" href="#music21.tree.core.AVLNode.leftChild" title="Permalink to this definition">¶</a></dt>
+<dd><p>The left child of this node.</p>
+<p>After setting the left child you need to do a node update. with node.update()</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">makeExampleScore</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">fromStream</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;OffsetNode: Start:3.0 Indices:(0:5:6:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:1.0 Indices:(0:2:3:5) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:2.0 Indices:(3:3:5:5) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:5.0 Indices:(6:8:9:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:4.0 Indices:(6:6:8:8) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;OffsetNode: Start:1.0 Indices:(0:2:3:5) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:2.0 Indices:(3:3:5:5) Length:{2}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.tree.core.AVLNode.payload">
+<code class="descclassname">AVLNode.</code><code class="descname">payload</code><a class="headerlink" href="#music21.tree.core.AVLNode.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>The content of the node at this point.  Usually a Music21Object.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.tree.core.AVLNode.position">
+<code class="descclassname">AVLNode.</code><code class="descname">position</code><a class="headerlink" href="#music21.tree.core.AVLNode.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The position of this node &#8211; this is often the same as the offset of
+the node in a containing score, but does not need to be. It could be the .sortTuple</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">makeExampleScore</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">fromStream</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;OffsetNode: Start:3.0 Indices:(0:5:6:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:1.0 Indices:(0:2:3:5) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:2.0 Indices:(3:3:5:5) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:5.0 Indices:(6:8:9:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:4.0 Indices:(6:6:8:8) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">position</span>
+<span class="go">3.0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">leftChild</span><span class="o">.</span><span class="n">position</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">position</span>
+<span class="go">5.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="music21.tree.core.AVLNode.rightChild">
+<code class="descclassname">AVLNode.</code><code class="descname">rightChild</code><a class="headerlink" href="#music21.tree.core.AVLNode.rightChild" title="Permalink to this definition">¶</a></dt>
+<dd><p>The right child of this node.</p>
+<p>After setting the right child you need to do a node update. with node.update()</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">makeExampleScore</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">fromStream</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">classList</span><span class="o">=</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span><span class="p">,</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;OffsetNode: Start:3.0 Indices:(0:5:6:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:1.0 Indices:(0:2:3:5) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:2.0 Indices:(3:3:5:5) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:5.0 Indices:(6:8:9:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:4.0 Indices:(6:6:8:8) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;OffsetNode: Start:5.0 Indices:(6:8:9:12) Length:{1}&gt;</span>
+<span class="go">L: &lt;OffsetNode: Start:4.0 Indices:(6:6:8:8) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;OffsetNode: Start:6.0 Indices:(9:9:11:12) Length:{2}&gt;</span>
+<span class="go">R: &lt;OffsetNode: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">scoreTree</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;OffsetNode: Start:7.0 Indices:(11:11:12:12) Length:{1}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="avltree">
+<h2>AVLTree<a class="headerlink" href="#avltree" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.tree.core.AVLTree">
+<em class="property">class </em><code class="descclassname">music21.tree.core.</code><code class="descname">AVLTree</code><a class="headerlink" href="#music21.tree.core.AVLTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data structure for working with tree.node.AVLNode objects.</p>
+<p>To be subclassed in order to do anything useful with music21 objects.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.tree.core.AVLTree" title="music21.tree.core.AVLTree"><code class="xref py py-class docutils literal"><span class="pre">AVLTree</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.tree.core.AVLTree.createNodeAtPosition">
+<code class="descclassname">AVLTree.</code><code class="descname">createNodeAtPosition</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLTree.createNodeAtPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates a new node at position and sets the rootNode
+appropriately</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">AVLTree</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">createNodeAtPosition</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">rootNode</span>
+<span class="go">&lt;AVLNode: Start:20 Height:0 L:None R:None&gt;        </span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">createNodeAtPosition</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">rootNode</span>
+<span class="go">&lt;AVLNode: Start:20 Height:1 L:0 R:None&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">createNodeAtPosition</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">rootNode</span>
+<span class="go">&lt;AVLNode: Start:10 Height:1 L:0 R:0&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">createNodeAtPosition</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">rootNode</span>
+<span class="go">&lt;AVLNode: Start:10 Height:2 L:0 R:1&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">leftChild</span>
+<span class="go">&lt;AVLNode: Start:5 Height:0 L:None R:None&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span>
+<span class="go">&lt;AVLNode: Start:20 Height:1 L:None R:0&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">rightChild</span><span class="o">.</span><span class="n">rightChild</span>
+<span class="go">&lt;AVLNode: Start:30 Height:0 L:None R:None&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLTree.debug">
+<code class="descclassname">AVLTree.</code><code class="descname">debug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLTree.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets string representation of the node tree.</p>
+<p>Useful only for debugging its internal node structure.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tsList</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tss</span> <span class="o">=</span> <span class="p">[</span><span class="n">tree</span><span class="o">.</span><span class="n">spans</span><span class="o">.</span><span class="n">Timespan</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">tsList</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tsTree</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">timespanTree</span><span class="o">.</span><span class="n">TimespanTree</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tsTree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tss</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">tsTree</span><span class="o">.</span><span class="n">debug</span><span class="p">())</span>
+<span class="go">&lt;OffsetNode: Start:3.0 Indices:(0:4:5:10) Length:{1}&gt;</span>
+<span class="go">    L: &lt;OffsetNode: Start:1.0 Indices:(0:2:3:4) Length:{1}&gt;</span>
+<span class="go">        L: &lt;OffsetNode: Start:0.0 Indices:(0:0:2:2) Length:{2}&gt;</span>
+<span class="go">        R: &lt;OffsetNode: Start:2.0 Indices:(3:3:4:4) Length:{1}&gt;</span>
+<span class="go">    R: &lt;OffsetNode: Start:5.0 Indices:(5:6:8:10) Length:{2}&gt;</span>
+<span class="go">        L: &lt;OffsetNode: Start:4.0 Indices:(5:5:6:6) Length:{1}&gt;</span>
+<span class="go">        R: &lt;OffsetNode: Start:6.0 Indices:(8:8:9:10) Length:{1}&gt;</span>
+<span class="go">            R: &lt;OffsetNode: Start:7.0 Indices:(9:9:10:10) Length:{1}&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLTree.getNodeAfter">
+<code class="descclassname">AVLTree.</code><code class="descname">getNodeAfter</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLTree.getNodeAfter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the first node after <cite>position</cite>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTree</span><span class="p">(</span><span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node1</span> <span class="o">=</span> <span class="n">scoreTree</span><span class="o">.</span><span class="n">getNodeAfter</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node1</span>
+<span class="go">&lt;ElementNode: Start:1.0 &lt;0.20...&gt; Indices:(l:0 *25* r:61) Payload:&lt;music21.note.Note A&gt;&gt;        </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node2</span> <span class="o">=</span> <span class="n">scoreTree</span><span class="o">.</span><span class="n">getNodeAfter</span><span class="p">(</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">node2</span> <span class="ow">is</span> <span class="n">node1</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">endNode</span> <span class="o">=</span> <span class="n">scoreTree</span><span class="o">.</span><span class="n">getNodeAfter</span><span class="p">(</span><span class="mi">9999</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">endNode</span>
+<span class="go">&lt;ElementNode: Start:End &lt;0.-5...&gt; Indices:(l:188 *191* r:195) </span>
+<span class="go">       Payload:&lt;music21.bar.Barline style=final&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="n">endNode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">endNode</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">endNodePosition</span> <span class="o">=</span> <span class="n">endNode</span><span class="o">.</span><span class="n">position</span>
+<span class="gp">... </span>    <span class="n">endNode</span> <span class="o">=</span> <span class="n">scoreTree</span><span class="o">.</span><span class="n">getNodeAfter</span><span class="p">(</span><span class="n">endNodePosition</span><span class="p">)</span>
+<span class="go">&lt;ElementNode: Start:End &lt;0.-5...&gt; Indices:(l:188 *191* r:195) </span>
+<span class="go">    Payload:&lt;music21.bar.Barline style=final&gt;&gt;</span>
+<span class="go">&lt;ElementNode: Start:End &lt;0.-5...&gt; Indices:(l:192 *192* r:193) </span>
+<span class="go">    Payload:&lt;music21.bar.Barline style=final&gt;&gt;</span>
+<span class="go">&lt;ElementNode: Start:End &lt;0.-5...&gt; Indices:(l:192 *193* r:195) </span>
+<span class="go">    Payload:&lt;music21.bar.Barline style=final&gt;&gt;</span>
+<span class="go">&lt;ElementNode: Start:End &lt;0.-5...&gt; Indices:(l:194 *194* r:195) </span>
+<span class="go">    Payload:&lt;music21.bar.Barline style=final&gt;&gt;        </span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">note1</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Works with sortTuple positions as well...</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span> <span class="o">=</span> <span class="n">note1</span><span class="o">.</span><span class="n">sortTuple</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">st</span>
+<span class="go">SortTuple(atEnd=0, offset=6.0, priority=0, classSortOrder=20, isNotGrace=1, insertIndex=...)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">getNodeAfter</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<span class="go">&lt;ElementNode: Start:6.5 &lt;0.20...&gt; Indices:(l:51 *52* r:53) </span>
+<span class="go">    Payload:&lt;music21.note.Note D&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLTree.getNodeBefore">
+<code class="descclassname">AVLTree.</code><code class="descname">getNodeBefore</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLTree.getNodeBefore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the node immediately before position.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>100 is beyond the end so it will get the last node in piece</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">getNodeBefore</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="go">&lt;OffsetNode: Start:36.0 Indices:(191:191:195:195) Length:{4}&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">getNodeBefore</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLTree.getNodeByPosition">
+<code class="descclassname">AVLTree.</code><code class="descname">getNodeByPosition</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLTree.getNodeByPosition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searches for a node whose position is <cite>position</cite> in the subtree
+rooted on <cite>node</cite>.</p>
+<p>Returns a Node object or None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLTree.getPositionAfter">
+<code class="descclassname">AVLTree.</code><code class="descname">getPositionAfter</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLTree.getPositionAfter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets start position after <cite>position</cite>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTree</span><span class="p">(</span><span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">getPositionAfter</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>Returns None if no succeeding position exists.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">endPosition</span> <span class="o">=</span> <span class="n">scoreTree</span><span class="o">.</span><span class="n">getPositionAfter</span><span class="p">(</span><span class="mi">9999</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="n">endPosition</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">endPosition</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">endPosition</span> <span class="o">=</span> <span class="n">scoreTree</span><span class="o">.</span><span class="n">getPositionAfter</span><span class="p">(</span><span class="n">endPosition</span><span class="p">)</span>
+<span class="go">SortTuple(atEnd=1, offset=36.0, priority=0, classSortOrder=-5, ...)</span>
+<span class="go">SortTuple(atEnd=1, offset=36.0, priority=0, classSortOrder=-5, ...)</span>
+<span class="go">SortTuple(atEnd=1, offset=36.0, priority=0, classSortOrder=-5, ...)</span>
+<span class="go">SortTuple(atEnd=1, offset=36.0, priority=0, classSortOrder=-5, ...)</span>
+</pre></div>
+</div>
+<p>Generally speaking, negative positions will usually return 0.0</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">getPositionAfter</span><span class="p">(</span><span class="o">-</span><span class="mi">999</span><span class="p">)</span><span class="o">.</span><span class="n">offset</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>Unless the Tree is empty in which case, None is returned:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">at</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">AVLTree</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">at</span><span class="o">.</span><span class="n">getPositionAfter</span><span class="p">(</span><span class="o">-</span><span class="mi">999</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLTree.getPositionBefore">
+<code class="descclassname">AVLTree.</code><code class="descname">getPositionBefore</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLTree.getPositionBefore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the start position immediately preceding <cite>position</cite> in this
+position-tree.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">score</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bwv66.6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">asTimespans</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">getPositionBefore</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="go">36.0</span>
+</pre></div>
+</div>
+<p>Return None if no preceding position exists.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scoreTree</span><span class="o">.</span><span class="n">getPositionBefore</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLTree.populateFromSortedList">
+<code class="descclassname">AVLTree.</code><code class="descname">populateFromSortedList</code><span class="sig-paren">(</span><em>listOfTuples</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLTree.populateFromSortedList" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method assumes that the current tree is empty (or will be wiped) and 
+that listOfTuples is a non-empty
+list where the first element is a unique position to insert,
+and the second is the complete payload for that node, and
+that the positions are strictly increasing in order.</p>
+<p>This is about an order of magnitude faster (3ms vs 21ms for 1000 items; 31 vs. 30ms for
+10,000 items) than running createNodeAtPosition() for each element in a list if it is
+already sorted.  Thus it should be used when converting a
+Stream where .isSorted is True into a tree.</p>
+<p>If any of the conditions is not true, expect to get a dangerously
+badly sorted tree that will be useless.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">listOfTuples</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">listOfTuples</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+<span class="go">(10, &#39;10&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">AVLTree</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">rootNode</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">populateFromSortedList</span><span class="p">(</span><span class="n">listOfTuples</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">rootNode</span>
+<span class="go">&lt;AVLNode: Start:500 Height:9 L:8 R:8&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">rootNode</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="n">n</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">payload</span><span class="p">))</span>
+<span class="gp">... </span>   <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">leftChild</span>
+<span class="go">&lt;AVLNode: Start:500 Height:9 L:8 R:8&gt; &#39;500&#39;</span>
+<span class="go">&lt;AVLNode: Start:250 Height:8 L:7 R:7&gt; &#39;250&#39;</span>
+<span class="go">&lt;AVLNode: Start:125 Height:7 L:6 R:6&gt; &#39;125&#39;</span>
+<span class="go">&lt;AVLNode: Start:62 Height:6 L:5 R:5&gt; &#39;62&#39;</span>
+<span class="go">&lt;AVLNode: Start:31 Height:5 L:4 R:4&gt; &#39;31&#39;</span>
+<span class="go">&lt;AVLNode: Start:15 Height:4 L:3 R:3&gt; &#39;15&#39;</span>
+<span class="go">&lt;AVLNode: Start:7 Height:3 L:2 R:2&gt; &#39;7&#39;</span>
+<span class="go">&lt;AVLNode: Start:3 Height:2 L:1 R:1&gt; &#39;3&#39;</span>
+<span class="go">&lt;AVLNode: Start:1 Height:1 L:0 R:0&gt; &#39;1&#39;</span>
+<span class="go">&lt;AVLNode: Start:0 Height:0 L:None R:None&gt; &#39;0&#39;        </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.tree.core.AVLTree.removeNode">
+<code class="descclassname">AVLTree.</code><code class="descname">removeNode</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.tree.core.AVLTree.removeNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a node at <cite>position</cite> and rebalances the tree</p>
+<p>Used internally by TimespanTree.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">AVLTree</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">createNodeAtPosition</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">createNodeAtPosition</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">createNodeAtPosition</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">createNodeAtPosition</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">rootNode</span>
+<span class="go">&lt;AVLNode: Start:10 Height:2 L:0 R:1&gt;</span>
+</pre></div>
+</div>
+<p>Remove node at 30</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">removeNode</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">rootNode</span>
+<span class="go">&lt;AVLNode: Start:10 Height:1 L:0 R:0&gt;</span>
+</pre></div>
+</div>
+<p>Removing a node eliminates its payload:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ten</span> <span class="o">=</span> <span class="n">avl</span><span class="o">.</span><span class="n">getNodeByPosition</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ten</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="s1">&#39;ten&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">twenty</span> <span class="o">=</span> <span class="n">avl</span><span class="o">.</span><span class="n">getNodeByPosition</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">twenty</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="s1">&#39;twenty&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">removeNode</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">rootNode</span>
+<span class="go">&lt;AVLNode: Start:20 Height:1 L:0 R:None&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">rootNode</span><span class="o">.</span><span class="n">payload</span>
+<span class="go">&#39;twenty&#39;</span>
+</pre></div>
+</div>
+<p>Removing a non-existent node does nothing.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">removeNode</span><span class="p">(</span><span class="mf">9.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">avl</span><span class="o">.</span><span class="n">rootNode</span>
+<span class="go">&lt;AVLNode: Start:20 Height:1 L:0 R:None&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">avl</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="o">.</span><span class="n">payload</span><span class="p">)</span>
+<span class="go">&lt;AVLNode: Start:5 Height:0 L:None R:None&gt; None</span>
+<span class="go">&lt;AVLNode: Start:20 Height:1 L:0 R:None&gt; twenty        </span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleTreeFromStream.html" title="music21.tree.fromStream"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleTreeAnalysis.html" title="music21.tree.analysis"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

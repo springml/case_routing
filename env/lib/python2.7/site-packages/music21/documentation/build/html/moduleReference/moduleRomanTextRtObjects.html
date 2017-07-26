@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>music21.romanText.rtObjects &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Module Reference" href="index.html" />
+    <link rel="next" title="music21.romanText.translate" href="moduleRomanTextTranslate.html" />
+    <link rel="prev" title="music21.romanText.clercqTemperley" href="moduleRomanTextClercqTemperley.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleRomanTextTranslate.html" title="music21.romanText.translate"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moduleRomanTextClercqTemperley.html" title="music21.romanText.clercqTemperley"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moduleRomanTextClercqTemperley.html"
+                        title="previous chapter">music21.romanText.clercqTemperley</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="moduleRomanTextTranslate.html"
+                        title="next chapter">music21.romanText.translate</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">music21.romanText.rtObjects</a><ul>
+<li><a class="reference internal" href="#rtanalytickey">RTAnalyticKey</a></li>
+<li><a class="reference internal" href="#rtatom">RTAtom</a></li>
+<li><a class="reference internal" href="#rtbeat">RTBeat</a></li>
+<li><a class="reference internal" href="#rtchord">RTChord</a></li>
+<li><a class="reference internal" href="#rtcloseparens">RTCloseParens</a></li>
+<li><a class="reference internal" href="#rtellisonstart">RTEllisonStart</a></li>
+<li><a class="reference internal" href="#rtellisonstop">RTEllisonStop</a></li>
+<li><a class="reference internal" href="#rtfile">RTFile</a></li>
+<li><a class="reference internal" href="#rthandler">RTHandler</a></li>
+<li><a class="reference internal" href="#rtkey">RTKey</a></li>
+<li><a class="reference internal" href="#rtkeysignature">RTKeySignature</a></li>
+<li><a class="reference internal" href="#rtkeytypeatom">RTKeyTypeAtom</a></li>
+<li><a class="reference internal" href="#rtmeasure">RTMeasure</a></li>
+<li><a class="reference internal" href="#rtnochord">RTNoChord</a></li>
+<li><a class="reference internal" href="#rtopenparens">RTOpenParens</a></li>
+<li><a class="reference internal" href="#rtoptionalkeyclose">RTOptionalKeyClose</a></li>
+<li><a class="reference internal" href="#rtoptionalkeyopen">RTOptionalKeyOpen</a></li>
+<li><a class="reference internal" href="#rtphraseboundary">RTPhraseBoundary</a></li>
+<li><a class="reference internal" href="#rtphrasemarker">RTPhraseMarker</a></li>
+<li><a class="reference internal" href="#rtrepeat">RTRepeat</a></li>
+<li><a class="reference internal" href="#rtrepeatstart">RTRepeatStart</a></li>
+<li><a class="reference internal" href="#rtrepeatstop">RTRepeatStop</a></li>
+<li><a class="reference internal" href="#rttagged">RTTagged</a></li>
+<li><a class="reference internal" href="#rttoken">RTToken</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/moduleReference/moduleRomanTextRtObjects.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music21-romantext-rtobjects">
+<span id="moduleromantextrtobjects"></span><h1>music21.romanText.rtObjects<a class="headerlink" href="#music21-romantext-rtobjects" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-music21.romanText.rtObjects"></span><p>Translation routines for roman numeral analysis text files, as defined 
+and demonstrated by Dmitri Tymoczko.</p>
+<div class="section" id="rtanalytickey">
+<h2>RTAnalyticKey<a class="headerlink" href="#rtanalytickey" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTAnalyticKey">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTAnalyticKey</code><span class="sig-paren">(</span><em>src=''</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTAnalyticKey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTAnalyticKey" title="music21.romanText.rtObjects.RTAnalyticKey"><code class="xref py py-class docutils literal"><span class="pre">RTAnalyticKey</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTKeyTypeAtom" title="music21.romanText.rtObjects.RTKeyTypeAtom"><code class="xref py py-class docutils literal"><span class="pre">RTKeyTypeAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTAnalyticKey" title="music21.romanText.rtObjects.RTAnalyticKey"><code class="xref py py-class docutils literal"><span class="pre">RTAnalyticKey</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTKeyTypeAtom" title="music21.romanText.rtObjects.RTKeyTypeAtom"><code class="xref py py-class docutils literal"><span class="pre">RTKeyTypeAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTKeyTypeAtom.getKey" title="music21.romanText.rtObjects.RTKeyTypeAtom.getKey"><code class="xref py py-meth docutils literal"><span class="pre">getKey()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTKeyTypeAtom.getKeySignature" title="music21.romanText.rtObjects.RTKeyTypeAtom.getKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">getKeySignature()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtatom">
+<h2>RTAtom<a class="headerlink" href="#rtatom" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTAtom">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTAtom</code><span class="sig-paren">(</span><em>src=''</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTAtom" title="Permalink to this definition">¶</a></dt>
+<dd><p>In RomanText, definitions of chords, phrases boundaries, open/close
+parenthesis, beat indicators, etc. appear within measures (RTMeasure
+objects). These individual elements will be called Atoms, as they are data
+that is not tagged.</p>
+<p>Each atom store a reference to its container (normally an RTMeasure).</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chordIV</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTAtom</span><span class="p">(</span><span class="s1">&#39;IV&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beat4</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTAtom</span><span class="p">(</span><span class="s1">&#39;b4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beat4</span>
+<span class="go">&lt;RTAtom &#39;b4&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beat4</span><span class="o">.</span><span class="n">isAtom</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>However, see RTChord, RTBeat, etc. which are subclasses of RTAtom
+specifically for storing chords, beats, etc.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTAtom.isAtom">
+<code class="descclassname">RTAtom.</code><code class="descname">isAtom</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtbeat">
+<h2>RTBeat<a class="headerlink" href="#rtbeat" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTBeat">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTBeat</code><span class="sig-paren">(</span><em>src=''</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTBeat" title="Permalink to this definition">¶</a></dt>
+<dd><p>An RTAtom subclass that defines a beat definition.  Also contains a
+reference to the container.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">beatFour</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTBeat</span><span class="p">(</span><span class="s1">&#39;b4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beatFour</span>
+<span class="go">&lt;RTBeat &#39;b4&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTBeat" title="music21.romanText.rtObjects.RTBeat"><code class="xref py py-class docutils literal"><span class="pre">RTBeat</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTBeat" title="music21.romanText.rtObjects.RTBeat"><code class="xref py py-class docutils literal"><span class="pre">RTBeat</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTBeat.getBeatFloatOrFrac">
+<code class="descclassname">RTBeat.</code><code class="descname">getBeatFloatOrFrac</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTBeat.getBeatFloatOrFrac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the beat number as a float or fraction. Time signature independent</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RTB</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTBeat</span>
+</pre></div>
+</div>
+<p>Simple ones:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RTB</span><span class="p">(</span><span class="s1">&#39;b1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getBeatFloatOrFrac</span><span class="p">()</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RTB</span><span class="p">(</span><span class="s1">&#39;b2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getBeatFloatOrFrac</span><span class="p">()</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+<p>etc.</p>
+<p>with easy float:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RTB</span><span class="p">(</span><span class="s1">&#39;b1.5&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getBeatFloatOrFrac</span><span class="p">()</span>
+<span class="go">1.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RTB</span><span class="p">(</span><span class="s1">&#39;b1.25&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getBeatFloatOrFrac</span><span class="p">()</span>
+<span class="go">1.25</span>
+</pre></div>
+</div>
+<p>with harder:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RTB</span><span class="p">(</span><span class="s1">&#39;b1.33&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getBeatFloatOrFrac</span><span class="p">()</span>
+<span class="go">Fraction(4, 3)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RTB</span><span class="p">(</span><span class="s1">&#39;b2.66&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getBeatFloatOrFrac</span><span class="p">()</span>
+<span class="go">Fraction(8, 3)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RTB</span><span class="p">(</span><span class="s1">&#39;b1.2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getBeatFloatOrFrac</span><span class="p">()</span>
+<span class="go">Fraction(6, 5)</span>
+</pre></div>
+</div>
+<p>A third digit of .5 adds 1/2 of 1/DENOM of before.  Here DENOM is 3 (in 5/3) so
+we add 1/6 to 5/3 to get 11/6:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RTB</span><span class="p">(</span><span class="s1">&#39;b1.66&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getBeatFloatOrFrac</span><span class="p">()</span>
+<span class="go">Fraction(5, 3)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RTB</span><span class="p">(</span><span class="s1">&#39;b1.66.5&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getBeatFloatOrFrac</span><span class="p">()</span>
+<span class="go">Fraction(11, 6)</span>
+</pre></div>
+</div>
+<p>Similarly .25 adds 1/4 of 1/DENOM... to get 21/12 or 7/4 or 1.75</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RTB</span><span class="p">(</span><span class="s1">&#39;b1.66.25&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getBeatFloatOrFrac</span><span class="p">()</span>
+<span class="go">1.75</span>
+</pre></div>
+</div>
+<p>And .75 adds 3/4 of 1/DENOM to get 23/12</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RTB</span><span class="p">(</span><span class="s1">&#39;b1.66.75&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getBeatFloatOrFrac</span><span class="p">()</span>
+<span class="go">Fraction(23, 12)</span>
+</pre></div>
+</div>
+<p>A weird way of writing &#8216;b1.5&#8217;</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RTB</span><span class="p">(</span><span class="s1">&#39;b1.33.5&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getBeatFloatOrFrac</span><span class="p">()</span>
+<span class="go">1.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTBeat.getOffset">
+<code class="descclassname">RTBeat.</code><code class="descname">getOffset</code><span class="sig-paren">(</span><em>timeSignature</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTBeat.getOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a time signature, return the offset position specified by this
+beat.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rtb</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTBeat</span><span class="p">(</span><span class="s1">&#39;b1.5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtb</span><span class="o">.</span><span class="n">getOffset</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">))</span>
+<span class="go">0.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtb</span><span class="o">.</span><span class="n">getOffset</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;6/8&#39;</span><span class="p">))</span>
+<span class="go">0.75</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtb</span><span class="o">.</span><span class="n">getOffset</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;2/2&#39;</span><span class="p">))</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rtb</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTBeat</span><span class="p">(</span><span class="s1">&#39;b2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtb</span><span class="o">.</span><span class="n">getOffset</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;3/4&#39;</span><span class="p">))</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtb</span><span class="o">.</span><span class="n">getOffset</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;6/8&#39;</span><span class="p">))</span>
+<span class="go">1.5</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rtb</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTBeat</span><span class="p">(</span><span class="s1">&#39;b1.66&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtb</span><span class="o">.</span><span class="n">getOffset</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;6/8&#39;</span><span class="p">))</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtc</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTBeat</span><span class="p">(</span><span class="s1">&#39;b1.66.5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtc</span><span class="o">.</span><span class="n">getOffset</span><span class="p">(</span><span class="n">meter</span><span class="o">.</span><span class="n">TimeSignature</span><span class="p">(</span><span class="s1">&#39;6/8&#39;</span><span class="p">))</span>
+<span class="go">1.25</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtchord">
+<h2>RTChord<a class="headerlink" href="#rtchord" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTChord">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTChord</code><span class="sig-paren">(</span><em>src=''</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTChord" title="Permalink to this definition">¶</a></dt>
+<dd><p>An RTAtom subclass that defines a chord.  Also contains a reference to
+the container.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chordIV</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTChord</span><span class="p">(</span><span class="s1">&#39;IV&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chordIV</span>
+<span class="go">&lt;RTChord &#39;IV&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTChord" title="music21.romanText.rtObjects.RTChord"><code class="xref py py-class docutils literal"><span class="pre">RTChord</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTChord" title="music21.romanText.rtObjects.RTChord"><code class="xref py py-class docutils literal"><span class="pre">RTChord</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtcloseparens">
+<h2>RTCloseParens<a class="headerlink" href="#rtcloseparens" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTCloseParens">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTCloseParens</code><span class="sig-paren">(</span><em>src=')'</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTCloseParens" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple close parenthesis Atom with a sensible default</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTCloseParens</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
+<span class="go">&lt;RTCloseParens &#39;)&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTCloseParens" title="music21.romanText.rtObjects.RTCloseParens"><code class="xref py py-class docutils literal"><span class="pre">RTCloseParens</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTCloseParens" title="music21.romanText.rtObjects.RTCloseParens"><code class="xref py py-class docutils literal"><span class="pre">RTCloseParens</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtellisonstart">
+<h2>RTEllisonStart<a class="headerlink" href="#rtellisonstart" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTEllisonStart">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTEllisonStart</code><span class="sig-paren">(</span><em>src='|*'</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTEllisonStart" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTEllisonStart" title="music21.romanText.rtObjects.RTEllisonStart"><code class="xref py py-class docutils literal"><span class="pre">RTEllisonStart</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTPhraseMarker" title="music21.romanText.rtObjects.RTPhraseMarker"><code class="xref py py-class docutils literal"><span class="pre">RTPhraseMarker</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTEllisonStart" title="music21.romanText.rtObjects.RTEllisonStart"><code class="xref py py-class docutils literal"><span class="pre">RTEllisonStart</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtellisonstop">
+<h2>RTEllisonStop<a class="headerlink" href="#rtellisonstop" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTEllisonStop">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTEllisonStop</code><span class="sig-paren">(</span><em>src='|*'</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTEllisonStop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTEllisonStop" title="music21.romanText.rtObjects.RTEllisonStop"><code class="xref py py-class docutils literal"><span class="pre">RTEllisonStop</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTPhraseMarker" title="music21.romanText.rtObjects.RTPhraseMarker"><code class="xref py py-class docutils literal"><span class="pre">RTPhraseMarker</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTEllisonStop" title="music21.romanText.rtObjects.RTEllisonStop"><code class="xref py py-class docutils literal"><span class="pre">RTEllisonStop</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtfile">
+<h2>RTFile<a class="headerlink" href="#rtfile" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTFile">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTFile</code><a class="headerlink" href="#music21.romanText.rtObjects.RTFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Roman Text File access.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTFile" title="music21.romanText.rtObjects.RTFile"><code class="xref py py-class docutils literal"><span class="pre">RTFile</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTFile.close">
+<code class="descclassname">RTFile.</code><code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTFile.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTFile.open">
+<code class="descclassname">RTFile.</code><code class="descname">open</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTFile.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open a file for reading, trying a variety of encodings and then
+trying them again with an ignore if it is not possible.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTFile.openFileLike">
+<code class="descclassname">RTFile.</code><code class="descname">openFileLike</code><span class="sig-paren">(</span><em>fileLike</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTFile.openFileLike" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign a file-like object, such as those provided by StringIO, as an
+open file object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTFile.read">
+<code class="descclassname">RTFile.</code><code class="descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTFile.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a file. Note that this calls readstring, which processes all tokens.</p>
+<p>If <cite>number</cite> is given, a work number will be extracted if possible.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTFile.readstr">
+<code class="descclassname">RTFile.</code><code class="descname">readstr</code><span class="sig-paren">(</span><em>strSrc</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTFile.readstr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a string and process all Tokens. Returns a ABCHandler instance.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="rthandler">
+<h2>RTHandler<a class="headerlink" href="#rthandler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTHandler">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTHandler</code><a class="headerlink" href="#music21.romanText.rtObjects.RTHandler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTHandler" title="music21.romanText.rtObjects.RTHandler"><code class="xref py py-class docutils literal"><span class="pre">RTHandler</span></code></a> read/write properties</p>
+<dl class="attribute">
+<dt id="music21.romanText.rtObjects.RTHandler.tokens">
+<code class="descclassname">RTHandler.</code><code class="descname">tokens</code><a class="headerlink" href="#music21.romanText.rtObjects.RTHandler.tokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set tokens for this Handler.</p>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTHandler" title="music21.romanText.rtObjects.RTHandler"><code class="xref py py-class docutils literal"><span class="pre">RTHandler</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTHandler.definesMovement">
+<code class="descclassname">RTHandler.</code><code class="descname">definesMovement</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTHandler.definesMovement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if this handler has 1 or more movement.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="s1">&#39;Movement: 1 </span><span class="se">\n</span><span class="s1"> </span><span class="se">\n</span><span class="s1"> m1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">definesMovements</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">definesMovement</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTHandler.definesMovements">
+<code class="descclassname">RTHandler.</code><code class="descname">definesMovements</code><span class="sig-paren">(</span><em>countRequired=2</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTHandler.definesMovements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if more than one movement is defined in a RT file.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="s1">&#39;Movement: 1 </span><span class="se">\n</span><span class="s1"> Movement: 2 </span><span class="se">\n</span><span class="s1"> </span><span class="se">\n</span><span class="s1"> m1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">definesMovements</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="s1">&#39;Movement: 1 </span><span class="se">\n</span><span class="s1"> m1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">definesMovements</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTHandler.process">
+<code class="descclassname">RTHandler.</code><code class="descname">process</code><span class="sig-paren">(</span><em>src</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTHandler.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an entire specification as a single source string, strSrc, tokenize it.
+This is usually provided in a file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTHandler.splitAtHeader">
+<code class="descclassname">RTHandler.</code><code class="descname">splitAtHeader</code><span class="sig-paren">(</span><em>lines</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTHandler.splitAtHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divide string into header and non-header; this is done before
+tokenization.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">splitAtHeader</span><span class="p">([</span><span class="s1">&#39;Title: s&#39;</span><span class="p">,</span> <span class="s1">&#39;Time Signature:&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;m1 g: i&#39;</span><span class="p">])</span>
+<span class="go">([&#39;Title: s&#39;, &#39;Time Signature:&#39;, &#39;&#39;], [&#39;m1 g: i&#39;])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTHandler.splitByMovement">
+<code class="descclassname">RTHandler.</code><code class="descname">splitByMovement</code><span class="sig-paren">(</span><em>duplicateHeader=True</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTHandler.splitByMovement" title="Permalink to this definition">¶</a></dt>
+<dd><p>If we have movements defined, return a list of RTHandler rtObjects,
+representing header information and each movement, in order.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="s1">&#39;Title: Test </span><span class="se">\n</span><span class="s1"> Movement: 1 </span><span class="se">\n</span><span class="s1"> m1 </span><span class="se">\n</span><span class="s1"> Movement: 2 </span><span class="se">\n</span><span class="s1"> m1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">post</span> <span class="o">=</span> <span class="n">rth</span><span class="o">.</span><span class="n">splitByMovement</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">post</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">__class__</span>
+<span class="go">&lt;class &#39;music21.romanText.rtObjects.RTHandler&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">(2, 2)</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">post</span> <span class="o">=</span> <span class="n">rth</span><span class="o">.</span><span class="n">splitByMovement</span><span class="p">(</span><span class="n">duplicateHeader</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">(3, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTHandler.tokenize">
+<code class="descclassname">RTHandler.</code><code class="descname">tokenize</code><span class="sig-paren">(</span><em>src</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTHandler.tokenize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Walk the RT string, creating RT rtObjects along the way.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTHandler.tokenizeAtoms">
+<code class="descclassname">RTHandler.</code><code class="descname">tokenizeAtoms</code><span class="sig-paren">(</span><em>line</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTHandler.tokenizeAtoms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a line of data stored in measure consisting only of Atoms,
+tokenize and return a list.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTHandler</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">tokenizeAtoms</span><span class="p">(</span><span class="s1">&#39;IV b3 ii7 b4 ii&#39;</span><span class="p">)</span>
+<span class="go">[&lt;RTChord &#39;IV&#39;&gt;, &lt;RTBeat &#39;b3&#39;&gt;, &lt;RTChord &#39;ii7&#39;&gt;, &lt;RTBeat &#39;b4&#39;&gt;, &lt;RTChord &#39;ii&#39;&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">tokenizeAtoms</span><span class="p">(</span><span class="s1">&#39;V7 b2 V13 b3 V7 iio6/5[no5]&#39;</span><span class="p">)</span>
+<span class="go">[&lt;RTChord &#39;V7&#39;&gt;, &lt;RTBeat &#39;b2&#39;&gt;, &lt;RTChord &#39;V13&#39;&gt;, </span>
+<span class="go"> &lt;RTBeat &#39;b3&#39;&gt;, &lt;RTChord &#39;V7&#39;&gt;, &lt;RTChord &#39;iio6/5[no5]&#39;&gt;]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokenList</span> <span class="o">=</span> <span class="n">rth</span><span class="o">.</span><span class="n">tokenizeAtoms</span><span class="p">(</span><span class="s1">&#39;I b2 I b2.25 V/ii b2.5 bVII b2.75 V g: IV&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenList</span>
+<span class="go">[&lt;RTChord &#39;I&#39;&gt;, &lt;RTBeat &#39;b2&#39;&gt;, &lt;RTChord &#39;I&#39;&gt;, &lt;RTBeat &#39;b2.25&#39;&gt;, &lt;RTChord &#39;V/ii&#39;&gt;, </span>
+<span class="go"> &lt;RTBeat &#39;b2.5&#39;&gt;, &lt;RTChord &#39;bVII&#39;&gt;, &lt;RTBeat &#39;b2.75&#39;&gt;, &lt;RTChord &#39;V&#39;&gt;, </span>
+<span class="go"> &lt;RTAnalyticKey &#39;g:&#39;&gt;, &lt;RTChord &#39;IV&#39;&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenList</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="o">.</span><span class="n">getKey</span><span class="p">()</span>
+<span class="go">&lt;music21.key.Key of g minor&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">tokenizeAtoms</span><span class="p">(</span><span class="s1">&#39;= m3&#39;</span><span class="p">)</span>
+<span class="go">[]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tokenList</span> <span class="o">=</span> <span class="n">rth</span><span class="o">.</span><span class="n">tokenizeAtoms</span><span class="p">(</span><span class="s1">&#39;g;: ||: V b2 ?(Bb: VII7 b3 III b4 ?)Bb: i :||&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tokenList</span>
+<span class="go">[&lt;RTKey &#39;g;:&#39;&gt;, &lt;RTRepeatStart &#39;||:&#39;&gt;, &lt;RTChord &#39;V&#39;&gt;, &lt;RTBeat &#39;b2&#39;&gt;, </span>
+<span class="go"> &lt;RTOptionalKeyOpen &#39;?(Bb:&#39;&gt;, &lt;RTChord &#39;VII7&#39;&gt;, &lt;RTBeat &#39;b3&#39;&gt;, </span>
+<span class="go"> &lt;RTChord &#39;III&#39;&gt;, &lt;RTBeat &#39;b4&#39;&gt;, &lt;RTOptionalKeyClose &#39;?)Bb:&#39;&gt;, </span>
+<span class="go"> &lt;RTChord &#39;i&#39;&gt;, &lt;RTRepeatStop &#39;:||&#39;&gt;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTHandler.tokenizeBody">
+<code class="descclassname">RTHandler.</code><code class="descname">tokenizeBody</code><span class="sig-paren">(</span><em>lines</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTHandler.tokenizeBody" title="Permalink to this definition">¶</a></dt>
+<dd><p>In the body, we may have measure, time signature, or note
+declarations, as well as possible other tagged definitions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTHandler.tokenizeHeader">
+<code class="descclassname">RTHandler.</code><code class="descname">tokenizeHeader</code><span class="sig-paren">(</span><em>lines</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTHandler.tokenizeHeader" title="Permalink to this definition">¶</a></dt>
+<dd><p>In the header, we only have <code class="xref py py-class docutils literal"><span class="pre">RTTagged</span></code>
+tokens. We can this process these all as the same class.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="rtkey">
+<h2>RTKey<a class="headerlink" href="#rtkey" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTKey">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTKey</code><span class="sig-paren">(</span><em>src=''</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTKey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTKey" title="music21.romanText.rtObjects.RTKey"><code class="xref py py-class docutils literal"><span class="pre">RTKey</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTKeyTypeAtom" title="music21.romanText.rtObjects.RTKeyTypeAtom"><code class="xref py py-class docutils literal"><span class="pre">RTKeyTypeAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTKey" title="music21.romanText.rtObjects.RTKey"><code class="xref py py-class docutils literal"><span class="pre">RTKey</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTKeyTypeAtom" title="music21.romanText.rtObjects.RTKeyTypeAtom"><code class="xref py py-class docutils literal"><span class="pre">RTKeyTypeAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTKeyTypeAtom.getKey" title="music21.romanText.rtObjects.RTKeyTypeAtom.getKey"><code class="xref py py-meth docutils literal"><span class="pre">getKey()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTKeyTypeAtom.getKeySignature" title="music21.romanText.rtObjects.RTKeyTypeAtom.getKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">getKeySignature()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtkeysignature">
+<h2>RTKeySignature<a class="headerlink" href="#rtkeysignature" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTKeySignature">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTKeySignature</code><span class="sig-paren">(</span><em>src=''</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTKeySignature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTKeySignature" title="music21.romanText.rtObjects.RTKeySignature"><code class="xref py py-class docutils literal"><span class="pre">RTKeySignature</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTKeySignature" title="music21.romanText.rtObjects.RTKeySignature"><code class="xref py py-class docutils literal"><span class="pre">RTKeySignature</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTKeySignature.getKeySignature">
+<code class="descclassname">RTKeySignature.</code><code class="descname">getKeySignature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTKeySignature.getKeySignature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtkeytypeatom">
+<h2>RTKeyTypeAtom<a class="headerlink" href="#rtkeytypeatom" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTKeyTypeAtom">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTKeyTypeAtom</code><span class="sig-paren">(</span><em>src=''</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTKeyTypeAtom" title="Permalink to this definition">¶</a></dt>
+<dd><p>RTKeyTypeAtoms contain utility functions for all Key-type tokens, i.e.
+RTKey, RTAnalyticKey, but not KeySignature.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gminor</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTKeyTypeAtom</span><span class="p">(</span><span class="s1">&#39;g;:&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gminor</span>
+<span class="go">&lt;RTKeyTypeAtom &#39;g;:&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTKeyTypeAtom" title="music21.romanText.rtObjects.RTKeyTypeAtom"><code class="xref py py-class docutils literal"><span class="pre">RTKeyTypeAtom</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTKeyTypeAtom" title="music21.romanText.rtObjects.RTKeyTypeAtom"><code class="xref py py-class docutils literal"><span class="pre">RTKeyTypeAtom</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTKeyTypeAtom.getKey">
+<code class="descclassname">RTKeyTypeAtom.</code><code class="descname">getKey</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTKeyTypeAtom.getKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>This returns a Key, not a KeySignature object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTKeyTypeAtom.getKeySignature">
+<code class="descclassname">RTKeyTypeAtom.</code><code class="descname">getKeySignature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTKeyTypeAtom.getKeySignature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a KeySignature object.</p>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtmeasure">
+<h2>RTMeasure<a class="headerlink" href="#rtmeasure" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTMeasure">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTMeasure</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTMeasure" title="Permalink to this definition">¶</a></dt>
+<dd><p>In RomanText, measures are given one per line and always start with &#8216;m&#8217;.</p>
+<p>For instance:</p>
+<blockquote>
+<div>m4 i b3 v b4 VI
+m5 b2 g: IV b4 V
+m6 i
+m7 D: V</div></blockquote>
+<p>Measure ranges can be used and copied, such as:</p>
+<blockquote>
+<div>m8-m9=m4-m5</div></blockquote>
+<p>RTMeasure objects can also define variant readings for a measure:</p>
+<blockquote>
+<div>m1     ii
+m1var1 ii b2 ii6 b3 IV</div></blockquote>
+<p>Variants are not part of the tag, but are read into an attribute.</p>
+<p>Endings are indicated by a single letter after the measure number, such as
+&#8220;a&#8221; for first ending.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rtm</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTMeasure</span><span class="p">(</span><span class="s1">&#39;m15a V6 b1.5 V6/5 b2 I b3 viio6&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtm</span><span class="o">.</span><span class="n">data</span>
+<span class="go">&#39;V6 b1.5 V6/5 b2 I b3 viio6&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtm</span><span class="o">.</span><span class="n">number</span>
+<span class="go">[15]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtm</span><span class="o">.</span><span class="n">repeatLetter</span>
+<span class="go">[&#39;a&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtm</span><span class="o">.</span><span class="n">isMeasure</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTMeasure" title="music21.romanText.rtObjects.RTMeasure"><code class="xref py py-class docutils literal"><span class="pre">RTMeasure</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTMeasure" title="music21.romanText.rtObjects.RTMeasure"><code class="xref py py-class docutils literal"><span class="pre">RTMeasure</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTMeasure.getCopyTarget">
+<code class="descclassname">RTMeasure.</code><code class="descname">getCopyTarget</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTMeasure.getCopyTarget" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this measure defines a copy operation, return two lists defining
+the measures to copy; the second list has the repeat data.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rtm</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTMeasure</span><span class="p">(</span><span class="s1">&#39;m35-36 = m29-30&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtm</span><span class="o">.</span><span class="n">number</span>
+<span class="go">[35, 36]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtm</span><span class="o">.</span><span class="n">getCopyTarget</span><span class="p">()</span>
+<span class="go">([29, 30], [&#39;&#39;, &#39;&#39;])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rtm</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTMeasure</span><span class="p">(</span><span class="s1">&#39;m4 = m1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtm</span><span class="o">.</span><span class="n">number</span>
+<span class="go">[4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtm</span><span class="o">.</span><span class="n">getCopyTarget</span><span class="p">()</span>
+<span class="go">([1], [&#39;&#39;])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTMeasure.isMeasure">
+<code class="descclassname">RTMeasure.</code><code class="descname">isMeasure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTMeasure.isMeasure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAtom" title="music21.romanText.rtObjects.RTToken.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtnochord">
+<h2>RTNoChord<a class="headerlink" href="#rtnochord" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTNoChord">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTNoChord</code><span class="sig-paren">(</span><em>src=''</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTNoChord" title="Permalink to this definition">¶</a></dt>
+<dd><p>An RTAtom subclass that defines absence of a chord.  Also contains a
+reference to the container.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">chordNC</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTNoChord</span><span class="p">(</span><span class="s1">&#39;NC&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">chordNC</span>
+<span class="go">&lt;RTNoChord &#39;NC&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTNoChord" title="music21.romanText.rtObjects.RTNoChord"><code class="xref py py-class docutils literal"><span class="pre">RTNoChord</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTNoChord" title="music21.romanText.rtObjects.RTNoChord"><code class="xref py py-class docutils literal"><span class="pre">RTNoChord</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtopenparens">
+<h2>RTOpenParens<a class="headerlink" href="#rtopenparens" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTOpenParens">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTOpenParens</code><span class="sig-paren">(</span><em>src='('</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTOpenParens" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple open parenthesis Atom with a sensible default</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTOpenParens</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">)</span>
+<span class="go">&lt;RTOpenParens &#39;(&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTOpenParens" title="music21.romanText.rtObjects.RTOpenParens"><code class="xref py py-class docutils literal"><span class="pre">RTOpenParens</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTOpenParens" title="music21.romanText.rtObjects.RTOpenParens"><code class="xref py py-class docutils literal"><span class="pre">RTOpenParens</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtoptionalkeyclose">
+<h2>RTOptionalKeyClose<a class="headerlink" href="#rtoptionalkeyclose" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTOptionalKeyClose">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTOptionalKeyClose</code><span class="sig-paren">(</span><em>src=''</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTOptionalKeyClose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTOptionalKeyClose" title="music21.romanText.rtObjects.RTOptionalKeyClose"><code class="xref py py-class docutils literal"><span class="pre">RTOptionalKeyClose</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTOptionalKeyClose" title="music21.romanText.rtObjects.RTOptionalKeyClose"><code class="xref py py-class docutils literal"><span class="pre">RTOptionalKeyClose</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTOptionalKeyClose.getKey">
+<code class="descclassname">RTOptionalKeyClose.</code><code class="descname">getKey</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTOptionalKeyClose.getKey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtoptionalkeyopen">
+<h2>RTOptionalKeyOpen<a class="headerlink" href="#rtoptionalkeyopen" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTOptionalKeyOpen">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTOptionalKeyOpen</code><span class="sig-paren">(</span><em>src=''</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTOptionalKeyOpen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTOptionalKeyOpen" title="music21.romanText.rtObjects.RTOptionalKeyOpen"><code class="xref py py-class docutils literal"><span class="pre">RTOptionalKeyOpen</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTOptionalKeyOpen" title="music21.romanText.rtObjects.RTOptionalKeyOpen"><code class="xref py py-class docutils literal"><span class="pre">RTOptionalKeyOpen</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTOptionalKeyOpen.getKey">
+<code class="descclassname">RTOptionalKeyOpen.</code><code class="descname">getKey</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTOptionalKeyOpen.getKey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtphraseboundary">
+<h2>RTPhraseBoundary<a class="headerlink" href="#rtphraseboundary" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTPhraseBoundary">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTPhraseBoundary</code><span class="sig-paren">(</span><em>src='||'</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTPhraseBoundary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTPhraseBoundary" title="music21.romanText.rtObjects.RTPhraseBoundary"><code class="xref py py-class docutils literal"><span class="pre">RTPhraseBoundary</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTPhraseMarker" title="music21.romanText.rtObjects.RTPhraseMarker"><code class="xref py py-class docutils literal"><span class="pre">RTPhraseMarker</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTPhraseBoundary" title="music21.romanText.rtObjects.RTPhraseBoundary"><code class="xref py py-class docutils literal"><span class="pre">RTPhraseBoundary</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtphrasemarker">
+<h2>RTPhraseMarker<a class="headerlink" href="#rtphrasemarker" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTPhraseMarker">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTPhraseMarker</code><span class="sig-paren">(</span><em>src=''</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTPhraseMarker" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Phrase Marker:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rtpm</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTPhraseMarker</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtpm</span>
+<span class="go">&lt;RTPhraseMarker &#39;&#39;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTPhraseMarker" title="music21.romanText.rtObjects.RTPhraseMarker"><code class="xref py py-class docutils literal"><span class="pre">RTPhraseMarker</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTPhraseMarker" title="music21.romanText.rtObjects.RTPhraseMarker"><code class="xref py py-class docutils literal"><span class="pre">RTPhraseMarker</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtrepeat">
+<h2>RTRepeat<a class="headerlink" href="#rtrepeat" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTRepeat">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTRepeat</code><span class="sig-paren">(</span><em>src=''</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTRepeat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTRepeat" title="music21.romanText.rtObjects.RTRepeat"><code class="xref py py-class docutils literal"><span class="pre">RTRepeat</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTRepeat" title="music21.romanText.rtObjects.RTRepeat"><code class="xref py py-class docutils literal"><span class="pre">RTRepeat</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtrepeatstart">
+<h2>RTRepeatStart<a class="headerlink" href="#rtrepeatstart" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTRepeatStart">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTRepeatStart</code><span class="sig-paren">(</span><em>src='||:'</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTRepeatStart" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTRepeatStart" title="music21.romanText.rtObjects.RTRepeatStart"><code class="xref py py-class docutils literal"><span class="pre">RTRepeatStart</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTRepeat" title="music21.romanText.rtObjects.RTRepeat"><code class="xref py py-class docutils literal"><span class="pre">RTRepeat</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTRepeatStart" title="music21.romanText.rtObjects.RTRepeatStart"><code class="xref py py-class docutils literal"><span class="pre">RTRepeatStart</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rtrepeatstop">
+<h2>RTRepeatStop<a class="headerlink" href="#rtrepeatstop" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTRepeatStop">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTRepeatStop</code><span class="sig-paren">(</span><em>src=':||'</em>, <em>container=None</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTRepeatStop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTRepeatStop" title="music21.romanText.rtObjects.RTRepeatStop"><code class="xref py py-class docutils literal"><span class="pre">RTRepeatStop</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTRepeat" title="music21.romanText.rtObjects.RTRepeat"><code class="xref py py-class docutils literal"><span class="pre">RTRepeat</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTRepeatStop" title="music21.romanText.rtObjects.RTRepeatStop"><code class="xref py py-class docutils literal"><span class="pre">RTRepeatStop</span></code></a> methods</p>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTAtom" title="music21.romanText.rtObjects.RTAtom"><code class="xref py py-class docutils literal"><span class="pre">RTAtom</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTAtom.isAtom" title="music21.romanText.rtObjects.RTAtom.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="music21.romanText.rtObjects.RTToken.isAnalyst"><code class="xref py py-meth docutils literal"><span class="pre">isAnalyst()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isComposer" title="music21.romanText.rtObjects.RTToken.isComposer"><code class="xref py py-meth docutils literal"><span class="pre">isComposer()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isForm" title="music21.romanText.rtObjects.RTToken.isForm"><code class="xref py py-meth docutils literal"><span class="pre">isForm()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="music21.romanText.rtObjects.RTToken.isKeySignature"><code class="xref py py-meth docutils literal"><span class="pre">isKeySignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMovement" title="music21.romanText.rtObjects.RTToken.isMovement"><code class="xref py py-meth docutils literal"><span class="pre">isMovement()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isNote" title="music21.romanText.rtObjects.RTToken.isNote"><code class="xref py py-meth docutils literal"><span class="pre">isNote()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPedal" title="music21.romanText.rtObjects.RTToken.isPedal"><code class="xref py py-meth docutils literal"><span class="pre">isPedal()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isPiece" title="music21.romanText.rtObjects.RTToken.isPiece"><code class="xref py py-meth docutils literal"><span class="pre">isPiece()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="music21.romanText.rtObjects.RTToken.isProofreader"><code class="xref py py-meth docutils literal"><span class="pre">isProofreader()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="music21.romanText.rtObjects.RTToken.isTimeSignature"><code class="xref py py-meth docutils literal"><span class="pre">isTimeSignature()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isTitle" title="music21.romanText.rtObjects.RTToken.isTitle"><code class="xref py py-meth docutils literal"><span class="pre">isTitle()</span></code></a></li>
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isWork" title="music21.romanText.rtObjects.RTToken.isWork"><code class="xref py py-meth docutils literal"><span class="pre">isWork()</span></code></a></li>
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rttagged">
+<h2>RTTagged<a class="headerlink" href="#rttagged" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTTagged">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTTagged</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTTagged" title="Permalink to this definition">¶</a></dt>
+<dd><p>In romanText, some data elements are tags, that is a tag name, a colon,
+optional whitespace, and data. In non-RTTagged elements, there is just
+data.</p>
+<p>All tagged tokens are subclasses of this class. Examples are:</p>
+<blockquote>
+<div>Title: Die Jahrzeiten
+Composer: Fanny Mendelssohn</div></blockquote>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rttag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Title: Die Jahrzeiten&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rttag</span><span class="o">.</span><span class="n">tag</span>
+<span class="go">&#39;Title&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rttag</span><span class="o">.</span><span class="n">data</span>
+<span class="go">&#39;Die Jahrzeiten&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rttag</span><span class="o">.</span><span class="n">isTitle</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rttag</span><span class="o">.</span><span class="n">isComposer</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTTagged" title="music21.romanText.rtObjects.RTTagged"><code class="xref py py-class docutils literal"><span class="pre">RTTagged</span></code></a> bases</p>
+<ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a></li>
+</ul>
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTTagged" title="music21.romanText.rtObjects.RTTagged"><code class="xref py py-class docutils literal"><span class="pre">RTTagged</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTTagged.isAnalyst">
+<code class="descclassname">RTTagged.</code><code class="descname">isAnalyst</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTTagged.isAnalyst" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if tag represents a analyst, otherwise False.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Analyst: This is an analyst.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isAnalyst</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Nothing: Nothing at all.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isAnalyst</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTTagged.isComposer">
+<code class="descclassname">RTTagged.</code><code class="descname">isComposer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTTagged.isComposer" title="Permalink to this definition">¶</a></dt>
+<dd><p>True is the tag represents a composer.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Composer: Claudio Monteverdi&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">isComposer</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">isTitle</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">isWork</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">data</span> 
+<span class="go">&#39;Claudio Monteverdi&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTTagged.isForm">
+<code class="descclassname">RTTagged.</code><code class="descname">isForm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTTagged.isForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if tag represents a form, otherwise False.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Form: This is a form.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isForm</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Nothing: Nothing at all.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isForm</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTTagged.isKeySignature">
+<code class="descclassname">RTTagged.</code><code class="descname">isKeySignature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTTagged.isKeySignature" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if tag represents a key signature, otherwise False.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;KeySignature: This is a key signature.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isKeySignature</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Nothing: Nothing at all.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isKeySignature</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>KeySignatures are a type of tagged data found outside of measures,
+such as &#8220;Key Signature: Bb,&#8221; meaning one flat.</p>
+<p>Note: this is not the same as a key definition found inside of a
+Measure. These are represented by RTKey rtObjects, defined below, and are
+not RTTagged rtObjects, but RTAtom subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTTagged.isMovement">
+<code class="descclassname">RTTagged.</code><code class="descname">isMovement</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTTagged.isMovement" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if tag represents a movement, otherwise False.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Movement: This is a movement.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isMovement</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Nothing: Nothing at all.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isMovement</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTTagged.isNote">
+<code class="descclassname">RTTagged.</code><code class="descname">isNote</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTTagged.isNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if tag represents a note, otherwise False.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Note: This is a note.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isNote</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Nothing: Nothing at all.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isNote</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTTagged.isPedal">
+<code class="descclassname">RTTagged.</code><code class="descname">isPedal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTTagged.isPedal" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if tag represents a pedal, otherwise False.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Pedal: This is a pedal.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isPedal</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Nothing: Nothing at all.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isPedal</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTTagged.isPiece">
+<code class="descclassname">RTTagged.</code><code class="descname">isPiece</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTTagged.isPiece" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if tag represents a piece, otherwise False.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Piece: This is a piece.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isPiece</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Nothing: Nothing at all.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isPiece</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTTagged.isProofreader">
+<code class="descclassname">RTTagged.</code><code class="descname">isProofreader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTTagged.isProofreader" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if tag represents a proofreader, otherwise False.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Proofreader: This is a proofreader.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isProofreader</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Nothing: Nothing at all.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isProofreader</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTTagged.isTimeSignature">
+<code class="descclassname">RTTagged.</code><code class="descname">isTimeSignature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTTagged.isTimeSignature" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if tag represents a time signature, otherwise False.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;TimeSignature: This is a time signature.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isTimeSignature</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Nothing: Nothing at all.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isTimeSignature</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p>TimeSignature header data can be found intermingled with measures.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTTagged.isTitle">
+<code class="descclassname">RTTagged.</code><code class="descname">isTitle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTTagged.isTitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if tag represents a title, otherwise False.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Title: This is a title.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isTitle</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Nothing: Nothing at all.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="o">.</span><span class="n">isTitle</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTTagged.isWork">
+<code class="descclassname">RTTagged.</code><code class="descname">isWork</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTTagged.isWork" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if tag represents a work, otherwise False.</p>
+<p>The &#8220;work&#8221; is not defined as a header tag, but is used to represent
+all tags, often placed after Composer, for the work or pieces designation.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTTagged</span><span class="p">(</span><span class="s1">&#39;Madrigal: 4.12&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">isTitle</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">isWork</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">tag</span>
+<span class="go">&#39;Madrigal&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rth</span><span class="o">.</span><span class="n">data</span> 
+<span class="go">&#39;4.12&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Methods inherited from <a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a>:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isAtom" title="music21.romanText.rtObjects.RTToken.isAtom"><code class="xref py py-meth docutils literal"><span class="pre">isAtom()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+<li><a class="reference internal" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="music21.romanText.rtObjects.RTToken.isMeasure"><code class="xref py py-meth docutils literal"><span class="pre">isMeasure()</span></code></a></li>
+</ul>
+</td><td><ul class="simple">
+</ul>
+</td></tr></table>
+</div>
+<div class="section" id="rttoken">
+<h2>RTToken<a class="headerlink" href="#rttoken" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="music21.romanText.rtObjects.RTToken">
+<em class="property">class </em><code class="descclassname">music21.romanText.rtObjects.</code><code class="descname">RTToken</code><span class="sig-paren">(</span><em>src=''</em><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores each linear, logical entity of a RomanText.</p>
+<p>A multi-pass parsing procedure is likely necessary, as RomanText permits
+variety of groupings and markings.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rtt</span> <span class="o">=</span> <span class="n">romanText</span><span class="o">.</span><span class="n">rtObjects</span><span class="o">.</span><span class="n">RTToken</span><span class="p">(</span><span class="s1">&#39;||:&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtt</span>
+<span class="go">&lt;RTToken &#39;||:&#39;&gt;</span>
+</pre></div>
+</div>
+<p>A standard RTToken returns <cite>False</cite> for all of the following.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rtt</span><span class="o">.</span><span class="n">isComposer</span><span class="p">()</span> <span class="ow">or</span> <span class="n">rtt</span><span class="o">.</span><span class="n">isTitle</span><span class="p">()</span> <span class="ow">or</span> <span class="n">rtt</span><span class="o">.</span><span class="n">isPiece</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtt</span><span class="o">.</span><span class="n">isAnalyst</span><span class="p">()</span> <span class="ow">or</span> <span class="n">rtt</span><span class="o">.</span><span class="n">isProofreader</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtt</span><span class="o">.</span><span class="n">isTimeSignature</span><span class="p">()</span> <span class="ow">or</span> <span class="n">rtt</span><span class="o">.</span><span class="n">isKeySignature</span><span class="p">()</span> <span class="ow">or</span> <span class="n">rtt</span><span class="o">.</span><span class="n">isNote</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtt</span><span class="o">.</span><span class="n">isForm</span><span class="p">()</span> <span class="ow">or</span> <span class="n">rtt</span><span class="o">.</span><span class="n">isPedal</span><span class="p">()</span> <span class="ow">or</span> <span class="n">rtt</span><span class="o">.</span><span class="n">isMeasure</span><span class="p">()</span> <span class="ow">or</span> <span class="n">rtt</span><span class="o">.</span><span class="n">isWork</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rtt</span><span class="o">.</span><span class="n">isMovement</span><span class="p">()</span> <span class="ow">or</span> <span class="n">rtt</span><span class="o">.</span><span class="n">isAtom</span><span class="p">()</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p class="rubric"><a class="reference internal" href="#music21.romanText.rtObjects.RTToken" title="music21.romanText.rtObjects.RTToken"><code class="xref py py-class docutils literal"><span class="pre">RTToken</span></code></a> methods</p>
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isAnalyst">
+<code class="descclassname">RTToken.</code><code class="descname">isAnalyst</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isAnalyst" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isAtom">
+<code class="descclassname">RTToken.</code><code class="descname">isAtom</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isAtom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Atoms are any untagged data; generally only found inside of a
+measure definition.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isComposer">
+<code class="descclassname">RTToken.</code><code class="descname">isComposer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isComposer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isForm">
+<code class="descclassname">RTToken.</code><code class="descname">isForm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Occasionally found in header.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isKeySignature">
+<code class="descclassname">RTToken.</code><code class="descname">isKeySignature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isKeySignature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isMeasure">
+<code class="descclassname">RTToken.</code><code class="descname">isMeasure</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isMeasure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isMovement">
+<code class="descclassname">RTToken.</code><code class="descname">isMovement</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isMovement" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isNote">
+<code class="descclassname">RTToken.</code><code class="descname">isNote</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isNote" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isPedal">
+<code class="descclassname">RTToken.</code><code class="descname">isPedal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isPedal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isPiece">
+<code class="descclassname">RTToken.</code><code class="descname">isPiece</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isPiece" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isProofreader">
+<code class="descclassname">RTToken.</code><code class="descname">isProofreader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isProofreader" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isTimeSignature">
+<code class="descclassname">RTToken.</code><code class="descname">isTimeSignature</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isTimeSignature" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isTitle">
+<code class="descclassname">RTToken.</code><code class="descname">isTitle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isTitle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="music21.romanText.rtObjects.RTToken.isWork">
+<code class="descclassname">RTToken.</code><code class="descname">isWork</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#music21.romanText.rtObjects.RTToken.isWork" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="moduleRomanTextTranslate.html" title="music21.romanText.translate"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moduleRomanTextClercqTemperley.html" title="music21.romanText.clercqTemperley"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

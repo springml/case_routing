@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User’s Guide, Chapter 25: Post-Tonal Tools (1) &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="User’s Guide" href="index.html" />
+    <link rel="next" title="User’s Guide, Chapter 26: Clients and Weak References." href="usersGuide_26_clientWeakref.html" />
+    <link rel="prev" title="User’s Guide, Chapter 23: Advanced Corpus and Metadata Searching" href="usersGuide_23_advancedCorpus.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_26_clientWeakref.html" title="User’s Guide, Chapter 26: Clients and Weak References."
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_23_advancedCorpus.html" title="User’s Guide, Chapter 23: Advanced Corpus and Metadata Searching"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usersGuide_23_advancedCorpus.html"
+                        title="previous chapter">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="usersGuide_26_clientWeakref.html"
+                        title="next chapter">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a><ul>
+<li><a class="reference internal" href="#pitches-as-pitch-classes">Pitches as Pitch Classes</a></li>
+<li><a class="reference internal" href="#chords-as-forte-set-classes">Chords as Forte Set Classes</a></li>
+<li><a class="reference internal" href="#creating-and-processing-twelve-tone-matrices">Creating and Processing Twelve-Tone Matrices</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User&#8217;s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_99_Table_of_Contents.html">User&#8217;s Guide: Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_01_installing.html">User&#8217;s Guide, Chapter 1: Installing and Getting Started with <code class="docutils literal"><span class="pre">music21</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_02_notes.html">User&#8217;s Guide, Chapter 2: Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_03_pitches.html">User&#8217;s Guide, Chapter 3: Pitches, Durations, and Notes again</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_04_stream1.html">User&#8217;s Guide, Chapter 4: Lists, Streams (I) and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_05_listsOfLists.html">User&#8217;s Guide, Chapter 5: Lists of Lists, Functions, and Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_06_stream2.html">User&#8217;s Guide, Chapter 6: Streams (II): Hierarchies, Recursion, and Flattening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_07_chords.html">User&#8217;s Guide, Chapter 7: Chords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_08_installingMusicXML.html">User&#8217;s Guide, Chapter 8: Installing MusicXML Readers and File Formats (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_09_chordify.html">User&#8217;s Guide, Chapter 9: Chordify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_10_examples1.html">User&#8217;s Guide, Chapter 10: Examples 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_11_corpusSearching.html">User&#8217;s Guide, Chapter 11: Corpus Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_12_music21object.html">User&#8217;s Guide, Chapter 12: Getting Back to Basics: The Music21Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_13_music21object2.html">User&#8217;s Guide, Chapter 13: More Music21Object Attributes and Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_14_timeSignatures.html">User&#8217;s Guide: Chapter 14: Time Signatures and Beats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_15_key.html">User&#8217;s Guide, Chapter 15: Keys and KeySignatures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_17_derivations.html">User&#8217;s Guide: Chapter 17: Derivations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_21_sorting.html">User&#8217;s Guide, Chapter 21: Ordering and Sorting of Stream Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_22_graphing.html">User’s Guide, Chapter 22: Graphing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_23_advancedCorpus.html">User&#8217;s Guide, Chapter 23: Advanced Corpus and Metadata Searching</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_26_clientWeakref.html">User&#8217;s Guide, Chapter 26: Clients and Weak References.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_27_graceNotes.html">User&#8217;s Guide, Chapter 27: Grace Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_28_lyricSearcher.html">User&#8217;s Guide, Chapter 28: Lyric Searching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_54_extendingConverter.html">User&#8217;s Guide, Chapter 54: Extending Converter with New Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_55_advancedMeter.html">User&#8217;s Guide, Chapter 55: Advanced Meter Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_90_musicxmlTest.html">User&#8217;s Guide, Chapter 90: Lilypond Unofficial MusicXML Test Suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_97_timespans.html">Timespan Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usersGuide_98_inversionDemo.html">Inversion Demo</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developerReference/index.html">Developer Reference</a></li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usersGuide/usersGuide_25_postTonalTools1.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="usersguide-25-posttonaltools1"></span><div class="section" id="user-s-guide-chapter-25-post-tonal-tools-1">
+<h1>User&#8217;s Guide, Chapter 25: Post-Tonal Tools (1)<a class="headerlink" href="#user-s-guide-chapter-25-post-tonal-tools-1" title="Permalink to this headline">¶</a></h1>
+<p>The music21 toolkit features many tools for analyzing and creating music
+within a post-tonal context. A <a class="reference internal" href="../moduleReference/moduleChord.html#music21.chord.Chord" title="music21.chord.Chord"><code class="xref py py-class docutils literal"><span class="pre">Chord</span></code></a> can be
+identified as a Forte class, a list of pitch classes can be used to
+create a 12-tone matrix, and many other analytical tools are available.</p>
+<p>This overview will illustrate key features of music21&#8217;s post tonal
+tools. For complete documentation on post-tonal tools, see the many
+methods in <a class="reference internal" href="../moduleReference/moduleChord.html#music21.chord.Chord" title="music21.chord.Chord"><code class="xref py py-class docutils literal"><span class="pre">Chord</span></code></a> as well as the objects in
+<a class="reference internal" href="../moduleReference/moduleSerial.html#moduleserial"><span class="std std-ref">music21.serial</span></a>, such as
+<a class="reference internal" href="../moduleReference/moduleSerial.html#music21.serial.TwelveToneMatrix" title="music21.serial.TwelveToneMatrix"><code class="xref py py-class docutils literal"><span class="pre">TwelveToneMatrix</span></code></a> and
+<a class="reference internal" href="../moduleReference/moduleSerial.html#music21.serial.TwelveToneRow" title="music21.serial.TwelveToneRow"><code class="xref py py-class docutils literal"><span class="pre">TwelveToneRow</span></code></a>.</p>
+<div class="section" id="pitches-as-pitch-classes">
+<h2>Pitches as Pitch Classes<a class="headerlink" href="#pitches-as-pitch-classes" title="Permalink to this headline">¶</a></h2>
+<p>Any music21 <a class="reference internal" href="../moduleReference/modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code></a>, or a
+<a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.Note" title="music21.note.Note"><code class="xref py py-class docutils literal"><span class="pre">Note</span></code></a> containing Pitch, can be expressed as
+pitch class integers using the
+<a class="reference internal" href="../moduleReference/modulePitch.html#music21.pitch.Pitch.pitchClass" title="music21.pitch.Pitch.pitchClass"><code class="xref py py-meth docutils literal"><span class="pre">pitchClass</span></code></a> and
+<a class="reference internal" href="../moduleReference/modulePitch.html#music21.pitch.Pitch.pitchClassString" title="music21.pitch.Pitch.pitchClassString"><code class="xref py py-meth docutils literal"><span class="pre">pitchClassString</span></code></a>
+properties.</p>
+<p>In the following example, the <a class="reference internal" href="../moduleReference/moduleCorpus.html#music21.corpus.parse" title="music21.corpus.parse"><code class="xref py py-func docutils literal"><span class="pre">parse()</span></code></a> function
+is used to create a <a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Score" title="music21.stream.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> object. The
+<a class="reference internal" href="../moduleReference/moduleBase.html#music21.base.Music21Object.id" title="music21.base.Music21Object.id"><code class="xref py py-meth docutils literal"><span class="pre">id</span></code></a> attribute of each contained
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Part" title="music21.stream.Part"><code class="xref py py-class docutils literal"><span class="pre">Part</span></code></a> is presented in a list.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+<span class="n">aScore</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;beethoven/opus59no2&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">aScore</span><span class="o">.</span><span class="n">parts</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="s1">&#39;Violin I.&#39;</span><span class="p">,</span> <span class="s1">&#39;Violin II.&#39;</span><span class="p">,</span> <span class="s1">&#39;Viola.&#39;</span><span class="p">,</span> <span class="s1">&#39;Violoncello.&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We can view the fourth and fifth measures of the violin Part by
+obtaining the Part from the Stream with
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Stream.getElementById" title="music21.stream.Stream.getElementById"><code class="xref py py-meth docutils literal"><span class="pre">getElementById()</span></code></a> method. Next, we can
+extract the desired measures with the
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Stream.measures" title="music21.stream.Stream.measures"><code class="xref py py-meth docutils literal"><span class="pre">measures()</span></code></a> method. Calling the
+<a class="reference internal" href="../moduleReference/moduleBase.html#music21.base.Music21Object.show" title="music21.base.Music21Object.show"><code class="xref py py-meth docutils literal"><span class="pre">show()</span></code></a> method will, assuming correct
+setup of your environment, open a display of the extracted measures.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">vlnPart</span> <span class="o">=</span> <span class="n">aScore</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;Violin I.&#39;</span><span class="p">)</span>
+<span class="n">mRange</span> <span class="o">=</span> <span class="n">vlnPart</span><span class="o">.</span><span class="n">measures</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">mRange</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_25_postTonalTools1_7_0.png" src="../_images/usersGuide_25_postTonalTools1_7_0.png" />
+<p>If we want to gather all <a class="reference internal" href="../moduleReference/modulePitch.html#music21.pitch.Pitch" title="music21.pitch.Pitch"><code class="xref py py-class docutils literal"><span class="pre">Pitch</span></code></a> objects from
+this measure range, we can use the
+<a class="reference internal" href="../moduleReference/moduleStream.html#music21.stream.Stream.pitches" title="music21.stream.Stream.pitches"><code class="xref py py-meth docutils literal"><span class="pre">pitches</span></code></a> property. This returns
+a list of all Pitch objects. All pitch objects have
+<a class="reference internal" href="../moduleReference/modulePitch.html#music21.pitch.Pitch.pitchClass" title="music21.pitch.Pitch.pitchClass"><code class="xref py py-meth docutils literal"><span class="pre">pitchClass</span></code></a> and
+<a class="reference internal" href="../moduleReference/modulePitch.html#music21.pitch.Pitch.pitchClassString" title="music21.pitch.Pitch.pitchClassString"><code class="xref py py-meth docutils literal"><span class="pre">pitchClassString</span></code></a>
+properties, providing either integer or string representations,
+respectively.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">mRange</span><span class="o">.</span><span class="n">pitches</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="s1">&#39;A4&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;F#4&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;G4&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;G4&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;B4&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;E5&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;G5&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;G5&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;G5&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;C#6&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;E6&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;E6&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;E6&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;G6&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;C#5&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">pitchClass</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">mRange</span><span class="o">.</span><span class="n">pitches</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If we want to label the notes in our measure range with the Note&#8217;s pitch
+class representation, we can iterate over the notes and assign the pitch
+class representation to the Note&#8217;s lyric. This is a common way to
+annotate Note and Chord objects in music21. The results can be displayed
+with the <code class="docutils literal"><span class="pre">show()</span></code> method.</p>
+<p>Here is the image from when we were using a Beethoven Quartet as an
+example:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">mRange</span><span class="o">.</span><span class="n">flat</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">tie</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">n</span><span class="o">.</span><span class="n">tie</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;start&#39;</span><span class="p">:</span>
+        <span class="n">n</span><span class="o">.</span><span class="n">lyric</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">pitch</span><span class="o">.</span><span class="n">pitchClassString</span>
+<span class="n">mRange</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_25_postTonalTools1_12_0.png" src="../_images/usersGuide_25_postTonalTools1_12_0.png" />
+</div>
+<div class="section" id="chords-as-forte-set-classes">
+<h2>Chords as Forte Set Classes<a class="headerlink" href="#chords-as-forte-set-classes" title="Permalink to this headline">¶</a></h2>
+<p>Any music21 Chord can be interpreted as a Forte set class. Additional, a
+wide variety of analytical features, derived from the Forte set class,
+are available as methods of the chord.</p>
+<p>For an example, lets create a sequence of generated aggregate-completing
+trichords stored on a Stream. That is, we will construct chords with
+pitch classes, drawing them from a list of all pitch classes. These
+pitches will be supplied to a Chord object and stored on a Stream.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">aStream</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="n">src</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span> <span class="c1"># cheate a list of integers 0 through 11</span>
+<span class="n">src</span> <span class="o">=</span> <span class="n">src</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">src</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">src</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span> <span class="o">+</span> <span class="n">src</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span> <span class="o">+</span> <span class="n">src</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span> <span class="c1"># recombine</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">aStream</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="n">src</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]))</span>
+
+<span class="n">aStream</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_25_postTonalTools1_15_0.png" src="../_images/usersGuide_25_postTonalTools1_15_0.png" />
+<p>These Chords, like all Chords in music21, can be interpreted as Forte
+set classes. The Chord object offers numerous methods that retrieve data
+from the set class representation of the Chord. The following is just a
+sampling of some of the many relevant methods.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">aStream</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">orderedPitchClassesString</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="mi">023</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="mi">148</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="mi">567</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="mi">9</span><span class="n">AB</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">aStream</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">forteClass</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">3</span><span class="o">-</span><span class="mi">2</span><span class="n">B</span>
+ <span class="mi">3</span><span class="o">-</span><span class="mi">11</span><span class="n">A</span>
+ <span class="mi">3</span><span class="o">-</span><span class="mi">1</span>
+ <span class="mi">3</span><span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">aStream</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">forteClassTnI</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="mi">3</span><span class="o">-</span><span class="mi">2</span>
+ <span class="mi">3</span><span class="o">-</span><span class="mi">11</span>
+ <span class="mi">3</span><span class="o">-</span><span class="mi">1</span>
+ <span class="mi">3</span><span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">aStream</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">normalOrder</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">aStream</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">primeFormString</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="mi">013</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="mi">037</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="mi">012</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="mi">012</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">aStream</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">intervalVector</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>To annotate the Chords stored on the Stream with their Forte name, we
+can iterate over the Stream and assign the Forte name to each Chord&#8217;s
+<code class="docutils literal"><span class="pre">lyric</span></code> attribute.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">aStream</span><span class="p">:</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">lyric</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">forteClass</span>
+<span class="n">aStream</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_25_postTonalTools1_24_0.png" src="../_images/usersGuide_25_postTonalTools1_24_0.png" />
+<p>We can use the <code class="docutils literal"><span class="pre">itertools.combinations</span></code> function to find all possible
+subsets of a chord for a given cardinality. (Hat tip to John Chittum for
+the hint). Here is the <code class="docutils literal"><span class="pre">all</span> <span class="pre">tri-chord</span> <span class="pre">hexachord</span></code> which contains within
+it all possible three-note chords under inversion and transposition:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="n">c</span><span class="o">.</span><span class="n">commonName</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="s1">&#39;all tri-chord hexachord&#39;</span>
+</pre></div>
+</div>
+<p>Now we&#8217;ll test this create a set to hold the Forte number for each
+trichord and see that all twelve of them are there:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">cc</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">pitches</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+    <span class="n">cc</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">forteClassNumber</span><span class="p">)</span>
+<span class="n">cc</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-and-processing-twelve-tone-matrices">
+<h2>Creating and Processing Twelve-Tone Matrices<a class="headerlink" href="#creating-and-processing-twelve-tone-matrices" title="Permalink to this headline">¶</a></h2>
+<p>The music21 <a class="reference internal" href="../moduleReference/moduleSerial.html#moduleserial"><span class="std std-ref">music21.serial</span></a> module provides a Stream-based
+representation of a 12-Tone row, as well as the ability to view these
+rows as a matrix. Additionally, numerous 12-tone rows from works are
+available as classes.</p>
+<p>For example, we can create an instance of the row from Alban Berg&#8217;s
+<em>Violin Concerto</em>, use the <code class="docutils literal"><span class="pre">show()</span></code> method to display its contents as
+text, and then create and print a
+<a class="reference internal" href="../moduleReference/moduleSerial.html#music21.serial.TwelveToneMatrix" title="music21.serial.TwelveToneMatrix"><code class="xref py py-class docutils literal"><span class="pre">TwelveToneMatrix</span></code></a> object.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">aRow</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">getHistoricalRowByName</span><span class="p">(</span><span class="s1">&#39;RowBergViolinConcerto&#39;</span><span class="p">)</span>
+<span class="n">aRow</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mf">0.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">G</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">1.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">B</span><span class="o">-&gt;</span>
+ <span class="p">{</span><span class="mf">2.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">D</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">3.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">4.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">A</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">5.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">6.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">7.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">G</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">8.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">B</span><span class="o">&gt;</span>
+ <span class="p">{</span><span class="mf">9.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">C</span><span class="c1">#&gt;</span>
+ <span class="p">{</span><span class="mf">10.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">E</span><span class="o">-&gt;</span>
+ <span class="p">{</span><span class="mf">11.0</span><span class="p">}</span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">Note</span> <span class="n">F</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">aMatrix</span> <span class="o">=</span> <span class="n">aRow</span><span class="o">.</span><span class="n">matrix</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">aMatrix</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span>   <span class="mi">0</span>  <span class="mi">3</span>  <span class="mi">7</span>  <span class="n">B</span>  <span class="mi">2</span>  <span class="mi">5</span>  <span class="mi">9</span>  <span class="mi">1</span>  <span class="mi">4</span>  <span class="mi">6</span>  <span class="mi">8</span>  <span class="n">A</span>
+   <span class="mi">9</span>  <span class="mi">0</span>  <span class="mi">4</span>  <span class="mi">8</span>  <span class="n">B</span>  <span class="mi">2</span>  <span class="mi">6</span>  <span class="n">A</span>  <span class="mi">1</span>  <span class="mi">3</span>  <span class="mi">5</span>  <span class="mi">7</span>
+   <span class="mi">5</span>  <span class="mi">8</span>  <span class="mi">0</span>  <span class="mi">4</span>  <span class="mi">7</span>  <span class="n">A</span>  <span class="mi">2</span>  <span class="mi">6</span>  <span class="mi">9</span>  <span class="n">B</span>  <span class="mi">1</span>  <span class="mi">3</span>
+   <span class="mi">1</span>  <span class="mi">4</span>  <span class="mi">8</span>  <span class="mi">0</span>  <span class="mi">3</span>  <span class="mi">6</span>  <span class="n">A</span>  <span class="mi">2</span>  <span class="mi">5</span>  <span class="mi">7</span>  <span class="mi">9</span>  <span class="n">B</span>
+   <span class="n">A</span>  <span class="mi">1</span>  <span class="mi">5</span>  <span class="mi">9</span>  <span class="mi">0</span>  <span class="mi">3</span>  <span class="mi">7</span>  <span class="n">B</span>  <span class="mi">2</span>  <span class="mi">4</span>  <span class="mi">6</span>  <span class="mi">8</span>
+   <span class="mi">7</span>  <span class="n">A</span>  <span class="mi">2</span>  <span class="mi">6</span>  <span class="mi">9</span>  <span class="mi">0</span>  <span class="mi">4</span>  <span class="mi">8</span>  <span class="n">B</span>  <span class="mi">1</span>  <span class="mi">3</span>  <span class="mi">5</span>
+   <span class="mi">3</span>  <span class="mi">6</span>  <span class="n">A</span>  <span class="mi">2</span>  <span class="mi">5</span>  <span class="mi">8</span>  <span class="mi">0</span>  <span class="mi">4</span>  <span class="mi">7</span>  <span class="mi">9</span>  <span class="n">B</span>  <span class="mi">1</span>
+   <span class="n">B</span>  <span class="mi">2</span>  <span class="mi">6</span>  <span class="n">A</span>  <span class="mi">1</span>  <span class="mi">4</span>  <span class="mi">8</span>  <span class="mi">0</span>  <span class="mi">3</span>  <span class="mi">5</span>  <span class="mi">7</span>  <span class="mi">9</span>
+   <span class="mi">8</span>  <span class="n">B</span>  <span class="mi">3</span>  <span class="mi">7</span>  <span class="n">A</span>  <span class="mi">1</span>  <span class="mi">5</span>  <span class="mi">9</span>  <span class="mi">0</span>  <span class="mi">2</span>  <span class="mi">4</span>  <span class="mi">6</span>
+   <span class="mi">6</span>  <span class="mi">9</span>  <span class="mi">1</span>  <span class="mi">5</span>  <span class="mi">8</span>  <span class="n">B</span>  <span class="mi">3</span>  <span class="mi">7</span>  <span class="n">A</span>  <span class="mi">0</span>  <span class="mi">2</span>  <span class="mi">4</span>
+   <span class="mi">4</span>  <span class="mi">7</span>  <span class="n">B</span>  <span class="mi">3</span>  <span class="mi">6</span>  <span class="mi">9</span>  <span class="mi">1</span>  <span class="mi">5</span>  <span class="mi">8</span>  <span class="n">A</span>  <span class="mi">0</span>  <span class="mi">2</span>
+   <span class="mi">2</span>  <span class="mi">5</span>  <span class="mi">9</span>  <span class="mi">1</span>  <span class="mi">4</span>  <span class="mi">7</span>  <span class="n">B</span>  <span class="mi">3</span>  <span class="mi">6</span>  <span class="mi">8</span>  <span class="n">A</span>  <span class="mi">0</span>
+</pre></div>
+</div>
+<p>We might divide this row into trichords, present each of those trichords
+as Chords, and label the resulting pitch classes and Forte set class. As
+shown above, we can set the <code class="docutils literal"><span class="pre">lyric</span></code> attribute to assign a single line
+of text. If we need to assign multiple lines of text, the Note and Chord
+method <a class="reference internal" href="../moduleReference/moduleNote.html#music21.note.GeneralNote.addLyric" title="music21.note.GeneralNote.addLyric"><code class="xref py py-meth docutils literal"><span class="pre">addLyric()</span></code></a> can be used to add
+successive lines.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">bStream</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">Stream</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="n">aRow</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">addLyric</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">primeFormString</span><span class="p">)</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">addLyric</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">forteClass</span><span class="p">)</span>
+    <span class="n">bStream</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">bStream</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/usersGuide_25_postTonalTools1_34_0.png" src="../_images/usersGuide_25_postTonalTools1_34_0.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_26_clientWeakref.html" title="User’s Guide, Chapter 26: Clients and Weak References."
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usersGuide_23_advancedCorpus.html" title="User’s Guide, Chapter 23: Advanced Corpus and Metadata Searching"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >User&#8217;s Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

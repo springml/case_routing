@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using music21 with the Jupyter (iPython) Notebook &mdash; music21 Documentation</title>
+    
+    <link rel="stylesheet" href="../_static/m21.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    <link rel="top" title="music21 Documentation" href="../index.html" />
+    <link rel="up" title="Developer Reference" href="index.html" />
+    <link rel="prev" title="Using music21 with Git for Eclipse" href="usingGit.html" /><link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+<script src='http://artusi.xyz/music21j/ext/require/require.js'></script>
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usingGit.html" title="Using music21 with Git for Eclipse"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Developer Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usingGit.html"
+                        title="previous chapter">Using music21 with Git for Eclipse</a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using <code class="docutils literal"><span class="pre">music21</span></code> with the Jupyter (iPython) Notebook</a><ul>
+<li><a class="reference internal" href="#setting-up-the-jupyter-environment">Setting up the Jupyter environment</a></li>
+<li><a class="reference internal" href="#using-the-web-based-jupyter-notebook">Using the web-based Jupyter Notebook</a></li>
+<li><a class="reference internal" href="#displaying-graphics-inline">Displaying graphics inline</a></li>
+</ul>
+</li>
+</ul>
+
+<h3><a href="../index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Music21</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../usersGuide/index.html">User&#8217;s Guide</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../moduleReference/index.html">Module Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="documenting.html">Documenting music21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="buildingDocumentation.html">Building Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usingGit.html">Using music21 with Git for Eclipse</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Using <code class="docutils literal"><span class="pre">music21</span></code> with the Jupyter (iPython) Notebook</a></li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/developerReference/installJupyter.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="installjupyter"></span><div class="section" id="using-music21-with-the-jupyter-ipython-notebook">
+<h1>Using <code class="docutils literal"><span class="pre">music21</span></code> with the Jupyter (iPython) Notebook<a class="headerlink" href="#using-music21-with-the-jupyter-ipython-notebook" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="setting-up-the-jupyter-environment">
+<h2>Setting up the Jupyter environment<a class="headerlink" href="#setting-up-the-jupyter-environment" title="Permalink to this headline">¶</a></h2>
+<p>To get <code class="docutils literal"><span class="pre">music21</span></code> to work it&#8217;s best to have a good pip installation
+first. Then you should be able to simply install jupyter (and IPython if
+you don&#8217;t have it):</p>
+<p><code class="docutils literal"><span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">jupyter</span> <span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">ipython</span></code></p>
+</div>
+<div class="section" id="using-the-web-based-jupyter-notebook">
+<h2>Using the web-based Jupyter Notebook<a class="headerlink" href="#using-the-web-based-jupyter-notebook" title="Permalink to this headline">¶</a></h2>
+<p>Start jupyter in a directory you want to save files by typing.</p>
+<p><code class="docutils literal"><span class="pre">`$</span> <span class="pre">jupyter</span> <span class="pre">notebook`</span></code></p>
+<p>Now in the webbrowser you can type commands such as the ones below:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">music21</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">Chord</span><span class="p">(</span><span class="s2">&quot;C4 E4 G4&quot;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">isConsonant</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>All other normal <code class="docutils literal"><span class="pre">music21</span></code> commands will work as they should</p>
+</div>
+<div class="section" id="displaying-graphics-inline">
+<h2>Displaying graphics inline<a class="headerlink" href="#displaying-graphics-inline" title="Permalink to this headline">¶</a></h2>
+<p>By default, you cannot be sure that justing call .show() will work
+because it might open up your MusicXML reader locally...</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="o">&lt;</span><span class="n">music21</span><span class="o">.</span><span class="n">ipython21</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">IPythonPNGObject</span> <span class="n">at</span> <span class="mh">0x1054dcf60</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Nor does just generating a lilypond PNG or PDF work as you&#8217;d like &#8211;
+this will display it on the screen but not in your browser:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s1">&#39;lily.pdf&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Instead do this:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">music21</span><span class="o">.</span><span class="n">ipython21</span>
+</pre></div>
+</div>
+<p>Now this will work:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/installJupyter_18_0.png" src="../_images/installJupyter_18_0.png" />
+<p>If you don&#8217;t want to do that, then instead do this...</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;lily.png&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>SVG is much faster, but it doesn&#8217;t work, sadly...</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;lily.svg&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+
+<span class="ne">ValueError</span>                                <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="n">a78ad09b705c</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;lily.svg&#39;</span><span class="p">))</span>
+
+
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">cuthbert</span><span class="o">/</span><span class="n">anaconda</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">IPython</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">display</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="nb">format</span><span class="p">,</span> <span class="n">embed</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">retina</span><span class="p">,</span> <span class="n">unconfined</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
+    <span class="mi">743</span>
+    <span class="mi">744</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">embed</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ACCEPTABLE_EMBEDDINGS</span><span class="p">:</span>
+<span class="o">--&gt;</span> <span class="mi">745</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot embed the &#39;</span><span class="si">%s</span><span class="s2">&#39; image format&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">))</span>
+    <span class="mi">746</span>         <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+    <span class="mi">747</span>         <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+
+
+<span class="ne">ValueError</span><span class="p">:</span> <span class="n">Cannot</span> <span class="n">embed</span> <span class="n">the</span> <span class="s1">&#39;svg&#39;</span> <span class="n">image</span> <span class="nb">format</span>
+</pre></div>
+</div>
+<p>Whole pieces will show properly also now that the extension module is
+loaded</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;bach/bwv66.6&#39;</span><span class="p">)</span>
+<span class="n">b</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/installJupyter_24_0.png" src="../_images/installJupyter_24_0.png" />
+<p>And that is basically it! We use <code class="docutils literal"><span class="pre">sphinx</span></code> for interwiki links, which,
+sadly, won&#8217;t show up on the notebook, but should render properly.</p>
+<p>But I did make a sphinx-markdown Notebook extension. When it&#8217;s ready,
+I&#8217;ll put it up. Make a directory &#8220;sphinx-markdown&#8221; in a &#8220;usability&#8221;
+directory in &#8220;nbextensions&#8221; (mine is at
+&#8220;~/Library/Jupyter/nbextensions&#8221;). And put this file there as &#8220;main.js&#8221;:
+[<a class="reference external" href="https://gist.github.com/mscuthbert/6411762f98f3536712e0">https://gist.github.com/mscuthbert/6411762f98f3536712e0</a>]</p>
+<p>Check to see if it exists:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">notebook</span>
+<span class="n">notebook</span><span class="o">.</span><span class="n">nbextensions</span><span class="o">.</span><span class="n">check_nbextension</span><span class="p">(</span><span class="s1">&#39;usability/sphinx-markdown&#39;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Load it with:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="n">notebook</span><span class="o">.</span><span class="n">nbextensions</span><span class="o">.</span><span class="n">EnableNBExtensionApp</span><span class="p">()</span>
+<span class="n">E</span><span class="o">.</span><span class="n">toggle_nbextension</span><span class="p">(</span><span class="s1">&#39;usability/sphinx-markdown/main&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> Enabling notebook extension usability/sphinx-markdown/main...
+       - Validating: [32mOK[0m
+</pre></div>
+</div>
+<div class="ipython-result highlight-default"><div class="highlight"><pre><span></span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>Save, and reload. Then test it with a markdown cell like:</p>
+<p>For more information, see, <span class="xref std std-ref">installing IPython/Jupyter for Music21</span>.</p>
+<p>And you should get this output:</p>
+<p>For more information, see,
+<span class="xref std std-ref">installing IPython/Jupyter for Music21</span>. :-)</p>
+<p>It works!</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="usingGit.html" title="Using music21 with Git for Eclipse"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">music21</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Developer Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2006-2016, Michael Scott Cuthbert and cuthbertLab.
+      Last updated on Aug 21, 2016.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>
