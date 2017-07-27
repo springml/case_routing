@@ -1,6 +1,19 @@
 runtime: python
 env: flex
-entrypoint: gunicorn -b :$PORT main:app
+# entrypoint: python main.py
+entrypoint: gunicorn -b :$PORT -b :8000 main:app
 
 runtime_config:
  python_version: 2
+# 
+# automatic_scaling:
+#   min_num_instances: 1
+#   max_num_instances: 20
+#   cool_down_period_sec: 120 # default value
+#   cpu_utilization:
+#     target_utilization: 0.5
+
+resources:
+  cpu: 2
+  memory_gb: 8
+  disk_size_gb: 10
