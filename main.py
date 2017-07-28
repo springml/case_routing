@@ -16,16 +16,8 @@ import random
 # gcloud beta ml language analyze-entities --content="Michelangelo Caravaggio, Italian painter, is known for 'The Calling of Saint Matthew'."
 
 GROUP_NAMES = ['Legal', 'AutoResponded', 'Emergencies', 'TechSupport', 'Utilities', 'Sales']
-# DATA_PATH = '/Users/Edrich/programming/CaseRoutingDemo/'
-# BAG_OF_WORDS_PATH = DATA_PATH + 'full_bags_3.pk'
 
-# BAG_OF_WORDS_PATH = './static/full_bags_3.pk'
-
-parser = argparse.ArgumentParser(
-	description='Arguments for running web server')
-parser.add_argument(
-	'--DATA_PATH', required=True, help='Bag of Words Path')
-args = parser.parse_args()
+BAG_OF_WORDS_PATH = './static/full_bags_3.pk'
 
 spanner_client = spanner.Client()
 
@@ -112,15 +104,11 @@ def run_pipeline():
 
 	subject = request.get_json().get('subject', '')
 	content = request.get_json().get('content', '')
-
-	# Hemanth this is new: It's for the priority
-	priority = request.get_json().get('priority', '')
+	Priority = request.get_json().get('priority', '')
 	Created_Date = datetime.datetime.now()
 
-
 	subject, content = clean_text(subject, content)
-	word_bags = unpack_word_bags(word_bags_path = args.DATA_PATH)
-	# word_bags = unpack_word_bags(word_bags_path = BAG_OF_WORDS_PATH)
+	word_bags = unpack_word_bags(word_bags_path = BAG_OF_WORDS_PATH)
 	words_groups = get_bag_of_word_counts(subject, content, word_bags, GROUP_NAMES)
 	entity_count_person, entity_count_location, entity_count_organization, entity_count_event, entity_count_work_of_art, entity_count_consumer_good, sentiment_score = get_entity_counts_sentiment_score(subject, content)
 	subject_length, subject_word_count, content_length, content_word_count, is_am, is_weekday = get_basic_quantitative_features(subject, content, Created_Date)
@@ -167,7 +155,6 @@ def run_pipeline():
 
 	Assignee = random.choice(Case_Assignments[Category])
 	Region = random.choice(regions)
-	Priority = random.choice(["P1", "P2", "P2", "P3", "P3"])
 
 	#While loop to ensure CSAT always less than 5
 	CSAT = np.random.normal(3.4, .6)
