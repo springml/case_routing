@@ -1,24 +1,4 @@
-var app = angular.module("app", ['ngRoute', 'chart.js', 'ngAnimate']);
-app.config(function($routeProvider, $locationProvider){
-    $routeProvider.when('/', {
-        templateUrl: "./views/dashboard.html",
-        controller: "DashboardController"
-    }).when('/tickets', {
-        templateUrl: "./views/tickets.html",
-        controller: "TicketsController"
-    }).when('/email-us', {
-        templateUrl: "./views/email-us.html",
-        controller: "EmailUsController"
-    }).otherwise({
-        redirectTo: "/"
-    });
-
-    $locationProvider.html5Mode({
-        enabled: true,
-        requireBase: false
-    });
-});
-app.controller("DashboardController", function($scope, $location, $http, anchorSmoothScroll, DataService) {
+app.controller("DashboardController", ['$scope', '$location', '$http', 'DataService', function($scope, $location, $http, DataService) {
     // Initialize Chart variables
     $scope.labelsDate, $scope.dataDate, $scope.optionsDate, $scope.colorsDate;
     $scope.labelsRegionPriority, $scope.dataRegionPriority, $scope.seriesRegionPriority, $scope.optionsRegionPriority;
@@ -88,7 +68,9 @@ app.controller("DashboardController", function($scope, $location, $http, anchorS
             "#E0F2F1", "#B2DFDB", "#80CBC4",
             "#4DB6AC", "#26A69A", "#009688",
             "#00897B", "#00796B", "#00695C",
-            "#004D40", "#00392F", "#00231E"
+            "#004D40", "#00392F", "#00231E",
+            "#00231E", "#00231E", "#00231E",
+            "#00231E", "#00231E", "#00231E"
         ];
     });
     $scope.overrideRegionPriority = [
@@ -121,16 +103,9 @@ app.controller("DashboardController", function($scope, $location, $http, anchorS
     $scope.showData = function(event) {
         console.log(event);
     }
-    $scope.gotoElement = function(eID) {
-        // set the location.hash to the id of
-        // the element you wish to scroll to.
-        $location.hash('bottom');
-        // call $anchorScroll()
-        anchorSmoothScroll.scrollTo(eID);
-    };
-});
+}]);
 
-app.controller("EmailUsController", function($scope, $location, $http, anchorSmoothScroll) {
+app.controller("EmailUsController", ['$scope', '$location', '$http', 'DataService', function($scope, $location, $http) {
     $scope.submitEmail = function(subject, content, priority) {
         if (subject && content && priority) {
             $http.post("/submit", {
@@ -144,9 +119,9 @@ app.controller("EmailUsController", function($scope, $location, $http, anchorSmo
             });
         }
     }
-});
+}]);
 
-app.controller("TicketsController", function($scope, $location, $http, DataService, anchorSmoothScroll) {
+app.controller("TicketsController", ['$scope', '$location', '$http', 'DataService', function($scope, $location, $http, DataService) {
     $scope.rawData;
     $scope.allCategories;
 
@@ -180,7 +155,13 @@ app.controller("TicketsController", function($scope, $location, $http, DataServi
         }
         $scope.notHidden = false;
     }
-});
+    $scope.moreButton = function(CaseID){
+        return CaseID
+    }
+    $scope.lessButton = function(CaseID){
+        return CaseID
+    }
+}]);
 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 // User Defined Functions  -- -- -- -- -- -- --
 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
