@@ -78,7 +78,7 @@ def get_region_priority_data():
 @app.route('/getAllData', methods=['POST'])
 def get_all_data():
 	data = {}
-	results = run_table_query("SELECT CaseID, Subject, Body, Priority, Category, FORMAT_TIMESTAMP('%F', Created_Date) as Created_Date, FORMAT_TIMESTAMP('%F', Close_Date) as Closed_Date, Region, Assignee, Status FROM CaseDetails Order By Created_Date;")
+	results = run_table_query("SELECT CaseID, Subject, Body, Priority, Category, FORMAT_TIMESTAMP('%F', Created_Date) as Created_Date_Formatted, Created_Date, Region, Assignee FROM CaseDetails Order By Created_Date Desc;")
 	data["allColumns"] = results
 	return jsonify(data)
 

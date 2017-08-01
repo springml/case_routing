@@ -28,23 +28,22 @@ app.service('DataService', function($http){
         getAllData: function(){
             return $http.post('/getAllData').then(function(response){
                 var returnArr = []
-                function templateObj(CaseID, Subject, Body, Priority, Category, Created_Date, Close_Date, Region, Assignee, Status){
+                function templateObj(CaseID, Subject, Body, Priority, Category, Created_Date_Formatted, Created_Date, Region, Assignee){
                     return {
                         CaseID: CaseID,
                         Subject: Subject,
                         Body: Body,
                         Priority: Priority,
                         Category: Category,
+                        Created_Date_Formatted: Created_Date_Formatted,
                         Created_Date: Created_Date,
-                        Close_Date: Close_Date,
                         Region: Region,
-                        Assignee: Assignee,
-                        Status: Status
+                        Assignee: Assignee
                     }
                 }
 
                 response.data.allColumns.forEach(function(row){
-                    returnArr.push(templateObj(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]));
+                    returnArr.push(templateObj(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]));
                 });
                 return returnArr;
             });
