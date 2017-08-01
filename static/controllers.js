@@ -17,6 +17,7 @@ app.controller("DashboardController", ['$scope', '$location', '$http', 'DataServ
 
     DataService.getAllData().then(function(data){
         $scope.rawData = data;
+        console.log($scope.rawData);
     });
 
     // Cases VS. Time
