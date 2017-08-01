@@ -16,7 +16,7 @@ app.controller("DashboardController", ['$scope', '$location', '$http', 'DataServ
     $scope.title = "Analytics Controller";
 
     DataService.getAllData().then(function(data){
-        $scope.rawData = data.reverse();
+        $scope.rawData = data;
     });
 
     // Cases VS. Time
@@ -126,7 +126,7 @@ app.controller("TicketsController", ['$scope', '$location', '$http', 'DataServic
     $scope.allCategories;
 
     DataService.getAllData().then(function(data){
-        $scope.rawData = data.reverse();
+        $scope.rawData = data;
         $scope.allCategories = findAllCategories(data);
     });
 
