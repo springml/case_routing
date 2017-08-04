@@ -17,7 +17,7 @@ import random
 
 GROUP_NAMES = ['Legal', 'AutoResponded', 'Emergencies', 'TechSupport', 'Utilities', 'Sales']
 
-BAG_OF_WORDS_PATH = './static/full_bags_3.pk'
+BAG_OF_WORDS_PATH = './static/full_bags_4.pk'
 
 spanner_client = spanner.Client()
 
@@ -138,7 +138,7 @@ def run_pipeline():
 
 	service = googleapiclient.discovery.build('ml', 'v1')
 	PROJECT = 'emailinsight-1'
-	MODEL = 'case_routing_model_v5'
+	MODEL = 'case_routing_model_v7'
 	name = 'projects/{}/models/{}'.format(PROJECT, MODEL)
 	response = service.projects().predict(
     	name=name,
