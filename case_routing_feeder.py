@@ -4,21 +4,27 @@ import os
 import pandas as pd
 import time
 import argparse, datetime, re
-from google.cloud import language # pip install --upgrade google-cloud-language
+from google.cloud import language, spanner # pip install --upgrade google-cloud-language
 from sklearn.utils import shuffle
+import datetime
+import googleapiclient.discovery
+import random
+import numpy as np 
 
 GROUP_NAMES = ['Legal', 'AutoResponded', 'Emergencies', 'TechSupport', 'Utilities', 'Sales']
 
 Case_Assignments = {"Legal": ["Charles Anderson", "Robert Heller", "Jane Jackson"],
-        "Information": ["Ann Gitlin", "Harrison Davis", "Raj Kumar"],
-        "Emergancies": ["Eduardo Sanchez", "Jack Lee", "Sarah Jefferson"],
+        "AutoResponded": [""],
+        "Emergencies": ["Eduardo Sanchez", "Jack Lee", "Sarah Jefferson"],
         "TechSupport": ["Kris Hauser", "Sheryl Thomas", "Yash Patel"],
         "Utilities": ["Mike Camica", "Jose Lopez", "Greg Guniski"],
         "Sales": ["Taylor Traver", "Sam Goldberg", "Jen Kuecks"],
         "Region": ["West", "South", "Midwest", "Northeast"]
 }
 
-regions = ["West", "South", "Midwest", "Northeast"]
+Regions = ["West", "South", "Midwest", "Northeast"]
+
+Channels = ["Online", "Online", "Online", "Phone", "Phone", "Chat", "Walk-In", "Walk-In"]
 
 
 def clean_text(message_subject, message_content):
@@ -39,6 +45,7 @@ def get_bag_of_word_counts(message_subject, message_content, word_bags, departme
         work_group.append(len([w for w in text.split() if w in set(top_words)]))
         words_groups.append(work_group)
     return words_groups
+
 def get_entity_counts_sentiment_score(message_subject, message_content):
     """Extract entities using google NLP API
 
@@ -139,12 +146,12 @@ def get_assignee_region(category):
 def get_region():
     return random.choice(["West", "South", "Midwest", "Northeast"])
 
-def feature_engineering(subject, content):
+def feature_engineering(subject, content, CREATED_DATE):
     subject, content = clean_text(subject, content)
     word_bags = unpack_word_bags(word_bags_path = args.DATA_PATH)
     words_groups = get_bag_of_word_counts(subject, content, word_bags, GROUP_NAMES)
     entity_count_person, entity_count_location, entity_count_organization, entity_count_event, entity_count_work_of_art, entity_count_consumer_good, sentiment_score = get_entity_counts_sentiment_score(subject, content)
-    subject_length, subject_word_count, content_length, content_word_count, is_am, is_weekday = get_basic_quantitative_features(subject, content, sample_request_timestamp)
+    subject_length, subject_word_count, content_length, content_word_count, is_am, is_weekday = get_basic_quantitative_features(subject, content, CREATED_DATE)
     
     json_to_submit = {'content_length':content_length,
                 'content_word_count':content_word_count,
@@ -181,21 +188,64 @@ def get_prediction(json_to_submit):
 
     return GROUP_NAMES[response['predictions'][0]['classes']]
 
+def get_case_info(Category, Created_Date):
+    CaseID = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in xrange(6))
+    Priority = random.choice(["P1", "P2", "P2", "P3"])
+
+    Assignee = random.choice(Case_Assignments[Category])
+    Region = random.choice(Regions)
+    Channel = random.choice(Channels)
+
+    CSAT = np.random.normal(3.4, .6)
+    while CSAT > 5:
+        CSAT = np.random.normal(3.4, .6)
+
+    Close_Date = Created_Date + datetime.timedelta(days=random.randint(1,5), hours = random.randint(-5, 5), )
+    
+    return CaseID, Priority, Assignee, Region, Channel, CSAT, Close_Date
+
 def feeder():
+
+
     case_traffic = pd.read_csv('simulated_case_traffic.csv')
     case_traffic = shuffle(case_traffic)
 
     SEND_CASE_EVERY_X_SECONDS = 2 # email sent every x seconds
 
+    Dates = args.Created_Date.split('/')
+    print int(Dates[2]), int(Dates[0]), int(Dates[1])
+    Created_Date = datetime.datetime(int(Dates[2]), int(Dates[0]), int(Dates[1]))
 
+
+    spanner_client = spanner.Client()
+
+    instance = spanner_client.instance("caseroutingdemo")
+    database = instance.database("caserouting")
+    
+    counter = 0
     for index, row in case_traffic.iterrows():
-    	subject = row['subject']
-    	content = row['content']
-        date_created = 
-        json_to_submit = feature_engineering(subject, content)
-        category = get_prediction(json_to_submit)
-        print category
-        break
+    	Subject = row['subject']
+    	Content = row['content']
+         
+        json_to_submit = feature_engineering(Subject, Content, Created_Date)
+        Category = get_prediction(json_to_submit)
+        
+
+        CaseID, Priority, Assignee, Region, Channel, CSAT, Close_Date = get_case_info(Category, Created_Date)
+        
+        Sentiment_Score = json_to_submit["sentiment_scores"]  
+        
+        with database.batch() as batch:
+            batch.insert(
+                table='CaseDetails',
+                columns=('CaseID', 'Subject', 'Body', 'Category', 'Assignee', 'Region', 'Created_Date', 'Priority', 'Close_Date', 'CSAT', 'Channel', 'Sentiment', 'Status'),
+                values=[
+                    (CaseID, Subject, Content, Category, Assignee, Region, Created_Date, Priority, Close_Date, CSAT, Channel, float(Sentiment_Score), '')])
+        
+        print "Succefully submmited Case {}".format(CaseID)
+        counter = counter + 1
+        print counter, Created_Date
+        time.sleep(1)
 
 if __name__ == '__main__':
 
@@ -203,7 +253,12 @@ if __name__ == '__main__':
         description='Arguments for running web server')
     parser.add_argument(
         '--DATA_PATH', required=True, help='Bag of Words Path')
+    parser.add_argument(
+        '--Created_Date', required=True, help='Created Date of Cases to Simulate MM/DD/YYYY')
     args = parser.parse_args()
+
+
+
     feeder()
         
 	    
