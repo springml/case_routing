@@ -17,11 +17,31 @@
 from googlecloudsdk.api_lib.dataproc import dataproc as dp
 from googlecloudsdk.api_lib.dataproc import exceptions
 from googlecloudsdk.api_lib.dataproc import util
+from googlecloudsdk.calliope import arg_parsers
 from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.util import labels_util
 from googlecloudsdk.core import log
 
 
+def _CommonArgs(parser):
+  """Register flags common to all tracks."""
+  base.ASYNC_FLAG.AddToParser(parser)
+  # Allow the user to specify new labels as well as update/remove existing
+  labels_util.AddUpdateLabelsFlags(parser)
+  # Updates can take hours if a lot of data needs to be moved on HDFS
+  util.AddTimeoutFlag(parser, default='3h')
+  parser.add_argument('name', help='The name of the cluster to update.')
+  parser.add_argument(
+      '--num-workers',
+      type=int,
+      help='The new number of worker nodes in the cluster.')
+  parser.add_argument(
+      '--num-preemptible-workers',
+      type=int,
+      help='The new number of preemptible worker nodes in the cluster.')
+
+
+@base.ReleaseTracks(base.ReleaseTrack.GA)
 class Update(base.UpdateCommand):
   """Update labels and/or the number of worker nodes in a cluster.
 
@@ -53,22 +73,7 @@ class Update(base.UpdateCommand):
 
   @staticmethod
   def Args(parser):
-    base.ASYNC_FLAG.AddToParser(parser)
-    # Allow the user to specify new labels as well as update/remove existing
-    labels_util.AddUpdateLabelsFlags(parser)
-    # Updates can take hours if a lot of data needs to be moved on HDFS
-    util.AddTimeoutFlag(parser, default='3h')
-    parser.add_argument(
-        'name',
-        help='The name of the cluster to update.')
-    parser.add_argument(
-        '--num-workers',
-        type=int,
-        help='The new number of worker nodes in the cluster.')
-    parser.add_argument(
-        '--num-preemptible-workers',
-        type=int,
-        help='The new number of preemptible worker nodes in the cluster.')
+    _CommonArgs(parser)
 
   def Run(self, args):
     dataproc = dp.Dataproc(self.ReleaseTrack())
@@ -135,6 +140,11 @@ class Update(base.UpdateCommand):
         cluster=cluster,
         updateMask=','.join(changed_fields))
 
+    if (self.ReleaseTrack() == base.ReleaseTrack.BETA and
+        args.graceful_decommission_timeout):
+      request.gracefulDecommissionTimeout = (
+          str(args.graceful_decommission_timeout) + 's')
+
     operation = dataproc.client.projects_regions_clusters.Patch(request)
 
     if args.async:
@@ -156,3 +166,51 @@ class Update(base.UpdateCommand):
     cluster = dataproc.client.projects_regions_clusters.Get(request)
     log.UpdatedResource(cluster_ref)
     return cluster
+
+
+@base.ReleaseTracks(base.ReleaseTrack.BETA)
+class UpdateBeta(Update):
+  """Update labels and/or the number of worker nodes in a cluster.
+
+  Update the number of worker nodes and/or the labels in a cluster.
+
+  ## EXAMPLES
+
+  To resize a cluster, run:
+
+    $ {command} my_cluster --num-workers 5
+
+  To change the number preemptible workers in a cluster, run:
+
+    $ {command} my_cluster --num-preemptible-workers 5
+
+  To add the label 'customer=acme' to a cluster, run:
+
+    $ {command} my_cluster --update-labels=customer=acme
+
+  To update the label 'customer=ackme' to 'customer=acme', run:
+
+    $ {command} my_cluster --update-labels=customer=acme
+
+  To remove the label whose key is 'customer', run:
+
+    $ {command} my_cluster --remove-labels=customer
+
+  """
+
+  @staticmethod
+  def Args(parser):
+    _CommonArgs(parser)
+    parser.add_argument(
+        '--graceful-decommission-timeout',
+        type=arg_parsers.Duration(lower_bound='0s', upper_bound='1d'),
+        help="""
+            The graceful decommission timeout for decommissioning Node Managers
+            in the cluster, used when removing nodes. Graceful decommissioning
+            allows removing nodes from the cluster without interrupting jobs in
+            progress. Timeout specifies how long to wait for jobs in progress to
+            finish before forcefully removing nodes (and potentially
+            interrupting jobs). Timeout defaults to 0 if not set (for forceful
+            decommission), and the maximum allowed timeout is 1 day.
+            """,
+        hidden=True)

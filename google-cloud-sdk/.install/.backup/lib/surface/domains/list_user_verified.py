@@ -35,7 +35,7 @@ class ListUserVerified(base.Command):
   }
 
   def Run(self, args):
-    client = api_client.AppengineDomainsApiClient.GetApiClient()
+    client = api_client.GetApiClientForTrack(self.ReleaseTrack())
     return client.ListVerifiedDomains()
 
   def DeprecatedFormat(self, args):

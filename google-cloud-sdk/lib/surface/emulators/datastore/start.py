@@ -65,7 +65,7 @@ class Start(base.Command):
   def Run(self, args):
     if not args.host_port:
       args.host_port = arg_parsers.HostPort.Parse(
-          util.GetHostPort(), ipv6_enabled=socket.has_ipv6)
+          datastore_util.GetHostPort(), ipv6_enabled=socket.has_ipv6)
     args.host_port.host = args.host_port.host or 'localhost'
 
     datastore_util.PrepareGCDDataDir(args)

@@ -46,10 +46,7 @@ class Describe(base.DescribeCommand):
                                      'Get', request)])[0]
 
     return instance_groups_utils.ComputeInstanceGroupManagerMembership(
-        compute=client.apitools_client,
-        resources=holder.resources,
-        http=client.apitools_client.http,
-        batch_url=client.batch_url,
+        compute_holder=holder,
         items=[encoding.MessageToDict(response)],
         filter_mode=instance_groups_utils.InstanceGroupFilteringMode.ALL_GROUPS
     )[0]

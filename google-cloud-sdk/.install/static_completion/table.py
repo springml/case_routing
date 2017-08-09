@@ -2945,6 +2945,7 @@ table={'commands': {'app': {'commands': {'browse': {'flags': {'--launch-browser'
                                                                                     '--local-path': 'CANNOT_BE_COMPLETED',
                                                                                     '--memory': 'CANNOT_BE_COMPLETED',
                                                                                     '--region': 'DYNAMIC',
+                                                                                    '--source': 'CANNOT_BE_COMPLETED',
                                                                                     '--source-branch': 'CANNOT_BE_COMPLETED',
                                                                                     '--source-path': 'CANNOT_BE_COMPLETED',
                                                                                     '--source-revision': 'CANNOT_BE_COMPLETED',

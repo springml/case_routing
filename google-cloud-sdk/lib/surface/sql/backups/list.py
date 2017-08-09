@@ -36,7 +36,7 @@ class List(base.ListCommand):
 
   @staticmethod
   def Args(parser):
-    flags.INSTANCE_FLAG.AddToParser(parser)
+    flags.AddInstance(parser)
     parser.display_info.AddFormat("""
       table(
         id,

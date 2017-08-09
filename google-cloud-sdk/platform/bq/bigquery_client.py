@@ -117,6 +117,23 @@ def _FormatLabels(labels):
   return '\n'.join(result_lines)
 
 
+def _FormatProjectIdentifierForTransfers(project_reference):
+  """Formats a project identifier for data transfers.
+
+  Data transfer API calls take in the format projects/(projectName), so because
+  by default project IDs take the format (projectName), add the beginning format
+  to perform data transfer commands
+
+  Args:
+    project_reference: The project id to format for data transfer commands.
+
+  Returns:
+    The formatted project name for transfers.
+  """
+
+  return 'projects/' + project_reference.projectId
+
+
 
 
 def ConfigurePythonLogger(apilog=None):
@@ -652,6 +669,7 @@ class BigqueryClient(object):
 
 
 
+
   #################################
   ## Utility methods
   #################################
@@ -782,8 +800,11 @@ class BigqueryClient(object):
         return ApiClientHelper.ProjectReference.Create(projectId=project_id)
     except ValueError:
       pass
-    raise BigqueryClientError('Cannot determine project described by %s' % (
-        identifier,))
+    if project_id is '':
+      raise BigqueryClientError('Please provide a project ID.')
+    else:
+      raise BigqueryClientError('Cannot determine project described by %s' % (
+          identifier,))
 
   def GetDatasetReference(self, identifier=''):
     """Determine a DatasetReference from an identifier and self."""
@@ -1620,7 +1641,8 @@ class BigqueryClient(object):
                   view_udf_resources=None,
                   use_legacy_sql=None,
                   labels=None,
-                  time_partitioning=None):
+                  time_partitioning=None
+                 ):
     """Create a table corresponding to TableReference.
 
     Args:
@@ -2967,6 +2989,7 @@ class ApiClientHelper(object):
     def GetProjectReference(self):
       return ApiClientHelper.ProjectReference.Create(
           projectId=self.projectId)
+
 
 
 

@@ -39,7 +39,8 @@ class ListBeta(base.ListCommand):
   }
 
   def Run(self, args):
-    return api_client.AppengineSslApiClient.GetApiClient().ListSslCertificates()
+    return api_client.GetApiClientForTrack(
+        self.ReleaseTrack()).ListSslCertificates()
 
   @staticmethod
   def Args(parser):
@@ -57,8 +58,8 @@ class ListAlpha(ListBeta):
   """Lists the SSL certificates for Alpha version."""
 
   def Run(self, args):
-    return api_client.AppengineSslApiAlphaClient.GetApiClient(
-    ).ListSslCertificates()
+    return api_client.GetApiClientForTrack(
+        self.ReleaseTrack()).ListSslCertificates()
 
   @staticmethod
   def Args(parser):

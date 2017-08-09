@@ -14,6 +14,7 @@
 """Command for listing accelerator types."""
 from googlecloudsdk.api_lib.compute import base_classes
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.compute.accelerator_types import flags
 from googlecloudsdk.core import properties
 
 
@@ -29,6 +30,7 @@ class List(base.ListCommand):
           description
         )
     """)
+    parser.display_info.AddCacheUpdater(flags.AcceleratorTypesCompleter)
 
   def Run(self, args):
     holder = base_classes.ComputeApiHolder(self.ReleaseTrack())

@@ -125,9 +125,10 @@ class Upgrade(base.Command):
       Some value that we want to have printed later.
     """
     adapter = self.context['api_adapter']
+    location_get = self.context['location_get']
+    location = location_get(args)
 
-    cluster_ref = adapter.ParseCluster(args.name,
-                                       getattr(args, 'region', None))
+    cluster_ref = adapter.ParseCluster(args.name, location)
 
     # Make sure it exists (will raise appropriate error if not)
     cluster = adapter.GetCluster(cluster_ref)

@@ -21,7 +21,7 @@ from googlecloudsdk.command_lib.iam import iam_util
 
 
 class Describe(base_classes.BaseIamCommand, base.DescribeCommand):
-  """Show metadata for a role from an organization.
+  """Show metadata for a role.
 
   This command shows metadata for a role.
 
@@ -38,6 +38,10 @@ class Describe(base_classes.BaseIamCommand, base.DescribeCommand):
   To print metadata for a role of a project, run:
 
     $ {command} --project myproject viewer
+
+  To print metadata for a predefined role, run:
+
+    $ {command} roles/viewer
   """
 
   @staticmethod

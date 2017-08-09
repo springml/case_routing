@@ -33,9 +33,9 @@ class Delete(base.DeleteCommand):
 
   @staticmethod
   def Args(parser):
-    flags.INSTANCE_FLAG.AddToParser(parser)
-    flags.USERNAME_FLAG.AddToParser(parser)
-    flags.HOST_FLAG.AddToParser(parser)
+    flags.AddInstance(parser)
+    flags.AddUsername(parser)
+    flags.AddHost(parser)
     base.ASYNC_FLAG.AddToParser(parser)
 
   def Run(self, args):

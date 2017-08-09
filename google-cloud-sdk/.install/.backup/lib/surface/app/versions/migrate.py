@@ -55,7 +55,7 @@ class Migrate(base.Command):
                              'given service.')
 
   def Run(self, args):
-    client = appengine_api_client.GetApiClient()
+    client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     if args.service:
       service = client.GetServiceResource(args.service)
       traffic_split = {}

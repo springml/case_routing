@@ -51,7 +51,7 @@ class Create(base.CreateCommand):
 
   def Run(self, args):
     project = properties.VALUES.core.project.Get(required=True)
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     if args.region:
       create_util.CreateApp(api_client, project, args.region)
     elif console_io.CanPrompt():

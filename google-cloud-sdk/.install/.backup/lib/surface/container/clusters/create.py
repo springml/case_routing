@@ -82,9 +82,11 @@ Multiple locations can be specified, separated by commas. For example:
   parser.add_argument(
       '--disable-addons',
       type=arg_parsers.ArgList(
-          choices=[api_adapter.INGRESS, api_adapter.HPA]),
+          choices=[api_adapter.INGRESS, api_adapter.HPA,
+                   api_adapter.DASHBOARD]),
       help='List of cluster addons to disable. Options are {0}'.format(
-          ', '.join([api_adapter.INGRESS, api_adapter.HPA])))
+          ', '.join(
+              [api_adapter.INGRESS, api_adapter.HPA, api_adapter.DASHBOARD])))
   parser.add_argument(
       '--network',
       help='The Compute Engine Network that the cluster will connect to. '
@@ -278,17 +280,24 @@ class Create(base.CreateCommand):
     util.CheckKubectlInstalled()
 
     adapter = self.context['api_adapter']
+    location_get = self.context['location_get']
+    location = location_get(args)
 
     if not args.scopes:
       args.scopes = []
-    cluster_ref = adapter.ParseCluster(args.name,
-                                       getattr(args, 'region', None))
+    cluster_ref = adapter.ParseCluster(args.name, location)
     options = self.ParseCreateOptions(args)
 
     if options.enable_kubernetes_alpha:
       console_io.PromptContinue(message=constants.KUBERNETES_ALPHA_PROMPT,
                                 throw_if_unattended=True,
                                 cancel_on_no=True)
+
+    if getattr(args, 'region', None):
+      console_io.PromptContinue(
+          message=constants.KUBERNETES_REGIONAL_CHARGES_PROMPT,
+          throw_if_unattended=True,
+          cancel_on_no=True)
 
     if options.enable_autorepair is not None:
       log.status.Print(messages.AutoUpdateUpgradeRepairMessage(
@@ -340,7 +349,7 @@ class CreateBeta(Create):
     flags.AddEnableAutoRepairFlag(parser)
     flags.AddEnableAutoUpgradeFlag(parser)
     flags.AddServiceAccountFlag(parser)
-    flags.AddMasterAuthorizedNetworksFlags(parser, hidden=True)
+    flags.AddMasterAuthorizedNetworksFlags(parser)
     flags.AddEnableLegacyAuthorizationFlag(parser)
     flags.AddLabelsFlag(parser)
     flags.AddNetworkPolicyFlags(parser, hidden=True)
@@ -361,7 +370,7 @@ class CreateAlpha(Create):
     flags.AddEnableAutoRepairFlag(parser)
     flags.AddEnableAutoUpgradeFlag(parser)
     flags.AddServiceAccountFlag(parser)
-    flags.AddMasterAuthorizedNetworksFlags(parser, hidden=True)
+    flags.AddMasterAuthorizedNetworksFlags(parser)
     flags.AddEnableLegacyAuthorizationFlag(parser)
     flags.AddLabelsFlag(parser)
     flags.AddNetworkPolicyFlags(parser, hidden=False)

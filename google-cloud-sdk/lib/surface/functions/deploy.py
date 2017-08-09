@@ -18,7 +18,6 @@ import httplib
 from apitools.base.py import exceptions as apitools_exceptions
 
 from googlecloudsdk.api_lib.compute import utils
-from googlecloudsdk.api_lib.functions import exceptions
 from googlecloudsdk.api_lib.functions import operations
 from googlecloudsdk.api_lib.functions import util
 from googlecloudsdk.calliope import arg_parsers
@@ -67,6 +66,35 @@ def _SourceCodeArgs(parser):
       help=('Path to directory with source code in Cloud Source '
             'Repositories, when you specify this parameter --source-url flag '
             'is required.'))
+  path_group.add_argument(
+      '--source',
+      help="""\
+      Location of source code to deploy.
+
+      Location of the source can be one of the following:
+
+      * Source code in Google Cloud Storage,
+      * Reference to source repository or,
+      * Local filesystem path.
+
+      Value of the flag will be interpreted as Google Cloud Storage location if
+      it starts with `gs://`.
+
+      The value will be interpreted as reference to source repository if it
+      starts with `https://`..
+
+      Otherwise it will be interpeted as local filesystem path.
+
+      If you provide reference to source repository it should be in one of the
+      following formats:
+
+      * https://source.developers.google.com/projects/([^/]+)/repos/([^/]+)/revisions/([^/]+)/paths/(.+)
+        * Unlike other patterns this can include slashes in last group.
+      * https://source.developers.google.com/projects/([^/]+)/repos/([^/]+)/moveable-aliases/([^/]+)
+      * https://source.developers.google.com/projects/([^/]+)/repos/([^/]+)/fixed-aliases/([^/]+)
+      * https://source.developers.google.com/projects/([^/]+)/repos/([^/]+)
+      """)
+
   source_group = parser.add_mutually_exclusive_group()
   source_group.add_argument(
       '--stage-bucket',
@@ -262,7 +290,11 @@ class Deploy(base.Command):
                       trigger_params):
     function = self._PrepareFunctionWithoutSources(
         name, args.entry_point, args.timeout, args.trigger_http, trigger_params)
-    if args.source_url:
+    if args.source:
+      deploy_util.AddSourceToFunction(
+          function, args.source, args.include_ignored_files, args.name,
+          args.stage_bucket)
+    elif args.source_url:
       messages = util.GetApiMessagesModule()
       source_path = args.source_path
       source_branch = args.source_branch or 'master'
@@ -283,16 +315,6 @@ class Deploy(base.Command):
       zip_file = deploy_util.CreateSourcesZipFile(
           tmp_dir, local_path, args.include_ignored_files)
       return deploy_util.UploadFile(zip_file, args.name, args.stage_bucket)
-
-  def _ValidateUnpackedSourceSize(self, args):
-    ignore_regex = deploy_util.GetIgnoreFilesRegex(args.include_ignored_files)
-    path = deploy_util.GetLocalPath(args)
-    size_b = file_utils.GetTreeSizeBytes(path, ignore_regex)
-    size_limit_mb = 512
-    size_limit_b = size_limit_mb * 2 ** 20
-    if size_b > size_limit_b:
-      raise exceptions.OversizedDeployment(
-          str(size_b) + 'B', str(size_limit_b) + 'B')
 
   @util.CatchHTTPErrorRaiseHTTPException
   def _CreateFunction(self, location, function):
@@ -325,7 +347,6 @@ class Deploy(base.Command):
     Raises:
       FunctionsError if command line parameters are not valid.
     """
-    self._ValidateUnpackedSourceSize(args)
     trigger_params = deploy_util.DeduceAndCheckArgs(args)
     project = properties.VALUES.core.project.Get(required=True)
     location_ref = resources.REGISTRY.Parse(

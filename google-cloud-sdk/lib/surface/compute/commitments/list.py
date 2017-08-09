@@ -14,16 +14,32 @@
 """Listing Google Compute Engine commitments."""
 
 from googlecloudsdk.api_lib.compute import base_classes
-from googlecloudsdk.command_lib.compute.commitments import util
+from googlecloudsdk.api_lib.compute import lister
+from googlecloudsdk.api_lib.compute import utils
+from googlecloudsdk.calliope import base
 
 
-class List(base_classes.RegionalLister):
+class List(base.ListCommand):
   """List Google Compute Engine commitments."""
 
-  @property
-  def service(self):
-    return self.compute.regionCommitments
+  @staticmethod
+  def Args(parser):
+    parser.display_info.AddFormat("""\
+        table(name,
+              region.basename(),
+              endTimestamp,
+              status)
+        """)
+    parser.display_info.AddUriFunc(utils.MakeGetUriFunc())
+    lister.AddRegionsArg(parser)
 
-  @property
-  def resource_type(self):
-    return 'commitments'
+  def Run(self, args):
+    holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
+    client = holder.client
+
+    request_data = lister.ParseRegionalFlags(args, holder.resources)
+
+    list_implementation = lister.RegionalLister(
+        client, client.apitools_client.regionCommitments)
+
+    return lister.Invoke(request_data, list_implementation)

@@ -13,18 +13,38 @@
 # limitations under the License.
 """Command for listing machine types."""
 from googlecloudsdk.api_lib.compute import base_classes
+from googlecloudsdk.api_lib.compute import lister
+from googlecloudsdk.api_lib.compute import utils
+from googlecloudsdk.calliope import base
 
 
-class List(base_classes.ZonalLister):
+class List(base.ListCommand):
   """List Google Compute Engine machine types."""
 
-  @property
-  def service(self):
-    return self.compute.machineTypes
+  @staticmethod
+  def Args(parser):
+    parser.display_info.AddFormat("""\
+    table(
+      name,
+      zone.basename(),
+      guestCpus:label=CPUS,
+      memoryMb.size(units_in=MiB, units_out=GiB, precision=2):label=MEMORY_GB,
+      deprecated.state:label=DEPRECATED
+    )
+""")
+    parser.display_info.AddUriFunc(utils.MakeGetUriFunc())
+    lister.AddZonalListerArgs(parser)
 
-  @property
-  def resource_type(self):
-    return 'machineTypes'
+  def Run(self, args):
+    holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
+    client = holder.client
+
+    request_data = lister.ParseZonalFlags(args, holder.resources)
+
+    list_implementation = lister.ZonalLister(
+        client, client.apitools_client.machineTypes)
+
+    return lister.Invoke(request_data, list_implementation)
 
 
 List.detailed_help = base_classes.GetZonalListerHelp('machine types')

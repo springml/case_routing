@@ -60,12 +60,12 @@ class Delete(base.DeleteCommand):
       Some value that we want to have printed later.
     """
     adapter = self.context['api_adapter']
+    location_get = self.context['location_get']
+    location = location_get(args)
 
     cluster_refs = []
     for name in args.names:
-      cluster_refs.append(
-          adapter.ParseCluster(name,
-                               getattr(args, 'region', None)))
+      cluster_refs.append(adapter.ParseCluster(name, location))
     console_io.PromptContinue(
         message=util.ConstructList(
             'The following clusters will be deleted.',

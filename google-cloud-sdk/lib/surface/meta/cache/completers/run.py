@@ -123,7 +123,7 @@ class Run(base.Command):
         help=('Keyword arg dict passed to the completer constructor. For '
               'example, use this to set the resource collection and '
               'list command for `DeprecatedListCommandCompleter`:\n\n'
-              '  --kwargs=collection=...,list_command_path="..."'))
+              '  --kwargs=collection=...,foo="..."'))
     parser.add_argument(
         '--stack-trace',
         action='store_true',

@@ -112,9 +112,7 @@ class ActivateServiceAccount(base.SilentCommand):
       c_store.ActivateCredentials(account, cred)
     except c_store.TokenRefreshError as e:
       log.file_only_logger.exception(e)
-      raise auth_service_account.BadCredentialFileException(
-          'Failed to activate the given service account. '
-          'Please ensure provided key file is valid.')
+      raise
 
     project = args.project
     if project:

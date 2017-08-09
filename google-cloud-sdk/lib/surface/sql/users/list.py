@@ -32,7 +32,7 @@ class List(base.ListCommand):
 
   @staticmethod
   def Args(parser):
-    flags.INSTANCE_FLAG.AddToParser(parser)
+    flags.AddInstance(parser)
     # TODO(b/36473146): Add an output format test to kill a mutant.
     parser.display_info.AddFormat(flags.USERS_FORMAT_BETA)
 

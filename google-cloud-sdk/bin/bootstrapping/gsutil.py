@@ -79,8 +79,7 @@ def main():
   _MaybeAddBotoOption(args, 'Boto', 'ca_certificates_file',
                       properties.VALUES.core.custom_ca_certs_file.Get())
 
-  bootstrapping.ExecutePythonTool(
-      'platform/gsutil', 'gsutil', *args)
+  bootstrapping.ExecutePythonTool('platform/gsutil', 'gsutil', *args)
 
 
 if __name__ == '__main__':

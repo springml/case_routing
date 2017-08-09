@@ -70,7 +70,7 @@ class Start(base.Command):
     # TODO(b/36052475): This fails with "module/version does not exist" even
     # when it exists if the scaling mode is set to auto.  It would be good
     # to improve that error message.
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     services = api_client.ListServices()
     versions = version_util.GetMatchingVersions(
         api_client.ListVersions(services),

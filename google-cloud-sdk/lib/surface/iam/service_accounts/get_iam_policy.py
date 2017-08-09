@@ -37,6 +37,9 @@ class GetIamPolicy(base_classes.BaseIamCommand, base.ListCommand):
 
             $ {command} my-iam-account@somedomain.com
           """),
+      'DESCRIPTION': '\n\n'.join([
+          '{description}',
+          iam_util.GetHintForServiceAccountResource('get the iam policy of')])
   }
 
   @staticmethod

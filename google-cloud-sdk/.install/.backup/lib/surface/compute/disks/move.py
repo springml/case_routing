@@ -17,6 +17,7 @@ from googlecloudsdk.api_lib.compute import base_classes
 from googlecloudsdk.api_lib.compute.operations import poller
 from googlecloudsdk.api_lib.util import waiter
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.compute import completers
 from googlecloudsdk.command_lib.compute import flags
 from googlecloudsdk.command_lib.compute.disks import flags as disks_flags
 from googlecloudsdk.core import log
@@ -35,7 +36,7 @@ class Move(base.SilentCommand):
     parser.add_argument(
         '--destination-zone',
         help='The zone to move the disk to.',
-        completion_resource='compute.zones',
+        completer=completers.ZonesCompleter,
         required=True)
 
     base.ASYNC_FLAG.AddToParser(parser)

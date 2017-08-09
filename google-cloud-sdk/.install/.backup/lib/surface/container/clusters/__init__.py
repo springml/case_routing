@@ -17,6 +17,7 @@
 from googlecloudsdk.api_lib.container import transforms
 from googlecloudsdk.calliope import actions
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.container import container_command_util
 from googlecloudsdk.command_lib.container import flags
 from googlecloudsdk.core import properties
 
@@ -56,6 +57,7 @@ class Clusters(base.Group):
     Returns:
       The refined command context.
     """
+    context['location_get'] = container_command_util.GetZone
     return context
 
 
@@ -81,3 +83,18 @@ class ClustersAlpha(Clusters):
     """
     flags.AddZoneAndRegionFlags(parser, region_hidden=True)
     parser.display_info.AddTransforms(transforms.GetTransforms())
+
+  def Filter(self, context, args):
+    """Modify the context that will be given to this group's commands when run.
+
+    Args:
+      context: {str:object}, A set of key-value pairs that can be used for
+          common initialization among commands.
+      args: argparse.Namespace: The same namespace given to the corresponding
+          .Run() invocation.
+
+    Returns:
+      The refined command context.
+    """
+    context['location_get'] = container_command_util.GetZoneOrRegion
+    return context

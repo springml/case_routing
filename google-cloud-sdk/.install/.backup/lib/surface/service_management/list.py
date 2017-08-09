@@ -44,6 +44,8 @@ class List(base.ListCommand):
     $ {command} --available
   """
 
+  _DEFAULT_PAGE_SIZE = 2000
+
   @staticmethod
   def Args(parser):
     """Args is called by calliope to gather arguments for this command.
@@ -116,5 +118,5 @@ class List(base.ListCommand):
         request,
         limit=args.limit,
         batch_size_attribute='pageSize',
-        batch_size=args.page_size,
+        batch_size=args.page_size or self._DEFAULT_PAGE_SIZE,
         field='services')

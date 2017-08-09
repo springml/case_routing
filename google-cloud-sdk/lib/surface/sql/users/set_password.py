@@ -42,12 +42,12 @@ class SetPassword(base.CreateCommand):
           on the command line after this command. Positional arguments are
           allowed.
     """
-    flags.INSTANCE_FLAG.AddToParser(parser)
-    flags.USERNAME_FLAG.AddToParser(parser)
-    flags.HOST_FLAG.AddToParser(parser)
+    flags.AddInstance(parser)
+    flags.AddUsername(parser)
+    flags.AddHost(parser)
     password_group = parser.add_mutually_exclusive_group()
-    flags.PASSWORD_FLAG.AddToParser(password_group)
-    flags.PROMPT_FOR_PASSWORD_FLAG.AddToParser(password_group)
+    flags.AddPassword(password_group)
+    flags.AddPromptForPassword(password_group)
     base.ASYNC_FLAG.AddToParser(parser)
 
   def Run(self, args):

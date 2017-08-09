@@ -19,7 +19,6 @@ from googlecloudsdk.api_lib.sql import api_util
 from googlecloudsdk.api_lib.sql import instances
 from googlecloudsdk.api_lib.sql import operations
 from googlecloudsdk.api_lib.sql import validate
-from googlecloudsdk.calliope import arg_parsers
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions
 from googlecloudsdk.command_lib.sql import flags
@@ -84,31 +83,14 @@ def _GetConfirmedClearedFields(args, patch_instance):
 def AddBaseArgs(parser):
   """Adds base args and flags to the parser."""
   # TODO(b/35705305): move common flags to command_lib.sql.flags
-  parser.add_argument(
-      '--activation-policy',
-      required=False,
-      choices=['ALWAYS', 'NEVER', 'ON_DEMAND'],
-      help=('The activation policy for this instance. This specifies when '
-            'the instance should be activated and is applicable only when '
-            'the instance state is RUNNABLE.'))
-  parser.add_argument(
-      '--assign-ip',
-      action='store_true',
-      default=None,  # Tri-valued: None => don't change the setting.
-      help='The instance must be assigned an IP address.')
+  flags.AddActivationPolicy(parser)
+  flags.AddAssignIp(parser)
   parser.add_argument(
       '--async',
       action='store_true',
       help='Do not wait for the operation to complete.')
   gae_apps_group = parser.add_mutually_exclusive_group()
-  gae_apps_group.add_argument(
-      '--authorized-gae-apps',
-      type=arg_parsers.ArgList(min_length=1),
-      metavar='APP',
-      required=False,
-      help=('First Generation instances only. List of IDs for App Engine '
-            'applications running in the Standard environment that '
-            'can access this instance.'))
+  flags.AddAuthorizedGAEApps(gae_apps_group)
   gae_apps_group.add_argument(
       '--clear-gae-apps',
       required=False,
@@ -116,14 +98,7 @@ def AddBaseArgs(parser):
       help=('Specified to clear the list of App Engine apps that can access '
             'this instance.'))
   networks_group = parser.add_mutually_exclusive_group()
-  networks_group.add_argument(
-      '--authorized-networks',
-      type=arg_parsers.ArgList(min_length=1),
-      metavar='NETWORK',
-      required=False,
-      help=('The list of external networks that are allowed to connect to '
-            'the instance. Specified in CIDR notation, also known as '
-            '\'slash\' notation (e.g. 192.168.100.0/24).'))
+  flags.AddAuthorizedNetworks(networks_group)
   networks_group.add_argument(
       '--clear-authorized-networks',
       required=False,
@@ -131,52 +106,26 @@ def AddBaseArgs(parser):
       help=('Clear the list of external networks that are allowed to connect '
             'to the instance.'))
   backups_group = parser.add_mutually_exclusive_group()
-  backups_group.add_argument(
-      '--backup-start-time',
-      required=False,
-      help=('The start time of daily backups, specified in the 24 hour '
-            'format - HH:MM, in the UTC timezone.'))
+  flags.AddBackupStartTime(backups_group)
   backups_group.add_argument(
       '--no-backup',
       required=False,
       action='store_true',
       help='Specified if daily backup should be disabled.')
   database_flags_group = parser.add_mutually_exclusive_group()
-  database_flags_group.add_argument(
-      '--database-flags',
-      type=arg_parsers.ArgDict(min_length=1),
-      metavar='FLAG=VALUE',
-      required=False,
-      help=('A comma-separated list of database flags to set on the '
-            'instance. Use an equals sign to separate flag name and value. '
-            'Flags without values, like skip_grant_tables, can be written '
-            'out without a value after, e.g., `skip_grant_tables=`. Use '
-            'on/off for booleans. View the Instance Resource API for allowed '
-            'flags. (e.g., `--database-flags max_allowed_packet=55555,'
-            'skip_grant_tables=,log_output=1`)'))
+  flags.AddDatabaseFlags(database_flags_group)
   database_flags_group.add_argument(
       '--clear-database-flags',
       required=False,
       action='store_true',
       help=('Clear the database flags set on the instance. '
             'WARNING: Instance will be restarted.'))
-  parser.add_argument(
-      '--cpu',
-      type=int,
-      required=False,
-      help='A whole number value indicating how many cores are desired in '
-      'the machine. Both --cpu and --memory must be specified if a custom '
-      'machine type is desired, and the --tier flag must be omitted.')
+  flags.AddCPU(parser)
   parser.add_argument(
       '--diff',
       action='store_true',
       help='Show what changed as a result of the update.')
-  parser.add_argument(
-      '--enable-bin-log',
-      action='store_true',
-      default=None,  # Tri-valued: None => don't change the setting.
-      help=('Enable binary log. If backup configuration is disabled, binary '
-            'log should be disabled as well.'))
+  flags.AddEnableBinLog(parser)
   parser.add_argument(
       '--enable-database-replication',
       action='store_true',
@@ -198,32 +147,14 @@ def AddBaseArgs(parser):
       'instance',
       completer=flags.InstanceCompleter,
       help='Cloud SQL instance ID.')
-  parser.add_argument(
-      '--maintenance-release-channel',
-      choices={
-          'production': 'Production updates are stable and recommended '
-                        'for applications in production.',
-          'preview': 'Preview updates release prior to production '
-                     'updates. You may wish to use the preview channel '
-                     'for dev/test applications so that you can preview '
-                     'their compatibility with your application prior '
-                     'to the production release.'
-      },
-      type=str.lower,
-      help="Which channel's updates to apply during the maintenance window.")
+  flags.AddMaintenanceReleaseChannel(parser)
   parser.add_argument(
       '--maintenance-window-any',
       action='store_true',
       help='Removes the user-specified maintenance window.')
-  parser.add_argument(
-      '--maintenance-window-day',
-      choices=arg_parsers.DayOfWeek.DAYS,
-      type=arg_parsers.DayOfWeek.Parse,
-      help='Day of week for maintenance window, in UTC time zone.')
-  parser.add_argument(
-      '--maintenance-window-hour',
-      type=arg_parsers.BoundedInt(lower_bound=0, upper_bound=23),
-      help='Hour of day for maintenance window, in UTC time zone.')
+  flags.AddMaintenanceWindowDay(parser)
+  flags.AddMaintenanceWindowHour(parser)
+  flags.AddMemory(parser)
   parser.add_argument(
       '--pricing-plan',
       '-p',
@@ -231,44 +162,15 @@ def AddBaseArgs(parser):
       choices=['PER_USE', 'PACKAGE'],
       help=('First Generation instances only. The pricing plan for this '
             'instance.'))
-  parser.add_argument(
-      '--memory',
-      type=arg_parsers.BinarySize(),
-      required=False,
-      help='A whole number value indicating how much memory is desired in '
-      'the machine. A size unit should be provided (eg. 3072MiB or 9GiB) - '
-      'if no units are specified, GiB is assumed. Both --cpu and --memory '
-      'must be specified if a custom machine type is desired, and the --tier '
-      'flag must be omitted.')
-  parser.add_argument(
-      '--replication',
-      required=False,
-      choices=['SYNCHRONOUS', 'ASYNCHRONOUS'],
-      help='The type of replication this instance uses.')
+  flags.AddReplication(parser)
   parser.add_argument(
       '--require-ssl',
       action='store_true',
       default=None,  # Tri-valued: None => don't change the setting.
       help=('mysqld should default to \'REQUIRE X509\' for users connecting '
             'over IP.'))
-  parser.add_argument(
-      '--storage-auto-increase',
-      action='store_true',
-      default=None,
-      help='Storage size can be increased, but it cannot be '
-      'decreased; storage increases are permanent for the life of the '
-      'instance. With this setting enabled, a spike in storage requirements '
-      'can result in permanently increased storage costs for your instance. '
-      'However, if an instance runs out of available space, it can result in '
-      'the instance going offline, dropping existing connections.')
-  parser.add_argument(
-      '--storage-size',
-      type=arg_parsers.BinarySize(
-          lower_bound='10GB',
-          upper_bound='10230GB',
-          suggested_binary_size_scales=['GB']),
-      help='Amount of storage allocated to the instance. Must be an integer '
-      'number of GB between 10GB and 10230GB inclusive.')
+  flags.AddStorageAutoIncrease(parser)
+  flags.AddStorageSize(parser)
   parser.add_argument(
       '--tier',
       '-t',

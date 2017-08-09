@@ -44,9 +44,11 @@ class Describe(base.DescribeCommand):
       Some value that we want to have printed later.
     """
     adapter = self.context['api_adapter']
+    location_get = self.context['location_get']
+    location = location_get(args)
 
     try:
       return adapter.GetOperation(adapter.ParseOperation(
-          args.operation_id, getattr(args, 'region', None)))
+          args.operation_id, location))
     except apitools_exceptions.HttpError as error:
       raise exceptions.HttpException(error, util.HTTP_ERROR_FORMAT)

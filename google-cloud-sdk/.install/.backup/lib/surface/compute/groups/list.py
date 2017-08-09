@@ -32,7 +32,7 @@ class List(base_classes.GlobalLister):
     return self.clouduseraccounts.MESSAGES_MODULE
 
   def GetResources(self, args, errors):
-    return lister.GetGlobalResources(
+    return lister.GetGlobalResourcesDicts(
         service=self.service,
         project=self.project,
         filter_expr=self.GetFilterExpr(args),

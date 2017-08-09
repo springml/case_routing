@@ -13,23 +13,40 @@
 # limitations under the License.
 """Command for listing disk types."""
 from googlecloudsdk.api_lib.compute import base_classes
+from googlecloudsdk.api_lib.compute import lister
+from googlecloudsdk.api_lib.compute import utils
 from googlecloudsdk.api_lib.util import apis
 from googlecloudsdk.calliope import arg_parsers
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.compute import completers
 from googlecloudsdk.core import properties
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.GA)
-class List(base_classes.ZonalLister):
+class List(base.ListCommand):
   """List Google Compute Engine disk types."""
 
-  @property
-  def service(self):
-    return self.compute.diskTypes
+  @staticmethod
+  def Args(parser):
+    parser.display_info.AddFormat("""\
+        table(
+          name,
+          zone.basename(),
+          validDiskSize:label=VALID_DISK_SIZES
+        )""")
+    parser.display_info.AddUriFunc(utils.MakeGetUriFunc())
+    lister.AddZonalListerArgs(parser)
 
-  @property
-  def resource_type(self):
-    return 'diskTypes'
+  def Run(self, args):
+    holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
+    client = holder.client
+
+    request_data = lister.ParseZonalFlags(args, holder.resources)
+
+    list_implementation = lister.ZonalLister(
+        client, client.apitools_client.diskTypes)
+
+    return lister.Invoke(request_data, list_implementation)
 
 
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)
@@ -46,7 +63,7 @@ class ListAlpha(base.ListCommand):
         metavar='NAME',
         nargs='*',
         default=[],
-        completion_resource='compute.diskTypes',
+        completer=completers.DeprecatedDiskTypesCompleter,
         help=('If provided, show details for the specified names and/or URIs '
               'of resources.'))
     parser.add_argument(
@@ -91,14 +108,7 @@ class ListAlpha(base.ListCommand):
       result.append('(zone eq {0})'.format('|'.join(zones)))
     if regions:
       result.append('(region eq {0})'.format('|'.join(regions)))
-    return ''.join(result)
-
-  def _GetListPage(self, compute_disk_types, request):
-    response = compute_disk_types.AggregatedList(request)
-    disk_types_lists = []
-    for disk_in_scope in response.items.additionalProperties:
-      disk_types_lists += disk_in_scope.value.diskTypes
-    return disk_types_lists, response.nextPageToken
+    return ''.join(result) or None
 
   def Run(self, args):
     compute_disk_types = apis.GetClientInstance('compute', 'alpha').diskTypes
@@ -111,14 +121,8 @@ class ListAlpha(base.ListCommand):
     )
 
     # TODO(b/34871930): Write and use helper for handling listing.
-    disk_types_lists, next_page_token = self._GetListPage(
-        compute_disk_types, request)
-    while next_page_token:
-      request.pageToken = next_page_token
-      disk_types_list_page, next_page_token = self._GetListPage(
-          compute_disk_types, request)
-      disk_types_lists += disk_types_list_page
-    return disk_types_lists
+    return utils.GetListPager(
+        compute_disk_types, request, lambda r: r.value.diskTypes)
 
 
 List.detailed_help = base_classes.GetZonalListerHelp('disk types')

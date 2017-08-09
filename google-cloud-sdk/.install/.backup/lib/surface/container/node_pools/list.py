@@ -60,9 +60,11 @@ class List(base.ListCommand):
       Some value that we want to have printed later.
     """
     adapter = self.context['api_adapter']
+    location_get = self.context['location_get']
+    location = location_get(args)
 
     cluster = properties.VALUES.container.cluster.Get(required=True)
-    cluster_ref = adapter.ParseCluster(cluster, getattr(args, 'region', None))
+    cluster_ref = adapter.ParseCluster(cluster, location)
 
     try:
       res = adapter.ListNodePools(cluster_ref)

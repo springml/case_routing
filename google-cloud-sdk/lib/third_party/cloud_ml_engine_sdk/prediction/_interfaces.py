@@ -21,11 +21,10 @@ class Model(object):
   responsibility of a Model to translate these instances into
   actual predictions.
 
-  Note that this class is service agnostic, e.g., no assumptions are made
-  about JSON or base64 encoding -- those conversions are taken care of by
-  their respective services (in this case, the online prediction web server).
-  The inputs and outputs here are Python data types. A particular Model
-  handles a particular type of input.
+  The input instances and the output use python data types. The input
+  instances have been decoded prior to being passed to the predict
+  method. The output, which should use python data types is
+  encoded after being returned from the predict method.
   """
 
   def predict(self, instances, stats=None):
@@ -36,7 +35,7 @@ class Model(object):
 
     Args:
       instances: list of instances, as described in the API.
-      stats: Stats object for recording timing information.
+      stats: Dict (str->float) object for recording timing information.
 
     Returns:
       A two-element tuple (inputs, outputs). Both inputs and outputs are
@@ -51,6 +50,22 @@ class Model(object):
   @property
   def signature(self):
     """Returns the SignatureDef for this model."""
+    raise NotImplementedError()
+
+  @classmethod
+  def from_client(cls, client, model_path):
+    """Creates a model using the given client and path.
+
+    Path is useful, e.g., to load files from the exported directory containing
+    the model.
+
+    Args:
+      client: An instance of Client for performing prediction.
+      model_path: The path to the stored model.
+
+    Returns:
+      An instance implementing this Model class.
+    """
     raise NotImplementedError()
 
 
@@ -84,6 +99,22 @@ class PredictionClient(object):
     raise NotImplementedError()
 
 
+class Processor(object):
+  """Interface for constructing instance processors."""
+
+  @classmethod
+  def from_model_path(cls, model_path):
+    """Creates a processor using the given model path.
+
+    Args:
+      model_path: The path to the stored model.
+
+    Returns:
+      An instance implementing this Processor class.
+    """
+    raise NotImplementedError()
+
+
 class Preprocessor(object):
   """Interface for processing instances one-by-one before prediction."""
 
@@ -114,24 +145,3 @@ class Postprocessor(object):
       The processed instance to return as the final prediction output.
     """
     raise NotImplementedError()
-
-
-# Specify the method interface for users to implement, so disable the unused
-# argument rule.
-def from_client(client, model_path):  # pylint: disable=unused-argument
-  """Creates a model using the given client and path.
-
-  Path is useful, e.g., to load files from the exported directory containing
-  the model.
-
-  Args:
-    client: An instance of Client for performing prediction.
-    model_path: The path to the stored model.
-
-  Returns:
-    An instance implementing the following:
-      Model
-      -or-
-      Preprocessor and/or Postprocessor
-  """
-  raise NotImplementedError()

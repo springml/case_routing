@@ -13,20 +13,39 @@
 # limitations under the License.
 """Command for listing sole-tenancy host types."""
 from googlecloudsdk.api_lib.compute import base_classes
+from googlecloudsdk.api_lib.compute import lister
+from googlecloudsdk.api_lib.compute import utils
 from googlecloudsdk.calliope import base
 
 
 @base.Hidden
-class List(base_classes.ZonalLister):
+class List(base.ListCommand):
   """List Google Compute Engine sole-tenancy host types."""
 
-  @property
-  def service(self):
-    return self.compute.hostTypes
+  @staticmethod
+  def Args(parser):
+    parser.display_info.AddFormat("""\
+        table(
+          name,
+          zone.basename(),
+          guestCpus:label=CPUs,
+          memoryMb,
+          localSsdGb,
+          deprecated.state:label=DEPRECATED
+        )""")
+    parser.display_info.AddUriFunc(utils.MakeGetUriFunc())
+    lister.AddZonalListerArgs(parser)
 
-  @property
-  def resource_type(self):
-    return 'hostTypes'
+  def Run(self, args):
+    holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
+    client = holder.client
+
+    request_data = lister.ParseZonalFlags(args, holder.resources)
+
+    list_implementation = lister.ZonalLister(
+        client, client.apitools_client.hostTypes)
+
+    return lister.Invoke(request_data, list_implementation)
 
 
 List.detailed_help = base_classes.GetZonalListerHelp('hostTypes')

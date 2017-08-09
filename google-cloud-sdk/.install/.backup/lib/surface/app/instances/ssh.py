@@ -85,7 +85,7 @@ class SshGa(base.Command):
     Returns:
       int, The exit code of the SSH command.
     """
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     env = ssh.Environment.Current()
     env.RequireSSH()
     keys = ssh.Keys.FromFilename()

@@ -56,8 +56,9 @@ class GetValue(base.Command):
 
   def Run(self, args):
     config_name = named_configs.ConfigurationStore.ActiveConfig().name
-    log.status.write('Your active configuration is: [{0}]\n\n'.format(
-        config_name))
+    if config_name != 'default':
+      log.status.write('Your active configuration is: [{0}]\n'.format(
+          config_name))
 
     section, prop = properties.ParsePropertyString(args.property)
     if not prop:

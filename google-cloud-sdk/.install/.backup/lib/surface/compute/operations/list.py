@@ -211,7 +211,7 @@ class ListGA(base_classes.BaseLister):
                  maxResults=max_results,
                  project=project)))
 
-    return request_helper.MakeRequests(
+    return request_helper.ListJson(
         requests=requests,
         http=self.http,
         batch_url=self.batch_url,

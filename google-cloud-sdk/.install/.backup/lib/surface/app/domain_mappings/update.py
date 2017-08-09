@@ -46,7 +46,7 @@ class UpdateBeta(base.UpdateCommand):
     flags.AddCertificateIdFlag(parser, include_no_cert=True)
 
   def Run(self, args):
-    client = api_client.AppengineDomainsApiClient.GetApiClient()
+    client = api_client.GetApiClientForTrack(self.ReleaseTrack())
     mapping = client.UpdateDomainMapping(args.domain,
                                          args.certificate_id,
                                          args.no_certificate_id)
@@ -64,7 +64,7 @@ class UpdateAlpha(UpdateBeta):
     flags.AddNoManagedCertificateFlag(parser)
 
   def Run(self, args):
-    client = api_client.AppengineDomainsApiAlphaClient.GetApiClient()
+    client = api_client.GetApiClientForTrack(self.ReleaseTrack())
     mapping = client.UpdateDomainMapping(args.domain,
                                          args.certificate_id,
                                          args.no_certificate_id,

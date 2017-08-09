@@ -52,9 +52,9 @@ class Cancel(base.Command):
       Some value that we want to have printed later.
     """
     adapter = self.context['api_adapter']
-
-    op_ref = adapter.ParseOperation(args.operation_id,
-                                    getattr(args, 'region', None))
+    location_get = self.context['location_get']
+    location = location_get(args)
+    op_ref = adapter.ParseOperation(args.operation_id, location)
     try:
       op = adapter.GetOperation(op_ref)
     except apitools_exceptions.HttpError as error:

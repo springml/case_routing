@@ -36,7 +36,7 @@ class _BaseGet(object):
     parser.add_argument(
         'common_name',
         help='User supplied name. Constrained to ```[a-zA-Z.-_ ]+```.')
-    flags.INSTANCE_FLAG.AddToParser(parser)
+    flags.AddInstance(parser)
 
   def Run(self, args):
     """Retrieves information about an SSL cert for a Cloud SQL instance.

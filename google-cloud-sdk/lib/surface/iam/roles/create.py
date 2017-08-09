@@ -56,7 +56,7 @@ class Create(base_classes.BaseIamCommand):
         help='The Yaml file you want to use to create a role. '
         'Can not be specified with other flags except role-id.')
     flags.GetOrgFlag('create').AddToParser(parser)
-    flags.GetRoleFlag('create').AddToParser(parser)
+    flags.GetCustomRoleFlag('create').AddToParser(parser)
 
   def Run(self, args):
     iam_client = apis.GetClientInstance('iam', 'v1')

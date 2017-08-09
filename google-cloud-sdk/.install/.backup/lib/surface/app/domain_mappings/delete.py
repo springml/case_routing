@@ -44,9 +44,6 @@ class Delete(base.DeleteCommand):
                        ' serving from this domain.'.format(args.domain)),
         cancel_on_no=True)
 
-    if self.ReleaseTrack() == base.ReleaseTrack.ALPHA:
-      client = api_client.AppengineDomainsApiAlphaClient.GetApiClient()
-    else:
-      client = api_client.AppengineDomainsApiClient.GetApiClient()
+    client = api_client.GetApiClientForTrack(self.ReleaseTrack())
     client.DeleteDomainMapping(args.domain)
     log.DeletedResource(args.domain)

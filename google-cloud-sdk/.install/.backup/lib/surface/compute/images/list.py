@@ -96,14 +96,14 @@ class List(base_classes.BaseLister):
                maxResults=constants.MAX_RESULTS_PER_PAGE,
                project=project)))
 
-    images = request_helper.MakeRequests(
+    images = request_helper.ListJson(
         requests=requests,
         http=self.http,
         batch_url=self.batch_url,
         errors=errors)
 
     for image in images:
-      if not image.deprecated or args.show_deprecated:
+      if not image.get('deprecated', False) or args.show_deprecated:
         yield image
 
 

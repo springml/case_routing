@@ -42,11 +42,12 @@ class Describe(base.DescribeCommand):
       Some value that we want to have printed later.
     """
     adapter = self.context['api_adapter']
+    location_get = self.context['location_get']
+    location = location_get(args)
+
     self._upgrade_hint = None
     vv = VersionVerifier()
-    c = adapter.GetCluster(
-        adapter.ParseCluster(args.name,
-                             getattr(args, 'region', None)))
+    c = adapter.GetCluster(adapter.ParseCluster(args.name, location))
     ver_status = vv.Compare(c.currentMasterVersion, c.currentNodeVersion)
 
     if ver_status == VersionVerifier.UPGRADE_AVAILABLE:

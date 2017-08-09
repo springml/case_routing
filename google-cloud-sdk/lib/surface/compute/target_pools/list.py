@@ -13,18 +13,29 @@
 # limitations under the License.
 """Command for listing target pools."""
 from googlecloudsdk.api_lib.compute import base_classes
+from googlecloudsdk.api_lib.compute import lister
+from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.compute.target_pools import flags
 
 
-class List(base_classes.RegionalLister):
+class List(base.ListCommand):
   """List target pools."""
 
-  @property
-  def service(self):
-    return self.compute.targetPools
+  @staticmethod
+  def Args(parser):
+    parser.display_info.AddFormat(flags.DEFAULT_LIST_FORMAT)
+    lister.AddRegionsArg(parser)
 
-  @property
-  def resource_type(self):
-    return 'targetPools'
+  def Run(self, args):
+    holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
+    client = holder.client
+
+    request_data = lister.ParseRegionalFlags(args, holder.resources)
+
+    list_implementation = lister.RegionalLister(
+        client, client.apitools_client.targetPools)
+
+    return lister.Invoke(request_data, list_implementation)
 
 
 List.detailed_help = base_classes.GetRegionalListerHelp('target pools')

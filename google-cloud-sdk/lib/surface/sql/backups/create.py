@@ -35,7 +35,7 @@ class CreateBackup(base.CreateCommand):
           on the command line after this command. Positional arguments are
           allowed.
     """
-    flags.INSTANCE_FLAG.AddToParser(parser)
+    flags.AddInstance(parser)
     parser.add_argument(
         '--description', help='A friendly description of the backup.')
     parser.add_argument(

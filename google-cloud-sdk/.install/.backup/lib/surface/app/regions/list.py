@@ -39,5 +39,5 @@ class List(base.ListCommand):
     """)
 
   def Run(self, args):
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     return sorted(api_client.ListRegions())

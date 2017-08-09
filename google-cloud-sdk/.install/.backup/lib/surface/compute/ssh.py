@@ -18,6 +18,7 @@ import sys
 
 from googlecloudsdk.api_lib.compute import base_classes
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.compute import completers
 from googlecloudsdk.command_lib.compute import flags
 from googlecloudsdk.command_lib.compute import scope as compute_scope
 from googlecloudsdk.command_lib.compute import ssh_utils
@@ -67,7 +68,7 @@ def _Args(parser):
 
   parser.add_argument(
       'user_host',
-      completion_resource='compute.instances',
+      completer=completers.DeprecatedInstancesCompleter,
       metavar='[USER@]INSTANCE',
       help="""\
       Specifies the instance to SSH into.
@@ -208,27 +209,13 @@ class SshGA(base.Command):
       sys.exit(return_code)
 
 
-@base.ReleaseTracks(base.ReleaseTrack.BETA)
+@base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.ALPHA)
 class SshBeta(SshGA):
   """SSH into a virtual machine instance."""
 
   def __init__(self, *args, **kwargs):
     super(SshBeta, self).__init__(*args, **kwargs)
     self._use_account_service = True
-
-  @staticmethod
-  def Args(parser):
-    """Set up arguments for this command.
-
-    Args:
-      parser: An argparse.ArgumentParser.
-    """
-    _Args(parser)
-
-
-@base.ReleaseTracks(base.ReleaseTrack.ALPHA)
-class SshAlpha(SshBeta):
-  """SSH into a virtual machine instance."""
 
   @staticmethod
   def Args(parser):
@@ -251,20 +238,22 @@ class SshAlpha(SshBeta):
         allow you to establish connections using the instance's private
         network IP.
 
+        gcloud will verify that the instance it connected to reports the same id
+        as the instance you requested connection to. This only helps with
+        catching network configuration mistakes and is not meant as protection
+        against any kind of attack.
+
         The same IP can appear in two internal networks and can result in an
         incorrect connection. For example, instance-1 in network-1 has the same
         internal IP as instance-2 in network-2. You want to connect to
         instance-1 but your network configuration results in opening a
-        connection to instance-2. gcloud will verify that the instance it
-        connected to reports the same id as the instance you requested
-        connection to. This only helps with catching network configuration
-        mistakes and is not meant as protection against any kind of attack.
-        `errors gcloud` requires the instance to have curl tool available.""")
+        connection to instance-2. This requires the instance to have curl tool
+        available.""")
 
   def Run(self, args):
     """See SshGA.Run."""
     self._use_internal_ip = args.internal_ip
-    super(SshAlpha, self).Run(args)
+    super(SshBeta, self).Run(args)
 
 
 def DetailedHelp(version):

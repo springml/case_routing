@@ -41,7 +41,7 @@ class Update(base.UpdateCommand):
     flags.AddSslCertificateFlags(parser, required=False)
 
   def Run(self, args):
-    client = api_client.GetApiClient(self.ReleaseTrack())
+    client = api_client.GetApiClientForTrack(self.ReleaseTrack())
     ssl_cert = client.UpdateSslCertificate(args.id, args.display_name,
                                            args.certificate, args.private_key)
     log.UpdatedResource(args.id)

@@ -44,7 +44,7 @@ class Delete(base_classes.BaseIamCommand, base.DescribeCommand):
   @staticmethod
   def Args(parser):
     flags.GetOrgFlag('delete').AddToParser(parser)
-    flags.GetRoleFlag('delete').AddToParser(parser)
+    flags.GetCustomRoleFlag('delete').AddToParser(parser)
 
   def Run(self, args):
     iam_client = apis.GetClientInstance('iam', 'v1')

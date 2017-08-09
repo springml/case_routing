@@ -34,5 +34,5 @@ class Describe(base.DescribeCommand):
     parser.add_argument('operation', help='ID of operation.')
 
   def Run(self, args):
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     return api_client.GetOperation(args.operation)
