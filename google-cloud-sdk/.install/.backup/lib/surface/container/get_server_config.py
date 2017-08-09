@@ -15,6 +15,7 @@
 """Get Server Config."""
 
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.container import container_command_util
 from googlecloudsdk.command_lib.container import flags
 from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
@@ -23,6 +24,10 @@ from googlecloudsdk.core import properties
 @base.ReleaseTracks(base.ReleaseTrack.GA, base.ReleaseTrack.BETA)
 class GetServerConfig(base.Command):
   """Get Container Engine server config."""
+
+  def __init__(self, *args, **kwargs):
+    super(GetServerConfig, self).__init__(*args, **kwargs)
+    self.location_get = container_command_util.GetZone
 
   @staticmethod
   def Args(parser):
@@ -39,17 +44,20 @@ class GetServerConfig(base.Command):
     adapter = self.context['api_adapter']
 
     project_id = properties.VALUES.core.project.Get(required=True)
-    location = getattr(args, 'region', None)
-    if not location:
-      location = properties.VALUES.compute.zone.Get(required=True)
+    location = self.location_get(args)
 
-    log.status.Print('Fetching server config for {zone}'.format(zone=location))
+    log.status.Print('Fetching server config for {location}'.format(
+        location=location))
     return adapter.GetServerConfig(project_id, location)
 
 
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)
 class GetServerConfigAlpha(GetServerConfig):
   """Get Container Engine server config."""
+
+  def __init__(self, *args, **kwargs):
+    super(GetServerConfigAlpha, self).__init__(*args, **kwargs)
+    self.location_get = container_command_util.GetZoneOrRegion
 
   @staticmethod
   def Args(parser):
@@ -61,3 +69,18 @@ class GetServerConfigAlpha(GetServerConfig):
         for its capabilities.
     """
     flags.AddZoneAndRegionFlags(parser, region_hidden=True)
+
+  def Filter(self, context, args):
+    """Modify the context that will be given to this group's commands when run.
+
+    Args:
+      context: {str:object}, A set of key-value pairs that can be used for
+          common initialization among commands.
+      args: argparse.Namespace: The same namespace given to the corresponding
+          .Run() invocation.
+
+    Returns:
+      The refined command context.
+    """
+    context['location_get'] = container_command_util.GetZoneOrRegion
+    return context

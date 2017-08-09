@@ -29,6 +29,9 @@ class RemoveIamPolicyBinding(base_classes.BaseIamCommand):
 
   detailed_help = iam_util.GetDetailedHelpForRemoveIamPolicyBinding(
       'service account', 'my-iam-account@somedomain.com')
+  detailed_help['DESCRIPTION'] += '\n\n' + (
+      iam_util.GetHintForServiceAccountResource(
+          'remove a policy binding from'))
 
   @staticmethod
   def Args(parser):

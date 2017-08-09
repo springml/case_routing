@@ -33,7 +33,7 @@ class ListBeta(base.ListCommand):
   }
 
   def Run(self, args):
-    client = api_client.AppengineDomainsApiClient.GetApiClient()
+    client = api_client.GetApiClientForTrack(self.ReleaseTrack())
     return client.ListDomainMappings()
 
   @staticmethod
@@ -51,7 +51,7 @@ class ListAlpha(ListBeta):
   """Lists domain mappings Alpha."""
 
   def Run(self, args):
-    client = api_client.AppengineDomainsApiAlphaClient.GetApiClient()
+    client = api_client.GetApiClientForTrack(self.ReleaseTrack())
     return client.ListDomainMappings()
 
   @staticmethod

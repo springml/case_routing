@@ -50,10 +50,7 @@ class List(base.ListCommand):
     results = (resource for resource in results if 'zone' in resource)
 
     return instance_groups_utils.ComputeInstanceGroupManagerMembership(
-        compute=client.apitools_client,
-        resources=holder.resources,
-        http=client.apitools_client.http,
-        batch_url=client.batch_url,
+        compute_holder=holder,
         items=results,
         filter_mode=instance_groups_utils.InstanceGroupFilteringMode.
         ONLY_UNMANAGED_GROUPS)

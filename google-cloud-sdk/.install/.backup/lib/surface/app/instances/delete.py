@@ -45,7 +45,7 @@ class Delete(base.DeleteCommand):
         '--service', '-s', required=True, help='The service ID.')
 
   def Run(self, args):
-    client = appengine_api_client.GetApiClient()
+    client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     instance = instances_util.Instance(args.service,
                                        args.version, args.instance)
 

@@ -45,7 +45,7 @@ class Undelete(base_classes.BaseIamCommand, base.DescribeCommand):
   @staticmethod
   def Args(parser):
     flags.GetOrgFlag('undelete').AddToParser(parser)
-    flags.GetRoleFlag('undelete').AddToParser(parser)
+    flags.GetCustomRoleFlag('undelete').AddToParser(parser)
 
   def Run(self, args):
     iam_client = apis.GetClientInstance('iam', 'v1')

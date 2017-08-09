@@ -67,7 +67,7 @@ class Delete(base.DeleteCommand):
                               'given service.'))
 
   def Run(self, args):
-    client = appengine_api_client.GetApiClient()
+    client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     services = client.ListServices()
     all_versions = client.ListVersions(services)
     # Sort versions to make behavior deterministic enough for unit testing.

@@ -13,18 +13,31 @@
 # limitations under the License.
 """Command for listing target instances."""
 from googlecloudsdk.api_lib.compute import base_classes
+from googlecloudsdk.api_lib.compute import lister
+from googlecloudsdk.api_lib.compute import utils
+from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.compute.target_instances import flags
 
 
-class List(base_classes.ZonalLister):
+class List(base.ListCommand):
   """List target instances."""
 
-  @property
-  def service(self):
-    return self.compute.targetInstances
+  @staticmethod
+  def Args(parser):
+    parser.display_info.AddFormat(flags.DEFAULT_LIST_FORMAT)
+    parser.display_info.AddUriFunc(utils.MakeGetUriFunc())
+    lister.AddZonalListerArgs(parser)
 
-  @property
-  def resource_type(self):
-    return 'targetInstances'
+  def Run(self, args):
+    holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
+    client = holder.client
+
+    request_data = lister.ParseZonalFlags(args, holder.resources)
+
+    list_implementation = lister.ZonalLister(
+        client, client.apitools_client.targetInstances)
+
+    return lister.Invoke(request_data, list_implementation)
 
 
 List.detailed_help = base_classes.GetZonalListerHelp('target instances')

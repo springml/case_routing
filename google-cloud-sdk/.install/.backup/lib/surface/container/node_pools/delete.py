@@ -76,8 +76,10 @@ class Delete(base.DeleteCommand):
       Some value that we want to have printed later.
     """
     adapter = self.context['api_adapter']
+    location_get = self.context['location_get']
+    location = location_get(args)
 
-    pool_ref = adapter.ParseNodePool(args.name, getattr(args, 'region', None))
+    pool_ref = adapter.ParseNodePool(args.name, location)
 
     console_io.PromptContinue(
         message=('The following node pool will be deleted.\n'

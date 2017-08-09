@@ -20,6 +20,7 @@ import sys
 from googlecloudsdk.api_lib.compute import base_classes
 from googlecloudsdk.calliope import arg_parsers
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.compute import completers
 from googlecloudsdk.command_lib.compute import flags
 from googlecloudsdk.command_lib.compute import scope as compute_scope
 from googlecloudsdk.command_lib.compute import ssh_utils
@@ -78,7 +79,7 @@ class ConnectToSerialPort(base.Command):
 
     parser.add_argument(
         'user_host',
-        completion_resource='compute.instances',
+        completer=completers.DeprecatedInstancesCompleter,
         metavar='[USER@]INSTANCE',
         help="""\
         Specifies the user/instance for the serial port connection.

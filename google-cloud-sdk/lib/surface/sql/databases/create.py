@@ -35,10 +35,10 @@ class AddDatabase(base.Command):
           on the command line after this command. Positional arguments are
           allowed.
     """
-    flags.DATABASE_NAME_FLAG.AddToParser(parser)
-    flags.CHARSET_FLAG.AddToParser(parser)
-    flags.COLLATION_FLAG.AddToParser(parser)
-    flags.INSTANCE_FLAG.AddToParser(parser)
+    flags.AddDatabaseName(parser)
+    flags.AddCharset(parser)
+    flags.AddCollation(parser)
+    flags.AddInstance(parser)
     base.ASYNC_FLAG.AddToParser(parser)
 
   def DeprecatedFormat(self, args):

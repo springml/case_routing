@@ -23,11 +23,13 @@ from googlecloudsdk.api_lib.compute import instance_utils
 from googlecloudsdk.api_lib.compute import metadata_utils
 from googlecloudsdk.api_lib.compute import utils
 from googlecloudsdk.api_lib.compute import zone_utils
+from googlecloudsdk.api_lib.compute.operations import poller
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions
 from googlecloudsdk.command_lib.compute import flags
 from googlecloudsdk.command_lib.compute.instances import flags as instances_flags
 from googlecloudsdk.command_lib.util import labels_util
+from googlecloudsdk.core import exceptions as core_exceptions
 from googlecloudsdk.core import log
 
 DETAILED_HELP = {
@@ -104,6 +106,7 @@ def _CommonArgs(parser, multiple_network_interface_cards, release_track,
 
   csek_utils.AddCsekKeyArgs(parser)
 
+  base.ASYNC_FLAG.AddToParser(parser)
   parser.display_info.AddFormat(
       resource_registry.RESOURCE_REGISTRY['compute.instances'].list_format)
 
@@ -130,7 +133,8 @@ class Create(base.CreateCommand):
     """Get sourceInstanceTemplate value as required by API."""
     return None
 
-  def _CreateRequests(self, args, compute_client, resource_parser):
+  def _CreateRequests(self, args, instance_refs,
+                      compute_client, resource_parser):
     # gcloud creates default values for some fields in Instance resource
     # when no value was specified on command line.
     # When --source-instance-template was specified, defaults are taken from
@@ -185,11 +189,6 @@ class Create(base.CreateCommand):
 
     boot_disk_size_gb = utils.BytesToGb(args.boot_disk_size)
     utils.WarnIfDiskSizeIsTooSmall(boot_disk_size_gb, args.boot_disk_type)
-
-    instance_refs = instances_flags.INSTANCES_ARG.ResolveAsResource(
-        args,
-        resource_parser,
-        scope_lister=flags.GetDefaultScopeLister(compute_client))
 
     # Check if the zone is deprecated or has maintenance coming.
     zone_resource_fetcher = zone_utils.ZoneResourceFetcher(compute_client)
@@ -440,19 +439,52 @@ class Create(base.CreateCommand):
     compute_client = holder.client
     resource_parser = holder.resources
 
-    requests = self._CreateRequests(args, compute_client, resource_parser)
-    try:
-      return compute_client.MakeRequests(requests)
-    except exceptions.ToolException as e:
-      invalid_machine_type_message_regex = (
-          r'Invalid value for field \'resource.machineType\': .+. '
-          r'Machine type with name \'.+\' does not exist in zone \'.+\'\.')
-      if re.search(invalid_machine_type_message_regex, e.message):
-        raise exceptions.ToolException(
-            e.message +
-            '\nUse `gcloud compute machine-types list --zones` to see the '
-            'available machine  types.')
-      raise
+    instance_refs = instances_flags.INSTANCES_ARG.ResolveAsResource(
+        args, resource_parser,
+        scope_lister=flags.GetDefaultScopeLister(compute_client))
+
+    requests = self._CreateRequests(args, instance_refs,
+                                    compute_client, resource_parser)
+
+    if not args.async:
+      # TODO(b/63664449): Replace this with poller + progress tracker.
+      try:
+        # Using legacy MakeRequests (which also does polling) here until
+        # replaced by api_lib.utils.waiter.
+        return compute_client.MakeRequests(requests)
+      except exceptions.ToolException as e:
+        invalid_machine_type_message_regex = (
+            r'Invalid value for field \'resource.machineType\': .+. '
+            r'Machine type with name \'.+\' does not exist in zone \'.+\'\.')
+        if re.search(invalid_machine_type_message_regex, e.message):
+          raise exceptions.ToolException(
+              e.message +
+              '\nUse `gcloud compute machine-types list --zones` to see the '
+              'available machine  types.')
+        raise
+
+    errors_to_collect = []
+    responses = compute_client.BatchRequests(requests, errors_to_collect)
+    for r in responses:
+      err = getattr(r, 'error', None)
+      if err:
+        errors_to_collect.append(poller.OperationErrors(err.errors))
+    if errors_to_collect:
+      raise core_exceptions.MultiError(errors_to_collect)
+
+    operation_refs = [holder.resources.Parse(r.selfLink) for r in responses]
+
+    for instance_ref, operation_ref in zip(instance_refs, operation_refs):
+      log.status.Print('Instance creation in progress for [{}]: {}'
+                       .format(instance_ref.instance, operation_ref.SelfLink()))
+    log.status.Print('Use [gcloud compute operations describe URI] command '
+                     'to check the status of the operation(s).')
+    if not args.IsSpecified('format'):
+      # For async output we need a separate format. Since we already printed in
+      # the status messages information about operations there is nothing else
+      # needs to be printed.
+      args.format = 'disable'
+    return responses
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA)

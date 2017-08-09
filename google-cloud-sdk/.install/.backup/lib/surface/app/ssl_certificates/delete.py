@@ -39,7 +39,7 @@ class Delete(base.DeleteCommand):
     flags.CERTIFICATE_ID_FLAG.AddToParser(parser)
 
   def Run(self, args):
-    client = api_client.GetApiClient(self.ReleaseTrack())
+    client = api_client.GetApiClientForTrack(self.ReleaseTrack())
     console_io.PromptContinue(
         prompt_string=('Deleting certificate [{0}]'.format(args.id)),
         cancel_on_no=True)

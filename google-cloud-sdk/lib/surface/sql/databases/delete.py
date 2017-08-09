@@ -35,8 +35,8 @@ class Delete(base.DeleteCommand):
           on the command line after this command. Positional arguments are
           allowed.
     """
-    flags.INSTANCE_FLAG.AddToParser(parser)
-    flags.DATABASE_NAME_FLAG.AddToParser(parser)
+    flags.AddInstance(parser)
+    flags.AddDatabaseName(parser)
 
   def Run(self, args):
     """Deletes a Cloud SQL database.

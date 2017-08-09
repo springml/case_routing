@@ -44,7 +44,7 @@ class Describe(base.DescribeCommand):
         # TODO(b/21877717): uncomment validation after deprecation period.
         # type=arg_parsers.BoundedInt(1, sys.maxint),
         help='The ID of the Backup Run.')
-    flags.INSTANCE_FLAG.AddToParser(parser)
+    flags.AddInstance(parser)
 
   def _GetById(self, id_integer, args):
     # If user passes ID, user v1beta4 API.

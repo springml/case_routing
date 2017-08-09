@@ -34,11 +34,11 @@ class ListTestablePermissions(base_classes.BaseIamCommand):
 
   List testable permissions for a resource identified via full resource name:
 
-  $ {command} //cloudresourcemanager.googleapis.com/organizations/1234567
+    $ {command} //cloudresourcemanager.googleapis.com/organizations/1234567
 
   List testable permissions for a resource identified via URI:
 
-  $ {command} https://www.googleapis.com/compute/v1/projects/example-project
+    $ {command} https://www.googleapis.com/compute/v1/projects/example-project
   """
 
   @staticmethod

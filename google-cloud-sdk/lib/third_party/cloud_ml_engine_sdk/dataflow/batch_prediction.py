@@ -38,6 +38,7 @@ BASE64_TENSOR_NAME_SUFFIX_ = "_bytes"
 DEFAULT_BATCH_SIZE = 1000  # 1K instances per batch when evaluating models.
 LOG_SIZE_LIMIT = 1000  # 1K bytes for the input field in log entries.
 LOG_NAME = "worker"
+_METRICS_NAMESPACE = "cloud_ml_batch_predict"
 
 
 class EmitAsBatchDoFn(beam.DoFn):
@@ -59,8 +60,8 @@ class EmitAsBatchDoFn(beam.DoFn):
 
     # Metrics.
     self._batch_size_distribution = beam.metrics.Metrics.distribution(
-        self.__class__, "batch_size")
-    self._num_instances = beam.metrics.Metrics.counter(self.__class__,
+        _METRICS_NAMESPACE, "batch_size")
+    self._num_instances = beam.metrics.Metrics.counter(_METRICS_NAMESPACE,
                                                        "num_instances")
 
   def _flush_batch(self):
@@ -160,7 +161,7 @@ class PredictionDoFn(beam.DoFn):
 
     # Metrics.
     self._model_load_seconds_distribution = beam.metrics.Metrics.distribution(
-        self.__class__, "model_load_seconds")
+        _METRICS_NAMESPACE, "model_load_seconds")
 
   def start_bundle(self):
     user_project_id = self._user_project_id.get()

@@ -47,11 +47,6 @@ class List(base.ListCommand):
   }
 
   @staticmethod
-  def GetUriCacheUpdateOp():
-    # TODO(b/29539463) Resources of this API are not parsable.
-    return None
-
-  @staticmethod
   def Args(parser):
     parser.add_argument('--service', '-s',
                         help=('If specified, only list instances belonging to '
@@ -69,7 +64,9 @@ class List(base.ListCommand):
           )
     """)
     parser.display_info.AddUriFunc(_GetUri)
+    # TODO(b/29539463) Resources of this API are not parsable.
+    parser.display_info.AddCacheUpdater(None)
 
   def Run(self, args):
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     return api_client.GetAllInstances(args.service, args.version)

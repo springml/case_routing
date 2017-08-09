@@ -45,10 +45,10 @@ class Patch(base.Command):
           allowed.
     """
 
-    flags.CHARSET_FLAG.AddToParser(parser)
-    flags.COLLATION_FLAG.AddToParser(parser)
-    flags.DATABASE_NAME_FLAG.AddToParser(parser)
-    flags.INSTANCE_FLAG.AddToParser(parser)
+    flags.AddCharset(parser)
+    flags.AddCollation(parser)
+    flags.AddDatabaseName(parser)
+    flags.AddInstance(parser)
     parser.add_argument(
         '--diff',
         action='store_true',

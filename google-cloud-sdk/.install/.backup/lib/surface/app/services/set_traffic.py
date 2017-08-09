@@ -87,7 +87,7 @@ for more information.""")
       raise TrafficSplitError('The migrate flag can only be used with splits '
                               'to a single version.')
 
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
 
     all_services = api_client.ListServices()
     services = service_util.GetMatchingServices(all_services, args.services)

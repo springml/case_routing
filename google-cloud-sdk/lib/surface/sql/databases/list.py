@@ -33,7 +33,7 @@ class List(base.ListCommand):
           on the command line after this command. Positional arguments are
           allowed.
     """
-    flags.INSTANCE_FLAG.AddToParser(parser)
+    flags.AddInstance(parser)
     parser.display_info.AddFormat("""
       table(
           name,

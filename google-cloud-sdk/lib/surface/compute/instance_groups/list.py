@@ -72,10 +72,7 @@ class List(base_classes.MultiScopeLister):
       mode = (instance_groups_utils.InstanceGroupFilteringMode
               .ONLY_UNMANAGED_GROUPS)
     return instance_groups_utils.ComputeInstanceGroupManagerMembership(
-        compute=self.compute,
-        resources=self.resources,
-        http=self.http,
-        batch_url=self.batch_url,
+        compute_holder=self._compute_holder,
         items=items,
         filter_mode=mode)
 
@@ -90,10 +87,7 @@ class ListBetaAlpha(List):
 
   def ComputeDynamicProperties(self, args, items):
     return instance_groups_utils.ComputeInstanceGroupManagerMembership(
-        compute=self.compute,
-        resources=self.resources,
-        http=self.http,
-        batch_url=self.batch_url,
+        compute_holder=self._compute_holder,
         items=items,
         filter_mode=instance_groups_utils.InstanceGroupFilteringMode.ALL_GROUPS)
 

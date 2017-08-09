@@ -58,6 +58,11 @@ class List(base.ListCommand):
     parser.add_argument(
         '--show-versions', required=False, action='store_true',
         help='Show installed and available versions of all components.')
+    parser.add_argument(
+        '--show-hidden', required=False, action='store_true',
+        help='Show installed and available versions of all components.',
+        hidden=True,
+    )
 
   def DeprecatedFormat(self, args):
     attributes = [
@@ -83,7 +88,7 @@ class List(base.ListCommand):
   def Run(self, args):
     """Runs the list command."""
     update_manager = util.GetUpdateManager(args)
-    result = update_manager.List()
+    result = update_manager.List(show_hidden=args.show_hidden)
     (to_print, self._current_version, self._latest_version) = result
     if not to_print:
       raise StopIteration

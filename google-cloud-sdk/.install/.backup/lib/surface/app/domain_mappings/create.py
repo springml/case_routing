@@ -42,7 +42,8 @@ class CreateBeta(base.CreateCommand):
     parser.display_info.AddFormat('default(id, resourceRecords)')
 
   def Run(self, args):
-    client = api_client.AppengineDomainsApiClient.GetApiClient()
+    client = api_client.GetApiClientForTrack(
+        self.ReleaseTrack())
     mapping = client.CreateDomainMapping(args.domain,
                                          args.certificate_id)
     log.CreatedResource(args.domain)
@@ -86,7 +87,8 @@ class CreateAlpha(CreateBeta):
     flags.AddNoManagedCertificateFlag(parser)
 
   def Run(self, args):
-    client = api_client.AppengineDomainsApiAlphaClient.GetApiClient()
+    client = api_client.GetApiClientForTrack(
+        self.ReleaseTrack())
     mapping = client.CreateDomainMapping(args.domain,
                                          args.certificate_id,
                                          args.no_managed_certificate)

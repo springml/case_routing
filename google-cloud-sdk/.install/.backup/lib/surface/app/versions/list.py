@@ -64,7 +64,7 @@ class List(base.ListCommand):
     """)
 
   def Run(self, args):
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     services = api_client.ListServices()
     service_ids = [s.id for s in services]
     log.debug('All services: {0}'.format(service_ids))

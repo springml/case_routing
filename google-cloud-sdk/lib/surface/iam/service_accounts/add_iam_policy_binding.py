@@ -28,7 +28,10 @@ class AddIamPolicyBinding(base_classes.BaseIamCommand):
   """
 
   detailed_help = iam_util.GetDetailedHelpForAddIamPolicyBinding(
-      'service account', 'my-iam-account@somedomain.com')
+      'service account',
+      'my-iam-account@somedomain.com')
+  detailed_help['DESCRIPTION'] += '\n\n' + (
+      iam_util.GetHintForServiceAccountResource('add iam policy bindings to'))
 
   @staticmethod
   def Args(parser):

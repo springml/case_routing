@@ -15,6 +15,7 @@
 
 from googlecloudsdk.api_lib.cloudbuild import cloudbuild_util
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.container.builds import flags
 from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
 from googlecloudsdk.core import resources
@@ -25,20 +26,7 @@ class Cancel(base.Command):
 
   @staticmethod
   def Args(parser):
-    """Register flags for this command.
-
-    Args:
-      parser: An argparse.ArgumentParser-like object. It is mocked out in order
-          to capture some information, but behaves like an ArgumentParser.
-    """
-    parser.add_argument(
-        'build',
-        completion_resource='cloudbuild.projects.builds',
-        list_command_path='container builds list --uri',
-        help=('The build to cancel. The ID of the build is printed at the end '
-              'of the build submission process, or in the ID column when '
-              'listing builds.'),
-    )
+    flags.AddBuildArg(parser, intro='The build to cancel.')
 
   def Run(self, args):
     """This is what gets called when the user runs this command.

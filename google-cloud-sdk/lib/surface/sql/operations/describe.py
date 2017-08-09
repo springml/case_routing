@@ -36,7 +36,7 @@ class Get(base.DescribeCommand):
         'operation', help='Name that uniquely identifies the operation.')
     # Add superfluous instance flag so that users passing --instance do not see
     # an error.
-    flags.DEPRECATED_INSTANCE_FLAG.AddToParser(parser)
+    flags.AddDeprecatedInstance(parser)
 
   def Run(self, args):
     """Retrieves information about a Cloud SQL instance operation.

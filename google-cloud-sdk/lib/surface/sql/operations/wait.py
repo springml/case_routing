@@ -26,8 +26,8 @@ class Wait(base.Command):
 
   @staticmethod
   def Args(parser):
-    flags.OPERATION_ARGUMENT.AddToParser(parser)
-    flags.DEPRECATED_INSTANCE_FLAG.AddToParser(parser)
+    flags.AddOperationArgument(parser)
+    flags.AddDeprecatedInstance(parser)
     parser.display_info.AddFormat(flags.OPERATION_FORMAT_BETA)
 
   def Run(self, args):

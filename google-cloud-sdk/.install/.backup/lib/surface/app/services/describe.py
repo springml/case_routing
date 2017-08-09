@@ -37,5 +37,5 @@ class Describe(base.Command):
         help='The service to describe.')
 
   def Run(self, args):
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     return api_client.GetServiceResource(args.service)

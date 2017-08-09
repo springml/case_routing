@@ -408,35 +408,26 @@ def create_model(client, model_path, **kwargs):
   Returns:
     An instance of the appropriate model class.
   """
-  user_class = load_user_class(client, model_path)
-  # Can't use isinstance() because the user doesn't have access to our Model
-  # class. We can only inspect the user_class to check if it conforms to the
-  # Model interface.
-  if user_class and hasattr(user_class, "predict"):
-    return user_class
-  else:
-    return DefaultModel.from_client(client, model_path, **kwargs)
+  return (load_model_class(client, model_path) or
+          DefaultModel.from_client(client, model_path, **kwargs))
 
 
-# TODO(b/62266327): split this into load_user_model and load_user_processor if
-# we decide to use separate parameters in Version API.
-def load_user_class(client, model_path):
-  """Loads in the user specified custom python class.
+def load_model_class(client, model_path):
+  """Loads in the user specified custom Model class.
 
   Args:
     client: An instance of ModelServerClient for performing prediction.
     model_path: the path to either session_bundle or SavedModel
 
   Returns:
-    An instance of a Model or Preprocessor/Postprocessor.
+    An instance of a Model.
     Returns None if the user didn't specify the name of the custom
     python class to load in the create_version_request.
 
   Raises:
     PredictionError: for any of the following:
       (1) the user provided python model class cannot be found
-      (2) if the loaded class does not implement a Model,
-      Preprocessor, or Postprocessor
+      (2) if the loaded class does not implement the Model interface.
   """
   create_version_json = os.environ.get("create_version_request")
   if not create_version_json:
@@ -447,31 +438,22 @@ def load_user_class(client, model_path):
   version = create_version_request.get("version")
   if not version:
     return None
-  custom_code = version.get("custom_code")
-  if not custom_code:
+  model_class_name = version.get("model_class")
+  if not model_class_name:
     return None
-  create_fn = pydoc.locate(custom_code)
+  model_class = pydoc.locate(model_class_name)
   # TODO(b/37749453): right place to generate errors?
-  if not create_fn:
+  if not model_class:
     package_uris = [str(s) for s in version.get("package_uris")]
     raise PredictionError(PredictionError.FAILED_TO_LOAD_USER_CODE,
                           "%s cannot be found. Please make sure "
-                          "(1) custom_code is the fully qualified function "
-                          "name, and (2) custom_code uses the correct package "
-                          "name as provided by the package_uris: %s"
-                          % (custom_code, package_uris))
-  user_class = create_fn(client, model_path)
-  # Check that the user class implements at least one of the expected methods
-  if hasattr(user_class, "predict"):
-    _validate_model_class(user_class)
-  else:
-    user_class_name = user_class.__class__.__name__
-    raise PredictionError(PredictionError.FAILED_TO_LOAD_USER_CODE,
-                          "The provided class, %s, must implement at least one "
-                          "of the following methods: predict, preprocess, "
-                          "postprocess"
-                          % user_class_name)
-  return user_class
+                          "(1) model_class is the fully qualified function "
+                          "name, and (2) model_class uses the correct package "
+                          "name as provided by the package_uris: %s" %
+                          (model_class_name, package_uris))
+  model_instance = model_class.from_client(client, model_path)
+  _validate_model_class(model_instance)
+  return model_instance
 
 
 def _validate_model_class(user_class):
@@ -486,24 +468,30 @@ def _validate_model_class(user_class):
       the predict method
       (2) the user model class does not implement the signature method
   """
+  user_class_name = type(user_class).__name__
+  # Can't use isinstance() because the user doesn't have access to our Model
+  # class. We can only inspect the user_class to check if it conforms to the
+  # Model interface.
+  if not hasattr(user_class, "predict"):
+    raise PredictionError(PredictionError.FAILED_TO_LOAD_USER_CODE,
+                          "The provided model class, %s, is missing the "
+                          "required predict method." % user_class_name)
+  # Check that the signature method is implemented
+  if not hasattr(user_class, "signature"):
+    raise PredictionError(PredictionError.FAILED_TO_LOAD_USER_CODE,
+                          "The provided model class, %s, is missing the "
+                          "required signature property." % user_class_name)
   # Check the predict method has the correct number of arguments
   user_signature = inspect.getargspec(user_class.predict)[0]
   model_signature = inspect.getargspec(Model.predict)[0]
   user_predict_num_args = len(user_signature)
   predict_num_args = len(model_signature)
-  user_class_name = type(user_class).__name__
   if predict_num_args is not user_predict_num_args:
     raise PredictionError(PredictionError.FAILED_TO_LOAD_USER_CODE,
-                          "The provided class, %s, has a predict method with "
-                          "an invalid signature. Expected signature: %s User "
-                          "signature: %s"
-                          % (user_class_name, model_signature, user_signature))
-  # Check that the signature method is implemented
-  if not hasattr(user_class, "signature"):
-    raise PredictionError(PredictionError.FAILED_TO_LOAD_USER_CODE,
-                          "The provided class, %s, is missing the required "
-                          "signature property."
-                          % user_class_name)
+                          "The provided model class, %s, has a predict method "
+                          "with an invalid signature. Expected signature: %s "
+                          "User signature: %s" %
+                          (user_class_name, model_signature, user_signature))
 
 
 class DefaultModel(object):

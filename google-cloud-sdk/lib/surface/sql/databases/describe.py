@@ -36,8 +36,8 @@ class Get(base.DescribeCommand):
           on the command line after this command. Positional arguments are
           allowed.
     """
-    flags.DATABASE_NAME_FLAG.AddToParser(parser)
-    flags.INSTANCE_FLAG.AddToParser(parser)
+    flags.AddDatabaseName(parser)
+    flags.AddInstance(parser)
 
   def Run(self, args):
     """Displays configuration and metadata about a Cloud SQL database.

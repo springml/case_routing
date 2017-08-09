@@ -70,7 +70,7 @@ class Update(base_classes.BaseIamCommand):
         help='The Yaml file you want to use to update a role. '
         'Can not be specified with other flags except role-id.')
     flags.GetOrgFlag('update').AddToParser(parser)
-    flags.GetRoleFlag('update').AddToParser(parser)
+    flags.GetCustomRoleFlag('update').AddToParser(parser)
 
   def Run(self, args):
     iam_client = apis.GetClientInstance('iam', 'v1')

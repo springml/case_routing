@@ -28,6 +28,6 @@ class Describe(base.DescribeCommand):
     parser.add_argument('version', help='The ID of the version to show.')
 
   def Run(self, args):
-    api_client = appengine_api_client.GetApiClient()
+    api_client = appengine_api_client.GetApiClientForTrack(self.ReleaseTrack())
     return api_client.GetVersionResource(service=args.service,
                                          version=args.version)

@@ -75,7 +75,7 @@ class SetBackup(base.SilentCommand):
             'Use of --backup-pool without an argument is deprecated and will '
             'stop working in the future. Please use --no-backup-pool to disable'
             ' the backup pool.'),
-        completion_resource='targetPools',
+        completer=flags.TargetPoolsCompleter,
         help='Name of the target pool that will serve as backup.')
 
     parser.add_argument(

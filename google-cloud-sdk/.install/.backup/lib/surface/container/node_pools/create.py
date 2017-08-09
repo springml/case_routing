@@ -181,13 +181,15 @@ class Create(base.CreateCommand):
       util.Error, if creation failed.
     """
     adapter = self.context['api_adapter']
+    location_get = self.context['location_get']
+    location = location_get(args)
     if not args.scopes:
       args.scopes = []
 
     try:
       if not args.scopes:
         args.scopes = []
-      pool_ref = adapter.ParseNodePool(args.name, getattr(args, 'region', None))
+      pool_ref = adapter.ParseNodePool(args.name, location)
       options = self.ParseCreateNodePoolOptions(args)
 
       if options.enable_autorepair is not None:

@@ -20,7 +20,6 @@ from googlecloudsdk.command_lib.config import completers
 from googlecloudsdk.command_lib.config import flags
 from googlecloudsdk.core import log
 from googlecloudsdk.core import properties
-from googlecloudsdk.core import remote_completion
 
 
 class Set(base.Command):
@@ -58,31 +57,10 @@ class Set(base.Command):
         'referring to properties in the core section.')
     parser.add_argument(
         'value',
-        completer=Set.ValueCompleter,
+        completer=completers.PropertyValueCompleter,
         help='The value to be set.')
 
     flags.INSTALLATION_FLAG.AddToParser(parser)
-
-  @staticmethod
-  def ValueCompleter(prefix, parsed_args, **unused_kwargs):
-    prop = properties.FromString(getattr(parsed_args, 'property'))
-    if not prop:
-      # No property was given, or it was invalid.
-      return
-
-    if prop.choices:
-      return [c for c in prop.choices if c.startswith(prefix)]
-
-    if not prop.resource:
-      # No collection associated with the property.
-      return
-    cli_generator = Set.GetCLIGenerator()
-    if not cli_generator:
-      return
-
-    completer = remote_completion.RemoteCompletion.GetCompleterForResource(
-        prop.resource, cli_generator, command_line=prop.resource_command_path)
-    return completer(prefix=prefix, parsed_args=parsed_args, **unused_kwargs)
 
   def Run(self, args):
     scope = (properties.Scope.INSTALLATION if args.installation

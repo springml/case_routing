@@ -10,12 +10,15 @@ import cmd
 import codecs
 import collections
 import datetime
+import functools
 import httplib
 import json
 import os
 import pdb
 import pipes
+import pkgutil
 import platform
+import re
 import shlex
 import sys
 import time
@@ -82,14 +85,31 @@ JobIdGeneratorFingerprint = bigquery_client.JobIdGeneratorFingerprint
 # pylint: enable=g-bad-name
 
 
-_VERSION_NUMBER = '2.0.24'
-_CLIENT_USER_AGENT = 'google-cloud-sdk' + _VERSION_NUMBER
+def _GetVersion():
+  """Returns content of VERSION file which is same directory as this file."""
+  root = 'bq'
+  return pkgutil.get_data(root, 'VERSION')
+
+
+_VERSION_NUMBER = _GetVersion()
+
+if os.environ.get('CLOUDSDK_WRAPPER') == '1':
+  _CLIENT_ID = '32555940559.apps.googleusercontent.com'
+  _CLIENT_SECRET = 'ZmssLNjJy2998hD4CTg2ejr2'
+  _CLIENT_USER_AGENT = 'google-cloud-sdk' + os.environ.get(
+      'CLOUDSDK_VERSION', _VERSION_NUMBER)
+else:
+  _CLIENT_ID = '977385342095.apps.googleusercontent.com'
+  _CLIENT_SECRET = 'wbER7576mc_1YOII0dGk7jEE'
+  _CLIENT_USER_AGENT = 'bq/' + _VERSION_NUMBER
+
 _GDRIVE_SCOPE = 'https://www.googleapis.com/auth/drive'
 _CLIENT_SCOPE = 'https://www.googleapis.com/auth/bigquery'
-_CLIENT_ID = '32555940559.apps.googleusercontent.com'
+
+
 _CLIENT_INFO = {
     'client_id': _CLIENT_ID,
-    'client_secret': 'ZmssLNjJy2998hD4CTg2ejr2',
+    'client_secret': _CLIENT_SECRET,
     'user_agent': _CLIENT_USER_AGENT,
     }
 _BIGQUERY_TOS_MESSAGE = (
@@ -114,6 +134,8 @@ _DELIMITER_MAP = {
 ####################
 # flags processing
 ####################
+
+
 
 
 def _ValidateGlobalFlags():
@@ -769,12 +791,12 @@ class NewCmd(appcommands.Cmd):
       flag_name = flag_name.split('=')[0]
       if flag_name not in FLAGS:
         print ("FATAL Flags parsing error: Unknown command line flag '%s'\n"
-               "Run 'bq.py help' to get help" % flag)
+               "Run 'bq help' to get help" % flag)
         sys.exit(1)
       else:
         print ("FATAL Flags positioning error: Flag '%s' appears after final "
-               "command line argument. Please reposition the flag.\nRun 'bq.py"
-               " help' to get help." % flag)
+               "command line argument. Please reposition the flag.\n"
+               "Run 'bq help' to get help." % flag)
         sys.exit(1)
 
   def Run(self, argv):
@@ -1913,7 +1935,6 @@ class _List(BigqueryCmd):  # pylint: disable=missing-docstring
       self.a = self.all_jobs
 
     client = Client.Get()
-    formatter = _GetFormatterFromFlags()
     if identifier:
       reference = client.GetReference(identifier)
     else:
@@ -1939,40 +1960,34 @@ class _List(BigqueryCmd):  # pylint: disable=missing-docstring
       reference = reference.GetProjectReference()
 
     page_token = None
+    results = None
+    object_type = None
     if self.j:
+      object_type = JobReference
       reference = client.GetProjectReference(identifier)
       _Typecheck(reference, ProjectReference,
                  'Cannot determine job(s) associated with "%s"' % (identifier,))
-      BigqueryClient.ConfigureFormatter(formatter, JobReference)
-      results = map(  # pylint: disable=g-long-lambda
-          client.FormatJobInfo,
-          client.ListJobs(reference=reference,
-                          max_results=self.max_results,
-                          all_users=self.a, page_token=page_token))
+      results = client.ListJobs(reference=reference,
+                                max_results=self.max_results,
+                                all_users=self.a, page_token=page_token)
     elif self.p or reference is None:
-      BigqueryClient.ConfigureFormatter(formatter, ProjectReference)
-      results = map(  # pylint: disable=g-long-lambda
-          client.FormatProjectInfo,
-          client.ListProjects(max_results=self.max_results, page_token=page_token))
+      object_type = ProjectReference
+      results = client.ListProjects(
+          max_results=self.max_results, page_token=page_token)
     elif isinstance(reference, ProjectReference):
-      BigqueryClient.ConfigureFormatter(formatter, DatasetReference)
-      results = map(  # pylint: disable=g-long-lambda
-          client.FormatDatasetInfo,
-          client.ListDatasets(reference,
-                              max_results=self.max_results,
-                              list_all=self.a,
-                              page_token=page_token,
-                              filter_expression=self.filter))
+      object_type = DatasetReference
+      results = client.ListDatasets(reference,
+                                    max_results=self.max_results,
+                                    list_all=self.a,
+                                    page_token=page_token,
+                                    filter_expression=self.filter)
     else:  # isinstance(reference, DatasetReference):
-      BigqueryClient.ConfigureFormatter(formatter, TableReference)
-      results = map(  # pylint: disable=g-long-lambda
-          client.FormatTableInfo,
-          client.ListTables(reference, max_results=self.max_results,
-                            page_token=page_token))
-
-    for result in results:
-      formatter.AddDict(result)
-    formatter.Print()
+      object_type = TableReference
+      results = client.ListTables(
+          reference, max_results=self.max_results, page_token=page_token)
+    if results:
+      assert object_type is not None
+      _PrintObjectsArray(results, object_type)
 
 
 
@@ -2254,8 +2269,6 @@ class _Make(BigqueryCmd):
       bq mk --view='select 1 as num' new_dataset.newview
          (--view_udf_resource=path/to/file.js)
       bq mk -d --data_location=EU new_dataset
-      bq mk -tr -st={start_time} -et={end_time}
-      projects/{projectId}/transferConfigs/{config_id}
     """
 
     client = Client.Get()
@@ -2347,7 +2360,8 @@ class _Make(BigqueryCmd):
                          use_legacy_sql=self.use_legacy_sql,
                          external_data_config=external_data_config,
                          labels=labels,
-                         time_partitioning=time_partitioning)
+                         time_partitioning=time_partitioning
+                        )
       print "%s '%s' successfully created." % (object_name, reference,)
 
 
@@ -2450,7 +2464,6 @@ class _Update(BigqueryCmd):
          (--view_udf_resource=path/to/file.js)
     """
     client = Client.Get()
-
     if self.d and self.t:
       raise app.UsageError('Cannot specify both -d and -t.')
     if ValidateAtMostOneSelected(self.schema, self.view):
@@ -2625,6 +2638,10 @@ class _Show(BigqueryCmd):
         'view', False,
         'Show view specific details instead of general table details.',
         flag_values=fv)
+    flags.DEFINE_boolean(
+        'schema', False,
+        'Show only the schema instead of general table details.',
+        flag_values=fv)
     self._ProcessCommandRc(fv)
 
   def RunWithArgs(self, identifier=''):
@@ -2633,7 +2650,7 @@ class _Show(BigqueryCmd):
     Examples:
       bq show -j <job_id>
       bq show dataset
-      bq show dataset.table
+      bq show [--schema] dataset.table
       bq show [--view] dataset.view
     """
     # pylint: disable=g-doc-exception
@@ -2647,6 +2664,12 @@ class _Show(BigqueryCmd):
     elif self.view:
       reference = client.GetTableReference(identifier)
       custom_format = 'view'
+    elif self.schema:
+      if FLAGS.format not in [None, 'prettyjson', 'json']:
+        raise app.UsageError(
+            'Table schema output format must be json or prettyjson.')
+      reference = client.GetTableReference(identifier)
+      custom_format = 'schema'
     else:
       reference = client.GetReference(identifier)
     if reference is None:
@@ -2702,7 +2725,11 @@ def _PrintJobMessages(printable_job_info):
 def _PrintObjectInfo(object_info, reference, custom_format):
   # The JSON formats are handled separately so that they don't print
   # the record as a list of one record.
-  if FLAGS.format in ['prettyjson', 'json']:
+  if custom_format == 'schema':
+    if 'schema' not in object_info or 'fields' not in object_info['schema']:
+      raise app.UsageError('Unable to retrieve schema from specified table.')
+    _PrintFormattedJsonObject(object_info['schema']['fields'])
+  elif FLAGS.format in ['prettyjson', 'json']:
     _PrintFormattedJsonObject(object_info)
   elif FLAGS.format in [None, 'sparse', 'pretty']:
     formatter = _GetFormatterFromFlags()
@@ -2712,7 +2739,8 @@ def _PrintObjectInfo(object_info, reference, custom_format):
     object_info = BigqueryClient.FormatInfoByType(object_info, type(reference))
     if object_info:
       formatter.AddDict(object_info)
-    print '%s %s\n' % (reference.typename.capitalize(), reference)
+    if reference.typename:
+      print '%s %s\n' % (reference.typename.capitalize(), reference)
     formatter.Print()
     print
     if isinstance(reference, JobReference):
@@ -2721,6 +2749,30 @@ def _PrintObjectInfo(object_info, reference, custom_format):
     formatter = _GetFormatterFromFlags()
     formatter.AddColumns(object_info.keys())
     formatter.AddDict(object_info)
+    formatter.Print()
+
+
+def _PrintObjectsArray(object_infos, objects_type):
+  if FLAGS.format in ['prettyjson', 'json']:
+    _PrintFormattedJsonObject(object_infos)
+  elif FLAGS.format in [None, 'sparse', 'pretty']:
+    if not object_infos:
+      return
+    formatter = _GetFormatterFromFlags()
+    BigqueryClient.ConfigureFormatter(formatter, objects_type,
+                                      print_format='list')
+    formatted_infos = map(
+        functools.partial(
+            BigqueryClient.FormatInfoByType, object_type=objects_type),
+        object_infos)
+    for info in formatted_infos:
+      formatter.AddDict(info)
+    formatter.Print()
+  elif object_infos:
+    formatter = _GetFormatterFromFlags()
+    formatter.AddColumns(object_infos[0].keys())
+    for info in object_infos:
+      formatter.AddDict(info)
     formatter.Print()
 
 

@@ -33,6 +33,7 @@ class Delete(base.DeleteCommand):
   @classmethod
   def Args(cls, parser):
     cls._BACKEND_SERVICE_ARG.AddArgument(parser, operation_type='delete')
+    parser.display_info.AddCacheUpdater(None)
 
   def Run(self, args):
     holder = base_classes.ComputeApiHolder(self.ReleaseTrack())

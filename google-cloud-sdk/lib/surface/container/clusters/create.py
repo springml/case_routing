@@ -376,8 +376,10 @@ class CreateAlpha(Create):
     flags.AddNetworkPolicyFlags(parser, hidden=False)
     flags.AddIPAliasFlags(parser)
     flags.AddAcceleratorArgs(parser)
+    flags.AddEnableAuditLoggingFlag(parser)
 
   def ParseCreateOptions(self, args):
     ops = ParseCreateOptionsBase(args)
     ops.accelerators = args.accelerator
+    ops.enable_audit_logging = args.enable_audit_logging
     return ops

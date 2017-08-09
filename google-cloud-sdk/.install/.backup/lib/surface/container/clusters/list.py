@@ -45,18 +45,10 @@ class List(base.ListCommand):
       Some value that we want to have printed later.
     """
     adapter = self.context['api_adapter']
+    location_get = self.context['location_get']
+    location = location_get(args, ignore_property=True, required=False)
 
     project = properties.VALUES.core.project.Get(required=True)
-    if getattr(args, 'region', None):
-      location = adapter.registry.Parse(args.region,
-                                        params={'project': project},
-                                        collection='compute.regions').region
-    elif getattr(args, 'zone', None):
-      location = adapter.registry.Parse(args.zone,
-                                        params={'project': project},
-                                        collection='compute.zones').zone
-    else:
-      location = None
 
     def sort_key(cluster):
       return (cluster.zone, cluster.name)

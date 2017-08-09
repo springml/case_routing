@@ -50,6 +50,10 @@ class DockerImage(object):
     """The unique set of blobs that compose to create the filesystem."""
     return set(self.fs_layers())
 
+  def digest(self):
+    """The digest of the manifest."""
+    return util.Digest(self.manifest())
+
   # pytype: disable=bad-return-type
   @abc.abstractmethod
   def manifest(self):

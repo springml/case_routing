@@ -63,8 +63,10 @@ class Rollback(base.Command):
       util.Error, if rollback failed.
     """
     adapter = self.context['api_adapter']
+    location_get = self.context['location_get']
+    location = location_get(args)
 
-    pool_ref = adapter.ParseNodePool(args.name, getattr(args, 'region', None))
+    pool_ref = adapter.ParseNodePool(args.name, location)
 
     console_io.PromptContinue(
         message=

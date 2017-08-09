@@ -26,6 +26,7 @@ from googlecloudsdk.api_lib.compute.regions import utils as region_utils
 from googlecloudsdk.calliope import arg_parsers
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions
+from googlecloudsdk.command_lib.compute import completers
 from googlecloudsdk.command_lib.compute import flags
 from googlecloudsdk.command_lib.compute.disks import create
 from googlecloudsdk.command_lib.compute.disks import flags as disks_flags
@@ -113,7 +114,7 @@ def _CommonArgs(parser, source_snapshot_arg):
 
   parser.add_argument(
       '--type',
-      completion_resource='compute.diskTypes',
+      completer=completers.DeprecatedDiskTypesCompleter,
       help="""\
       Specifies the type of disk to create. To get a
       list of available disk types, run `gcloud compute disk-types list`.

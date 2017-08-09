@@ -32,6 +32,9 @@ class SetIamPolicy(base_classes.BaseIamCommand):
 
   detailed_help = iam_util.GetDetailedHelpForSetIamPolicy(
       'service account', 'my-iam-account@somedomain.com')
+  detailed_help['DESCRIPTION'] += '\n\n' + (
+      iam_util.GetHintForServiceAccountResource(
+          'set the iam policy of'))
 
   @staticmethod
   def Args(parser):

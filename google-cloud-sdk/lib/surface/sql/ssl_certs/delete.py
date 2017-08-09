@@ -41,7 +41,7 @@ class _BaseDelete(object):
     parser.add_argument(
         'common_name',
         help='User supplied name. Constrained to ```[a-zA-Z.-_ ]+```.')
-    flags.INSTANCE_FLAG.AddToParser(parser)
+    flags.AddInstance(parser)
 
 
 @base.ReleaseTracks(base.ReleaseTrack.GA, base.ReleaseTrack.BETA)

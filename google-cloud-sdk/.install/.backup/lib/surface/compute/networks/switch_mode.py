@@ -16,6 +16,7 @@
 from googlecloudsdk.api_lib.compute import base_classes
 from googlecloudsdk.calliope import base
 from googlecloudsdk.calliope import exceptions as exceptions
+from googlecloudsdk.command_lib.compute.networks import flags
 from googlecloudsdk.core import properties
 from googlecloudsdk.core.console import console_io
 
@@ -33,7 +34,7 @@ class SwitchMode(base.SilentCommand):
         required=True)
     parser.add_argument(
         'name',
-        completion_resource='compute.networks',
+        completer=flags.NetworksCompleter,
         help='The name of the network for which to switch mode.')
 
   def Run(self, args):

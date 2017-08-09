@@ -60,7 +60,8 @@ def main():
 
 
 if __name__ == '__main__':
-  bootstrapping.CommandStart('bq', component_id='bq')
+  version = bootstrapping.GetFileContents('platform/bq', 'VERSION')
+  bootstrapping.CommandStart('bq', version=version)
   blacklist = {
       'init': 'To authenticate, run gcloud auth.',
   }

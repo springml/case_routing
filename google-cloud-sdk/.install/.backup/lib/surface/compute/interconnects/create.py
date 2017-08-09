@@ -20,6 +20,20 @@ from googlecloudsdk.calliope import base
 from googlecloudsdk.command_lib.compute.interconnects import flags
 from googlecloudsdk.command_lib.compute.interconnects.locations import flags as location_flags
 
+DETAILED_HELP = {
+    'DESCRIPTION': """\
+        *{command}* is used to create interconnect. An interconnect represents a
+  single specific connection between Google and the customer.
+
+        For an example, refer to the *EXAMPLES* section below.
+        """,
+    'EXAMPLES': """\
+        To create an interconnect of type IT_PRIVATE, run:
+
+          $ {command} example-interconnect --customer-name "Example Customer Name" --interconnect-type IT_PRIVATE --link-type LINK_TYPE_ETHERNET_10G_LR --location example-zone1-1 --requested-link-count 1 --noc-contact-email noc@example.com --description "Example interconnect"
+        """,
+}
+
 
 class Create(base.CreateCommand):
   """Create a Google Compute Engine interconnect.
@@ -35,10 +49,11 @@ class Create(base.CreateCommand):
   def Args(cls, parser):
     cls.LOCATION_ARG = (
         location_flags.InterconnectLocationArgumentForOtherResource(
-            'The location for the interconnect, user can first list the '
-            'locations by using '
-            '{ gcloud alpha compute interconnects locations list }, then find'
-            'the appropriate location to use when create interconnect here.'))
+            'The location for the interconnect. The locations can be listed by '
+            'using the  '
+            '{ gcloud alpha compute interconnects locations list } command, '
+            'then find the appropriate location to use when creating an '
+            'interconnect here.'))
     cls.LOCATION_ARG.AddArgument(parser)
     cls.INTERCONNECT_ARG = flags.InterconnectArgument()
     cls.INTERCONNECT_ARG.AddArgument(parser, operation_type='create')
@@ -47,6 +62,7 @@ class Create(base.CreateCommand):
         '--description',
         help='An optional, textual description for the interconnect.')
     flags.AddAdminEnabled(parser)
+    flags.AddCustomerName(parser)
     flags.AddInterconnectType(parser)
     flags.AddLinkType(parser)
     flags.AddNocContactEmail(parser)
@@ -73,4 +89,7 @@ class Create(base.CreateCommand):
         link_type=link_type,
         admin_enabled=args.admin_enabled,
         noc_contact_email=args.noc_contact_email,
-        location=location_ref.SelfLink())
+        location=location_ref.SelfLink(),
+        customer_name=args.customer_name)
+
+Create.detailed_help = DETAILED_HELP

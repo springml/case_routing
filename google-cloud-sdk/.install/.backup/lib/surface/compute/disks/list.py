@@ -14,20 +14,32 @@
 """Command for listing persistent disks."""
 
 from googlecloudsdk.api_lib.compute import base_classes
+from googlecloudsdk.api_lib.compute import lister
+from googlecloudsdk.api_lib.compute import utils
 from googlecloudsdk.calliope import base
+from googlecloudsdk.command_lib.compute.disks import flags
 
 
 @base.ReleaseTracks(base.ReleaseTrack.BETA, base.ReleaseTrack.GA)
-class List(base_classes.ZonalLister):
+class List(base.ListCommand):
   """List Google Compute Engine persistent disks."""
 
-  @property
-  def service(self):
-    return self.compute.disks
+  @staticmethod
+  def Args(parser):
+    parser.display_info.AddFormat(flags.DEFAULT_LIST_FORMAT)
+    parser.display_info.AddUriFunc(utils.MakeGetUriFunc())
+    lister.AddZonalListerArgs(parser)
 
-  @property
-  def resource_type(self):
-    return 'disks'
+  def Run(self, args):
+    holder = base_classes.ComputeApiHolder(self.ReleaseTrack())
+    client = holder.client
+
+    request_data = lister.ParseZonalFlags(args, holder.resources)
+
+    list_implementation = lister.ZonalLister(
+        client, client.apitools_client.disks)
+
+    return lister.Invoke(request_data, list_implementation)
 
 
 @base.ReleaseTracks(base.ReleaseTrack.ALPHA)

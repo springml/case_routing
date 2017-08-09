@@ -68,18 +68,6 @@ class GetLogs(base.ListCommand):
     parser.add_argument(
         '--min-log-level', choices=GetLogs.SEVERITIES,
         help='Minimum level of logs to be fetched.')
-    parser.add_argument(
-        '--show-log-levels', action='store_true', default=True,
-        help=('Print a log level of each log entry.'))
-    parser.add_argument(
-        '--show-function-names', action='store_true', default=True,
-        help=('Print a function name before each log entry.'))
-    parser.add_argument(
-        '--show-execution-ids', action='store_true', default=True,
-        help=('Print an execution ID before each log entry.'))
-    parser.add_argument(
-        '--show-timestamps', action='store_true', default=True,
-        help=('Print a UTC timestamp before each log entry.'))
 
   @util.CatchHTTPErrorRaiseHTTPException
   def Run(self, args):
@@ -152,14 +140,4 @@ class GetLogs(base.ListCommand):
       yield row
 
   def _Format(self, args):
-    fields = []
-    if args.show_log_levels:
-      fields.append('level')
-    if args.show_function_names:
-      fields.append('name')
-    if args.show_execution_ids:
-      fields.append('execution_id')
-    if args.show_timestamps:
-      fields.append('time_utc')
-    fields.append('log')
-    return 'table({0})'.format(','.join(fields))
+    return 'table(level,name,execution_id,time_utc,log)'

@@ -44,9 +44,10 @@ class Wait(base.Command):
       Some value that we want to have printed later.
     """
     adapter = self.context['api_adapter']
+    location_get = self.context['location_get']
+    location = location_get(args)
 
-    operation_ref = adapter.ParseOperation(args.operation_id,
-                                           getattr(args, 'region', None))
+    operation_ref = adapter.ParseOperation(args.operation_id, location)
 
     try:
       # Try fetching it first to ensure we have permissions and the op exists.

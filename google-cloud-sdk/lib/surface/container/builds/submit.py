@@ -58,11 +58,6 @@ class Submit(base.CreateCommand):
   """Submit a build using the Google Container Builder service."""
 
   @staticmethod
-  def GetUriCacheUpdateOp():
-    """Do not try to create a URI to update the cache."""
-    return None
-
-  @staticmethod
   def Args(parser):
     """Register flags for this command.
 
@@ -84,14 +79,14 @@ class Submit(base.CreateCommand):
         '--gcs-source-staging-dir',
         help='Directory in Google Cloud Storage to stage a copy of the source '
              'used for the build. If the bucket does not exist, it will be '
-             'created. If not set, `gs://<project id>_cloudbuild/source` '
+             'created. If not set, ```gs://<project id>_cloudbuild/source``` '
              'is used.',
     )
     parser.add_argument(
         '--gcs-log-dir',
         help='Directory in Google Cloud Storage to hold build logs. If not '
-             'set, `gs://<project num>.cloudbuild-logs.googleusercontent.com/` '
-             'will be created and used.',
+        'set, ```gs://<project num>.cloudbuild-logs.googleusercontent.com/``` '
+        'will be created and used.',
     )
     parser.add_argument(
         '--timeout',
@@ -145,6 +140,8 @@ https://cloud.google.com/container-builder/docs/api/build-requests#substitutions
             status
           )
         """)
+    # Do not try to create a URI to update the cache.
+    parser.display_info.AddCacheUpdater(None)
 
   def Run(self, args):
     """This is what gets called when the user runs this command.
