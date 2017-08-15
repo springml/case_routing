@@ -103,15 +103,7 @@ def get_entity_counts_sentiment_score(message_subject, message_content):
     return entity_count_person, entity_count_location, entity_count_organization, entity_count_event, entity_count_work_of_art, entity_count_consumer_good, sentiment_score
 
 def get_basic_quantitative_features(message_subject, message_content, message_time):
-    """
 
-
-    Args
-
-
-    Returns:
-
-    """
     subject_length = len(message_subject)
     subject_word_count = len(message_subject.split())
     content_length = len(message_content)
@@ -131,7 +123,7 @@ def unpack_word_bags(word_bags_path):
     each routing groups
      
 
-    Returns:
+    Returns: word counts based on group
  
     """
     import cPickle as pickle
@@ -189,7 +181,7 @@ def get_prediction(json_to_submit):
     return GROUP_NAMES[response['predictions'][0]['classes']]
 
 def get_case_info(Category, Created_Date):
-    CaseID = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in xrange(6))
+    CaseID = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') for i in xrange(10))
     Priority = random.choice(["P1", "P2", "P2", "P3"])
 
     Assignee = random.choice(Case_Assignments[Category])
@@ -205,6 +197,10 @@ def get_case_info(Category, Created_Date):
     return CaseID, Priority, Assignee, Region, Channel, CSAT, Close_Date
 
 def feeder():
+    '''
+    Main function that reads dummy case data from simulated_case_traffic,csv and 
+    generates cases and inserts them into spanner
+    '''
 
 
     case_traffic = pd.read_csv('simulated_case_traffic.csv')
@@ -213,9 +209,8 @@ def feeder():
     SEND_CASE_EVERY_X_SECONDS = 2 # email sent every x seconds
 
     Dates = args.Created_Date.split('/')
-    print int(Dates[2]), int(Dates[0]), int(Dates[1])
-    Created_Date = datetime.datetime(int(Dates[2]), int(Dates[0]), int(Dates[1]))
-
+    Created_Date = datetime.datetime(int(Dates[2]), int(Dates[0]), int(Dates[1]), 12)
+    print Created_Date
 
     spanner_client = spanner.Client()
 
@@ -226,7 +221,8 @@ def feeder():
     for index, row in case_traffic.iterrows():
     	Subject = row['subject']
     	Content = row['content']
-         
+        
+        print Created_Date 
         json_to_submit = feature_engineering(Subject, Content, Created_Date)
         Category = get_prediction(json_to_submit)
         
@@ -235,6 +231,7 @@ def feeder():
         
         Sentiment_Score = json_to_submit["sentiment_scores"]  
         
+        print Created_Date
         with database.batch() as batch:
             batch.insert(
                 table='CaseDetails',
