@@ -5,6 +5,10 @@ import time, json
 
 
 def push_spanner_data(instance, database):
+	'''
+	Connects to Spanner and creates a csv file with all the data in Spanner. CSV file is then uploaded to a bucket in 
+	Google Cloud storage.
+	'''
 	spanner_client = spanner.Client()
 
 	instance = spanner_client.instance("caseroutingdemo")
@@ -58,6 +62,9 @@ def create_table(dataset, table_name):
 	table.create()
 
 def load_data_from_gcs(dataset_name, table_name, source):
+	'''
+	Loads data of Spanner Data files from google cloud storage and loads it into Big Query
+	'''
 	bigquery_client = bigquery.Client()
 	dataset = bigquery_client.dataset(dataset_name)
 	
