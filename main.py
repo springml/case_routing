@@ -10,10 +10,6 @@ import googleapiclient.discovery
 import collections
 import numpy as np
 import random
-# export GOOGLE_APPLICATION_CREDENTIALS=emailinsight-7f04f034fa9b.json
-# export API_KEY=AIzaSyAY9T1IVheKFOCI9vdTp6-J77Rzk2XUiW0
-# gcloud auth activate-service-account  --key-file emailinsight-7f04f034fa9b.json
-# gcloud beta ml language analyze-entities --content="Michelangelo Caravaggio, Italian painter, is known for 'The Calling of Saint Matthew'."
 
 GROUP_NAMES = ['Legal', 'AutoResponded', 'Emergencies', 'TechSupport', 'Utilities', 'Sales']
 
@@ -90,8 +86,11 @@ def show_request():
 @app.route('/submit', methods=['POST'])
 def run_pipeline():
 
-	print "we made it"
-	#retreiving results from UI
+	'''
+	Function that runs when user submits a case in UI. 
+	Code then generates features and thus a request json object for the ML Api call. 
+	Results are then inserted into Spanner
+	'''
 	regions = ["West", "South", "Midwest", "Northeast"]
 	Case_Assignments = {"Legal": ["Charles Anderson", "Robert Heller", "Jane Jackson"],
 						"Information": ["Ann Gitlin", "Harrison Davis", "Raj Kumar"],
@@ -113,8 +112,7 @@ def run_pipeline():
 	entity_count_person, entity_count_location, entity_count_organization, entity_count_event, entity_count_work_of_art, entity_count_consumer_good, sentiment_score = get_entity_counts_sentiment_score(subject, content)
 	subject_length, subject_word_count, content_length, content_word_count, is_am, is_weekday = get_basic_quantitative_features(subject, content, Created_Date)
 
-	#with open('instances.json') as f:
-	#	JSON = json.load(f)
+
 	json_to_submit = {'content_length':content_length,
 					'content_word_count':content_word_count,
 					'group1':words_groups[0][0],
