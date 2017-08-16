@@ -2,9 +2,10 @@ from google.cloud import bigquery, spanner, storage
 import uuid
 import datetime
 import time, json
+import argparse
 
 
-def push_spanner_data(instance, database):
+def push_spanner_data(instance, database, spanner_bucket):
 	'''
 	Connects to Spanner and creates a csv file with all the data in Spanner. CSV file is then uploaded to a bucket in 
 	Google Cloud storage.
@@ -25,7 +26,7 @@ def push_spanner_data(instance, database):
 			results["Created_Date"] = results["Created_Date"].strftime('%Y-%m-%d %H:%M:%S')
 			json.dump(results, fp)
 			fp.write('\n')
-	upload_file('spanner_data_files', 'SpannerCaseDetails.json', 'SpannerCaseDetails.json')
+	upload_file(spanner_bucket, 'SpannerCaseDetails.json', 'SpannerCaseDetails.json')
 
 def upload_file(bucket_name, source_file_name, destination_blob_name):
     """Uploads a file to the bucket."""
@@ -96,7 +97,14 @@ def wait_for_job(job):
 		time.sleep(.1)
 
 if __name__ == '__main__':
-	push_spanner_data('caseroutingdemo', 'caserouting')
-	load_data_from_gcs('CaseRouting', 'CaseDetails', 'gs://spanner_data_files/SpannerCaseDetails.json')
+	
+	parser = argparse.ArgumentParser(
+        description='Arguments for running web server')
+    parser.add_argument(
+        '--Spanner_Bucket', required=True, help='gcs bucket with spanner files')
+    args = parser.parse_args()
+
+	push_spanner_data('caseroutingdemo', 'caserouting', args.Spanner_Bucket)
+	load_data_from_gcs('CaseRouting', 'CaseDetails', 'gs://' +  args.Spanner_Bucket + '/SpannerCaseDetails.json')
 
 
