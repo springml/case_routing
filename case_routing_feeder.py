@@ -171,7 +171,7 @@ def feature_engineering(subject, content, CREATED_DATE):
 def get_prediction(json_to_submit):
     service = googleapiclient.discovery.build('ml', 'v1')
     PROJECT = args.Project_ID
-    MODEL =  args.Model_Version
+    MODEL =  args.Model_Name
     name = 'projects/{}/models/{}'.format(PROJECT, MODEL)
     response = service.projects().predict(
         name=name,
@@ -253,7 +253,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--Project_ID', required=True, help='Project ID')
     parser.add_argument(
-        '--Model_Version', required=True, help='Model Version')
+        '--Model_Name', required=True, help='Model Name')
     parser.add_argument(
         '--Created_Date', required=True, help='Created Date of Cases to Simulate MM/DD/YYYY')
     args = parser.parse_args()
