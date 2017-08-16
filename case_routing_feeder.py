@@ -170,8 +170,8 @@ def feature_engineering(subject, content, CREATED_DATE):
 
 def get_prediction(json_to_submit):
     service = googleapiclient.discovery.build('ml', 'v1')
-    PROJECT = 'emailinsight-1'
-    MODEL = 'case_routing_model_v5'
+    PROJECT = args.Project_ID
+    MODEL =  args.Model_Version
     name = 'projects/{}/models/{}'.format(PROJECT, MODEL)
     response = service.projects().predict(
         name=name,
@@ -222,7 +222,7 @@ def feeder():
     	Subject = row['subject']
     	Content = row['content']
         
-        print Created_Date 
+         
         json_to_submit = feature_engineering(Subject, Content, Created_Date)
         Category = get_prediction(json_to_submit)
         
@@ -250,6 +250,10 @@ if __name__ == '__main__':
         description='Arguments for running web server')
     parser.add_argument(
         '--DATA_PATH', required=True, help='Bag of Words Path')
+    parser.add_argument(
+        '--Project_ID', required=True, help='Project ID')
+    parser.add_argument(
+        '--Model_Version', required=True, help='Model Version')
     parser.add_argument(
         '--Created_Date', required=True, help='Created Date of Cases to Simulate MM/DD/YYYY')
     args = parser.parse_args()
