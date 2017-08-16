@@ -99,10 +99,10 @@ def wait_for_job(job):
 if __name__ == '__main__':
 	
 	parser = argparse.ArgumentParser(
-        description='Arguments for running web server')
-    parser.add_argument(
-        '--Spanner_Bucket', required=True, help='gcs bucket with spanner files')
-    args = parser.parse_args()
+		description='Arguments for running web server')
+	parser.add_argument(
+		'--Spanner_Bucket', required=True, help='gcs bucket with spanner files')
+	args = parser.parse_args()
 
 	push_spanner_data('caseroutingdemo', 'caserouting', args.Spanner_Bucket)
 	load_data_from_gcs('CaseRouting', 'CaseDetails', 'gs://' +  args.Spanner_Bucket + '/SpannerCaseDetails.json')
