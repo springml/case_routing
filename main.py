@@ -262,7 +262,7 @@ def get_entity_counts_sentiment_score(message_subject, message_content):
 
 def get_basic_quantitative_features(message_subject, message_content, message_time):
 	"""
-
+	gets basic quantitative features about the subject and content length and time of request
 
 	Args
 
