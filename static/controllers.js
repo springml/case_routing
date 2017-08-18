@@ -163,6 +163,10 @@ app.controller("TicketsController", ['$scope', '$location', '$http', 'DataServic
         return CaseID
     }
 }]);
+
+app.controller("ArchitectureController", function($scope){
+    $scope.title = "Architecture Controller";
+});
 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 // User Defined Functions  -- -- -- -- -- -- --
 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
