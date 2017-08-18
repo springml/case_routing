@@ -38,6 +38,10 @@ def upload_file(bucket_name, source_file_name, destination_blob_name):
 
 def create_table(dataset, table_name):
 
+	'''
+	Deletes old table and creates new table
+	'''
+
 
 	#Delete Old Table
 	dataset.table(table_name).delete()
