@@ -98,7 +98,8 @@ def run_pipeline():
 						"TechSupport": ["Kris Hauser", "Sheryl Thomas", "Yash Patel"],
 						"Utilities": ["Mike Camica", "Jose Lopez", "Greg Guniski"],
 						"Sales": ["Taylor Traver", "Sam Goldberg", "Jen Kuecks"],
-						"Region": ["West", "South", "Midwest", "Northeast"]
+						"Region": ["West", "South", "Midwest", "Northeast"],
+						"AutoResponded": [""]
 	}
 
 	subject = request.get_json().get('subject', '')
