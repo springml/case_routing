@@ -1,2 +1,2 @@
 ## Intelligent Case Routing
-[Working Demo](https://emailinsight-1.appspot.com/)
+![Alt text](DemoScreenShot.png?raw=true "Case Routing")
