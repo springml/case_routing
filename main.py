@@ -87,8 +87,8 @@ def show_request():
 def run_pipeline():
 
 	'''
-	Function that runs when user submits a case in UI. 
-	Code then generates features and thus a request json object for the ML Api call. 
+	Function that runs when user submits a case in UI.
+	Code then generates features and thus a request json object for the ML Api call.
 	Results are then inserted into Spanner
 	'''
 	regions = ["West", "South", "Midwest", "Northeast"]
