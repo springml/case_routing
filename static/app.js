@@ -9,6 +9,9 @@ app.config(function($routeProvider, $locationProvider){
     }).when('/email-us', {
         templateUrl: "./views/email-us.html",
         controller: "EmailUsController"
+    }).when('/architecture', {
+        templateUrl: "./views/architecture.html",
+        controller: "ArchitectureController"
     }).otherwise({
         redirectTo: "/"
     });
