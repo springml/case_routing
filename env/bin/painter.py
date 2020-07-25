@@ -23,8 +23,8 @@ from PIL import Image, ImageTk
 
 
 class PaintCanvas(tkinter.Canvas):
-    def __init__(self, master, image):
-        tkinter.Canvas.__init__(self, master,
+    def __init__(self, main, image):
+        tkinter.Canvas.__init__(self, main,
                                 width=image.size[0], height=image.size[1])
 
         # fill the canvas
