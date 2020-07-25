@@ -21,18 +21,18 @@ from PIL import Image, ImageTk
 
 class UI(tkinter.Label):
 
-    def __init__(self, master, im):
+    def __init__(self, main, im):
 
         if im.mode == "1":
             # bitmap image
             self.image = ImageTk.BitmapImage(im, foreground="white")
-            tkinter.Label.__init__(self, master, image=self.image, bd=0,
+            tkinter.Label.__init__(self, main, image=self.image, bd=0,
                                    bg="black")
 
         else:
             # photo image
             self.image = ImageTk.PhotoImage(im)
-            tkinter.Label.__init__(self, master, image=self.image, bd=0)
+            tkinter.Label.__init__(self, main, image=self.image, bd=0)
 
 #
 # script interface

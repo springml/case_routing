@@ -21,8 +21,8 @@ from PIL import Image, ImageTk, ImageEnhance
 
 
 class Enhance(tkinter.Frame):
-    def __init__(self, master, image, name, enhancer, lo, hi):
-        tkinter.Frame.__init__(self, master)
+    def __init__(self, main, image, name, enhancer, lo, hi):
+        tkinter.Frame.__init__(self, main)
 
         # set up the image
         self.tkim = ImageTk.PhotoImage(image.mode, image.size)

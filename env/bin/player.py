@@ -21,7 +21,7 @@ from PIL import Image, ImageTk
 
 class UI(tkinter.Label):
 
-    def __init__(self, master, im):
+    def __init__(self, main, im):
         if isinstance(im, list):
             # list of images
             self.im = im[1:]
@@ -35,7 +35,7 @@ class UI(tkinter.Label):
         else:
             self.image = ImageTk.PhotoImage(im)
 
-        tkinter.Label.__init__(self, master, image=self.image, bg="black", bd=0)
+        tkinter.Label.__init__(self, main, image=self.image, bg="black", bd=0)
 
         self.update()
 

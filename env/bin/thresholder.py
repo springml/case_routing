@@ -21,8 +21,8 @@ from PIL import Image, ImageTk
 
 
 class UI(tkinter.Frame):
-    def __init__(self, master, im, value=128):
-        tkinter.Frame.__init__(self, master)
+    def __init__(self, main, im, value=128):
+        tkinter.Frame.__init__(self, main)
 
         self.image = im
         self.value = value
